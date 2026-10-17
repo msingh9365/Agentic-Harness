@@ -7,8 +7,9 @@ fix, waits for **human approval**, and then checks the fix in the sandbox.
 Built to show **AI harness engineering**: orchestration (LangGraph), typed agents
 (PydanticAI), sandboxed tools, checkpointing, approval gates, budgets and evals.
 
-> Status: **Step 1 of the [capability ladder](docs/00-poc-plan.md#2-the-capability-ladder)**.
-> One agent with no tools reads a bundle and returns a validated `Diagnosis`. Tools come next.
+> Status: **Step 2 of the [capability ladder](docs/00-poc-plan.md#2-the-capability-ladder)**.
+> The agent investigates with read-only tools (profile, schema diff, log grep, SQL) and
+> cites evidence IDs that the harness recorded. Tools run locally; the sandbox comes next.
 
 ## Docs
 
@@ -20,6 +21,7 @@ Built to show **AI harness engineering**: orchestration (LangGraph), typed agent
 | [03 · Low-level design](docs/03-low-level-design.md) | Models, state, nodes, tools, sandbox interface, evals |
 | [04 · Model smoke test](docs/04-model-smoke-test.md) | Which NVIDIA-hosted models handle structured output and tool calling |
 | [learn/01 · Structured output](docs/learn/01-structured-output.md) | Step 1 concepts mapped to the code, plus likely interview questions |
+| [learn/02 · Tools and the agent loop](docs/learn/02-tools-and-agent-loop.md) | Step 2 concepts: tool calling, ReAct loop, tool design, evidence IDs |
 
 ## Quick start
 
@@ -30,7 +32,8 @@ make break SCENARIO=f1_date_format MODE=silent
 make test
 
 export NVIDIA_API_KEY=...         # LLM steps
-make diagnose SCENARIO=f1_date_format MODE=silent   # Step 1: validated Diagnosis JSON
+make diagnose SCENARIO=f1_date_format MODE=silent   # agent with tools: live tool trace + Diagnosis JSON
+make diagnose SCENARIO=f1_date_format MODE=silent NO_TOOLS=1   # Step 1 baseline
 make grade    SCENARIO=f1_date_format MODE=silent   # ...scored against ground_truth.json
 make smoke                         # compare candidate models
 ```
@@ -41,10 +44,16 @@ make smoke                         # compare candidate models
 src/etl_doctor/         the agent
   llm.py                NVIDIA API via PydanticAI (one place to swap providers)
   context.py            bundle -> bounded, <untrusted>-tagged prompt context
-  domain.py             Diagnosis schema (sent to the model as JSON schema)
-  diagnose.py           Step 1 agent + validator that rejects invented quotes
-  prompts/diagnose.md   system instructions
-  cli.py                `etl-doctor diagnose`
+  domain.py             Diagnosis schemas (sent to the model as JSON schema)
+  diagnose.py           Step 1 agent (no tools) + validator that rejects invented quotes
+  investigate.py        Step 2 agent: tool loop + validator that rejects uncited/invented evidence IDs
+  tools.py              model-facing read-only tools; each call is recorded as evidence
+  evidence.py           evidence store (IDs come from the harness, never the model)
+  executor.py           where tool code runs: LocalExecutor now, a sandbox in Step 3
+  prompts/              system instructions
+  cli.py                `etl-doctor diagnose [--no-tools]`
+src/edtools/            the tool implementations: JSON in, JSON out (profile, diff_schema,
+                        grep_logs, run_sql, read_file, list_files); will run inside the sandbox
 scripts/smoke_llm.py    model comparison: structured output + tool calling
 demo_pipeline/          the "patient": orders CSVs -> Polars transform -> DuckDB
   pipeline/             extract.py, transform.py, load.py, run.py, config.yaml

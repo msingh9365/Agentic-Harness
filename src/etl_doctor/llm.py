@@ -11,6 +11,8 @@ from openai import AsyncOpenAI
 from pydantic_ai.models.openai import OpenAIChatModel
 from pydantic_ai.providers.openai import OpenAIProvider
 
+os.environ.setdefault("PYDANTIC_AI_NO_BANNER", "1")
+
 NVIDIA_BASE_URL = "https://integrate.api.nvidia.com/v1"
 
 # Chosen from the smoke test in scripts/smoke_llm.py (results: docs/04-model-smoke-test.md).

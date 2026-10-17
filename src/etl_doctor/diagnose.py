@@ -1,4 +1,6 @@
-"""Step 1: one agent, no tools. Context in, validated Diagnosis out."""
+"""Step 1: one agent, no tools. Context in, validated QuotedDiagnosis out.
+
+Kept after Step 2 as the `--no-tools` baseline, so evals can compare with and without tools."""
 
 from dataclasses import dataclass
 from pathlib import Path
@@ -9,7 +11,7 @@ from pydantic_ai.settings import ModelSettings
 from pydantic_ai.usage import RunUsage, UsageLimits
 
 from etl_doctor.context import BundleContext, build_context, normalize
-from etl_doctor.domain import Diagnosis
+from etl_doctor.domain import QuotedDiagnosis
 from etl_doctor.llm import STRONG_MODEL, make_model
 
 PROMPT = (Path(__file__).parent / "prompts" / "diagnose.md").read_text()
@@ -23,7 +25,7 @@ LIMITS = UsageLimits(request_limit=6)
 
 agent = Agent(
     deps_type=BundleContext,
-    output_type=Diagnosis,
+    output_type=QuotedDiagnosis,
     instructions=PROMPT,
     # Each failed validation is sent back to the model as feedback, up to this many times.
     retries=3,
@@ -31,7 +33,7 @@ agent = Agent(
 
 
 @agent.output_validator
-def check_against_context(ctx: RunContext[BundleContext], out: Diagnosis) -> Diagnosis:
+def check_against_context(ctx: RunContext[BundleContext], out: QuotedDiagnosis) -> QuotedDiagnosis:
     """Reject answers that cite things not in the context.
 
     Pydantic already checked the shape (types, enums, lengths). This checks the facts that
@@ -57,7 +59,7 @@ def check_against_context(ctx: RunContext[BundleContext], out: Diagnosis) -> Dia
 
 @dataclass
 class DiagnoseResult:
-    diagnosis: Diagnosis
+    diagnosis: QuotedDiagnosis
     usage: RunUsage
     retries: int
     model: str

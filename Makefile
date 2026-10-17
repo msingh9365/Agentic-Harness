@@ -3,7 +3,8 @@ MODE ?= crash
 PARAMS ?=
 MODEL ?=
 CASE ?= out/scenarios/$(SCENARIO)__$(MODE)
-model_opt = $(if $(MODEL),--model $(MODEL),)
+NO_TOOLS ?=
+model_opt = $(if $(MODEL),--model $(MODEL),) $(if $(NO_TOOLS),--no-tools,)
 
 .PHONY: setup data run break diagnose grade smoke test clean
 
@@ -20,7 +21,7 @@ run: data         ## run the healthy pipeline + quality checks
 break:            ## build a broken bundle: make break SCENARIO=f4_type_drift MODE=silent PARAMS="-p style=currency_symbol"
 	uv run python -m evals.inject $(SCENARIO) --mode $(MODE) $(PARAMS)
 
-diagnose:         ## Step 1 agent on a bundle: make diagnose SCENARIO=f1_date_format MODE=silent [MODEL=...]
+diagnose:         ## agent with tools on a bundle: make diagnose SCENARIO=f1_date_format MODE=silent [MODEL=...] [NO_TOOLS=1]
 	uv run etl-doctor diagnose $(CASE)/bundle $(model_opt)
 
 grade:            ## diagnose + score against ground truth

@@ -28,7 +28,9 @@ class Quote(BaseModel):
     )
 
 
-class Diagnosis(BaseModel):
+class DiagnosisCore(BaseModel):
+    """Fields every diagnosis has, whichever agent produced it. The grader reads only these."""
+
     failure_class: FailureClass = Field(
         description="F1 date/time format changed, F3 column renamed or dropped, "
         "F4 numeric value format changed, UNKNOWN if the evidence does not support one."
@@ -45,6 +47,22 @@ class Diagnosis(BaseModel):
     first_bad_partition: str | None = Field(
         description="File name of the first broken data file, e.g. orders_2026-10-14.csv. null if unknown."
     )
-    evidence: list[Quote] = Field(min_length=1, max_length=6)
     suggested_fix: str = Field(max_length=600, description="Concrete change to code or config. Do not apply it.")
     confidence: float = Field(ge=0, le=1)
+
+
+class QuotedDiagnosis(DiagnosisCore):
+    """Step 1 (no tools): evidence is quoted from the prompt and checked verbatim."""
+
+    evidence: list[Quote] = Field(min_length=1, max_length=6)
+
+
+class Diagnosis(DiagnosisCore):
+    """Step 2+ (tools): evidence is cited by ID. IDs are created by the tools when they
+    run, never by the model, so a cited ID proves the check really happened."""
+
+    evidence_ids: list[str] = Field(
+        min_length=1,
+        max_length=8,
+        description='IDs returned by your tool calls, e.g. ["ev-002", "ev-005"], that support the root cause.',
+    )

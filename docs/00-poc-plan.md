@@ -71,4 +71,5 @@ None blocking. (Resolved: LLM provider and models, see §1 and the
 |---|---|---|
 | 0 | Done | Demo pipeline, fault injector, 3 failure types × 2 modes |
 | 1 | Done | `etl-doctor diagnose`, quote-checking validator, grader. Nemotron Super 6/6 correct. Notes: [learn/01](learn/01-structured-output.md) |
-| 2 | Next | Tools. Design rule from the smoke test: no zero-argument tools |
+| 2 | Done | 6 read-only tools via an `Executor` seam, evidence IDs + citation validator, `--no-tools` baseline. 6/6 correct, 5–10× the tokens of Step 1. Notes: [learn/02](learn/02-tools-and-agent-loop.md) |
+| 3 | Next | `E2BExecutor` running the same `edtools` commands in a microVM |

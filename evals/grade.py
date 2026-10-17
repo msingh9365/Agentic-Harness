@@ -13,12 +13,13 @@ from pathlib import Path
 import typer
 
 from etl_doctor.diagnose import diagnose
-from etl_doctor.domain import Diagnosis
+from etl_doctor.investigate import investigate
+from etl_doctor.domain import DiagnosisCore
 from etl_doctor.llm import STRONG_MODEL
 from evals.models import GroundTruth
 
 
-def grade(d: Diagnosis, truth: GroundTruth) -> dict[str, bool]:
+def grade(d: DiagnosisCore, truth: GroundTruth) -> dict[str, bool]:
     return {
         "failure_class": d.failure_class.value == truth.failure_class,
         # Extra columns are tolerated (e.g. naming both customer_id and cust_id for a rename).
@@ -30,18 +31,22 @@ def grade(d: Diagnosis, truth: GroundTruth) -> dict[str, bool]:
 def main(
     case_dir: Path = typer.Argument(..., exists=True, file_okay=False),
     model: str = typer.Option(STRONG_MODEL),
+    no_tools: bool = typer.Option(False, "--no-tools", help="Grade the Step 1 baseline instead"),
 ) -> None:
     truth = GroundTruth.model_validate_json((case_dir / "ground_truth.json").read_text())
     t0 = time.perf_counter()
-    r = asyncio.run(diagnose(case_dir / "bundle", model))
+    run = diagnose if no_tools else investigate
+    r = asyncio.run(run(case_dir / "bundle", model))
     scores = grade(r.diagnosis, truth)
     typer.echo(r.diagnosis.model_dump_json(indent=2))
     typer.echo(json.dumps({
         "case": case_dir.name,
         "model": model,
+        "agent": "no_tools" if no_tools else "tools",
         "correct": all(scores.values()),
         **scores,
         "retries": r.retries,
+        "tool_calls": r.usage.tool_calls,
         "input_tokens": r.usage.input_tokens,
         "output_tokens": r.usage.output_tokens,
         "seconds": round(time.perf_counter() - t0, 1),

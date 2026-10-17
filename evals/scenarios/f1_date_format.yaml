@@ -1,0 +1,14 @@
+id: f1_date_format
+failure_class: F1
+description: Upstream changes the order_date format partway through the window.
+fault:
+  type: date_format_change
+  column: order_date
+  params: {to_format: "%d/%m/%Y"}
+start_partition: "2026-10-14"
+modes: [crash, silent]
+variants:                     # used by the eval runner to fan out; override with -p
+  to_format: ["%d/%m/%Y", "%m/%d/%Y", "%Y%m%d", "epoch_ms"]
+root_cause: >-
+  Upstream changed the order_date format from YYYY-MM-DD to {to_format_human}
+  starting with {first_bad_partition}; the pipeline still parses with %Y-%m-%d.

@@ -1,0 +1,14 @@
+id: f4_type_drift
+failure_class: F4
+description: Upstream changes how amount is serialised.
+fault:
+  type: type_drift
+  column: amount
+  params: {style: comma_decimal}
+start_partition: "2026-10-14"
+modes: [crash, silent]
+variants:
+  style: [comma_decimal, currency_symbol]
+root_cause: >-
+  Upstream changed amount serialisation to {style_human} (e.g. {example}) starting with
+  {first_bad_partition}; the pipeline casts amount directly to a float.

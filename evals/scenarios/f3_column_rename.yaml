@@ -1,0 +1,14 @@
+id: f3_column_rename
+failure_class: F3
+description: Upstream renames the customer_id column.
+fault:
+  type: column_rename
+  column: customer_id
+  params: {to: cust_id}
+start_partition: "2026-10-14"
+modes: [crash, silent]        # silent: union-by-name fills customer_id with nulls
+variants:
+  to: [cust_id, customerId, customer_number]
+root_cause: >-
+  Upstream renamed column customer_id to {to} starting with {first_bad_partition};
+  the pipeline still requires customer_id.

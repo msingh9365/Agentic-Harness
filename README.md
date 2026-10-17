@@ -1,0 +1,62 @@
+# ETL Doctor
+
+An LLM agent that **diagnoses broken ETL pipelines**: date-format changes, renamed columns,
+type drift. It investigates inside an isolated **E2B Firecracker microVM**, proposes a
+fix, waits for **human approval**, and then checks the fix in the sandbox.
+
+Built to show **AI harness engineering**: orchestration (LangGraph), typed agents
+(PydanticAI), sandboxed tools, checkpointing, approval gates, budgets and evals.
+
+> Status: **Step 0 of the [capability ladder](docs/00-poc-plan.md#2-the-capability-ladder)**.
+> The patient (a demo pipeline) and the fault injector are done. The agent comes next.
+
+## Docs
+
+| Doc | What it covers |
+|---|---|
+| [00 · PoC plan](docs/00-poc-plan.md) | Agreed scope, the step-by-step capability ladder, 15-day schedule |
+| [01 · Requirements](docs/01-requirements.md) | Problem, goals, failure classes, functional and non-functional requirements |
+| [02 · High-level design](docs/02-high-level-design.md) | Components, the LangGraph state machine, sandbox and HITL design |
+| [03 · Low-level design](docs/03-low-level-design.md) | Models, state, nodes, tools, sandbox interface, evals |
+
+## Quick start
+
+```bash
+make setup                       # uv sync
+make run                         # healthy pipeline: run + quality checks pass
+make break SCENARIO=f1_date_format MODE=silent
+make test
+```
+
+## What's here
+
+```
+demo_pipeline/          the "patient": orders CSVs -> Polars transform -> DuckDB
+  pipeline/             extract.py, transform.py, load.py, run.py, config.yaml
+  tests/                post-load data-quality checks (dbt-test style)
+  generate.py           deterministic synthetic source data
+evals/
+  scenarios/*.yaml      failure scenarios (F1 date format, F3 column rename, F4 type drift)
+  faults.py             fault implementations
+  inject.py             builds a broken bundle + a separate ground-truth answer key
+tests/                  every scenario x mode x variant produces its symptom and leaks nothing
+```
+
+### Failure scenarios
+
+| ID | Fault | `crash` mode (`strict_parsing: true`) | `silent` mode (`strict_parsing: false`) |
+|---|---|---|---|
+| F1 | `order_date` goes from `YYYY-MM-DD` to `DD/MM/YYYY`, `MM/DD/YYYY`, `YYYYMMDD` or epoch ms | `strptime` error | Rows dropped; "every source file loaded" check fails |
+| F3 | `customer_id` renamed to `cust_id`, `customerId` or `customer_number` | Header-mismatch error | Union by name fills nulls; "no null keys" check fails |
+| F4 | `amount` becomes `12,50` or `$12.50` | Cast error | Rows dropped; "every source file loaded" check fails |
+
+Each `make break` writes:
+
+```
+out/scenarios/<case>/
+  bundle/               what the agent sees: code, data/current, data/last_good, logs/, problem.md
+  ground_truth.json     the answer key: kept outside the bundle, used only for grading
+```
+
+The **silent** mode is the interesting one. The pipeline reports success and the problem
+only shows up in the data, which is what makes these bugs expensive in real life.

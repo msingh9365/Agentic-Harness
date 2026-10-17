@@ -1,0 +1,8 @@
+# Orders pipeline config.
+# strict_parsing: true  -> a file whose header differs, or a value that doesn't match the
+#                          expected type/format, fails the run.
+# strict_parsing: false -> files are unioned by column name; unparseable values become null
+#                          and those rows are dropped (the run "succeeds").
+strict_parsing: true
+date_format: "%Y-%m-%d"
+required_columns: [order_id, customer_id, order_date, amount, currency, status]

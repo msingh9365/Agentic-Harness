@@ -62,7 +62,8 @@ Other observations:
   even though the layout is in the system prompt). Tighter instructions, or a cheaper
   model for exploration, would cut cost.
 - Two runs used 14 of the 15 allowed tool calls. Budgets have to be set from measured
-  runs, not guessed.
+  runs, not guessed. (In Step 3 they did go over; the fix was a manifest in the prompt
+  and a `column_by_file` tool, not a bigger budget. See [learn/03](03-sandboxing.md).)
 - `diff_schema` was the decisive call in every case: one deterministic, well-named signal
   is worth more than many raw reads. That is the main tool-design lesson.
 

@@ -7,9 +7,10 @@ fix, waits for **human approval**, and then checks the fix in the sandbox.
 Built to show **AI harness engineering**: orchestration (LangGraph), typed agents
 (PydanticAI), sandboxed tools, checkpointing, approval gates, budgets and evals.
 
-> Status: **Step 2 of the [capability ladder](docs/00-poc-plan.md#2-the-capability-ladder)**.
-> The agent investigates with read-only tools (profile, schema diff, log grep, SQL) and
-> cites evidence IDs that the harness recorded. Tools run locally; the sandbox comes next.
+> Status: **Step 3 of the [capability ladder](docs/00-poc-plan.md#2-the-capability-ladder)**.
+> The agent investigates with read-only tools (profile, per-file column formats, schema diff, log grep, SQL) that run
+> inside a disposable E2B microVM with no internet, and cites evidence IDs that the harness
+> recorded. LangGraph orchestration comes next.
 
 ## Docs
 
@@ -22,6 +23,7 @@ Built to show **AI harness engineering**: orchestration (LangGraph), typed agent
 | [04 · Model smoke test](docs/04-model-smoke-test.md) | Which NVIDIA-hosted models handle structured output and tool calling |
 | [learn/01 · Structured output](docs/learn/01-structured-output.md) | Step 1 concepts mapped to the code, plus likely interview questions |
 | [learn/02 · Tools and the agent loop](docs/learn/02-tools-and-agent-loop.md) | Step 2 concepts: tool calling, ReAct loop, tool design, evidence IDs |
+| [learn/03 · Sandboxing and prompt injection](docs/learn/03-sandboxing.md) | Step 3 concepts: process vs container vs microVM, layered defence, least privilege |
 
 ## Quick start
 
@@ -32,7 +34,10 @@ make break SCENARIO=f1_date_format MODE=silent
 make test
 
 export NVIDIA_API_KEY=...         # LLM steps
-make diagnose SCENARIO=f1_date_format MODE=silent   # agent with tools: live tool trace + Diagnosis JSON
+export E2B_API_KEY=...            # sandbox (Step 3+); `make template` once to build the image
+make diagnose SCENARIO=f1_date_format MODE=silent   # agent, tools in E2B: live tool trace + Diagnosis JSON
+make diagnose SCENARIO=f1_date_format MODE=silent SANDBOX=local   # tools on this machine (dev only)
+make attack   SCENARIO=f1_date_format MODE=silent   # prompt-injection drill
 make diagnose SCENARIO=f1_date_format MODE=silent NO_TOOLS=1   # Step 1 baseline
 make grade    SCENARIO=f1_date_format MODE=silent   # ...scored against ground_truth.json
 make smoke                         # compare candidate models
@@ -49,11 +54,13 @@ src/etl_doctor/         the agent
   investigate.py        Step 2 agent: tool loop + validator that rejects uncited/invented evidence IDs
   tools.py              model-facing read-only tools; each call is recorded as evidence
   evidence.py           evidence store (IDs come from the harness, never the model)
-  executor.py           where tool code runs: LocalExecutor now, a sandbox in Step 3
+  executor.py           Executor interface + LocalExecutor (subprocess, dev only)
+  sandbox.py            E2BExecutor: same tools in a Firecracker microVM, no internet
   prompts/              system instructions
   cli.py                `etl-doctor diagnose [--no-tools]`
-src/edtools/            the tool implementations: JSON in, JSON out (profile, diff_schema,
-                        grep_logs, run_sql, read_file, list_files); will run inside the sandbox
+src/edtools/            the tool implementations: JSON in, JSON out (profile, column_by_file,
+                        diff_schema, grep_logs, run_sql, read_file, list_files); run in the sandbox
+sandbox/build_template.py  E2B template: Python 3.12 + pinned polars/duckdb
 scripts/smoke_llm.py    model comparison: structured output + tool calling
 demo_pipeline/          the "patient": orders CSVs -> Polars transform -> DuckDB
   pipeline/             extract.py, transform.py, load.py, run.py, config.yaml
@@ -64,7 +71,8 @@ evals/
   faults.py             fault implementations
   inject.py             builds a broken bundle + a separate ground-truth answer key
   grade.py              runs the agent on a case and scores it against the answer key
-tests/                  every scenario x mode x variant produces its symptom and leaks nothing
+  attack.py             prompt-injection drill: planted log line, reports each defence layer
+tests/                  offline tests (fake models) + test_sandbox.py against a real microVM
 ```
 
 ### Failure scenarios

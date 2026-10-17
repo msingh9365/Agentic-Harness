@@ -124,6 +124,38 @@ async def profile_dataset(ctx: RunContext[AgentDeps], path: RelPath, columns: li
 
 
 @readonly_tools.tool
+async def column_by_file(ctx: RunContext[AgentDeps], column: str, directory: RelPath = "data/current") -> dict[str, Any]:
+    """For ONE column, one row per CSV file in a directory: whether the column exists, its
+    dominant value shape, the best-matching date/number format and an example value.
+    The fastest way to find the FIRST file where a column changes: one call covers every file.
+
+    Args:
+        column: e.g. "order_date".
+        directory: e.g. "data/current".
+    """
+
+    def summary(r):
+        def cell(f):
+            # Format name, not shape: amounts like 99.99 and 999.99 differ in shape, not format.
+            if not f["present"]:
+                return f"{f['file']}: missing"
+            if f["best_format"]:
+                return f"{f['file']}: {f['best_format']['format']}"
+            return f"{f['file']}: {f['shape']['shape'] if f['shape'] else 'empty'}"
+
+        # Collapse runs of identical shapes so the summary shows where it changes.
+        parts, prev = [], None
+        for f in r["files"]:
+            key = cell(f).split(": ", 1)[1]
+            if key != prev:
+                parts.append(cell(f))
+                prev = key
+        return f"{r['column']} by file: " + "; ".join(parts)
+
+    return await _call(ctx, "column_by_file", {"column": column, "directory": directory}, summary)
+
+
+@readonly_tools.tool
 async def diff_schema(ctx: RunContext[AgentDeps], current: RelPath, last_good: RelPath) -> dict[str, Any]:
     """Compare two CSV files: added and dropped columns, likely renames (with a score), and
     columns whose value format changed (dominant shape and matching formats, before and after).

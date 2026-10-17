@@ -72,4 +72,5 @@ None blocking. (Resolved: LLM provider and models, see §1 and the
 | 0 | Done | Demo pipeline, fault injector, 3 failure types × 2 modes |
 | 1 | Done | `etl-doctor diagnose`, quote-checking validator, grader. Nemotron Super 6/6 correct. Notes: [learn/01](learn/01-structured-output.md) |
 | 2 | Done | 6 read-only tools via an `Executor` seam, evidence IDs + citation validator, `--no-tools` baseline. 6/6 correct, 5–10× the tokens of Step 1. Notes: [learn/02](learn/02-tools-and-agent-loop.md) |
-| 3 | Next | `E2BExecutor` running the same `edtools` commands in a microVM |
+| 3 | Done | `E2BExecutor`: same tools in a Firecracker microVM, no internet, no host secrets; isolation tests on a real VM; prompt-injection drill (`make attack`). Budget overruns fixed with a manifest + `column_by_file` tool: 6/6, 5–12 tool calls. Notes: [learn/03](learn/03-sandboxing.md) |
+| 4 | Next | LangGraph: triage → investigate ⇄ hypothesize → verify, SQLite checkpoints, budgets → escalate instead of crash |

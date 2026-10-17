@@ -107,3 +107,14 @@ def test_bad_path_is_rejected_before_anything_runs(cases):
     with pytest.raises(RuntimeError, match="stop"):
         asyncio.run(investigate(cases["f1_date_format"], FunctionModel(respond), on_evidence=seen.append))
     assert seen == []
+
+
+def test_column_by_file_finds_the_first_bad_file_in_one_call(cases):
+    out = edtools(cases["f1_date_format"], "column_by_file", column="order_date")["result"]
+    shapes = {f["file"]: f["shape"]["shape"] for f in out["files"]}
+    assert shapes["orders_2026-10-13.csv"] == "9999-99-99"
+    assert shapes["orders_2026-10-14.csv"] == "99/99/9999"
+
+    out = edtools(cases["f3_column_rename"], "column_by_file", column="customer_id")["result"]
+    missing = [f["file"] for f in out["files"] if not f["present"]]
+    assert missing[0] == "orders_2026-10-14.csv"

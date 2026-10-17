@@ -76,6 +76,32 @@ def dominant(col: dict) -> str | None:
     return col["shapes"][0]["shape"] if col["shapes"] else None
 
 
+def column_by_file(column: str, directory: str = "data/current") -> dict:
+    """One row per CSV file: is the column there, and what do its values look like?"""
+    d = safe_path(directory)
+    files = sorted(d.glob("*.csv"))
+    if not files:
+        raise UserError(f"no CSV files in {directory!r}")
+    rows = []
+    for f in files[:100]:
+        df = read_strings(f)
+        if column not in df.columns:
+            rows.append({"file": f.name, "rows": df.height, "present": False, "columns": df.columns})
+            continue
+        col = profile_column(df[column])
+        top = col["formats"][0] if col["formats"] else None
+        rows.append({
+            "file": f.name,
+            "rows": df.height,
+            "present": True,
+            "nulls": col["nulls"],
+            "shape": col["shapes"][0] if col["shapes"] else None,
+            "best_format": top,
+            "example": col["examples"][0] if col["examples"] else None,
+        })
+    return {"column": column, "directory": directory, "files": rows}
+
+
 def diff_schema(current: str, last_good: str) -> dict:
     cur, old = profile(current), profile(last_good)
     cur_cols = {c["name"]: c for c in cur["columns"]}
@@ -191,6 +217,7 @@ COMMANDS = {
     "read_file": read_file,
     "list_files": list_files,
     "profile": profile,
+    "column_by_file": column_by_file,
     "diff_schema": diff_schema,
     "grep_logs": grep_logs,
     "run_sql": run_sql,

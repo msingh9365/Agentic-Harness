@@ -13,7 +13,7 @@ Anything not listed here is either cut or postponed.
 
 | Topic | Decision | Notes |
 |---|---|---|
-| LLM | **Azure OpenAI** (from the Azure for Students account), deployment **TBD** | PydanticAI `AzureProvider`; the model string looks like `azure:<deployment-name>`. Key and endpoint are read from env vars `AZURE_OPENAI_API_KEY` and `AZURE_OPENAI_ENDPOINT`. Needed from Step 1 on. |
+| LLM | **NVIDIA API** (OpenAI-compatible, `https://integrate.api.nvidia.com/v1`, key in `NVIDIA_API_KEY`). Strong model: **`nvidia/nemotron-3-super-120b-a12b`**. Fast model: **`openai/gpt-oss-20b`** | Chosen by the [smoke test](04-model-smoke-test.md). PydanticAI `OpenAIChatModel` with a custom base URL (`src/etl_doctor/llm.py`). Override with `ETLDOC_STRONG_MODEL` / `ETLDOC_FAST_MODEL`. Replaces the earlier Azure OpenAI plan. |
 | Sandbox | **E2B**, Hobby tier: free, with a one-time $100 credit | Plus a `docker` fallback behind the same interface, so the live demo can't fail because of the network. |
 | Checkpointing | **SQLite** (`langgraph-checkpoint-sqlite`) | Same LangGraph features as Postgres (resume, interrupts, time travel). Postgres is "the production answer". |
 | Failure types | **3**: F1 date-format change, F3 column rename, F4 type drift | F1 is the flagship demo. |
@@ -62,6 +62,13 @@ own sake.
 
 ## 4. Open questions
 
-1. **Azure deployment:** which model deployment to use (check Azure AI Foundry →
-   Deployments). It must support tool calling and structured output; `gpt-4o-mini` or
-   `gpt-4.1-mini` is a good, cheap choice. **Needed before Step 1.**
+None blocking. (Resolved: LLM provider and models, see §1 and the
+[smoke test](04-model-smoke-test.md).)
+
+## 5. Progress
+
+| Step | Status | Notes |
+|---|---|---|
+| 0 | Done | Demo pipeline, fault injector, 3 failure types × 2 modes |
+| 1 | Done | `etl-doctor diagnose`, quote-checking validator, grader. Nemotron Super 6/6 correct. Notes: [learn/01](learn/01-structured-output.md) |
+| 2 | Next | Tools. Design rule from the smoke test: no zero-argument tools |

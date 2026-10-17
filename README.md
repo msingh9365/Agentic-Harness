@@ -7,8 +7,8 @@ fix, waits for **human approval**, and then checks the fix in the sandbox.
 Built to show **AI harness engineering**: orchestration (LangGraph), typed agents
 (PydanticAI), sandboxed tools, checkpointing, approval gates, budgets and evals.
 
-> Status: **Step 0 of the [capability ladder](docs/00-poc-plan.md#2-the-capability-ladder)**.
-> The patient (a demo pipeline) and the fault injector are done. The agent comes next.
+> Status: **Step 1 of the [capability ladder](docs/00-poc-plan.md#2-the-capability-ladder)**.
+> One agent with no tools reads a bundle and returns a validated `Diagnosis`. Tools come next.
 
 ## Docs
 
@@ -18,6 +18,8 @@ Built to show **AI harness engineering**: orchestration (LangGraph), typed agent
 | [01 · Requirements](docs/01-requirements.md) | Problem, goals, failure classes, functional and non-functional requirements |
 | [02 · High-level design](docs/02-high-level-design.md) | Components, the LangGraph state machine, sandbox and HITL design |
 | [03 · Low-level design](docs/03-low-level-design.md) | Models, state, nodes, tools, sandbox interface, evals |
+| [04 · Model smoke test](docs/04-model-smoke-test.md) | Which NVIDIA-hosted models handle structured output and tool calling |
+| [learn/01 · Structured output](docs/learn/01-structured-output.md) | Step 1 concepts mapped to the code, plus likely interview questions |
 
 ## Quick start
 
@@ -26,11 +28,24 @@ make setup                       # uv sync
 make run                         # healthy pipeline: run + quality checks pass
 make break SCENARIO=f1_date_format MODE=silent
 make test
+
+export NVIDIA_API_KEY=...         # LLM steps
+make diagnose SCENARIO=f1_date_format MODE=silent   # Step 1: validated Diagnosis JSON
+make grade    SCENARIO=f1_date_format MODE=silent   # ...scored against ground_truth.json
+make smoke                         # compare candidate models
 ```
 
 ## What's here
 
 ```
+src/etl_doctor/         the agent
+  llm.py                NVIDIA API via PydanticAI (one place to swap providers)
+  context.py            bundle -> bounded, <untrusted>-tagged prompt context
+  domain.py             Diagnosis schema (sent to the model as JSON schema)
+  diagnose.py           Step 1 agent + validator that rejects invented quotes
+  prompts/diagnose.md   system instructions
+  cli.py                `etl-doctor diagnose`
+scripts/smoke_llm.py    model comparison: structured output + tool calling
 demo_pipeline/          the "patient": orders CSVs -> Polars transform -> DuckDB
   pipeline/             extract.py, transform.py, load.py, run.py, config.yaml
   tests/                post-load data-quality checks (dbt-test style)
@@ -39,6 +54,7 @@ evals/
   scenarios/*.yaml      failure scenarios (F1 date format, F3 column rename, F4 type drift)
   faults.py             fault implementations
   inject.py             builds a broken bundle + a separate ground-truth answer key
+  grade.py              runs the agent on a case and scores it against the answer key
 tests/                  every scenario x mode x variant produces its symptom and leaks nothing
 ```
 

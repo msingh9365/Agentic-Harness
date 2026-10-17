@@ -14,7 +14,10 @@ from pydantic_ai.providers.openai import OpenAIProvider
 NVIDIA_BASE_URL = "https://integrate.api.nvidia.com/v1"
 
 # Chosen from the smoke test in scripts/smoke_llm.py (results: docs/04-model-smoke-test.md).
-STRONG_MODEL = os.environ.get("ETLDOC_STRONG_MODEL", "nvidia/nemotron-3-ultra-550b-a55b")
+# Nemotron 3 Ultra was the plan, but the free endpoint was overloaded (503/500) for most
+# calls; Super passed every structured-output check and 6/6 Step 1 cases. Override with
+# ETLDOC_STRONG_MODEL=nvidia/nemotron-3-ultra-550b-a55b when Ultra is available.
+STRONG_MODEL = os.environ.get("ETLDOC_STRONG_MODEL", "nvidia/nemotron-3-super-120b-a12b")
 FAST_MODEL = os.environ.get("ETLDOC_FAST_MODEL", "openai/gpt-oss-20b")
 
 

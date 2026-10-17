@@ -1,8 +1,11 @@
 SCENARIO ?= f1_date_format
 MODE ?= crash
 PARAMS ?=
+MODEL ?=
+CASE ?= out/scenarios/$(SCENARIO)__$(MODE)
+model_opt = $(if $(MODEL),--model $(MODEL),)
 
-.PHONY: setup data run break test clean
+.PHONY: setup data run break diagnose grade smoke test clean
 
 setup:            ## install dependencies into .venv
 	uv sync
@@ -16,6 +19,15 @@ run: data         ## run the healthy pipeline + quality checks
 
 break:            ## build a broken bundle: make break SCENARIO=f4_type_drift MODE=silent PARAMS="-p style=currency_symbol"
 	uv run python -m evals.inject $(SCENARIO) --mode $(MODE) $(PARAMS)
+
+diagnose:         ## Step 1 agent on a bundle: make diagnose SCENARIO=f1_date_format MODE=silent [MODEL=...]
+	uv run etl-doctor diagnose $(CASE)/bundle $(model_opt)
+
+grade:            ## diagnose + score against ground truth
+	uv run python -m evals.grade $(CASE) $(model_opt)
+
+smoke:            ## compare candidate models on structured output + tool calling (needs NVIDIA_API_KEY)
+	uv run python scripts/smoke_llm.py
 
 test:             ## run the repo's test suite
 	uv run pytest -q

@@ -13,6 +13,9 @@ dependencies = [
     "typer>=0.12",
     "pydantic-ai-slim[openai]>=2.57.0",
     "e2b>=2.56.0",
+    "langgraph>=1.2.16",
+    "langgraph-checkpoint-sqlite>=3.1.2",
+    "aiosqlite>=0.22.1",
 ]
 
 [build-system]

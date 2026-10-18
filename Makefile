@@ -7,7 +7,9 @@ NO_TOOLS ?=
 model_opt = $(if $(MODEL),--model $(MODEL),) $(if $(NO_TOOLS),--no-tools,) $(if $(SANDBOX),--sandbox $(SANDBOX),)
 
 SANDBOX ?=
-.PHONY: setup data run break diagnose grade attack template smoke test clean
+RUN ?=
+CRASH ?=
+.PHONY: setup data run break diagnose doctor resume history grade attack template smoke test clean
 
 setup:            ## install dependencies into .venv
 	uv sync
@@ -25,6 +27,15 @@ break:            ## build a broken bundle: make break SCENARIO=f4_type_drift MO
 diagnose:         ## agent, tools in E2B: make diagnose SCENARIO=f1_date_format MODE=silent [MODEL=...] [NO_TOOLS=1] [SANDBOX=local]
 	uv run etl-doctor diagnose $(CASE)/bundle $(model_opt)
 
+doctor:           ## Step 4 graph, checkpointed: make doctor SCENARIO=f1_date_format MODE=silent [CRASH=hypothesize] [SANDBOX=local]
+	uv run etl-doctor run $(CASE)/bundle $(if $(SANDBOX),--sandbox $(SANDBOX),) $(if $(CRASH),--crash-before $(CRASH),)
+
+resume:           ## continue a run from its last checkpoint: make resume RUN=run-...
+	uv run etl-doctor resume $(RUN)
+
+history:          ## list a run's checkpoints: make history RUN=run-...
+	uv run etl-doctor history $(RUN)
+
 grade:            ## diagnose + score against ground truth
 	uv run python -m evals.grade $(CASE) $(model_opt)
 
@@ -41,4 +52,4 @@ test:             ## run the repo's test suite
 	uv run pytest -q
 
 clean:
-	rm -rf out demo_pipeline/data
+	rm -rf out demo_pipeline/data .etl_doctor

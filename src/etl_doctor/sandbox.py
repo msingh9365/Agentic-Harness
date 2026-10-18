@@ -49,9 +49,8 @@ class E2BExecutor:
         return self.sandbox.sandbox_id
 
     @classmethod
-    @asynccontextmanager
-    async def start(cls, bundle: Path, template: str = TEMPLATE, timeout_s: int = 900) -> AsyncIterator["E2BExecutor"]:
-        """Create a sandbox, copy the bundle and the tool code in, and always kill it at the end."""
+    async def create(cls, bundle: Path, template: str = TEMPLATE, timeout_s: int = 900) -> "E2BExecutor":
+        """Create a sandbox and copy the bundle and the tool code in. Caller must kill() it."""
         sandbox = await AsyncSandbox.create(
             template=template,
             timeout=timeout_s,  # E2B kills the VM after this even if we crash before kill()
@@ -66,9 +65,29 @@ class E2BExecutor:
                 f"&& cp -r /tmp/edtools {EDTOOLS_ROOT}/ && rm -rf /tmp/upload.tgz /tmp/bundle /tmp/edtools",
                 timeout=60,
             )
-            yield cls(sandbox)
-        finally:
+        except BaseException:
             await sandbox.kill()
+            raise
+        return cls(sandbox)
+
+    @classmethod
+    async def connect(cls, sandbox_id: str, timeout_s: int = 900) -> "E2BExecutor":
+        """Reattach to a running sandbox (e.g. after the host process crashed and resumed).
+        Its workspace is exactly as we left it, so nothing is re-uploaded."""
+        return cls(await AsyncSandbox.connect(sandbox_id, timeout=timeout_s))
+
+    async def kill(self) -> None:
+        await self.sandbox.kill()
+
+    @classmethod
+    @asynccontextmanager
+    async def start(cls, bundle: Path, template: str = TEMPLATE, timeout_s: int = 900) -> AsyncIterator["E2BExecutor"]:
+        """create() + kill() as a context manager: the sandbox never outlives the block."""
+        ex = await cls.create(bundle, template, timeout_s)
+        try:
+            yield ex
+        finally:
+            await ex.kill()
 
     async def run(self, cmd: str, timeout_s: float | None = None) -> tuple[int, str, str]:
         """Run a shell command in the sandbox. Used by tests and by later steps (validation)."""

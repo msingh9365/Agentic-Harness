@@ -64,5 +64,86 @@ def diagnose(
     )
 
 
+NODE_LABEL = {
+    "intake": "read bundle manifest",
+    "provision_sandbox": "sandbox ready",
+    "triage": "triage",
+    "investigate": "investigation round",
+    "hypothesize": "hypotheses",
+    "verify": "verification",
+    "escalate": "ESCALATE to a human",
+    "report": "report",
+    "teardown": "sandbox destroyed",
+}
+
+
+def print_node(name: str, update: dict) -> None:
+    detail = ""
+    if name == "provision_sandbox" and update.get("sandbox_id"):
+        detail = update["sandbox_id"]
+    elif name == "triage" and update.get("triage"):
+        t = update["triage"]
+        detail = f"{t.run_outcome}; candidates {[c.value for c in t.candidate_classes]}; suspects {t.suspect_columns}"
+    elif name == "hypothesize" and update.get("hypotheses"):
+        detail = "; ".join(f"{h.id} {h.failure_class.value} conf={h.confidence:.2f} {h.statement[:70]}" for h in update["hypotheses"].hypotheses)
+    elif name == "verify" and update.get("verification"):
+        v = update["verification"]
+        detail = f"{v.hypothesis_id} {v.outcome.upper()}: {v.observations[:100]}"
+    elif name == "escalate":
+        detail = update.get("terminal_reason", "")
+    typer.secho(f"[{name}] {NODE_LABEL.get(name, name)} {detail}", err=True, fg="green" if name != "escalate" else "red")
+
+
+def print_report(s) -> None:
+    r = s.report
+    if r is None:
+        return
+    typer.echo(r.model_dump_json(indent=2, exclude={"usage"}))
+    u = r.usage
+    typer.secho(f"\nrun={s.run_id} status={r.status} investigations={s.investigations} verifications={s.verifications} "
+                f"requests={u.requests} tool_calls={u.tool_calls} input_tokens={u.input_tokens} output_tokens={u.output_tokens}",
+                err=True, bold=True)
+
+
+@app.command()
+def run(
+    bundle: Path = typer.Argument(..., exists=True, file_okay=False, help="Bundle directory"),
+    sandbox: str = typer.Option("e2b", help="e2b or local"),
+    run_id: str | None = typer.Option(None, help="Defaults to a new timestamped ID"),
+    crash_before: str | None = typer.Option(None, help="Demo: hard-kill the process before this node, then use `resume`"),
+) -> None:
+    """Step 4: the full graph (triage -> investigate <-> hypothesize -> verify -> report), checkpointed."""
+    from etl_doctor.graph.build import new_run_id, start_run
+    from etl_doctor.graph.nodes import GraphContext
+
+    run_id = run_id or new_run_id()
+    typer.secho(f"run {run_id} (checkpoints: .etl_doctor/checkpoints.sqlite)", err=True, bold=True)
+    ctx = GraphContext(on_evidence=print_evidence, crash_before=crash_before)
+    print_report(asyncio.run(start_run(bundle, sandbox, ctx, run_id=run_id, on_node=print_node)))
+
+
+@app.command()
+def resume(run_id: str = typer.Argument(...)) -> None:
+    """Continue a run from its last checkpoint (after a crash, Ctrl-C or error)."""
+    from etl_doctor.graph.build import resume_run
+    from etl_doctor.graph.nodes import GraphContext
+
+    typer.secho(f"resuming {run_id}", err=True, bold=True)
+    print_report(asyncio.run(resume_run(run_id, GraphContext(on_evidence=print_evidence), on_node=print_node)))
+
+
+@app.command("history")
+def history_cmd(run_id: str = typer.Argument(...)) -> None:
+    """List a run's checkpoints, newest first (time travel)."""
+    from etl_doctor.graph.build import history
+
+    async def go():
+        async for h in history(run_id):
+            typer.echo(f"step {h['step']:>3}  next={','.join(h['next']) or '(done)':<18} evidence={h['evidence']:<3} "
+                       f"investigations={h['investigations']} tokens={h['tokens']:<7} {h['checkpoint_id']}")
+
+    asyncio.run(go())
+
+
 if __name__ == "__main__":
     app()

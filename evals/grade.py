@@ -33,10 +33,13 @@ def main(
     case_dir: Path = typer.Argument(..., exists=True, file_okay=False),
     model: str = typer.Option(STRONG_MODEL),
     no_tools: bool = typer.Option(False, "--no-tools", help="Grade the Step 1 baseline instead"),
+    graph: bool = typer.Option(False, "--graph", help="Grade the Step 4 graph (checkpointed, with verification)"),
     sandbox: str = typer.Option("e2b", help="e2b or local"),
 ) -> None:
     truth = GroundTruth.model_validate_json((case_dir / "ground_truth.json").read_text())
     t0 = time.perf_counter()
+    if graph:
+        return grade_graph(case_dir, truth, sandbox, t0)
     run = diagnose if no_tools else investigate_in_sandbox if sandbox == "e2b" else investigate
     agent = "no_tools" if no_tools else f"tools/{sandbox}"
     try:
@@ -62,6 +65,32 @@ def main(
         "input_tokens": r.usage.input_tokens,
         "output_tokens": r.usage.output_tokens,
         "seconds": round(time.perf_counter() - t0, 1),
+    }))
+
+
+def grade_graph(case_dir: Path, truth: GroundTruth, sandbox: str, t0: float) -> None:
+    from etl_doctor.graph.build import start_run
+
+    s = asyncio.run(start_run(case_dir / "bundle", sandbox))
+    r = s.report
+    scores = grade(r.diagnosis, truth) if r.diagnosis else {k: False for k in ("failure_class", "affected_columns", "first_bad_partition")}
+    if r.diagnosis:
+        typer.echo(r.diagnosis.model_dump_json(indent=2))
+    typer.echo(json.dumps({
+        "case": case_dir.name,
+        "agent": f"graph/{sandbox}",
+        "run_id": s.run_id,
+        "status": r.status,
+        # An escalation is not a wrong answer, but it is not a diagnosis either.
+        "correct": r.status == "diagnosed" and all(scores.values()),
+        **scores,
+        "investigations": s.investigations,
+        "verifications": s.verifications,
+        "tool_calls": r.usage.tool_calls,
+        "input_tokens": r.usage.input_tokens,
+        "output_tokens": r.usage.output_tokens,
+        "seconds": round(time.perf_counter() - t0, 1),
+        "terminal_reason": r.terminal_reason,
     }))
 
 

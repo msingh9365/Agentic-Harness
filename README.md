@@ -7,10 +7,11 @@ fix, waits for **human approval**, and then checks the fix in the sandbox.
 Built to show **AI harness engineering**: orchestration (LangGraph), typed agents
 (PydanticAI), sandboxed tools, checkpointing, approval gates, budgets and evals.
 
-> Status: **Step 3 of the [capability ladder](docs/00-poc-plan.md#2-the-capability-ladder)**.
-> The agent investigates with read-only tools (profile, per-file column formats, schema diff, log grep, SQL) that run
-> inside a disposable E2B microVM with no internet, and cites evidence IDs that the harness
-> recorded. LangGraph orchestration comes next.
+> Status: **Step 4 of the [capability ladder](docs/00-poc-plan.md#2-the-capability-ladder)**.
+> A LangGraph state machine runs triage → investigate ⇄ hypothesize → verify → report, with
+> SQLite checkpoints (kill it, resume it) and budgets that end in an escalation instead of a
+> crash. Tools run inside a disposable E2B microVM with no internet; every claim cites
+> evidence IDs the harness recorded. Human approval of fixes comes next.
 
 ## Docs
 
@@ -24,6 +25,7 @@ Built to show **AI harness engineering**: orchestration (LangGraph), typed agent
 | [learn/01 · Structured output](docs/learn/01-structured-output.md) | Step 1 concepts mapped to the code, plus likely interview questions |
 | [learn/02 · Tools and the agent loop](docs/learn/02-tools-and-agent-loop.md) | Step 2 concepts: tool calling, ReAct loop, tool design, evidence IDs |
 | [learn/03 · Sandboxing and prompt injection](docs/learn/03-sandboxing.md) | Step 3 concepts: process vs container vs microVM, layered defence, least privilege |
+| [learn/04 · LangGraph, checkpoints, budgets](docs/learn/04-graph-and-checkpoints.md) | Step 4 concepts: state machines vs free agents, reducers, durability, resume, escalation |
 
 ## Quick start
 
@@ -38,6 +40,10 @@ export E2B_API_KEY=...            # sandbox (Step 3+); `make template` once to b
 make diagnose SCENARIO=f1_date_format MODE=silent   # agent, tools in E2B: live tool trace + Diagnosis JSON
 make diagnose SCENARIO=f1_date_format MODE=silent SANDBOX=local   # tools on this machine (dev only)
 make attack   SCENARIO=f1_date_format MODE=silent   # prompt-injection drill
+make doctor   SCENARIO=f1_date_format MODE=silent   # Step 4 graph: triage -> investigate <-> hypothesize -> verify -> report
+make doctor   SCENARIO=f1_date_format MODE=silent CRASH=hypothesize   # kill -9 mid-run...
+make resume   RUN=run-...                           # ...and continue from the checkpoint
+make history  RUN=run-...                           # every checkpoint of a run
 make diagnose SCENARIO=f1_date_format MODE=silent NO_TOOLS=1   # Step 1 baseline
 make grade    SCENARIO=f1_date_format MODE=silent   # ...scored against ground_truth.json
 make smoke                         # compare candidate models
@@ -56,8 +62,13 @@ src/etl_doctor/         the agent
   evidence.py           evidence store (IDs come from the harness, never the model)
   executor.py           Executor interface + LocalExecutor (subprocess, dev only)
   sandbox.py            E2BExecutor: same tools in a Firecracker microVM, no internet
+  graph/                Step 4: LangGraph state machine
+    state.py            RunState (checkpointed), reducers, budgets, hypothesis/verification models
+    agents.py           triage / investigator / hypothesis / verifier roles + validators
+    nodes.py            node functions, routing (pure functions of state), sandbox reconnect
+    build.py            graph wiring, SQLite checkpointer, run / resume / history
   prompts/              system instructions
-  cli.py                `etl-doctor diagnose [--no-tools]`
+  cli.py                `etl-doctor diagnose|run|resume|history`
 src/edtools/            the tool implementations: JSON in, JSON out (profile, column_by_file,
                         diff_schema, grep_logs, run_sql, read_file, list_files); run in the sandbox
 sandbox/build_template.py  E2B template: Python 3.12 + pinned polars/duckdb

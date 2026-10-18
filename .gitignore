@@ -7,3 +7,6 @@ demo_pipeline/data/
 out/
 *.duckdb
 .env
+
+# graph checkpoints (Step 4)
+.etl_doctor/

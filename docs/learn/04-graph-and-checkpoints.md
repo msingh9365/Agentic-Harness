@@ -46,6 +46,30 @@ make history RUN=run-...                                            # every chec
 | **Deterministic guardrails on LLM claims** | If the code can check a claim cheaply, check it: cited evidence IDs must exist; an F3 (rename) claim must name a column that really differs across the file headers. | validators in `graph/agents.py` |
 | **Serialization safety** | A checkpoint DB is input to the program. Only our own state types may be deserialized from it. | `_state_types()` → `allowed_msgpack_modules` |
 
+## Results (Nemotron 3 Super, tools in E2B, the same 6 cases)
+
+| Case | Status | Investigation rounds | Tool calls | Input tokens | Time |
+|---|---|---|---|---|---|
+| F1 crash | diagnosed, verified | 1 | 9 | 55k | 176 s |
+| F1 silent | diagnosed, verified | 3 | 12 | 112k | 532 s |
+| F3 crash | diagnosed, verified | 1 | 8 | 42k | 110 s |
+| F3 silent | diagnosed, verified | 1 | 6 | 33k | 146 s |
+| F4 crash | diagnosed, verified | 1 | 3 | 20k | 115 s |
+| F4 silent | diagnosed, verified | 1 | 7 | 36k | 119 s |
+
+**6/6 diagnosed and every answer survived a falsification attempt.** Five cases needed one
+round; F1-silent needed three (its first rounds chased the wrong columns), which is the loop
+working as designed. Compared with Step 3's single agent (5–12 tool calls, 36k–88k tokens),
+the graph is cheaper on easy cases (20k–55k) because each step gets a compact prompt, and
+more expensive on hard ones, because it spends extra rounds instead of guessing.
+
+**Crash/resume demo (live, E2B):** `etl-doctor run ... --run-id demo-crash --crash-before hypothesize`
+died with exit code 137 after triage and one investigation round (7 evidence items, 56k
+tokens in the checkpoint). `etl-doctor resume demo-crash` started at `hypothesize`,
+reconnected to the **same sandbox** by ID, continued evidence numbering at `ev-008`, ran
+one more round, and verification confirmed F4 / `amount` / `orders_2026-10-14.csv`. Then
+teardown killed the sandbox (0 left running).
+
 ## Things we learned building it
 
 - **The first live run crashed in `verify`**: the verifier hit its tool budget and the

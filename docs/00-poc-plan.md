@@ -13,7 +13,7 @@ Anything not listed here is either cut or postponed.
 
 | Topic | Decision | Notes |
 |---|---|---|
-| LLM | **NVIDIA API** (OpenAI-compatible, `https://integrate.api.nvidia.com/v1`, key in `NVIDIA_API_KEY`). Strong model: **`nvidia/nemotron-3-super-120b-a12b`**. Fast model: **`openai/gpt-oss-20b`** | Chosen by the [smoke test](04-model-smoke-test.md). PydanticAI `OpenAIChatModel` with a custom base URL (`src/etl_doctor/llm.py`). Override with `ETLDOC_STRONG_MODEL` / `ETLDOC_FAST_MODEL`. Replaces the earlier Azure OpenAI plan. |
+| LLM | **NVIDIA API** (OpenAI-compatible, `https://integrate.api.nvidia.com/v1`, key in `NVIDIA_API_KEY`). Since 2026-11-02: strong **`nvidia/nemotron-3-ultra-550b-a55b`**, code (fixer) **`minimaxai/minimax-m3.1-flash`**, fast **`nvidia/nemotron-3.5-lightning-30b-a3b`** | Chosen by the [smoke test](04-model-smoke-test.md) (October's Super returned 404 by November). PydanticAI `OpenAIChatModel` with a custom base URL (`src/etl_doctor/llm.py`). Override with `ETLDOC_STRONG_MODEL` / `ETLDOC_CODE_MODEL` / `ETLDOC_FAST_MODEL`. |
 | Sandbox | **E2B**, Hobby tier: free, with a one-time $100 credit | Plus a `docker` fallback behind the same interface, so the live demo can't fail because of the network. |
 | Checkpointing | **SQLite** (`langgraph-checkpoint-sqlite`) | Same LangGraph features as Postgres (resume, interrupts, time travel). Postgres is "the production answer". |
 | Failure types | **3**: F1 date-format change, F3 column rename, F4 type drift | F1 is the flagship demo. |
@@ -74,4 +74,5 @@ None blocking. (Resolved: LLM provider and models, see §1 and the
 | 2 | Done | 6 read-only tools via an `Executor` seam, evidence IDs + citation validator, `--no-tools` baseline. 6/6 correct, 5–10× the tokens of Step 1. Notes: [learn/02](learn/02-tools-and-agent-loop.md) |
 | 3 | Done | `E2BExecutor`: same tools in a Firecracker microVM, no internet, no host secrets; isolation tests on a real VM; prompt-injection drill (`make attack`). Budget overruns fixed with a manifest + `column_by_file` tool: 6/6, 5–12 tool calls. Notes: [learn/03](learn/03-sandboxing.md) |
 | 4 | Done | LangGraph: triage → investigate ⇄ hypothesize → verify → report, SQLite checkpoints (`durability="sync"`, survives kill -9), resume with sandbox reconnect, budgets → escalate. 6/6 diagnosed and verified; live crash/resume demo works. Notes: [learn/04](learn/04-graph-and-checkpoints.md) |
-| 5 | Next | Human approval: propose a patch → `interrupt()` → approve/reject in the CLI → apply + validate in the sandbox |
+| 5 | Done | Fixer proposes search/replace edits (no tools, native JSON, own model) → guardrails → `interrupt()` approval card → approve/reject/abort from any process → apply to a copy in a fresh sandbox → 7 checks incl. regression on last-good data → validated `.patch`. Live: rejected a no-op, approved a real fix, `status: fixed`. Notes: [learn/05](learn/05-human-in-the-loop.md) |
+| 6 | Next | Evals: 3 failure types × variants × k runs, scorecard |

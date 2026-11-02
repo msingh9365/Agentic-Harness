@@ -8,6 +8,8 @@ Checks, per model:
   native_output   structured output via the API's response_format=json_schema
   prompted_output schema pasted into the prompt, JSON parsed from plain text
   tool_calling    a two-tool task the model can only answer by calling tools several times
+  code_in_tools   a code string (quotes, newline) must survive the tool-call channel intact;
+                  some endpoints strip or HTML-escape quotes in tool arguments
 
 Each check is graded on the content too (right failure class, right file), not just "did it
 parse". Writes a JSON results file next to the printed table.
@@ -112,6 +114,13 @@ def make_tool_agent(model) -> Agent[None, HeaderFinding]:
     return agent
 
 
+CODE = 'x = cfg["date_format"]\ny = {"a": 1}'
+
+
+class Code(BaseModel):
+    code: str
+
+
 # --- runner -------------------------------------------------------------------------------
 @dataclass
 class Result:
@@ -142,7 +151,14 @@ async def run_check(model_name: str, check: str, i: int) -> Result:
     model = make_model(model_name)
     t0 = time.perf_counter()
     try:
-        if check == "tool_calling":
+        if check == "code_in_tools":
+            res = await Agent(model, output_type=ToolOutput(Code), retries=RETRIES).run(
+                f"Return exactly this Python code (two lines) in the `code` field, unchanged:\n{CODE}",
+                model_settings=SETTINGS, usage_limits=LIMITS,
+            )
+            out = res.output
+            correct = out.code.strip() == CODE
+        elif check == "tool_calling":
             res = await make_tool_agent(model).run(
                 "Which file is the first one whose header differs from the earlier files, and "
                 "which column was renamed to what?",
@@ -190,7 +206,7 @@ async def run_check(model_name: str, check: str, i: int) -> Result:
         return Result(model_name, check, i, False, False, time.perf_counter() - t0, error=f"{type(e).__name__}: {e}"[:300])
 
 
-CHECKS = ["tool_output", "native_output", "prompted_output", "tool_calling"]
+CHECKS = ["tool_output", "native_output", "prompted_output", "tool_calling", "code_in_tools"]
 
 
 async def run_model(name: str, runs: int, sem: asyncio.Semaphore) -> list[Result]:

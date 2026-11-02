@@ -16,7 +16,9 @@ from pathlib import Path
 from typing import Any
 
 from langgraph.runtime import Runtime
-from pydantic_ai.exceptions import UsageLimitExceeded
+from langgraph.types import interrupt
+from pydantic_ai import capture_run_messages
+from pydantic_ai.exceptions import UnexpectedModelBehavior, UsageLimitExceeded
 from pydantic_ai.models import Model
 from pydantic_ai.settings import ModelSettings
 from pydantic_ai.usage import RunUsage, UsageLimits
@@ -25,16 +27,28 @@ from etl_doctor.context import escape, tail
 from etl_doctor.domain import Diagnosis
 from etl_doctor.evidence import Evidence, EvidenceStore
 from etl_doctor.executor import Executor, LocalExecutor
+from etl_doctor.fixes import render_patch
 from etl_doctor.graph.agents import (
+    FixerDeps,
     KnownFacts,
+    fixer_agent,
     hypothesis_agent,
     investigator_agent,
     triage_agent,
+    verdict_agent,
     verifier_agent,
 )
-from etl_doctor.graph.state import Report, RunState, Usage, Verification
+from etl_doctor.graph.state import (
+    ApprovalDecision,
+    Report,
+    RunState,
+    Usage,
+    ValidationCheck,
+    ValidationResult,
+    Verification,
+)
 from etl_doctor.investigate import manifest
-from etl_doctor.llm import FAST_MODEL, STRONG_MODEL, make_model
+from etl_doctor.llm import CODE_MODEL, FAST_MODEL, STRONG_MODEL, make_model
 from etl_doctor.tools import AgentDeps
 
 SETTINGS = ModelSettings(temperature=0.0, max_tokens=8_192)
@@ -46,12 +60,17 @@ class GraphContext:
 
     strong: str | Model = STRONG_MODEL
     fast: str | Model = FAST_MODEL
+    code: str | Model | None = None  # fix author; None -> CODE_MODEL, or `strong` if a test set it
     on_evidence: Callable[[Evidence], None] | None = None
     crash_before: str | None = None  # demo/testing: hard-kill the process before this node
     executors: dict[str, Executor] = field(default_factory=dict)  # run_id -> live executor
 
     def model(self, which: str) -> Model:
-        m = self.strong if which == "strong" else self.fast
+        if which == "code":
+            # Tests that pass a fake `strong` model expect it everywhere: reuse it.
+            m = self.code or (self.strong if not isinstance(self.strong, str) else CODE_MODEL)
+        else:
+            m = self.strong if which == "strong" else self.fast
         return make_model(m) if isinstance(m, str) else m
 
 
@@ -204,13 +223,20 @@ async def verify(state: RunState, runtime: Runtime[GraphContext]) -> dict:
     usage = RunUsage()
     try:
         r = await verifier_agent.run(prompt, deps=deps, model=ctx.model("strong"), model_settings=SETTINGS,
-                                     usage_limits=UsageLimits(request_limit=8, tool_calls_limit=4), usage=usage)
+                                     usage_limits=UsageLimits(request_limit=9, tool_calls_limit=5), usage=usage)
         v = r.output.model_copy(update={"hypothesis_id": h.id})
     except UsageLimitExceeded:
-        # A verifier that can't decide within budget hasn't confirmed anything.
-        cited = [e.id for e in store.new()] or h.evidence_ids
-        v = Verification(hypothesis_id=h.id, outcome="inconclusive", evidence_ids=cited,
-                         observations="verification ran out of tool budget before reaching a verdict")
+        # Out of tool budget: decide from the checks already run (one call, no tools).
+        new = store.new()
+        if not new:
+            v = Verification(hypothesis_id=h.id, outcome="inconclusive", evidence_ids=h.evidence_ids,
+                             observations="verification ran out of budget before running any check")
+        else:
+            facts = KnownFacts({e.id for e in new}, state.current_files, {})
+            r = await verdict_agent.run(f"{prompt}\n\nChecks you ran:\n{render_evidence(new, with_data=True)}",
+                                        deps=facts, model=ctx.model("strong"), model_settings=SETTINGS,
+                                        usage_limits=UsageLimits(request_limit=4), usage=usage)
+            v = r.output.model_copy(update={"hypothesis_id": h.id})
     out = {**update, "verification": v, "evidence": store.new(), "verifications": state.verifications + 1,
            "usage": usage_of(usage)}
     if v.outcome != "confirmed":
@@ -233,29 +259,138 @@ async def report(state: RunState, runtime: Runtime[GraphContext]) -> dict:
         diagnosis = Diagnosis(
             failure_class=h.failure_class, summary=h.statement[:200], root_cause=h.statement[:600],
             affected_columns=h.affected_columns, first_bad_partition=h.first_bad_partition,
-            suggested_fix=h.suggested_fix[:600], confidence=h.confidence, evidence_ids=cited,
+            suggested_fix=(state.proposal.rationale if state.proposal else h.suggested_fix)[:600],
+            confidence=h.confidence, evidence_ids=cited,
         )
+    fixed = bool(state.validation and state.validation.passed and state.approvals and state.approvals[-1].decision == "approve")
+    if state.terminal_reason or not confirmed:
+        status, reason = "escalated", state.terminal_reason or escalation_reason(state)
+    elif fixed:
+        status, reason = "fixed", "diagnosis verified; fix approved by a human and validated in the sandbox"
+    else:
+        status, reason = "diagnosed_unfixed", fix_outcome(state)
+    patch = render_patch(Path(state.bundle), state.proposal.edits) if fixed else None
+    if patch:
+        # The deliverable: a validated patch a human applies. The agent never touches the real pipeline.
+        out = Path(".etl_doctor/fixes") / f"{state.run_id}.patch"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(patch)
     return {"report": Report(
-        status="diagnosed" if confirmed and not state.terminal_reason else "escalated",
-        diagnosis=diagnosis, verification=state.verification,
-        terminal_reason=state.terminal_reason or "hypothesis confirmed by verification",
-        usage=state.usage,
+        status=status, diagnosis=diagnosis, verification=state.verification,
+        fix=state.proposal if fixed else None, patch=patch, approvals=state.approvals,
+        validation=state.validation, terminal_reason=reason, usage=state.usage,
     )}
+
+
+async def _kill_sandbox(state: RunState, ctx: GraphContext) -> None:
+    if state.sandbox_mode != "e2b" or not state.sandbox_id:
+        return
+    ex = ctx.executors.pop(state.run_id, None)
+    if ex is None:
+        from etl_doctor.sandbox import E2BExecutor
+
+        try:
+            ex = await E2BExecutor.connect(state.sandbox_id)
+        except Exception:
+            return  # already gone: nothing to clean up
+    await ex.kill()
+
+
+def editable_files(bundle: Path) -> dict[str, str]:
+    """The files a fix may change, verbatim (no line numbers), so edits can be copied exactly."""
+    from edtools.validate import EDITABLE
+
+    return {p.relative_to(bundle).as_posix(): p.read_text()
+            for pattern in EDITABLE for p in sorted(bundle.glob(pattern)) if p.name != "__init__.py"}
+
+
+@node
+async def propose_fix(state: RunState, runtime: Runtime[GraphContext]) -> dict:
+    ctx = runtime.context
+    h = state.hypotheses.top()
+    cited = [e for e in state.evidence if e.id in set(h.evidence_ids + state.verification.evidence_ids)]
+    parts = [
+        f"Verified hypothesis:\n{h.model_dump_json(indent=1)}",
+        f"Verification:\n{state.verification.model_dump_json(indent=1)}",
+        "Supporting evidence:\n" + render_evidence(cited, with_data=True),
+        "Files you may edit (complete and verbatim; copy old_text from here):\n"
+        + "\n\n".join(untrusted(path, text) for path, text in editable_files(Path(state.bundle)).items()),
+    ]
+    if state.proposal:
+        parts.append(f"Your previous proposal (do not repeat it unchanged):\n{state.proposal.model_dump_json(indent=1)}")
+    if state.fix_feedback:
+        parts.append("Feedback on earlier proposals:\n" + "\n".join(f"- {f}" for f in state.fix_feedback))
+    usage = RunUsage()
+    with capture_run_messages() as messages:
+        try:
+            r = await fixer_agent.run("\n\n".join(parts), deps=FixerDeps(bundle=Path(state.bundle)), model=ctx.model("code"),
+                                      model_settings=SETTINGS, usage_limits=UsageLimits(request_limit=5), usage=usage)
+            proposal = r.output.model_copy(update={"hypothesis_id": h.id})
+            return {"proposal": proposal, "fix_attempts": state.fix_attempts + 1, "usage": usage_of(usage)}
+        except (UsageLimitExceeded, UnexpectedModelBehavior) as e:
+            # Record WHY (the validator's last complaint), for the next attempt and the report.
+            complaints = [str(p.content) for m in messages for p in m.parts if p.part_kind == "retry-prompt"]
+            why = complaints[-1][:500] if complaints else f"{type(e).__name__}: {str(e)[:300]}"
+            return {"proposal": None, "fix_attempts": state.fix_attempts + 1, "usage": usage_of(usage),
+                    "fix_feedback": [f"attempt {state.fix_attempts + 1}: no valid proposal. Last problem: {why}"]}
+
+
+@node
+async def release_sandbox(state: RunState, runtime: Runtime[GraphContext]) -> dict:
+    # A human may take hours to answer. Don't pay for an idle VM meanwhile: kill it now and
+    # start a clean one to apply the fix (which also guarantees an unmodified workspace).
+    await _kill_sandbox(state, runtime.context)
+    return {"sandbox_id": None}
+
+
+def approval_request(state: RunState) -> dict:
+    h = state.hypotheses.top()
+    cited = [e for e in state.evidence if e.id in set(h.evidence_ids + state.verification.evidence_ids)]
+    return {
+        "run_id": state.run_id,
+        "attempt": state.fix_attempts,
+        "hypothesis": h.model_dump(mode="json"),
+        "verification": state.verification.model_dump(mode="json"),
+        "evidence": [{"id": e.id, "tool": e.tool, "summary": e.summary} for e in cited],
+        "proposal": state.proposal.model_dump(mode="json"),
+        "patch": render_patch(Path(state.bundle), state.proposal.edits),
+        "usage": state.usage.model_dump(),
+    }
+
+
+@node
+async def approval_gate(state: RunState, runtime: Runtime[GraphContext]) -> dict:
+    # interrupt() saves the run and stops it here. On resume, LangGraph re-runs this node from
+    # the top and interrupt() returns the human's answer. So everything above that line must
+    # be side-effect free: building the request is pure, the decision is applied below.
+    answer = interrupt(approval_request(state))
+    decision = ApprovalDecision.model_validate(answer)
+    update: dict[str, Any] = {"approvals": [decision]}
+    if decision.decision == "reject":
+        update["fix_feedback"] = [f"reviewer {decision.approver} rejected attempt {state.fix_attempts}: {decision.feedback}"]
+    return update
+
+
+@node
+async def apply_fix(state: RunState, runtime: Runtime[GraphContext]) -> dict:
+    """Harness code, not the model: apply the APPROVED edits to a copy of the workspace in the
+    sandbox and validate. Keyed by a hash of the edits, so a retry or resume is idempotent."""
+    ex, update = await executor_for(state, runtime.context)
+    out = await ex.edtools("validate_fix", {"edits": [e.model_dump() for e in state.proposal.edits]}, timeout_s=300)
+    if "error" in out:
+        v = ValidationResult(fix_id="-", passed=False, checks=[ValidationCheck(name="apply", ok=False, detail=out["error"])])
+    else:
+        v = ValidationResult.model_validate(out["result"])
+    update["validation"] = v
+    if not v.passed:
+        failed = "; ".join(f"{c.name}: ...{c.detail[-300:]}" for c in v.checks if not c.ok)  # tail: the error
+        update["fix_feedback"] = [f"attempt {state.fix_attempts} failed validation: {failed}"]
+    return update
 
 
 @node
 async def teardown(state: RunState, runtime: Runtime[GraphContext]) -> dict:
-    if state.sandbox_mode == "e2b" and state.sandbox_id:
-        ex = runtime.context.executors.pop(state.run_id, None)
-        if ex is None:
-            from etl_doctor.sandbox import E2BExecutor
-
-            try:
-                ex = await E2BExecutor.connect(state.sandbox_id)
-            except Exception:
-                ex = None  # already gone: nothing to clean up
-        if ex is not None:
-            await ex.kill()
+    await _kill_sandbox(state, runtime.context)
     return {"sandbox_id": None}
 
 
@@ -278,7 +413,7 @@ def route_after_hypothesize(s: RunState) -> str:
 
 def route_after_verify(s: RunState) -> str:
     if s.verification.outcome == "confirmed":
-        return "report"
+        return "propose_fix"
     if over_token_budget(s) or s.verifications >= s.budget.max_verifications or s.investigations >= s.budget.max_investigations:
         return "escalate"
     return "investigate"
@@ -292,3 +427,45 @@ def escalation_reason(s: RunState) -> str:
     if s.hypotheses and s.hypotheses.top().confidence < s.budget.confidence_threshold:
         return f"no hypothesis reached confidence {s.budget.confidence_threshold} after {s.investigations} investigation round(s)"
     return "verification budget exhausted"
+
+
+def fix_attempts_left(s: RunState) -> bool:
+    return s.fix_attempts < s.budget.max_fix_attempts and not over_token_budget(s)
+
+
+def route_after_propose(s: RunState) -> str:
+    # propose_fix always overwrites `proposal`: a new one, or None when it couldn't make one.
+    if s.proposal is not None:
+        return "release_sandbox"
+    return "propose_fix" if fix_attempts_left(s) else "report"
+
+
+def route_after_approval(s: RunState) -> str:
+    decision = s.approvals[-1].decision
+    if decision == "approve":
+        return "apply_fix"
+    if decision == "reject" and fix_attempts_left(s):
+        return "propose_fix"
+    return "report"  # aborted, or rejected with no attempts left: the diagnosis still stands
+
+
+def route_after_apply(s: RunState) -> str:
+    if s.validation.passed:
+        return "report"
+    return "propose_fix" if fix_attempts_left(s) else "report"
+
+
+def fix_outcome(s: RunState) -> str:
+    """Why a verified diagnosis ended without a fix: describe the LAST thing that happened."""
+    last = s.approvals[-1] if s.approvals else None
+    rejected = sum(a.decision == "reject" for a in s.approvals)
+    tail = f" ({s.fix_attempts} attempt(s), {rejected} rejected by reviewers)"
+    if last and last.decision == "abort":
+        return f"diagnosis verified; fix aborted by {last.approver}" + tail
+    if s.proposal is None:
+        return "diagnosis verified; the last attempt produced no valid proposal" + tail
+    if s.validation and not s.validation.passed and last and last.decision == "approve":
+        return "diagnosis verified; the approved fix failed validation in the sandbox" + tail
+    if last and last.decision == "reject":
+        return "diagnosis verified; the last proposal was rejected" + tail
+    return "diagnosis verified; no fix applied" + tail

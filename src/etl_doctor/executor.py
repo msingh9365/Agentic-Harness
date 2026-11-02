@@ -15,7 +15,7 @@ from typing import Any, Protocol
 
 
 class Executor(Protocol):
-    async def edtools(self, command: str, args: dict[str, Any]) -> dict[str, Any]:
+    async def edtools(self, command: str, args: dict[str, Any], timeout_s: float | None = None) -> dict[str, Any]:
         """Returns {"result": ...} or {"error": "..."}; raises only on infrastructure failure."""
         ...
 
@@ -26,7 +26,8 @@ class LocalExecutor:
         self.timeout_s = timeout_s
         self.max_output_bytes = max_output_bytes
 
-    async def edtools(self, command: str, args: dict[str, Any]) -> dict[str, Any]:
+    async def edtools(self, command: str, args: dict[str, Any], timeout_s: float | None = None) -> dict[str, Any]:
+        timeout_s = timeout_s or self.timeout_s
         proc = await asyncio.create_subprocess_exec(
             sys.executable, "-m", "edtools", command, json.dumps(args),
             cwd=self.bundle,
@@ -35,10 +36,10 @@ class LocalExecutor:
             stderr=asyncio.subprocess.PIPE,
         )
         try:
-            out, err = await asyncio.wait_for(proc.communicate(), self.timeout_s)
+            out, err = await asyncio.wait_for(proc.communicate(), timeout_s)
         except TimeoutError:
             proc.kill()
-            return {"error": f"{command} timed out after {self.timeout_s}s; narrow the request"}
+            return {"error": f"{command} timed out after {timeout_s}s; narrow the request"}
         if proc.returncode not in (0, 2):
             # A crash in our own tool code is a harness bug, not something the model can fix.
             raise RuntimeError(f"edtools {command} crashed (exit {proc.returncode}): {err.decode()[-2000:]}")

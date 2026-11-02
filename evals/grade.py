@@ -34,12 +34,13 @@ def main(
     model: str = typer.Option(STRONG_MODEL),
     no_tools: bool = typer.Option(False, "--no-tools", help="Grade the Step 1 baseline instead"),
     graph: bool = typer.Option(False, "--graph", help="Grade the Step 4 graph (checkpointed, with verification)"),
+    approve_fixes: bool = typer.Option(False, "--approve-fixes", help="--graph: approve every proposed fix (eval only) to grade fixes too"),
     sandbox: str = typer.Option("e2b", help="e2b or local"),
 ) -> None:
     truth = GroundTruth.model_validate_json((case_dir / "ground_truth.json").read_text())
     t0 = time.perf_counter()
     if graph:
-        return grade_graph(case_dir, truth, sandbox, t0)
+        return grade_graph(case_dir, truth, sandbox, t0, approve_fixes)
     run = diagnose if no_tools else investigate_in_sandbox if sandbox == "e2b" else investigate
     agent = "no_tools" if no_tools else f"tools/{sandbox}"
     try:
@@ -68,10 +69,19 @@ def main(
     }))
 
 
-def grade_graph(case_dir: Path, truth: GroundTruth, sandbox: str, t0: float) -> None:
-    from etl_doctor.graph.build import start_run
+def grade_graph(case_dir: Path, truth: GroundTruth, sandbox: str, t0: float, approve_fixes: bool) -> None:
+    from datetime import datetime, timezone
+
+    from etl_doctor.graph.build import decide, start_run
+    from etl_doctor.graph.state import ApprovalDecision
 
     s = asyncio.run(start_run(case_dir / "bundle", sandbox))
+    # The graph stops for a human before any change. An eval answers in the human's place, and
+    # says so in the audit trail: approve (to grade fixes too) or abort (diagnosis only).
+    while s.report is None:
+        d = ApprovalDecision(decision="approve" if approve_fixes else "abort", approver="eval-harness",
+                             decided_at=datetime.now(timezone.utc))
+        s = asyncio.run(decide(s.run_id, d))
     r = s.report
     scores = grade(r.diagnosis, truth) if r.diagnosis else {k: False for k in ("failure_class", "affected_columns", "first_bad_partition")}
     if r.diagnosis:
@@ -82,7 +92,9 @@ def grade_graph(case_dir: Path, truth: GroundTruth, sandbox: str, t0: float) -> 
         "run_id": s.run_id,
         "status": r.status,
         # An escalation is not a wrong answer, but it is not a diagnosis either.
-        "correct": r.status == "diagnosed" and all(scores.values()),
+        "correct": r.status in ("fixed", "diagnosed_unfixed") and all(scores.values()),
+        "fix_attempts": s.fix_attempts,
+        "fix_validated": bool(s.validation and s.validation.passed),
         **scores,
         "investigations": s.investigations,
         "verifications": s.verifications,

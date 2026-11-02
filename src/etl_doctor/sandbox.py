@@ -23,7 +23,7 @@ from e2b import AsyncSandbox, CommandExitException, TimeoutException
 
 import edtools
 
-TEMPLATE = "etl-doctor-v1"  # built by sandbox/build_template.py
+TEMPLATE = "etl-doctor-v2"  # built by sandbox/build_template.py
 WORKSPACE = "/workspace"
 EDTOOLS_ROOT = "/opt/edtools"  # the package goes to /opt/edtools/edtools, on PYTHONPATH
 
@@ -97,12 +97,13 @@ class E2BExecutor:
         except CommandExitException as e:  # the SDK raises on non-zero exit
             return e.exit_code, e.stdout, e.stderr
 
-    async def edtools(self, command: str, args: dict[str, Any]) -> dict[str, Any]:
+    async def edtools(self, command: str, args: dict[str, Any], timeout_s: float | None = None) -> dict[str, Any]:
+        timeout_s = timeout_s or self.cmd_timeout_s
         cmd = f"PYTHONPATH={EDTOOLS_ROOT} PYTHONDONTWRITEBYTECODE=1 python -m edtools {command} {shlex.quote(json.dumps(args))}"
         try:
-            code, out, err = await self.run(cmd)
+            code, out, err = await self.run(cmd, timeout_s)
         except TimeoutException:
-            return {"error": f"{command} timed out after {self.cmd_timeout_s}s; narrow the request"}
+            return {"error": f"{command} timed out after {timeout_s}s; narrow the request"}
         if code not in (0, 2):
             raise RuntimeError(f"edtools {command} crashed in sandbox (exit {code}): {err[-2000:]}")
         if len(out) > self.max_output_bytes:

@@ -12,14 +12,14 @@ from typing import Any
 from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
 from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
 from langgraph.graph import END, START, StateGraph
-from langgraph.types import RetryPolicy
+from langgraph.types import Command, RetryPolicy
 from pydantic import BaseModel
 
 from etl_doctor import domain, evidence
 from etl_doctor.graph import nodes as n
 from etl_doctor.graph import state as st
 from etl_doctor.graph.nodes import GraphContext
-from etl_doctor.graph.state import Budget, RunState
+from etl_doctor.graph.state import ApprovalDecision, Budget, RunState
 
 DB_PATH = Path(".etl_doctor/checkpoints.sqlite")
 
@@ -36,6 +36,10 @@ def build_graph() -> StateGraph:
     g.add_node("investigate", n.investigate, retry_policy=LLM_RETRY)
     g.add_node("hypothesize", n.hypothesize, retry_policy=LLM_RETRY)
     g.add_node("verify", n.verify, retry_policy=LLM_RETRY)
+    g.add_node("propose_fix", n.propose_fix, retry_policy=LLM_RETRY)
+    g.add_node("release_sandbox", n.release_sandbox)
+    g.add_node("approval_gate", n.approval_gate)
+    g.add_node("apply_fix", n.apply_fix, retry_policy=LLM_RETRY)  # safe to retry: idempotent by patch hash
     g.add_node("escalate", n.escalate)
     g.add_node("report", n.report)
     g.add_node("teardown", n.teardown)
@@ -46,7 +50,11 @@ def build_graph() -> StateGraph:
     g.add_edge("triage", "investigate")
     g.add_edge("investigate", "hypothesize")
     g.add_conditional_edges("hypothesize", n.route_after_hypothesize, ["investigate", "verify", "escalate"])
-    g.add_conditional_edges("verify", n.route_after_verify, ["investigate", "report", "escalate"])
+    g.add_conditional_edges("verify", n.route_after_verify, ["investigate", "propose_fix", "escalate"])
+    g.add_conditional_edges("propose_fix", n.route_after_propose, ["release_sandbox", "propose_fix", "report"])
+    g.add_edge("release_sandbox", "approval_gate")
+    g.add_conditional_edges("approval_gate", n.route_after_approval, ["apply_fix", "propose_fix", "report"])
+    g.add_conditional_edges("apply_fix", n.route_after_apply, ["report", "propose_fix"])
     g.add_edge("escalate", "report")
     g.add_edge("report", "teardown")
     g.add_edge("teardown", END)
@@ -97,6 +105,24 @@ async def _stream(app, inp, run_id: str, ctx: GraphContext, on_node: Callable[[s
     return RunState.model_validate(snap.values)
 
 
+async def pending_approval(run_id: str, db_path: Path = DB_PATH) -> dict | None:
+    """The approval request a run is waiting on, or None."""
+    async with open_graph(db_path) as app:
+        snap = await app.aget_state(_config(run_id))
+        return snap.interrupts[0].value if snap.interrupts else None
+
+
+async def decide(run_id: str, decision: ApprovalDecision, ctx: GraphContext | None = None, on_node=None,
+                 db_path: Path = DB_PATH) -> RunState:
+    """Answer a pending approval and continue the run. Can be a different process, hours later."""
+    async with open_graph(db_path) as app:
+        snap = await app.aget_state(_config(run_id))
+        if not snap.interrupts:
+            raise ValueError(f"{run_id} is not waiting for approval (next: {list(snap.next) or 'done'})")
+        resume = Command(resume=decision.model_dump(mode="json"))
+        return await _stream(app, resume, run_id, ctx or GraphContext(), on_node)
+
+
 async def start_run(bundle: Path, sandbox: str = "e2b", ctx: GraphContext | None = None, run_id: str | None = None,
                     budget: Budget | None = None, on_node=None, db_path: Path = DB_PATH) -> RunState:
     run_id = run_id or new_run_id()
@@ -113,8 +139,8 @@ async def resume_run(run_id: str, ctx: GraphContext | None = None, on_node=None,
         if snap.values.get("state_version") != st.STATE_VERSION:
             raise ValueError(f"{run_id} was saved with state version {snap.values.get('state_version')}, "
                              f"this code expects {st.STATE_VERSION}")
-        if not snap.next:
-            return RunState.model_validate(snap.values)  # already finished
+        if not snap.next or snap.interrupts:
+            return RunState.model_validate(snap.values)  # finished, or waiting for a human: use decide()
         return await _stream(app, None, run_id, ctx or GraphContext(), on_node)
 
 

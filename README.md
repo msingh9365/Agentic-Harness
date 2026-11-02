@@ -7,11 +7,12 @@ fix, waits for **human approval**, and then checks the fix in the sandbox.
 Built to show **AI harness engineering**: orchestration (LangGraph), typed agents
 (PydanticAI), sandboxed tools, checkpointing, approval gates, budgets and evals.
 
-> Status: **Step 4 of the [capability ladder](docs/00-poc-plan.md#2-the-capability-ladder)**.
-> A LangGraph state machine runs triage → investigate ⇄ hypothesize → verify → report, with
-> SQLite checkpoints (kill it, resume it) and budgets that end in an escalation instead of a
-> crash. Tools run inside a disposable E2B microVM with no internet; every claim cites
-> evidence IDs the harness recorded. Human approval of fixes comes next.
+> Status: **Step 5 of the [capability ladder](docs/00-poc-plan.md#2-the-capability-ladder)**.
+> A LangGraph state machine diagnoses (triage → investigate ⇄ hypothesize → verify), proposes
+> a fix, **waits for a human** (`interrupt()`, answerable from any process), then applies the
+> fix to a copy in a fresh E2B microVM and re-runs the pipeline on current and last-good data.
+> The output is a validated patch for a human to apply; the agent never changes the real
+> pipeline. Checkpointed (kill it, resume it); budgets end in escalation, not a crash.
 
 ## Docs
 
@@ -26,6 +27,7 @@ Built to show **AI harness engineering**: orchestration (LangGraph), typed agent
 | [learn/02 · Tools and the agent loop](docs/learn/02-tools-and-agent-loop.md) | Step 2 concepts: tool calling, ReAct loop, tool design, evidence IDs |
 | [learn/03 · Sandboxing and prompt injection](docs/learn/03-sandboxing.md) | Step 3 concepts: process vs container vs microVM, layered defence, least privilege |
 | [learn/04 · LangGraph, checkpoints, budgets](docs/learn/04-graph-and-checkpoints.md) | Step 4 concepts: state machines vs free agents, reducers, durability, resume, escalation |
+| [learn/05 · Human-in-the-loop](docs/learn/05-human-in-the-loop.md) | Step 5 concepts: `interrupt()`, mutations as data, validation after approval, idempotency |
 
 ## Quick start
 
@@ -44,6 +46,8 @@ make doctor   SCENARIO=f1_date_format MODE=silent   # Step 4 graph: triage -> in
 make doctor   SCENARIO=f1_date_format MODE=silent CRASH=hypothesize   # kill -9 mid-run...
 make resume   RUN=run-...                           # ...and continue from the checkpoint
 make history  RUN=run-...                           # every checkpoint of a run
+etl-doctor show    RUN                              # the approval a run is waiting on
+etl-doctor approve RUN [--reject "why" | --abort]   # answer it (any process, any time)
 make diagnose SCENARIO=f1_date_format MODE=silent NO_TOOLS=1   # Step 1 baseline
 make grade    SCENARIO=f1_date_format MODE=silent   # ...scored against ground_truth.json
 make smoke                         # compare candidate models
@@ -62,16 +66,18 @@ src/etl_doctor/         the agent
   evidence.py           evidence store (IDs come from the harness, never the model)
   executor.py           Executor interface + LocalExecutor (subprocess, dev only)
   sandbox.py            E2BExecutor: same tools in a Firecracker microVM, no internet
+  fixes.py              fix guardrails (exact, whole-line, parses, not cosmetic) + patch rendering
   graph/                Step 4: LangGraph state machine
     state.py            RunState (checkpointed), reducers, budgets, hypothesis/verification models
-    agents.py           triage / investigator / hypothesis / verifier roles + validators
+    agents.py           triage / investigator / hypothesis / verifier / fixer roles + validators
     nodes.py            node functions, routing (pure functions of state), sandbox reconnect
     build.py            graph wiring, SQLite checkpointer, run / resume / history
   prompts/              system instructions
   cli.py                `etl-doctor diagnose|run|resume|history`
 src/edtools/            the tool implementations: JSON in, JSON out (profile, column_by_file,
                         diff_schema, grep_logs, run_sql, read_file, list_files); run in the sandbox
-sandbox/build_template.py  E2B template: Python 3.12 + pinned polars/duckdb
+  validate.py           harness-only: apply approved edits to a copy, re-run pipeline + checks
+sandbox/build_template.py  E2B template etl-doctor-v2: Python 3.12 + the pipeline's pinned deps
 scripts/smoke_llm.py    model comparison: structured output + tool calling
 demo_pipeline/          the "patient": orders CSVs -> Polars transform -> DuckDB
   pipeline/             extract.py, transform.py, load.py, run.py, config.yaml

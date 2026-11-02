@@ -4,7 +4,8 @@
 |---|---|
 | **Date** | 2026-10-17 |
 | **Script** | `scripts/smoke_llm.py` (`make smoke`) |
-| **Decision** | Strong model: `nvidia/nemotron-3-super-120b-a12b`. Fast model: `openai/gpt-oss-20b` |
+| **Decision (2026-10-17)** | Strong: `nvidia/nemotron-3-super-120b-a12b`. Fast: `openai/gpt-oss-20b` |
+| **Decision (2026-11-02)** | Strong: `nvidia/nemotron-3-ultra-550b-a55b`. Code (fixer): `minimaxai/minimax-m3.1-flash`. Fast: `nvidia/nemotron-3.5-lightning-30b-a3b`. See the [re-run](#re-run-2026-11-02) |
 
 ## What was tested
 
@@ -77,3 +78,38 @@ not for the final diagnosis, which is the reason for the strong/fast split.
   retry budget. Use it for triage and summaries, not final answers.
 - **Backup strong = GLM-5.3:** reliable but 5–10× slower.
 - Free-tier availability changes daily, so `make smoke` re-checks before a demo.
+
+
+## Re-run 2026-11-02
+
+Two weeks later the free tier had changed under us:
+
+- `nvidia/nemotron-3-super-120b-a12b` (the default) is still listed but every call returns **404**.
+- `z-ai/glm-5.3` returns **410 Gone**; `openai/gpt-oss-20b` passes but takes ~150 s per call.
+- `nvidia/nemotron-3-ultra-550b-a55b`, overloaded in October, now answers in ~6–10 s.
+
+| Model | tool_output | native_output | prompted_output | tool_calling | code_in_tools (new) | seconds |
+|---|---|---|---|---|---|---|
+| `nvidia/nemotron-3-ultra-550b-a55b` | 1/1 | 0/1 (wrong content) | 1/1 | 1/1 | **0/1** | 6–17 |
+| `minimaxai/minimax-m3.1-flash` | 1/1 | 1/1 | 1/1 | 1/1, then 0/1 | **1/1** | 9–12 |
+| `nvidia/nemotron-3.5-lightning-30b-a3b` | 1/1 | 1/1 | 1/1 | 1/1 | 0/1 (HTML-escaped) | 4–16 |
+| `nvidia/nemotron-3.5-super-vl-120b-a12b` | 1/1 | 1/1 | 1/1 | 0/1 (zero-arg tool bug) | – | 4–14 |
+| `mistralai/mistral-large-4-1t-a52b` | 1/1 | – | – | – | – | 340 |
+
+**New finding, the `code_in_tools` check.** For Nemotron models, NVIDIA's tool-call
+parsing mangles quotes and newlines *inside tool-call arguments*. Asked to return
+`x = cfg["date_format"]` + newline + `y = {"a": 1}`:
+
+| Channel | Ultra | Lightning | MiniMax |
+|---|---|---|---|
+| tool call (PydanticAI default) | `x = cfg[date_format]y = {a: 1}` | `x = cfg[&quot;date_format&quot;]&newline;...` | exact |
+| native JSON (`response_format`) | exact | exact | exact |
+| prompted JSON | exact | exact | exact |
+
+That's harmless for diagnosis (short strings, SQL in single quotes) but destroys code, so
+the fix author uses native JSON output and a different model (MiniMax), chosen per role
+by measurement. `scripts/smoke_llm.py` now includes the check, so this regression shows up
+in one command.
+
+**Lesson:** a hosted free tier is not a stable dependency. Pin models in config (env
+vars), keep a smoke test that takes one command, and re-run it before every demo.

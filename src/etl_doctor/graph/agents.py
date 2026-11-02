@@ -8,9 +8,10 @@ budget of its own, and lets the graph decide what happens next instead of the mo
 from dataclasses import dataclass
 from pathlib import Path
 
-from pydantic_ai import Agent, ModelRetry, RunContext
+from pydantic_ai import Agent, ModelRetry, NativeOutput, RunContext
 
-from etl_doctor.graph.state import HypothesisSet, InvestigationStep, TriageResult, Verification
+from etl_doctor.fixes import edit_problems, repair_edits, syntax_problems
+from etl_doctor.graph.state import FixProposal, HypothesisSet, InvestigationStep, TriageResult, Verification
 from etl_doctor.tools import AgentDeps, readonly_tools
 
 PROMPTS = Path(__file__).resolve().parent.parent / "prompts"
@@ -86,3 +87,51 @@ def _verification_cites_real_evidence(ctx: RunContext[AgentDeps], out: Verificat
     if problems := _check_refs(out.evidence_ids, None, ctx.deps.evidence.ids(), ctx.deps.current_files):
         raise ModelRetry("Fix and answer again:\n- " + "\n- ".join(problems))
     return out
+
+
+# When the verifier's tool budget runs out, its checks are already paid for. Rather than
+# discard them as "inconclusive", one extra call with NO tools decides from what they showed.
+verdict_agent = Agent(
+    deps_type=KnownFacts,
+    output_type=Verification,
+    instructions=prompt("verify") + "\n\nYour tool budget is spent. Decide from the evidence below; "
+    "if it does not settle the question, answer inconclusive.",
+    retries=3,
+)
+
+
+@verdict_agent.output_validator
+def _verdict_cites_real_evidence(ctx: RunContext[KnownFacts], out: Verification) -> Verification:
+    if problems := _check_refs(out.evidence_ids, None, ctx.deps.evidence_ids, ctx.deps.current_files):
+        raise ModelRetry("Fix and answer again:\n- " + "\n- ".join(problems))
+    return out
+
+
+@dataclass
+class FixerDeps:
+    bundle: Path
+
+
+fixer_agent = Agent(
+    deps_type=FixerDeps,
+    # Native JSON output (response_format=json_schema), not the default "final_result" tool
+    # call: NVIDIA's tool-call parsing for Nemotron models drops or HTML-escapes quotes and
+    # newlines inside tool arguments, which destroys code (measured: docs/04-model-smoke-test.md).
+    # In that mode the endpoint answers at once and never calls tools, so the fixer has none:
+    # the harness puts the editable files in its prompt instead. Least privilege for free.
+    output_type=NativeOutput(FixProposal),
+    instructions=prompt("propose_fix"),
+    retries=3,
+)
+
+
+@fixer_agent.output_validator
+def _edits_apply_cleanly(ctx: RunContext[FixerDeps], out: FixProposal) -> FixProposal:
+    # Checked before a human sees it: reviewers shouldn't spend time on a patch that can't apply.
+    edits = repair_edits(ctx.deps.bundle, out.edits)
+    problems = edit_problems(ctx.deps.bundle, edits)
+    if not problems:
+        problems = syntax_problems(ctx.deps.bundle, edits)
+    if problems:
+        raise ModelRetry("Fix these problems in your edits and answer again:\n- " + "\n- ".join(problems))
+    return out.model_copy(update={"edits": edits})

@@ -9,14 +9,15 @@ Rules:
 """
 
 import operator
+from datetime import datetime
 from typing import Annotated, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 from etl_doctor.domain import Diagnosis, FailureClass
 from etl_doctor.evidence import Evidence
 
-STATE_VERSION = 1
+STATE_VERSION = 2  # v2 (Step 5): fix proposal, approval, validation
 
 
 class Usage(BaseModel):
@@ -37,6 +38,7 @@ class Budget(BaseModel):
     max_total_tokens: int = 400_000
     max_investigations: int = 3  # investigate <-> hypothesize loops
     max_verifications: int = 2
+    max_fix_attempts: int = 3  # proposals per run, counting rejected and invalid ones
     tool_calls_per_investigation: int = 8
     confidence_threshold: float = 0.8
 
@@ -83,10 +85,58 @@ class Verification(BaseModel):
     evidence_ids: list[str] = Field(min_length=1)
 
 
+class FileEdit(BaseModel):
+    """One exact search/replace edit. More reliable from an LLM than a unified diff
+    (no line numbers to get wrong), and trivially checkable: old_text must exist once."""
+
+    path: str = Field(description="e.g. demo_pipeline/pipeline/transform.py")
+    old_text: str = Field(min_length=1, description="Exact text to replace, copied from read_file output without the line-number prefix. Must occur exactly once.")
+    new_text: str
+
+
+class FixProposal(BaseModel):
+    hypothesis_id: str
+    edits: list[FileEdit] = Field(min_length=1, max_length=5)
+    rationale: str = Field(max_length=600)
+    blast_radius: str = Field(max_length=400, description="What else this change can affect.")
+    expected_effects: list[str] = Field(min_length=1, max_length=5, description="Observable results if the fix works.")
+    rollback: str = Field(max_length=300)
+    confidence: float = Field(ge=0, le=1)
+
+
+class ApprovalDecision(BaseModel):
+    decision: Literal["approve", "reject", "abort"]
+    approver: str
+    feedback: str | None = None
+    decided_at: datetime
+
+    @model_validator(mode="after")
+    def _reject_needs_feedback(self):
+        if self.decision == "reject" and not self.feedback:
+            raise ValueError("a rejection needs feedback, so the next proposal can do better")
+        return self
+
+
+class ValidationCheck(BaseModel):
+    name: str
+    ok: bool
+    detail: str
+
+
+class ValidationResult(BaseModel):
+    fix_id: str
+    passed: bool
+    checks: list[ValidationCheck]
+
+
 class Report(BaseModel):
-    status: Literal["diagnosed", "escalated"]
+    status: Literal["fixed", "diagnosed_unfixed", "escalated"]
     diagnosis: Diagnosis | None
     verification: Verification | None
+    fix: FixProposal | None = None
+    patch: str | None = None  # unified diff of the approved, validated fix, for a human to apply
+    approvals: list[ApprovalDecision] = []
+    validation: ValidationResult | None = None
     terminal_reason: str
     usage: Usage
 
@@ -109,8 +159,14 @@ class RunState(BaseModel):
     verification: Verification | None = None
     feedback: Annotated[list[str], operator.add] = []  # why a hypothesis was rejected, for the next round
 
+    proposal: FixProposal | None = None
+    approvals: Annotated[list[ApprovalDecision], operator.add] = []  # audit trail: every decision, in order
+    validation: ValidationResult | None = None
+    fix_feedback: Annotated[list[str], operator.add] = []  # human rejections and failed validations
+
     investigations: int = 0
     verifications: int = 0
+    fix_attempts: int = 0
     usage: Annotated[Usage, operator.add] = Usage()
     terminal_reason: str | None = None
     report: Report | None = None

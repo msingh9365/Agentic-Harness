@@ -15,12 +15,16 @@ from importlib.metadata import version
 
 from e2b import Template
 
-ALIAS = "etl-doctor-v1"
+ALIAS = "etl-doctor-v2"
 
 template = (
     Template()
     .from_python_image("3.12")
-    .pip_install([f"polars=={version('polars')}", f"duckdb=={version('duckdb')}"])
+    # v1: tools only. v2 (Step 5): also what the demo pipeline and its quality tests need,
+    # because validating a fix means re-running the pipeline inside the sandbox.
+    # Must cover the pipeline's real runtime deps: v2 first shipped without pyarrow (used by
+    # polars' to_arrow() in load.py), and every fix failed validation until it was added.
+    .pip_install([f"{p}=={version(p)}" for p in ["polars", "duckdb", "pyarrow", "pyyaml", "typer", "pytest"]])
     .run_cmd("mkdir -p /workspace /opt/edtools && chown -R user:user /workspace /opt/edtools", user="root")
 )
 

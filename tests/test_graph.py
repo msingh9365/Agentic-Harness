@@ -7,9 +7,11 @@ from pathlib import Path
 
 import pytest
 
-from etl_doctor.graph.build import history, resume_run, start_run
+from datetime import datetime, timezone
+
+from etl_doctor.graph.build import decide, history, pending_approval, resume_run, start_run
 from etl_doctor.graph.nodes import GraphContext, route_after_hypothesize, route_after_verify
-from etl_doctor.graph.state import Budget, Hypothesis, HypothesisSet, RunState, Usage, Verification
+from etl_doctor.graph.state import ApprovalDecision, Budget, Hypothesis, HypothesisSet, RunState, Usage, Verification
 from evals.inject import build, load_scenario
 from tests.fake_brain import make_brain
 
@@ -24,13 +26,68 @@ def ctx(**kw) -> GraphContext:
     return GraphContext(strong=brain, fast=brain)
 
 
-def test_happy_path_is_diagnosed(bundle, tmp_path):
-    nodes = []
-    s = asyncio.run(start_run(bundle, "local", ctx(), db_path=tmp_path / "cp.db", on_node=lambda n, u: nodes.append(n)))
-    assert nodes == ["intake", "provision_sandbox", "triage", "investigate", "hypothesize", "verify", "report", "teardown"]
-    assert s.report.status == "diagnosed"
-    assert s.report.diagnosis.first_bad_partition == "orders_2026-10-14.csv"
-    assert [e.id for e in s.evidence] == ["ev-001", "ev-002"]  # IDs continue across nodes
+def approve(**kw) -> ApprovalDecision:
+    return ApprovalDecision(**{"decision": "approve", "approver": "tester", "decided_at": datetime.now(timezone.utc), **kw})
+
+
+def test_happy_path_pauses_for_approval_then_fixes(bundle, tmp_path):
+    db, nodes = tmp_path / "cp.db", []
+    s = asyncio.run(start_run(bundle, "local", ctx(), run_id="r1", db_path=db, on_node=lambda n, u: nodes.append(n)))
+    assert nodes[-3:] == ["propose_fix", "release_sandbox", "__interrupt__"]
+    assert s.report is None and [e.id for e in s.evidence] == ["ev-001", "ev-002"]  # IDs continue across nodes
+
+    req = asyncio.run(pending_approval("r1", db_path=db))  # e.g. from another process, later
+    assert "+++ b/demo_pipeline/pipeline/transform.py" in req["patch"] and "coalesce" in req["patch"]
+
+    nodes.clear()
+    s = asyncio.run(decide("r1", approve(), ctx(), db_path=db, on_node=lambda n, u: nodes.append(n)))
+    assert nodes == ["approval_gate", "apply_fix", "report", "teardown"]
+    assert s.report.status == "fixed" and s.validation.passed
+    assert {c.name for c in s.validation.checks} >= {"no_rows_lost", "quality_tests_last_good", "order_date_matches_partition"}
+    assert s.report.approvals[0].approver == "tester"  # audit trail
+    assert "coalesce" in s.report.patch
+
+
+def test_rejection_feedback_reaches_the_next_proposal(bundle, tmp_path):
+    db = tmp_path / "cp.db"
+    c = ctx(fixes=["regress", "good"])
+    asyncio.run(start_run(bundle, "local", c, run_id="r2", db_path=db))
+    assert "config.yaml" in asyncio.run(pending_approval("r2", db_path=db))["patch"]
+    asyncio.run(decide("r2", approve(decision="reject", feedback="breaks the old files"), c, db_path=db))
+    req = asyncio.run(pending_approval("r2", db_path=db))
+    assert req["attempt"] == 2 and "transform.py" in req["patch"]
+    s = asyncio.run(decide("r2", approve(), c, db_path=db))
+    assert s.report.status == "fixed" and "breaks the old files" in s.fix_feedback[0]
+
+
+def test_regressing_fix_fails_validation_and_run_ends_unfixed(bundle, tmp_path):
+    db = tmp_path / "cp.db"
+    c = ctx(fixes=["regress"])
+    asyncio.run(start_run(bundle, "local", c, run_id="r3", db_path=db))
+    s = asyncio.run(decide("r3", approve(), c, db_path=db))   # human approves a bad fix...
+    assert not s.validation.passed                              # ...the sandbox check catches it
+    failed = {ch.name for ch in s.validation.checks if not ch.ok}
+    assert "quality_tests_last_good" in failed and "no_rows_lost" in failed
+    while s.report is None:                                    # every retry is the same bad fix, approved again
+        s = asyncio.run(decide("r3", approve(), c, db_path=db))
+    assert s.fix_attempts == s.budget.max_fix_attempts
+    assert s.report.status == "diagnosed_unfixed" and s.report.patch is None
+    assert "failed validation" in s.report.terminal_reason
+
+
+def test_forbidden_edit_never_reaches_a_human(bundle, tmp_path):
+    db = tmp_path / "cp.db"
+    asyncio.run(start_run(bundle, "local", ctx(fixes=["forbidden", "good"]), run_id="r4", db_path=db))
+    req = asyncio.run(pending_approval("r4", db_path=db))
+    assert "test_quality.py" not in req["patch"] and "transform.py" in req["patch"]
+
+
+def test_abort_keeps_the_diagnosis(bundle, tmp_path):
+    db = tmp_path / "cp.db"
+    asyncio.run(start_run(bundle, "local", ctx(), run_id="r5", db_path=db))
+    s = asyncio.run(decide("r5", approve(decision="abort"), ctx(), db_path=db))
+    assert s.report.status == "diagnosed_unfixed" and s.report.diagnosis.failure_class == "F1"
+    assert s.validation is None  # nothing was applied
 
 
 def test_low_confidence_loops_then_escalates(bundle, tmp_path):
@@ -72,7 +129,7 @@ def test_crash_and_resume_from_checkpoint(bundle, tmp_path):
     s = asyncio.run(resume_run("crashy", c, db_path=db, on_node=lambda n, u: nodes.append(n)))
     assert nodes[0] == "hypothesize"           # did not redo intake/triage/investigate
     assert [e.id for e in new_evidence] == ["ev-002"]  # only verify ran a tool; ev-001 came from the checkpoint
-    assert s.report.status == "diagnosed"
+    assert nodes[-1] == "__interrupt__" and s.proposal is not None  # now waiting for a human
 
 
 # --- routing is pure, so test it directly ---------------------------------------------------
@@ -97,10 +154,69 @@ def test_route_after_hypothesize(kw, expected):
 
 
 @pytest.mark.parametrize(("kw", "expected"), [
-    ({"outcome": "confirmed"}, "report"),
+    ({"outcome": "confirmed"}, "propose_fix"),
     ({"outcome": "falsified", "verifications": 1}, "investigate"),
     ({"outcome": "falsified", "verifications": 2}, "escalate"),
     ({"outcome": "inconclusive", "verifications": 1, "tokens": 10**6}, "escalate"),
 ])
 def test_route_after_verify(kw, expected):
     assert route_after_verify(_state(**kw)) == expected
+
+
+def test_validation_cache_is_per_workspace(tmp_path_factory):
+    """Same edits on two different bundles must be validated separately."""
+    from edtools.validate import fix_id
+    from tests.fake_brain import FIXES
+
+    out = tmp_path_factory.mktemp("two")
+    a = build(load_scenario("f1_date_format"), "silent", {}, out / "a") / "bundle"
+    b = build(load_scenario("f4_type_drift"), "silent", {}, out / "b") / "bundle"
+    assert fix_id(FIXES["good"], a) != fix_id(FIXES["good"], b)
+    assert fix_id(FIXES["good"], a) == fix_id(FIXES["good"], a)
+
+
+def test_requoted_old_text_snaps_to_the_real_file(bundle):
+    from etl_doctor.fixes import edit_problems, repair_edits
+    from etl_doctor.graph.state import FileEdit
+
+    # What Nemotron Ultra actually sent: single quotes where the file has double quotes.
+    e = FileEdit(path="demo_pipeline/pipeline/config.yaml", old_text="date_format: '%Y-%m-%d'", new_text="date_formats: ['%Y-%m-%d']")
+    assert edit_problems(bundle, [e])  # exact match fails
+    fixed = repair_edits(bundle, [e])
+    assert fixed[0].old_text == 'date_format: "%Y-%m-%d"' and not edit_problems(bundle, fixed)
+    # An ambiguous loose match is left alone, so the model is asked again.
+    amb = FileEdit(path="demo_pipeline/pipeline/transform.py", old_text="pl.col(", new_text="x")
+    assert repair_edits(bundle, [amb])[0].old_text == "pl.col("
+
+
+def test_flattened_multiline_text_is_not_snapped(bundle):
+    """What Ultra sent once: a whole multi-line config, flattened onto one line."""
+    from etl_doctor.fixes import repair_edits
+    from etl_doctor.graph.state import FileEdit
+
+    cfg = (bundle / "demo_pipeline/pipeline/config.yaml").read_text()
+    flat = "  ".join(cfg.splitlines())
+    e = FileEdit(path="demo_pipeline/pipeline/config.yaml", old_text=flat, new_text="x")
+    assert repair_edits(bundle, [e])[0].old_text == flat  # untouched -> validator asks again
+
+
+def test_truncated_fragment_and_broken_syntax_are_rejected(bundle):
+    from etl_doctor.fixes import edit_problems, syntax_problems
+    from etl_doctor.graph.state import FileEdit
+
+    # What Ultra sent: old_text cut off at a quote. Unique, but mid-line.
+    frag = FileEdit(path="demo_pipeline/pipeline/transform.py", old_text="    strict = cfg[", new_text="    strict = cfg[")
+    assert any("complete lines" in p for p in edit_problems(bundle, [frag]))
+    broken = FileEdit(path="demo_pipeline/pipeline/transform.py", old_text='    strict = cfg["strict_parsing"]',
+                      new_text='    strict = cfg["strict_parsing"]\n    )')
+    assert not edit_problems(bundle, [broken]) and syntax_problems(bundle, [broken])
+
+
+def test_quote_only_edit_is_a_no_op(bundle):
+    """What MiniMax once sent: the same line with ' instead of "."""
+    from etl_doctor.fixes import edit_problems
+    from etl_doctor.graph.state import FileEdit
+
+    line = '        pl.col("order_date").str.strptime(pl.Date, cfg["date_format"], strict=strict),'
+    e = FileEdit(path="demo_pipeline/pipeline/transform.py", old_text=line, new_text=line.replace('"', "'"))
+    assert any("changes nothing" in p for p in edit_problems(bundle, [e]))

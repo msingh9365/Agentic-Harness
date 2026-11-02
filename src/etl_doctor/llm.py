@@ -16,11 +16,15 @@ os.environ.setdefault("PYDANTIC_AI_NO_BANNER", "1")
 NVIDIA_BASE_URL = "https://integrate.api.nvidia.com/v1"
 
 # Chosen from the smoke test in scripts/smoke_llm.py (results: docs/04-model-smoke-test.md).
-# Nemotron 3 Ultra was the plan, but the free endpoint was overloaded (503/500) for most
-# calls; Super passed every structured-output check and 6/6 Step 1 cases. Override with
-# ETLDOC_STRONG_MODEL=nvidia/nemotron-3-ultra-550b-a55b when Ultra is available.
-STRONG_MODEL = os.environ.get("ETLDOC_STRONG_MODEL", "nvidia/nemotron-3-super-120b-a12b")
-FAST_MODEL = os.environ.get("ETLDOC_FAST_MODEL", "openai/gpt-oss-20b")
+# The free tier changes under you: on 2026-11-02 Nemotron 3 Super (the October default)
+# returned 404 and gpt-oss-20b took ~150 s per call, while Ultra, overloaded in October,
+# answered in seconds. Re-run `make smoke` before a demo. Override with these env vars.
+STRONG_MODEL = os.environ.get("ETLDOC_STRONG_MODEL", "nvidia/nemotron-3-ultra-550b-a55b")
+FAST_MODEL = os.environ.get("ETLDOC_FAST_MODEL", "nvidia/nemotron-3.5-lightning-30b-a3b")
+# Writes code (fix proposals). A separate role because it needs exact copying more than
+# deep reasoning: Ultra kept truncating old_text at quotes; MiniMax produced valid edits
+# 2/2 times on the same case and passes the smoke test's code_in_tools check.
+CODE_MODEL = os.environ.get("ETLDOC_CODE_MODEL", "minimaxai/minimax-m3.1-flash")
 
 
 def make_model(name: str) -> OpenAIChatModel:

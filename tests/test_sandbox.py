@@ -107,3 +107,15 @@ def test_compromised_model_gets_nothing(tmp_path):
     ]), outcomes
     sql = next(p for p in seen.values() if p.tool_name == "run_sql")
     assert "error" in sql.content and "evidence_id" not in sql.content
+
+
+def test_fix_validation_runs_the_patched_pipeline_inside_the_vm(sbx):
+    from tests.fake_brain import FIXES
+
+    loop, ex = sbx
+    good = loop.run_until_complete(ex.edtools("validate_fix", {"edits": FIXES["good"]}, timeout_s=300))["result"]
+    assert good["passed"], good["checks"]
+    bad = loop.run_until_complete(ex.edtools("validate_fix", {"edits": FIXES["regress"]}, timeout_s=300))["result"]
+    assert not bad["passed"]
+    forbidden = loop.run_until_complete(ex.edtools("validate_fix", {"edits": FIXES["forbidden"]}))
+    assert "not allowed" in forbidden["error"]

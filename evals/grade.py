@@ -75,13 +75,22 @@ def grade_graph(case_dir: Path, truth: GroundTruth, sandbox: str, t0: float, app
     from etl_doctor.graph.build import decide, start_run
     from etl_doctor.graph.state import ApprovalDecision
 
-    s = asyncio.run(start_run(case_dir / "bundle", sandbox))
-    # The graph stops for a human before any change. An eval answers in the human's place, and
-    # says so in the audit trail: approve (to grade fixes too) or abort (diagnosis only).
-    while s.report is None:
-        d = ApprovalDecision(decision="approve" if approve_fixes else "abort", approver="eval-harness",
-                             decided_at=datetime.now(timezone.utc))
-        s = asyncio.run(decide(s.run_id, d))
+    async def go():
+        s = await start_run(case_dir / "bundle", sandbox)
+        # The graph stops for a human before any change. An eval answers in the human's place, and
+        # says so in the audit trail: approve (to grade fixes too) or abort (diagnosis only).
+        while s.report is None:
+            d = ApprovalDecision(decision="approve" if approve_fixes else "abort", approver="eval-harness",
+                                 decided_at=datetime.now(timezone.utc))
+            s = await decide(s.run_id, d)
+        return s
+
+    try:
+        s = asyncio.run(go())
+    except Exception as e:  # an eval must record every failure as a row, never lose it
+        typer.echo(json.dumps({"case": case_dir.name, "agent": f"graph/{sandbox}", "correct": False,
+                               "error": f"{type(e).__name__}: {str(e)[:300]}", "seconds": round(time.perf_counter() - t0, 1)}))
+        raise typer.Exit(1)
     r = s.report
     scores = grade(r.diagnosis, truth) if r.diagnosis else {k: False for k in ("failure_class", "affected_columns", "first_bad_partition")}
     if r.diagnosis:

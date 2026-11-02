@@ -64,6 +64,27 @@ regression on last-good data, every date matches its partition, amounts at the s
 scale). The patch was written to `.etl_doctor/fixes/demo-approve-f1d.patch` and applies
 cleanly with `git apply`.
 
+### 6-case eval with every fix auto-approved (`python -m evals.grade <case> --graph --approve-fixes`)
+
+The eval answers the approval gate as `eval-harness` (recorded in the audit trail) so that
+fix quality is measured too. Diagnosis: Ultra; fixes: MiniMax M3.1; tools in E2B.
+
+| Case | Diagnosis | Fix | Attempts | What happened |
+|---|---|---|---|---|
+| F1 crash | correct | **not fixed** | 3 | fixes passed a list of formats to `to_date`, or kept `strict=strict` (raises on the first mismatch in crash mode); all caught by validation |
+| F1 silent | correct | **not fixed** | 3 | same kinds of polars mistakes; all caught |
+| F3 crash | correct | **fixed** | 2 | |
+| F3 silent | correct | **not fixed** | 3 | renamed column still loaded as null: `test_no_null_keys` failed in validation |
+| F4 crash | correct | **fixed** | 1 | |
+| F4 silent | correct | **fixed** (rerun) | 1 | first run hit a transient error the grader didn't record (now it does) |
+
+**Diagnosis 6/6. Fixes validated 3/6. Broken fixes reported as fixed: 0.** The
+interesting number is the last one. The fixer model is mediocre at polars, and the harness
+is what makes that safe: every bad patch was rejected by the sandbox checks, even though
+the eval approved all of them. Improving the fixer is the obvious next lever, for example
+by retrieving past fixes and runbooks (Step 7, incident memory) or using a stronger code
+model when one is available.
+
 The layered-defence lesson in one sentence: **the model was wrong several times, the
 reviewer was wrong once on purpose, and nothing broken was ever reported as fixed.**
 

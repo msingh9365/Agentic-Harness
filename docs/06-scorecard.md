@@ -60,35 +60,35 @@ Models: strong: `nvidia/nemotron-3-ultra-550b-a55b`, code: `minimaxai/minimax-m3
 
 | Metric | Value |
 |---|---|
-| Runs scored | 53 (18 cases; 1 infrastructure errors not scored) |
-| **Diagnosis correct** | **53/53 (100%, CI 93-100%)** |
-| failure class / column / first bad file | 53 / 53 / 53 of 53 |
+| Runs scored | 54 (18 cases; 0 infrastructure errors not scored) |
+| **Diagnosis correct** | **54/54 (100%, CI 93-100%)** |
+| failure class / column / first bad file | 54 / 54 / 54 of 54 |
 | Cases correct in every trial (pass^k) | 18/18 |
 | Cases correct in at least one trial (pass@k) | 18/18 |
 | Cases with the same result every trial | 18/18 |
-| Outcomes | diagnosed_unfixed: 26, fixed: 27 |
+| Outcomes | diagnosed_unfixed: 26, fixed: 28 |
 | Wrong answer not escalated | 0 |
-| **Fix validated** (of runs that reached a fix) | **27/53 (51%, CI 38-64%)** |
-| Fix validated (of all runs) | 27/53 (51%, CI 38-64%) |
+| **Fix validated** (of runs that reached a fix) | **28/54 (52%, CI 39-65%)** |
+| Fix validated (of all runs) | 28/54 (52%, CI 39-65%) |
 | Mean proposals per fix | 2.1 |
 | **Reported fixed but not validated** | **0** |
 | Reported fixed with a wrong diagnosis | 0 |
 | **Patches applied without an approval** | **0** |
 | **Host bundle modified** | **0** |
-| LLM judge: explanation passes | 53/53 (100%, CI 93-100%) |
-| LLM judge: fix addresses the cause | 50/53 |
-| Judge agrees with the field grader | 53/53 |
+| LLM judge: explanation passes | 54/54 (100%, CI 93-100%) |
+| LLM judge: fix addresses the cause | 51/54 |
+| Judge agrees with the field grader | 54/54 |
 | Tokens per run (median / p95) | 42k / 88k |
 | Tool calls per run (median / max) | 8 / 13 |
-| Time per run (median / p95) | 172 s / 418 s |
-| **Cost per run** (mean / p95, assumed prices) | **$0.038 / $0.058** |
+| Time per run (median / p95) | 178 s / 417 s |
+| **Cost per run** (mean / p95, assumed prices) | **$0.038 / $0.057** |
 
 ### By scenario and mode
 
 | Scenario | Mode | Runs | Diagnosis correct | Fix validated | Escalated | Mean tokens | Mean time | Mean cost |
 |---|---|---|---|---|---|---|---|---|
 | f1_date_format | crash | 12 | 12/12 | 5/12 | 0 | 58k | 275 s | $0.042 |
-| f1_date_format | silent | 11 | 11/11 | 3/11 | 0 | 68k | 262 s | $0.047 |
+| f1_date_format | silent | 12 | 12/12 | 4/12 | 0 | 67k | 265 s | $0.047 |
 | f3_column_rename | crash | 9 | 9/9 | 4/9 | 0 | 52k | 205 s | $0.036 |
 | f3_column_rename | silent | 9 | 9/9 | 3/9 | 0 | 38k | 194 s | $0.032 |
 | f4_type_drift | crash | 6 | 6/6 | 6/6 | 0 | 36k | 122 s | $0.030 |
@@ -105,7 +105,7 @@ Models: strong: `nvidia/nemotron-3-ultra-550b-a55b`, code: `minimaxai/minimax-m3
 | `f1_date_format__silent__to_format-Ymd` | ✓ F F |
 | `f1_date_format__silent__to_format-dmY` | ✓ F ✓ |
 | `f1_date_format__silent__to_format-epoch_ms` | ✓ ✓ ✓ |
-| `f1_date_format__silent__to_format-mdY` | ✓ ✓ E |
+| `f1_date_format__silent__to_format-mdY` | ✓ ✓ F |
 | `f3_column_rename__crash__to-cust_id` | F ✓ ✓ |
 | `f3_column_rename__crash__to-customerId` | ✓ F F |
 | `f3_column_rename__crash__to-customer_number` | ✓ ✓ F |
@@ -133,55 +133,55 @@ Models: strong: `nvidia/nemotron-3-ultra-550b-a55b`
 
 | Metric | Value |
 |---|---|
-| Runs scored | 30 (18 cases; 0 infrastructure errors not scored) |
-| **Diagnosis correct** | **29/30 (97%, CI 83-99%)** |
-| failure class / column / first bad file | 29 / 29 / 29 of 30 |
-| Cases correct in every trial (pass^k) | 17/18 |
+| Runs scored | 54 (18 cases; 0 infrastructure errors not scored) |
+| **Diagnosis correct** | **52/54 (96%, CI 87-99%)** |
+| failure class / column / first bad file | 52 / 52 / 52 of 54 |
+| Cases correct in every trial (pass^k) | 16/18 |
 | Cases correct in at least one trial (pass@k) | 18/18 |
-| Cases with the same result every trial | 17/18 |
-| Outcomes | diagnosed: 29, error: 1 |
+| Cases with the same result every trial | 16/18 |
+| Outcomes | diagnosed: 52, error: 2 |
 | Wrong answer not escalated | 0 |
-| LLM judge: explanation passes | n/a |
-| LLM judge: fix addresses the cause | 0/0 |
-| Judge agrees with the field grader | 0/0 |
+| LLM judge: explanation passes | 52/52 (100%, CI 93-100%) |
+| LLM judge: fix addresses the cause | 50/52 |
+| Judge agrees with the field grader | 52/52 |
 | Tokens per run (median / p95) | 6k / 14k |
 | Tool calls per run (median / max) | 0 / 0 |
-| Time per run (median / p95) | 25 s / 49 s |
+| Time per run (median / p95) | 24 s / 49 s |
 | **Cost per run** (mean / p95, assumed prices) | **$0.006 / $0.012** |
 
 ### By scenario and mode
 
 | Scenario | Mode | Runs | Diagnosis correct | Fix validated | Escalated | Mean tokens | Mean time | Mean cost |
 |---|---|---|---|---|---|---|---|---|
-| f1_date_format | crash | 8 | 8/8 | 0/- | 0 | 8k | 29 s | $0.008 |
-| f1_date_format | silent | 8 | 8/8 | 0/- | 0 | 6k | 26 s | $0.006 |
-| f3_column_rename | crash | 6 | 6/6 | 0/- | 0 | 6k | 18 s | $0.005 |
-| f3_column_rename | silent | 4 | 3/4 | 0/- | 0 | 5k | 42 s | $0.005 |
-| f4_type_drift | crash | 2 | 2/2 | 0/- | 0 | 10k | 32 s | $0.009 |
-| f4_type_drift | silent | 2 | 2/2 | 0/- | 0 | 10k | 32 s | $0.008 |
+| f1_date_format | crash | 12 | 12/12 | 0/- | 0 | 8k | 27 s | $0.007 |
+| f1_date_format | silent | 12 | 12/12 | 0/- | 0 | 7k | 27 s | $0.007 |
+| f3_column_rename | crash | 9 | 9/9 | 0/- | 0 | 6k | 20 s | $0.005 |
+| f3_column_rename | silent | 9 | 8/9 | 0/- | 0 | 5k | 56 s | $0.005 |
+| f4_type_drift | crash | 6 | 5/6 | 0/- | 0 | 6k | 27 s | $0.006 |
+| f4_type_drift | silent | 6 | 6/6 | 0/- | 0 | 7k | 23 s | $0.007 |
 
 ### Every run
 
 | Case | Trials |
 |---|---|
-| `f1_date_format__crash__to_format-Ymd` | ✓ ✓ |
-| `f1_date_format__crash__to_format-dmY` | ✓ ✓ |
-| `f1_date_format__crash__to_format-epoch_ms` | ✓ ✓ |
-| `f1_date_format__crash__to_format-mdY` | ✓ ✓ |
-| `f1_date_format__silent__to_format-Ymd` | ✓ ✓ |
-| `f1_date_format__silent__to_format-dmY` | ✓ ✓ |
-| `f1_date_format__silent__to_format-epoch_ms` | ✓ ✓ |
-| `f1_date_format__silent__to_format-mdY` | ✓ ✓ |
-| `f3_column_rename__crash__to-cust_id` | ✓ ✓ |
-| `f3_column_rename__crash__to-customerId` | ✓ ✓ |
-| `f3_column_rename__crash__to-customer_number` | ✓ ✓ |
-| `f3_column_rename__silent__to-cust_id` | ✓ |
-| `f3_column_rename__silent__to-customerId` | ✗ ✓ |
-| `f3_column_rename__silent__to-customer_number` | ✓ |
-| `f4_type_drift__crash__style-comma_decimal` | ✓ |
-| `f4_type_drift__crash__style-currency_symbol` | ✓ |
-| `f4_type_drift__silent__style-comma_decimal` | ✓ |
-| `f4_type_drift__silent__style-currency_symbol` | ✓ |
+| `f1_date_format__crash__to_format-Ymd` | ✓ ✓ ✓ |
+| `f1_date_format__crash__to_format-dmY` | ✓ ✓ ✓ |
+| `f1_date_format__crash__to_format-epoch_ms` | ✓ ✓ ✓ |
+| `f1_date_format__crash__to_format-mdY` | ✓ ✓ ✓ |
+| `f1_date_format__silent__to_format-Ymd` | ✓ ✓ ✓ |
+| `f1_date_format__silent__to_format-dmY` | ✓ ✓ ✓ |
+| `f1_date_format__silent__to_format-epoch_ms` | ✓ ✓ ✓ |
+| `f1_date_format__silent__to_format-mdY` | ✓ ✓ ✓ |
+| `f3_column_rename__crash__to-cust_id` | ✓ ✓ ✓ |
+| `f3_column_rename__crash__to-customerId` | ✓ ✓ ✓ |
+| `f3_column_rename__crash__to-customer_number` | ✓ ✓ ✓ |
+| `f3_column_rename__silent__to-cust_id` | ✓ ✓ ✓ |
+| `f3_column_rename__silent__to-customerId` | ✗ ✓ ✓ |
+| `f3_column_rename__silent__to-customer_number` | ✓ ✓ ✓ |
+| `f4_type_drift__crash__style-comma_decimal` | ✓ ✗ ✓ |
+| `f4_type_drift__crash__style-currency_symbol` | ✓ ✓ ✓ |
+| `f4_type_drift__silent__style-comma_decimal` | ✓ ✓ ✓ |
+| `f4_type_drift__silent__style-currency_symbol` | ✓ ✓ ✓ |
 
 ✓ correct diagnosis, F correct + fix validated, ✗ wrong, · escalated, E infrastructure error (not scored)
 

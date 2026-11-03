@@ -40,16 +40,35 @@ trials, every fix approved by the eval (so the harness, not a reviewer, has to c
 
 | Metric | Value |
 |---|---|
-| Diagnosis correct | **53/53** (95% CI 93–100%); pass^3 18/18; same result every trial 18/18 |
-| LLM judge: explanation correct | 53/53; agrees with the field grader 53/53 |
-| Fix validated in the sandbox | **27/53 (51%, CI 38–64%)**: F4 12/12, F1 8/23, F3 7/18 |
-| Fix: pass@3 vs pass^3 (per case) | **15/18 vs 5/18** |
+| Diagnosis correct | **54/54** (95% CI 93–100%); pass^3 18/18; same result every trial 18/18 |
+| LLM judge: explanation correct | 54/54; agrees with the field grader 54/54 |
+| Fix validated in the sandbox | **28/54 (52%, CI 39–65%)**: F4 12/12, F1 9/24, F3 7/18 |
+| Fix: pass@3 vs pass^3 (per case) | **16/18 vs 5/18** |
 | Patches applied without approval / reported fixed but not validated / host bundle modified | **0 / 0 / 0** |
-| Cost per run (assumed prices) | **$0.038 mean, $0.058 p95**; 42k tokens median, 172 s median |
-| Infrastructure errors (not scored) | 1 run (provider 429 after 5 attempts) |
+| Cost per run (assumed prices) | **$0.038 mean, $0.057 p95**; 42k tokens median, 178 s median |
+| Infrastructure errors | 1 slot gave up after 5 rate-limited attempts; re-run later, so 0 in the final table |
 
-The headline for an interview: **diagnosis 53/53, fixes 51%, 0 unsafe outcomes, about 4
+The headline for an interview: **diagnosis 54/54, fixes 52%, 0 unsafe outcomes, about 4
 cents a run.** The fixer is the weak part, and the harness makes that weakness safe.
+
+### Against the Step 1 baseline (no tools, whole bundle in the prompt)
+
+| | Graph agent | No-tools baseline |
+|---|---|---|
+| Diagnosis correct | 54/54 (CI 93–100%) | 52/54 (96%, CI 87–99%) |
+| pass^3 / pass@3 | 18/18 / 18/18 | 16/18 / 18/18 |
+| Failed runs | 0 | 2, both "exceeded output retries" (the answer kept failing validation), never a confident wrong answer |
+| Fixes | 28/54 validated | none (it only suggests) |
+| Tokens / time per run (median) | 42k / 178 s | 6k / 24 s |
+| Cost per run (mean) | $0.038 | $0.006 |
+
+An honest reading: **on bundles this small, tools buy little diagnosis accuracy.** The
+whole bundle fits in the prompt, so the baseline sees everything at once for a sixth of the
+cost. The difference is within the error bars. What the graph buys is (a) verified,
+cited evidence instead of a single guess, (b) a validated fix, and (c) a design that still
+works when the logs and data no longer fit in a prompt, which is the normal case in
+production. The interview answer to "was the agent worth it?" is "not for diagnosis at this
+size; measure the baseline first, and here is where it stops being enough."
 
 ### Three things the numbers show
 
@@ -57,11 +76,11 @@ cents a run.** The fixer is the weak part, and the harness makes that weakness s
    same evidence: explaining the failure is reliable, writing correct polars code that
    handles both old and new data is not.
 2. **Variance lives in the fix, not the diagnosis.** Diagnosis is identical across trials;
-   the fix succeeds in *some* trial for 15 of 18 cases but in *every* trial for only 5.
+   the fix succeeds in *some* trial for 16 of 18 cases but in *every* trial for only 5.
    A single run of this suite would have reported anything from about 35% to 65%. That is
    why k > 1 and confidence intervals are not optional.
-3. **A judge reading a fix is not the same as running it.** The judge said 50/53 fixes
-   "address the cause"; 27/53 actually passed validation. The text of a fix looks right far
+3. **A judge reading a fix is not the same as running it.** The judge said 51/54 fixes
+   "address the cause"; 28/54 actually passed validation. The text of a fix looks right far
    more often than the code is right. For anything executable, execute it; use the judge
    for what can't be executed (the explanation).
 
@@ -121,11 +140,11 @@ The pattern: **at scale, the failures are mostly in the harness, not the model.*
 - *How do you evaluate a non-deterministic agent?* Fixed cases with ground truth kept
   outside the agent's view, several trials per case, report rates with confidence
   intervals, and report pass^k (reliable) next to pass@k (possible).
-- *Your diagnosis is 100%. Is it really?* 53/53 gives a 95% lower bound of 93%, on three
+- *Your diagnosis is 100%. Is it really?* 54/54 gives a 95% lower bound of 93%, on three
   failure classes I designed. It says the agent handles these well, not that it handles
   production. The next step is more classes and real incident replays.
 - *Why not just use an LLM judge for everything?* It can't run code, and it is biased
-  toward plausible text: here it accepted 50/53 fixes when 27 worked. Use code checks where
+  toward plausible text: here it accepted 51/54 fixes when 28 worked. Use code checks where
   possible, execution for code, and a calibrated judge only for free text.
 - *How do you know the judge is right?* Calibrate it on labelled answers including hard
   negatives (right kind, wrong value; vague), use a different model family, binary criteria
@@ -137,5 +156,8 @@ The pattern: **at scale, the failures are mostly in the harness, not the model.*
   from the error analysis (wrong file, polars misuse). Re-run the same suite and compare fix
   pass^k and its interval, with diagnosis and the safety counts as guardrails that must not
   regress.
+- *Why compare with a no-tools baseline?* Without one, 54/54 says nothing about whether
+  the tools, the graph or the model did the work. Here the baseline is 52/54 at a sixth of
+  the cost: the graph's value is the verified evidence and the fix, not raw accuracy.
 - *A run hit a rate limit. Did that count as a failure?* No: infrastructure errors are
   recorded and retried, never scored, and the scorecard shows how many there were.

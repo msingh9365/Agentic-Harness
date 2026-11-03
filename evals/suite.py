@@ -14,6 +14,7 @@ import asyncio
 import hashlib
 import itertools
 import json
+import os
 import signal
 import time
 import traceback
@@ -239,7 +240,12 @@ def run(
         except asyncio.CancelledError:
             typer.echo("cancelled: sandboxes released; run the same command to resume")
 
-    asyncio.run(main())
+    pid = OUT / "suite.pid"  # stop a running suite cleanly: kill -TERM $(cat out/suite/suite.pid)
+    pid.write_text(str(os.getpid()))
+    try:
+        asyncio.run(main())
+    finally:
+        pid.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,14 @@
+# Never bake secrets, local state or build output into the image.
+.env
+.env.*
+.git
+.venv
+.pytest_cache
+**/__pycache__
+**/*.pyc
+out
+.etl_doctor
+demo_pipeline/data
+*.duckdb
+docs
+tests

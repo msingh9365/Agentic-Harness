@@ -67,50 +67,14 @@ def diagnose(
     )
 
 
-NODE_LABEL = {
-    "intake": "read bundle manifest",
-    "provision_sandbox": "sandbox ready",
-    "triage": "triage",
-    "investigate": "investigation round",
-    "hypothesize": "hypotheses",
-    "verify": "verification",
-    "propose_fix": "fix proposed",
-    "release_sandbox": "sandbox released while waiting for a human",
-    "approval_gate": "decision recorded",
-    "apply_fix": "fix applied to a copy in the sandbox and validated",
-    "escalate": "ESCALATE to a human",
-    "report": "report",
-    "teardown": "sandbox destroyed",
-}
-
-
 def print_node(name: str, update: dict) -> None:
-    detail = ""
-    if name == "provision_sandbox" and update.get("sandbox_id"):
-        detail = update["sandbox_id"]
-    elif name == "triage" and update.get("triage"):
-        t = update["triage"]
-        detail = f"{t.run_outcome}; candidates {[c.value for c in t.candidate_classes]}; suspects {t.suspect_columns}"
-    elif name == "hypothesize" and update.get("hypotheses"):
-        detail = "; ".join(f"{h.id} {h.failure_class.value} conf={h.confidence:.2f} {h.statement[:70]}" for h in update["hypotheses"].hypotheses)
-    elif name == "verify" and update.get("verification"):
-        v = update["verification"]
-        detail = f"{v.hypothesis_id} {v.outcome.upper()}: {v.observations[:100]}"
-    elif name == "escalate":
-        detail = update.get("terminal_reason", "")
-    elif name == "propose_fix":
-        p = update.get("proposal")
-        detail = f"{len(p.edits)} edit(s) to {sorted({e.path for e in p.edits})}" if p else "no valid proposal"
-    elif name == "approval_gate" and update.get("approvals"):
-        a = update["approvals"][-1]
-        detail = f"{a.decision.upper()} by {a.approver}" + (f": {a.feedback}" if a.feedback else "")
-    elif name == "apply_fix" and update.get("validation"):
-        v = update["validation"]
-        detail = ("PASSED " if v.passed else "FAILED ") + ", ".join(f"{c.name}={'ok' if c.ok else 'FAIL'}" for c in v.checks)
-    elif name == "__interrupt__":
+    from etl_doctor.progress import NODE_LABEL, node_detail
+
+    if name == "__interrupt__":
         typer.secho("[approval_gate] waiting for a human decision (run is checkpointed)", err=True, fg="yellow", bold=True)
         return
-    typer.secho(f"[{name}] {NODE_LABEL.get(name, name)} {detail}", err=True, fg="green" if name != "escalate" else "red")
+    typer.secho(f"[{name}] {NODE_LABEL.get(name, name)} {node_detail(name, update)}", err=True,
+                fg="green" if name != "escalate" else "red")
 
 
 def print_approval_card(req: dict) -> None:
@@ -270,6 +234,31 @@ def history_cmd(run_id: str = typer.Argument(...)) -> None:
                        f"investigations={h['investigations']} tokens={h['tokens']:<7} {h['checkpoint_id']}")
 
     asyncio.run(go())
+
+
+
+@app.command()
+def serve(
+    host: str = typer.Option("127.0.0.1", help="Interface to bind; 0.0.0.0 to expose it (needs ETLDOC_UI_USERS)"),
+    port: int = typer.Option(8000),
+    data_dir: Path | None = typer.Option(None, help="Runs and cases (default: $ETLDOC_DATA_DIR or .etl_doctor/web)"),
+    insecure: bool = typer.Option(False, help="Allow a non-local bind without login (e.g. behind an authenticating proxy)"),
+) -> None:
+    """Web UI: start runs, watch them live, approve or reject fixes, read reports."""
+    import uvicorn
+
+    from etl_doctor.web.app import Settings, create_app
+
+    settings = Settings.from_env(**({"data_dir": data_dir} if data_dir else {}))
+    if host not in ("127.0.0.1", "localhost", "::1") and not settings.users and not insecure:
+        raise typer.BadParameter(
+            "refusing to expose the UI without a login: every run spends API and sandbox credit, and "
+            "approvals are recorded under a name. Set ETLDOC_UI_USERS=name:password[,...] or pass --insecure.",
+            param_hint="--host")
+    typer.secho(f"ETL Doctor UI on http://{host}:{port}  (data: {settings.data_dir}, "
+                f"login: {'on' if settings.users else 'off'}, local sandbox: {'on' if settings.allow_local_sandbox else 'off'})",
+                err=True, bold=True)
+    uvicorn.run(create_app(settings), host=host, port=port, proxy_headers=True, timeout_graceful_shutdown=20)
 
 
 if __name__ == "__main__":

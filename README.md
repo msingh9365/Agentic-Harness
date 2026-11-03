@@ -7,12 +7,14 @@ fix, waits for **human approval**, and then checks the fix in the sandbox.
 Built to show **AI harness engineering**: orchestration (LangGraph), typed agents
 (PydanticAI), sandboxed tools, checkpointing, approval gates, budgets and evals.
 
-> Status: **Step 5 of the [capability ladder](docs/00-poc-plan.md#2-the-capability-ladder)**.
+> Status: **Step 6 of the [capability ladder](docs/00-poc-plan.md#2-the-capability-ladder), plus a web UI.**
 > A LangGraph state machine diagnoses (triage → investigate ⇄ hypothesize → verify), proposes
-> a fix, **waits for a human** (`interrupt()`, answerable from any process), then applies the
-> fix to a copy in a fresh E2B microVM and re-runs the pipeline on current and last-good data.
-> The output is a validated patch for a human to apply; the agent never changes the real
-> pipeline. Checkpointed (kill it, resume it); budgets end in escalation, not a crash.
+> a fix, **waits for a human** (`interrupt()`, answerable from any process or the browser), then
+> applies the fix to a copy in a fresh E2B microVM and re-runs the pipeline on current and
+> last-good data. The output is a validated patch for a human to apply; the agent never changes
+> the real pipeline. Checkpointed (kill it, resume it); budgets end in escalation, not a crash.
+> Evals: diagnosis **54/54**, fixes validated **28/54**, **0** unsafe outcomes, about $0.04 a run
+> ([scorecard](docs/06-scorecard.md)).
 
 ## Docs
 
@@ -28,6 +30,8 @@ Built to show **AI harness engineering**: orchestration (LangGraph), typed agent
 | [learn/03 · Sandboxing and prompt injection](docs/learn/03-sandboxing.md) | Step 3 concepts: process vs container vs microVM, layered defence, least privilege |
 | [learn/04 · LangGraph, checkpoints, budgets](docs/learn/04-graph-and-checkpoints.md) | Step 4 concepts: state machines vs free agents, reducers, durability, resume, escalation |
 | [learn/05 · Human-in-the-loop](docs/learn/05-human-in-the-loop.md) | Step 5 concepts: `interrupt()`, mutations as data, validation after approval, idempotency |
+| [learn/06 · Evals](docs/learn/06-evals.md) · [scorecard](docs/06-scorecard.md) | Step 6: k trials, pass^k, confidence intervals, LLM-as-judge and its calibration, cost, error analysis |
+| [learn/07 · Web UI and hosting](docs/learn/07-web-ui-and-hosting.md) | The browser UI over the same graph, its security, and where/how to host it |
 
 ## Quick start
 
@@ -51,6 +55,9 @@ etl-doctor approve RUN [--reject "why" | --abort]   # answer it (any process, an
 make diagnose SCENARIO=f1_date_format MODE=silent NO_TOOLS=1   # Step 1 baseline
 make grade    SCENARIO=f1_date_format MODE=silent   # ...scored against ground_truth.json
 make smoke                         # compare candidate models
+
+make ui                            # web UI on http://127.0.0.1:8000: start runs, watch live, approve
+make docker-build && make docker-run   # the same UI in the container used for hosting
 ```
 
 ## What's here
@@ -73,7 +80,10 @@ src/etl_doctor/         the agent
     nodes.py            node functions, routing (pure functions of state), sandbox reconnect
     build.py            graph wiring, SQLite checkpointer, run / resume / history
   prompts/              system instructions
-  cli.py                `etl-doctor diagnose|run|resume|history`
+  progress.py           one-line step descriptions shared by the CLI and the UI
+  web/app.py            FastAPI: runs as background tasks, live events (SSE), approvals, auth/CSRF/CSP
+  web/static/           the page: plain HTML/CSS/JS, renders untrusted text only as text
+  cli.py                `etl-doctor diagnose|run|resume|history|approve|serve`
 src/edtools/            the tool implementations: JSON in, JSON out (profile, column_by_file,
                         diff_schema, grep_logs, run_sql, read_file, list_files); run in the sandbox
   validate.py           harness-only: apply approved edits to a copy, re-run pipeline + checks
@@ -89,6 +99,8 @@ evals/
   inject.py             builds a broken bundle + a separate ground-truth answer key
   grade.py              runs the agent on a case and scores it against the answer key
   attack.py             prompt-injection drill: planted log line, reports each defence layer
+  suite.py, judge.py, scorecard.py, fix_failures.py   Step 6: eval suite, LLM judge, scorecard, error analysis
+Dockerfile, fly.toml    hosting: one container, state on a volume at /data
 tests/                  offline tests (fake models) + test_sandbox.py against a real microVM
 ```
 

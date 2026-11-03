@@ -1,0 +1,40 @@
+# Fly.io: one always-on machine, state on a volume. See docs/learn/07-web-ui-and-hosting.md.
+#   fly apps create <your-app-name>      # then put that name below
+#   fly volumes create etl_doctor_data --size 1 --region <region>
+#   fly secrets set NVIDIA_API_KEY=... E2B_API_KEY=... ETLDOC_UI_USERS=you:long-random-password
+#   fly deploy
+app = "etl-doctor-demo"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  ETLDOC_MAX_ACTIVE_RUNS = "2"
+  ETLDOC_MAX_RUNS_PER_DAY = "30"
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  # Runs are background tasks, not requests: a machine stopped for "no traffic" would
+  # interrupt a run nobody is watching. Keep one machine up. (A stopped run is still safe:
+  # it is checkpointed, and ETLDOC_RESUME_ON_START resumes it when the machine starts.)
+  auto_stop_machines = "off"
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [[http_service.checks]]
+    grace_period = "20s"
+    interval = "30s"
+    timeout = "5s"
+    method = "GET"
+    path = "/healthz"
+
+# SQLite checkpoints and run logs: must survive deploys and restarts.
+[mounts]
+  source = "etl_doctor_data"
+  destination = "/data"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "1gb"

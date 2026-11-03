@@ -9,7 +9,7 @@ model_opt = $(if $(MODEL),--model $(MODEL),) $(if $(NO_TOOLS),--no-tools,) $(if 
 SANDBOX ?=
 RUN ?=
 CRASH ?=
-.PHONY: setup data run break diagnose doctor resume history grade attack template smoke test clean suite-build suite judge-calibrate judge scorecard
+.PHONY: ui docker-build docker-run setup data run break diagnose doctor resume history grade attack template smoke test clean suite-build suite judge-calibrate judge scorecard
 
 setup:            ## install dependencies into .venv
 	uv sync
@@ -70,3 +70,12 @@ scorecard:        ## Step 6: write out/suite/scorecard.md from the results
 
 clean:
 	rm -rf out demo_pipeline/data .etl_doctor
+
+ui:               ## web UI on http://127.0.0.1:8000 (ETLDOC_UI_USERS=name:pw to require a login)
+	uv run etl-doctor serve
+
+docker-build:     ## the hosting image
+	docker build -t etl-doctor .
+
+docker-run:       ## the image locally: needs NVIDIA_API_KEY, E2B_API_KEY and ETLDOC_UI_USERS in the environment
+	docker run --rm -p 8000:8000 -v etl-doctor-data:/data -e NVIDIA_API_KEY -e E2B_API_KEY -e ETLDOC_UI_USERS etl-doctor

@@ -29,8 +29,10 @@ FIXES = {
 }
 
 
-def make_brain(confidence: float = 0.9, verdict: str = "confirmed", fixes: list[str] | None = None) -> FunctionModel:
-    """`fixes`: what the fixer proposes on each call, in order (the last one repeats)."""
+def make_brain(confidence: float = 0.9, verdict: str = "confirmed", fixes: list[str] | None = None,
+               stubborn_verifier: bool = False) -> FunctionModel:
+    """`fixes`: what the fixer proposes on each call, in order (the last one repeats).
+    `stubborn_verifier`: the verifier never stops calling tools, so its budget runs out."""
     fix_plan = list(fixes or ["good"])
     fixer_calls = {"n": 0}
 
@@ -70,6 +72,12 @@ def make_brain(confidence: float = 0.9, verdict: str = "confirmed", fixes: list[
                 "falsification_check": "count rows per file with '/' in order_date", "suggested_fix": "accept both formats",
             }], "next_checks": ["profile orders_2026-10-14.csv"]})
         if "outcome" in fields:
+            if stubborn_verifier:
+                if info.function_tools:
+                    return call("run_sql", {"query": f"SELECT count(*) FROM current_orders -- {len(ids)}"})
+                # The verdict agent (no tools) sees the checks in its prompt: cite the last one.
+                text = " ".join(str(p.content) for m in messages for p in m.parts if hasattr(p, "content"))
+                ids = [w.strip("[]():,") for w in text.split() if w.startswith("ev-")]
             if not ids:
                 return call("run_sql", {"query": "SELECT source_file, count(*) FROM current_orders WHERE order_date LIKE '%/%' GROUP BY 1"})
             return answer({"hypothesis_id": "h1", "outcome": verdict, "observations": "as predicted", "evidence_ids": [ids[-1]]})

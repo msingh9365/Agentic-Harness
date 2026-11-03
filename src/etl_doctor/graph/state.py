@@ -34,6 +34,14 @@ class Usage(BaseModel):
         return self.input_tokens + self.output_tokens
 
 
+def merge_usage(a: dict[str, Usage], b: dict[str, Usage]) -> dict[str, Usage]:
+    """Reducer for per-model spend: sum Usage per model name."""
+    out = dict(a)
+    for k, u in b.items():
+        out[k] = out[k] + u if k in out else u
+    return out
+
+
 class Budget(BaseModel):
     max_total_tokens: int = 400_000
     max_investigations: int = 3  # investigate <-> hypothesize loops
@@ -139,6 +147,7 @@ class Report(BaseModel):
     validation: ValidationResult | None = None
     terminal_reason: str
     usage: Usage
+    usage_by_model: dict[str, Usage] = {}
 
 
 class RunState(BaseModel):
@@ -168,5 +177,6 @@ class RunState(BaseModel):
     verifications: int = 0
     fix_attempts: int = 0
     usage: Annotated[Usage, operator.add] = Usage()
+    usage_by_model: Annotated[dict[str, Usage], merge_usage] = {}  # for pricing: models cost differently
     terminal_reason: str | None = None
     report: Report | None = None

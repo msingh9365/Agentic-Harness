@@ -91,3 +91,14 @@ def test_gives_up_after_retry_budget(case_dir: Path):
     model = scripted(*[answer("never in the logs at all")] * 10)
     with pytest.raises(Exception, match="retries|Exceeded"):
         asyncio.run(diagnose(case_dir / "bundle", model))
+
+
+def test_quote_check_survives_endpoint_quote_mangling():
+    # Real inputs from the Step 6 suite: the endpoint dropped `"`, the model re-quoted it as `'`,
+    # or the escape lost its backslash (u0022). Other characters must still match exactly.
+    from etl_doctor.context import normalize
+
+    src = normalize('date_format: "%Y-%m-%d"\n    pl.col("amount").cast(pl.Float64)')
+    for quote in ["date_format: %Y-%m-%d", "date_format: '%Y-%m-%d'", "pl.col(u0022amountu0022).cast(pl.Float64)"]:
+        assert normalize(quote) in src
+    assert normalize("date_format: %d/%m/%Y") not in src

@@ -144,6 +144,16 @@ async def resume_run(run_id: str, ctx: GraphContext | None = None, on_node=None,
         return await _stream(app, None, run_id, ctx or GraphContext(), on_node)
 
 
+async def release(run_id: str, ctx: GraphContext | None = None, db_path: Path = DB_PATH) -> None:
+    """Kill a run's sandbox. For a run that died with an exception: `teardown` never ran, and
+    the VM would otherwise live (and bill) until its hard timeout. The run stays resumable:
+    resume makes a new sandbox when the old one is gone."""
+    async with open_graph(db_path) as app:
+        snap = await app.aget_state(_config(run_id))
+    if snap.values:
+        await n._kill_sandbox(RunState.model_validate(snap.values), ctx or GraphContext())
+
+
 async def history(run_id: str, db_path: Path = DB_PATH) -> AsyncIterator[dict]:
     """Every checkpoint of a run, newest first: time travel for debugging."""
     async with open_graph(db_path) as app:

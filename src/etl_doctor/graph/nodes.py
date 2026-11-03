@@ -92,6 +92,12 @@ def usage_of(u: RunUsage) -> Usage:
     return Usage(requests=u.requests, tool_calls=u.tool_calls, input_tokens=u.input_tokens, output_tokens=u.output_tokens)
 
 
+def spend(model: Model, u: RunUsage) -> dict:
+    """State update for what one agent call spent: the run total, and per model (for pricing)."""
+    usage = usage_of(u)
+    return {"usage": usage, "usage_by_model": {model.model_name: usage}}
+
+
 async def executor_for(state: RunState, ctx: GraphContext) -> tuple[Executor, dict[str, Any]]:
     """The live executor for this run, plus a state update if the sandbox had to change.
 
@@ -160,9 +166,10 @@ async def triage(state: RunState, runtime: Runtime[GraphContext]) -> dict:
     # Strong model on purpose. Measured on the 6 cases: the fast model ranked the right class
     # first 4/6 times vs 5/6, and named the right column 4/6 vs 6/6, for the same ~5k tokens.
     # A wrong triage cost two extra investigation rounds, far more than it saved.
-    r = await triage_agent.run("\n\n".join(parts), model=runtime.context.model("strong"), model_settings=SETTINGS,
+    model = runtime.context.model("strong")
+    r = await triage_agent.run("\n\n".join(parts), model=model, model_settings=SETTINGS,
                                usage_limits=UsageLimits(request_limit=4))
-    return {"triage": r.output, "usage": usage_of(r.usage)}
+    return {"triage": r.output, **spend(model, r.usage)}
 
 
 @node
@@ -181,10 +188,11 @@ async def investigate(state: RunState, runtime: Runtime[GraphContext]) -> dict:
         "Open questions for this round:\n" + "\n".join(f"- {q}" for q in questions),
     ])
     usage = RunUsage()  # passed in so we can still read it if the budget runs out mid-run
+    model = ctx.model("strong")
     limits = UsageLimits(request_limit=state.budget.tool_calls_per_investigation + 4,
                          tool_calls_limit=state.budget.tool_calls_per_investigation)
     try:
-        r = await investigator_agent.run(prompt, deps=deps, model=ctx.model("strong"), model_settings=SETTINGS,
+        r = await investigator_agent.run(prompt, deps=deps, model=model, model_settings=SETTINGS,
                                          usage_limits=limits, usage=usage)
         findings = r.output.findings
     except UsageLimitExceeded:
@@ -192,7 +200,7 @@ async def investigate(state: RunState, runtime: Runtime[GraphContext]) -> dict:
         # tools recorded and let the hypothesis step work with it.
         findings = [f"(round {state.investigations + 1} ran out of tool budget; see its evidence)"]
     return {**update, "evidence": store.new(), "findings": findings,
-            "investigations": state.investigations + 1, "usage": usage_of(usage)}
+            "investigations": state.investigations + 1, **spend(model, usage)}
 
 
 @node
@@ -207,9 +215,10 @@ async def hypothesize(state: RunState, runtime: Runtime[GraphContext]) -> dict:
     current = Path(state.bundle) / "data" / "current"
     headers = {f: (current / f).open().readline().strip().split(",") for f in state.current_files}
     deps = KnownFacts({e.id for e in state.evidence}, state.current_files, headers)
-    r = await hypothesis_agent.run(prompt, deps=deps, model=runtime.context.model("strong"), model_settings=SETTINGS,
+    model = runtime.context.model("strong")
+    r = await hypothesis_agent.run(prompt, deps=deps, model=model, model_settings=SETTINGS,
                                    usage_limits=UsageLimits(request_limit=5))
-    return {"hypotheses": r.output, "usage": usage_of(r.usage)}
+    return {"hypotheses": r.output, **spend(model, r.usage)}
 
 
 @node
@@ -221,8 +230,9 @@ async def verify(state: RunState, runtime: Runtime[GraphContext]) -> dict:
     deps = AgentDeps(executor=ex, evidence=store, current_files=state.current_files)
     prompt = f"Hypothesis to test:\n{h.model_dump_json(indent=1)}"
     usage = RunUsage()
+    model = ctx.model("strong")
     try:
-        r = await verifier_agent.run(prompt, deps=deps, model=ctx.model("strong"), model_settings=SETTINGS,
+        r = await verifier_agent.run(prompt, deps=deps, model=model, model_settings=SETTINGS,
                                      usage_limits=UsageLimits(request_limit=9, tool_calls_limit=5), usage=usage)
         v = r.output.model_copy(update={"hypothesis_id": h.id})
     except UsageLimitExceeded:
@@ -233,12 +243,15 @@ async def verify(state: RunState, runtime: Runtime[GraphContext]) -> dict:
                              observations="verification ran out of budget before running any check")
         else:
             facts = KnownFacts({e.id for e in new}, state.current_files, {})
+            # Its own usage counter: limits apply to the usage object passed in, and `usage`
+            # already holds the verifier's requests, so sharing it would fail the limit at once.
             r = await verdict_agent.run(f"{prompt}\n\nChecks you ran:\n{render_evidence(new, with_data=True)}",
-                                        deps=facts, model=ctx.model("strong"), model_settings=SETTINGS,
-                                        usage_limits=UsageLimits(request_limit=4), usage=usage)
+                                        deps=facts, model=model, model_settings=SETTINGS,
+                                        usage_limits=UsageLimits(request_limit=4))
+            usage = usage + r.usage
             v = r.output.model_copy(update={"hypothesis_id": h.id})
     out = {**update, "verification": v, "evidence": store.new(), "verifications": state.verifications + 1,
-           "usage": usage_of(usage)}
+           **spend(model, usage)}
     if v.outcome != "confirmed":
         out["feedback"] = [f"{h.id} ({h.failure_class}, {h.statement[:120]}) was {v.outcome}: {v.observations[:300]}"]
     return out
@@ -279,6 +292,7 @@ async def report(state: RunState, runtime: Runtime[GraphContext]) -> dict:
         status=status, diagnosis=diagnosis, verification=state.verification,
         fix=state.proposal if fixed else None, patch=patch, approvals=state.approvals,
         validation=state.validation, terminal_reason=reason, usage=state.usage,
+        usage_by_model=state.usage_by_model,
     )}
 
 
@@ -321,17 +335,18 @@ async def propose_fix(state: RunState, runtime: Runtime[GraphContext]) -> dict:
     if state.fix_feedback:
         parts.append("Feedback on earlier proposals:\n" + "\n".join(f"- {f}" for f in state.fix_feedback))
     usage = RunUsage()
+    model = ctx.model("code")
     with capture_run_messages() as messages:
         try:
-            r = await fixer_agent.run("\n\n".join(parts), deps=FixerDeps(bundle=Path(state.bundle)), model=ctx.model("code"),
+            r = await fixer_agent.run("\n\n".join(parts), deps=FixerDeps(bundle=Path(state.bundle)), model=model,
                                       model_settings=SETTINGS, usage_limits=UsageLimits(request_limit=5), usage=usage)
             proposal = r.output.model_copy(update={"hypothesis_id": h.id})
-            return {"proposal": proposal, "fix_attempts": state.fix_attempts + 1, "usage": usage_of(usage)}
+            return {"proposal": proposal, "fix_attempts": state.fix_attempts + 1, **spend(model, usage)}
         except (UsageLimitExceeded, UnexpectedModelBehavior) as e:
             # Record WHY (the validator's last complaint), for the next attempt and the report.
             complaints = [str(p.content) for m in messages for p in m.parts if p.part_kind == "retry-prompt"]
             why = complaints[-1][:500] if complaints else f"{type(e).__name__}: {str(e)[:300]}"
-            return {"proposal": None, "fix_attempts": state.fix_attempts + 1, "usage": usage_of(usage),
+            return {"proposal": None, "fix_attempts": state.fix_attempts + 1, **spend(model, usage),
                     "fix_feedback": [f"attempt {state.fix_attempts + 1}: no valid proposal. Last problem: {why}"]}
 
 

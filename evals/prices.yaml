@@ -1,0 +1,11 @@
+# ASSUMED reference prices, used only to turn measured tokens and seconds into dollars.
+# The PoC runs on NVIDIA's free hosted tier (actual cost: $0). These numbers stand in for
+# what a paid provider might charge for models of this size; edit them to your provider's
+# real prices. The scorecard reports tokens too, so nothing depends on these being right.
+currency: USD
+per_million_tokens:            # input, output
+  nvidia/nemotron-3-ultra-550b-a55b: {input: 0.60, output: 2.40}   # assumption: large MoE (~55B active)
+  minimaxai/minimax-m3.1-flash:      {input: 0.30, output: 1.20}   # assumption: mid-size "flash" model
+  nvidia/nemotron-3.5-lightning-30b-a3b: {input: 0.10, output: 0.40}
+  default:                           {input: 1.00, output: 4.00}   # unknown model: deliberately high
+sandbox_per_second: 0.000028   # assumption: a 2-vCPU microVM at ~$0.000014 per vCPU-second

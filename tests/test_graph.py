@@ -106,6 +106,14 @@ def test_falsified_hypothesis_goes_back_to_investigation(bundle, tmp_path):
     assert s.report.status == "escalated" and s.feedback  # the rejection reason is kept for later rounds
 
 
+def test_verifier_out_of_budget_gets_a_verdict_from_its_checks(bundle, tmp_path):
+    # Found by the Step 6 eval: the fallback verdict call shared the verifier's usage counter,
+    # so its own request_limit was already exceeded and the run crashed.
+    s = asyncio.run(start_run(bundle, "local", ctx(stubborn_verifier=True), db_path=tmp_path / "cp.db"))
+    assert s.verification.outcome == "confirmed"
+    assert s.report is None and s.proposal is not None  # carried on to the fix and the approval gate
+
+
 def test_crash_and_resume_from_checkpoint(bundle, tmp_path):
     db = tmp_path / "cp.db"
     # Run in a child process that hard-kills itself (os._exit) right before 'hypothesize'.

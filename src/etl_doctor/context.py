@@ -91,4 +91,11 @@ def build_context(bundle: Path) -> BundleContext:
 
 
 def normalize(s: str) -> str:
-    return re.sub(r"\s+", " ", s).strip()
+    """For comparing a quote with its source: whitespace-insensitive, and quote characters
+    are ignored. NVIDIA's endpoint strips `"` from some models' tool-call arguments
+    (see docs/04-model-smoke-test.md), and models re-quote `"` as `'` when they retry, so
+    `date_format: "%Y-%m-%d"` arrives bare, single-quoted or as `u0022`. A quote character carries no
+    evidence; every other character must still match."""
+    # The endpoint also sometimes sends escapes with the backslash lost: `u0022` for `"`.
+    s = re.sub(r"\\?u([0-9a-fA-F]{4})", lambda m: chr(int(m.group(1), 16)), s)
+    return re.sub(r"\s+", " ", re.sub("[\"']", "", s)).strip()

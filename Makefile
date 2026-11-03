@@ -9,7 +9,7 @@ model_opt = $(if $(MODEL),--model $(MODEL),) $(if $(NO_TOOLS),--no-tools,) $(if 
 SANDBOX ?=
 RUN ?=
 CRASH ?=
-.PHONY: setup data run break diagnose doctor resume history grade attack template smoke test clean
+.PHONY: setup data run break diagnose doctor resume history grade attack template smoke test clean suite-build suite judge-calibrate judge scorecard
 
 setup:            ## install dependencies into .venv
 	uv sync
@@ -50,6 +50,23 @@ smoke:            ## compare candidate models on structured output + tool callin
 
 test:             ## run the repo's test suite
 	uv run pytest -q
+
+K ?= 3
+CONCURRENCY ?= 4
+suite-build:      ## Step 6: inject every scenario x mode x variant (18 cases) and check each is broken
+	uv run python -m evals.suite build
+
+suite:            ## Step 6: run the graph on every case K times (resumable): make suite K=3 [AGENT=no_tools]
+	uv run python -m evals.suite run --k $(K) --concurrency $(CONCURRENCY) $(if $(AGENT),--agent $(AGENT),)
+
+judge-calibrate:  ## Step 6: measure the LLM judge on labelled answers before trusting it
+	uv run python -m evals.judge calibrate
+
+judge:            ## Step 6: LLM-as-judge on every diagnosis in the suite results
+	uv run python -m evals.judge run
+
+scorecard:        ## Step 6: write out/suite/scorecard.md from the results
+	uv run python -m evals.scorecard
 
 clean:
 	rm -rf out demo_pipeline/data .etl_doctor

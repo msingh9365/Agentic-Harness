@@ -19,3 +19,4 @@ nebula/
 results/samples.csv
 results/entry_points.csv
 results/sample2000_*.csv
+results/logs/measure_full.log  # temporary: re-added when the run finishes

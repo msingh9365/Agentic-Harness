@@ -9,7 +9,7 @@ model_opt = $(if $(MODEL),--model $(MODEL),) $(if $(NO_TOOLS),--no-tools,) $(if 
 SANDBOX ?=
 RUN ?=
 CRASH ?=
-.PHONY: ui docker-build docker-run setup data run break diagnose doctor resume history grade attack template smoke test clean suite-build suite judge-calibrate judge scorecard
+.PHONY: site site-preview ui docker-build docker-run setup data run break diagnose doctor resume history grade attack template smoke test clean suite-build suite judge-calibrate judge scorecard
 
 setup:            ## install dependencies into .venv
 	uv sync
@@ -79,3 +79,9 @@ docker-build:     ## the hosting image
 
 docker-run:       ## the image locally: needs NVIDIA_API_KEY, E2B_API_KEY and ETLDOC_UI_USERS in the environment
 	docker run --rm -p 8000:8000 -v etl-doctor-data:/data -e NVIDIA_API_KEY -e E2B_API_KEY -e ETLDOC_UI_USERS etl-doctor
+
+site:             ## the static replay site in _site/ (what GitHub Pages publishes)
+	rm -rf _site && mkdir -p _site && cp -r site/. _site/ && cp src/etl_doctor/web/static/app.js src/etl_doctor/web/static/style.css _site/
+
+site-preview: site ## serve _site/ on http://127.0.0.1:8001
+	python3 -m http.server 8001 --bind 127.0.0.1 --directory _site

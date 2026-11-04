@@ -1,6 +1,8 @@
 """Web UI: the API drives the same checkpointed graph as the CLI (scripted model, local tools)."""
 
+import asyncio
 import base64
+import json
 import time
 
 import pytest
@@ -9,6 +11,7 @@ from pydantic_ai.models.function import FunctionModel
 
 from etl_doctor.graph.nodes import GraphContext
 from etl_doctor.web.app import Settings, create_app
+from etl_doctor.web.export import export_run
 from tests.fake_brain import make_brain
 
 CASE = "f1_date_format__silent__to_format-dmY"
@@ -89,6 +92,15 @@ def test_run_approve_and_report_through_the_api(data_dir):
         assert p.status_code == 200 and "coalesce" in p.text and "attachment" in p.headers["content-disposition"]
         assert [r["run_id"] for r in c.get("/api/runs", headers=alice).json()] == [run_id]
         assert c.get(f"/api/runs/{run_id}/history", headers=alice).json()[0]["next"] == []
+
+    # The finished run exports for the static replay site, without local or private details.
+    data = asyncio.run(export_run(data_dir / "runs" / run_id, data_dir / "cases"))
+    text = json.dumps(data)
+    assert data["frames"][-1]["run"]["status"] == "fixed" and data["frames"][-1]["run"]["answer_key"]["grade"]
+    assert any(f["run"]["approval"] for f in data["frames"])  # the approval card can be replayed
+    assert str(data_dir) not in text and '"bundle"' not in text and '"sandbox_id"' not in text
+    assert all("data" not in e for f in data["frames"] for e in f["run"]["state"]["evidence"])
+    assert [e["approver"] for e in data["events"] if e["type"] == "decision"] == ["alice"]
 
 
 def test_failed_run_is_stopped_then_resumable(data_dir):

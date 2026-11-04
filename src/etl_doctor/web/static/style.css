@@ -189,3 +189,11 @@ pre.log { background: var(--code-bg); border: 1px solid var(--border); border-ra
   dl.kv { grid-template-columns: minmax(0, 1fr); gap: 0; }
   dl.kv dd { margin-bottom: 8px; }
 }
+
+/* replay controls (static site) */
+.panel.replay { border-color: var(--accent); }
+.replay-track { margin-top: 10px; flex-wrap: nowrap; }
+.replay-track input[type=range] { flex: 1; min-width: 0; accent-color: var(--accent); }
+.replay-hint { color: var(--warn); margin-top: 6px; }
+.replay-hint:empty { display: none; }
+select.speed { width: auto; padding: 7px 8px; }

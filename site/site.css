@@ -1,0 +1,31 @@
+/* Landing page only; colours and base styles come from style.css (shared with the app). */
+.hero { padding: 28px 0 8px; }
+.hero h1 { font-size: 30px; line-height: 1.2; margin: 0 0 10px; }
+.hero p.lead { font-size: 17px; color: var(--muted); max-width: 760px; margin: 0 0 18px; }
+.cta { display: inline-block; padding: 10px 16px; border-radius: 6px; font-weight: 600; text-decoration: none;
+  background: var(--accent); color: var(--accent-text); }
+.cta.secondary { background: var(--panel); color: var(--text); border: 1px solid var(--border); }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 22px 0; }
+@media (max-width: 800px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.stat { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
+.stat .v { font-size: 26px; font-weight: 700; }
+.stat .l { color: var(--muted); font-size: 13px; }
+.flow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 6px 0 4px; font-size: 14px; }
+.flow .step { background: var(--info-bg); color: var(--info); padding: 4px 10px; border-radius: 999px; font-weight: 600; }
+.flow .step.human { background: var(--warn-bg); color: var(--warn); }
+.flow .step.safe { background: var(--ok-bg); color: var(--ok); }
+.flow .arrow { color: var(--muted); }
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 900px) { .cards { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px;
+  display: flex; flex-direction: column; gap: 8px; }
+.card h3 { margin: 0; font-size: 16px; color: var(--text); text-transform: none; letter-spacing: 0; }
+.card p { margin: 0; font-size: 14px; }
+.card .go { margin-top: auto; font-weight: 600; }
+.section-title { font-size: 18px; margin: 30px 0 12px; }
+ul.points { margin: 0; padding-left: 20px; }
+ul.points li { margin: 6px 0; }
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 800px) { .two { grid-template-columns: minmax(0, 1fr); } }
+footer.site { color: var(--muted); font-size: 13px; padding: 24px 0 40px; }
+.two.spaced { margin-top: 16px; }

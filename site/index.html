@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ETL Doctor</title>
+  <meta name="description" content="An LLM agent that diagnoses broken data pipelines in a sandbox, proposes a fix, waits for a human, and proves the fix before calling it fixed.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%232f6fdb'/%3E%3Cpath d='M7 3h2v4h4v2H9v4H7V9H3V7h4z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <header class="top">
+    <a href="./" class="brand">ETL Doctor</a>
+    <span class="tagline">an AI harness engineering project</span>
+    <span class="who"><a href="https://github.com/msingh9365/Agentic-Harness">Code on GitHub</a></span>
+  </header>
+  <main>
+    <section class="hero">
+      <h1>An LLM agent that diagnoses broken data pipelines, and is not trusted to fix them alone.</h1>
+      <p class="lead">ETL Doctor investigates a failed pipeline inside an isolated microVM, cites every
+        piece of evidence it used, proposes a code fix, and stops for a human. An approved fix is
+        applied to a copy and re-tested on new <em>and</em> old data before anything is called fixed.</p>
+      <div class="row">
+        <a class="cta" href="replay.html#/run/run-20261103-160754-8684">▶ Watch a real run</a>
+        <a class="cta secondary" href="https://github.com/msingh9365/Agentic-Harness">Read the code</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="v">54/54</div><div class="l">diagnoses correct (95% CI 93–100%), every case right in all 3 trials</div></div>
+        <div class="stat"><div class="v">28/54</div><div class="l">fixes passed validation in the sandbox; the rest were caught, not shipped</div></div>
+        <div class="stat"><div class="v">0</div><div class="l">patches applied without approval, broken fixes reported as fixed, or host files changed</div></div>
+        <div class="stat"><div class="v">~$0.04</div><div class="l">per run at assumed API prices; median 42k tokens, about 3 minutes</div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>What happens in a run</h2>
+      <div class="flow">
+        <span class="step">intake</span><span class="arrow">→</span>
+        <span class="step">sandbox</span><span class="arrow">→</span>
+        <span class="step">triage</span><span class="arrow">→</span>
+        <span class="step">investigate ⇄ hypothesize</span><span class="arrow">→</span>
+        <span class="step">verify</span><span class="arrow">→</span>
+        <span class="step">propose fix</span><span class="arrow">→</span>
+        <span class="step human">human approval</span><span class="arrow">→</span>
+        <span class="step safe">validate on a copy</span><span class="arrow">→</span>
+        <span class="step">report</span>
+      </div>
+      <p class="muted small">A LangGraph state machine, checkpointed after every step: kill the process and the
+        run resumes where it stopped. Budgets end in escalation to a human, not a crash.</p>
+    </section>
+
+    <h2 class="section-title">Recorded runs</h2>
+    <p class="muted small">Real models, real sandboxes, recorded from the live system and played back here
+      step by step. Nothing on this page calls an API.</p>
+    <div class="cards">
+      <article class="card">
+        <span><span class="pill fixed">Fixed</span></span>
+        <h3>Currency symbols break the amount column</h3>
+        <p>The pipeline crashes. The agent finds that amounts arrive as <code>$125.18</code> from one file on,
+          proves it with a per-file check, and proposes a one-line fix. A reviewer approves; the fix passes
+          all 7 checks on new and old data.</p>
+        <a class="go" href="replay.html#/run/run-20261103-160754-8684">Watch →</a>
+      </article>
+      <article class="card">
+        <span><span class="pill awaiting_approval">Rejected, then retried</span></span>
+        <h3>The reviewer catches two bugs before anything runs</h3>
+        <p>Decimal commas (<code>71,01</code>) make rows vanish silently. The first fix would also mangle <code>1,234.56</code>; the reviewer says so and rejects. The second regex replaces the whole value with a dot; rejected again, with the reason. The third fix uses each piece of feedback and passes all 7 checks.</p>
+        <a class="go" href="replay.html#/run/run-20261104-192123-7a80">Watch →</a>
+      </article>
+      <article class="card">
+        <span><span class="pill escalated">Caught</span></span>
+        <h3>A broken fix that was never reported as fixed</h3>
+        <p>A column is renamed upstream. Mid-investigation the server is restarted; the run resumes from its
+          checkpoint on its own. The approved fix then fails validation in the sandbox and is not reported as
+          fixed; the reviewer stops there, and the report says <em>diagnosed, not fixed</em>.</p>
+        <a class="go" href="replay.html#/run/run-20261103-161122-22a9">Watch →</a>
+      </article>
+    </div>
+
+    <div class="two spaced">
+      <section class="panel">
+        <h2>Why it is safe to run unattended</h2>
+        <ul class="points small">
+          <li>The agent only reads: its tools run in an E2B Firecracker microVM with no internet and no secrets.</li>
+          <li>Every claim cites evidence IDs that the harness issued when a tool actually ran; invented IDs are rejected.</li>
+          <li>A fix is data (exact search/replace edits), checked by guardrails before a person sees it.</li>
+          <li>Nothing is applied without approval. After approval, the fix runs on a copy against current and last-good data.</li>
+          <li>The output is a validated patch for a human to apply. The real pipeline is never touched.</li>
+          <li>Logs and data from the broken system are treated as untrusted input (a prompt-injection drill is part of the repo).</li>
+        </ul>
+      </section>
+      <section class="panel">
+        <h2>How it was measured</h2>
+        <ul class="points small">
+          <li>18 cases: 3 failure types × variants (date formats, column names, number styles) × crash or silent failure; 3 trials each.</li>
+          <li>Ground truth comes from the fault injector and is never shown to the agent.</li>
+          <li>Diagnosis is right in every trial; fixes vary: 16/18 cases get a working fix in some trial, 5/18 in all three.</li>
+          <li>An LLM judge, calibrated on labelled answers first, said 51/54 fixes looked right. Only 28 passed when run: reading a fix is not testing it.</li>
+          <li>A no-tools baseline scores 52/54 at a sixth of the cost on these small cases: measured, not assumed.</li>
+        </ul>
+        <p class="small"><a href="https://github.com/msingh9365/Agentic-Harness/blob/main/docs/06-scorecard.md">Full scorecard</a> ·
+          <a href="https://github.com/msingh9365/Agentic-Harness/blob/main/docs/learn/06-evals.md">Eval notes</a></p>
+      </section>
+    </div>
+
+    <section class="panel">
+      <h2>Built with</h2>
+      <p class="small">LangGraph (state machine, checkpoints, <code>interrupt()</code> for approvals) · PydanticAI (typed agents,
+        validators) · E2B microVMs · models served by the NVIDIA API · Polars and DuckDB (the pipeline being repaired) ·
+        FastAPI with Server-Sent Events (the live UI this replay comes from).</p>
+      <p class="small muted">Write-ups per step, with likely interview questions:
+        <a href="https://github.com/msingh9365/Agentic-Harness/tree/main/docs/learn">docs/learn</a>.</p>
+    </section>
+
+    <footer class="site">This page is static: the runs are recordings of the real system. To run it live,
+      clone the repo and run <code>make ui</code>.</footer>
+  </main>
+</body>
+</html>

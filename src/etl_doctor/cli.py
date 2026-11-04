@@ -261,5 +261,30 @@ def serve(
     uvicorn.run(create_app(settings), host=host, port=port, proxy_headers=True, timeout_graceful_shutdown=20)
 
 
+
+@app.command("export")
+def export_cmd(
+    run_dirs: list[Path] = typer.Argument(..., exists=True, file_okay=False, help="Run directories (out/web/runs/<run_id>)"),
+    cases: Path | None = typer.Option(None, help="Case directory, for the answer key (default: <run_dir>/../../cases)"),
+    out: Path = typer.Option(Path("site/runs"), help="Where the JSON files go"),
+) -> None:
+    """Export finished runs as JSON for the static replay site (secrets and sandbox IDs removed)."""
+    import json
+    import os
+
+    from etl_doctor.web.export import export_run
+
+    out.mkdir(parents=True, exist_ok=True)
+    secrets_ = [v for k, v in os.environ.items() if k.endswith("_API_KEY") and len(v) >= 12]
+    for d in run_dirs:
+        data = asyncio.run(export_run(d, cases or d.parent.parent / "cases"))
+        text = json.dumps(data, separators=(",", ":"), default=str)
+        if any(s in text for s in secrets_):
+            raise typer.BadParameter(f"{d.name}: the export contains an API key; not written")
+        (out / f"{d.name}.json").write_text(text)
+        typer.echo(f"{d.name}: {len(data['events'])} events, {len(data['frames'])} frames, "
+                   f"{len(text) // 1024} KB -> {out / (d.name + '.json')}")
+
+
 if __name__ == "__main__":
     app()

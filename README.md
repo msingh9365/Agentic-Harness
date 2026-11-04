@@ -58,6 +58,8 @@ make smoke                         # compare candidate models
 
 make ui                            # web UI on http://127.0.0.1:8000: start runs, watch live, approve
 make docker-build && make docker-run   # the same UI in the container used for hosting
+uv run etl-doctor export out/web/runs/RUN  # record a finished run for the static replay site
+make site-preview                  # the GitHub Pages site (replays of real runs) on :8001
 ```
 
 ## What's here
@@ -101,6 +103,7 @@ evals/
   attack.py             prompt-injection drill: planted log line, reports each defence layer
   suite.py, judge.py, scorecard.py, fix_failures.py   Step 6: eval suite, LLM judge, scorecard, error analysis
 Dockerfile, fly.toml    hosting: one container, state on a volume at /data
+site/                   static GitHub Pages site: landing page + replays of recorded runs (site/runs/*.json)
 tests/                  offline tests (fake models) + test_sandbox.py against a real microVM
 ```
 

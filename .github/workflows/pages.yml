@@ -1,0 +1,38 @@
+# Publishes the static replay site (site/ + the UI's app.js and style.css) to GitHub Pages.
+# One-time setup: repository Settings -> Pages -> Source: "GitHub Actions".
+name: Pages
+
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", "src/etl_doctor/web/static/**", ".github/workflows/pages.yml", "Makefile"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

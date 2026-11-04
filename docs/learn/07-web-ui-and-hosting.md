@@ -93,6 +93,31 @@ fly deploy
 The E2B sandbox template (`etl-doctor-v2`) lives in your E2B account, so the hosted app uses it
 with the same key. Logs: `fly logs`. The image is the same one tested above.
 
+## The public showcase: a static replay site (GitHub Pages)
+
+A live public demo costs money and needs a login; a static site costs nothing and can't be
+abused. So the public link is a **replay**: real runs, recorded from the live system and
+played back in the browser by the same UI code, with no server and no API keys.
+
+```bash
+uv run etl-doctor export out/web/runs/<run_id>   # -> site/runs/<run_id>.json (commit it)
+make site-preview                                # http://127.0.0.1:8001
+```
+
+| Piece | How |
+|---|---|
+| What a recording holds | The run's event log, plus the **checkpoint history**: the state after every step, including each approval request the run paused on. Nothing new had to be recorded; durable execution already kept it. |
+| Playback | `replaySource()` in `app.js` puts events and checkpoint frames on one clock (long waits capped at 6 s), and the run view reads from it instead of the server. The page stops at each approval gate and shows the decision the reviewer actually made. Seeking rebuilds the log. |
+| One UI, two sources | `showRun(runId, source)`: `liveSource` (HTTP + SSE) or `replaySource` (a JSON file). The rendering code is shared, so the replay can't drift from the real UI. |
+| What is not published | `export` drops sandbox IDs, local paths, the bundle manifest and full tool results (only one-line evidence summaries), and refuses to write a file containing an API key from the environment. Tested in `tests/test_web.py`. |
+| Publishing | `.github/workflows/pages.yml` copies `site/` and the UI's `app.js`/`style.css` into `_site/` and deploys it on pushes to `main`. One-time setup: Settings → Pages → Source: GitHub Actions. |
+
+The three recordings: a straightforward fix; **a reviewer rejecting two flawed fixes with
+specific reasons** (a blanket comma replace that would break `1,234.56`, then a regex that
+replaced the whole value) **and approving the third, which validated**; and a run that was
+restarted mid-investigation, resumed itself, and whose approved fix failed validation and
+was not reported as fixed.
+
 ## Where this design stops, and what production would change
 
 This is deliberately **one process and one machine**: the task runner, the event wake-ups and
@@ -110,6 +135,10 @@ the SQLite files are all local. Scaling out means separating the pieces:
 | Observability | events.jsonl | traces per run (OpenTelemetry / LangSmith), token and cost metrics, alerts on escalations |
 
 ## Likely interview questions
+
+- *How did you make the demo public without paying for or exposing the system?* A static
+  replay of real recorded runs on GitHub Pages. The checkpoint history already had every
+  intermediate state, so recording was an export, and the same UI code renders it.
 
 - *Why not run the agent inside the HTTP request?* It takes minutes and may wait for a human
   for hours. Requests time out, browsers close, and deploys restart processes. The request

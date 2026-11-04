@@ -15,9 +15,3 @@ nebula/
 *.parquet
 *.arrow
 *.npy
-# full-size CSVs are kept compressed (see README); uncompressed copies are ignored
-results/samples.csv
-results/entry_points.csv
-results/sample2000_*.csv
-# temporary: run log, re-added when the run finishes
-results/logs/measure_full.log

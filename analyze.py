@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 
 FIELDS = ["registry_access", "network_events.traffic", "file_access", "apis"]
 THRESH = [512, 1024, 2048, 4096, 8192]
-CHUNK_CAPS = [16, 32, 64]
+CHUNK_CAPS = [8, 16, 32, 64]
 
 # reference palette (light mode) from the dataviz skill
 BLUE, ORANGE, AQUA, YELLOW = "#2a78d6", "#eb6834", "#1baf7a", "#eda100"
@@ -228,7 +228,11 @@ def main():
     md.append(q(ok.ep_tokens_sum, "sum of per-EP tokens per sample"))
     md.append(q(ok.chunks_fixed, "chunks needed, (a) fixed 512"))
     md.append(q(ok.chunks_per_ep, "chunks needed, (b) per-EP, 512/overlap 64"))
-    md.append(f"\nSamples with more than one entry point: {fmt_cnt(int((nep > 1).sum()), len(ok))}\n")
+    md.append(f"\nSamples with exactly one entry point: {fmt_cnt(int((nep == 1).sum()), len(ok))}; "
+              f"with more than one: {fmt_cnt(int((nep > 1).sum()), len(ok))}\n")
+    md.append(f"\nSum over all samples of per-EP tokens = {ok.ep_tokens_sum.sum():,.0f} vs whole-report tokens = "
+              f"{ok.tokens.sum():,.0f} ({pct(ok.ep_tokens_sum.sum() - ok.tokens.sum(), ok.tokens.sum()):+.2f}%; "
+              f"tokenizing entry points separately repeats the field key names).\n")
     md.append(f"\nEntry points longer than 512 tokens: {fmt_cnt(int((Eok.tokens > 512).sum()), len(Eok))} "
               f"(module_entry: {fmt_cnt(int(((Eok.ep_type=='module_entry') & (Eok.tokens > 512)).sum()), int((Eok.ep_type=='module_entry').sum()))}; "
               f"thread: {fmt_cnt(int(((Eok.ep_type=='thread') & (Eok.tokens > 512)).sum()), int((Eok.ep_type=='thread').sum()))})\n")
@@ -245,16 +249,16 @@ def main():
         for col, name in [("chunks_fixed", "(a) fixed 512"), ("chunks_per_ep", "(b) per entry point")]:
             md.append(f"| {sp} | {name} | " + " | ".join(fmt_cnt(int((sub[col] <= c).sum()), len(sub)) for c in CHUNK_CAPS) + " |\n")
     md.append("\nCoverage if the model only reads the first K chunks (share of all tokens covered):\n\n")
-    md.append("| scheme | K=1 (=Nebula) | K=16 | K=32 | K=64 |\n|---|---|---|---|---|\n")
+    md.append("| scheme | K=1 (=Nebula) | K=4 | K=8 | K=16 | K=32 | K=64 |\n|---|---|---|---|---|---|---|\n")
     tot = ok.tokens.sum()
-    md.append("| (a) fixed 512 | " + " | ".join(f"{pct(np.minimum(ok.tokens, 512*k).sum(), tot):.1f}%" for k in [1,16,32,64]) + " |\n")
+    md.append("| (a) fixed 512 | " + " | ".join(f"{pct(np.minimum(ok.tokens, 512*k).sum(), tot):.1f}%" for k in [1,4,8,16,32,64]) + " |\n")
     # (b): tokens are per-EP; covering first K chunks in EP order
     Es = Eok.sort_values(["sample_id", "split", "ep_index"]).copy()
     Es["cum_chunks"] = Es.groupby(["split", "sample_id"]).chunks.cumsum()
     Es["prev_chunks"] = Es.cum_chunks - Es.chunks
     tot_ep = Es.tokens.sum()
     cov = []
-    for k in [1, 16, 32, 64]:
+    for k in [1, 4, 8, 16, 32, 64]:
         # entry points fully inside the budget count fully; the one straddling the
         # budget counts its first (k - prev) pieces (stride 448 after the first 512)
         room = (k - Es.prev_chunks).clip(lower=0)
@@ -272,6 +276,61 @@ def main():
                   f"{np.median(g.chunks_per_ep):,.0f} | {np.percentile(g.chunks_per_ep,90):,.0f} | "
                   f"{fmt_cnt(int((g.chunks_per_ep<=32).sum()), len(g))} |\n")
 
+    # ---------------- (c) packed entry points (extra variant, not in the original brief)
+    def packed(tokens):
+        chunks, room = 0, 0
+        for t in tokens:
+            if t > 512:                      # long EP: split as in (b), start fresh
+                chunks += 1 + int(np.ceil((t - 512) / 448)); room = 0
+            elif t <= room:                  # small EP fits in the open chunk
+                room -= t
+            else:                            # open a new chunk
+                chunks += 1; room = 512 - t
+        return max(chunks, 1)
+    pk = (Es.groupby(["split", "sample_id"]).tokens.apply(lambda s: packed(s.tolist()))
+          .rename("chunks_packed").reset_index())
+    okp = ok.merge(pk, on=["split", "sample_id"], how="left")
+    md.append("\n### Extra variant (c): entry-point chunks with packing\n\n"
+              "Same as (b), but consecutive entry points shorter than 512 tokens share one 512-token chunk "
+              "(an entry point is never split unless it is longer than 512 tokens).\n\n")
+    md.append("| set | median | p90 | p99 | max | " + " | ".join(f"≤{c} chunks" for c in CHUNK_CAPS) +
+              " |\n|---|---|---|---|---|" + "---|" * len(CHUNK_CAPS) + "\n")
+    for sp in ["all"] + sorted(okp.split.unique()):
+        sub = okp if sp == "all" else okp[okp.split == sp]
+        c = sub.chunks_packed
+        md.append(f"| {sp} | {np.median(c):,.0f} | {np.percentile(c,90):,.0f} | {np.percentile(c,99):,.0f} | {c.max():,} | "
+                  + " | ".join(fmt_cnt(int((c <= k).sum()), len(sub)) for k in CHUNK_CAPS) + " |\n")
+    summ["chunks_packed_le32"] = float((okp.chunks_packed <= 32).mean())
+
+    # ---------------- what the extra entry points are
+    th = Eok[Eok.ep_type == "thread"]
+    md.append("\n### What the thread entry points contain\n\n")
+    md.append(f"- thread entry points: {len(th):,}; with exactly 1 API call: {fmt_cnt(int((th.n_apis == 1).sum()), len(th))}; "
+              f"with ≤4 tokens: {fmt_cnt(int((th.tokens <= 4).sum()), len(th))}\n")
+    n102 = ok[ok.n_entry_points > 64]
+    md.append(f"- samples with more than 64 entry points: {fmt_cnt(len(n102), len(ok))}; their entry-point counts: "
+              f"{n102.n_entry_points.value_counts().to_dict()}; by split/family: "
+              f"{n102.groupby(['split','family']).size().to_dict()}\n")
+    big = ok[ok.tokens > 8192]
+    md.append(f"- samples longer than 8,192 tokens: {len(big):,}, holding {pct(big.tokens.sum(), ok.tokens.sum()):.1f}% of all tokens; "
+              f"by family: {big.family.value_counts().to_dict()}; raw API calls in them: median {np.median(big.n_apis_raw):,.0f}\n")
+
+    # ---------------- length as a family shortcut
+    md.append("\n## Length as a shortcut: each family vs clean\n\n"
+              "ROC AUC of raw token count for separating one family from `clean` (0.5 = no signal; "
+              "values far from 0.5 in either direction mean length alone separates them).\n\n")
+    md.append("| family | AUC trainset | AUC testset | AUC trainset, min(tokens,512) | AUC testset, min(tokens,512) |\n|---|---|---|---|---|\n")
+    for f in sorted(ok.family.unique()):
+        if f == "clean":
+            continue
+        vals = []
+        for capped in (False, True):
+            for sp in ("trainset", "testset"):
+                sub = ok[(ok.split == sp) & ok.family.isin([f, "clean"])]
+                sc = sub.tokens.clip(upper=512) if capped else sub.tokens
+                vals.append(auc(sc, (sub.family == f).astype(int)))
+        md.append(f"| {f} | {vals[0]:.3f} | {vals[1]:.3f} | {vals[2]:.3f} | {vals[3]:.3f} |\n")
+
     # ---------------- emulation cap (Speakeasy max_api_count = 500)
     if "hit_api_cap" in ok:
         md.append("\n## Emulation cap (Speakeasy `max_api_count` = 500 in the dataset's config)\n")
@@ -280,8 +339,8 @@ def main():
         for name, sub in [("all", ok)] + [(f, g) for f, g in ok.groupby("family")]:
             hit = sub.hit_api_cap == 1
             md.append(f"| {name} | {fmt_cnt(int(hit.sum()), len(sub))} | "
-                      f"{np.median(sub[hit].tokens) if hit.any() else float('nan'):,.0f} | "
-                      f"{np.median(sub[~hit].tokens) if (~hit).any() else float('nan'):,.0f} | "
+                      f"{format(np.median(sub[hit].tokens), ',.0f') if hit.any() else '–'} | "
+                      f"{format(np.median(sub[~hit].tokens), ',.0f') if (~hit).any() else '–'} | "
                       f"{np.median(sub.n_apis_raw):,.0f} |\n")
         long = ok.tokens > 512
         md.append(f"\nOf the samples longer than 512 tokens, {fmt_cnt(int((ok[long].hit_api_cap == 1).sum()), int(long.sum()))} "
@@ -292,6 +351,10 @@ def main():
                       f"{np.median(w.tokens / w.n_apis):.2f}, p10 {np.percentile(w.tokens / w.n_apis, 10):.2f}, "
                       f"p90 {np.percentile(w.tokens / w.n_apis, 90):.2f}. Entry points with ≥500 API calls: "
                       f"{fmt_cnt(int((Eok.n_apis >= 500).sum()), len(Eok))}.\n")
+            cap = Eok[Eok.error_type == "max_api_count"]
+            md.append(f"\nEntry points whose `error.type` is `max_api_count`: {len(cap):,}; of these, "
+                      f"{fmt_cnt(int((cap.n_apis < 500).sum()), len(cap))} have fewer than 500 API calls "
+                      f"(the counter looks shared across a sample's entry points).\n")
 
     with open(os.path.join(R, "tables.md"), "w") as fh:
         fh.write("# Generated tables (analyze.py)\n\n" + "".join(md))
@@ -306,8 +369,8 @@ def main():
     # 1 histogram, log x
     fig, ax = plt.subplots(figsize=(8, 4.2)); style(ax)
     bins = np.logspace(0, np.log10(t.max() + 1), 80)
-    ax.hist(t[ok.is_malware == 1], bins=bins, color=ORANGE, alpha=0.75, label=f"malware (n={int((ok.is_malware==1).sum()):,})")
-    ax.hist(t[ok.is_malware == 0], bins=bins, color=BLUE, alpha=0.75, label=f"benign (n={int((ok.is_malware==0).sum()):,})")
+    ax.hist(t[ok.is_malware == 1], bins=bins, color=ORANGE, histtype="step", lw=2, label=f"malware (n={int((ok.is_malware==1).sum()):,})")
+    ax.hist(t[ok.is_malware == 0], bins=bins, color=BLUE, histtype="step", lw=2, label=f"benign (n={int((ok.is_malware==0).sum()):,})")
     ax.axvline(512, color=INK, lw=1.5, ls="--"); ax.text(512 * 1.08, ax.get_ylim()[1] * 0.92, "512 (Nebula cut)", color=INK, fontsize=9)
     ax.set_xscale("log"); ax.set_xlabel("tokens per sample after Nebula filtering + BPE (log scale)"); ax.set_ylabel("samples")
     ax.set_title("Tokens per sample"); ax.legend(frameon=False)
@@ -355,14 +418,15 @@ def main():
 
     # 5 chunks histogram
     fig, ax = plt.subplots(figsize=(8, 4.2)); style(ax)
-    mx = int(max(ok.chunks_fixed.max(), ok.chunks_per_ep.max()))
+    mx = int(max(ok.chunks_fixed.max(), ok.chunks_per_ep.max(), okp.chunks_packed.max()))
     bins = np.unique(np.concatenate([np.arange(1, 17), np.logspace(np.log10(17), np.log10(mx + 2), 40).astype(int)]))
-    ax.hist(ok.chunks_fixed, bins=bins, color=BLUE, alpha=0.75, label="(a) fixed 512-token chunks")
-    ax.hist(ok.chunks_per_ep, bins=bins, color=ORANGE, alpha=0.6, label="(b) one chunk per entry point (512, overlap 64)")
+    ax.hist(ok.chunks_fixed, bins=bins, color=BLUE, histtype="step", lw=2, label="(a) fixed 512-token chunks")
+    ax.hist(ok.chunks_per_ep, bins=bins, color=ORANGE, histtype="step", lw=2, label="(b) one chunk per entry point (512, overlap 64)")
+    ax.hist(okp.chunks_packed, bins=bins, color=AQUA, histtype="step", lw=2, ls="--", label="(c) per entry point, small ones packed")
     for c in CHUNK_CAPS:
         ax.axvline(c, color=INK2, lw=1, ls=":"); ax.text(c * 1.05, ax.get_ylim()[1] * 0.9, str(c), color=INK2, fontsize=8)
     ax.set_xscale("log"); ax.set_yscale("log"); ax.set_xlabel("chunks needed per sample (log)"); ax.set_ylabel("samples (log)")
-    ax.set_title("512-token chunks needed per sample"); ax.legend(frameon=False)
+    ax.set_title("512-token chunks needed per sample"); ax.legend(frameon=False, loc="upper right", bbox_to_anchor=(1, 0.85))
     fig.tight_layout(); fig.savefig(os.path.join(plots, "hist_chunks.png"), dpi=150); plt.close(fig)
     print("wrote", os.path.join(R, "tables.md"), "and plots in", plots)
 

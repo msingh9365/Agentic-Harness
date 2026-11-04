@@ -272,6 +272,27 @@ def main():
                   f"{np.median(g.chunks_per_ep):,.0f} | {np.percentile(g.chunks_per_ep,90):,.0f} | "
                   f"{fmt_cnt(int((g.chunks_per_ep<=32).sum()), len(g))} |\n")
 
+    # ---------------- emulation cap (Speakeasy max_api_count = 500)
+    if "hit_api_cap" in ok:
+        md.append("\n## Emulation cap (Speakeasy `max_api_count` = 500 in the dataset's config)\n")
+        md.append("\n| set | samples that hit the API cap | median tokens (hit cap) | median tokens (no cap) | "
+                  "median raw API calls |\n|---|---|---|---|---|\n")
+        for name, sub in [("all", ok)] + [(f, g) for f, g in ok.groupby("family")]:
+            hit = sub.hit_api_cap == 1
+            md.append(f"| {name} | {fmt_cnt(int(hit.sum()), len(sub))} | "
+                      f"{np.median(sub[hit].tokens) if hit.any() else float('nan'):,.0f} | "
+                      f"{np.median(sub[~hit].tokens) if (~hit).any() else float('nan'):,.0f} | "
+                      f"{np.median(sub.n_apis_raw):,.0f} |\n")
+        long = ok.tokens > 512
+        md.append(f"\nOf the samples longer than 512 tokens, {fmt_cnt(int((ok[long].hit_api_cap == 1).sum()), int(long.sum()))} "
+                  f"hit the emulation cap.\n")
+        if "n_apis" in Eok:
+            w = Eok[Eok.n_apis > 0]
+            md.append(f"\nTokens per raw API call (entry points with ≥1 API call): median "
+                      f"{np.median(w.tokens / w.n_apis):.2f}, p10 {np.percentile(w.tokens / w.n_apis, 10):.2f}, "
+                      f"p90 {np.percentile(w.tokens / w.n_apis, 90):.2f}. Entry points with ≥500 API calls: "
+                      f"{fmt_cnt(int((Eok.n_apis >= 500).sum()), len(Eok))}.\n")
+
     with open(os.path.join(R, "tables.md"), "w") as fh:
         fh.write("# Generated tables (analyze.py)\n\n" + "".join(md))
     with open(os.path.join(R, "summary.json"), "w") as fh:

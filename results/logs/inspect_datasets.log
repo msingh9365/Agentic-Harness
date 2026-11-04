@@ -24,3 +24,11 @@ columns of first rows: ['ep_type', 'start_addr', 'ep_args', 'apihash', 'apis', '
   network_events: None
   dynamic_code_segments: []
   file_access: ['{"event":"open","path":"C:\\\\Windows\\\\system32\\\\295a3a4d656a256e4612a42fda86667e98b436a02ff3069d41d8ef1b3ef029ac.dat","open_flags":["OPEN_EXISTING"],"access_flags":["GENERIC_READ"]}', '{"event"
+
+raw files: 92703 by extension {'.json': 92700, '.err': 3}
+top-level JSON type per file: {'list': 92700}
+total entry points (= datasets rows): 167548
+ep_type counts: {'module_entry': 92651, 'thread': 66704, 'tls_callback_0': 3870, 'tls_callback_1': 2803, 'tls_callback_2': 872, 'tls_callback_3': 617, 'entry_point': 27, 'thread..414956': 1, 'thread..266492': 1, 'dll_entry.DLL_PROCESS_ATTACH': 2}
+entry-point keys seen: {'ep_type': 167548, 'start_addr': 167548, 'ep_args': 167548, 'apihash': 167548, 'apis': 167548, 'ret_val': 167548, 'error': 167548, 'dynamic_code_segments': 167548, 'file_access': 20574, 'registry_access': 9454, 'process_events': 3897, 'dropped_files': 8931, 'handled_exceptions': 20636, 'network_events': 1100}
+distinct apihash values: 6699; entry points whose apihash also appears in another file: 160638
+file stems duplicated across folders: 0

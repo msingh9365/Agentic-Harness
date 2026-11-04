@@ -1,0 +1,5 @@
+92700 .json sample files; skipping 3 non-json: ['trainset/report_backdoor/sha_path_db.csv.err', 'trainset/report_clean/647fb5e5aa902cf19275c925e87c3740c29a15b1c27e99113ebbaec11d017c04.err', 'trainset/report_windows_syswow64/mmc.exe.config.err']
+random subset of 2000 files (seed=0)
+1000/2000 done, 0.4 min, eta 0.4 min
+2000/2000 done, 0.5 min, eta 0.0 min
+wrote results/sample2000_samples.csv and results/sample2000_entry_points.csv in 0.5 min

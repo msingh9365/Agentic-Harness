@@ -181,7 +181,9 @@ def measure_sample(nb, entry_points, with_eps=True):
     ep_rows = []
     if with_eps:
         for j, ep in enumerate(eps):
-            row = {"ep_index": j, "ep_type": ep.get("ep_type") if isinstance(ep, dict) else None}
+            row = {"ep_index": j, "ep_type": ep.get("ep_type") if isinstance(ep, dict) else None,
+                   "n_apis": len(ep.get("apis") or []) if isinstance(ep, dict) else 0,
+                   "error_type": ((ep.get("error") or {}).get("type") if isinstance(ep, dict) else None)}
             try:
                 r = nb.report([ep])
                 if not r:
@@ -198,6 +200,10 @@ def measure_sample(nb, entry_points, with_eps=True):
         out["ep_tokens_sum"] = sum(r["tokens"] for r in ok)
         out["ep_tokens_max"] = max((r["tokens"] for r in ok), default=0)
         out["chunks_per_ep"] = sum(r["chunks"] for r in ok)
+    # raw emulation size: Speakeasy stopped at max_api_count=500 (dataset config)
+    out["n_apis_raw"] = sum(len(e.get("apis") or []) for e in eps if isinstance(e, dict))
+    out["hit_api_cap"] = int(any(isinstance(e, dict) and (e.get("error") or {}).get("type") == "max_api_count"
+                                 for e in eps))
     return out, ep_rows
 
 
@@ -267,8 +273,11 @@ def list_files(data_dir):
         split = os.path.basename(split_dir).replace("windows_emulation_", "")
         for fam_dir in sorted(glob.glob(os.path.join(split_dir, "report_*"))):
             folder = os.path.basename(fam_dir)
-            for p in sorted(os.listdir(fam_dir)):
-                rows.append((split, folder, p, os.path.join(fam_dir, p)))
+            # trainset/report_backdoor and trainset/report_clean are sharded into
+            # sub-folders 0..f by the first hex digit of the sha256, so walk recursively
+            for root, _, names in os.walk(fam_dir):
+                for p in sorted(names):
+                    rows.append((split, folder, p, os.path.join(root, p)))
     return rows
 
 
@@ -344,8 +353,9 @@ SAMPLE_COLS = ["split", "family", "is_malware", "sample_id", "file_bytes", "file
                "field_order", "field_attr_exact"] + \
               [f"{p}_{f}" for f in FIELDS for p in ("tok", "kept")] + \
               ["n_entry_points", "n_module_entry", "n_thread", "n_ep_tokenized",
-               "ep_tokens_sum", "ep_tokens_max", "chunks_per_ep", "seconds"]
-EP_COLS = ["split", "family", "sample_id", "ep_index", "ep_type", "status", "tokens", "chunks"]
+               "ep_tokens_sum", "ep_tokens_max", "chunks_per_ep", "n_apis_raw", "hit_api_cap", "seconds"]
+EP_COLS = ["split", "family", "sample_id", "ep_index", "ep_type", "status", "tokens", "chunks",
+           "n_apis", "error_type"]
 
 
 def cmd_measure(args):

@@ -1,0 +1,21 @@
+# never commit data, caches, or downloaded code
+data/
+raw/
+hf-git/
+quovadis-speakeasy/
+windows_emulation_*/
+*.json.gz
+*.err
+.cache/
+__pycache__/
+*.pyc
+.venv/
+venv/
+nebula/
+*.parquet
+*.arrow
+*.npy
+# full-size CSVs are kept compressed (see README); uncompressed copies are ignored
+results/samples.csv
+results/entry_points.csv
+results/sample2000_*.csv

@@ -1,0 +1,12 @@
+vocab size: 50001
+report_example_entrypoint_with_file.json         type=list keys=['file_access', 'apis'] tokens=  551 expected=  551 OK
+                                                 field-split tokens concat == full tokens: True
+report_example_entrypoint_with_registry.json     type=list keys=['registry_access', 'apis'] tokens= 1672 expected= 1672 OK
+                                                 field-split tokens concat == full tokens: True
+report_example_entrypoint_withDNS.json           type=list keys=['registry_access', 'apis'] tokens= 1811 expected= 1811 OK
+                                                 field-split tokens concat == full tokens: True
+report_example_entrypoint_ransomware.json        type=list keys=['network_events.traffic', 'file_access', 'apis'] tokens= 2609 expected= 2609 OK
+                                                 field-split tokens concat == full tokens: True
+report_example_full.json                         type=dict keys=['apis'] tokens=   57 expected=   57 OK (whole dict instead of entry_points would give 1)
+                                                 field-split tokens concat == full tokens: True
+ALL MATCH

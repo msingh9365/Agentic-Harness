@@ -24,6 +24,8 @@ The full list of package versions is in [requirements-freeze.txt](requirements-f
 measure_lengths.py   measurement (sanity check, dataset inspection, per-sample CSVs)
 analyze.py           tables (results/tables.md), summary.json and plots
 build_report.py      builds REPORT.md from REPORT.src.md + results/tables.md
+make_examples.py     copies 21 example samples into examples/ (raw, filtered, tokens)
+examples/            the example samples, with their own README explaining the data
 results/             CSVs, tables.md, summary.json, pilot (sample2000_*) outputs
 results/logs/        console output of every run
 results/plots/       PNG plots used in REPORT.md
@@ -31,8 +33,11 @@ REPORT.src.md        report text with include markers for the tables
 REPORT.md            the write-up (generated; edit REPORT.src.md)
 ```
 
-The data, the Nebula clone and the Python environment all live **outside**
-this folder and are never committed (see `.gitignore`).
+The dataset, the Nebula clone and the Python environment all live **outside**
+this folder and are not committed (see `.gitignore`). The one exception is
+`examples/`: 21 sample reports (about 2.4 MB) copied on purpose so the data
+can be inspected without downloading 5.5 GB. See
+[examples/README.md](examples/README.md).
 
 ## How to rerun
 
@@ -66,6 +71,7 @@ python analyze.py --results results --prefix sample2000_
 python measure_lengths.py --nebula ../nebula measure --data-dir ../hf-git --out results
 python analyze.py --results results
 python build_report.py            # pastes the tables into REPORT.md
+python make_examples.py --nebula ../nebula --data-dir ../hf-git   # examples/
 ```
 
 `analyze.py` always writes `results/plots/`, so run the pilot `analyze.py`

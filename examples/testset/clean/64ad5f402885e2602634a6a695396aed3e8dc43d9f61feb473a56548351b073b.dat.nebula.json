@@ -1,0 +1,1501 @@
+{
+ "apis": [
+  {
+   "api_name": "KERNEL32.GetSystemTimeAsFileTime",
+   "args": [
+    "0x1211fd8"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.GetCurrentProcessId",
+   "args": [],
+   "ret_val": "0x566c4"
+  },
+  {
+   "api_name": "KERNEL32.GetCurrentThreadId",
+   "args": [],
+   "ret_val": "0x566d8"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265c14"
+  },
+  {
+   "api_name": "KERNEL32.QueryPerformanceCounter",
+   "args": [
+    "0x1211fd0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.GetStartupInfoW",
+   "args": [
+    "0x1211f7c"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.HeapCreate",
+   "args": [
+    "0x0",
+    "0x1000",
+    "0x0"
+   ],
+   "ret_val": "0x46e0"
+  },
+  {
+   "api_name": "KERNEL32.GetModuleHandleW",
+   "args": [
+    "KERNEL32.DLL"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "FlsAlloc"
+   ],
+   "ret_val": "0xfeee0000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "FlsGetValue"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "FlsSetValue"
+   ],
+   "ret_val": "0xfeee0002"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "FlsFree"
+   ],
+   "ret_val": "0xfeee0003"
+  },
+  {
+   "api_name": "KERNEL32.TlsAlloc",
+   "args": [],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.TlsSetValue",
+   "args": [
+    "0x0",
+    "0xfeee0001"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.GetModuleHandleW",
+   "args": [
+    "KERNEL32.DLL"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "EncodePointer"
+   ],
+   "ret_val": "0xfeee0004"
+  },
+  {
+   "api_name": "kernel32.EncodePointer",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.GetModuleHandleW",
+   "args": [
+    "KERNEL32.DLL"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "EncodePointer"
+   ],
+   "ret_val": "0xfeee0004"
+  },
+  {
+   "api_name": "kernel32.EncodePointer",
+   "args": [
+    "0x467d7f"
+   ],
+   "ret_val": "0x467d80"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.GetModuleHandleW",
+   "args": [
+    "KERNEL32.DLL"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "EncodePointer"
+   ],
+   "ret_val": "0xfeee0004"
+  },
+  {
+   "api_name": "kernel32.EncodePointer",
+   "args": [
+    "0x460bdb"
+   ],
+   "ret_val": "0x460bdc"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.GetModuleHandleW",
+   "args": [
+    "KERNEL32.DLL"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "EncodePointer"
+   ],
+   "ret_val": "0xfeee0004"
+  },
+  {
+   "api_name": "kernel32.EncodePointer",
+   "args": [
+    "0xfeee0000"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.GetModuleHandleW",
+   "args": [
+    "KERNEL32.DLL"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "EncodePointer"
+   ],
+   "ret_val": "0xfeee0004"
+  },
+  {
+   "api_name": "kernel32.EncodePointer",
+   "args": [
+    "0xfeee0001"
+   ],
+   "ret_val": "0xfeee0002"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.GetModuleHandleW",
+   "args": [
+    "KERNEL32.DLL"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "EncodePointer"
+   ],
+   "ret_val": "0xfeee0004"
+  },
+  {
+   "api_name": "kernel32.EncodePointer",
+   "args": [
+    "0xfeee0002"
+   ],
+   "ret_val": "0xfeee0003"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.GetModuleHandleW",
+   "args": [
+    "KERNEL32.DLL"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "EncodePointer"
+   ],
+   "ret_val": "0xfeee0004"
+  },
+  {
+   "api_name": "kernel32.EncodePointer",
+   "args": [
+    "0xfeee0003"
+   ],
+   "ret_val": "0xfeee0004"
+  },
+  {
+   "api_name": "KERNEL32.InitializeCriticalSectionAndSpinCount",
+   "args": [
+    "0x4e7a38",
+    "0xfa0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.InitializeCriticalSectionAndSpinCount",
+   "args": [
+    "0x4e7a50",
+    "0xfa0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.InitializeCriticalSectionAndSpinCount",
+   "args": [
+    "0x4e7a68",
+    "0xfa0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.InitializeCriticalSectionAndSpinCount",
+   "args": [
+    "0x4e7a80",
+    "0xfa0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.InitializeCriticalSectionAndSpinCount",
+   "args": [
+    "0x4e7a98",
+    "0xfa0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.InitializeCriticalSectionAndSpinCount",
+   "args": [
+    "0x4e7ab0",
+    "0xfa0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.InitializeCriticalSectionAndSpinCount",
+   "args": [
+    "0x4e7ac8",
+    "0xfa0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.InitializeCriticalSectionAndSpinCount",
+   "args": [
+    "0x4e7ae0",
+    "0xfa0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.InitializeCriticalSectionAndSpinCount",
+   "args": [
+    "0x4e7af8",
+    "0xfa0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.InitializeCriticalSectionAndSpinCount",
+   "args": [
+    "0x4e7b10",
+    "0xfa0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.InitializeCriticalSectionAndSpinCount",
+   "args": [
+    "0x4e7b28",
+    "0xfa0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.InitializeCriticalSectionAndSpinCount",
+   "args": [
+    "0x4e7b40",
+    "0xfa0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.InitializeCriticalSectionAndSpinCount",
+   "args": [
+    "0x4e7b58",
+    "0xfa0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.InitializeCriticalSectionAndSpinCount",
+   "args": [
+    "0x4e7b70",
+    "0xfa0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.GetModuleHandleW",
+   "args": [
+    "KERNEL32.DLL"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "DecodePointer"
+   ],
+   "ret_val": "0xfeee0005"
+  },
+  {
+   "api_name": "kernel32.DecodePointer",
+   "args": [
+    "0xfeee0001"
+   ],
+   "ret_val": "0xfeee0000"
+  },
+  {
+   "api_name": "kernel32.FlsAlloc",
+   "args": [
+    "0x466328"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.HeapAlloc",
+   "args": [
+    "0x46e0",
+    "0x8",
+    "0x214"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.GetModuleHandleW",
+   "args": [
+    "KERNEL32.DLL"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "DecodePointer"
+   ],
+   "ret_val": "0xfeee0005"
+  },
+  {
+   "api_name": "kernel32.DecodePointer",
+   "args": [
+    "0xfeee0003"
+   ],
+   "ret_val": "0xfeee0002"
+  },
+  {
+   "api_name": "kernel32.FlsSetValue",
+   "args": [
+    "0x0",
+    "0x4700"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.GetModuleHandleW",
+   "args": [
+    "KERNEL32.DLL"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "EncodePointer"
+   ],
+   "ret_val": "0xfeee0004"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "DecodePointer"
+   ],
+   "ret_val": "0xfeee0005"
+  },
+  {
+   "api_name": "KERNEL32.EnterCriticalSection",
+   "args": [
+    "0x4e7b10"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.InterlockedIncrement",
+   "args": [
+    "0x4e3440"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.LeaveCriticalSection",
+   "args": [
+    "0x4e7b10"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.EnterCriticalSection",
+   "args": [
+    "0x4e7af8"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.InterlockedIncrement",
+   "args": [
+    "0x4e3970"
+   ],
+   "ret_val": "0x2"
+  },
+  {
+   "api_name": "KERNEL32.InterlockedIncrement",
+   "args": [
+    "0x4e4184"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.LeaveCriticalSection",
+   "args": [
+    "0x4e7af8"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.GetCurrentThreadId",
+   "args": [],
+   "ret_val": "0x566d8"
+  },
+  {
+   "api_name": "KERNEL32.GetStartupInfoA",
+   "args": [
+    "0x1211f00"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.HeapAlloc",
+   "args": [
+    "0x46e0",
+    "0x8",
+    "0x800"
+   ],
+   "ret_val": "0x7000"
+  },
+  {
+   "api_name": "KERNEL32.GetStdHandle",
+   "args": [
+    "0xfffffff6"
+   ],
+   "ret_val": "0xf001"
+  },
+  {
+   "api_name": "KERNEL32.GetFileType",
+   "args": [
+    "0xf001"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.InitializeCriticalSectionAndSpinCount",
+   "args": [
+    "0x700c",
+    "0xfa0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.GetStdHandle",
+   "args": [
+    "0xfffffff5"
+   ],
+   "ret_val": "0xf002"
+  },
+  {
+   "api_name": "KERNEL32.GetFileType",
+   "args": [
+    "0xf002"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.InitializeCriticalSectionAndSpinCount",
+   "args": [
+    "0x704c",
+    "0xfa0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.GetStdHandle",
+   "args": [
+    "0xfffffff4"
+   ],
+   "ret_val": "0xf003"
+  },
+  {
+   "api_name": "KERNEL32.GetFileType",
+   "args": [
+    "0xf003"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.InitializeCriticalSectionAndSpinCount",
+   "args": [
+    "0x708c",
+    "0xfa0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.SetHandleCount",
+   "args": [
+    "0x20"
+   ],
+   "ret_val": "0x20"
+  },
+  {
+   "api_name": "KERNEL32.GetCommandLineW",
+   "args": [],
+   "ret_val": "0x7810"
+  },
+  {
+   "api_name": "KERNEL32.GetEnvironmentStringsW",
+   "args": [],
+   "ret_val": "0x7850"
+  },
+  {
+   "api_name": "KERNEL32.HeapAlloc",
+   "args": [
+    "0x46e0",
+    "0x0",
+    "0x19a"
+   ],
+   "ret_val": "0x79f0"
+  },
+  {
+   "api_name": "KERNEL32.FreeEnvironmentStringsW",
+   "args": [
+    "0x7850"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.GetModuleFileNameW",
+   "args": [
+    "0x0",
+    "C:\\Windows\\system32\\64ad5f402885e2602634a6a695396aed3e8dc43d9f61feb473a56548351b073b.dat",
+    "0x104"
+   ],
+   "ret_val": "0x58"
+  },
+  {
+   "api_name": "KERNEL32.HeapAlloc",
+   "args": [
+    "0x46e0",
+    "0x0",
+    "0x44"
+   ],
+   "ret_val": "0x7b90"
+  },
+  {
+   "api_name": "KERNEL32.HeapAlloc",
+   "args": [
+    "0x46e0",
+    "0x8",
+    "0x8"
+   ],
+   "ret_val": "0x7be0"
+  },
+  {
+   "api_name": "KERNEL32.HeapAlloc",
+   "args": [
+    "0x46e0",
+    "0x8",
+    "0x198"
+   ],
+   "ret_val": "0x7bf0"
+  },
+  {
+   "api_name": "KERNEL32.HeapFree",
+   "args": [
+    "0x46e0",
+    "0x0",
+    "0x79f0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.GetModuleHandleA",
+   "args": [
+    "KERNEL32"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "IsProcessorFeaturePresent"
+   ],
+   "ret_val": "0xfeee0006"
+  },
+  {
+   "api_name": "kernel32.IsProcessorFeaturePresent",
+   "args": [
+    "PF_FLOATING_POINT_PRECISION_ERRATA"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "kernel32.EncodePointer",
+   "args": [
+    "0x475495"
+   ],
+   "ret_val": "0x475496"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "kernel32.EncodePointer",
+   "args": [
+    "0x474b1f"
+   ],
+   "ret_val": "0x474b20"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "kernel32.EncodePointer",
+   "args": [
+    "0x474ad3"
+   ],
+   "ret_val": "0x474ad4"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "kernel32.EncodePointer",
+   "args": [
+    "0x474b0c"
+   ],
+   "ret_val": "0x474b0d"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "kernel32.EncodePointer",
+   "args": [
+    "0x474a75"
+   ],
+   "ret_val": "0x474a76"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "kernel32.EncodePointer",
+   "args": [
+    "0x475495"
+   ],
+   "ret_val": "0x475496"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "kernel32.EncodePointer",
+   "args": [
+    "0x47540d"
+   ],
+   "ret_val": "0x47540e"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "kernel32.EncodePointer",
+   "args": [
+    "0x474a91"
+   ],
+   "ret_val": "0x474a92"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "kernel32.EncodePointer",
+   "args": [
+    "0x4749f3"
+   ],
+   "ret_val": "0x4749f4"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "kernel32.EncodePointer",
+   "args": [
+    "0x474980"
+   ],
+   "ret_val": "0x474981"
+  },
+  {
+   "api_name": "KERNEL32.HeapAlloc",
+   "args": [
+    "0x46e0",
+    "0x8",
+    "0x80"
+   ],
+   "ret_val": "0x7d90"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "kernel32.EncodePointer",
+   "args": [
+    "0x7d90"
+   ],
+   "ret_val": "0x7d91"
+  },
+  {
+   "api_name": "KERNEL32.GetLastError",
+   "args": [],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "KERNEL32.SetLastError",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.GetLastError",
+   "args": [],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "KERNEL32.SetLastError",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.EnterCriticalSection",
+   "args": [
+    "0x4e7b10"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.LeaveCriticalSection",
+   "args": [
+    "0x4e7b10"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.GetLastError",
+   "args": [],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "KERNEL32.SetLastError",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.GetACP",
+   "args": [],
+   "ret_val": "0x4e4"
+  },
+  {
+   "api_name": "KERNEL32.HeapAlloc",
+   "args": [
+    "0x46e0",
+    "0x0",
+    "0x220"
+   ],
+   "ret_val": "0x8000"
+  },
+  {
+   "api_name": "KERNEL32.GetLastError",
+   "args": [],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "KERNEL32.SetLastError",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.IsValidCodePage",
+   "args": [
+    "0x4e4"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.GetCPInfo",
+   "args": [
+    "0x4e4",
+    "0x1211ee0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.GetCPInfo",
+   "args": [
+    "0x4e4",
+    "0x12119ac"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.GetLastError",
+   "args": [],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "KERNEL32.SetLastError",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.GetStringTypeW",
+   "args": [
+    "0x1",
+    "0x4c686c",
+    "0x1",
+    "0x121193c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.MultiByteToWideChar",
+   "args": [
+    "0x4e4",
+    "0x1",
+    "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~xt>!.F",
+    "0x100",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x10c"
+  },
+  {
+   "api_name": "KERNEL32.MultiByteToWideChar",
+   "args": [
+    "0x4e4",
+    "0x1",
+    "0x1211dc0",
+    "0x100",
+    "0x1211718",
+    "0x10c"
+   ],
+   "ret_val": "0x100"
+  },
+  {
+   "api_name": "KERNEL32.GetStringTypeW",
+   "args": [
+    "0x1",
+    "0x1211718",
+    "0x100",
+    "0x12119c0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.GetLastError",
+   "args": [],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "KERNEL32.SetLastError",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.LCMapStringW",
+   "args": [
+    "0x0",
+    "0x100",
+    "0x4c686c",
+    "0x1",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.MultiByteToWideChar",
+   "args": [
+    "0x4e4",
+    "0x1",
+    "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~xt>!.F",
+    "0x100",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x10c"
+  },
+  {
+   "api_name": "KERNEL32.MultiByteToWideChar",
+   "args": [
+    "0x4e4",
+    "0x1",
+    "0x1211dc0",
+    "0x100",
+    "0x12116d8",
+    "0x10c"
+   ],
+   "ret_val": "0x100"
+  },
+  {
+   "api_name": "KERNEL32.LCMapStringW",
+   "args": [
+    "0x0",
+    "0x100",
+    "0x12116d8",
+    "0x10c",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x10c"
+  },
+  {
+   "api_name": "KERNEL32.LCMapStringW",
+   "args": [
+    "0x0",
+    "0x100",
+    "0x12116d8",
+    "0x10c",
+    "0x12114b8",
+    "0x10c"
+   ],
+   "ret_val": "0x10c"
+  },
+  {
+   "api_name": "KERNEL32.WideCharToMultiByte",
+   "args": [
+    "0x4e4",
+    "0x0",
+    "0x12114b8",
+    "0x10c",
+    "0x1211cc0",
+    "0x100",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x100"
+  },
+  {
+   "api_name": "KERNEL32.GetLastError",
+   "args": [],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.TlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.FlsGetValue",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x4700"
+  },
+  {
+   "api_name": "KERNEL32.SetLastError",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.MultiByteToWideChar",
+   "args": [
+    "0x4e4",
+    "0x1",
+    "",
+    "0x1",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.MultiByteToWideChar",
+   "args": [
+    "0x4e4",
+    "0x1",
+    "0x1211dc0",
+    "0x1",
+    "0x1211918",
+    "0x1"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.LCMapStringW",
+   "args": [
+    "0x0",
+    "0x200",
+    "0x1211918",
+    "0x1",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.LCMapStringW",
+   "args": [
+    "0x0",
+    "0x200",
+    "0x1211918",
+    "0x1",
+    "0x1211908",
+    "0x1"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.WideCharToMultiByte",
+   "args": [
+    "0x4e4",
+    "0x0",
+    "0x1211908",
+    "0x1",
+    "0x1211bc0",
+    "0x100",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x100"
+  }
+ ]
+}

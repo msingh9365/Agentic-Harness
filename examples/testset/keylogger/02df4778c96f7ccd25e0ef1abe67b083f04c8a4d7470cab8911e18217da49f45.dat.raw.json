@@ -1,0 +1,344 @@
+[
+    {
+        "ep_type": "module_entry",
+        "start_addr": "0x58d7ec",
+        "ep_args": [
+            "0x4000",
+            "0x4010",
+            "0x4020",
+            "0x4030"
+        ],
+        "apihash": "93cd9abfd6534d43b0ed61b4f5f41068ec3abb04352fad74f0f32025c64b18a6",
+        "apis": [
+            {
+                "pc": "0x40abfd",
+                "api_name": "kernel32.GetModuleHandleW",
+                "args": [
+                    "0x0"
+                ],
+                "ret_val": "0x400000"
+            },
+            {
+                "pc": "0x40aa99",
+                "api_name": "kernel32.InitializeCriticalSection",
+                "args": [
+                    "0x599c24"
+                ],
+                "ret_val": null
+            },
+            {
+                "pc": "0x408d6a",
+                "api_name": "kernel32.InitializeCriticalSection",
+                "args": [
+                    "0x599b5c"
+                ],
+                "ret_val": null
+            },
+            {
+                "pc": "0x408d78",
+                "api_name": "kernel32.GetVersion",
+                "args": [],
+                "ret_val": "0x1db10106"
+            },
+            {
+                "pc": "0x408d9f",
+                "api_name": "kernel32.GetModuleHandleW",
+                "args": [
+                    "kernel32.dll"
+                ],
+                "ret_val": "0x77000000"
+            },
+            {
+                "pc": "0x408da5",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77000000",
+                    "GetThreadPreferredUILanguages"
+                ],
+                "ret_val": "0xfeee0000"
+            },
+            {
+                "pc": "0x408db9",
+                "api_name": "kernel32.GetModuleHandleW",
+                "args": [
+                    "kernel32.dll"
+                ],
+                "ret_val": "0x77000000"
+            },
+            {
+                "pc": "0x408dbf",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77000000",
+                    "SetThreadPreferredUILanguages"
+                ],
+                "ret_val": "0xfeee0001"
+            },
+            {
+                "pc": "0x408dd3",
+                "api_name": "kernel32.GetModuleHandleW",
+                "args": [
+                    "kernel32.dll"
+                ],
+                "ret_val": "0x77000000"
+            },
+            {
+                "pc": "0x408dd9",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77000000",
+                    "GetThreadUILanguage"
+                ],
+                "ret_val": "0xfeee0002"
+            },
+            {
+                "pc": "0x40a641",
+                "api_name": "kernel32.GetSystemInfo",
+                "args": [
+                    "0x1211f44"
+                ],
+                "ret_val": null
+            },
+            {
+                "pc": "0x58c077",
+                "api_name": "kernel32.GetCommandLineW",
+                "args": [],
+                "ret_val": "0x45f0"
+            },
+            {
+                "pc": "0x402652",
+                "api_name": "kernel32.GetStartupInfoA",
+                "args": [
+                    "0x1211f20"
+                ],
+                "ret_val": null
+            },
+            {
+                "pc": "0x58c08b",
+                "api_name": "kernel32.GetACP",
+                "args": [],
+                "ret_val": "0x4e4"
+            },
+            {
+                "pc": "0x58c09f",
+                "api_name": "kernel32.GetCurrentThreadId",
+                "args": [],
+                "ret_val": "0x589c"
+            },
+            {
+                "pc": "0x40a651",
+                "api_name": "kernel32.GetVersion",
+                "args": [],
+                "ret_val": "0x1db10106"
+            },
+            {
+                "pc": "0x40cd2b",
+                "api_name": "kernel32.GetVersionExW",
+                "args": [
+                    "0x1211e54"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x402a7b",
+                "api_name": "kernel32.VirtualAlloc",
+                "args": [
+                    "0x0",
+                    "0x13fff0",
+                    "0x1000",
+                    "PAGE_READWRITE"
+                ],
+                "ret_val": "0x50000"
+            },
+            {
+                "pc": "0x408ad7",
+                "api_name": "kernel32.GetModuleFileNameW",
+                "args": [
+                    "0x400000",
+                    "C:\\Windows\\system32\\02df4778c96f7ccd25e0ef1abe67b083f04c8a4d7470cab8911e18217da49f45.dat",
+                    "0x20a"
+                ],
+                "ret_val": "0x58"
+            },
+            {
+                "pc": "0x409951",
+                "api_name": "kernel32.GetModuleFileNameW",
+                "args": [
+                    "0x0",
+                    "C:\\Windows\\system32\\02df4778c96f7ccd25e0ef1abe67b083f04c8a4d7470cab8911e18217da49f45.dat",
+                    "0x105"
+                ],
+                "ret_val": "0x58"
+            },
+            {
+                "pc": "0x409ba0",
+                "api_name": "kernel32.lstrcpynW",
+                "args": [
+                    "0x120f8c2",
+                    "C:\\Windows\\system32\\02df4778c96f7ccd25e0ef1abe67b083f04c8a4d7470cab8911e18217da49f45.dat",
+                    "0x105"
+                ],
+                "ret_val": "0x120f8c2"
+            },
+            {
+                "pc": "0x409bac",
+                "api_name": "kernel32.lstrlenW",
+                "args": [
+                    "C:\\Windows\\system32\\02df4778c96f7ccd25e0ef1abe67b083f04c8a4d7470cab8911e18217da49f45.dat"
+                ],
+                "ret_val": "0x58"
+            },
+            {
+                "pc": "0x4096ca",
+                "api_name": "kernel32.lstrcpynW",
+                "args": [
+                    "0x120f66a",
+                    "C:\\Windows\\system32\\02df4778c96f7ccd25e0ef1abe67b083f04c8a4d7470cab8911e18217da49f45.dat",
+                    "0x105"
+                ],
+                "ret_val": "0x120f66a"
+            },
+            {
+                "pc": "0x4096f7",
+                "api_name": "advapi32.RegOpenKeyExW",
+                "args": [
+                    "HKEY_CURRENT_USER",
+                    "Software\\CodeGear\\Locales",
+                    "0x0",
+                    "0xf0019",
+                    "0x120f878"
+                ],
+                "ret_val": "0x3"
+            },
+            {
+                "pc": "0x409715",
+                "api_name": "advapi32.RegOpenKeyExW",
+                "args": [
+                    "HKEY_LOCAL_MACHINE",
+                    "Software\\CodeGear\\Locales",
+                    "0x0",
+                    "0xf0019",
+                    "0x120f878"
+                ],
+                "ret_val": "0x3"
+            },
+            {
+                "pc": "0x409733",
+                "api_name": "advapi32.RegOpenKeyExW",
+                "args": [
+                    "HKEY_CURRENT_USER",
+                    "Software\\Borland\\Locales",
+                    "0x0",
+                    "0xf0019",
+                    "0x120f878"
+                ],
+                "ret_val": "0x3"
+            },
+            {
+                "pc": "0x409751",
+                "api_name": "advapi32.RegOpenKeyExW",
+                "args": [
+                    "HKEY_CURRENT_USER",
+                    "Software\\Borland\\Delphi\\Locales",
+                    "0x0",
+                    "0xf0019",
+                    "0x120f878"
+                ],
+                "ret_val": "0x3"
+            },
+            {
+                "pc": "0x409c39",
+                "api_name": "kernel32.GetUserDefaultUILanguage",
+                "args": [],
+                "ret_val": "0xffff"
+            },
+            {
+                "pc": "0x40934f",
+                "api_name": "kernel32.EnterCriticalSection",
+                "args": [
+                    "0x599b5c"
+                ],
+                "ret_val": null
+            },
+            {
+                "pc": "0x409382",
+                "api_name": "kernel32.LeaveCriticalSection",
+                "args": [
+                    "0x599b5c"
+                ],
+                "ret_val": null
+            },
+            {
+                "pc": "0x409396",
+                "api_name": "kernel32.IsValidLocale",
+                "args": [
+                    "0xffff",
+                    "0x2"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x409223",
+                "api_name": "kernel32.GetThreadUILanguage",
+                "args": [],
+                "ret_val": "0xffff"
+            }
+        ],
+        "ret_val": "0x120f830",
+        "error": {
+            "type": "unsupported_api",
+            "pc": "0xfeee0000",
+            "address": "0xfeee0000",
+            "instr": "disasm_failed",
+            "regs": {
+                "esp": "0x0120f814",
+                "ebp": "0x0120f834",
+                "eip": "0xfeee0000",
+                "esi": "0x00000000",
+                "edi": "0x0120f8bc",
+                "eax": "0x0120f830",
+                "ebx": "0x0120f858",
+                "ecx": "0x00000002",
+                "edx": "0x0120f8a8"
+            },
+            "stack": [
+                "sp+0x00: 0x004091e5 -> emu.module.02df4778c96f7ccd25e0ef1abe67b083f04c8a4d7470cab8911e18217da49f45.0x400000",
+                "sp+0x04: 0x00000038",
+                "sp+0x08: 0x0120f830 -> emu.stack.0x1200000",
+                "sp+0x0c: 0x00000000",
+                "sp+0x10: 0x0120f858 -> emu.stack.0x1200000",
+                "sp+0x14: 0x0120f8a8 -> emu.stack.0x1200000",
+                "sp+0x18: 0x0000ffff",
+                "sp+0x1c: 0x00000002",
+                "sp+0x20: 0x0120f860 -> emu.stack.0x1200000",
+                "sp+0x24: 0x0040928d -> emu.module.02df4778c96f7ccd25e0ef1abe67b083f04c8a4d7470cab8911e18217da49f45.0x400000",
+                "sp+0x28: 0x0120f8a8 -> emu.stack.0x1200000",
+                "sp+0x2c: 0x0000ffff",
+                "sp+0x30: 0x00000000",
+                "sp+0x34: 0x00000000",
+                "sp+0x38: 0x00000000",
+                "sp+0x3c: 0x00000000"
+            ],
+            "api_name": "kernel32.GetThreadPreferredUILanguages"
+        },
+        "registry_access": [
+            {
+                "event": "open_key",
+                "path": "HKEY_CURRENT_USER\\Software\\CodeGear\\Locales"
+            },
+            {
+                "event": "open_key",
+                "path": "HKEY_LOCAL_MACHINE\\Software\\CodeGear\\Locales"
+            },
+            {
+                "event": "open_key",
+                "path": "HKEY_CURRENT_USER\\Software\\Borland\\Locales"
+            },
+            {
+                "event": "open_key",
+                "path": "HKEY_CURRENT_USER\\Software\\Borland\\Delphi\\Locales"
+            }
+        ],
+        "dynamic_code_segments": []
+    }
+]

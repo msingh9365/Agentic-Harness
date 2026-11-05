@@ -1,0 +1,284 @@
+[
+    {
+        "ep_type": "module_entry",
+        "start_addr": "0x401020",
+        "ep_args": [
+            "0x4000",
+            "0x4010",
+            "0x4020",
+            "0x4030"
+        ],
+        "apihash": "1161940493777e2ce72b727f4aeec0c0679a4c4018ddb40958b3fd1e69dbef45",
+        "apis": [
+            {
+                "pc": "0x401035",
+                "api_name": "KERNEL32.GetModuleHandleW",
+                "args": [
+                    "0x0"
+                ],
+                "ret_val": "0x400000"
+            },
+            {
+                "pc": "0x401050",
+                "api_name": "KERNEL32.HeapCreate",
+                "args": [
+                    "0x0",
+                    "0x2000",
+                    "0x0"
+                ],
+                "ret_val": "0x45f0"
+            },
+            {
+                "pc": "0x40105d",
+                "api_name": "KERNEL32.HeapAlloc",
+                "args": [
+                    "0x45f0",
+                    "0x8",
+                    "0x2000"
+                ],
+                "ret_val": "0x7000"
+            },
+            {
+                "pc": "0x40106b",
+                "api_name": "KERNEL32.HeapAlloc",
+                "args": [
+                    "0x45f0",
+                    "0x8",
+                    "0x2000"
+                ],
+                "ret_val": "0x9000"
+            },
+            {
+                "pc": "0x401077",
+                "api_name": "KERNEL32.GetModuleFileNameW",
+                "args": [
+                    "0x0",
+                    "C:\\Windows\\system32\\bbb911299e00a3ac3340c039ed69f825787e77306434cb92f443190d97f8c3ec.dat",
+                    "0x2000"
+                ],
+                "ret_val": "0x58"
+            },
+            {
+                "pc": "0x401085",
+                "api_name": "KERNEL32.GetTempPathW",
+                "args": [
+                    "0x1000",
+                    "C:\\Windows\\temp\\"
+                ],
+                "ret_val": "0x10"
+            },
+            {
+                "pc": "0x40109b",
+                "api_name": "USER32.wsprintfW",
+                "args": [
+                    "Cb",
+                    "%s%s"
+                ],
+                "ret_val": "0x2"
+            },
+            {
+                "pc": "0x4010b5",
+                "api_name": "KERNEL32.CreateFileW",
+                "args": [
+                    "C:\\Windows\\system32\\bbb911299e00a3ac3340c039ed69f825787e77306434cb92f443190d97f8c3ec.dat",
+                    "GENERIC_READ",
+                    "0x1",
+                    "0x0",
+                    "OPEN_EXISTING",
+                    "0x80",
+                    "0x0"
+                ],
+                "ret_val": "0xac"
+            },
+            {
+                "pc": "0x4010cd",
+                "api_name": "KERNEL32.GetFileSize",
+                "args": [
+                    "0xac",
+                    "0x0"
+                ],
+                "ret_val": "0x2ed2"
+            },
+            {
+                "pc": "0x4010d9",
+                "api_name": "KERNEL32.lstrlenW",
+                "args": [
+                    "C:\\Windows\\system32\\bbb911299e00a3ac3340c039ed69f825787e77306434cb92f443190d97f8c3ec.dat"
+                ],
+                "ret_val": "0x58"
+            },
+            {
+                "pc": "0x4010ec",
+                "api_name": "KERNEL32.HeapAlloc",
+                "args": [
+                    "0x45f0",
+                    "0x8",
+                    "0x2f86"
+                ],
+                "ret_val": "0xd000"
+            },
+            {
+                "pc": "0x401109",
+                "api_name": "KERNEL32.ReadFile",
+                "args": [
+                    "0xac",
+                    "0xd000",
+                    "0x2ed2",
+                    "0x1211fcc",
+                    "0x0"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x401113",
+                "api_name": "KERNEL32.lstrcmpW",
+                "args": [
+                    "C:\\Windows\\system32\\bbb911299e00a3ac3340c039ed69f825787e77306434cb92f443190d97f8c3ec.dat",
+                    "Cb\\Windows\\temp\\"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x40111e",
+                "api_name": "KERNEL32.lstrlenW",
+                "args": [
+                    "C:\\Windows\\system32\\bbb911299e00a3ac3340c039ed69f825787e77306434cb92f443190d97f8c3ec.dat"
+                ],
+                "ret_val": "0x58"
+            },
+            {
+                "pc": "0x401149",
+                "api_name": "KERNEL32.CreateFileW",
+                "args": [
+                    "Cb\\Windows\\temp\\",
+                    "GENERIC_WRITE",
+                    "0x2",
+                    "0x0",
+                    "CREATE_ALWAYS",
+                    "0x80",
+                    "0x0"
+                ],
+                "ret_val": "0xb0"
+            },
+            {
+                "pc": "0x40115d",
+                "api_name": "KERNEL32.lstrlenW",
+                "args": [
+                    "C:\\Windows\\system32\\bbb911299e00a3ac3340c039ed69f825787e77306434cb92f443190d97f8c3ec.dat"
+                ],
+                "ret_val": "0x58"
+            },
+            {
+                "pc": "0x401171",
+                "api_name": "KERNEL32.WriteFile",
+                "args": [
+                    "0xb0",
+                    "0xd000 (4d5a90000300000004000000ffff0000)",
+                    "0x2f86",
+                    "0x1211fcc",
+                    "0x0"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x40117c",
+                "api_name": "KERNEL32.CloseHandle",
+                "args": [
+                    "0xac"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x401181",
+                "api_name": "KERNEL32.CloseHandle",
+                "args": [
+                    "0xb0"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x40118d",
+                "api_name": "KERNEL32.GetTempPathW",
+                "args": [
+                    "0x1000",
+                    "C:\\Windows\\temp\\"
+                ],
+                "ret_val": "0x10"
+            },
+            {
+                "pc": "0x40119f",
+                "api_name": "SHELL32.ShellExecuteW",
+                "args": [
+                    "0x0",
+                    "open",
+                    "Cb\\Windows\\temp\\",
+                    "0x0",
+                    "C:\\Windows\\temp\\",
+                    "0x0"
+                ],
+                "ret_val": "0x21"
+            },
+            {
+                "pc": "0x401042",
+                "api_name": "KERNEL32.ExitProcess",
+                "args": [
+                    "0x0"
+                ],
+                "ret_val": "0x0"
+            }
+        ],
+        "ret_val": "0x21",
+        "error": {},
+        "file_access": [
+            {
+                "event": "open",
+                "path": "C:\\Windows\\system32\\bbb911299e00a3ac3340c039ed69f825787e77306434cb92f443190d97f8c3ec.dat",
+                "open_flags": [
+                    "OPEN_EXISTING"
+                ],
+                "access_flags": [
+                    "GENERIC_READ"
+                ]
+            },
+            {
+                "event": "read",
+                "path": "C:\\Windows\\system32\\bbb911299e00a3ac3340c039ed69f825787e77306434cb92f443190d97f8c3ec.dat",
+                "size": 11986,
+                "buffer": "0xd000"
+            },
+            {
+                "event": "create",
+                "path": "Cb\\Windows\\temp\\",
+                "open_flags": [
+                    "CREATE_ALWAYS"
+                ],
+                "access_flags": [
+                    "GENERIC_WRITE"
+                ]
+            },
+            {
+                "event": "write",
+                "path": "Cb\\Windows\\temp\\",
+                "data": "TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0AAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1vZGUuDQ0KJAAAAAAAAAD4b1bgvA44s7wOOLO8DjiztXars7UOOLO8DjmzpQ44s9N4l7O+Djiz03ils70OOLNSaWNovA44swAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBFAABMAQUAmBiOUgAAAAAAAAAA4AACAQsBCgAABAAAAAwAAAAAAAAgEAAAABAAAAAgAAAAAEAAABAAAAACAAAFAAEAAAAAAAUAAQAAAAAAAGAAAAAEAAAkywAAAgAAhwAAEAAAEAAAAAAQAAAQAAAAAAAAEAAAAAAAAAAAAAAAyCEAAGQAAAAAQAAAwAEAAAAAAAAAAAAAAAAAAAAAAAAAUAAAdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAB0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALnRleHQAAADYAwAAABAAAAAEAAAABAAAAAAAAAAAAAAAAAAAIAAAYC5yZGF0YQAAcAQAAAAgAAAABgAAAAgAAAAAAAAAAAAAAAAAAEAAAEAuZGF0YQAAABQAAAAAMAAAAAIAAAAOAAAAAAAAAAAAAAAAAABAAADALnJzcmMAAADAAQAAAEAAAAACAAAAEAAAAAAAAAAAAAAAAAAAQAAAQC5yZWxvYwAAsgAAAABQAAAAAgAAABIAAAAAAAAAAAAAAAAAAEAAAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+                "size": 12166,
+                "buffer": "0xd000"
+            }
+        ],
+        "process_events": [
+            {
+                "event": "create",
+                "pid": 24716,
+                "path": "C:\\Windows\\temp\\\\Cb\\Windows\\temp\\",
+                "cmdline": ""
+            }
+        ],
+        "dynamic_code_segments": [],
+        "dropped_files": [
+            {
+                "path": "Cb\\Windows\\temp\\",
+                "size": 12166,
+                "sha256": "12eebf21a314777042c812f19de4229e4e9e5bb2acd9d3aa3ed639ed0d6c66d2"
+            }
+        ]
+    }
+]

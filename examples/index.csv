@@ -1,0 +1,22 @@
+split,family,label,file,tokens,entry_points,api_calls,hit_cap,fields,raw_kb,why
+testset,backdoor,malware,testset/backdoor/3c9d44d9b1ea6475e3f4740246342ee46aaea4dafe0179013c531a7219b0af4d.dat,2251,1,501,1,apis,115.8,typical: token count closest to the median of its split/family
+testset,clean,benign,testset/clean/64ad5f402885e2602634a6a695396aed3e8dc43d9f61feb473a56548351b073b.dat,1048,1,199,0,apis,50.5,typical: token count closest to the median of its split/family
+testset,coinminer,malware,testset/coinminer/121926d31f5828f6231f0e1fa645be5c70c4fa40dbfd1b2e35e631d6b4b79456.dat,1172,1,219,0,apis,60.0,typical: token count closest to the median of its split/family
+testset,dropper,malware,testset/dropper/bbb911299e00a3ac3340c039ed69f825787e77306434cb92f443190d97f8c3ec.dat,329,1,22,0,file_access → apis,9.8,typical: token count closest to the median of its split/family
+testset,keylogger,malware,testset/keylogger/02df4778c96f7ccd25e0ef1abe67b083f04c8a4d7470cab8911e18217da49f45.dat,372,1,32,0,registry_access → apis,10.9,typical: token count closest to the median of its split/family
+testset,ransomware,malware,testset/ransomware/ec68ecb76f9de88508168f3182139391aac1f1ef611dcdacab1f48c4e01f4ff1.dat,761,1,138,0,apis,36.4,typical: token count closest to the median of its split/family
+testset,rat,malware,testset/rat/ac156a664a4c3beb1d8b54192c7e292eed3f03b24a09cf556d521b742107cb4b.dat,1169,1,219,0,apis,59.9,typical: token count closest to the median of its split/family
+testset,trojan,malware,testset/trojan/767c5839cf6ddd4b2dbb3c1b194c82797646e1fefb922d13f1636f9821d05b9c.dat,402,1,51,0,file_access → apis,19.5,typical: token count closest to the median of its split/family
+testset,windows_syswow64,benign,testset/windows_syswow64/iscsicpl,57,1,13,0,apis,3.2,typical: token count closest to the median of its split/family
+trainset,backdoor,malware,trainset/backdoor/f1b77391a6b779b7964ff63cfbd120141984daa43e59c622cfbb9eac0f5050c0,2310,1,501,1,file_access → apis,118.5,typical: token count closest to the median of its split/family
+trainset,clean,benign,trainset/clean/d2e651ed3e11fb6f44b3963713fc69cbf9b0a54268300303866d053e819921b0,1124,1,134,0,registry_access → file_access → apis,42.5,typical: token count closest to the median of its split/family
+trainset,coinminer,malware,trainset/coinminer/80a3215ad41af4c8fb57aee92afc650b79e6c5d8c5d63958ceb36619426638dd,1216,1,225,0,apis,62.7,typical: token count closest to the median of its split/family
+trainset,dropper,malware,trainset/dropper/31cb303de09d126c9138faa97e1ecff3defcc9247ad6af45fe3b45619d3bcc70,123,1,17,0,file_access → apis,5.2,typical: token count closest to the median of its split/family
+trainset,keylogger,malware,trainset/keylogger/3895d84b26a1c6b2670d27899ca0d131b8a8e5c3f52527a73007cf76434bf02c,1676,1,226,0,registry_access → apis,69.6,typical: token count closest to the median of its split/family
+trainset,ransomware,malware,trainset/ransomware/0029608fc206f08ed0ec885ab4f4e1ee464d72fe2e64c88d4acc74995942c473,949,1,180,0,apis,48.7,typical: token count closest to the median of its split/family
+trainset,rat,malware,trainset/rat/03f40e587c73e75e378f16a44ee87dc16270f7850a8ffb94c16c11ff182e1498,1132,1,220,0,apis,59.0,typical: token count closest to the median of its split/family
+trainset,trojan,malware,trainset/trojan/1cb90aa92ad600e865900c1c08f67de57a65449f32f5991ee6f71211c4e51cce,562,1,61,0,file_access → apis,20.6,typical: token count closest to the median of its split/family
+trainset,windows_syswow64,benign,trainset/windows_syswow64/appidtel,57,1,13,0,apis,3.2,typical: token count closest to the median of its split/family
+trainset,ransomware,malware,trainset/ransomware/6c2373c2fa75a1bc7c8dcea123b5f2b57fe5703c0a0c807f919cf3323c7c5eaa,2378,102,423,0,network_events.traffic → file_access → apis,441.4,"special: 102 entry points (1 module_entry + 101 threads), the case that breaks one-chunk-per-entry-point"
+trainset,trojan,malware,trainset/trojan/a7f91a2c5803e9bd85092ef955147d872f819fdbb6f27c818cd9c69f34212dc6,2323,1,492,1,registry_access → network_events.traffic → file_access → apis,115.9,"special: has all four fields (registry_access, network_events.traffic, file_access, apis)"
+testset,clean,benign,testset/clean/790f8ae1b9775fb4769042a41045732a2212d8bf7af26adc87316f88cea78337.dat,1095,3,168,0,apis,48.3,"special: benign sample with several entry points, length near the clean median"

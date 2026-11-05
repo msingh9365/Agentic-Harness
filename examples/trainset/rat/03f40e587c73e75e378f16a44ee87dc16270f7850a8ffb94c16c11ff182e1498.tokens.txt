@@ -1,0 +1,79 @@
+# total tokens: 1132   kept by Nebula (first 512): 512   dropped: 620
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: apis  (tokens 0..1131, 1132 tokens)
+     0  ▁apis ▁kernel32 ▁loadlibrarya ▁kernel32 ▁dll ▁0x77000000 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁sleep ▁0xfeee0000 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁lstrcpya ▁0xfeee0001
+    16  ▁kernel32 ▁getprocaddress ▁0x77000000 ▁writeprocessmemory ▁0xfeee0002 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁writefile ▁0xfeee0003 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁winexec ▁0xfeee0004 ▁kernel32
+    32  ▁getprocaddress ▁0x77000000 ▁waitforsingleob j ect ▁0xfeee0005 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁waitformultipleob j ectsex ▁0xfeee0006 ▁kernel32 ▁getprocaddress ▁0x77000000
+    48  ▁virtualquery ▁0xfeee0007 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁virtualprotectex ▁0xfeee0008 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁virtualprotect ▁0xfeee0009 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁virtual
+    64  fre eex ▁0xfeee000a ▁kernel32 ▁getprocaddress ▁0x77000000 ▁virtualfree ▁0xfeee000b ▁kernel32 ▁getprocaddress ▁0x77000000 ▁virtualallocex ▁0xfeee000c ▁kernel32 ▁getprocaddress ▁0x77000000
+    80  ▁virtualalloc ▁0xfeee000d ▁kernel32 ▁getprocaddress ▁0x77000000 ▁ver lan gu ag enamea ▁0xfeee000e ▁kernel32 ▁getprocaddress ▁0x77000000 ▁unmapviewoffile ▁0xfeee000f
+    96  ▁kernel32 ▁getprocaddress ▁0x77000000 ▁terminateprocess ▁0xfeee0010 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁sleep ▁0xfeee0000 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁ofresource ▁0xfeee0011 ▁kernel32
+   112  ▁getprocaddress ▁0x77000000 ▁setthreadpriority ▁0xfeee0012 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁setthreadlocale ▁0xfeee0013 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁setthreadcontext ▁0xfeee0014 ▁kernel32 ▁getprocaddress
+   128  ▁0x77000000 ▁setlasterror ▁0xfeee0015 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁setfiletime ▁0xfeee0016 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁setfilepointer ▁0xfeee0017 ▁kernel32 ▁getprocaddress ▁0x77000000
+   144  ▁setfileattributesa ▁0xfeee0018 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁set ▁0xfeee0019 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁seterrormode ▁0xfeee001a ▁kernel32 ▁getprocaddress ▁0x77000000 ▁setendoffile
+   160  ▁0xfeee001b ▁kernel32 ▁getprocaddress ▁0x77000000 ▁resumethread ▁0xfeee001c ▁kernel32 ▁getprocaddress ▁0x77000000 ▁reset ▁0xfeee001d ▁kernel32 ▁getprocaddress ▁0x77000000 ▁readprocessmemory ▁0xfeee001e
+   176  ▁kernel32 ▁getprocaddress ▁0x77000000 ▁readfile ▁0xfeee001f ▁kernel32 ▁getprocaddress ▁0x77000000 ▁peeknamedpipe ▁0xfeee0020 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁openprocess ▁0xfeee0021 ▁kernel32
+   192  ▁getprocaddress ▁0x77000000 ▁multibytetowidechar ▁0xfeee0022 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁muldiv ▁0xfeee0023 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁movefilea ▁0xfeee0024 ▁kernel32 ▁getprocaddress
+   208  ▁0x77000000 ▁mapviewoffile ▁0xfeee0025 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁lockresource ▁0xfeee0026 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁localfiletimetofiletime ▁0xfeee0027 ▁kernel32 ▁getprocaddress ▁0x77000000
+   224  ▁localalloc ▁0xfeee0028 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁loadresource ▁0xfeee0029 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁loadlibrarya ▁0xfeee002a ▁kernel32 ▁getprocaddress ▁0x77000000 ▁leavecriticalsection
+   240  ▁0xfeee002b ▁kernel32 ▁getprocaddress ▁0x77000000 ▁isbadreadptr ▁0xfeee002c ▁kernel32 ▁getprocaddress ▁0x77000000 ▁initializecriticalsection ▁0xfeee002d ▁kernel32 ▁getprocaddress ▁0x77000000 ▁heapfree ▁0xfeee002e
+   256  ▁kernel32 ▁getprocaddress ▁0x77000000 ▁heapalloc ▁0xfeee002f ▁kernel32 ▁getprocaddress ▁0x77000000 ▁globalunlock ▁0xfeee0030 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁globalmemorystatus ▁0xfeee0031 ▁kernel32
+   272  ▁getprocaddress ▁0x77000000 ▁globallock ▁0xfeee0032 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁globalfree ▁0xfeee0033 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁globalfindatoma ▁0xfeee0034 ▁kernel32 ▁getprocaddress
+   288  ▁0x77000000 ▁globaldeleteatom ▁0xfeee0035 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁globalalloc ▁0xfeee0036 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁globaladdatoma ▁0xfeee0037 ▁kernel32 ▁getprocaddress ▁0x77000000
+   304  ▁getwindowsdirectorya ▁0xfeee0038 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getvolumeinformationa ▁0xfeee0039 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getversionexa ▁0xfeee003a ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getversion
+   320  ▁0xfeee003b ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getuserdefaultlangid ▁0xfeee003c ▁kernel32 ▁getprocaddress ▁0x77000000 ▁gettickcount ▁0xfeee003d ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getthreadlocale ▁0xfeee003e
+   336  ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getthreadcontext ▁0xfeee003f ▁kernel32 ▁getprocaddress ▁0x77000000 ▁gettempa ▁0xfeee0040 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getsystem power status
+   352  ▁0xfeee0041 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getsystemdirectorya ▁0xfeee0042 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getstdhandle ▁0xfeee0043 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getprocessheap ▁0xfeee0044
+   368  ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getprocaddress ▁0xfeee0045 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getmodulehandlea ▁0xfeee0046 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getmodulefilenamea ▁0xfeee0047 ▁kernel32
+   384  ▁getprocaddress ▁0x77000000 ▁getlocaleinfoa ▁0xfeee0048 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getlocaltime ▁0xfeee0049 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getlasterror ▁0xfeee004a ▁kernel32 ▁getprocaddress
+   400  ▁0x77000000 ▁getfullnamea ▁0xfeee004b ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getfiletime ▁0xfeee004c ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getfile ▁0xfeee004d ▁kernel32 ▁getprocaddress ▁0x77000000
+   416  ▁getfileattributesa ▁0xfeee004e ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getexitcodethread ▁0xfeee004f ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getexitcodeprocess ▁0xfeee0050 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getenvironmentvariablea
+   432  ▁0xfeee0051 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getdrivetypea ▁0xfeee0052 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getdiskfreespacea ▁0xfeee0053 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getdateformata ▁0xfeee0054
+   448  ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getcurrentthreadid ▁0xfeee0055 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getcurrentthread ▁0xfeee0056 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getcurrentprocessid ▁0xfeee0057 ▁kernel32
+   464  ▁getprocaddress ▁0x77000000 ▁getcurrentprocess ▁0xfeee0058 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getcomputernamea ▁0xfeee0059 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getcpinfo ▁0xfeee005a ▁kernel32 ▁getprocaddress
+   480  ▁0x77000000 ▁freeresource ▁0xfeee005b ▁kernel32 ▁getprocaddress ▁0x77000000 ▁interlockedincrement ▁0xfeee005c ▁kernel32 ▁getprocaddress ▁0x77000000 ▁interlockedexchange ▁0xfeee005d ▁kernel32 ▁getprocaddress ▁0x77000000
+   496  ▁interlockeddecrement ▁0xfeee005e ▁kernel32 ▁getprocaddress ▁0x77000000 ▁freelibrary ▁0xfeee005f ▁kernel32 ▁getprocaddress ▁0x77000000 ▁formatmessagea ▁0xfeee0060 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁findresourcea
+
+-------- 512-token cut: Nebula never sees token 512 and later --------
+
+   512  ▁0xfeee0061 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁findnextfilea ▁0xfeee0062 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁findfirstfilea ▁0xfeee0063 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁findclose ▁0xfeee0064
+   528  ▁kernel32 ▁getprocaddress ▁0x77000000 ▁filetimetosystemtime ▁0xfeee0065 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁filetimetolocalfiletime ▁0xfeee0066 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁filetimetodosdatetime ▁0xfeee0067 ▁kernel32
+   544  ▁getprocaddress ▁0x77000000 ▁exitthread ▁0xfeee0068 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁exitprocess ▁0xfeee0069 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁enumresourcenamesa ▁0xfeee006a ▁kernel32 ▁getprocaddress
+   560  ▁0x77000000 ▁enumcalendarinfoa ▁0xfeee006b ▁kernel32 ▁getprocaddress ▁0x77000000 ▁entercriticalsection ▁0xfeee006c ▁kernel32 ▁getprocaddress ▁0x77000000 ▁dosdatetimetofiletime ▁0xfeee006d ▁kernel32 ▁getprocaddress ▁0x77000000
+   576  ▁deletefilea ▁0xfeee006e ▁kernel32 ▁getprocaddress ▁0x77000000 ▁deletecriticalsection ▁0xfeee006f ▁kernel32 ▁getprocaddress ▁0x77000000 ▁createthread ▁0xfeee0070 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁createremotethread
+   592  ▁0xfeee0071 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁createprocessa ▁0xfeee0072 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁createpipe ▁0xfeee0073 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁createmutexa ▁0xfeee0074
+   608  ▁kernel32 ▁getprocaddress ▁0x77000000 ▁createfilemappinga ▁0xfeee0075 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁createfilea ▁0xfeee0076 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁createa ▁0xfeee0077 ▁kernel32
+   624  ▁getprocaddress ▁0x77000000 ▁createdirectorya ▁0xfeee0078 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁copyfilea ▁0xfeee0079 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁comparestringa ▁0xfeee007a ▁kernel32 ▁getprocaddress
+   640  ▁0x77000000 ▁closehandle ▁0xfeee007b ▁kernel32 ▁getprocaddress ▁0x77000000 ▁beep ▁0xfeee007c ▁kernel32 ▁loadlibrarya ▁kernel32 ▁dll ▁0x77000000 ▁kernel32 ▁getprocaddress ▁0x77000000
+   656  ▁getacp ▁0xfeee007d ▁kernel32 ▁getprocaddress ▁0x77000000 ▁sleep ▁0xfeee0000 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁virtualfree ▁0xfeee000b ▁kernel32 ▁getprocaddress ▁0x77000000 ▁virtualalloc
+   672  ▁0xfeee000d ▁kernel32 ▁getprocaddress ▁0x77000000 ▁gettickcount ▁0xfeee003d ▁kernel32 ▁getprocaddress ▁0x77000000 ▁queryperformancecounter ▁0xfeee007e ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getcurrentthreadid ▁0xfeee0055
+   688  ▁kernel32 ▁getprocaddress ▁0x77000000 ▁interlockeddecrement ▁0xfeee005e ▁kernel32 ▁getprocaddress ▁0x77000000 ▁interlockedincrement ▁0xfeee005c ▁kernel32 ▁getprocaddress ▁0x77000000 ▁virtualquery ▁0xfeee0007 ▁kernel32
+   704  ▁getprocaddress ▁0x77000000 ▁widechartomultibyte ▁0xfeee007f ▁kernel32 ▁getprocaddress ▁0x77000000 ▁multibytetowidechar ▁0xfeee0022 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁lstrlena ▁0xfeee0080 ▁kernel32 ▁getprocaddress
+   720  ▁0x77000000 ▁lstrcpyna ▁0xfeee0081 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁loadlibraryexa ▁0xfeee0082 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getthreadlocale ▁0xfeee003e ▁kernel32 ▁getprocaddress ▁0x77000000
+   736  ▁getstartupinfoa ▁0xfeee0083 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getprocaddress ▁0xfeee0045 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getmodulehandlea ▁0xfeee0046 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getmodulefilenamea
+   752  ▁0xfeee0047 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getlocaleinfoa ▁0xfeee0048 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getlasterror ▁0xfeee004a ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getcommandlinea ▁0xfeee0084
+   768  ▁kernel32 ▁getprocaddress ▁0x77000000 ▁freelibrary ▁0xfeee005f ▁kernel32 ▁getprocaddress ▁0x77000000 ▁findfirstfilea ▁0xfeee0063 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁findclose ▁0xfeee0064 ▁kernel32
+   784  ▁getprocaddress ▁0x77000000 ▁exitprocess ▁0xfeee0069 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁exitthread ▁0xfeee0068 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁createthread ▁0xfeee0070 ▁kernel32 ▁getprocaddress
+   800  ▁0x77000000 ▁comparestringa ▁0xfeee007a ▁kernel32 ▁getprocaddress ▁0x77000000 ▁writefile ▁0xfeee0003 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁unhandledexceptionfilter ▁0xfeee0085 ▁kernel32 ▁getprocaddress ▁0x77000000
+   816  ▁setfilepointer ▁0xfeee0017 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁setendoffile ▁0xfeee001b ▁kernel32 ▁getprocaddress ▁0x77000000 ▁rtlunwind ▁0xfeee0086 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁readfile
+   832  ▁0xfeee001f ▁kernel32 ▁getprocaddress ▁0x77000000 ▁raiseexception ▁0xfeee0087 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getstdhandle ▁0xfeee0043 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getfile ▁0xfeee004d
+   848  ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getfiletype ▁0xfeee0088 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁createfilea ▁0xfeee0076 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁closehandle ▁0xfeee007b ▁kernel32
+   864  ▁loadlibrarya ▁kernel32 ▁dll ▁0x77000000 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁tlssetvalue ▁0xfeee0089 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁tlsgetvalue ▁0xfeee008a ▁kernel32 ▁getprocaddress
+   880  ▁0x77000000 ▁localalloc ▁0xfeee0028 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getmodulehandlea ▁0xfeee0046 ▁kernel32 ▁loadlibrarya ▁advapi32 ▁dll ▁0x78000000 ▁kernel32 ▁getprocaddress ▁0x78000000
+   896  ▁regsetvalueexa ▁0xfeee008b ▁kernel32 ▁getprocaddress ▁0x78000000 ▁regqueryvalueexa ▁0xfeee008c ▁kernel32 ▁getprocaddress ▁0x78000000 ▁regqueryinfokeya ▁0xfeee008d ▁kernel32 ▁getprocaddress ▁0x78000000 ▁regopenkeyexa
+   912  ▁0xfeee008e ▁kernel32 ▁getprocaddress ▁0x78000000 ▁regopenkeya ▁0xfeee008f ▁kernel32 ▁getprocaddress ▁0x78000000 ▁regflushkey ▁0xfeee0090 ▁kernel32 ▁getprocaddress ▁0x78000000 ▁regenumvaluea ▁0xfeee0091
+   928  ▁kernel32 ▁getprocaddress ▁0x78000000 ▁regenumkeyexa ▁0xfeee0092 ▁kernel32 ▁getprocaddress ▁0x78000000 ▁regdeletevaluea ▁0xfeee0093 ▁kernel32 ▁getprocaddress ▁0x78000000 ▁regdeletekeya ▁0xfeee0094 ▁kernel32
+   944  ▁getprocaddress ▁0x78000000 ▁regcreatekeyexa ▁0xfeee0095 ▁kernel32 ▁getprocaddress ▁0x78000000 ▁regcreatekeya ▁0xfeee0096 ▁kernel32 ▁getprocaddress ▁0x78000000 ▁regclosekey ▁0xfeee0097 ▁kernel32 ▁getprocaddress
+   960  ▁0x78000000 ▁openthreadtoken ▁0xfeee0098 ▁kernel32 ▁getprocaddress ▁0x78000000 ▁openprocesstoken ▁0xfeee0099 ▁kernel32 ▁getprocaddress ▁0x78000000 ▁lookupprivilegevaluea ▁0xfeee009a ▁kernel32 ▁getprocaddress ▁0x78000000
+   976  ▁lookup privile g enamea ▁0xfeee009b ▁kernel32 ▁getprocaddress ▁0x78000000 ▁lookupprivilege display namea ▁0xfeee009c ▁kernel32 ▁getprocaddress ▁0x78000000 ▁lookupaccount
+   992  sida ▁0xfeee009d ▁kernel32 ▁getprocaddress ▁0x78000000 ▁isvalidsid ▁0xfeee009e ▁kernel32 ▁getprocaddress ▁0x78000000 ▁getusernamea ▁0xfeee009f ▁kernel32 ▁getprocaddress ▁0x78000000 ▁gettokeninformation
+  1008  ▁0xfeee00a0 ▁kernel32 ▁getprocaddress ▁0x78000000 ▁getsidsubauthoritycount ▁0xfeee00a1 ▁kernel32 ▁getprocaddress ▁0x78000000 ▁getsidsubauthority ▁0xfeee00a2 ▁kernel32 ▁getprocaddress ▁0x78000000 ▁getsid id
+  1024  entifier au thority ▁0xfeee00a3 ▁kernel32 ▁getprocaddress ▁0x78000000 ▁getcurrent h w pro filea ▁0xfeee00a4 ▁kernel32 ▁getprocaddress ▁0x78000000
+  1040  ▁ad j usttokenprivileges ▁0xfeee00a5 ▁kernel32 ▁loadlibrarya ▁advapi32 ▁dll ▁0x78000000 ▁kernel32 ▁getprocaddress ▁0x78000000 ▁regqueryvalueexa ▁0xfeee008c ▁kernel32 ▁getprocaddress
+  1056  ▁0x78000000 ▁regopenkeyexa ▁0xfeee008e ▁kernel32 ▁getprocaddress ▁0x78000000 ▁regclosekey ▁0xfeee0097 ▁kernel32 ▁loadlibrarya ▁advapi32 ▁dll ▁0x78000000 ▁kernel32 ▁getprocaddress ▁0x78000000
+  1072  ▁startservicea ▁0xfeee00a6 ▁kernel32 ▁getprocaddress ▁0x78000000 ▁queryservicestatus ▁0xfeee00a7 ▁kernel32 ▁getprocaddress ▁0x78000000 ▁openservicea ▁0xfeee00a8 ▁kernel32 ▁getprocaddress ▁0x78000000 ▁openscmanagera
+  1088  ▁0xfeee00a9 ▁kernel32 ▁getprocaddress ▁0x78000000 ▁enumservicesstatusa ▁0xfeee00aa ▁kernel32 ▁getprocaddress ▁0x78000000 ▁deleteservice ▁0xfeee00ab ▁kernel32 ▁getprocaddress ▁0x78000000 ▁create servicea
+  1104  ▁0xfeee00ac ▁kernel32 ▁getprocaddress ▁0x78000000 ▁controlservice ▁0xfeee00ad ▁kernel32 ▁getprocaddress ▁0x78000000 ▁closeservicehandle ▁0xfeee00ae ▁kernel32 ▁loadlibrarya ▁avicap32 ▁dll ▁0x0
+  1120  ▁kernel32 ▁getprocaddress ▁0x0 ▁cap get driver descriptiona ▁0x0 ▁kernel32 ▁exitprocess ▁0x0 ▁0x0
+

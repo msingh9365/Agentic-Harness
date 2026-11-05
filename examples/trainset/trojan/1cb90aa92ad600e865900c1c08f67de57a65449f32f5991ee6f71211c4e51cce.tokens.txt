@@ -1,0 +1,47 @@
+# total tokens: 562   kept by Nebula (first 512): 512   dropped: 50
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: file_access  (tokens 0..19, 20 tokens)
+     0  ▁file ▁access ▁open ▁drive ▁windows ▁system32 ▁sha256 ▁read ▁drive ▁windows ▁system32 ▁sha256 ▁create ▁cq ▁windows ▁temp
+    16  ▁write ▁cq ▁windows ▁temp
+
+## field: apis  (tokens 20..561, 542 tokens)
+    20  ▁apis ▁kernel32 ▁virtualalloc ▁0x0 ▁0x69e ▁0x3000 ▁page ▁execute ▁readwrite ▁0x50000 ▁kernel32 ▁virtualprotect ▁0x403000 ▁0x1000 ▁0x4 ▁0x1211fb8
+    36  ▁0x1 ▁kernel32 ▁virtualprotect ▁0x402000 ▁0x1000 ▁0x4 ▁0x1211fb8 ▁0x1 ▁kernel32 ▁virtualprotect ▁0x401000 ▁0x1000 ▁0x4 ▁0x1211fb8 ▁0x1 ▁kernel32
+    52  ▁virtualprotect ▁0x406000 ▁0x1 ▁0x40 ▁0x1211fc0 ▁0x1 ▁kernel32 ▁getmodulehandlea ▁wininet ▁dll ▁0x7bc00000 ▁kernel32 ▁getprocaddress ▁0x7bc00000 ▁httpsendrequestw ▁0xfeee0000
+    68  ▁kernel32 ▁getprocaddress ▁0x7bc00000 ▁internetsetoptionw ▁0xfeee0001 ▁kernel32 ▁getprocaddress ▁0x7bc00000 ▁internetqueryoptionw ▁0xfeee0002 ▁kernel32 ▁getprocaddress ▁0x7bc00000 ▁httpopenrequestw ▁0xfeee0003 ▁kernel32
+    84  ▁getprocaddress ▁0x7bc00000 ▁httpqueryinfow ▁0xfeee0004 ▁kernel32 ▁getprocaddress ▁0x7bc00000 ▁internetreadfile ▁0xfeee0005 ▁kernel32 ▁getprocaddress ▁0x7bc00000 ▁internetconnectw ▁0xfeee0006 ▁kernel32 ▁getprocaddress
+   100  ▁0x7bc00000 ▁internetopenw ▁0xfeee0007 ▁kernel32 ▁getmodulehandlea ▁kernel32 ▁dll ▁0x77000000 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁gettempw ▁0xfeee0008 ▁kernel32 ▁getprocaddress ▁0x77000000
+   116  ▁getfile ▁0xfeee0009 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getcurrentdirectoryw ▁0xfeee000a ▁kernel32 ▁getprocaddress ▁0x77000000 ▁deletefilew ▁0xfeee000b ▁kernel32 ▁getprocaddress ▁0x77000000 ▁closehandle
+   132  ▁0xfeee000c ▁kernel32 ▁getprocaddress ▁0x77000000 ▁writefile ▁0xfeee000d ▁kernel32 ▁getprocaddress ▁0x77000000 ▁lstrcmpw ▁0xfeee000e ▁kernel32 ▁getprocaddress ▁0x77000000 ▁readfile ▁0xfeee000f
+   148  ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getmodulehandlew ▁0xfeee0010 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁exitprocess ▁0xfeee0011 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁heapcreate ▁0xfeee0012 ▁kernel32
+   164  ▁getprocaddress ▁0x77000000 ▁heapalloc ▁0xfeee0013 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getmodulefilenamew ▁0xfeee0014 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁createfilew ▁0xfeee0015 ▁kernel32 ▁getprocaddress
+   180  ▁0x77000000 ▁lstrlenw ▁0xfeee0016 ▁kernel32 ▁getmodulehandlea ▁user32 ▁dll ▁0x77d10000 ▁kernel32 ▁getprocaddress ▁0x77d10000 ▁wsprintfw ▁0xfeee0017 ▁kernel32 ▁getmodulehandlea ▁shell32
+   196  ▁dll ▁0x69000000 ▁kernel32 ▁getprocaddress ▁0x69000000 ▁shellexecutew ▁0xfeee0018 ▁kernel32 ▁virtualprotect ▁0x403000 ▁0x1000 ▁0x4 ▁0x1211fc4 ▁0x1 ▁kernel32 ▁virtualprotect
+   212  ▁0x402000 ▁0x1000 ▁0x2 ▁0x1211fc4 ▁0x1 ▁kernel32 ▁virtualprotect ▁0x401000 ▁0x1000 ▁0x20 ▁0x1211fc4 ▁0x1 ▁kernel32 ▁virtualprotect ▁0x406000 ▁0x1
+   228  ▁0x20 ▁0x1211fc4 ▁0x1 ▁kernel32 ▁virtualfree ▁0x50000 ▁0x0 ▁0x8000 ▁0x1 ▁kernel32 ▁getmodulehandlew ▁0x0 ▁0x400000 ▁kernel32 ▁heapcreate ▁0x0
+   244  ▁0x2000 ▁0x0 ▁0x45f0 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x8 ▁0x2000 ▁0x7000 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x8 ▁0x2000 ▁0x9000 ▁kernel32
+   260  ▁getmodulefilenamew ▁0x0 ▁c ▁windows ▁system32 ▁1 cb 90 aa9 2ad 600 e8 659 00c 1 c08
+   276  f6 7de 57 a6 544 9f 32 f59 91 ee6 f7 12 11c4 e51c ce ▁0x2000
+   292  ▁0x54 ▁kernel32 ▁gettempw ▁0x1000 ▁c ▁windows ▁temp ▁0x10 ▁user32 ▁wsprintfw ▁cq ▁s ▁s ▁0x2 ▁kernel32 ▁createfilew
+   308  ▁c ▁windows ▁system32 ▁1 cb 90 aa9 2ad 600 e8 659 00c 1 c08 f6 7de
+   324  57 a6 544 9f 32 f59 91 ee6 f7 12 11c4 e51c ce ▁generic ▁read ▁0x1
+   340  ▁0x0 ▁open ▁existing ▁0x80 ▁0x0 ▁0x34 90 ▁kernel32 ▁getfile ▁0x34 90 ▁0x0 ▁0x1f6 a ▁kernel32 ▁lstrlenw
+   356  ▁c ▁windows ▁system32 ▁1 cb 90 aa9 2ad 600 e8 659 00c 1 c08 f6 7de
+   372  57 a6 544 9f 32 f59 91 ee6 f7 12 11c4 e51c ce ▁0x54 ▁kernel32 ▁heapalloc
+   388  ▁0x45f0 ▁0x8 ▁0x20 16 ▁0xd000 ▁kernel32 ▁readfile ▁0x34 90 ▁0xd000 ▁0x1f6 a ▁0x1211fc8 ▁0x0 ▁0x1 ▁kernel32
+   404  ▁lstrcmpw ▁c ▁windows ▁system32 ▁1 cb 90 aa9 2ad 600 e8 659 00c 1 c08 f6
+   420  7de 57 a6 544 9f 32 f59 91 ee6 f7 12 11c4 e51c ce ▁cq ▁windows
+   436  ▁temp ▁0x1 ▁kernel32 ▁lstrlenw ▁c ▁windows ▁system32 ▁1 cb 90 aa9 2ad 600 e8 659 00c
+   452  1 c08 f6 7de 57 a6 544 9f 32 f59 91 ee6 f7 12 11c4 e51c
+   468  ce ▁0x54 ▁kernel32 ▁createfilew ▁cq ▁windows ▁temp ▁generic ▁write ▁0x2 ▁0x0 ▁create ▁always ▁0x80 ▁0x0 ▁0x34
+   484  94 ▁kernel32 ▁lstrlenw ▁c ▁windows ▁system32 ▁1 cb 90 aa9 2ad 600 e8 659 00c 1
+   500  c08 f6 7de 57 a6 544 9f 32 f59 91 ee6 f7
+
+-------- 512-token cut: Nebula never sees token 512 and later --------
+
+   512  12 11c4 e51c ce ▁0x54 ▁kernel32 ▁writefile ▁0x34 94 ▁0xd000 ▁4d5a90000300000004000000ffff0000 ▁0x20 16 ▁0x1211fc8 ▁0x0 ▁0x1
+   528  ▁kernel32 ▁closehandle ▁0x34 90 ▁0x1 ▁kernel32 ▁closehandle ▁0x34 94 ▁0x1 ▁kernel32 ▁gettempw ▁0x1000 ▁c ▁windows ▁temp
+   544  ▁0x10 ▁shell32 ▁shellexecutew ▁0x0 ▁open ▁cq ▁windows ▁temp ▁0x0 ▁c ▁windows ▁temp ▁0x0 ▁0x21 ▁kernel32 ▁exitprocess
+   560  ▁0x0 ▁0x0
+

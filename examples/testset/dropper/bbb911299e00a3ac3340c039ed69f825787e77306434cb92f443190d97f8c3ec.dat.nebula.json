@@ -1,0 +1,216 @@
+{
+ "file_access": [
+  {
+   "event": "open",
+   "path": "<drive>\\windows\\system32\\<sha256>.dat"
+  },
+  {
+   "event": "read",
+   "path": "<drive>\\windows\\system32\\<sha256>.dat"
+  },
+  {
+   "event": "create",
+   "path": "cb\\windows\\temp\\"
+  },
+  {
+   "event": "write",
+   "path": "cb\\windows\\temp\\"
+  }
+ ],
+ "apis": [
+  {
+   "api_name": "KERNEL32.GetModuleHandleW",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x400000"
+  },
+  {
+   "api_name": "KERNEL32.HeapCreate",
+   "args": [
+    "0x0",
+    "0x2000",
+    "0x0"
+   ],
+   "ret_val": "0x45f0"
+  },
+  {
+   "api_name": "KERNEL32.HeapAlloc",
+   "args": [
+    "0x45f0",
+    "0x8",
+    "0x2000"
+   ],
+   "ret_val": "0x7000"
+  },
+  {
+   "api_name": "KERNEL32.HeapAlloc",
+   "args": [
+    "0x45f0",
+    "0x8",
+    "0x2000"
+   ],
+   "ret_val": "0x9000"
+  },
+  {
+   "api_name": "KERNEL32.GetModuleFileNameW",
+   "args": [
+    "0x0",
+    "C:\\Windows\\system32\\bbb911299e00a3ac3340c039ed69f825787e77306434cb92f443190d97f8c3ec.dat",
+    "0x2000"
+   ],
+   "ret_val": "0x58"
+  },
+  {
+   "api_name": "KERNEL32.GetTempPathW",
+   "args": [
+    "0x1000",
+    "C:\\Windows\\temp\\"
+   ],
+   "ret_val": "0x10"
+  },
+  {
+   "api_name": "USER32.wsprintfW",
+   "args": [
+    "Cb",
+    "%s%s"
+   ],
+   "ret_val": "0x2"
+  },
+  {
+   "api_name": "KERNEL32.CreateFileW",
+   "args": [
+    "C:\\Windows\\system32\\bbb911299e00a3ac3340c039ed69f825787e77306434cb92f443190d97f8c3ec.dat",
+    "GENERIC_READ",
+    "0x1",
+    "0x0",
+    "OPEN_EXISTING",
+    "0x80",
+    "0x0"
+   ],
+   "ret_val": "0xac"
+  },
+  {
+   "api_name": "KERNEL32.GetFileSize",
+   "args": [
+    "0xac",
+    "0x0"
+   ],
+   "ret_val": "0x2ed2"
+  },
+  {
+   "api_name": "KERNEL32.lstrlenW",
+   "args": [
+    "C:\\Windows\\system32\\bbb911299e00a3ac3340c039ed69f825787e77306434cb92f443190d97f8c3ec.dat"
+   ],
+   "ret_val": "0x58"
+  },
+  {
+   "api_name": "KERNEL32.HeapAlloc",
+   "args": [
+    "0x45f0",
+    "0x8",
+    "0x2f86"
+   ],
+   "ret_val": "0xd000"
+  },
+  {
+   "api_name": "KERNEL32.ReadFile",
+   "args": [
+    "0xac",
+    "0xd000",
+    "0x2ed2",
+    "0x1211fcc",
+    "0x0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.lstrcmpW",
+   "args": [
+    "C:\\Windows\\system32\\bbb911299e00a3ac3340c039ed69f825787e77306434cb92f443190d97f8c3ec.dat",
+    "Cb\\Windows\\temp\\"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.lstrlenW",
+   "args": [
+    "C:\\Windows\\system32\\bbb911299e00a3ac3340c039ed69f825787e77306434cb92f443190d97f8c3ec.dat"
+   ],
+   "ret_val": "0x58"
+  },
+  {
+   "api_name": "KERNEL32.CreateFileW",
+   "args": [
+    "Cb\\Windows\\temp\\",
+    "GENERIC_WRITE",
+    "0x2",
+    "0x0",
+    "CREATE_ALWAYS",
+    "0x80",
+    "0x0"
+   ],
+   "ret_val": "0xb0"
+  },
+  {
+   "api_name": "KERNEL32.lstrlenW",
+   "args": [
+    "C:\\Windows\\system32\\bbb911299e00a3ac3340c039ed69f825787e77306434cb92f443190d97f8c3ec.dat"
+   ],
+   "ret_val": "0x58"
+  },
+  {
+   "api_name": "KERNEL32.WriteFile",
+   "args": [
+    "0xb0",
+    "0xd000(4d5a90000300000004000000ffff0000)",
+    "0x2f86",
+    "0x1211fcc",
+    "0x0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xac"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xb0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.GetTempPathW",
+   "args": [
+    "0x1000",
+    "C:\\Windows\\temp\\"
+   ],
+   "ret_val": "0x10"
+  },
+  {
+   "api_name": "SHELL32.ShellExecuteW",
+   "args": [
+    "0x0",
+    "open",
+    "Cb\\Windows\\temp\\",
+    "0x0",
+    "C:\\Windows\\temp\\",
+    "0x0"
+   ],
+   "ret_val": "0x21"
+  },
+  {
+   "api_name": "KERNEL32.ExitProcess",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  }
+ ]
+}

@@ -1,0 +1,31 @@
+# total tokens: 372   kept by Nebula (first 512): 372   dropped: 0
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: registry_access  (tokens 0..44, 45 tokens)
+     0  ▁registry ▁access ▁open ▁key ▁hkey ▁current ▁user ▁software ▁co de gear ▁ locales ▁open ▁key ▁hkey
+    16  ▁local ▁machine ▁software ▁co de gear ▁ locales ▁open ▁key ▁hkey ▁current ▁user ▁software ▁borland ▁
+    32  locales ▁open ▁key ▁hkey ▁current ▁user ▁software ▁borland ▁de lp hi ▁ locales
+
+## field: apis  (tokens 45..371, 327 tokens)
+    45  ▁apis ▁kernel32 ▁getmodulehandlew ▁0x0 ▁0x400000 ▁kernel32 ▁initializecriticalsection ▁0x599c24 ▁none ▁kernel32 ▁initializecriticalsection ▁0x599b5c ▁none ▁kernel32 ▁getversion ▁0x1db10106
+    61  ▁kernel32 ▁getmodulehandlew ▁kernel32 ▁dll ▁0x77000000 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getthreadpreferreduilanguages ▁0xfeee0000 ▁kernel32 ▁getmodulehandlew ▁kernel32 ▁dll ▁0x77000000 ▁kernel32
+    77  ▁getprocaddress ▁0x77000000 ▁setthreadpreferreduilanguages ▁0xfeee0001 ▁kernel32 ▁getmodulehandlew ▁kernel32 ▁dll ▁0x77000000 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getthreaduilanguage ▁0xfeee0002 ▁kernel32 ▁getsysteminfo
+    93  ▁0x1211f44 ▁none ▁kernel32 ▁getcommandlinew ▁0x45f0 ▁kernel32 ▁getstartupinfoa ▁0x1211f20 ▁none ▁kernel32 ▁getacp ▁0x4e4 ▁kernel32 ▁getcurrentthreadid ▁0x58 9c
+   109  ▁kernel32 ▁getversion ▁0x1db10106 ▁kernel32 ▁getversionexw ▁0x1211e54 ▁0x1 ▁kernel32 ▁virtualalloc ▁0x0 ▁0x13fff0 ▁0x1000 ▁page ▁readwrite ▁0x50000 ▁kernel32
+   125  ▁getmodulefilenamew ▁0x400000 ▁c ▁windows ▁system32 ▁02d f4 778 c 96 f7cc d25 e0 ef1 ab e67
+   141  b08 3 f04 c8 a4 d74 70c ab8 911 e18 217 d a49 f45 ▁dat ▁0x20a
+   157  ▁0x58 ▁kernel32 ▁getmodulefilenamew ▁0x0 ▁c ▁windows ▁system32 ▁02d f4 778 c 96 f7cc d25 e0 ef1
+   173  ab e67 b08 3 f04 c8 a4 d74 70c ab8 911 e18 217 d a49 f45
+   189  ▁dat ▁0x105 ▁0x58 ▁kernel32 ▁lstrcpynw ▁0x120f8c2 ▁c ▁windows ▁system32 ▁02d f4 778 c 96 f7cc d25
+   205  e0 ef1 ab e67 b08 3 f04 c8 a4 d74 70c ab8 911 e18 217 d
+   221  a49 f45 ▁dat ▁0x105 ▁0x120f8c2 ▁kernel32 ▁lstrlenw ▁c ▁windows ▁system32 ▁02d f4 778 c 96 f7cc
+   237  d25 e0 ef1 ab e67 b08 3 f04 c8 a4 d74 70c ab8 911 e18 217
+   253  d a49 f45 ▁dat ▁0x58 ▁kernel32 ▁lstrcpynw ▁0x120f6 6a ▁c ▁windows ▁system32 ▁02d f4 778 c
+   269  96 f7cc d25 e0 ef1 ab e67 b08 3 f04 c8 a4 d74 70c ab8 911
+   285  e18 217 d a49 f45 ▁dat ▁0x105 ▁0x120f6 6a ▁advapi32 ▁regopenkeyexw ▁hkey ▁current ▁user ▁software ▁co
+   301  de gear ▁ locales ▁0x0 ▁0xf0019 ▁0x120f878 ▁0x3 ▁advapi32 ▁regopenkeyexw ▁hkey ▁local ▁machine ▁software ▁co de
+   317  gear ▁ locales ▁0x0 ▁0xf0019 ▁0x120f878 ▁0x3 ▁advapi32 ▁regopenkeyexw ▁hkey ▁current ▁user ▁software ▁borland ▁ locales
+   333  ▁0x0 ▁0xf0019 ▁0x120f878 ▁0x3 ▁advapi32 ▁regopenkeyexw ▁hkey ▁current ▁user ▁software ▁borland ▁de lp hi ▁ locales
+   349  ▁0x0 ▁0xf0019 ▁0x120f878 ▁0x3 ▁kernel32 ▁getuserdefaultuilanguage ▁0xffff ▁kernel32 ▁entercriticalsection ▁0x599b5c ▁none ▁kernel32 ▁leavecriticalsection ▁0x599b5c ▁none ▁kernel32
+   365  ▁isvalidlocale ▁0xffff ▁0x2 ▁0x1 ▁kernel32 ▁getthreaduilanguage ▁0xffff
+

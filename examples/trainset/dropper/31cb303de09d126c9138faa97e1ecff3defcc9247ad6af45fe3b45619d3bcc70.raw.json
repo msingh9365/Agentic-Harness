@@ -1,0 +1,193 @@
+[
+    {
+        "ep_type": "module_entry",
+        "start_addr": "0x401810",
+        "ep_args": [
+            "0x4000",
+            "0x4010",
+            "0x4020",
+            "0x4030"
+        ],
+        "apihash": "d48a1950f42266edcb1c08030a82bf9efdb2ebda15b6543f1149b874c180ad85",
+        "apis": [
+            {
+                "pc": "0x401836",
+                "api_name": "KERNEL32.CreateFileA",
+                "args": [
+                    "conf.ini",
+                    "GENERIC_READ",
+                    "0x0",
+                    "0x0",
+                    "OPEN_EXISTING",
+                    "0x80",
+                    "0x0"
+                ],
+                "ret_val": "0xffffffff"
+            },
+            {
+                "pc": "0x4018e9",
+                "api_name": "KERNEL32.GetProcessHeap",
+                "args": [],
+                "ret_val": "0x45f0"
+            },
+            {
+                "pc": "0x4018f4",
+                "api_name": "KERNEL32.GetCommandLineA",
+                "args": [],
+                "ret_val": "0x4610"
+            },
+            {
+                "pc": "0x401902",
+                "api_name": "KERNEL32.GetModuleHandleA",
+                "args": [
+                    "0x0"
+                ],
+                "ret_val": "0x400000"
+            },
+            {
+                "pc": "0x40192b",
+                "api_name": "KERNEL32.HeapAlloc",
+                "args": [
+                    "0x45f0",
+                    "0x0",
+                    "0x3fc"
+                ],
+                "ret_val": "0x4630"
+            },
+            {
+                "pc": "0x401987",
+                "api_name": "KERNEL32.HeapAlloc",
+                "args": [
+                    "0x45f0",
+                    "0x0",
+                    "0xc"
+                ],
+                "ret_val": "0x4a30"
+            },
+            {
+                "pc": "0x401987",
+                "api_name": "KERNEL32.HeapAlloc",
+                "args": [
+                    "0x45f0",
+                    "0x0",
+                    "0x7"
+                ],
+                "ret_val": "0x4a40"
+            },
+            {
+                "pc": "0x401a23",
+                "api_name": "USER32.LoadAcceleratorsA",
+                "args": [
+                    "0x400000",
+                    "0xc8"
+                ],
+                "ret_val": "0x4"
+            },
+            {
+                "pc": "0x4011c5",
+                "api_name": "COMCTL32.InitCommonControlsEx",
+                "args": [
+                    "0x1211b44"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x4011f3",
+                "api_name": "USER32.LoadIconA",
+                "args": [
+                    "0x400000",
+                    "0x0"
+                ],
+                "ret_val": "0x0"
+            },
+            {
+                "pc": "0x401205",
+                "api_name": "USER32.LoadIconA",
+                "args": [
+                    "0x400000",
+                    "0x7f00"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x401215",
+                "api_name": "USER32.LoadCursorA",
+                "args": [
+                    "0x0",
+                    "0x7f00"
+                ],
+                "ret_val": "0x8"
+            },
+            {
+                "pc": "0x401239",
+                "api_name": "USER32.RegisterClassExA",
+                "args": [
+                    "0x1211b14"
+                ],
+                "ret_val": "0x153c44"
+            },
+            {
+                "pc": "0x4017d7",
+                "api_name": "USER32.CreateWindowExA",
+                "args": [
+                    "0x0",
+                    "clasics",
+                    "refujo",
+                    "0xcf0000",
+                    "0x80000000",
+                    "0x0",
+                    "0x80000000",
+                    "0x0",
+                    "0x0",
+                    "0x0",
+                    "0x400000",
+                    "0x0"
+                ],
+                "ret_val": "0x153c4c"
+            },
+            {
+                "pc": "0x4017fc",
+                "api_name": "USER32.ShowWindow",
+                "args": [
+                    "0x153c4c",
+                    "0x0"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x401806",
+                "api_name": "USER32.UpdateWindow",
+                "args": [
+                    "0x153c4c"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x401a68",
+                "api_name": "USER32.GetMessageA",
+                "args": [
+                    "0x1211d6c",
+                    "0x0",
+                    "0x0",
+                    "0x0"
+                ],
+                "ret_val": "0x0"
+            }
+        ],
+        "ret_val": "0x0",
+        "error": {},
+        "file_access": [
+            {
+                "event": "create",
+                "path": "conf.ini",
+                "open_flags": [
+                    "OPEN_EXISTING"
+                ],
+                "access_flags": [
+                    "GENERIC_READ"
+                ]
+            }
+        ],
+        "dynamic_code_segments": []
+    }
+]

@@ -1,0 +1,82 @@
+# total tokens: 1169   kept by Nebula (first 512): 512   dropped: 657
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: apis  (tokens 0..1168, 1169 tokens)
+     0  ▁apis ▁kernel32 ▁getsystemtimeasfiletime ▁0x1211fd4 ▁none ▁kernel32 ▁getcurrentthreadid ▁0x1e 14c ▁kernel32 ▁getcurrentprocessid ▁0x1 e1 38 ▁kernel32 ▁queryperformancecounter
+    16  ▁0x1211fcc ▁0x1 ▁kernel32 ▁getstartupinfow ▁0x1211f64 ▁none ▁kernel32 ▁getprocessheap ▁0x46e0 ▁kernel32 ▁encodepointer ▁0x0 ▁0x1 ▁kernel32 ▁encodepointer ▁0x42a730
+    32  ▁0x42a731 ▁kernel32 ▁getmodulehandlew ▁kernel32 ▁dll ▁0x77000000 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁flsalloc ▁0xfeee0000 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁flsfree ▁0xfeee0001
+    48  ▁kernel32 ▁getprocaddress ▁0x77000000 ▁flsgetvalue ▁0xfeee0002 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁flssetvalue ▁0xfeee0003 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁initializecriticalsectionex ▁0xfeee0004 ▁kernel32
+    64  ▁getprocaddress ▁0x77000000 ▁createexw ▁0xfeee0005 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁createsemaphoreexw ▁0xfeee0006 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁setthreadstackguarantee ▁0xfeee0007 ▁kernel32 ▁getprocaddress
+    80  ▁0x77000000 ▁createthreadpooltimer ▁0xfeee0008 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁setthreadpooltimer ▁0xfeee0009 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁waitforthreadpooltimercallbacks ▁0xfeee000a ▁kernel32 ▁getprocaddress ▁0x77000000
+    96  ▁closethreadpooltimer ▁0xfeee000b ▁kernel32 ▁getprocaddress ▁0x77000000 ▁createthreadpoolwait ▁0xfeee000c ▁kernel32 ▁getprocaddress ▁0x77000000 ▁setthreadpoolwait ▁0xfeee000d ▁kernel32 ▁getprocaddress ▁0x77000000 ▁closethreadpoolwait
+   112  ▁0xfeee000e ▁kernel32 ▁getprocaddress ▁0x77000000 ▁flushprocesswritebuffers ▁0xfeee000f ▁kernel32 ▁getprocaddress ▁0x77000000 ▁freelibrarywhencallbackreturns ▁0xfeee0010 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getcurrentprocessornumber ▁0xfeee0011
+   128  ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getlogicalprocessorinformation ▁0xfeee0012 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁createsymboliclinkw ▁0xfeee0013 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁setdefaultdlldirectories ▁0xfeee0014 ▁kernel32
+   144  ▁getprocaddress ▁0x77000000 ▁enumsystemlocalesex ▁0xfeee0015 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁comparestringex ▁0xfeee0016 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getdateformatex ▁0xfeee0017 ▁kernel32 ▁getprocaddress
+   160  ▁0x77000000 ▁getlocaleinfoex ▁0xfeee0018 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁gettimeformatex ▁0xfeee0019 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getuserdefaultlocalename ▁0xfeee001a ▁kernel32 ▁getprocaddress ▁0x77000000
+   176  ▁isvalidlocalename ▁0xfeee001b ▁kernel32 ▁getprocaddress ▁0x77000000 ▁lcmapstringex ▁0xfeee001c ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getcurrentpackageid ▁0xfeee001d ▁kernel32 ▁getprocaddress ▁0x77000000 ▁gettickcount64
+   192  ▁0xfeee001e ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getfileinformationbyhandleexw ▁0xfeee001f ▁kernel32 ▁getprocaddress ▁0x77000000 ▁setfileinformationbyhandlew ▁0xfeee0020 ▁kernel32 ▁initializecriticalsectionex ▁0x4c4230 ▁0xfa0 ▁0x0
+   208  ▁0x1 ▁kernel32 ▁initializecriticalsectionex ▁0x4c4248 ▁0xfa0 ▁0x0 ▁0x1 ▁kernel32 ▁initializecriticalsectionex ▁0x4c4260 ▁0xfa0 ▁0x0 ▁0x1 ▁kernel32 ▁initializecriticalsectionex ▁0x4c4278
+   224  ▁0xfa0 ▁0x0 ▁0x1 ▁kernel32 ▁initializecriticalsectionex ▁0x4c4290 ▁0xfa0 ▁0x0 ▁0x1 ▁kernel32 ▁initializecriticalsectionex ▁0x4c42a8 ▁0xfa0 ▁0x0 ▁0x1 ▁kernel32
+   240  ▁initializecriticalsectionex ▁0x4c42c0 ▁0xfa0 ▁0x0 ▁0x1 ▁kernel32 ▁initializecriticalsectionex ▁0x4c42d8 ▁0xfa0 ▁0x0 ▁0x1 ▁kernel32 ▁initializecriticalsectionex ▁0x4c42f0 ▁0xfa0 ▁0x0
+   256  ▁0x1 ▁kernel32 ▁initializecriticalsectionex ▁0x4c4308 ▁0xfa0 ▁0x0 ▁0x1 ▁kernel32 ▁initializecriticalsectionex ▁0x4c4320 ▁0xfa0 ▁0x0 ▁0x1 ▁kernel32 ▁initializecriticalsectionex ▁0x4c4338
+   272  ▁0xfa0 ▁0x0 ▁0x1 ▁kernel32 ▁initializecriticalsectionex ▁0x4c4350 ▁0xfa0 ▁0x0 ▁0x1 ▁kernel32 ▁initializecriticalsectionex ▁0x4c4368 ▁0xfa0 ▁0x0 ▁0x1 ▁kernel32
+   288  ▁flsalloc ▁0x429a81 ▁0x0 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x8 ▁0x3bc ▁0x4700 ▁kernel32 ▁flssetvalue ▁0x0 ▁0x4700 ▁0x1 ▁kernel32 ▁entercriticalsection
+   304  ▁0x4c4308 ▁none ▁kernel32 ▁leavecriticalsection ▁0x4c4308 ▁none ▁kernel32 ▁entercriticalsection ▁0x4c42f0 ▁none ▁kernel32 ▁leavecriticalsection ▁0x4c42f0 ▁none ▁kernel32 ▁getcurrentthreadid
+   320  ▁0x1e 14c ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x18 ▁0x4ac0 ▁kernel32 ▁entercriticalsection ▁0x4c42d8 ▁none ▁kernel32 ▁initializecriticalsectionex ▁0x4ac0 ▁0xfa0
+   336  ▁0x0 ▁0x1 ▁kernel32 ▁leavecriticalsection ▁0x4c42d8 ▁none ▁kernel32 ▁entercriticalsection ▁0x4ac0 ▁none ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x8 ▁0x800 ▁0x7000
+   352  ▁kernel32 ▁getstartupinfow ▁0x1211f34 ▁none ▁kernel32 ▁getstdhandle ▁0xf ffff ff6 ▁0xf001 ▁kernel32 ▁getfiletype ▁0xf001 ▁0x1 ▁kernel32 ▁initializecriticalsectionex
+   368  ▁0x700c ▁0xfa0 ▁0x0 ▁0x1 ▁kernel32 ▁getstdhandle ▁0xf ffff ff5 ▁0xf002 ▁kernel32 ▁getfiletype ▁0xf002 ▁0x1 ▁kernel32 ▁initializecriticalsectionex
+   384  ▁0x704c ▁0xfa0 ▁0x0 ▁0x1 ▁kernel32 ▁getstdhandle ▁0xf ffff ff4 ▁0xf003 ▁kernel32 ▁getfiletype ▁0xf003 ▁0x1 ▁kernel32 ▁initializecriticalsectionex
+   400  ▁0x708c ▁0xfa0 ▁0x0 ▁0x1 ▁kernel32 ▁leavecriticalsection ▁0x4ac0 ▁none ▁kernel32 ▁getcommandlinew ▁0x7900 ▁kernel32 ▁getenvironmentstringsw ▁0x7940 ▁kernel32 ▁heapalloc
+   416  ▁0x46e0 ▁0x0 ▁0x19a ▁0x7ae0 ▁kernel32 ▁fre een vironment stringsw ▁0x7940 ▁0x1 ▁kernel32 ▁getmodulefilenamew ▁0x0 ▁c ▁windows
+   432  ▁system32 ▁ac 156 a664 a4 c3 beb1 d8 b54 19 2c 7e2 92 ee d3 f0
+   448  3b24 a0 9c f5 56d5 21 b74 210 7c b4b ▁dat ▁0x104 ▁0x58 ▁kernel32 ▁heapalloc ▁0x46e0
+   464  ▁0x0 ▁0x44 ▁0x7c80 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x8 ▁0x8 ▁0x7cd0 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x8 ▁0x198 ▁0x7ce0 ▁kernel32
+   480  ▁heapfree ▁0x46e0 ▁0x0 ▁0x7ae0 ▁0x1 ▁kernel32 ▁encodepointer ▁0x4371e6 ▁0x4371e7 ▁kernel32 ▁encodepointer ▁0x437ad2 ▁0x437ad3 ▁kernel32 ▁encodepointer ▁0x437b63
+   496  ▁0x437b64 ▁kernel32 ▁encodepointer ▁0x437bbd ▁0x437bbe ▁kernel32 ▁encodepointer ▁0x437c42 ▁0x437c43 ▁kernel32 ▁encodepointer ▁0x4371e6 ▁0x4371e7 ▁kernel32 ▁encodepointer ▁0x437207
+
+-------- 512-token cut: Nebula never sees token 512 and later --------
+
+   512  ▁0x437208 ▁kernel32 ▁encodepointer ▁0x437b7b ▁0x437b7c ▁kernel32 ▁encodepointer ▁0x437ae3 ▁0x437ae4 ▁kernel32 ▁encodepointer ▁0x437bce ▁0x437bcf ▁kernel32 ▁heapalloc ▁0x46e0
+   528  ▁0x8 ▁0x80 ▁0x7e80 ▁kernel32 ▁encodepointer ▁0x7e80 ▁0x7e81 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x8 ▁0x800 ▁0x8000 ▁kernel32 ▁isprocessorfeaturepresent ▁pf
+   544  ▁xmmi64 ▁instructions ▁available ▁0x1 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x4700 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32
+   560  ▁entercriticalsection ▁0x4c4308 ▁none ▁kernel32 ▁leavecriticalsection ▁0x4c4308 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x4700 ▁kernel32 ▁setlasterror
+   576  ▁0x0 ▁none ▁kernel32 ▁getacp ▁0x4e4 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x220 ▁0x8810 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁flsgetvalue
+   592  ▁0x0 ▁0x4700 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁isvalidcodepage ▁0x4e4 ▁0x1 ▁kernel32 ▁getcpinfo ▁0x4e4 ▁0x1211f28 ▁0x1 ▁kernel32
+   608  ▁getcpinfo ▁0x4e4 ▁0x12119f0 ▁0x1 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x4700 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32
+   624  ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0123456789 ▁abcdefghi j klmnopqrstuvwxyz ▁abcdefghi j klmnopqrstuvwxyz ▁y ▁0x100 ▁0x0 ▁0x0 ▁0x102 ▁kernel32
+   640  ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0x1211e04 ▁0x100 ▁0x1211768 ▁0x102 ▁0x100 ▁kernel32 ▁getstringtypew ▁0x1 ▁0x1211768 ▁0x100 ▁0x1211a04 ▁0x1 ▁kernel32
+   656  ▁getlasterror ▁0x0 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x4700 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0123456789 ▁abcdefghi
+   672  j klmnopqrstuvwxyz ▁abcdefghi j klmnopqrstuvwxyz ▁y ▁0x100 ▁0x0 ▁0x0 ▁0x102 ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0x1211e04 ▁0x100
+   688  ▁0x1211738 ▁0x102 ▁0x100 ▁kernel32 ▁lcmapstringex ▁0x0 ▁0x100 ▁0x1211738 ▁0x102 ▁0x0 ▁0x0 ▁0x0 ▁0x0 ▁0x0 ▁0x102 ▁kernel32
+   704  ▁lcmapstringex ▁0x0 ▁0x100 ▁0x1211738 ▁0x102 ▁0x1211528 ▁0x102 ▁0x0 ▁0x0 ▁0x0 ▁0x102 ▁kernel32 ▁widechartomultibyte ▁0x4e4 ▁0x0 ▁0x1211528
+   720  ▁0x102 ▁0x1211d04 ▁0x100 ▁0x0 ▁0x0 ▁0x100 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x4700 ▁kernel32 ▁setlasterror ▁0x0
+   736  ▁none ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0x1 ▁0x0 ▁0x0 ▁0x1 ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0x1211e04 ▁0x1 ▁0x1211958
+   752  ▁0x1 ▁0x1 ▁kernel32 ▁lcmapstringex ▁0x0 ▁0x200 ▁0x1211958 ▁0x1 ▁0x0 ▁0x0 ▁0x0 ▁0x0 ▁0x0 ▁0x1 ▁kernel32 ▁lcmapstringex
+   768  ▁0x0 ▁0x200 ▁0x1211958 ▁0x1 ▁0x1211948 ▁0x1 ▁0x0 ▁0x0 ▁0x0 ▁0x1 ▁kernel32 ▁widechartomultibyte ▁0x4e4 ▁0x0 ▁0x1211948 ▁0x1
+   784  ▁0x1211c04 ▁0x100 ▁0x0 ▁0x0 ▁0x100 ▁kernel32 ▁entercriticalsection ▁0x4c4308 ▁none ▁kernel32 ▁leavecriticalsection ▁0x4c4308 ▁none ▁kernel32 ▁isprocessorfeaturepresent ▁pf
+   800  ▁xmmi64 ▁instructions ▁available ▁0x1 ▁kernel32 ▁setunhandledexceptionfilter ▁0x434d1c ▁0x0 ▁kernel32 ▁entercriticalsection ▁0x4c42c0 ▁none ▁kernel32 ▁decodepointer ▁0x7e81 ▁0x7e80
+   816  ▁kernel32 ▁decodepointer ▁0x7e81 ▁0x7e80 ▁kernel32 ▁heap ▁0x46e0 ▁0x0 ▁0x7e80 ▁0x90 ▁kernel32 ▁encodepointer ▁0x429e2b ▁0x429e2c ▁kernel32 ▁encodepointer
+   832  ▁0x7e84 ▁0x7e85 ▁kernel32 ▁leavecriticalsection ▁0x4c42c0 ▁none ▁kernel32 ▁initializecriticalsectionandspincount ▁0x4c5158 ▁0x0 ▁0x1 ▁kernel32 ▁entercriticalsection ▁0x4c42c0 ▁none ▁kernel32
+   848  ▁decodepointer ▁0x7e81 ▁0x7e80 ▁kernel32 ▁decodepointer ▁0x7e85 ▁0x7e84 ▁kernel32 ▁heap ▁0x46e0 ▁0x0 ▁0x7e80 ▁0x90 ▁kernel32 ▁encodepointer ▁0x43b7a9
+   864  ▁0x43b7aa ▁kernel32 ▁encodepointer ▁0x7e88 ▁0x7e89 ▁kernel32 ▁leavecriticalsection ▁0x4c42c0 ▁none ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x3c ▁0x8a40 ▁kernel32
+   880  ▁entercriticalsection ▁0x4c42c0 ▁none ▁kernel32 ▁decodepointer ▁0x7e81 ▁0x7e80 ▁kernel32 ▁decodepointer ▁0x7e89 ▁0x7e88 ▁kernel32 ▁heap ▁0x46e0 ▁0x0 ▁0x7e80
+   896  ▁0x90 ▁kernel32 ▁encodepointer ▁0x43b7b8 ▁0x43b7b9 ▁kernel32 ▁encodepointer ▁0x7e8c ▁0x7e8d ▁kernel32 ▁leavecriticalsection ▁0x4c42c0 ▁none ▁kernel32 ▁heapalloc ▁0x46e0
+   912  ▁0x0 ▁0x10 ▁0x8a80 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x4 ▁0x8aa0 ▁kernel32 ▁getversionexw ▁0x1211e1c ▁0x1 ▁kernel32 ▁heapfree ▁0x46e0
+   928  ▁0x0 ▁0x8a80 ▁0x1 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0xe0 ▁0x8ab0 ▁kernel32 ▁getcurrentprocess ▁0xf ffff fff ▁kernel32 ▁iswow64process
+   944  ▁0xf ffff fff ▁0x1211f6c ▁0x1 ▁kernel32 ▁getsysteminfo ▁0x1211f38 ▁none ▁kernel32 ▁entercriticalsection ▁0x4c42c0 ▁none ▁kernel32 ▁decodepointer ▁0x7e81
+   960  ▁0x7e80 ▁kernel32 ▁decodepointer ▁0x7e8d ▁0x7e8c ▁kernel32 ▁heap ▁0x46e0 ▁0x0 ▁0x7e80 ▁0x90 ▁kernel32 ▁encodepointer ▁0x43b7b3 ▁0x43b7b4 ▁kernel32
+   976  ▁encodepointer ▁0x7e90 ▁0x7e91 ▁kernel32 ▁leavecriticalsection ▁0x4c42c0 ▁none ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0xc ▁0x8ba0 ▁kernel32 ▁entercriticalsection ▁0x4c42c0
+   992  ▁none ▁kernel32 ▁decodepointer ▁0x7e81 ▁0x7e80 ▁kernel32 ▁decodepointer ▁0x7e91 ▁0x7e90 ▁kernel32 ▁heap ▁0x46e0 ▁0x0 ▁0x7e80 ▁0x90 ▁kernel32
+  1008  ▁encodepointer ▁0x43b7b9 ▁0x43b7ba ▁kernel32 ▁encodepointer ▁0x7e94 ▁0x7e95 ▁kernel32 ▁leavecriticalsection ▁0x4c42c0 ▁none ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x10
+  1024  ▁0x8bb0 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x4 ▁0x8bd0 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x10 ▁0x8be0 ▁kernel32 ▁heapalloc ▁0x46e0
+  1040  ▁0x0 ▁0x4 ▁0x8c00 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x10 ▁0x8c10 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x4 ▁0x8c30 ▁kernel32
+  1056  ▁entercriticalsection ▁0x4c42c0 ▁none ▁kernel32 ▁decodepointer ▁0x7e81 ▁0x7e80 ▁kernel32 ▁decodepointer ▁0x7e95 ▁0x7e94 ▁kernel32 ▁heap ▁0x46e0 ▁0x0 ▁0x7e80
+  1072  ▁0x90 ▁kernel32 ▁encodepointer ▁0x43b7c3 ▁0x43b7c4 ▁kernel32 ▁encodepointer ▁0x7e98 ▁0x7e99 ▁kernel32 ▁leavecriticalsection ▁0x4c42c0 ▁none ▁kernel32 ▁heapalloc ▁0x46e0
+  1088  ▁0x0 ▁0x10 ▁0x8c40 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x4 ▁0x8c60 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x10 ▁0x8c70 ▁kernel32
+  1104  ▁heapalloc ▁0x46e0 ▁0x0 ▁0x4 ▁0x8c90 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x10 ▁0x8ca0 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x4
+  1120  ▁0x8cc0 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x10 ▁0x8cd0 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x4 ▁0x8cf0 ▁kernel32 ▁heapalloc ▁0x46e0
+  1136  ▁0x0 ▁0x10 ▁0x8d00 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x4 ▁0x8d20 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x10 ▁0x8d30 ▁kernel32
+  1152  ▁heapalloc ▁0x46e0 ▁0x0 ▁0x4 ▁0x8d50 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x10 ▁0x8d60 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x4
+  1168  ▁0x8d80
+

@@ -1,0 +1,156 @@
+{
+ "file_access": [
+  {
+   "event": "create",
+   "path": "conf.ini"
+  }
+ ],
+ "apis": [
+  {
+   "api_name": "KERNEL32.CreateFileA",
+   "args": [
+    "conf.ini",
+    "GENERIC_READ",
+    "0x0",
+    "0x0",
+    "OPEN_EXISTING",
+    "0x80",
+    "0x0"
+   ],
+   "ret_val": "0xffffffff"
+  },
+  {
+   "api_name": "KERNEL32.GetProcessHeap",
+   "args": [],
+   "ret_val": "0x45f0"
+  },
+  {
+   "api_name": "KERNEL32.GetCommandLineA",
+   "args": [],
+   "ret_val": "0x4610"
+  },
+  {
+   "api_name": "KERNEL32.GetModuleHandleA",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x400000"
+  },
+  {
+   "api_name": "KERNEL32.HeapAlloc",
+   "args": [
+    "0x45f0",
+    "0x0",
+    "0x3fc"
+   ],
+   "ret_val": "0x4630"
+  },
+  {
+   "api_name": "KERNEL32.HeapAlloc",
+   "args": [
+    "0x45f0",
+    "0x0",
+    "0xc"
+   ],
+   "ret_val": "0x4a30"
+  },
+  {
+   "api_name": "KERNEL32.HeapAlloc",
+   "args": [
+    "0x45f0",
+    "0x0",
+    "0x7"
+   ],
+   "ret_val": "0x4a40"
+  },
+  {
+   "api_name": "USER32.LoadAcceleratorsA",
+   "args": [
+    "0x400000",
+    "0xc8"
+   ],
+   "ret_val": "0x4"
+  },
+  {
+   "api_name": "COMCTL32.InitCommonControlsEx",
+   "args": [
+    "0x1211b44"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "USER32.LoadIconA",
+   "args": [
+    "0x400000",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "USER32.LoadIconA",
+   "args": [
+    "0x400000",
+    "0x7f00"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "USER32.LoadCursorA",
+   "args": [
+    "0x0",
+    "0x7f00"
+   ],
+   "ret_val": "0x8"
+  },
+  {
+   "api_name": "USER32.RegisterClassExA",
+   "args": [
+    "0x1211b14"
+   ],
+   "ret_val": "0x153c44"
+  },
+  {
+   "api_name": "USER32.CreateWindowExA",
+   "args": [
+    "0x0",
+    "clasics",
+    "refujo",
+    "0xcf0000",
+    "0x80000000",
+    "0x0",
+    "0x80000000",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x400000",
+    "0x0"
+   ],
+   "ret_val": "0x153c4c"
+  },
+  {
+   "api_name": "USER32.ShowWindow",
+   "args": [
+    "0x153c4c",
+    "0x0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "USER32.UpdateWindow",
+   "args": [
+    "0x153c4c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "USER32.GetMessageA",
+   "args": [
+    "0x1211d6c",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  }
+ ]
+}

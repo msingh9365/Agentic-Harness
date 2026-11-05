@@ -1,0 +1,484 @@
+{
+ "file_access": [
+  {
+   "event": "open",
+   "path": "svchost.exe"
+  },
+  {
+   "event": "read",
+   "path": "<drive>\\windows\\system32\\<sha256>.dat"
+  }
+ ],
+ "apis": [
+  {
+   "api_name": "KERNEL32.GetVersion",
+   "args": [],
+   "ret_val": "0x1db10106"
+  },
+  {
+   "api_name": "KERNEL32.HeapCreate",
+   "args": [
+    "0x1",
+    "0x1000",
+    "0x0"
+   ],
+   "ret_val": "0x45f0"
+  },
+  {
+   "api_name": "KERNEL32.HeapAlloc",
+   "args": [
+    "0x45f0",
+    "0x0",
+    "0x140"
+   ],
+   "ret_val": "0x4610"
+  },
+  {
+   "api_name": "KERNEL32.HeapAlloc",
+   "args": [
+    "0x45f0",
+    "0x8",
+    "0x41c4"
+   ],
+   "ret_val": "0xb000"
+  },
+  {
+   "api_name": "KERNEL32.VirtualAlloc",
+   "args": [
+    "0x0",
+    "0x100000",
+    "0x2000",
+    "PAGE_READWRITE"
+   ],
+   "ret_val": "0x50000"
+  },
+  {
+   "api_name": "KERNEL32.VirtualAlloc",
+   "args": [
+    "0x50000",
+    "0x8000",
+    "0x1000",
+    "PAGE_READWRITE"
+   ],
+   "ret_val": "0x50000"
+  },
+  {
+   "api_name": "KERNEL32.GetStartupInfoA",
+   "args": [
+    "0x1211f28"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.GetStdHandle",
+   "args": [
+    "0xfffffff6"
+   ],
+   "ret_val": "0xf001"
+  },
+  {
+   "api_name": "KERNEL32.GetFileType",
+   "args": [
+    "0xf001"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.GetStdHandle",
+   "args": [
+    "0xfffffff5"
+   ],
+   "ret_val": "0xf002"
+  },
+  {
+   "api_name": "KERNEL32.GetFileType",
+   "args": [
+    "0xf002"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.GetStdHandle",
+   "args": [
+    "0xfffffff4"
+   ],
+   "ret_val": "0xf003"
+  },
+  {
+   "api_name": "KERNEL32.GetFileType",
+   "args": [
+    "0xf003"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.SetHandleCount",
+   "args": [
+    "0x20"
+   ],
+   "ret_val": "0x20"
+  },
+  {
+   "api_name": "KERNEL32.GetCommandLineA",
+   "args": [],
+   "ret_val": "0x47e0"
+  },
+  {
+   "api_name": "KERNEL32.GetEnvironmentStringsW",
+   "args": [],
+   "ret_val": "0x4800"
+  },
+  {
+   "api_name": "KERNEL32.WideCharToMultiByte",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x4800",
+    "0xcd",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcd"
+  },
+  {
+   "api_name": "KERNEL32.WideCharToMultiByte",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x4800",
+    "0xcd",
+    "0x50e10",
+    "0xcd",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcd"
+  },
+  {
+   "api_name": "KERNEL32.FreeEnvironmentStringsW",
+   "args": [
+    "0x4800"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.GetACP",
+   "args": [],
+   "ret_val": "0x4e4"
+  },
+  {
+   "api_name": "KERNEL32.GetCPInfo",
+   "args": [
+    "0x4e4",
+    "0x1211f2c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.GetCPInfo",
+   "args": [
+    "0x4e4",
+    "0x1211f04"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.GetStringTypeW",
+   "args": [
+    "0x1",
+    "0x4095e0",
+    "0x1",
+    "0x12119c0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.MultiByteToWideChar",
+   "args": [
+    "0x4e4",
+    "0x1",
+    "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+    "0x100",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x102"
+  },
+  {
+   "api_name": "KERNEL32.MultiByteToWideChar",
+   "args": [
+    "0x4e4",
+    "0x1",
+    "0x1211e04",
+    "0x100",
+    "0x12117a4",
+    "0x102"
+   ],
+   "ret_val": "0x100"
+  },
+  {
+   "api_name": "KERNEL32.GetStringTypeW",
+   "args": [
+    "0x1",
+    "0x12117a4",
+    "0x100",
+    "0x1211a04"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.LCMapStringW",
+   "args": [
+    "0x0",
+    "0x100",
+    "0x4095e0",
+    "0x1",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.MultiByteToWideChar",
+   "args": [
+    "0x4e4",
+    "0x1",
+    "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+    "0x100",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x102"
+  },
+  {
+   "api_name": "KERNEL32.MultiByteToWideChar",
+   "args": [
+    "0x4e4",
+    "0x1",
+    "0x1211e04",
+    "0x100",
+    "0x1211780",
+    "0x102"
+   ],
+   "ret_val": "0x100"
+  },
+  {
+   "api_name": "KERNEL32.LCMapStringW",
+   "args": [
+    "0x0",
+    "0x100",
+    "0x1211780",
+    "0x102",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x102"
+  },
+  {
+   "api_name": "KERNEL32.LCMapStringW",
+   "args": [
+    "0x0",
+    "0x100",
+    "0x1211780",
+    "0x102",
+    "0x121157c",
+    "0x102"
+   ],
+   "ret_val": "0x102"
+  },
+  {
+   "api_name": "KERNEL32.WideCharToMultiByte",
+   "args": [
+    "0x4e4",
+    "0x220",
+    "0x121157c",
+    "0x102",
+    "0x1211d04",
+    "0x100",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x100"
+  },
+  {
+   "api_name": "KERNEL32.MultiByteToWideChar",
+   "args": [
+    "0x4e4",
+    "0x1",
+    "",
+    "0x4",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x5"
+  },
+  {
+   "api_name": "KERNEL32.MultiByteToWideChar",
+   "args": [
+    "0x4e4",
+    "0x1",
+    "0x1211e04",
+    "0x4",
+    "0x1211958",
+    "0x5"
+   ],
+   "ret_val": "0x4"
+  },
+  {
+   "api_name": "KERNEL32.LCMapStringW",
+   "args": [
+    "0x0",
+    "0x200",
+    "0x1211958",
+    "0x5",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x5"
+  },
+  {
+   "api_name": "KERNEL32.LCMapStringW",
+   "args": [
+    "0x0",
+    "0x200",
+    "0x1211958",
+    "0x5",
+    "0x121194c",
+    "0x5"
+   ],
+   "ret_val": "0x5"
+  },
+  {
+   "api_name": "KERNEL32.WideCharToMultiByte",
+   "args": [
+    "0x4e4",
+    "0x220",
+    "0x121194c",
+    "0x5",
+    "0x1211c04",
+    "0x100",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x100"
+  },
+  {
+   "api_name": "KERNEL32.GetModuleFileNameA",
+   "args": [
+    "0x0",
+    "C:\\Windows\\system32\\767c5839cf6ddd4b2dbb3c1b194c82797646e1fefb922d13f1636f9821d05b9c.dat",
+    "0x104"
+   ],
+   "ret_val": "0x58"
+  },
+  {
+   "api_name": "KERNEL32.HeapAlloc",
+   "args": [
+    "0x45f0",
+    "0x8",
+    "0x800"
+   ],
+   "ret_val": "0x7000"
+  },
+  {
+   "api_name": "KERNEL32.SetUnhandledExceptionFilter",
+   "args": [
+    "0x407269"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.GetStartupInfoA",
+   "args": [
+    "0x1211f88"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.GetModuleHandleA",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x400000"
+  },
+  {
+   "api_name": "KERNEL32.GetCommandLineA",
+   "args": [],
+   "ret_val": "0x47e0"
+  },
+  {
+   "api_name": "KERNEL32.GetWindowsDirectoryA",
+   "args": [
+    "C:\\Windows",
+    "0x12c"
+   ],
+   "ret_val": "0xb"
+  },
+  {
+   "api_name": "KERNEL32.GetSystemDirectoryA",
+   "args": [
+    "C:\\Windows\\system32",
+    "0x12c"
+   ],
+   "ret_val": "0x14"
+  },
+  {
+   "api_name": "KERNEL32.CreateFileA",
+   "args": [
+    "svchost.exe",
+    "GENERIC_READ",
+    "0x3",
+    "0x1211e58",
+    "OPEN_ALWAYS",
+    "0x80",
+    "0x0"
+   ],
+   "ret_val": "0x180"
+  },
+  {
+   "api_name": "KERNEL32.GetFileType",
+   "args": [
+    "0x180"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.SetFilePointer",
+   "args": [
+    "0x180",
+    "0xfffffff7",
+    "0x0",
+    "0x2"
+   ],
+   "ret_val": "0x100101df7"
+  },
+  {
+   "api_name": "KERNEL32.ReadFile",
+   "args": [
+    "0x180",
+    "0x501e0",
+    "0x200",
+    "0x1211e80",
+    "0x0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0x180"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.WinExec",
+   "args": [
+    "svchost.usamyarg1myarg2",
+    "0x1"
+   ],
+   "ret_val": "0x20"
+  }
+ ]
+}

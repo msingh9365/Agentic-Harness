@@ -1,0 +1,29 @@
+# total tokens: 329   kept by Nebula (first 512): 329   dropped: 0
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: file_access  (tokens 0..21, 22 tokens)
+     0  ▁file ▁access ▁open ▁drive ▁windows ▁system32 ▁sha256 ▁dat ▁read ▁drive ▁windows ▁system32 ▁sha256 ▁dat ▁create ▁cb
+    16  ▁windows ▁temp ▁write ▁cb ▁windows ▁temp
+
+## field: apis  (tokens 22..328, 307 tokens)
+    22  ▁apis ▁kernel32 ▁getmodulehandlew ▁0x0 ▁0x400000 ▁kernel32 ▁heapcreate ▁0x0 ▁0x2000 ▁0x0 ▁0x45f0 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x8 ▁0x2000
+    38  ▁0x7000 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x8 ▁0x2000 ▁0x9000 ▁kernel32 ▁getmodulefilenamew ▁0x0 ▁c ▁windows ▁system32 ▁b bb9 11
+    54  29 9e00 a3ac 3340 c0 39 ed 69f8 2578 7e 7730 64 34c b92 f44 3190
+    70  d9 7f8 c3 ec ▁dat ▁0x2000 ▁0x58 ▁kernel32 ▁gettempw ▁0x1000 ▁c ▁windows ▁temp ▁0x10 ▁user32 ▁wsprintfw
+    86  ▁cb ▁s ▁s ▁0x2 ▁kernel32 ▁createfilew ▁c ▁windows ▁system32 ▁b bb9 11 29 9e00 a3ac 3340
+   102  c0 39 ed 69f8 2578 7e 7730 64 34c b92 f44 3190 d9 7f8 c3 ec
+   118  ▁dat ▁generic ▁read ▁0x1 ▁0x0 ▁open ▁existing ▁0x80 ▁0x0 ▁0xac ▁kernel32 ▁getfile ▁0xac ▁0x0 ▁0x2 ed2
+   134  ▁kernel32 ▁lstrlenw ▁c ▁windows ▁system32 ▁b bb9 11 29 9e00 a3ac 3340 c0 39 ed 69f8
+   150  2578 7e 7730 64 34c b92 f44 3190 d9 7f8 c3 ec ▁dat ▁0x58 ▁kernel32 ▁heapalloc
+   166  ▁0x45f0 ▁0x8 ▁0x2 f86 ▁0xd000 ▁kernel32 ▁readfile ▁0xac ▁0xd000 ▁0x2 ed2 ▁0x1211fcc ▁0x0 ▁0x1 ▁kernel32 ▁lstrcmpw
+   182  ▁c ▁windows ▁system32 ▁b bb9 11 29 9e00 a3ac 3340 c0 39 ed 69f8 2578 7e
+   198  7730 64 34c b92 f44 3190 d9 7f8 c3 ec ▁dat ▁cb ▁windows ▁temp ▁0x1 ▁kernel32
+   214  ▁lstrlenw ▁c ▁windows ▁system32 ▁b bb9 11 29 9e00 a3ac 3340 c0 39 ed 69f8 2578
+   230  7e 7730 64 34c b92 f44 3190 d9 7f8 c3 ec ▁dat ▁0x58 ▁kernel32 ▁createfilew ▁cb
+   246  ▁windows ▁temp ▁generic ▁write ▁0x2 ▁0x0 ▁create ▁always ▁0x80 ▁0x0 ▁0xb0 ▁kernel32 ▁lstrlenw ▁c ▁windows ▁system32
+   262  ▁b bb9 11 29 9e00 a3ac 3340 c0 39 ed 69f8 2578 7e 7730 64 34c
+   278  b92 f44 3190 d9 7f8 c3 ec ▁dat ▁0x58 ▁kernel32 ▁writefile ▁0xb0 ▁0xd000 ▁4d5a90000300000004000000ffff0000 ▁0x2 f86
+   294  ▁0x1211fcc ▁0x0 ▁0x1 ▁kernel32 ▁closehandle ▁0xac ▁0x1 ▁kernel32 ▁closehandle ▁0xb0 ▁0x1 ▁kernel32 ▁gettempw ▁0x1000 ▁c ▁windows
+   310  ▁temp ▁0x10 ▁shell32 ▁shellexecutew ▁0x0 ▁open ▁cb ▁windows ▁temp ▁0x0 ▁c ▁windows ▁temp ▁0x0 ▁0x21 ▁kernel32
+   326  ▁exitprocess ▁0x0 ▁0x0
+

@@ -1,0 +1,116 @@
+# total tokens: 1676   kept by Nebula (first 512): 512   dropped: 1164
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: registry_access  (tokens 0..59, 60 tokens)
+     0  ▁registry ▁access ▁open ▁key ▁hkey ▁current ▁user ▁software ▁co de gear ▁ locales ▁open ▁key ▁hkey
+    16  ▁local ▁machine ▁software ▁co de gear ▁ locales ▁open ▁key ▁hkey ▁current ▁user ▁software ▁borland ▁
+    32  locales ▁open ▁key ▁hkey ▁current ▁user ▁software ▁borland ▁de lp hi ▁ locales ▁open ▁key ▁hkey
+    48  ▁local ▁machine ▁software ▁microsoft ▁windows ▁nt ▁current version ▁f on ts ubstitutes
+
+## field: apis  (tokens 60..1675, 1616 tokens)
+    60  ▁apis ▁kernel32 ▁getmodulehandlew ▁0x0 ▁0x400000 ▁kernel32 ▁initializecriticalsection ▁0x5f5c24 ▁none ▁kernel32 ▁initializecriticalsection ▁0x5f5b5c ▁none ▁kernel32 ▁getversion ▁0x1db10106
+    76  ▁kernel32 ▁getmodulehandlew ▁kernel32 ▁dll ▁0x77000000 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getthreadpreferreduilanguages ▁0xfeee0000 ▁kernel32 ▁getmodulehandlew ▁kernel32 ▁dll ▁0x77000000 ▁kernel32
+    92  ▁getprocaddress ▁0x77000000 ▁setthreadpreferreduilanguages ▁0xfeee0001 ▁kernel32 ▁getmodulehandlew ▁kernel32 ▁dll ▁0x77000000 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getthreaduilanguage ▁0xfeee0002 ▁kernel32 ▁getsysteminfo
+   108  ▁0x1211f2c ▁none ▁kernel32 ▁getcommandlinew ▁0x45f0 ▁kernel32 ▁getstartupinfoa ▁0x1211f08 ▁none ▁kernel32 ▁getacp ▁0x4e4 ▁kernel32 ▁getcurrentthreadid ▁0x6ad cc
+   124  ▁kernel32 ▁getversion ▁0x1db10106 ▁kernel32 ▁getversionexw ▁0x1211e3c ▁0x1 ▁kernel32 ▁virtualalloc ▁0x0 ▁0x13fff0 ▁0x1000 ▁page ▁readwrite ▁0x50000 ▁kernel32
+   140  ▁getmodulefilenamew ▁0x400000 ▁c ▁windows ▁system32 ▁38 95 d84 b26 a1c 6b 2670 d2 789 9ca0 d1
+   156  31 b8a8 e5c 3f5 2527 a7 300 7c f764 34 bf0 2c ▁0x20a ▁0x54 ▁kernel32 ▁getmodulefilenamew
+   172  ▁0x0 ▁c ▁windows ▁system32 ▁38 95 d84 b26 a1c 6b 2670 d2 789 9ca0 d1 31
+   188  b8a8 e5c 3f5 2527 a7 300 7c f764 34 bf0 2c ▁0x105 ▁0x54 ▁kernel32 ▁lstrcpynw ▁0x120f8aa
+   204  ▁c ▁windows ▁system32 ▁38 95 d84 b26 a1c 6b 2670 d2 789 9ca0 d1 31 b8a8
+   220  e5c 3f5 2527 a7 300 7c f764 34 bf0 2c ▁0x105 ▁0x120f8aa ▁kernel32 ▁lstrlenw ▁c ▁windows
+   236  ▁system32 ▁38 95 d84 b26 a1c 6b 2670 d2 789 9ca0 d1 31 b8a8 e5c 3f5
+   252  2527 a7 300 7c f764 34 bf0 2c ▁0x54 ▁user32 ▁loadstringw ▁0x400000 ▁0xfff3 ▁outofmemory ▁0x1000 ▁0x1a
+   268  ▁user32 ▁loadstringw ▁0x400000 ▁0xffe1 ▁invalidpointeroperation ▁0x1000 ▁0x32 ▁user32 ▁loadstringw ▁0x400000 ▁0xffc7 ▁monitorsupfunctionnotinitialized ▁0x1000 ▁0x50 ▁user32 ▁loadstringw
+   284  ▁0x400000 ▁0xffc6 ▁ob j ectlocknotowned ▁0x1000 ▁0x2a ▁user32 ▁loadstringw ▁0x400000 ▁0xffc5 ▁exceptioninsafecall ▁0x1000 ▁0x38 ▁user32 ▁loadstringw
+   300  ▁0x400000 ▁0xffc4 ▁interfacenotsuped ▁0x1000 ▁0x2e ▁user32 ▁loadstringw ▁0x400000 ▁0xffc2 ▁externalexception ▁x ▁0x1000 ▁0x2a ▁user32 ▁loadstringw ▁0x400000
+   316  ▁0xffc3 ▁assertionfailed ▁0x1000 ▁0x20 ▁user32 ▁loadstringw ▁0x400000 ▁0xffd1 ▁variantorsafearrayindexoutofbounds ▁0x1000 ▁0x52 ▁user32 ▁loadstringw ▁0x400000 ▁0xffde ▁invalidargument
+   332  ▁0x1000 ▁0x20 ▁user32 ▁loadstringw ▁0x400000 ▁0xffd0 ▁errorcreatingvariantorsafearray ▁0x1000 ▁0x48 ▁user32 ▁loadstringw ▁0x400000 ▁0xffed ▁variantcallsnotsuped ▁0x1000 ▁0x44
+   348  ▁user32 ▁loadstringw ▁0x400000 ▁0xffd4 ▁invalidvariantoperation ▁0x1000 ▁0x32 ▁user32 ▁loadstringw ▁0x400000 ▁0xffd3 ▁invalidvarianttypeconversion ▁0x1000 ▁0x3e ▁user32 ▁loadstringw
+   364  ▁0x400000 ▁0xffe5 ▁stackoverflow ▁0x1000 ▁0x1c ▁user32 ▁loadstringw ▁0x400000 ▁0xffe6 ▁control ▁chit ▁0x1000 ▁0x1a ▁user32 ▁loadstringw ▁0x400000
+   380  ▁0xffe7 ▁privilegedinstruction ▁0x1000 ▁0x2c ▁user32 ▁loadstringw ▁0x400000 ▁0xffe4 ▁accessviolation ▁0x1000 ▁0x20 ▁user32 ▁loadstringw ▁0x400000 ▁0xffe2 ▁invalidclasstypecast
+   396  ▁0x1000 ▁0x2c ▁user32 ▁loadstringw ▁0x400000 ▁0xffe0 ▁floatingpointunderflow ▁0x1000 ▁0x30 ▁user32 ▁loadstringw ▁0x400000 ▁0xffff ▁floatingpointoverflow ▁0x1000 ▁0x2e
+   412  ▁user32 ▁loadstringw ▁0x400000 ▁0xfffe ▁floatingpointdivisionbyzero ▁0x1000 ▁0x3e ▁user32 ▁loadstringw ▁0x400000 ▁0xfffd ▁invalidfloatingpointoperation ▁0x1000 ▁0x40 ▁user32 ▁loadstringw
+   428  ▁0x400000 ▁0xfffc ▁integeroverflow ▁0x1000 ▁0x20 ▁user32 ▁loadstringw ▁0x400000 ▁0xfffb ▁rangecheckerror ▁0x1000 ▁0x22 ▁user32 ▁loadstringw ▁0x400000 ▁0xfffa
+   444  ▁divisionbyzero ▁0x1000 ▁0x20 ▁user32 ▁loadstringw ▁0x400000 ▁0xfff9 ▁invalidnumericinput ▁0x1000 ▁0x2a ▁user32 ▁loadstringw ▁0x400000 ▁0xfff8 ▁diskfull ▁0x1000
+   460  ▁0x12 ▁user32 ▁loadstringw ▁0x400000 ▁0xfff7 ▁readbeyondendoffile ▁0x1000 ▁0x2e ▁user32 ▁loadstringw ▁0x400000 ▁0xfff6 ▁fileaccessdenied ▁0x1000 ▁0x24 ▁user32
+   476  ▁loadstringw ▁0x400000 ▁0xfff5 ▁toomanyopenfiles ▁0x1000 ▁0x26 ▁user32 ▁loadstringw ▁0x400000 ▁0xff87 ▁invalidfilename ▁s ▁0x1000 ▁0x2c ▁user32 ▁loadstringw
+   492  ▁0x400000 ▁0xff50 ▁thespecifiedfilewasnotfound ▁0x1000 ▁0x40 ▁kernel32 ▁getversionexw ▁0x1211e2c ▁0x1 ▁kernel32 ▁getmodulehandlew ▁kernel32 ▁dll ▁0x77000000 ▁kernel32 ▁widechartomultibyte
+   508  ▁0x4e4 ▁0x0 ▁0x41cbb8 ▁0x13
+
+-------- 512-token cut: Nebula never sees token 512 and later --------
+
+   512  ▁0x0 ▁0x0 ▁0x0 ▁0x0 ▁0x13 ▁kernel32 ▁widechartomultibyte ▁0x4e4 ▁0x0 ▁0x41cbb8 ▁0x13 ▁0x188d3c ▁0x13 ▁0x0 ▁0x0 ▁0x13
+   528  ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getdiskfreespaceexw ▁0xfeee0003 ▁kernel32 ▁getmodulefilenamew ▁0x0 ▁c ▁windows ▁system32 ▁38 95 d84 b26 a1c
+   544  6b 2670 d2 789 9ca0 d1 31 b8a8 e5c 3f5 2527 a7 300 7c f764 34
+   560  bf0 2c ▁0x105 ▁0x54 ▁advapi32 ▁regopenkeyexw ▁hkey ▁current ▁user ▁software ▁co de gear ▁ locales ▁0x0
+   576  ▁0xf0019 ▁0x1211f30 ▁0x3 ▁advapi32 ▁regopenkeyexw ▁hkey ▁local ▁machine ▁software ▁co de gear ▁ locales ▁0x0 ▁0xf0019
+   592  ▁0x1211f30 ▁0x3 ▁advapi32 ▁regopenkeyexw ▁hkey ▁current ▁user ▁software ▁borland ▁ locales ▁0x0 ▁0xf0019 ▁0x1211f30 ▁0x3 ▁advapi32
+   608  ▁regopenkeyexw ▁hkey ▁current ▁user ▁software ▁borland ▁de lp hi ▁ locales ▁0x0 ▁0xf0019 ▁0x1211f30 ▁0x3 ▁kernel32
+   624  ▁getthreadlocale ▁0xc000 ▁kernel32 ▁getcpinfo ▁0x0 ▁0x1211ed0 ▁0x1 ▁kernel32 ▁getthreadlocale ▁0xc000 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x44 ▁0x1211c80 ▁0x100
+   640  ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffcd ▁ j an ▁0x1000 ▁0x6 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x38 ▁0x1211c80 ▁0x100
+   656  ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffb9 ▁ j anuary ▁0x1000 ▁0xe ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x45 ▁0x1211c80 ▁0x100
+   672  ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffce ▁feb ▁0x1000 ▁0x6 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x39 ▁0x1211c80 ▁0x100 ▁0x0 ▁user32
+   688  ▁loadstringw ▁0x400000 ▁0xffba ▁february ▁0x1000 ▁0x10 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x46 ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000
+   704  ▁0xffcf ▁mar ▁0x1000 ▁0x6 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x3a ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffbb ▁march
+   720  ▁0x1000 ▁0xa ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x47 ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffb0 ▁apr ▁0x1000 ▁0x6
+   736  ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x3b ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffbc ▁april ▁0x1000 ▁0xa ▁kernel32 ▁getlocaleinfow
+   752  ▁0xc000 ▁0x48 ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffb1 ▁may ▁0x1000 ▁0x6 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x3c
+   768  ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffbd ▁may ▁0x1000 ▁0x6 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x49 ▁0x1211c80 ▁0x100
+   784  ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffb2 ▁ j un ▁0x1000 ▁0x6 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x3d ▁0x1211c80 ▁0x100
+   800  ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffbe ▁ j une ▁0x1000 ▁0x8 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x4a ▁0x1211c80 ▁0x100
+   816  ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffb3 ▁ j ul ▁0x1000 ▁0x6 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x3e ▁0x1211c80 ▁0x100
+   832  ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffbf ▁ j uly ▁0x1000 ▁0x8 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x4b ▁0x1211c80 ▁0x100
+   848  ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffb4 ▁aug ▁0x1000 ▁0x6 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x3f ▁0x1211c80 ▁0x100 ▁0x0 ▁user32
+   864  ▁loadstringw ▁0x400000 ▁0xffa0 ▁august ▁0x1000 ▁0xc ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x4c ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000
+   880  ▁0xffb5 ▁sep ▁0x1000 ▁0x6 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x40 ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffa1 ▁september
+   896  ▁0x1000 ▁0x12 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x4d ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffb6 ▁oct ▁0x1000 ▁0x6
+   912  ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x41 ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffa2 ▁october ▁0x1000 ▁0xe ▁kernel32 ▁getlocaleinfow
+   928  ▁0xc000 ▁0x4e ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffb7 ▁nov ▁0x1000 ▁0x6 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x42
+   944  ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffa3 ▁november ▁0x1000 ▁0x10 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x4f ▁0x1211c80 ▁0x100
+   960  ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffb8 ▁dec ▁0x1000 ▁0x6 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x43 ▁0x1211c80 ▁0x100 ▁0x0 ▁user32
+   976  ▁loadstringw ▁0x400000 ▁0xffa4 ▁december ▁0x1000 ▁0x10 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x37 ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000
+   992  ▁0xffa5 ▁sun ▁0x1000 ▁0x6 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x30 ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffac ▁sunday
+  1008  ▁0x1000 ▁0xc ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x31 ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffa6 ▁mon ▁0x1000 ▁0x6
+  1024  ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x2a ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffad ▁monday ▁0x1000 ▁0xc ▁kernel32 ▁getlocaleinfow
+  1040  ▁0xc000 ▁0x32 ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffa7 ▁tue ▁0x1000 ▁0x6 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x2b
+  1056  ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffae ▁tuesday ▁0x1000 ▁0xe ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x33 ▁0x1211c80 ▁0x100
+  1072  ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffa8 ▁wed ▁0x1000 ▁0x6 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x2c ▁0x1211c80 ▁0x100 ▁0x0 ▁user32
+  1088  ▁loadstringw ▁0x400000 ▁0xffaf ▁wednesday ▁0x1000 ▁0x12 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x34 ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000
+  1104  ▁0xffa9 ▁thu ▁0x1000 ▁0x6 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x2d ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xff90 ▁thursday
+  1120  ▁0x1000 ▁0x10 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x35 ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffaa ▁fri ▁0x1000 ▁0x6
+  1136  ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x2e ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xff91 ▁friday ▁0x1000 ▁0xc ▁kernel32 ▁getlocaleinfow
+  1152  ▁0xc000 ▁0x36 ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xffab ▁sat ▁0x1000 ▁0x6 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x2f
+  1168  ▁0x1211c80 ▁0x100 ▁0x0 ▁user32 ▁loadstringw ▁0x400000 ▁0xff92 ▁saturday ▁0x1000 ▁0x10 ▁kernel32 ▁getthreadlocale ▁0xc000 ▁kernel32 ▁getlocaleinfow ▁0xc000
+  1184  ▁0x100b ▁0x1211cc4 ▁0x100 ▁0x0 ▁kernel32 ▁getthreadlocale ▁0xc000 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x14 ▁0x1211ce0 ▁0x100 ▁0x0 ▁kernel32 ▁getlocaleinfow
+  1200  ▁0xc000 ▁0x1b ▁0x1211ce0 ▁0x100 ▁0x0 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x1c ▁0x1211ce0 ▁0x100 ▁0x0 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0xf
+  1216  ▁0x1211ed8 ▁0x2 ▁0x0 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0xe ▁0x1211ed8 ▁0x2 ▁0x0 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x19 ▁0x1211ce0 ▁0x100
+  1232  ▁0x0 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x1d ▁0x1211ed8 ▁0x2 ▁0x0 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x1f ▁0x1211ce0 ▁0x100 ▁0x0 ▁kernel32
+  1248  ▁getthreadlocale ▁0xc000 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x1009 ▁0x1211ca8 ▁0x100 ▁0x0 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x20 ▁0x1211ce0 ▁0x100 ▁0x0
+  1264  ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x1e ▁0x1211ed8 ▁0x2 ▁0x0 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x28 ▁0x1211ce0 ▁0x100 ▁0x0 ▁kernel32 ▁getlocaleinfow
+  1280  ▁0xc000 ▁0x29 ▁0x1211ce0 ▁0x100 ▁0x0 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x25 ▁0x1211ce0 ▁0x100 ▁0x0 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x23
+  1296  ▁0x1211ce0 ▁0x100 ▁0x0 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0x1005 ▁0x1211ce0 ▁0x100 ▁0x0 ▁kernel32 ▁getlocaleinfow ▁0xc000 ▁0xc ▁0x1211ed8 ▁0x2
+  1312  ▁0x0 ▁kernel32 ▁getmodulehandlew ▁oleaut32 ▁dll ▁0x5f800000 ▁kernel32 ▁getprocaddress ▁0x5f800000 ▁variantchangetypeex ▁0xfeee0004 ▁kernel32 ▁getprocaddress ▁0x5f800000 ▁varneg ▁0xfeee0005
+  1328  ▁kernel32 ▁getprocaddress ▁0x5f800000 ▁varnot ▁0xfeee0006 ▁kernel32 ▁getprocaddress ▁0x5f800000 ▁varadd ▁0xfeee0007 ▁kernel32 ▁getprocaddress ▁0x5f800000 ▁varsub ▁0xfeee0008 ▁kernel32
+  1344  ▁getprocaddress ▁0x5f800000 ▁varmul ▁0xfeee0009 ▁kernel32 ▁getprocaddress ▁0x5f800000 ▁vardiv ▁0xfeee000a ▁kernel32 ▁getprocaddress ▁0x5f800000 ▁varidiv ▁0xfeee000b ▁kernel32 ▁getprocaddress
+  1360  ▁0x5f800000 ▁varmod ▁0xfeee000c ▁kernel32 ▁getprocaddress ▁0x5f800000 ▁varand ▁0xfeee000d ▁kernel32 ▁getprocaddress ▁0x5f800000 ▁varor ▁0xfeee000e ▁kernel32 ▁getprocaddress ▁0x5f800000
+  1376  ▁varxor ▁0xfeee000f ▁kernel32 ▁getprocaddress ▁0x5f800000 ▁varcmp ▁0xfeee0010 ▁kernel32 ▁getprocaddress ▁0x5f800000 ▁vari4fromstr ▁0xfeee0011 ▁kernel32 ▁getprocaddress ▁0x5f800000 ▁varr4fromstr
+  1392  ▁0xfeee0012 ▁kernel32 ▁getprocaddress ▁0x5f800000 ▁varr8fromstr ▁0xfeee0013 ▁kernel32 ▁getprocaddress ▁0x5f800000 ▁vardatefromstr ▁0xfeee0014 ▁kernel32 ▁getprocaddress ▁0x5f800000 ▁varcyfromstr ▁0xfeee0015
+  1408  ▁kernel32 ▁getprocaddress ▁0x5f800000 ▁varboolfromstr ▁0xfeee0016 ▁kernel32 ▁getprocaddress ▁0x5f800000 ▁varbstrfromcy ▁0xfeee0017 ▁kernel32 ▁getprocaddress ▁0x5f800000 ▁varbstrfromdate ▁0xfeee0018 ▁kernel32
+  1424  ▁getprocaddress ▁0x5f800000 ▁varbstrfrombool ▁0xfeee0019 ▁kernel32 ▁initializecriticalsection ▁0x5f7f30 ▁none ▁kernel32 ▁initializecriticalsection ▁0x5f7f70 ▁none ▁kernel32 ▁createw ▁0x0 ▁0xf
+  1440  ffff fff ▁0x0 ▁0x20 bc ▁kernel32 ▁createw ▁0x0 ▁0xf ffff fff ▁0xf ffff fff ▁0x0 ▁0x20
+  1456  c0 ▁kernel32 ▁createw ▁0x0 ▁0x0 ▁0x0 ▁0x0 ▁0x20 c4 ▁kernel32 ▁initializecriticalsection ▁0x107538 ▁none ▁kernel32 ▁initializecriticalsection ▁0x107568
+  1472  ▁none ▁kernel32 ▁initializecriticalsection ▁0x107598 ▁none ▁kernel32 ▁queryperformancecounter ▁0x1211f28 ▁0x1 ▁user32 ▁getdc ▁0x0 ▁0x88 f68 ▁gdi32 ▁getdevicecaps
+  1488  ▁0x88 f68 ▁0x5a ▁0x10 ▁user32 ▁releasedc ▁0x0 ▁0x88 f68 ▁0x0 ▁user32 ▁getdc ▁0x0 ▁0x88 f68 ▁gdi32
+  1504  ▁getdevicecaps ▁0x88 f68 ▁0x68 ▁0x10 ▁gdi32 ▁getsystempaletteentries ▁0x88 f68 ▁0x0 ▁0x8 ▁0x1211b3c ▁0x0 ▁gdi32 ▁getsystempaletteentries ▁0x88
+  1520  f68 ▁0x8 ▁0x8 ▁0x1211b5c ▁0x0 ▁user32 ▁releasedc ▁0x0 ▁0x88 f68 ▁0x0 ▁gdi32 ▁createpalette ▁0x1211b38 ▁0x1e ▁0x100300
+  1536  ▁0x0 ▁0x0 ▁kernel32 ▁initializecriticalsection ▁0x5f8114 ▁none ▁kernel32 ▁initializecriticalsection ▁0x5f812c ▁none ▁gdi32 ▁getstockob j ect ▁0x7 ▁0x0
+  1552  ▁gdi32 ▁getstockob j ect ▁0x5 ▁0x0 ▁gdi32 ▁getstockob j ect ▁0xd ▁0x0 ▁user32 ▁loadiconw ▁0x0 ▁0x7f00
+  1568  ▁0x1 ▁kernel32 ▁muldiv ▁0x8 ▁0x10 ▁0x48 ▁0x1211f58 ▁0x0 ▁advapi32 ▁regopenkeyexw ▁hkey ▁local ▁machine ▁software ▁microsoft ▁windows
+  1584  nt ▁current version ▁f on ts ubstitutes ▁0x0 ▁0x20019 ▁0x1211e1c ▁0x3 ▁advapi32 ▁regopenkeyexw ▁hkey ▁local ▁machine
+  1600  ▁software ▁microsoft ▁windows nt ▁current version ▁f on ts ubstitutes ▁0x0 ▁0x20009 ▁0x1211e1c ▁0x3 ▁advapi32 ▁regopenkeyexw
+  1616  ▁hkey ▁local ▁machine ▁software ▁microsoft ▁windows nt ▁current version ▁f on ts ubstitutes ▁0x0 ▁0x1 ▁0x1211e1c
+  1632  ▁0x3 ▁kernel32 ▁initializecriticalsection ▁0x1075c8 ▁none ▁kernel32 ▁initializecriticalsection ▁0x1075f8 ▁none ▁kernel32 ▁initializecriticalsection ▁0x107628 ▁none ▁kernel32 ▁initializecriticalsection ▁0x188e00
+  1648  ▁none ▁kernel32 ▁initializecriticalsection ▁0x107658 ▁none ▁kernel32 ▁initializecriticalsection ▁0x107688 ▁none ▁kernel32 ▁entercriticalsection ▁0x107568 ▁none ▁kernel32 ▁leavecriticalsection ▁0x107568
+  1664  ▁none ▁kernel32 ▁initializecriticalsection ▁0x188e24 ▁none ▁kernel32 ▁comparestringw ▁0x400 ▁0x1 ▁0x10e9bc ▁0x5 ▁0x0
+

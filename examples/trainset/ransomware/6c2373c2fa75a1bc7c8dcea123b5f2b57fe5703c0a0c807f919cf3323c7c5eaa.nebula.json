@@ -1,0 +1,3470 @@
+{
+ "network_events.traffic": [
+  {
+   "server": "",
+   "port": 443
+  }
+ ],
+ "file_access": [
+  {
+   "event": "open",
+   "path": "<drive>\\windows\\system32\\<sha256>"
+  },
+  {
+   "event": "read",
+   "path": "<drive>\\windows\\system32\\<sha256>"
+  }
+ ],
+ "apis": [
+  {
+   "api_name": "MSVCRT.__set_app_type",
+   "args": [
+    "0x2"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT.__p__fmode",
+   "args": [],
+   "ret_val": "0x4610"
+  },
+  {
+   "api_name": "MSVCRT.__p__commode",
+   "args": [],
+   "ret_val": "0x4620"
+  },
+  {
+   "api_name": "MSVCRT._controlfp",
+   "args": [
+    "0x10000",
+    "0x30000"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._initterm",
+   "args": [
+    "0x40b00c",
+    "0x40b010"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT.__getmainargs",
+   "args": [
+    "0x1211f84",
+    "0x1211f74",
+    "0x1211f80",
+    "0x0",
+    "0x1211f78"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._initterm",
+   "args": [
+    "0x40b000",
+    "0x40b008"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.GetStartupInfoA",
+   "args": [
+    "0x1211f88"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.GetModuleHandleA",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x400000"
+  },
+  {
+   "api_name": "WININET.InternetOpenA",
+   "args": [
+    "0x0",
+    "0x1",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x68"
+  },
+  {
+   "api_name": "WININET.InternetOpenUrlA",
+   "args": [
+    "0x68",
+    "",
+    "0x0",
+    "0x0",
+    "INTERNET_FLAG_DONT_CACHE|INTERNET_FLAG_RELOAD",
+    "0x0"
+   ],
+   "ret_val": "0x70"
+  },
+  {
+   "api_name": "WININET.InternetCloseHandle",
+   "args": [
+    "0x68"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "WININET.InternetCloseHandle",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.GetModuleFileNameA",
+   "args": [
+    "0x0",
+    "C:\\Windows\\system32\\6c2373c2fa75a1bc7c8dcea123b5f2b57fe5703c0a0c807f919cf3323c7c5eaa",
+    "0x104"
+   ],
+   "ret_val": "0x54"
+  },
+  {
+   "api_name": "MSVCRT.__p___argc",
+   "args": [],
+   "ret_val": "0x46b0"
+  },
+  {
+   "api_name": "ADVAPI32.OpenSCManagerA",
+   "args": [
+    "0x0",
+    "0x0",
+    "0xf003f"
+   ],
+   "ret_val": "0x46c0"
+  },
+  {
+   "api_name": "ADVAPI32.OpenServiceA",
+   "args": [
+    "0x46c0",
+    "mssecsvc2.0",
+    "0xf01ff"
+   ],
+   "ret_val": "0x2804"
+  },
+  {
+   "api_name": "ADVAPI32.ChangeServiceConfig2A",
+   "args": [
+    "0x2804",
+    "0x2",
+    "0x1211ec8"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "ADVAPI32.CloseServiceHandle",
+   "args": [
+    "0x2804"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "ADVAPI32.CloseServiceHandle",
+   "args": [
+    "0x46c0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "ADVAPI32.StartServiceCtrlDispatcherA",
+   "args": [
+    "lpServiceStartTable=[{lpServiceName=mssecsvc2.0,lpServiceProc=0x408000}]"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT.exit",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "ADVAPI32.RegisterServiceCtrlHandlerA",
+   "args": [
+    "0x4312fc",
+    "0x407f30"
+   ],
+   "ret_val": "0x1001"
+  },
+  {
+   "api_name": "ADVAPI32.SetServiceStatus",
+   "args": [
+    "0x1001",
+    "0x431430"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "WS2_32.WSAStartup",
+   "args": [
+    "0x202",
+    "0x1211e5c"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "ADVAPI32.CryptAcquireContextA",
+   "args": [
+    "0x70f870",
+    "0x0",
+    "0x0",
+    "0x1",
+    "0xf0000000"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.InitializeCriticalSection",
+   "args": [
+    "0x431418"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.GlobalAlloc",
+   "args": [
+    "0x40",
+    "0x50d800"
+   ],
+   "ret_val": "0xa1d000"
+  },
+  {
+   "api_name": "KERNEL32.GlobalAlloc",
+   "args": [
+    "0x40",
+    "0x50d800"
+   ],
+   "ret_val": "0x1439000"
+  },
+  {
+   "api_name": "KERNEL32.CreateFileA",
+   "args": [
+    "C:\\Windows\\system32\\6c2373c2fa75a1bc7c8dcea123b5f2b57fe5703c0a0c807f919cf3323c7c5eaa",
+    "GENERIC_READ",
+    "0x1",
+    "0x0",
+    "OPEN_EXISTING",
+    "0x4",
+    "0x0"
+   ],
+   "ret_val": "0x9c"
+  },
+  {
+   "api_name": "KERNEL32.GetFileSize",
+   "args": [
+    "0x9c",
+    "0x0"
+   ],
+   "ret_val": "0x22d000"
+  },
+  {
+   "api_name": "KERNEL32.ReadFile",
+   "args": [
+    "0x9c",
+    "0xa21064",
+    "0x22d000",
+    "0x1211e4c",
+    "0x0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0x9c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407720",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbb4"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbb4"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbb8"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbb8"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x1",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbbc"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbbc"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x2",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbc0"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbc0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x3",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbc4"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbc4"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x4",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbc8"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbc8"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x5",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbcc"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbcc"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x6",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbd0"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbd0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x7",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbd4"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbd4"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x8",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbd8"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbd8"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x9",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbdc"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbdc"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0xa",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbe0"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbe0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0xb",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbe4"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbe4"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0xc",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbe8"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbe8"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0xd",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbec"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbec"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0xe",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbf0"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbf0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0xf",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbf4"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbf4"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x10",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbf8"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbf8"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x11",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xbfc"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xbfc"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x12",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc00"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc00"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x13",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc04"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc04"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x14",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc08"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc08"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x15",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc0c"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc0c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x16",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc10"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc10"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x17",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc14"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc14"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x18",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc18"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc18"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x19",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc1c"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc1c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x1a",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc20"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc20"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x1b",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc24"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc24"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x1c",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc28"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc28"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x1d",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc2c"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc2c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x1e",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc30"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc30"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x1f",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc34"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc34"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x20",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc38"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc38"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x21",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc3c"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc3c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x22",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc40"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc40"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x23",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc44"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc44"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x24",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc48"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc48"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x25",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc4c"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc4c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x26",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc50"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc50"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x27",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc54"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc54"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x28",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc58"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc58"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x29",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc5c"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc5c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x2a",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc60"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc60"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x2b",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc64"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc64"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x2c",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc68"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc68"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x2d",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc6c"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc6c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x2e",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc70"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc70"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x2f",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc74"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc74"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x30",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc78"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc78"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x31",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc7c"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc7c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x32",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc80"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc80"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x33",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc84"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc84"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x34",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc88"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc88"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x35",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc8c"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc8c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x36",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc90"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc90"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x37",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc94"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc94"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x38",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc98"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc98"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x39",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xc9c"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xc9c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x3a",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xca0"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xca0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x3b",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xca4"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xca4"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x3c",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xca8"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xca8"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x3d",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcac"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xcac"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x3e",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcb0"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xcb0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x3f",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcb4"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xcb4"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x40",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcb8"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xcb8"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x41",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcbc"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xcbc"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x42",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcc0"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xcc0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x43",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcc4"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xcc4"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x44",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcc8"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xcc8"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x45",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xccc"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xccc"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x46",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcd0"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xcd0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x47",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcd4"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xcd4"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x48",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcd8"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xcd8"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x49",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcdc"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xcdc"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x4a",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xce0"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xce0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x4b",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xce4"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xce4"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x4c",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xce8"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xce8"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x4d",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcec"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xcec"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x4e",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcf0"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xcf0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x4f",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcf4"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xcf4"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x50",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcf8"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xcf8"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x51",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xcfc"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xcfc"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x52",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xd00"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xd00"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x53",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xd04"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xd04"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x54",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xd08"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xd08"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x55",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xd0c"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xd0c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x56",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xd10"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xd10"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x57",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xd14"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xd14"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x58",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xd18"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xd18"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x59",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xd1c"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xd1c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x5a",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xd20"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xd20"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x5b",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xd24"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xd24"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x5c",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xd28"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xd28"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x5d",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xd2c"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xd2c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x5e",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xd30"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xd30"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x5f",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xd34"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xd34"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x60",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xd38"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xd38"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x61",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xd3c"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xd3c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x62",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0xd40"
+  },
+  {
+   "api_name": "KERNEL32.CloseHandle",
+   "args": [
+    "0xd40"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x63",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x64",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x65",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x66",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x67",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x68",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x69",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x6a",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x6b",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x6c",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x6d",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x6e",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x6f",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x70",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x71",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x72",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x73",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x74",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x75",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x76",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x77",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x78",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x79",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x7a",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x7b",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x7c",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x7d",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x7d0"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x7e",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "MSVCRT._beginthreadex",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x407840",
+    "0x7f",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.Sleep",
+   "args": [
+    "0x5265c00"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "KERNEL32.ExitProcess",
+   "args": [
+    "0x1"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "iphlpapi.GetAdaptersInfo",
+   "args": [
+    "0x0",
+    "0x1211f98",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265c14"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265c28"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265c3c"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265c50"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265c64"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265c78"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265c8c"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265ca0"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265cb4"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265cc8"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265cdc"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265cf0"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265d04"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265d18"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265d2c"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265d40"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265d54"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265d68"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265d7c"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265d90"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265da4"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265db8"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265dcc"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265de0"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265df4"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265e08"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265e1c"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265e30"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265e44"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265e58"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265e6c"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265e80"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265e94"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265ea8"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265ebc"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265ed0"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265ee4"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265ef8"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265f0c"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265f20"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265f34"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265f48"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265f5c"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265f70"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265f84"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265f98"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265fac"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265fc0"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265fd4"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265fe8"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5265ffc"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266010"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266024"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266038"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x526604c"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266060"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266074"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266088"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x526609c"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x52660b0"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x52660c4"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x52660d8"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x52660ec"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266100"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266114"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266128"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x526613c"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266150"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266164"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266178"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x526618c"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x52661a0"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x52661b4"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x52661c8"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x52661dc"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x52661f0"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266204"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266218"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x526622c"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266240"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266254"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266268"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x526627c"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266290"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x52662a4"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x52662b8"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x52662cc"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x52662e0"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x52662f4"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266308"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x526631c"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266330"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266344"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266358"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x526636c"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266380"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x5266394"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x52663a8"
+  },
+  {
+   "api_name": "KERNEL32.GetTickCount",
+   "args": [],
+   "ret_val": "0x52663bc"
+  }
+ ]
+}

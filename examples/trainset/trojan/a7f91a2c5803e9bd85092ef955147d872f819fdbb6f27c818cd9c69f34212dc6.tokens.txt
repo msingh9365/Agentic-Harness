@@ -1,0 +1,162 @@
+# total tokens: 2323   kept by Nebula (first 512): 512   dropped: 1811
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: registry_access  (tokens 0..34, 35 tokens)
+     0  ▁registry ▁access ▁open ▁key ▁hkey ▁local ▁machine ▁software ▁microsoft ▁windows ▁current version ▁run ▁open ▁key ▁hkey
+    16  ▁current ▁user ▁software ▁microsoft ▁windows ▁current version ▁run ▁open ▁key ▁hkey ▁local ▁machine ▁software ▁microsoft ▁windows
+    32  ▁nt ▁current version
+
+## field: network_events.traffic  (tokens 35..39, 5 tokens)
+    35  ▁network ▁s ▁traffic ▁prvip ▁443
+
+## field: file_access  (tokens 40..67, 28 tokens)
+    40  ▁file ▁access ▁open ▁drive ▁windows ▁system32 ▁sha256 ▁create ▁drive ▁program data ▁update ▁ww ansvc ▁exe ▁read
+    56  ▁drive ▁windows ▁system32 ▁sha256 ▁write ▁drive ▁program data ▁update ▁ww ansvc ▁exe
+
+## field: apis  (tokens 68..2322, 2255 tokens)
+    68  ▁apis ▁kernel32 ▁getsystemtimeasfiletime ▁0x1211fd8 ▁none ▁kernel32 ▁getcurrentprocessid ▁0xc 26 4c ▁kernel32 ▁getcurrentthreadid ▁0xc 2660 ▁kernel32 ▁gettickcount
+    84  ▁0x5265c14 ▁kernel32 ▁queryperformancecounter ▁0x1211fd0 ▁0x1 ▁kernel32 ▁getstartupinfow ▁0x1211f7c ▁none ▁kernel32 ▁heapsetinformation ▁0x0 ▁0x1 ▁0x0 ▁0x0 ▁0x1
+   100  ▁kernel32 ▁heapcreate ▁0x0 ▁0x1000 ▁0x0 ▁0x46d0 ▁kernel32 ▁getmodulehandlew ▁kernel32 ▁dll ▁0x77000000 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁flsalloc ▁0xfeee0000
+   116  ▁kernel32 ▁getprocaddress ▁0x77000000 ▁flsgetvalue ▁0xfeee0001 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁flssetvalue ▁0xfeee0002 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁flsfree ▁0xfeee0003 ▁kernel32
+   132  ▁tlsalloc ▁0x0 ▁kernel32 ▁tlssetvalue ▁0x0 ▁0xfeee0001 ▁0x1 ▁kernel32 ▁encodepointer ▁0x0 ▁0x1 ▁kernel32 ▁encodepointer ▁0x408 bd2 ▁0x408
+   148  bd3 ▁kernel32 ▁encodepointer ▁0xfeee0000 ▁0xfeee0001 ▁kernel32 ▁encodepointer ▁0xfeee0001 ▁0xfeee0002 ▁kernel32 ▁encodepointer ▁0xfeee0002 ▁0xfeee0003 ▁kernel32 ▁encodepointer ▁0xfeee0003
+   164  ▁0xfeee0004 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x411b38 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x411b50 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x411b68 ▁0xfa0 ▁0x1
+   180  ▁kernel32 ▁initializecriticalsectionandspincount ▁0x411b80 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x411b98 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x411bb0 ▁0xfa0 ▁0x1 ▁kernel32
+   196  ▁initializecriticalsectionandspincount ▁0x411bc8 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x411be0 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x411bf8 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount
+   212  ▁0x411c10 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x411c28 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x411c40 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x411c58
+   228  ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x411c70 ▁0xfa0 ▁0x1 ▁kernel32 ▁decodepointer ▁0xfeee0001 ▁0xfeee0000 ▁kernel32 ▁flsalloc ▁0x4059 98 ▁0x0
+   244  ▁kernel32 ▁heapalloc ▁0x46d0 ▁0x8 ▁0x214 ▁0x46f0 ▁kernel32 ▁decodepointer ▁0xfeee0003 ▁0xfeee0002 ▁kernel32 ▁flssetvalue ▁0x0 ▁0x46f0 ▁0x1 ▁kernel32
+   260  ▁getmodulehandlew ▁kernel32 ▁dll ▁0x77000000 ▁kernel32 ▁entercriticalsection ▁0x411c10 ▁none ▁kernel32 ▁interlockedincrement ▁0x4101c0 ▁0x1 ▁kernel32 ▁leavecriticalsection ▁0x411c10 ▁none
+   276  ▁kernel32 ▁entercriticalsection ▁0x411bf8 ▁none ▁kernel32 ▁interlockedincrement ▁0x410850 ▁0x2 ▁kernel32 ▁interlockedincrement ▁0x41079c ▁0x1 ▁kernel32 ▁leavecriticalsection ▁0x411bf8 ▁none
+   292  ▁kernel32 ▁getcurrentthreadid ▁0xc 2660 ▁kernel32 ▁getstartupinfow ▁0x1211f18 ▁none ▁kernel32 ▁heapalloc ▁0x46d0 ▁0x8 ▁0x800 ▁0x7000 ▁kernel32 ▁getstdhandle
+   308  ▁0xf ffff ff6 ▁0xf001 ▁kernel32 ▁getfiletype ▁0xf001 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x700c ▁0xfa0 ▁0x1 ▁kernel32 ▁getstdhandle ▁0xf
+   324  ffff ff5 ▁0xf002 ▁kernel32 ▁getfiletype ▁0xf002 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x704c ▁0xfa0 ▁0x1 ▁kernel32 ▁getstdhandle ▁0xf ffff
+   340  ff4 ▁0xf003 ▁kernel32 ▁getfiletype ▁0xf003 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x708c ▁0xfa0 ▁0x1 ▁kernel32 ▁sethandlecount ▁0x20 ▁0x20 ▁kernel32
+   356  ▁getcommandlinea ▁0x7810 ▁kernel32 ▁getenvironmentstringsw ▁0x7830 ▁kernel32 ▁widechartomultibyte ▁0x0 ▁0x0 ▁0x7830 ▁0xcd ▁0x0 ▁0x0 ▁0x0 ▁0x0 ▁0xcd
+   372  ▁kernel32 ▁heapalloc ▁0x46d0 ▁0x0 ▁0xcd ▁0x79d0 ▁kernel32 ▁widechartomultibyte ▁0x0 ▁0x0 ▁0x7830 ▁0xcd ▁0x79d0 ▁0xcd ▁0x0 ▁0x0
+   388  ▁0xcd ▁kernel32 ▁fre een vironment stringsw ▁0x7830 ▁0x1 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32
+   404  ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue
+   420  ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁entercriticalsection ▁0x411c10 ▁none ▁kernel32 ▁leavecriticalsection ▁0x411c10 ▁none ▁kernel32 ▁getlasterror
+   436  ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getacp ▁0x4e4
+   452  ▁kernel32 ▁heapalloc ▁0x46d0 ▁0x0 ▁0x220 ▁0x7aa0 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0
+   468  ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁isvalidcodepage ▁0x4e4 ▁0x1 ▁kernel32 ▁getcpinfo ▁0x4e4 ▁0x1211ee0 ▁0x1 ▁kernel32 ▁getcpinfo
+   484  ▁0x4e4 ▁0x12119ac ▁0x1 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror
+   500  ▁0x0 ▁none ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0123456789 ▁abcdefghi j klmnopqrstuvwxyz ▁abcdefghi j
+
+-------- 512-token cut: Nebula never sees token 512 and later --------
+
+   512  klmnopqrstuvwxyz ▁0x100 ▁0x0 ▁0x0 ▁0x103 ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0x1211dc0 ▁0x100 ▁0x1211728 ▁0x103 ▁0x100 ▁kernel32 ▁getstringtypew
+   528  ▁0x1 ▁0x1211728 ▁0x100 ▁0x12119c0 ▁0x1 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0
+   544  ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0123456789 ▁abcdefghi j klmnopqrstuvwxyz ▁abcdefghi j klmnopqrstuvwxyz ▁0x100
+   560  ▁0x0 ▁0x0 ▁0x103 ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0x1211dc0 ▁0x100 ▁0x12116e8 ▁0x103 ▁0x100 ▁kernel32 ▁lcmapstringw ▁0x0 ▁0x100
+   576  ▁0x12116e8 ▁0x103 ▁0x0 ▁0x0 ▁0x103 ▁kernel32 ▁lcmapstringw ▁0x0 ▁0x100 ▁0x12116e8 ▁0x103 ▁0x12114d8 ▁0x103 ▁0x103 ▁kernel32 ▁widechartomultibyte
+   592  ▁0x4e4 ▁0x0 ▁0x12114d8 ▁0x103 ▁0x1211cc0 ▁0x100 ▁0x0 ▁0x0 ▁0x100 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001
+   608  ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0x3 ▁0x0 ▁0x0 ▁0x3
+   624  ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0x1211dc0 ▁0x3 ▁0x1211908 ▁0x3 ▁0x3 ▁kernel32 ▁lcmapstringw ▁0x0 ▁0x200 ▁0x1211908 ▁0x3 ▁0x0
+   640  ▁0x0 ▁0x3 ▁kernel32 ▁lcmapstringw ▁0x0 ▁0x200 ▁0x1211908 ▁0x3 ▁0x12118f8 ▁0x3 ▁0x3 ▁kernel32 ▁widechartomultibyte ▁0x4e4 ▁0x0 ▁0x12118f8
+   656  ▁0x3 ▁0x1211bc0 ▁0x100 ▁0x0 ▁0x0 ▁0x100 ▁kernel32 ▁interlockeddecrement ▁0x4101c0 ▁0x0 ▁kernel32 ▁interlockedincrement ▁0x7aa0 ▁0x1 ▁kernel32 ▁entercriticalsection
+   672  ▁0x411c10 ▁none ▁kernel32 ▁interlockeddecrement ▁0x4101c0 ▁0xf ffff fff ▁kernel32 ▁interlockedincrement ▁0x7aa0 ▁0x2 ▁kernel32 ▁leavecriticalsection ▁0x411c10 ▁none
+   688  ▁kernel32 ▁getmodulefilenamea ▁0x0 ▁c ▁windows ▁system32 ▁a 7f 91a 2c5 80 3e 9b d8 509 2e
+   704  f9 55 14 7d8 7 2f8 19 fdb b6 f2 7c8 18 cd 9c 69 f34
+   720  212 dc6 ▁0x104 ▁0x54 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32
+   736  ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror
+   752  ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0
+   768  ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none
+   784  ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32
+   800  ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror
+   816  ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0
+   832  ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32
+   848  ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue
+   864  ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0
+   880  ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001
+   896  ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32
+   912  ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue
+   928  ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0
+   944  ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0
+   960  ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32
+   976  ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror
+   992  ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0
+  1008  ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none
+  1024  ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32
+  1040  ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror
+  1056  ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0
+  1072  ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁heapalloc ▁0x46d0 ▁0x0
+  1088  ▁0x2a ▁0x7cd0 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0
+  1104  ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none
+  1120  ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32
+  1136  ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror
+  1152  ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0
+  1168  ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32
+  1184  ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue
+  1200  ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0
+  1216  ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001
+  1232  ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32
+  1248  ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue
+  1264  ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0
+  1280  ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0
+  1296  ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32
+  1312  ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror
+  1328  ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0
+  1344  ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none
+  1360  ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32
+  1376  ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror
+  1392  ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0
+  1408  ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32
+  1424  ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue
+  1440  ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁heapalloc ▁0x46d0 ▁0x8 ▁0x8 ▁0x7d00
+  1456  ▁kernel32 ▁heapalloc ▁0x46d0 ▁0x8 ▁0xcc ▁0x7d10 ▁kernel32 ▁heapfree ▁0x46d0 ▁0x0 ▁0x79d0 ▁0x1 ▁kernel32 ▁encodepointer ▁0x40a8 7a
+  1472  ▁0x40a8 7b ▁kernel32 ▁heapalloc ▁0x46d0 ▁0x8 ▁0x80 ▁0x7de0 ▁kernel32 ▁encodepointer ▁0x7de0 ▁0x7de1 ▁kernel32 ▁heapalloc ▁0x46d0 ▁0x8
+  1488  ▁0x800 ▁0x8000 ▁kernel32 ▁isprocessorfeaturepresent ▁pf ▁xmmi64 ▁instructions ▁available ▁0x1 ▁kernel32 ▁setunhandledexceptionfilter ▁0x406 f73 ▁0x0 ▁kernel32 ▁entercriticalsection
+  1504  ▁0x411bc8 ▁none ▁kernel32 ▁decodepointer ▁0x7de1 ▁0x7de0 ▁kernel32 ▁decodepointer ▁0x7de1 ▁0x7de0 ▁kernel32 ▁heap ▁0x46d0 ▁0x0 ▁0x7de0 ▁0x90
+  1520  ▁kernel32 ▁encodepointer ▁0x407 79f ▁0x4077 a0 ▁kernel32 ▁encodepointer ▁0x7de4 ▁0x7de5 ▁kernel32 ▁leavecriticalsection ▁0x411bc8 ▁none ▁kernel32 ▁getlasterror
+  1536  ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0
+  1552  ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32
+  1568  ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue
+  1584  ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0
+  1600  ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001
+  1616  ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32
+  1632  ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue
+  1648  ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0
+  1664  ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0
+  1680  ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32
+  1696  ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getcommandlinea ▁0x7810 ▁kernel32 ▁globalalloc ▁0x0 ▁0x53 ▁0x8810 ▁kernel32 ▁getmodulefilenamea ▁0x0 ▁c ▁windows
+  1712  ▁system32 ▁a 7f 91a 2c5 80 3e 9b d8 509 2e f9 55 14 7d8 7
+  1728  2f8 19 fdb b6 f2 7c8 18 cd 9c 69 f34 212 dc6 ▁0x100 ▁0x54 ▁kernel32
+  1744  ▁createdirectorya ▁c ▁program data ▁update ▁0x0 ▁0x1 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁createfilea ▁c ▁windows ▁system32 ▁a
+  1760  7f 91a 2c5 80 3e 9b d8 509 2e f9 55 14 7d8 7 2f8 19
+  1776  fdb b6 f2 7c8 18 cd 9c 69 f34 212 dc6 ▁generic ▁read ▁0x1 ▁0x0 ▁open
+  1792  ▁existing ▁0x80 ▁0x0 ▁0x2104 ▁kernel32 ▁getfile ▁0x2104 ▁0x0 ▁0x175 a0 ▁kernel32 ▁heapalloc ▁0x46d0 ▁0x0 ▁0x175 a0
+  1808  ▁0x19000 ▁kernel32 ▁createfilea ▁c ▁program data ▁update ▁ww ansvc ▁exe ▁generic ▁write ▁0x3 ▁0x0 ▁create ▁always
+  1824  ▁0x80 ▁0x0 ▁0x2108 ▁kernel32 ▁readfile ▁0x2104 ▁0x19000 ▁0x175 a0 ▁0x1211e3c ▁0x0 ▁0x1 ▁kernel32 ▁writefile ▁0x2108 ▁0x19000
+  1840  ▁4d5a90000300000004000000ffff0000 ▁0x175 a0 ▁0x1211e3c ▁0x0 ▁0x1 ▁kernel32 ▁gettickcount ▁0x5265c28 ▁kernel32 ▁writefile ▁0x2108 ▁0x1211e30 ▁285c2605 ▁0x4 ▁0x1211e3c
+  1856  ▁0x0 ▁0x1 ▁kernel32 ▁closehandle ▁0x2104 ▁0x1 ▁kernel32 ▁closehandle ▁0x2108 ▁0x1 ▁kernel32 ▁heapfree ▁0x46d0 ▁0x0 ▁0x19000 ▁0x1
+  1872  ▁advapi32 ▁regopenkeya ▁hkey ▁local ▁machine ▁software ▁microsoft ▁windows ▁current version ▁run ▁0x1211e40 ▁0x3 ▁advapi32 ▁regopenkeya ▁hkey
+  1888  ▁current ▁user ▁software ▁microsoft ▁windows ▁current version ▁run ▁0x1211e40 ▁0x3 ▁advapi32 ▁regclosekey ▁0x83828180 ▁0x6 ▁kernel32 ▁openmutexa
+  1904  ▁0x1f0001 ▁0x0 ▁mutex 3940 39 ▁4 9300 23 ▁0x0 ▁kernel32 ▁createmutexa ▁0x0 ▁0x0 ▁mutex 3940 39
+  1920  ▁4 9300 23 ▁0x3 504 ▁ws2 ▁32 ▁wsastartup ▁0x101 ▁0x1211da8 ▁0x0 ▁ws2 ▁32 ▁gethostbyname ▁1 58
+  1936  ▁69 ▁115 ▁115 ▁0xa000 ▁ws2 ▁32 ▁socket ▁af ▁inet ▁sock ▁stream ▁0x0 ▁0x4 ▁ws2 ▁32 ▁htons
+  1952  ▁0x1bb ▁0xb b01 ▁ws2 ▁32 ▁connect ▁0x4 ▁10 ▁1 ▁2 ▁3 ▁443 ▁0x10 ▁0x0 ▁advapi32 ▁getusernamea
+  1968  ▁triznadm ▁0x12116 18 ▁0x1 ▁kernel32 ▁getversionexa ▁0x1211568 ▁0x1 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32
+  1984  ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue
+  2000  ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0
+  2016  ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0
+  2032  ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32
+  2048  ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror
+  2064  ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0
+  2080  ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none
+  2096  ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32
+  2112  ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror
+  2128  ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0
+  2144  ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32
+  2160  ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue
+  2176  ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0
+  2192  ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001
+  2208  ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32
+  2224  ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁heapalloc ▁0x46d0 ▁0x0 ▁0x64 ▁0xa030 ▁advapi32 ▁regopenkeyexa ▁hkey
+  2240  ▁local ▁machine ▁software ▁microsoft ▁windows nt ▁current version ▁0x0 ▁0x20019 ▁0x12113a0 ▁0x3 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32
+  2256  ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue
+  2272  ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0
+  2288  ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001
+  2304  ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x46f0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32
+  2320  ▁flsgetvalue ▁0x0 ▁0x46f0
+

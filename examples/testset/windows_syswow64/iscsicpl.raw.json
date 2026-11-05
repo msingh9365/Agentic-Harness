@@ -1,0 +1,114 @@
+[
+    {
+        "ep_type": "module_entry",
+        "start_addr": "0x401ac0",
+        "ep_args": [
+            "0x4000",
+            "0x4010",
+            "0x4020",
+            "0x4030"
+        ],
+        "apihash": "ef6a987fdcccb203165e8e6ed906220c74531d341bd9c099842fb20565db6278",
+        "apis": [
+            {
+                "pc": "0x401dcc",
+                "api_name": "KERNEL32.GetSystemTimeAsFileTime",
+                "args": [
+                    "0x1211fd4"
+                ],
+                "ret_val": null
+            },
+            {
+                "pc": "0x401ddb",
+                "api_name": "KERNEL32.GetCurrentProcessId",
+                "args": [],
+                "ret_val": "0x2e80"
+            },
+            {
+                "pc": "0x401de4",
+                "api_name": "KERNEL32.GetCurrentThreadId",
+                "args": [],
+                "ret_val": "0x2e94"
+            },
+            {
+                "pc": "0x401ded",
+                "api_name": "KERNEL32.GetTickCount",
+                "args": [],
+                "ret_val": "0x5265c14"
+            },
+            {
+                "pc": "0x401e02",
+                "api_name": "KERNEL32.QueryPerformanceCounter",
+                "args": [
+                    "0x1211fcc"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x401854",
+                "api_name": "KERNEL32.GetStartupInfoW",
+                "args": [
+                    "0x1211f7c"
+                ],
+                "ret_val": null
+            },
+            {
+                "pc": "0x401be7",
+                "api_name": "KERNEL32.GetModuleHandleW",
+                "args": [
+                    "0x0"
+                ],
+                "ret_val": "0x400000"
+            },
+            {
+                "pc": "0x4017a8",
+                "api_name": "msvcrt.__set_app_type",
+                "args": [
+                    "0x2"
+                ],
+                "ret_val": null
+            },
+            {
+                "pc": "0x4017be",
+                "api_name": "msvcrt.__p__fmode",
+                "args": [],
+                "ret_val": "0x4600"
+            },
+            {
+                "pc": "0x4017cc",
+                "api_name": "msvcrt.__p__commode",
+                "args": [],
+                "ret_val": "0x4610"
+            },
+            {
+                "pc": "0x401e47",
+                "api_name": "msvcrt._controlfp",
+                "args": [
+                    "0x10000",
+                    "0x30000"
+                ],
+                "ret_val": "0x0"
+            },
+            {
+                "pc": "0x401b4b",
+                "api_name": "KERNEL32.SetUnhandledExceptionFilter",
+                "args": [
+                    "0x401af0"
+                ],
+                "ret_val": "0x0"
+            },
+            {
+                "pc": "0x4018f1",
+                "api_name": "msvcrt._initterm",
+                "args": [
+                    "0x4010c8",
+                    "0x4010d0"
+                ],
+                "ret_val": "0x0"
+            }
+        ],
+        "ret_val": "0xff",
+        "error": {},
+        "dynamic_code_segments": []
+    }
+]

@@ -1,0 +1,2078 @@
+{
+ "registry_access": [
+  {
+   "event": "open_key",
+   "path": "HKEY_CURRENT_USER\\Software\\CodeGear\\Locales"
+  },
+  {
+   "event": "open_key",
+   "path": "HKEY_LOCAL_MACHINE\\Software\\CodeGear\\Locales"
+  },
+  {
+   "event": "open_key",
+   "path": "HKEY_CURRENT_USER\\Software\\Borland\\Locales"
+  },
+  {
+   "event": "open_key",
+   "path": "HKEY_CURRENT_USER\\Software\\Borland\\Delphi\\Locales"
+  },
+  {
+   "event": "open_key",
+   "path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\FontSubstitutes"
+  }
+ ],
+ "apis": [
+  {
+   "api_name": "kernel32.GetModuleHandleW",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x400000"
+  },
+  {
+   "api_name": "kernel32.InitializeCriticalSection",
+   "args": [
+    "0x5f5c24"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.InitializeCriticalSection",
+   "args": [
+    "0x5f5b5c"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.GetVersion",
+   "args": [],
+   "ret_val": "0x1db10106"
+  },
+  {
+   "api_name": "kernel32.GetModuleHandleW",
+   "args": [
+    "kernel32.dll"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetThreadPreferredUILanguages"
+   ],
+   "ret_val": "0xfeee0000"
+  },
+  {
+   "api_name": "kernel32.GetModuleHandleW",
+   "args": [
+    "kernel32.dll"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "SetThreadPreferredUILanguages"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.GetModuleHandleW",
+   "args": [
+    "kernel32.dll"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetThreadUILanguage"
+   ],
+   "ret_val": "0xfeee0002"
+  },
+  {
+   "api_name": "kernel32.GetSystemInfo",
+   "args": [
+    "0x1211f2c"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.GetCommandLineW",
+   "args": [],
+   "ret_val": "0x45f0"
+  },
+  {
+   "api_name": "kernel32.GetStartupInfoA",
+   "args": [
+    "0x1211f08"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.GetACP",
+   "args": [],
+   "ret_val": "0x4e4"
+  },
+  {
+   "api_name": "kernel32.GetCurrentThreadId",
+   "args": [],
+   "ret_val": "0x6adcc"
+  },
+  {
+   "api_name": "kernel32.GetVersion",
+   "args": [],
+   "ret_val": "0x1db10106"
+  },
+  {
+   "api_name": "kernel32.GetVersionExW",
+   "args": [
+    "0x1211e3c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "kernel32.VirtualAlloc",
+   "args": [
+    "0x0",
+    "0x13fff0",
+    "0x1000",
+    "PAGE_READWRITE"
+   ],
+   "ret_val": "0x50000"
+  },
+  {
+   "api_name": "kernel32.GetModuleFileNameW",
+   "args": [
+    "0x400000",
+    "C:\\Windows\\system32\\3895d84b26a1c6b2670d27899ca0d131b8a8e5c3f52527a73007cf76434bf02c",
+    "0x20a"
+   ],
+   "ret_val": "0x54"
+  },
+  {
+   "api_name": "kernel32.GetModuleFileNameW",
+   "args": [
+    "0x0",
+    "C:\\Windows\\system32\\3895d84b26a1c6b2670d27899ca0d131b8a8e5c3f52527a73007cf76434bf02c",
+    "0x105"
+   ],
+   "ret_val": "0x54"
+  },
+  {
+   "api_name": "kernel32.lstrcpynW",
+   "args": [
+    "0x120f8aa",
+    "C:\\Windows\\system32\\3895d84b26a1c6b2670d27899ca0d131b8a8e5c3f52527a73007cf76434bf02c",
+    "0x105"
+   ],
+   "ret_val": "0x120f8aa"
+  },
+  {
+   "api_name": "kernel32.lstrlenW",
+   "args": [
+    "C:\\Windows\\system32\\3895d84b26a1c6b2670d27899ca0d131b8a8e5c3f52527a73007cf76434bf02c"
+   ],
+   "ret_val": "0x54"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xfff3",
+    "Outofmemory",
+    "0x1000"
+   ],
+   "ret_val": "0x1a"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffe1",
+    "Invalidpointeroperation",
+    "0x1000"
+   ],
+   "ret_val": "0x32"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffc7",
+    "Monitorsupportfunctionnotinitialized",
+    "0x1000"
+   ],
+   "ret_val": "0x50"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffc6",
+    "Objectlocknotowned",
+    "0x1000"
+   ],
+   "ret_val": "0x2a"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffc5",
+    "Exceptioninsafecallmethod",
+    "0x1000"
+   ],
+   "ret_val": "0x38"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffc4",
+    "Interfacenotsupported",
+    "0x1000"
+   ],
+   "ret_val": "0x2e"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffc2",
+    "Externalexception%x",
+    "0x1000"
+   ],
+   "ret_val": "0x2a"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffc3",
+    "Assertionfailed",
+    "0x1000"
+   ],
+   "ret_val": "0x20"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffd1",
+    "Variantorsafearrayindexoutofbounds",
+    "0x1000"
+   ],
+   "ret_val": "0x52"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffde",
+    "Invalidargument",
+    "0x1000"
+   ],
+   "ret_val": "0x20"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffd0",
+    "Errorcreatingvariantorsafearray",
+    "0x1000"
+   ],
+   "ret_val": "0x48"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffed",
+    "Variantmethodcallsnotsupported",
+    "0x1000"
+   ],
+   "ret_val": "0x44"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffd4",
+    "Invalidvariantoperation",
+    "0x1000"
+   ],
+   "ret_val": "0x32"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffd3",
+    "Invalidvarianttypeconversion",
+    "0x1000"
+   ],
+   "ret_val": "0x3e"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffe5",
+    "Stackoverflow",
+    "0x1000"
+   ],
+   "ret_val": "0x1c"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffe6",
+    "Control-Chit",
+    "0x1000"
+   ],
+   "ret_val": "0x1a"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffe7",
+    "Privilegedinstruction",
+    "0x1000"
+   ],
+   "ret_val": "0x2c"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffe4",
+    "Accessviolation",
+    "0x1000"
+   ],
+   "ret_val": "0x20"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffe2",
+    "Invalidclasstypecast",
+    "0x1000"
+   ],
+   "ret_val": "0x2c"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffe0",
+    "Floatingpointunderflow",
+    "0x1000"
+   ],
+   "ret_val": "0x30"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffff",
+    "Floatingpointoverflow",
+    "0x1000"
+   ],
+   "ret_val": "0x2e"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xfffe",
+    "Floatingpointdivisionbyzero",
+    "0x1000"
+   ],
+   "ret_val": "0x3e"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xfffd",
+    "Invalidfloatingpointoperation",
+    "0x1000"
+   ],
+   "ret_val": "0x40"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xfffc",
+    "Integeroverflow",
+    "0x1000"
+   ],
+   "ret_val": "0x20"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xfffb",
+    "Rangecheckerror",
+    "0x1000"
+   ],
+   "ret_val": "0x22"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xfffa",
+    "Divisionbyzero",
+    "0x1000"
+   ],
+   "ret_val": "0x20"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xfff9",
+    "Invalidnumericinput",
+    "0x1000"
+   ],
+   "ret_val": "0x2a"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xfff8",
+    "Diskfull",
+    "0x1000"
+   ],
+   "ret_val": "0x12"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xfff7",
+    "Readbeyondendoffile",
+    "0x1000"
+   ],
+   "ret_val": "0x2e"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xfff6",
+    "Fileaccessdenied",
+    "0x1000"
+   ],
+   "ret_val": "0x24"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xfff5",
+    "Toomanyopenfiles",
+    "0x1000"
+   ],
+   "ret_val": "0x26"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xff87",
+    "Invalidfilename-%s",
+    "0x1000"
+   ],
+   "ret_val": "0x2c"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xff50",
+    "Thespecifiedfilewasnotfound",
+    "0x1000"
+   ],
+   "ret_val": "0x40"
+  },
+  {
+   "api_name": "kernel32.GetVersionExW",
+   "args": [
+    "0x1211e2c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "kernel32.GetModuleHandleW",
+   "args": [
+    "kernel32.dll"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "kernel32.WideCharToMultiByte",
+   "args": [
+    "0x4e4",
+    "0x0",
+    "0x41cbb8",
+    "0x13",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x13"
+  },
+  {
+   "api_name": "kernel32.WideCharToMultiByte",
+   "args": [
+    "0x4e4",
+    "0x0",
+    "0x41cbb8",
+    "0x13",
+    "0x188d3c",
+    "0x13",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x13"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetDiskFreeSpaceExW"
+   ],
+   "ret_val": "0xfeee0003"
+  },
+  {
+   "api_name": "kernel32.GetModuleFileNameW",
+   "args": [
+    "0x0",
+    "C:\\Windows\\system32\\3895d84b26a1c6b2670d27899ca0d131b8a8e5c3f52527a73007cf76434bf02c",
+    "0x105"
+   ],
+   "ret_val": "0x54"
+  },
+  {
+   "api_name": "advapi32.RegOpenKeyExW",
+   "args": [
+    "HKEY_CURRENT_USER",
+    "Software\\CodeGear\\Locales",
+    "0x0",
+    "0xf0019",
+    "0x1211f30"
+   ],
+   "ret_val": "0x3"
+  },
+  {
+   "api_name": "advapi32.RegOpenKeyExW",
+   "args": [
+    "HKEY_LOCAL_MACHINE",
+    "Software\\CodeGear\\Locales",
+    "0x0",
+    "0xf0019",
+    "0x1211f30"
+   ],
+   "ret_val": "0x3"
+  },
+  {
+   "api_name": "advapi32.RegOpenKeyExW",
+   "args": [
+    "HKEY_CURRENT_USER",
+    "Software\\Borland\\Locales",
+    "0x0",
+    "0xf0019",
+    "0x1211f30"
+   ],
+   "ret_val": "0x3"
+  },
+  {
+   "api_name": "advapi32.RegOpenKeyExW",
+   "args": [
+    "HKEY_CURRENT_USER",
+    "Software\\Borland\\Delphi\\Locales",
+    "0x0",
+    "0xf0019",
+    "0x1211f30"
+   ],
+   "ret_val": "0x3"
+  },
+  {
+   "api_name": "kernel32.GetThreadLocale",
+   "args": [],
+   "ret_val": "0xc000"
+  },
+  {
+   "api_name": "kernel32.GetCPInfo",
+   "args": [
+    "0x0",
+    "0x1211ed0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "kernel32.GetThreadLocale",
+   "args": [],
+   "ret_val": "0xc000"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x44",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffcd",
+    "Jan",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x38",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffb9",
+    "January",
+    "0x1000"
+   ],
+   "ret_val": "0xe"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x45",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffce",
+    "Feb",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x39",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffba",
+    "February",
+    "0x1000"
+   ],
+   "ret_val": "0x10"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x46",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffcf",
+    "Mar",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x3a",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffbb",
+    "March",
+    "0x1000"
+   ],
+   "ret_val": "0xa"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x47",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffb0",
+    "Apr",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x3b",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffbc",
+    "April",
+    "0x1000"
+   ],
+   "ret_val": "0xa"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x48",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffb1",
+    "May",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x3c",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffbd",
+    "May",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x49",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffb2",
+    "Jun",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x3d",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffbe",
+    "June",
+    "0x1000"
+   ],
+   "ret_val": "0x8"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x4a",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffb3",
+    "Jul",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x3e",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffbf",
+    "July",
+    "0x1000"
+   ],
+   "ret_val": "0x8"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x4b",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffb4",
+    "Aug",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x3f",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffa0",
+    "August",
+    "0x1000"
+   ],
+   "ret_val": "0xc"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x4c",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffb5",
+    "Sep",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x40",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffa1",
+    "September",
+    "0x1000"
+   ],
+   "ret_val": "0x12"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x4d",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffb6",
+    "Oct",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x41",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffa2",
+    "October",
+    "0x1000"
+   ],
+   "ret_val": "0xe"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x4e",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffb7",
+    "Nov",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x42",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffa3",
+    "November",
+    "0x1000"
+   ],
+   "ret_val": "0x10"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x4f",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffb8",
+    "Dec",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x43",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffa4",
+    "December",
+    "0x1000"
+   ],
+   "ret_val": "0x10"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x37",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffa5",
+    "Sun",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x30",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffac",
+    "Sunday",
+    "0x1000"
+   ],
+   "ret_val": "0xc"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x31",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffa6",
+    "Mon",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x2a",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffad",
+    "Monday",
+    "0x1000"
+   ],
+   "ret_val": "0xc"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x32",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffa7",
+    "Tue",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x2b",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffae",
+    "Tuesday",
+    "0x1000"
+   ],
+   "ret_val": "0xe"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x33",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffa8",
+    "Wed",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x2c",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffaf",
+    "Wednesday",
+    "0x1000"
+   ],
+   "ret_val": "0x12"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x34",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffa9",
+    "Thu",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x2d",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xff90",
+    "Thursday",
+    "0x1000"
+   ],
+   "ret_val": "0x10"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x35",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffaa",
+    "Fri",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x2e",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xff91",
+    "Friday",
+    "0x1000"
+   ],
+   "ret_val": "0xc"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x36",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xffab",
+    "Sat",
+    "0x1000"
+   ],
+   "ret_val": "0x6"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x2f",
+    "0x1211c80",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadStringW",
+   "args": [
+    "0x400000",
+    "0xff92",
+    "Saturday",
+    "0x1000"
+   ],
+   "ret_val": "0x10"
+  },
+  {
+   "api_name": "kernel32.GetThreadLocale",
+   "args": [],
+   "ret_val": "0xc000"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x100b",
+    "0x1211cc4",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetThreadLocale",
+   "args": [],
+   "ret_val": "0xc000"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x14",
+    "0x1211ce0",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x1b",
+    "0x1211ce0",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x1c",
+    "0x1211ce0",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0xf",
+    "0x1211ed8",
+    "0x2"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0xe",
+    "0x1211ed8",
+    "0x2"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x19",
+    "0x1211ce0",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x1d",
+    "0x1211ed8",
+    "0x2"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x1f",
+    "0x1211ce0",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetThreadLocale",
+   "args": [],
+   "ret_val": "0xc000"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x1009",
+    "0x1211ca8",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x20",
+    "0x1211ce0",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x1e",
+    "0x1211ed8",
+    "0x2"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x28",
+    "0x1211ce0",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x29",
+    "0x1211ce0",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x25",
+    "0x1211ce0",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x23",
+    "0x1211ce0",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0x1005",
+    "0x1211ce0",
+    "0x100"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetLocaleInfoW",
+   "args": [
+    "0xc000",
+    "0xc",
+    "0x1211ed8",
+    "0x2"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetModuleHandleW",
+   "args": [
+    "oleaut32.dll"
+   ],
+   "ret_val": "0x5f800000"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VariantChangeTypeEx"
+   ],
+   "ret_val": "0xfeee0004"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarNeg"
+   ],
+   "ret_val": "0xfeee0005"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarNot"
+   ],
+   "ret_val": "0xfeee0006"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarAdd"
+   ],
+   "ret_val": "0xfeee0007"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarSub"
+   ],
+   "ret_val": "0xfeee0008"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarMul"
+   ],
+   "ret_val": "0xfeee0009"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarDiv"
+   ],
+   "ret_val": "0xfeee000a"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarIdiv"
+   ],
+   "ret_val": "0xfeee000b"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarMod"
+   ],
+   "ret_val": "0xfeee000c"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarAnd"
+   ],
+   "ret_val": "0xfeee000d"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarOr"
+   ],
+   "ret_val": "0xfeee000e"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarXor"
+   ],
+   "ret_val": "0xfeee000f"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarCmp"
+   ],
+   "ret_val": "0xfeee0010"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarI4FromStr"
+   ],
+   "ret_val": "0xfeee0011"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarR4FromStr"
+   ],
+   "ret_val": "0xfeee0012"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarR8FromStr"
+   ],
+   "ret_val": "0xfeee0013"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarDateFromStr"
+   ],
+   "ret_val": "0xfeee0014"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarCyFromStr"
+   ],
+   "ret_val": "0xfeee0015"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarBoolFromStr"
+   ],
+   "ret_val": "0xfeee0016"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarBstrFromCy"
+   ],
+   "ret_val": "0xfeee0017"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarBstrFromDate"
+   ],
+   "ret_val": "0xfeee0018"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "VarBstrFromBool"
+   ],
+   "ret_val": "0xfeee0019"
+  },
+  {
+   "api_name": "kernel32.InitializeCriticalSection",
+   "args": [
+    "0x5f7f30"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.InitializeCriticalSection",
+   "args": [
+    "0x5f7f70"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.CreateEventW",
+   "args": [
+    "0x0",
+    "0xffffffff",
+    "0x0",
+    ""
+   ],
+   "ret_val": "0x20bc"
+  },
+  {
+   "api_name": "kernel32.CreateEventW",
+   "args": [
+    "0x0",
+    "0xffffffff",
+    "0xffffffff",
+    "0x0"
+   ],
+   "ret_val": "0x20c0"
+  },
+  {
+   "api_name": "kernel32.CreateEventW",
+   "args": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x20c4"
+  },
+  {
+   "api_name": "kernel32.InitializeCriticalSection",
+   "args": [
+    "0x107538"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.InitializeCriticalSection",
+   "args": [
+    "0x107568"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.InitializeCriticalSection",
+   "args": [
+    "0x107598"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.QueryPerformanceCounter",
+   "args": [
+    "0x1211f28"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "user32.GetDC",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x88f68"
+  },
+  {
+   "api_name": "gdi32.GetDeviceCaps",
+   "args": [
+    "0x88f68",
+    "0x5a"
+   ],
+   "ret_val": "0x10"
+  },
+  {
+   "api_name": "user32.ReleaseDC",
+   "args": [
+    "0x0",
+    "0x88f68"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.GetDC",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x88f68"
+  },
+  {
+   "api_name": "gdi32.GetDeviceCaps",
+   "args": [
+    "0x88f68",
+    "0x68"
+   ],
+   "ret_val": "0x10"
+  },
+  {
+   "api_name": "gdi32.GetSystemPaletteEntries",
+   "args": [
+    "0x88f68",
+    "0x0",
+    "0x8",
+    "0x1211b3c"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "gdi32.GetSystemPaletteEntries",
+   "args": [
+    "0x88f68",
+    "0x8",
+    "0x8",
+    "0x1211b5c"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.ReleaseDC",
+   "args": [
+    "0x0",
+    "0x88f68"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "gdi32.CreatePalette",
+   "args": [
+    "0x1211b38",
+    "0x1e",
+    "0x100300",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.InitializeCriticalSection",
+   "args": [
+    "0x5f8114"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.InitializeCriticalSection",
+   "args": [
+    "0x5f812c"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "gdi32.GetStockObject",
+   "args": [
+    "0x7"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "gdi32.GetStockObject",
+   "args": [
+    "0x5"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "gdi32.GetStockObject",
+   "args": [
+    "0xd"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "user32.LoadIconW",
+   "args": [
+    "0x0",
+    "0x7f00"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "kernel32.MulDiv",
+   "args": [
+    "0x8",
+    "0x10",
+    "0x48",
+    "0x1211f58"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "advapi32.RegOpenKeyExW",
+   "args": [
+    "HKEY_LOCAL_MACHINE",
+    "SOFTWARE\\Microsoft\\WindowsNT\\CurrentVersion\\FontSubstitutes",
+    "0x0",
+    "0x20019",
+    "0x1211e1c"
+   ],
+   "ret_val": "0x3"
+  },
+  {
+   "api_name": "advapi32.RegOpenKeyExW",
+   "args": [
+    "HKEY_LOCAL_MACHINE",
+    "SOFTWARE\\Microsoft\\WindowsNT\\CurrentVersion\\FontSubstitutes",
+    "0x0",
+    "0x20009",
+    "0x1211e1c"
+   ],
+   "ret_val": "0x3"
+  },
+  {
+   "api_name": "advapi32.RegOpenKeyExW",
+   "args": [
+    "HKEY_LOCAL_MACHINE",
+    "SOFTWARE\\Microsoft\\WindowsNT\\CurrentVersion\\FontSubstitutes",
+    "0x0",
+    "0x1",
+    "0x1211e1c"
+   ],
+   "ret_val": "0x3"
+  },
+  {
+   "api_name": "kernel32.InitializeCriticalSection",
+   "args": [
+    "0x1075c8"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.InitializeCriticalSection",
+   "args": [
+    "0x1075f8"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.InitializeCriticalSection",
+   "args": [
+    "0x107628"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.InitializeCriticalSection",
+   "args": [
+    "0x188e00"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.InitializeCriticalSection",
+   "args": [
+    "0x107658"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.InitializeCriticalSection",
+   "args": [
+    "0x107688"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.EnterCriticalSection",
+   "args": [
+    "0x107568"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.LeaveCriticalSection",
+   "args": [
+    "0x107568"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.InitializeCriticalSection",
+   "args": [
+    "0x188e24"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.CompareStringW",
+   "args": [
+    "0x400",
+    "0x1",
+    "0x10e9bc",
+    "0x5"
+   ],
+   "ret_val": "0x0"
+  }
+ ]
+}

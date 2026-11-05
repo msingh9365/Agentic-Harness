@@ -1,0 +1,9 @@
+# total tokens: 57   kept by Nebula (first 512): 57   dropped: 0
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: apis  (tokens 0..56, 57 tokens)
+     0  ▁apis ▁kernel32 ▁getsystemtimeasfiletime ▁0x1211fd4 ▁none ▁kernel32 ▁getcurrentprocessid ▁0x2e 80 ▁kernel32 ▁getcurrentthreadid ▁0x2e 94 ▁kernel32 ▁gettickcount ▁0x5265c14
+    16  ▁kernel32 ▁queryperformancecounter ▁0x1211fcc ▁0x1 ▁kernel32 ▁getstartupinfow ▁0x1211f7c ▁none ▁kernel32 ▁getmodulehandlew ▁0x0 ▁0x400000 ▁msvcrt ▁set ▁app ▁type
+    32  ▁0x2 ▁none ▁msvcrt ▁p ▁fmode ▁0x4600 ▁msvcrt ▁p ▁commode ▁0x4610 ▁msvcrt ▁controlfp ▁0x10000 ▁0x30000 ▁0x0 ▁kernel32
+    48  ▁setunhandledexceptionfilter ▁0x401a f0 ▁0x0 ▁msvcrt ▁initterm ▁0x4010c8 ▁0x4010d0 ▁0x0
+

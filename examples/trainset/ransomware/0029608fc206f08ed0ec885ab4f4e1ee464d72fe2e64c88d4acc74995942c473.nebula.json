@@ -1,0 +1,1462 @@
+{
+ "apis": [
+  {
+   "api_name": "kernel32.GetVolumeInformation",
+   "args": [
+    "C:\\",
+    "0x0",
+    "0x0",
+    "0x1211fdc",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "kernel32.GetVersionEx",
+   "args": [
+    "0x1211f4c"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateFileA"
+   ],
+   "ret_val": "0xfeee0000"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateFileW"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "WriteFile"
+   ],
+   "ret_val": "0xfeee0002"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CloseHandle"
+   ],
+   "ret_val": "0xfeee0003"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "VirtualAlloc"
+   ],
+   "ret_val": "0xfeee0004"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "SetFilePointer"
+   ],
+   "ret_val": "0xfeee0005"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "ReadFile"
+   ],
+   "ret_val": "0xfeee0006"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "VirtualFree"
+   ],
+   "ret_val": "0xfeee0007"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetFileSize"
+   ],
+   "ret_val": "0xfeee0008"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "Sleep"
+   ],
+   "ret_val": "0xfeee0009"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "LoadLibraryA"
+   ],
+   "ret_val": "0xfeee000a"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "FreeLibrary"
+   ],
+   "ret_val": "0xfeee000b"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "FindFirstFileW"
+   ],
+   "ret_val": "0xfeee000c"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "RtlZeroMemory"
+   ],
+   "ret_val": "0xfeee000d"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateFileMappingA"
+   ],
+   "ret_val": "0xfeee000e"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "MapViewOfFile"
+   ],
+   "ret_val": "0xfeee000f"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "UnmapViewOfFile"
+   ],
+   "ret_val": "0xfeee0010"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "BeginUpdateResourceA"
+   ],
+   "ret_val": "0xfeee0011"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "BeginUpdateResourceW"
+   ],
+   "ret_val": "0xfeee0012"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GlobalAlloc"
+   ],
+   "ret_val": "0xfeee0013"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "UpdateResourceA"
+   ],
+   "ret_val": "0xfeee0014"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "EndUpdateResourceA"
+   ],
+   "ret_val": "0xfeee0015"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GlobalFree"
+   ],
+   "ret_val": "0xfeee0016"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetLogicalDriveStringsA"
+   ],
+   "ret_val": "0xfeee0017"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateToolhelp32Snapshot"
+   ],
+   "ret_val": "0xfeee0018"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "Process32First"
+   ],
+   "ret_val": "0xfeee0019"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "Process32Next"
+   ],
+   "ret_val": "0xfeee001a"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateDirectoryW"
+   ],
+   "ret_val": "0xfeee001b"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateDirectoryA"
+   ],
+   "ret_val": "0xfeee001c"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "SetFileAttributesW"
+   ],
+   "ret_val": "0xfeee001d"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "SetFileAttributesA"
+   ],
+   "ret_val": "0xfeee001e"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetEnvironmentVariableW"
+   ],
+   "ret_val": "0xfeee001f"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateProcessA"
+   ],
+   "ret_val": "0xfeee0020"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateProcessW"
+   ],
+   "ret_val": "0xfeee0021"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetModuleFileNameW"
+   ],
+   "ret_val": "0xfeee0022"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "ExitProcess"
+   ],
+   "ret_val": "0xfeee0023"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetModuleHandleA"
+   ],
+   "ret_val": "0xfeee0024"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetModuleFileNameA"
+   ],
+   "ret_val": "0xfeee0025"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetModuleHandleW"
+   ],
+   "ret_val": "0xfeee0026"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetLogicalDriveStringsW"
+   ],
+   "ret_val": "0xfeee0027"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "FindNextFileW"
+   ],
+   "ret_val": "0xfeee0028"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CopyFileW"
+   ],
+   "ret_val": "0xfeee0029"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CopyFileA"
+   ],
+   "ret_val": "0xfeee002a"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetFileAttributesW"
+   ],
+   "ret_val": "0xfeee002b"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetUserGeoID"
+   ],
+   "ret_val": "0xfeee002c"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GlobalLock"
+   ],
+   "ret_val": "0xfeee002d"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GlobalUnlock"
+   ],
+   "ret_val": "0xfeee002e"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "ExitThread"
+   ],
+   "ret_val": "0xfeee002f"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateThread"
+   ],
+   "ret_val": "0xfeee0030"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "OpenThread"
+   ],
+   "ret_val": "0xfeee0031"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "TerminateThread"
+   ],
+   "ret_val": "0xfeee0032"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateMutexA"
+   ],
+   "ret_val": "0xfeee0033"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "WaitForSingleObject"
+   ],
+   "ret_val": "0xfeee0034"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "ReleaseMutex"
+   ],
+   "ret_val": "0xfeee0035"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "FindClose"
+   ],
+   "ret_val": "0xfeee0036"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "LocalAlloc"
+   ],
+   "ret_val": "0xfeee0037"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "DeleteFileW"
+   ],
+   "ret_val": "0xfeee0038"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetSystemTimeAsFileTime"
+   ],
+   "ret_val": "0xfeee0039"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetTickCount"
+   ],
+   "ret_val": "0xfeee003a"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetCurrentDirectoryW"
+   ],
+   "ret_val": "0xfeee003b"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetCommandLineW"
+   ],
+   "ret_val": "0xfeee003c"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "WinExec"
+   ],
+   "ret_val": "0xfeee003d"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetCommandLineA"
+   ],
+   "ret_val": "0xfeee003e"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "DeleteFileA"
+   ],
+   "ret_val": "0xfeee003f"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "ResumeThread"
+   ],
+   "ret_val": "0xfeee0040"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "SuspendThread"
+   ],
+   "ret_val": "0xfeee0041"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateEventA"
+   ],
+   "ret_val": "0xfeee0042"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "SetEvent"
+   ],
+   "ret_val": "0xfeee0043"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetLastError"
+   ],
+   "ret_val": "0xfeee0044"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetEnvironmentVariableA"
+   ],
+   "ret_val": "0xfeee0045"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetCurrentThreadId"
+   ],
+   "ret_val": "0xfeee0046"
+  },
+  {
+   "api_name": "kernel32.LoadLibraryA",
+   "args": [
+    "mpr.dll"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x0",
+    "WNetOpenEnumW"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x0",
+    "WNetEnumResourceW"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x0",
+    "WNetAddConnection2W"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x0",
+    "WNetCancelConnection2W"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.LoadLibraryA",
+   "args": [
+    "user32.dll"
+   ],
+   "ret_val": "0x77d10000"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "GetDC"
+   ],
+   "ret_val": "0xfeee0047"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "DrawIcon"
+   ],
+   "ret_val": "0xfeee0048"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "DestroyIcon"
+   ],
+   "ret_val": "0xfeee0049"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "GetIconInfo"
+   ],
+   "ret_val": "0xfeee004a"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "FindWindowA"
+   ],
+   "ret_val": "0xfeee004b"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "LoadIconA"
+   ],
+   "ret_val": "0xfeee004c"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "SetTimer"
+   ],
+   "ret_val": "0xfeee004d"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "LoadCursorA"
+   ],
+   "ret_val": "0xfeee004e"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "RegisterClassExA"
+   ],
+   "ret_val": "0xfeee004f"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "CreateWindowExA"
+   ],
+   "ret_val": "0xfeee0050"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "UpdateWindow"
+   ],
+   "ret_val": "0xfeee0051"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "GetMessageA"
+   ],
+   "ret_val": "0xfeee0052"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "TranslateMessage"
+   ],
+   "ret_val": "0xfeee0053"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "DispatchMessageA"
+   ],
+   "ret_val": "0xfeee0054"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "InvalidateRect"
+   ],
+   "ret_val": "0xfeee0055"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "OpenClipboard"
+   ],
+   "ret_val": "0xfeee0056"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "EmptyClipboard"
+   ],
+   "ret_val": "0xfeee0057"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "FindWindowExA"
+   ],
+   "ret_val": "0xfeee0058"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "ShowWindow"
+   ],
+   "ret_val": "0xfeee0059"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "SendMessageA"
+   ],
+   "ret_val": "0xfeee005a"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "GetForegroundWindow"
+   ],
+   "ret_val": "0xfeee005b"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "GetKeyboardState"
+   ],
+   "ret_val": "0xfeee005c"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "GetKeyState"
+   ],
+   "ret_val": "0xfeee005d"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "BeginPaint"
+   ],
+   "ret_val": "0xfeee005e"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "DrawTextA"
+   ],
+   "ret_val": "0xfeee005f"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "FillRect"
+   ],
+   "ret_val": "0xfeee0060"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "DefWindowProcA"
+   ],
+   "ret_val": "0xfeee0061"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "PostQuitMessage"
+   ],
+   "ret_val": "0xfeee0062"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "EndPaint"
+   ],
+   "ret_val": "0xfeee0063"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "GetSystemMetrics"
+   ],
+   "ret_val": "0xfeee0064"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "SetClipboardData"
+   ],
+   "ret_val": "0xfeee0065"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "CloseClipboard"
+   ],
+   "ret_val": "0xfeee0066"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "SetClassLongA"
+   ],
+   "ret_val": "0xfeee0067"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "SetWindowPos"
+   ],
+   "ret_val": "0xfeee0068"
+  },
+  {
+   "api_name": "kernel32.LoadLibraryA",
+   "args": [
+    "shell32.dll"
+   ],
+   "ret_val": "0x69000000"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x69000000",
+    "ExtractAssociatedIconA"
+   ],
+   "ret_val": "0xfeee0069"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x69000000",
+    "ExtractAssociatedIconW"
+   ],
+   "ret_val": "0xfeee006a"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x69000000",
+    "ExtractIconExW"
+   ],
+   "ret_val": "0xfeee006b"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x69000000",
+    "ShellExecuteExW"
+   ],
+   "ret_val": "0xfeee006c"
+  },
+  {
+   "api_name": "kernel32.LoadLibraryA",
+   "args": [
+    "gdi32.dll"
+   ],
+   "ret_val": "0x77e10000"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77e10000",
+    "DeleteDC"
+   ],
+   "ret_val": "0xfeee006d"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77e10000",
+    "CreateCompatibleBitmap"
+   ],
+   "ret_val": "0xfeee006e"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77e10000",
+    "CreateCompatibleDC"
+   ],
+   "ret_val": "0xfeee006f"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77e10000",
+    "SelectObject"
+   ],
+   "ret_val": "0xfeee0070"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77e10000",
+    "GetDIBits"
+   ],
+   "ret_val": "0xfeee0071"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77e10000",
+    "DeleteObject"
+   ],
+   "ret_val": "0xfeee0072"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77e10000",
+    "GetObjectA"
+   ],
+   "ret_val": "0xfeee0073"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77e10000",
+    "CreateSolidBrush"
+   ],
+   "ret_val": "0xfeee0074"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77e10000",
+    "TextOutA"
+   ],
+   "ret_val": "0xfeee0075"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77e10000",
+    "CreateFontIndirectA"
+   ],
+   "ret_val": "0xfeee0076"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77e10000",
+    "SetBkColor"
+   ],
+   "ret_val": "0xfeee0077"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77e10000",
+    "SetTextColor"
+   ],
+   "ret_val": "0xfeee0078"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77e10000",
+    "CreateDIBSection"
+   ],
+   "ret_val": "0xfeee0079"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77e10000",
+    "BitBlt"
+   ],
+   "ret_val": "0xfeee007a"
+  },
+  {
+   "api_name": "kernel32.LoadLibraryA",
+   "args": [
+    "advapi32.dll"
+   ],
+   "ret_val": "0x78000000"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "InitializeSecurityDescriptor"
+   ],
+   "ret_val": "0xfeee007b"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "SetSecurityDescriptorDacl"
+   ],
+   "ret_val": "0xfeee007c"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "RegOpenKeyExA"
+   ],
+   "ret_val": "0xfeee007d"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "RegSetValueExW"
+   ],
+   "ret_val": "0xfeee007e"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "RegCloseKey"
+   ],
+   "ret_val": "0xfeee007f"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "GetUserNameA"
+   ],
+   "ret_val": "0xfeee0080"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "GetUserNameW"
+   ],
+   "ret_val": "0xfeee0081"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "OpenSCManagerW"
+   ],
+   "ret_val": "0xfeee0082"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "CreateServiceW"
+   ],
+   "ret_val": "0xfeee0083"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "OpenServiceW"
+   ],
+   "ret_val": "0xfeee0084"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "StartServiceW"
+   ],
+   "ret_val": "0xfeee0085"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "CloseServiceHandle"
+   ],
+   "ret_val": "0xfeee0086"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "StartServiceCtrlDispatcherW"
+   ],
+   "ret_val": "0xfeee0087"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "SetServiceStatus"
+   ],
+   "ret_val": "0xfeee0088"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "RegisterServiceCtrlHandlerW"
+   ],
+   "ret_val": "0xfeee0089"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "AllocateAndInitializeSid"
+   ],
+   "ret_val": "0xfeee008a"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "CheckTokenMembership"
+   ],
+   "ret_val": "0xfeee008b"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "FreeSid"
+   ],
+   "ret_val": "0xfeee008c"
+  },
+  {
+   "api_name": "kernel32.LoadLibraryA",
+   "args": [
+    "ws2_32.dll"
+   ],
+   "ret_val": "0x78c00000"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "socket"
+   ],
+   "ret_val": "0xfeee008d"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "gethostbyname"
+   ],
+   "ret_val": "0xfeee008e"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "htons"
+   ],
+   "ret_val": "0xfeee008f"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "connect"
+   ],
+   "ret_val": "0xfeee0090"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "ioctlsocket"
+   ],
+   "ret_val": "0xfeee0091"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "send"
+   ],
+   "ret_val": "0xfeee0092"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "select"
+   ],
+   "ret_val": "0xfeee0093"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "shutdown"
+   ],
+   "ret_val": "0xfeee0094"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "closesocket"
+   ],
+   "ret_val": "0xfeee0095"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "WSAStartup"
+   ],
+   "ret_val": "0xfeee0096"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "recv"
+   ],
+   "ret_val": "0xfeee0097"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "htonl"
+   ],
+   "ret_val": "0xfeee0098"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "bind"
+   ],
+   "ret_val": "0xfeee0099"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "listen"
+   ],
+   "ret_val": "0xfeee009a"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "accept"
+   ],
+   "ret_val": "0xfeee009b"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "getpeername"
+   ],
+   "ret_val": "0xfeee009c"
+  },
+  {
+   "api_name": "kernel32.VirtualAlloc",
+   "args": [
+    "0x0",
+    "0x400",
+    "0x1000",
+    "PAGE_EXECUTE_READWRITE"
+   ],
+   "ret_val": "0x50000"
+  },
+  {
+   "api_name": "kernel32.VirtualAlloc",
+   "args": [
+    "0x0",
+    "0x2ac45",
+    "0x1000",
+    "PAGE_EXECUTE_READWRITE"
+   ],
+   "ret_val": "0x7b000"
+  },
+  {
+   "api_name": "kernel32.VirtualAlloc",
+   "args": [
+    "0x0",
+    "0x200",
+    "0x3000",
+    "PAGE_EXECUTE_READWRITE"
+   ],
+   "ret_val": "0x51000"
+  },
+  {
+   "api_name": "kernel32.LocalAlloc",
+   "args": [
+    "0x40",
+    "0x14"
+   ],
+   "ret_val": "0x7910"
+  },
+  {
+   "api_name": "advapi32.InitializeSecurityDescriptor",
+   "args": [
+    "0x7910",
+    "0x1",
+    "0x40287e",
+    "0x432319"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "advapi32.SetSecurityDescriptorDacl",
+   "args": [
+    "0x7910",
+    "0x1",
+    "0x0",
+    "0x0"
+   ],
+   "ret_val": "0x0"
+  },
+  {
+   "api_name": "kernel32.VirtualAlloc",
+   "args": [
+    "0x0",
+    "0x200",
+    "0x3000",
+    "PAGE_EXECUTE_READWRITE"
+   ],
+   "ret_val": "0x52000"
+  },
+  {
+   "api_name": "kernel32.VirtualAlloc",
+   "args": [
+    "0x0",
+    "0x1e00000",
+    "0x3000",
+    "PAGE_EXECUTE_READWRITE"
+   ],
+   "ret_val": "0x1e50000"
+  },
+  {
+   "api_name": "kernel32.VirtualAlloc",
+   "args": [
+    "0x0",
+    "0x20000",
+    "0x3000",
+    "PAGE_EXECUTE_READWRITE"
+   ],
+   "ret_val": "0xb0000"
+  },
+  {
+   "api_name": "kernel32.VirtualAlloc",
+   "args": [
+    "0x0",
+    "0x200",
+    "0x3000",
+    "PAGE_EXECUTE_READWRITE"
+   ],
+   "ret_val": "0x53000"
+  },
+  {
+   "api_name": "kernel32.GetEnvironmentVariableW",
+   "args": [
+    "TEMP",
+    "0x53000",
+    "0x200"
+   ],
+   "ret_val": "0x11"
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+# total tokens: 123   kept by Nebula (first 512): 123   dropped: 0
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: file_access  (tokens 0..4, 5 tokens)
+     0  ▁file ▁access ▁create ▁conf ▁ini
+
+## field: apis  (tokens 5..122, 118 tokens)
+     5  ▁apis ▁kernel32 ▁createfilea ▁conf ▁ini ▁generic ▁read ▁0x0 ▁0x0 ▁open ▁existing ▁0x80 ▁0x0 ▁0xf ffff fff
+    21  ▁kernel32 ▁getprocessheap ▁0x45f0 ▁kernel32 ▁getcommandlinea ▁0x4610 ▁kernel32 ▁getmodulehandlea ▁0x0 ▁0x400000 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x0 ▁0x3fc ▁0x4630
+    37  ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x0 ▁0xc ▁0x4a30 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x0 ▁0x7 ▁0x4a40 ▁user32 ▁loadacceleratorsa ▁0x400000 ▁0xc8
+    53  ▁0x4 ▁comctl32 ▁initcommoncontrolsex ▁0x1211b44 ▁0x1 ▁user32 ▁loadicona ▁0x400000 ▁0x0 ▁0x0 ▁user32 ▁loadicona ▁0x400000 ▁0x7f00 ▁0x1 ▁user32
+    69  ▁loadcursora ▁0x0 ▁0x7f00 ▁0x8 ▁user32 ▁registerclassexa ▁0x1211b 14 ▁0x15 3 c44 ▁user32 ▁createwindowexa ▁0x0 ▁c la
+    85  s ics ▁re fu j o ▁0xcf0000 ▁0x80000000 ▁0x0 ▁0x80000000 ▁0x0 ▁0x0 ▁0x0 ▁0x400000 ▁0x0 ▁0x15
+   101  3 c4c ▁user32 ▁showwindow ▁0x15 3 c4c ▁0x0 ▁0x1 ▁user32 ▁updatewindow ▁0x15 3 c4c ▁0x1 ▁user32
+   117  ▁getmessagea ▁0x1211d6c ▁0x0 ▁0x0 ▁0x0 ▁0x0
+

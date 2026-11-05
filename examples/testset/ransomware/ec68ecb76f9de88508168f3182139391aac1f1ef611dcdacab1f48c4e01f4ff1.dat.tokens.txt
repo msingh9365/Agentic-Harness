@@ -1,0 +1,56 @@
+# total tokens: 761   kept by Nebula (first 512): 512   dropped: 249
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: apis  (tokens 0..760, 761 tokens)
+     0  ▁apis ▁kernel32 ▁getsystemtimeasfiletime ▁0x1211fd8 ▁none ▁kernel32 ▁getcurrentprocessid ▁0xa20 3c ▁kernel32 ▁getcurrentthreadid ▁0xa20 50 ▁kernel32 ▁gettickcount ▁0x5265c14
+    16  ▁kernel32 ▁queryperformancecounter ▁0x1211fd0 ▁0x1 ▁kernel32 ▁getstartupinfow ▁0x1211f7c ▁none ▁kernel32 ▁heapsetinformation ▁0x0 ▁0x1 ▁0x0 ▁0x0 ▁0x1 ▁kernel32
+    32  ▁heapcreate ▁0x0 ▁0x1000 ▁0x0 ▁0x46e0 ▁kernel32 ▁getmodulehandlew ▁kernel32 ▁dll ▁0x77000000 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁flsalloc ▁0xfeee0000 ▁kernel32
+    48  ▁getprocaddress ▁0x77000000 ▁flsgetvalue ▁0xfeee0001 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁flssetvalue ▁0xfeee0002 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁flsfree ▁0xfeee0003 ▁kernel32 ▁tlsalloc
+    64  ▁0x0 ▁kernel32 ▁tlssetvalue ▁0x0 ▁0xfeee0001 ▁0x1 ▁kernel32 ▁encodepointer ▁0x0 ▁0x1 ▁kernel32 ▁encodepointer ▁0x409 a65 ▁0x409 a66
+    80  ▁kernel32 ▁encodepointer ▁0xfeee0000 ▁0xfeee0001 ▁kernel32 ▁encodepointer ▁0xfeee0001 ▁0xfeee0002 ▁kernel32 ▁encodepointer ▁0xfeee0002 ▁0xfeee0003 ▁kernel32 ▁encodepointer ▁0xfeee0003 ▁0xfeee0004
+    96  ▁kernel32 ▁initializecriticalsectionandspincount ▁0x4b4 740 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x4b4 758 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x4b4 770
+   112  ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x4b4 788 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x4b4 7a0 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount
+   128  ▁0x4b4 7b8 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x4b4 7d0 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x4b4 7e8 ▁0xfa0 ▁0x1
+   144  ▁kernel32 ▁initializecriticalsectionandspincount ▁0x4b 4800 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x4b 4818 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x4b 48
+   160  30 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x4b 4848 ▁0xfa0 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x4b 4860 ▁0xfa0 ▁0x1 ▁kernel32
+   176  ▁initializecriticalsectionandspincount ▁0x4b 4878 ▁0xfa0 ▁0x1 ▁kernel32 ▁decodepointer ▁0xfeee0001 ▁0xfeee0000 ▁kernel32 ▁flsalloc ▁0x405b a9 ▁0x0 ▁kernel32 ▁heapalloc
+   192  ▁0x46e0 ▁0x8 ▁0x214 ▁0x4700 ▁kernel32 ▁decodepointer ▁0xfeee0003 ▁0xfeee0002 ▁kernel32 ▁flssetvalue ▁0x0 ▁0x4700 ▁0x1 ▁kernel32 ▁getmodulehandlew ▁kernel32
+   208  ▁dll ▁0x77000000 ▁kernel32 ▁entercriticalsection ▁0x4b 4818 ▁none ▁kernel32 ▁interlockedincrement ▁0x4ac 1b0 ▁0x1 ▁kernel32 ▁leavecriticalsection ▁0x4b 4818
+   224  ▁none ▁kernel32 ▁entercriticalsection ▁0x4b 4800 ▁none ▁kernel32 ▁interlockedincrement ▁0x4 ac8 40 ▁0x2 ▁kernel32 ▁interlockedincrement ▁0x4ac 78c
+   240  ▁0x1 ▁kernel32 ▁leavecriticalsection ▁0x4b 4800 ▁none ▁kernel32 ▁getcurrentthreadid ▁0xa20 50 ▁kernel32 ▁getstartupinfow ▁0x1211f18 ▁none ▁kernel32 ▁heapalloc
+   256  ▁0x46e0 ▁0x8 ▁0x800 ▁0x7000 ▁kernel32 ▁getstdhandle ▁0xf ffff ff6 ▁0xf001 ▁kernel32 ▁getfiletype ▁0xf001 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount
+   272  ▁0x700c ▁0xfa0 ▁0x1 ▁kernel32 ▁getstdhandle ▁0xf ffff ff5 ▁0xf002 ▁kernel32 ▁getfiletype ▁0xf002 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x704c
+   288  ▁0xfa0 ▁0x1 ▁kernel32 ▁getstdhandle ▁0xf ffff ff4 ▁0xf003 ▁kernel32 ▁getfiletype ▁0xf003 ▁0x1 ▁kernel32 ▁initializecriticalsectionandspincount ▁0x708c ▁0xfa0
+   304  ▁0x1 ▁kernel32 ▁sethandlecount ▁0x20 ▁0x20 ▁kernel32 ▁getcommandlinew ▁0x7810 ▁kernel32 ▁getenvironmentstringsw ▁0x7850 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x19a
+   320  ▁0x79f0 ▁kernel32 ▁fre een vironment stringsw ▁0x7850 ▁0x1 ▁kernel32 ▁getmodulefilenamew ▁0x0 ▁c ▁windows ▁system32 ▁ ec68
+   336  ec b76 f9 de88 508 168 f318 21 3939 1a ac1 f1 ef6 11 dc dac
+   352  ab 1f 48 c4 e0 1f4 ff1 ▁dat ▁0x104 ▁0x58 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x44 ▁0x7b90
+   368  ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x8 ▁0x8 ▁0x7be0 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x8 ▁0x198 ▁0x7bf0 ▁kernel32 ▁heapfree ▁0x46e0 ▁0x0
+   384  ▁0x79f0 ▁0x1 ▁kernel32 ▁encodepointer ▁0x40b f16 ▁0x40b f17 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32
+   400  ▁flsgetvalue ▁0x0 ▁0x4700 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue
+   416  ▁0x0 ▁0x4700 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁entercriticalsection ▁0x4b 4818 ▁none ▁kernel32 ▁leavecriticalsection ▁0x4b 4818 ▁none
+   432  ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x4700 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32
+   448  ▁getacp ▁0x4e4 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x0 ▁0x220 ▁0x7d90 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32
+   464  ▁flsgetvalue ▁0x0 ▁0x4700 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁isvalidcodepage ▁0x4e4 ▁0x1 ▁kernel32 ▁getcpinfo ▁0x4e4 ▁0x1211ee0 ▁0x1
+   480  ▁kernel32 ▁getcpinfo ▁0x4e4 ▁0x12119ac ▁0x1 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x4700
+   496  ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0123456789 ▁abcdefghi j klmnopqrstuvwxyz ▁abcdefghi j klmnopqrstuvwxyz ▁c
+
+-------- 512-token cut: Nebula never sees token 512 and later --------
+
+   512  ▁t ▁0x100 ▁0x0 ▁0x0 ▁0x10c ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0x1211dc0 ▁0x100 ▁0x1211718 ▁0x10c ▁0x100 ▁kernel32 ▁getstringtypew
+   528  ▁0x1 ▁0x1211718 ▁0x100 ▁0x12119c0 ▁0x1 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x4700
+   544  ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0123456789 ▁abcdefghi j klmnopqrstuvwxyz ▁abcdefghi j klmnopqrstuvwxyz ▁c
+   560  ▁t ▁0x100 ▁0x0 ▁0x0 ▁0x10c ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0x1211dc0 ▁0x100 ▁0x12116d8 ▁0x10c ▁0x100 ▁kernel32 ▁lcmapstringw
+   576  ▁0x0 ▁0x100 ▁0x12116d8 ▁0x10c ▁0x0 ▁0x0 ▁0x10c ▁kernel32 ▁lcmapstringw ▁0x0 ▁0x100 ▁0x12116d8 ▁0x10c ▁0x12114b8 ▁0x10c ▁0x10c
+   592  ▁kernel32 ▁widechartomultibyte ▁0x4e4 ▁0x0 ▁0x12114b8 ▁0x10c ▁0x1211cc0 ▁0x100 ▁0x0 ▁0x0 ▁0x100 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32 ▁tlsgetvalue
+   608  ▁0x0 ▁0xfeee0001 ▁kernel32 ▁flsgetvalue ▁0x0 ▁0x4700 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0x1 ▁0x0
+   624  ▁0x0 ▁0x1 ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0x1211dc0 ▁0x1 ▁0x1211918 ▁0x1 ▁0x1 ▁kernel32 ▁lcmapstringw ▁0x0 ▁0x200 ▁0x1211918
+   640  ▁0x1 ▁0x0 ▁0x0 ▁0x1 ▁kernel32 ▁lcmapstringw ▁0x0 ▁0x200 ▁0x1211918 ▁0x1 ▁0x1211908 ▁0x1 ▁0x1 ▁kernel32 ▁widechartomultibyte ▁0x4e4
+   656  ▁0x0 ▁0x1211908 ▁0x1 ▁0x1211bc0 ▁0x100 ▁0x0 ▁0x0 ▁0x100 ▁kernel32 ▁interlockeddecrement ▁0x4ac 1b0 ▁0x0 ▁kernel32 ▁interlockedincrement ▁0x7d90
+   672  ▁0x1 ▁kernel32 ▁entercriticalsection ▁0x4b 4818 ▁none ▁kernel32 ▁interlockeddecrement ▁0x4ac 1b0 ▁0xf ffff fff ▁kernel32 ▁interlockedincrement ▁0x7d90
+   688  ▁0x2 ▁kernel32 ▁leavecriticalsection ▁0x4b 4818 ▁none ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x8 ▁0x800 ▁0x8000 ▁kernel32 ▁heapalloc ▁0x46e0 ▁0x8
+   704  ▁0x80 ▁0x8810 ▁kernel32 ▁encodepointer ▁0x8810 ▁0x8811 ▁kernel32 ▁isprocessorfeaturepresent ▁pf ▁xmmi64 ▁instructions ▁available ▁0x1 ▁kernel32 ▁setunhandledexceptionfilter ▁0x4069
+   720  b8 ▁0x0 ▁kernel32 ▁entercriticalsection ▁0x4b4 7d0 ▁none ▁kernel32 ▁decodepointer ▁0x8811 ▁0x8810 ▁kernel32 ▁decodepointer ▁0x8811 ▁0x8810 ▁kernel32
+   736  ▁heap ▁0x46e0 ▁0x0 ▁0x8810 ▁0x90 ▁kernel32 ▁encodepointer ▁0x4076 34 ▁0x4076 35 ▁kernel32 ▁encodepointer ▁0x8814 ▁0x8815 ▁kernel32
+   752  ▁leavecriticalsection ▁0x4b4 7d0 ▁none ▁kernel32 ▁loadlibraryw ▁msimg32 ▁dll ▁0x0
+

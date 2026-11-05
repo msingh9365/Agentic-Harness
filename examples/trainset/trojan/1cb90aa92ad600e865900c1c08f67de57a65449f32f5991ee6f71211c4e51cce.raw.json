@@ -1,0 +1,656 @@
+[
+    {
+        "ep_type": "module_entry",
+        "start_addr": "0x401707",
+        "ep_args": [
+            "0x4000",
+            "0x4010",
+            "0x4020",
+            "0x4030"
+        ],
+        "apihash": "9c79b0d74694a4d10fce888f1eca3a518a4c3ffe33670427e7e73c381e6eae1c",
+        "apis": [
+            {
+                "pc": "0x40172c",
+                "api_name": "kernel32.VirtualAlloc",
+                "args": [
+                    "0x0",
+                    "0x69e",
+                    "0x3000",
+                    "PAGE_EXECUTE_READWRITE"
+                ],
+                "ret_val": "0x50000"
+            },
+            {
+                "pc": "0x50048",
+                "api_name": "kernel32.VirtualProtect",
+                "args": [
+                    "0x403000",
+                    "0x1000",
+                    "0x4",
+                    "0x1211fb8"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x50048",
+                "api_name": "kernel32.VirtualProtect",
+                "args": [
+                    "0x402000",
+                    "0x1000",
+                    "0x4",
+                    "0x1211fb8"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x50048",
+                "api_name": "kernel32.VirtualProtect",
+                "args": [
+                    "0x401000",
+                    "0x1000",
+                    "0x4",
+                    "0x1211fb8"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x50107",
+                "api_name": "kernel32.VirtualProtect",
+                "args": [
+                    "0x406000",
+                    "0x1",
+                    "0x40",
+                    "0x1211fc0"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x50131",
+                "api_name": "kernel32.GetModuleHandleA",
+                "args": [
+                    "WININET.dll"
+                ],
+                "ret_val": "0x7bc00000"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x7bc00000",
+                    "HttpSendRequestW"
+                ],
+                "ret_val": "0xfeee0000"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x7bc00000",
+                    "InternetSetOptionW"
+                ],
+                "ret_val": "0xfeee0001"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x7bc00000",
+                    "InternetQueryOptionW"
+                ],
+                "ret_val": "0xfeee0002"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x7bc00000",
+                    "HttpOpenRequestW"
+                ],
+                "ret_val": "0xfeee0003"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x7bc00000",
+                    "HttpQueryInfoW"
+                ],
+                "ret_val": "0xfeee0004"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x7bc00000",
+                    "InternetReadFile"
+                ],
+                "ret_val": "0xfeee0005"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x7bc00000",
+                    "InternetConnectW"
+                ],
+                "ret_val": "0xfeee0006"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x7bc00000",
+                    "InternetOpenW"
+                ],
+                "ret_val": "0xfeee0007"
+            },
+            {
+                "pc": "0x50131",
+                "api_name": "kernel32.GetModuleHandleA",
+                "args": [
+                    "kernel32.dll"
+                ],
+                "ret_val": "0x77000000"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77000000",
+                    "GetTempPathW"
+                ],
+                "ret_val": "0xfeee0008"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77000000",
+                    "GetFileSize"
+                ],
+                "ret_val": "0xfeee0009"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77000000",
+                    "GetCurrentDirectoryW"
+                ],
+                "ret_val": "0xfeee000a"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77000000",
+                    "DeleteFileW"
+                ],
+                "ret_val": "0xfeee000b"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77000000",
+                    "CloseHandle"
+                ],
+                "ret_val": "0xfeee000c"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77000000",
+                    "WriteFile"
+                ],
+                "ret_val": "0xfeee000d"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77000000",
+                    "lstrcmpW"
+                ],
+                "ret_val": "0xfeee000e"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77000000",
+                    "ReadFile"
+                ],
+                "ret_val": "0xfeee000f"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77000000",
+                    "GetModuleHandleW"
+                ],
+                "ret_val": "0xfeee0010"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77000000",
+                    "ExitProcess"
+                ],
+                "ret_val": "0xfeee0011"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77000000",
+                    "HeapCreate"
+                ],
+                "ret_val": "0xfeee0012"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77000000",
+                    "HeapAlloc"
+                ],
+                "ret_val": "0xfeee0013"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77000000",
+                    "GetModuleFileNameW"
+                ],
+                "ret_val": "0xfeee0014"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77000000",
+                    "CreateFileW"
+                ],
+                "ret_val": "0xfeee0015"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77000000",
+                    "lstrlenW"
+                ],
+                "ret_val": "0xfeee0016"
+            },
+            {
+                "pc": "0x50131",
+                "api_name": "kernel32.GetModuleHandleA",
+                "args": [
+                    "user32.dll"
+                ],
+                "ret_val": "0x77d10000"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x77d10000",
+                    "wsprintfW"
+                ],
+                "ret_val": "0xfeee0017"
+            },
+            {
+                "pc": "0x50131",
+                "api_name": "kernel32.GetModuleHandleA",
+                "args": [
+                    "SHELL32.dll"
+                ],
+                "ret_val": "0x69000000"
+            },
+            {
+                "pc": "0x50158",
+                "api_name": "kernel32.GetProcAddress",
+                "args": [
+                    "0x69000000",
+                    "ShellExecuteW"
+                ],
+                "ret_val": "0xfeee0018"
+            },
+            {
+                "pc": "0x502e1",
+                "api_name": "kernel32.VirtualProtect",
+                "args": [
+                    "0x403000",
+                    "0x1000",
+                    "0x4",
+                    "0x1211fc4"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x502e1",
+                "api_name": "kernel32.VirtualProtect",
+                "args": [
+                    "0x402000",
+                    "0x1000",
+                    "0x2",
+                    "0x1211fc4"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x502e1",
+                "api_name": "kernel32.VirtualProtect",
+                "args": [
+                    "0x401000",
+                    "0x1000",
+                    "0x20",
+                    "0x1211fc4"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x502f1",
+                "api_name": "kernel32.VirtualProtect",
+                "args": [
+                    "0x406000",
+                    "0x1",
+                    "0x20",
+                    "0x1211fc4"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x401020",
+                "api_name": "kernel32.VirtualFree",
+                "args": [
+                    "0x50000",
+                    "0x0",
+                    "0x8000"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x401035",
+                "api_name": "kernel32.GetModuleHandleW",
+                "args": [
+                    "0x0"
+                ],
+                "ret_val": "0x400000"
+            },
+            {
+                "pc": "0x401050",
+                "api_name": "kernel32.HeapCreate",
+                "args": [
+                    "0x0",
+                    "0x2000",
+                    "0x0"
+                ],
+                "ret_val": "0x45f0"
+            },
+            {
+                "pc": "0x40105f",
+                "api_name": "kernel32.HeapAlloc",
+                "args": [
+                    "0x45f0",
+                    "0x8",
+                    "0x2000"
+                ],
+                "ret_val": "0x7000"
+            },
+            {
+                "pc": "0x40106a",
+                "api_name": "kernel32.HeapAlloc",
+                "args": [
+                    "0x45f0",
+                    "0x8",
+                    "0x2000"
+                ],
+                "ret_val": "0x9000"
+            },
+            {
+                "pc": "0x401078",
+                "api_name": "kernel32.GetModuleFileNameW",
+                "args": [
+                    "0x0",
+                    "C:\\Windows\\system32\\1cb90aa92ad600e865900c1c08f67de57a65449f32f5991ee6f71211c4e51cce",
+                    "0x2000"
+                ],
+                "ret_val": "0x54"
+            },
+            {
+                "pc": "0x401086",
+                "api_name": "kernel32.GetTempPathW",
+                "args": [
+                    "0x1000",
+                    "C:\\Windows\\temp\\"
+                ],
+                "ret_val": "0x10"
+            },
+            {
+                "pc": "0x40109c",
+                "api_name": "user32.wsprintfW",
+                "args": [
+                    "Cq",
+                    "%s%s"
+                ],
+                "ret_val": "0x2"
+            },
+            {
+                "pc": "0x4010b8",
+                "api_name": "kernel32.CreateFileW",
+                "args": [
+                    "C:\\Windows\\system32\\1cb90aa92ad600e865900c1c08f67de57a65449f32f5991ee6f71211c4e51cce",
+                    "GENERIC_READ",
+                    "0x1",
+                    "0x0",
+                    "OPEN_EXISTING",
+                    "0x80",
+                    "0x0"
+                ],
+                "ret_val": "0x3490"
+            },
+            {
+                "pc": "0x4010d0",
+                "api_name": "kernel32.GetFileSize",
+                "args": [
+                    "0x3490",
+                    "0x0"
+                ],
+                "ret_val": "0x1f6a"
+            },
+            {
+                "pc": "0x4010de",
+                "api_name": "kernel32.lstrlenW",
+                "args": [
+                    "C:\\Windows\\system32\\1cb90aa92ad600e865900c1c08f67de57a65449f32f5991ee6f71211c4e51cce"
+                ],
+                "ret_val": "0x54"
+            },
+            {
+                "pc": "0x4010ed",
+                "api_name": "kernel32.HeapAlloc",
+                "args": [
+                    "0x45f0",
+                    "0x8",
+                    "0x2016"
+                ],
+                "ret_val": "0xd000"
+            },
+            {
+                "pc": "0x40110a",
+                "api_name": "kernel32.ReadFile",
+                "args": [
+                    "0x3490",
+                    "0xd000",
+                    "0x1f6a",
+                    "0x1211fc8",
+                    "0x0"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x401116",
+                "api_name": "kernel32.lstrcmpW",
+                "args": [
+                    "C:\\Windows\\system32\\1cb90aa92ad600e865900c1c08f67de57a65449f32f5991ee6f71211c4e51cce",
+                    "Cq\\Windows\\temp\\"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x401123",
+                "api_name": "kernel32.lstrlenW",
+                "args": [
+                    "C:\\Windows\\system32\\1cb90aa92ad600e865900c1c08f67de57a65449f32f5991ee6f71211c4e51cce"
+                ],
+                "ret_val": "0x54"
+            },
+            {
+                "pc": "0x401152",
+                "api_name": "kernel32.CreateFileW",
+                "args": [
+                    "Cq\\Windows\\temp\\",
+                    "GENERIC_WRITE",
+                    "0x2",
+                    "0x0",
+                    "CREATE_ALWAYS",
+                    "0x80",
+                    "0x0"
+                ],
+                "ret_val": "0x3494"
+            },
+            {
+                "pc": "0x401168",
+                "api_name": "kernel32.lstrlenW",
+                "args": [
+                    "C:\\Windows\\system32\\1cb90aa92ad600e865900c1c08f67de57a65449f32f5991ee6f71211c4e51cce"
+                ],
+                "ret_val": "0x54"
+            },
+            {
+                "pc": "0x401179",
+                "api_name": "kernel32.WriteFile",
+                "args": [
+                    "0x3494",
+                    "0xd000 (4d5a90000300000004000000ffff0000)",
+                    "0x2016",
+                    "0x1211fc8",
+                    "0x0"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x401184",
+                "api_name": "kernel32.CloseHandle",
+                "args": [
+                    "0x3490"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x401189",
+                "api_name": "kernel32.CloseHandle",
+                "args": [
+                    "0x3494"
+                ],
+                "ret_val": "0x1"
+            },
+            {
+                "pc": "0x401197",
+                "api_name": "kernel32.GetTempPathW",
+                "args": [
+                    "0x1000",
+                    "C:\\Windows\\temp\\"
+                ],
+                "ret_val": "0x10"
+            },
+            {
+                "pc": "0x4011ab",
+                "api_name": "shell32.ShellExecuteW",
+                "args": [
+                    "0x0",
+                    "open",
+                    "Cq\\Windows\\temp\\",
+                    "0x0",
+                    "C:\\Windows\\temp\\",
+                    "0x0"
+                ],
+                "ret_val": "0x21"
+            },
+            {
+                "pc": "0x401042",
+                "api_name": "kernel32.ExitProcess",
+                "args": [
+                    "0x0"
+                ],
+                "ret_val": "0x0"
+            }
+        ],
+        "ret_val": "0x21",
+        "error": {},
+        "file_access": [
+            {
+                "event": "open",
+                "path": "C:\\Windows\\system32\\1cb90aa92ad600e865900c1c08f67de57a65449f32f5991ee6f71211c4e51cce",
+                "open_flags": [
+                    "OPEN_EXISTING"
+                ],
+                "access_flags": [
+                    "GENERIC_READ"
+                ]
+            },
+            {
+                "event": "read",
+                "path": "C:\\Windows\\system32\\1cb90aa92ad600e865900c1c08f67de57a65449f32f5991ee6f71211c4e51cce",
+                "size": 8042,
+                "buffer": "0xd000"
+            },
+            {
+                "event": "create",
+                "path": "Cq\\Windows\\temp\\",
+                "open_flags": [
+                    "CREATE_ALWAYS"
+                ],
+                "access_flags": [
+                    "GENERIC_WRITE"
+                ]
+            },
+            {
+                "event": "write",
+                "path": "Cq\\Windows\\temp\\",
+                "data": "TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0AAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1vZGUuDQ0KJAAAAAAAAACAl1bgxPY4s8T2OLPE9jizzY6rs832OLPE9jmz3fY4s99rl7PG9jiz32uls8X2OLNSaWNoxPY4swAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBFAABMAQQARjddUgAAAAAAAAAA4AADAQsBCgAACgAAggMAAAAAAAAHFwAAABAAAAAgAAAAAEAAABAAAAACAAAFAAEAAAAAAAUAAQAAAAAAAHAAAAAEAAAAAAAAAgAAhwAAEAAAEAAAAAAQAAAQAAAAAAAAEAAAAAAAAAAAAAAAsmAAAGQAAAAAQAAAtAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABZhAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAABAAAAAKAAAABAAAAAAAAAAAAAAAAAAAYAAAYC5yc3JjAAAAABAAAABAAAAAAgAAAA4AAAAAAAAAAAAAAAAAAEAAAEAucmVsb2MAAAAQAAAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAABCcGV0aXRlAACCAQAAAGAAAIIBAAAAEAAAAAAAAAAAAAAAAAAAQAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+                "size": 8214,
+                "buffer": "0xd000"
+            }
+        ],
+        "process_events": [
+            {
+                "event": "create",
+                "pid": 1257500,
+                "path": "C:\\Windows\\temp\\\\Cq\\Windows\\temp\\",
+                "cmdline": ""
+            }
+        ],
+        "dynamic_code_segments": [
+            {
+                "tag": "api.VirtualAlloc.0x50000",
+                "base": "0x50000",
+                "size": "0x1000"
+            }
+        ],
+        "dropped_files": [
+            {
+                "path": "Cq\\Windows\\temp\\",
+                "size": 8214,
+                "sha256": "380d0e3c28ebcf44e07ba6aabb63803592e8d2a634a387e5bc4ab5861778a3e9"
+            }
+        ]
+    }
+]

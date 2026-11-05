@@ -1,0 +1,263 @@
+{
+ "registry_access": [
+  {
+   "event": "open_key",
+   "path": "HKEY_CURRENT_USER\\Software\\CodeGear\\Locales"
+  },
+  {
+   "event": "open_key",
+   "path": "HKEY_LOCAL_MACHINE\\Software\\CodeGear\\Locales"
+  },
+  {
+   "event": "open_key",
+   "path": "HKEY_CURRENT_USER\\Software\\Borland\\Locales"
+  },
+  {
+   "event": "open_key",
+   "path": "HKEY_CURRENT_USER\\Software\\Borland\\Delphi\\Locales"
+  }
+ ],
+ "apis": [
+  {
+   "api_name": "kernel32.GetModuleHandleW",
+   "args": [
+    "0x0"
+   ],
+   "ret_val": "0x400000"
+  },
+  {
+   "api_name": "kernel32.InitializeCriticalSection",
+   "args": [
+    "0x599c24"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.InitializeCriticalSection",
+   "args": [
+    "0x599b5c"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.GetVersion",
+   "args": [],
+   "ret_val": "0x1db10106"
+  },
+  {
+   "api_name": "kernel32.GetModuleHandleW",
+   "args": [
+    "kernel32.dll"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetThreadPreferredUILanguages"
+   ],
+   "ret_val": "0xfeee0000"
+  },
+  {
+   "api_name": "kernel32.GetModuleHandleW",
+   "args": [
+    "kernel32.dll"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "SetThreadPreferredUILanguages"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "kernel32.GetModuleHandleW",
+   "args": [
+    "kernel32.dll"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "kernel32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetThreadUILanguage"
+   ],
+   "ret_val": "0xfeee0002"
+  },
+  {
+   "api_name": "kernel32.GetSystemInfo",
+   "args": [
+    "0x1211f44"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.GetCommandLineW",
+   "args": [],
+   "ret_val": "0x45f0"
+  },
+  {
+   "api_name": "kernel32.GetStartupInfoA",
+   "args": [
+    "0x1211f20"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.GetACP",
+   "args": [],
+   "ret_val": "0x4e4"
+  },
+  {
+   "api_name": "kernel32.GetCurrentThreadId",
+   "args": [],
+   "ret_val": "0x589c"
+  },
+  {
+   "api_name": "kernel32.GetVersion",
+   "args": [],
+   "ret_val": "0x1db10106"
+  },
+  {
+   "api_name": "kernel32.GetVersionExW",
+   "args": [
+    "0x1211e54"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "kernel32.VirtualAlloc",
+   "args": [
+    "0x0",
+    "0x13fff0",
+    "0x1000",
+    "PAGE_READWRITE"
+   ],
+   "ret_val": "0x50000"
+  },
+  {
+   "api_name": "kernel32.GetModuleFileNameW",
+   "args": [
+    "0x400000",
+    "C:\\Windows\\system32\\02df4778c96f7ccd25e0ef1abe67b083f04c8a4d7470cab8911e18217da49f45.dat",
+    "0x20a"
+   ],
+   "ret_val": "0x58"
+  },
+  {
+   "api_name": "kernel32.GetModuleFileNameW",
+   "args": [
+    "0x0",
+    "C:\\Windows\\system32\\02df4778c96f7ccd25e0ef1abe67b083f04c8a4d7470cab8911e18217da49f45.dat",
+    "0x105"
+   ],
+   "ret_val": "0x58"
+  },
+  {
+   "api_name": "kernel32.lstrcpynW",
+   "args": [
+    "0x120f8c2",
+    "C:\\Windows\\system32\\02df4778c96f7ccd25e0ef1abe67b083f04c8a4d7470cab8911e18217da49f45.dat",
+    "0x105"
+   ],
+   "ret_val": "0x120f8c2"
+  },
+  {
+   "api_name": "kernel32.lstrlenW",
+   "args": [
+    "C:\\Windows\\system32\\02df4778c96f7ccd25e0ef1abe67b083f04c8a4d7470cab8911e18217da49f45.dat"
+   ],
+   "ret_val": "0x58"
+  },
+  {
+   "api_name": "kernel32.lstrcpynW",
+   "args": [
+    "0x120f66a",
+    "C:\\Windows\\system32\\02df4778c96f7ccd25e0ef1abe67b083f04c8a4d7470cab8911e18217da49f45.dat",
+    "0x105"
+   ],
+   "ret_val": "0x120f66a"
+  },
+  {
+   "api_name": "advapi32.RegOpenKeyExW",
+   "args": [
+    "HKEY_CURRENT_USER",
+    "Software\\CodeGear\\Locales",
+    "0x0",
+    "0xf0019",
+    "0x120f878"
+   ],
+   "ret_val": "0x3"
+  },
+  {
+   "api_name": "advapi32.RegOpenKeyExW",
+   "args": [
+    "HKEY_LOCAL_MACHINE",
+    "Software\\CodeGear\\Locales",
+    "0x0",
+    "0xf0019",
+    "0x120f878"
+   ],
+   "ret_val": "0x3"
+  },
+  {
+   "api_name": "advapi32.RegOpenKeyExW",
+   "args": [
+    "HKEY_CURRENT_USER",
+    "Software\\Borland\\Locales",
+    "0x0",
+    "0xf0019",
+    "0x120f878"
+   ],
+   "ret_val": "0x3"
+  },
+  {
+   "api_name": "advapi32.RegOpenKeyExW",
+   "args": [
+    "HKEY_CURRENT_USER",
+    "Software\\Borland\\Delphi\\Locales",
+    "0x0",
+    "0xf0019",
+    "0x120f878"
+   ],
+   "ret_val": "0x3"
+  },
+  {
+   "api_name": "kernel32.GetUserDefaultUILanguage",
+   "args": [],
+   "ret_val": "0xffff"
+  },
+  {
+   "api_name": "kernel32.EnterCriticalSection",
+   "args": [
+    "0x599b5c"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.LeaveCriticalSection",
+   "args": [
+    "0x599b5c"
+   ],
+   "ret_val": null
+  },
+  {
+   "api_name": "kernel32.IsValidLocale",
+   "args": [
+    "0xffff",
+    "0x2"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "kernel32.GetThreadUILanguage",
+   "args": [],
+   "ret_val": "0xffff"
+  }
+ ]
+}

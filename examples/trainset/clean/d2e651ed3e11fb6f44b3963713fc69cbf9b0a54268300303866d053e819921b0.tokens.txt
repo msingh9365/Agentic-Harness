@@ -1,0 +1,85 @@
+# total tokens: 1124   kept by Nebula (first 512): 512   dropped: 612
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: registry_access  (tokens 0..17, 18 tokens)
+     0  ▁registry ▁access ▁open ▁key ▁hkey ▁current ▁user ▁software ▁installs hi eld ▁isw i ▁7 ▁0 ▁setup
+    16  exe log
+
+## field: file_access  (tokens 18..29, 12 tokens)
+    18  ▁file ▁access ▁open ▁drive ▁windows ▁system32 ▁sha256 ▁read ▁drive ▁windows ▁system32 ▁sha256
+
+## field: apis  (tokens 30..1123, 1094 tokens)
+    30  ▁apis ▁kernel32 ▁getversion ▁0x1db10106 ▁kernel32 ▁heapcreate ▁0x0 ▁0x1000 ▁0x0 ▁0x45f0 ▁kernel32 ▁getversionexa ▁0x1211ec8 ▁0x1 ▁kernel32 ▁initializecriticalsection
+    46  ▁0x44 6998 ▁none ▁kernel32 ▁initializecriticalsection ▁0x44 69c8 ▁none ▁kernel32 ▁initializecriticalsection ▁0x44 69b0 ▁none ▁kernel32 ▁initializecriticalsection ▁0x44
+    62  6980 ▁none ▁kernel32 ▁tlsalloc ▁0x0 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x8 ▁0x80 ▁0x4610 ▁kernel32 ▁tlssetvalue ▁0x0 ▁0x4610 ▁0x1
+    78  ▁kernel32 ▁getcurrentthreadid ▁0x1a9 24 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x0 ▁0x480 ▁0x46a0 ▁kernel32 ▁getstartupinfoa ▁0x1211f20 ▁none ▁kernel32 ▁getstdhandle
+    94  ▁0xf ffff ff6 ▁0xf001 ▁kernel32 ▁getfiletype ▁0xf001 ▁0x1 ▁kernel32 ▁getstdhandle ▁0xf ffff ff5 ▁0xf002 ▁kernel32 ▁getfiletype
+   110  ▁0xf002 ▁0x1 ▁kernel32 ▁getstdhandle ▁0xf ffff ff4 ▁0xf003 ▁kernel32 ▁getfiletype ▁0xf003 ▁0x1 ▁kernel32 ▁sethandlecount ▁0x20 ▁0x20
+   126  ▁kernel32 ▁getcommandlinea ▁0x4bb0 ▁kernel32 ▁getenvironmentstringsw ▁0x4bd0 ▁kernel32 ▁widechartomultibyte ▁0x0 ▁0x0 ▁0x4bd0 ▁0xcd ▁0x0 ▁0x0 ▁0x0 ▁0x0
+   142  ▁0xcd ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x0 ▁0xd0 ▁0x4d70 ▁kernel32 ▁widechartomultibyte ▁0x0 ▁0x0 ▁0x4bd0 ▁0xcd ▁0x4d70 ▁0xcd ▁0x0
+   158  ▁0x0 ▁0xcd ▁kernel32 ▁fre een vironment stringsw ▁0x4bd0 ▁0x1 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x0 ▁0x20 ▁0x4e50 ▁kernel32
+   174  ▁entercriticalsection ▁0x44 6998 ▁none ▁kernel32 ▁initializecriticalsection ▁0x4e50 ▁none ▁kernel32 ▁leavecriticalsection ▁0x44 6998 ▁none ▁kernel32 ▁entercriticalsection ▁0x4e50
+   190  ▁none ▁kernel32 ▁getacp ▁0x4e4 ▁kernel32 ▁getcpinfo ▁0x4e4 ▁0x1211f2c ▁0x1 ▁kernel32 ▁getcpinfo ▁0x4e4 ▁0x1211f04 ▁0x1 ▁kernel32 ▁getstringtypew
+   206  ▁0x1 ▁0x438 1ec ▁0x1 ▁0x12119c0 ▁0x1 ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0123456789 ▁abcdefghi j klmnopqrstuvwxyz ▁abcdefghi j
+   222  klmnopqrstuvwxyz ▁0x100 ▁0x0 ▁0x0 ▁0x102 ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0x1211e04 ▁0x100 ▁0x12117a4 ▁0x102 ▁0x100 ▁kernel32 ▁getstringtypew
+   238  ▁0x1 ▁0x12117a4 ▁0x100 ▁0x1211a04 ▁0x1 ▁kernel32 ▁lcmapstringw ▁0x0 ▁0x100 ▁0x438 1ec ▁0x1 ▁0x0 ▁0x0 ▁0x1 ▁kernel32
+   254  ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0123456789 ▁abcdefghi j klmnopqrstuvwxyz ▁abcdefghi j klmnopqrstuvwxyz ▁0x100 ▁0x0 ▁0x0 ▁0x102 ▁kernel32 ▁multibytetowidechar
+   270  ▁0x4e4 ▁0x1 ▁0x1211e04 ▁0x100 ▁0x1211780 ▁0x102 ▁0x100 ▁kernel32 ▁lcmapstringw ▁0x0 ▁0x100 ▁0x1211780 ▁0x102 ▁0x0 ▁0x0 ▁0x102
+   286  ▁kernel32 ▁lcmapstringw ▁0x0 ▁0x100 ▁0x1211780 ▁0x102 ▁0x121157c ▁0x102 ▁0x102 ▁kernel32 ▁widechartomultibyte ▁0x4e4 ▁0x220 ▁0x121157c ▁0x102 ▁0x1211d04
+   302  ▁0x100 ▁0x0 ▁0x0 ▁0x100 ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1 ▁0x4 ▁0x0 ▁0x0 ▁0x5 ▁kernel32 ▁multibytetowidechar ▁0x4e4 ▁0x1
+   318  ▁0x1211e04 ▁0x4 ▁0x1211958 ▁0x5 ▁0x4 ▁kernel32 ▁lcmapstringw ▁0x0 ▁0x200 ▁0x1211958 ▁0x5 ▁0x0 ▁0x0 ▁0x5 ▁kernel32 ▁lcmapstringw
+   334  ▁0x0 ▁0x200 ▁0x1211958 ▁0x5 ▁0x121194c ▁0x5 ▁0x5 ▁kernel32 ▁widechartomultibyte ▁0x4e4 ▁0x220 ▁0x121194c ▁0x5 ▁0x1211c04 ▁0x100 ▁0x0
+   350  ▁0x0 ▁0x100 ▁kernel32 ▁leavecriticalsection ▁0x4e50 ▁none ▁kernel32 ▁getmodulefilenamea ▁0x0 ▁c ▁windows ▁system32 ▁d 2e6 51 ed
+   366  3e 11 fb6 f44 b39 63 71 3fc 69cb f9b0 a54 268 300 30 3866 d0
+   382  53e8 199 21b0 ▁0x104 ▁0x54 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x0 ▁0x30 ▁0x4e80 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x0 ▁0x10
+   398  ▁0x4ec0 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x0 ▁0xd0 ▁0x4ee0 ▁kernel32 ▁heapfree ▁0x45f0 ▁0x0 ▁0x4d70 ▁0x1 ▁kernel32 ▁getmodulehandlea ▁kernel32
+   414  ▁0x77000000 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁isprocessorfeaturepresent ▁0xfeee0000 ▁kernel32 ▁isprocessorfeaturepresent ▁pf ▁floating ▁point ▁precision ▁errata ▁0x1 ▁kernel32 ▁heapalloc
+   430  ▁0x45f0 ▁0x0 ▁0x80 ▁0x7000 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x8 ▁0x800 ▁0x7090 ▁kernel32 ▁setunhandledexceptionfilter ▁0x42f1 f4 ▁0x0 ▁kernel32
+   446  ▁entercriticalsection ▁0x44 69c8 ▁none ▁kernel32 ▁heap ▁0x45f0 ▁0x0 ▁0x7000 ▁0x90 ▁kernel32 ▁leavecriticalsection ▁0x44 69c8 ▁none ▁kernel32
+   462  ▁getmodulehandlea ▁kernel32 ▁0x77000000 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁iswow64process ▁0xfeee0001 ▁kernel32 ▁getmodulehandlea ▁kernel32 ▁0x77000000 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁getnativesysteminfo
+   478  ▁0xfeee0002 ▁kernel32 ▁getmodulehandlea ▁kernel32 ▁0x77000000 ▁kernel32 ▁getprocaddress ▁0x77000000 ▁wow64 enable wow64fsredirection ▁0xfeee0003 ▁kernel32 ▁entercriticalsection ▁0x44 69c8
+   494  ▁none ▁kernel32 ▁heap ▁0x45f0 ▁0x0 ▁0x7000 ▁0x90 ▁kernel32 ▁leavecriticalsection ▁0x44 69c8 ▁none ▁kernel32 ▁getstartupinfoa ▁0x1211f88 ▁none
+   510  ▁kernel32 ▁getmodulehandlea
+
+-------- 512-token cut: Nebula never sees token 512 and later --------
+
+   512  ▁0x0 ▁0x400000 ▁ole32 ▁coinitialize ▁0x0 ▁0x0 ▁kernel32 ▁lstrlena ▁0x0 ▁kernel32 ▁loadlibrarya ▁comctl32 ▁0x5f500000 ▁kernel32 ▁getprocaddress ▁0x5f500000
+   528  ▁initcommoncontrolsex ▁0xfeee0004 ▁comctl32 ▁initcommoncontrolsex ▁0x1210 d0c ▁0x1 ▁kernel32 ▁freelibrary ▁0x5f500000 ▁0x1 ▁advapi32 ▁regopenkeyexa ▁hkey ▁current ▁user
+   544  ▁software ▁installs hi eld ▁isw i ▁7 ▁0 ▁setup exe log ▁0x0 ▁0x1 ▁0x1210 3d4 ▁0x3
+   560  ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x0 ▁0x4940 ▁0xb000 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x0 ▁0x40 ▁0x7920 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x0
+   576  ▁0x40 ▁0x7970 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x0 ▁0x30 ▁0x79c0 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x0 ▁0x30 ▁0x7a00 ▁kernel32 ▁getlasterror
+   592  ▁0x0 ▁kernel32 ▁setlasterror ▁0x0 ▁none ▁kernel32 ▁getmodulefilenamea ▁0x400000 ▁c ▁windows ▁system32 ▁d 2e6 51 ed 3e
+   608  11 fb6 f44 b39 63 71 3fc 69cb f9b0 a54 268 300 30 3866 d0 53e8
+   624  199 21b0 ▁0x400 ▁0x54 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x0 ▁0x130 ▁0x7a40 ▁kernel32 ▁lstrcpya ▁0x7 a44 ▁c ▁windows
+   640  ▁system32 ▁d 2e6 51 ed 3e 11 fb6 f44 b39 63 71 3fc 69cb f9b0 a54
+   656  268 300 30 3866 d0 53e8 199 21b0 ▁0x7 a44 ▁kernel32 ▁createfilea ▁c ▁windows ▁system32 ▁d
+   672  2e6 51 ed 3e 11 fb6 f44 b39 63 71 3fc 69cb f9b0 a54 268 300
+   688  30 3866 d0 53e8 199 21b0 ▁generic ▁read ▁0x3 ▁0x0 ▁open ▁existing ▁0x80 ▁0x0 ▁0x468 ▁kernel32
+   704  ▁readfile ▁0x468 ▁0x120f f0c ▁0x40 ▁0x120ff74 ▁0x0 ▁0x1 ▁kernel32 ▁setfilepointer ▁0x468 ▁0xf8 ▁0x0 ▁0x0 ▁0xf8 ▁kernel32
+   720  ▁getlasterror ▁0x0 ▁kernel32 ▁readfile ▁0x468 ▁0x120fe 48 ▁0x18 ▁0x120ff74 ▁0x0 ▁0x1 ▁kernel32 ▁setfilepointer ▁0x468 ▁0xe0 ▁0x0
+   736  ▁0x1 ▁0x1f0 ▁kernel32 ▁readfile ▁0x468 ▁0x120ff 4c ▁0x28 ▁0x120ff74 ▁0x0 ▁0x1 ▁kernel32 ▁createfilemappinga ▁0x468 ▁0x0 ▁0x2
+   752  ▁0x0 ▁0x0 ▁0x0 ▁0x2d4 ▁kernel32 ▁mapviewoffile ▁0x2d4 ▁0x4 ▁0x0 ▁0x0 ▁0x0 ▁0x51000 ▁kernel32 ▁unmapviewoffile ▁0x51000 ▁0x1
+   768  ▁kernel32 ▁closehandle ▁0x2d4 ▁0x1 ▁kernel32 ▁closehandle ▁0x468 ▁0x1 ▁kernel32 ▁createfilea ▁c ▁windows ▁system32 ▁d 2e6 51
+   784  ed 3e 11 fb6 f44 b39 63 71 3fc 69cb f9b0 a54 268 300 30 3866
+   800  d0 53e8 199 21b0 ▁generic ▁read ▁0x3 ▁0x0 ▁open ▁existing ▁0x80 ▁0x0 ▁0x46c ▁kernel32 ▁heapalloc ▁0x45f0
+   816  ▁0x0 ▁0x30 ▁0x8000 ▁kernel32 ▁setfilepointer ▁0x46c ▁0x4 f000 ▁0x0 ▁0x0 ▁0x4 f000 ▁kernel32 ▁getlasterror ▁0x0 ▁kernel32
+   832  ▁readfile ▁0x46c ▁0x8000 ▁0x2e ▁0x120ff 98 ▁0x0 ▁0x1 ▁kernel32 ▁lstrcmpia ▁installs hi eld ▁installs hi eld
+   848  ▁0x0 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x0 ▁0x140 ▁0x8040 ▁kernel32 ▁readfile ▁0x46c ▁0x8040 ▁0x138 ▁0x120ff78 ▁0x0 ▁0x1 ▁kernel32
+   864  ▁heapalloc ▁0x45f0 ▁0x0 ▁0x10 ▁0x8190 ▁kernel32 ▁setfilepointer ▁0x46c ▁0x2e a ▁0x0 ▁0x1 ▁0x4f4 50 ▁kernel32 ▁getlasterror
+   880  ▁0x0 ▁kernel32 ▁getmodulefilenamea ▁0x400000 ▁c ▁windows ▁system32 ▁d 2e6 51 ed 3e 11 fb6 f44 b39
+   896  63 71 3fc 69cb f9b0 a54 268 300 30 3866 d0 53e8 199 21b0 ▁0x400 ▁0x54
+   912  ▁kernel32 ▁lstrlena ▁c ▁windows ▁system32 ▁d 2e6 51 ed 3e 11 fb6 f44 b39 63 71
+   928  3fc 69cb f9b0 a54 268 300 30 3866 d0 53e8 199 21b0 ▁0x54 ▁kernel32 ▁heapalloc ▁0x45f0
+   944  ▁0x0 ▁0x60 ▁0x81b0 ▁kernel32 ▁lstrcpya ▁0x81b0 ▁c ▁windows ▁system32 ▁d 2e6 51 ed 3e 11 fb6
+   960  f44 b39 63 71 3fc 69cb f9b0 a54 268 300 30 3866 d0 53e8 199 21b0
+   976  ▁0x81b0 ▁kernel32 ▁lstrcpya ▁0x120ff cc ▁c ▁windows ▁system32 ▁d 2e6 51 ed 3e 11 fb6 f44
+   992  b39 63 71 3fc 69cb f9b0 a54 268 300 30 3866 d0 53e8 199 21b0 ▁0x120ff
+  1008  cc ▁user32 ▁charnexta ▁0x120ff df ▁0x120ff e0 ▁kernel32 ▁lstrcpya ▁0x1210 3e8 ▁c ▁windows ▁system32 ▁0x1210 3e8
+  1024  ▁kernel32 ▁lstrcpya ▁0x1210 be8 ▁d 2e6 51 ed 3e 11 fb6 f44 b39 63 71 3fc
+  1040  69cb f9b0 a54 268 300 30 3866 d0 53e8 199 21b0 ▁0x1210 be8 ▁kernel32 ▁lstrlena ▁c
+  1056  ▁windows ▁system32 ▁0x13 ▁kernel32 ▁heapalloc ▁0x45f0 ▁0x0 ▁0x20 ▁0x82 20 ▁kernel32 ▁lstrcpya ▁0x82 20 ▁c ▁windows
+  1072  ▁system32 ▁0x82 20 ▁user32 ▁iswindow ▁0x0 ▁0x1 ▁user32 ▁wsprintfa ▁ 110 6 ▁u ▁0x4 ▁user32 ▁wsprintfa
+  1088  ▁0x 00 ▁04 x ▁0x4 ▁user32 ▁charnexta ▁0x120ef b0 ▁0x120ef b1 ▁user32 ▁charnexta ▁0x120ef b1 ▁0x120ef
+  1104  b2 ▁kernel32 ▁lstrlena ▁0x0 ▁kernel32 ▁lstrcpya ▁0x120 ebb0 ▁0x120 ebb0 ▁user32 ▁charpreva ▁0x120 ebb0 ▁0x120 ebb0
+  1120  ▁0x1 ▁0x120 e79c ▁0x0
+

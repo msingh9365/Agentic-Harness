@@ -1,0 +1,1551 @@
+{
+   "behavior": {
+                  "summary": {
+                                             "keys": [
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\OLEAUT",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\CustomLocale",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CustomLocale\\en-US",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\ExtendedLocale",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\ExtendedLocale\\en-US",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Sorting\\Versions\\00060101.00060101",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\Locale",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\Locale\\Alternate Sorts",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\Language Groups",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Locale\\00000409",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Language Groups\\1",
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\Windows Error Reporting\\WMR",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\Windows Error Reporting\\WMR\\Disable",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\SESSION MANAGER\\SafeProcessSearchMode",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\Codepage",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CodePage\\932",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CodePage\\949",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CodePage\\950",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CodePage\\936",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\VBA\\Monitors",
+                                                       "HKEY_CURRENT_USER\\Software\\Classes",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\COM3",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\COM3\\Com+Enabled",
+                                                       "HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{2BB12B86-59B8-4987-8489-2105F0A7A892}",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\OLE",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\OLE\\MaxSxSHashCount",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FolderDescriptions",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\Category",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\Name",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\ParentFolder",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\Description",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\RelativePath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\ParsingName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\InfoTip",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\LocalizedName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\Icon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\Security",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\StreamResource",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\StreamResourceType",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\LocalRedirectOnly",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\Roamable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\PreCreate",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\Stream",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\PublishExpandedPath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\Attributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\FolderTypeID",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\InitFolderHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\PropertyBag",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\KnownFolderSettings",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoPropertiesMyComputer",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoPropertiesRecycleBin",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoControlPanel",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoSetFolders",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoInternetIcon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ShellCompatibility\\Applications\\6B1CA35ACAD904E9FC0C.exe",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\SideBySide",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoCommonGroups",
+                                                       "HKEY_CLASSES_ROOT\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\Attributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\CallForAttributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\RestrictedAttributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsFORDISPLAY",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\HideFolderVerbs",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\UseDropHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsFORPARSING",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsParseDisplayName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\QueryForOverlay",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\MapNetDriveVerbs",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\QueryForInfoTip",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\HideInWebView",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\HideOnDesktopPerUser",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsAliasedNotifications",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsUniversalDelegate",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\NoFileFolderJunction",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\PinToNameSpaceTree",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\HasNavigationEnum",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\NonEnum",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\NonEnum",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\NonEnum\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3476-f160-11ea-9f0e-806e6f6e6963}\\",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3476-f160-11ea-9f0e-806e6f6e6963}\\Data",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3476-f160-11ea-9f0e-806e6f6e6963}\\Generation",
+                                                       "HKEY_CLASSES_ROOT\\Drive\\shellex\\FolderExtensions",
+                                                       "HKEY_CLASSES_ROOT\\Drive\\shellex\\FolderExtensions\\{fbeb8a05-beee-4442-804e-409d6c4515e9}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Drive\\shellex\\FolderExtensions\\{fbeb8a05-beee-4442-804e-409d6c4515e9}\\DriveMask",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                                                       "HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3475-f160-11ea-9f0e-806e6f6e6963}\\",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3475-f160-11ea-9f0e-806e6f6e6963}\\Data",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3475-f160-11ea-9f0e-806e6f6e6963}\\Generation",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\Category",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\Name",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\ParentFolder",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\Description",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\RelativePath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\ParsingName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\InfoTip",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\LocalizedName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\Icon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\Security",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\StreamResource",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\StreamResourceType",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\LocalRedirectOnly",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\Roamable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\PreCreate",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\Stream",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\PublishExpandedPath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\Attributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\FolderTypeID",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\InitFolderHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\PropertyBag",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\DontShowSuperHidden",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShellState",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoWebView",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\ClassicShell",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\SeparateProcess",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoNetCrawling",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoSimpleStartMenu",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\DontPrettyPath",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideIcons",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\MapNetDrvBtn",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\WebView",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Filter",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\NoNetCrawling",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\AutoCheckSelect",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\Shell\\RegisteredApplications\\UrlAssociations\\Directory\\OpenWithProgids",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\Shell\\Associations\\UrlAssociations\\Directory",
+                                                       "HKEY_CLASSES_ROOT\\Directory",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\CurVer",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\ShellEx\\IconHandler",
+                                                       "HKEY_CLASSES_ROOT\\Folder",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\ShellEx\\IconHandler",
+                                                       "HKEY_CLASSES_ROOT\\AllFilesystemObjects",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\ShellEx\\IconHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\DocObject",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\DocObject",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\DocObject",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\BrowseInPlace",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\BrowseInPlace",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\BrowseInPlace",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\Clsid",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\Clsid",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\Clsid",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\IsShortcut",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\IsShortcut",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\IsShortcut",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\AlwaysShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\NeverShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\NeverShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\NeverShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\Category",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\Name",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\ParentFolder",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\Description",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\RelativePath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\ParsingName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\InfoTip",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\LocalizedName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\Icon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\Security",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\StreamResource",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\StreamResourceType",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\LocalRedirectOnly",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\Roamable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\PreCreate",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\Stream",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\PublishExpandedPath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\Attributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\FolderTypeID",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\InitFolderHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\PropertyBag",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\ProgramFilesDir",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Category",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Name",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\ParentFolder",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Description",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\RelativePath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\ParsingName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\InfoTip",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\LocalizedName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Icon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Security",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\StreamResource",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\StreamResourceType",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\LocalRedirectOnly",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Roamable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\PreCreate",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Stream",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\PublishExpandedPath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Attributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\FolderTypeID",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\InitFolderHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\PropertyBag",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\LSA\\AccessProviders",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Lsa\\AccessProviders\\MartaExtension",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\Category",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\Name",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\ParentFolder",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\Description",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\RelativePath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\ParsingName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\InfoTip",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\LocalizedName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\Icon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\Security",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\StreamResource",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\StreamResourceType",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\LocalRedirectOnly",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\Roamable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\PreCreate",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\Stream",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\PublishExpandedPath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\Attributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\FolderTypeID",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\InitFolderHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\PropertyBag",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\SessionInfo\\1",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\SessionInfo\\1\\KnownFolders",
+                                                       "HKEY_CURRENT_USER",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\User Shell Folders",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\User Shell Folders\\AppData",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\Category",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\Name",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\ParentFolder",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\Description",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\RelativePath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\ParsingName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\InfoTip",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\LocalizedName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\Icon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\Security",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\StreamResource",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\StreamResourceType",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\LocalRedirectOnly",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\Roamable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\PreCreate",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\Stream",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\PublishExpandedPath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\Attributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\FolderTypeID",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\InitFolderHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\PropertyBag",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\User Shell Folders\\Desktop",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\Category",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\Name",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\ParentFolder",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\Description",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\RelativePath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\ParsingName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\InfoTip",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\LocalizedName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\Icon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\Security",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\StreamResource",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\StreamResourceType",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\LocalRedirectOnly",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\Roamable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\PreCreate",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\Stream",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\PublishExpandedPath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\Attributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\FolderTypeID",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\InitFolderHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\PropertyBag",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\User Shell Folders\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}",
+                                                       "HKEY_CURRENT_USER\\Software\\VB and VBA Program Settings\\Explorer\\Process",
+                                                       "HKEY_CURRENT_USER\\Software\\VB and VBA Program Settings\\Explorer\\Process\\LO",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Rpc\\Extensions",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Rpc\\Extensions\\NdrOleExtDLL",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\HTML Help",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\HTML Help\\.HLP",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\Help",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows NT\\CurrentVersion\\GRE_Initialize",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\GRE_Initialize\\DisableMetaFiles"
+                                                     ],
+                                    "resolved_apis": [
+                                                       "kernel32.dll.IsProcessorFeaturePresent",
+                                                       "kernel32.dll.SortGetHandle",
+                                                       "kernel32.dll.SortCloseHandle",
+                                                       "cryptbase.dll.SystemFunction036",
+                                                       "uxtheme.dll.ThemeInitApiHook",
+                                                       "user32.dll.IsProcessDPIAware",
+                                                       "oleaut32.dll.OleLoadPictureEx",
+                                                       "oleaut32.dll.DispCallFunc",
+                                                       "oleaut32.dll.LoadTypeLibEx",
+                                                       "oleaut32.dll.UnRegisterTypeLib",
+                                                       "oleaut32.dll.CreateTypeLib2",
+                                                       "oleaut32.dll.VarDateFromUdate",
+                                                       "oleaut32.dll.VarUdateFromDate",
+                                                       "oleaut32.dll.GetAltMonthNames",
+                                                       "oleaut32.dll.VarNumFromParseNum",
+                                                       "oleaut32.dll.VarParseNumFromStr",
+                                                       "oleaut32.dll.VarDecFromR4",
+                                                       "oleaut32.dll.VarDecFromR8",
+                                                       "oleaut32.dll.VarDecFromDate",
+                                                       "oleaut32.dll.VarDecFromI4",
+                                                       "oleaut32.dll.VarDecFromCy",
+                                                       "oleaut32.dll.VarR4FromDec",
+                                                       "oleaut32.dll.GetRecordInfoFromTypeInfo",
+                                                       "oleaut32.dll.GetRecordInfoFromGuids",
+                                                       "oleaut32.dll.SafeArrayGetRecordInfo",
+                                                       "oleaut32.dll.SafeArraySetRecordInfo",
+                                                       "oleaut32.dll.SafeArrayGetIID",
+                                                       "oleaut32.dll.SafeArraySetIID",
+                                                       "oleaut32.dll.SafeArrayCopyData",
+                                                       "oleaut32.dll.SafeArrayAllocDescriptorEx",
+                                                       "oleaut32.dll.SafeArrayCreateEx",
+                                                       "oleaut32.dll.VarFormat",
+                                                       "oleaut32.dll.VarFormatDateTime",
+                                                       "oleaut32.dll.VarFormatNumber",
+                                                       "oleaut32.dll.VarFormatPercent",
+                                                       "oleaut32.dll.VarFormatCurrency",
+                                                       "oleaut32.dll.VarWeekdayName",
+                                                       "oleaut32.dll.VarMonthName",
+                                                       "oleaut32.dll.VarAdd",
+                                                       "oleaut32.dll.VarAnd",
+                                                       "oleaut32.dll.VarCat",
+                                                       "oleaut32.dll.VarDiv",
+                                                       "oleaut32.dll.VarEqv",
+                                                       "oleaut32.dll.VarIdiv",
+                                                       "oleaut32.dll.VarImp",
+                                                       "oleaut32.dll.VarMod",
+                                                       "oleaut32.dll.VarMul",
+                                                       "oleaut32.dll.VarOr",
+                                                       "oleaut32.dll.VarPow",
+                                                       "oleaut32.dll.VarSub",
+                                                       "oleaut32.dll.VarXor",
+                                                       "oleaut32.dll.VarAbs",
+                                                       "oleaut32.dll.VarFix",
+                                                       "oleaut32.dll.VarInt",
+                                                       "oleaut32.dll.VarNeg",
+                                                       "oleaut32.dll.VarNot",
+                                                       "oleaut32.dll.VarRound",
+                                                       "oleaut32.dll.VarCmp",
+                                                       "oleaut32.dll.VarDecAdd",
+                                                       "oleaut32.dll.VarDecCmp",
+                                                       "oleaut32.dll.VarBstrCat",
+                                                       "oleaut32.dll.VarCyMulI4",
+                                                       "oleaut32.dll.VarBstrCmp",
+                                                       "ole32.dll.CoCreateInstanceEx",
+                                                       "ole32.dll.CLSIDFromProgIDEx",
+                                                       "sxs.dll.SxsOleAut32MapIIDOrCLSIDToTypeLibrary",
+                                                       "user32.dll.GetSystemMetrics",
+                                                       "user32.dll.MonitorFromWindow",
+                                                       "user32.dll.MonitorFromRect",
+                                                       "user32.dll.MonitorFromPoint",
+                                                       "user32.dll.EnumDisplayMonitors",
+                                                       "user32.dll.GetMonitorInfoA",
+                                                       "ole32.dll.CLSIDFromOle1Class",
+                                                       "clbcatq.dll.GetCatalogObject",
+                                                       "clbcatq.dll.GetCatalogObject2",
+                                                       "cryptsp.dll.CryptAcquireContextW",
+                                                       "cryptsp.dll.CryptGenRandom",
+                                                       "shell32.dll.SHGetSpecialFolderLocation",
+                                                       "ole32.dll.StringFromGUID2",
+                                                       "ole32.dll.CoInitializeEx",
+                                                       "ole32.dll.CreateBindCtx",
+                                                       "ole32.dll.CoTaskMemAlloc",
+                                                       "ole32.dll.CoGetApartmentType",
+                                                       "ole32.dll.CoRegisterInitializeSpy",
+                                                       "ole32.dll.CoTaskMemFree",
+                                                       "comctl32.dll.#236",
+                                                       "oleaut32.dll.#6",
+                                                       "ole32.dll.CoGetMalloc",
+                                                       "comctl32.dll.#320",
+                                                       "comctl32.dll.#324",
+                                                       "comctl32.dll.#323",
+                                                       "comctl32.dll.#328",
+                                                       "comctl32.dll.#334",
+                                                       "setupapi.dll.CM_Get_Device_Interface_List_Size_ExW",
+                                                       "advapi32.dll.RegEnumKeyW",
+                                                       "oleaut32.dll.#2",
+                                                       "setupapi.dll.CM_Get_Device_Interface_List_ExW",
+                                                       "ole32.dll.CoUninitialize",
+                                                       "comctl32.dll.#332",
+                                                       "shell32.dll.SHGetPathFromIDListA",
+                                                       "comctl32.dll.#386",
+                                                       "advapi32.dll.OpenThreadToken",
+                                                       "shell32.dll.#102",
+                                                       "ole32.dll.CoCreateInstance",
+                                                       "advapi32.dll.InitializeSecurityDescriptor",
+                                                       "advapi32.dll.SetEntriesInAclW",
+                                                       "ntmarta.dll.GetMartaExtensionInterface",
+                                                       "advapi32.dll.SetSecurityDescriptorDacl",
+                                                       "advapi32.dll.IsTextUnicode",
+                                                       "comctl32.dll.#338",
+                                                       "comctl32.dll.#339",
+                                                       "kernel32.dll.GetComputerNameA",
+                                                       "advapi32.dll.GetUserNameA",
+                                                       "kernel32.dll.NlsGetCacheUpdateCount",
+                                                       "kernel32.dll.CreateToolhelp32Snapshot",
+                                                       "kernel32.dll.Process32First",
+                                                       "kernel32.dll.OpenProcess",
+                                                       "psapi.dll.GetModuleFileNameExA",
+                                                       "kernel32.dll.Process32Next",
+                                                       "kernel32.dll.CloseHandle",
+                                                       "kernel32.dll.GetFileAttributesA",
+                                                       "ole32.dll.NdrOleInitializeExtension",
+                                                       "ole32.dll.CoGetClassObject",
+                                                       "ole32.dll.CoGetMarshalSizeMax",
+                                                       "ole32.dll.CoMarshalInterface",
+                                                       "ole32.dll.CoUnmarshalInterface",
+                                                       "ole32.dll.StringFromIID",
+                                                       "ole32.dll.CoGetPSClsid",
+                                                       "ole32.dll.CoReleaseMarshalData",
+                                                       "ole32.dll.DcomChannelSetHResult",
+                                                       "ole32.dll.CoRevokeInitializeSpy",
+                                                       "comctl32.dll.#388",
+                                                       "oleaut32.dll.#500",
+                                                       "advapi32.dll.UnregisterTraceGuids",
+                                                       "comctl32.dll.#321",
+                                                       "cryptsp.dll.CryptReleaseContext"
+                                                     ],
+                                "executed_commands": [
+                                                       "c:\\windows\\system\\explorer.exe"
+                                                     ],
+                                       "write_keys": [
+                                                       "HKEY_CURRENT_USER\\Software\\VB and VBA Program Settings\\Explorer\\Process",
+                                                       "HKEY_CURRENT_USER\\Software\\VB and VBA Program Settings\\Explorer\\Process\\LO"
+                                                     ],
+                                            "files": [
+                                                       "C:\\Windows\\Globalization\\Sorting\\sortdefault.nls",
+                                                       "\\Device\\KsecDD",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\6B1CA35ACAD904E9FC0C.exe.cfg",
+                                                       "C:\\Windows\\sysnative\\C_932.NLS",
+                                                       "C:\\Windows\\sysnative\\C_949.NLS",
+                                                       "C:\\Windows\\sysnative\\C_950.NLS",
+                                                       "C:\\Windows\\sysnative\\C_936.NLS",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\~DFB493405A3AA347DC.TMP",
+                                                       "C:\\Windows",
+                                                       "C:\\Windows\\SysWOW64\\shell32.dll",
+                                                       "C:\\",
+                                                       "\\??\\MountPointManager",
+                                                       "C:\\Windows\\System32",
+                                                       "C:\\Program Files (x86)",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Microsoft\\Windows\\Caches",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Microsoft\\Windows\\Caches\\cversions.1.db",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Microsoft\\Windows\\Caches\\{AFBF9F1A-8EE8-4C77-AF34-C647E37CA0D9}.1.ver0x0000000000000003.db",
+                                                       "C:\\Program Files (x86)\\desktop.ini",
+                                                       "C:\\Users\\comp\\AppData\\Roaming",
+                                                       "C:\\Users",
+                                                       "C:\\Users\\desktop.ini",
+                                                       "C:\\Users\\comp",
+                                                       "C:\\Users\\comp\\AppData",
+                                                       "C:\\Users\\comp\\Desktop\\desktop.ini",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\6b1ca35acad904e9fc0c.exe",
+                                                       "C:\\Windows\\system\\explorer.exe",
+                                                       "C:\\Windows\\WINHELP.INI",
+                                                       "C:\\Windows\\System32\\.HLP",
+                                                       "C:\\Windows\\Help\\.HLP"
+                                                     ],
+                                       "read_files": [
+                                                       "C:\\Windows\\Globalization\\Sorting\\sortdefault.nls",
+                                                       "\\Device\\KsecDD",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\~DFB493405A3AA347DC.TMP",
+                                                       "C:\\Windows\\SysWOW64\\shell32.dll",
+                                                       "C:\\",
+                                                       "C:\\Windows",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Microsoft\\Windows\\Caches\\cversions.1.db",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Microsoft\\Windows\\Caches\\{AFBF9F1A-8EE8-4C77-AF34-C647E37CA0D9}.1.ver0x0000000000000003.db",
+                                                       "C:\\Program Files (x86)\\desktop.ini",
+                                                       "C:\\Users\\desktop.ini",
+                                                       "C:\\Users",
+                                                       "C:\\Users\\comp",
+                                                       "C:\\Users\\comp\\AppData",
+                                                       "C:\\Users\\comp\\Desktop\\desktop.ini",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\6b1ca35acad904e9fc0c.exe",
+                                                       "C:\\Windows\\system\\explorer.exe",
+                                                       "C:\\Windows\\WINHELP.INI"
+                                                     ],
+                                 "started_services": [],
+                                 "created_services": [],
+                                      "write_files": [
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\~DFB493405A3AA347DC.TMP",
+                                                       "C:\\Windows\\system\\explorer.exe"
+                                                     ],
+                                      "delete_keys": [],
+                                        "read_keys": [
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CustomLocale\\en-US",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\ExtendedLocale\\en-US",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Sorting\\Versions\\00060101.00060101",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Locale\\00000409",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Language Groups\\1",
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\Windows Error Reporting\\WMR\\Disable",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\SESSION MANAGER\\SafeProcessSearchMode",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CodePage\\932",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CodePage\\949",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CodePage\\950",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CodePage\\936",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\COM3\\Com+Enabled",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\OLE\\MaxSxSHashCount",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\Category",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\Name",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\ParentFolder",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\Description",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\RelativePath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\ParsingName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\InfoTip",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\LocalizedName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\Icon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\Security",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\StreamResource",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\StreamResourceType",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\LocalRedirectOnly",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\Roamable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\PreCreate",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\Stream",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\PublishExpandedPath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\Attributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\FolderTypeID",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\InitFolderHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoPropertiesMyComputer",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoPropertiesRecycleBin",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoControlPanel",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoSetFolders",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoInternetIcon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoCommonGroups",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\Attributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\CallForAttributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\RestrictedAttributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsFORDISPLAY",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\HideFolderVerbs",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\UseDropHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsFORPARSING",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsParseDisplayName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\QueryForOverlay",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\MapNetDriveVerbs",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\QueryForInfoTip",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\HideInWebView",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\HideOnDesktopPerUser",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsAliasedNotifications",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsUniversalDelegate",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\NoFileFolderJunction",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\PinToNameSpaceTree",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\HasNavigationEnum",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\NonEnum\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3476-f160-11ea-9f0e-806e6f6e6963}\\Data",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3476-f160-11ea-9f0e-806e6f6e6963}\\Generation",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Drive\\shellex\\FolderExtensions\\{fbeb8a05-beee-4442-804e-409d6c4515e9}\\DriveMask",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3475-f160-11ea-9f0e-806e6f6e6963}\\Data",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3475-f160-11ea-9f0e-806e6f6e6963}\\Generation",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\Category",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\Name",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\ParentFolder",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\Description",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\RelativePath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\ParsingName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\InfoTip",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\LocalizedName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\Icon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\Security",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\StreamResource",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\StreamResourceType",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\LocalRedirectOnly",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\Roamable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\PreCreate",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\Stream",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\PublishExpandedPath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\Attributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\FolderTypeID",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\InitFolderHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\DontShowSuperHidden",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShellState",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoWebView",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\ClassicShell",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\SeparateProcess",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoNetCrawling",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoSimpleStartMenu",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\DontPrettyPath",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideIcons",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\MapNetDrvBtn",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\WebView",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Filter",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\NoNetCrawling",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\AutoCheckSelect",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\DocObject",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\DocObject",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\DocObject",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\BrowseInPlace",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\BrowseInPlace",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\BrowseInPlace",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\IsShortcut",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\IsShortcut",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\IsShortcut",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\AlwaysShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\NeverShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\NeverShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\NeverShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\Category",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\Name",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\ParentFolder",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\Description",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\RelativePath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\ParsingName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\InfoTip",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\LocalizedName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\Icon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\Security",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\StreamResource",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\StreamResourceType",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\LocalRedirectOnly",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\Roamable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\PreCreate",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\Stream",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\PublishExpandedPath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\Attributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\FolderTypeID",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{905E63B6-C1BF-494E-B29C-65B732D3D21A}\\InitFolderHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\ProgramFilesDir",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Category",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Name",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\ParentFolder",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Description",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\RelativePath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\ParsingName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\InfoTip",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\LocalizedName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Icon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Security",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\StreamResource",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\StreamResourceType",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\LocalRedirectOnly",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Roamable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\PreCreate",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Stream",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\PublishExpandedPath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Attributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\FolderTypeID",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\InitFolderHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Lsa\\AccessProviders\\MartaExtension",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\Category",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\Name",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\ParentFolder",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\Description",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\RelativePath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\ParsingName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\InfoTip",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\LocalizedName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\Icon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\Security",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\StreamResource",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\StreamResourceType",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\LocalRedirectOnly",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\Roamable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\PreCreate",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\Stream",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\PublishExpandedPath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\Attributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\FolderTypeID",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}\\InitFolderHandler",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\User Shell Folders\\AppData",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\Category",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\Name",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\ParentFolder",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\Description",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\RelativePath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\ParsingName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\InfoTip",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\LocalizedName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\Icon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\Security",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\StreamResource",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\StreamResourceType",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\LocalRedirectOnly",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\Roamable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\PreCreate",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\Stream",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\PublishExpandedPath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\Attributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\FolderTypeID",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\InitFolderHandler",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\User Shell Folders\\Desktop",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\Category",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\Name",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\ParentFolder",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\Description",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\RelativePath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\ParsingName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\InfoTip",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\LocalizedName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\Icon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\Security",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\StreamResource",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\StreamResourceType",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\LocalRedirectOnly",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\Roamable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\PreCreate",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\Stream",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\PublishExpandedPath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\Attributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\FolderTypeID",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\FolderDescriptions\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}\\InitFolderHandler",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\User Shell Folders\\{1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Rpc\\Extensions\\NdrOleExtDLL",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\HTML Help\\.HLP",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\GRE_Initialize\\DisableMetaFiles"
+                                                     ],
+                                     "delete_files": [
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\~DFB493405A3AA347DC.TMP"
+                                                     ],
+                                          "mutexes": []
+                             }
+               },
+     "static": {
+                  "pe": {
+                                    "icon_hash": null,
+                                     "sections": [
+                                                   {
+                                                              "raw_address": "0x00001000",
+                                                                     "name": ".text",
+                                                          "characteristics": "IMAGE_SCN_CNT_CODE|IMAGE_SCN_MEM_EXECUTE|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE",
+                                                             "virtual_size": "0x00025038",
+                                                          "virtual_address": "0x00001000",
+                                                             "size_of_data": "0x00026000",
+                                                                  "entropy": "5.91",
+                                                      "characteristics_raw": "0xe0000020"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00027000",
+                                                                     "name": ".data",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE",
+                                                             "virtual_size": "0x00001b28",
+                                                          "virtual_address": "0x00027000",
+                                                             "size_of_data": "0x00001000",
+                                                                  "entropy": "0.00",
+                                                      "characteristics_raw": "0xc0000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00028000",
+                                                                     "name": ".rsrc",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_EXECUTE|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE",
+                                                             "virtual_size": "0x00012000",
+                                                          "virtual_address": "0x00029000",
+                                                             "size_of_data": "0x00012000",
+                                                                  "entropy": "0.45",
+                                                      "characteristics_raw": "0xe0000040"
+                                                   }
+                                                 ],
+                              "peid_signatures": null,
+                                   "entrypoint": "0x00403098",
+                                      "exports": [],
+                                      "overlay": {
+                                                    "offset": "0x0003a000",
+                                                      "size": "0x000073d9"
+                                                 },
+                              "digital_signers": [],
+                                      "imphash": "c15737f8c755f9044ac853318e8d6e15",
+                            "reported_checksum": "0x00000000",
+                                         "icon": null,
+                                "guest_signers": {
+                                                         "aux_error": true,
+                                                          "aux_sha1": null,
+                                                     "aux_timestamp": null,
+                                                         "aux_valid": false,
+                                                       "aux_signers": [],
+                                                    "aux_error_desc": "No signature found. SignTool Error File not valid C\\Users\\comp\\AppData\\Local\\Temp\\6B1CA35ACAD904E9FC0C.exe"
+                                                 },
+                              "actual_checksum": "0x0004d2f5",
+                                      "imports": [
+                                                   {
+                                                          "dll": "MSVBVM60.DLL",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "EVENT_SINK_GetIDsOfNames",
+                                                                      "address": "0x401000"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaStrI2",
+                                                                      "address": "0x401004"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401008"
+                                                                   },
+                                                                   {
+                                                                         "name": "_CIcos",
+                                                                      "address": "0x40100c"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fptan",
+                                                                      "address": "0x401010"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaStrI4",
+                                                                      "address": "0x401014"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaVarVargNofree",
+                                                                      "address": "0x401018"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFreeVar",
+                                                                      "address": "0x40101c"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaStrVarMove",
+                                                                      "address": "0x401020"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaLateIdCall",
+                                                                      "address": "0x401024"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaLenBstr",
+                                                                      "address": "0x401028"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaPut3",
+                                                                      "address": "0x40102c"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaEnd",
+                                                                      "address": "0x401030"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFreeVarList",
+                                                                      "address": "0x401034"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fdiv_m64",
+                                                                      "address": "0x401038"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaPut4",
+                                                                      "address": "0x40103c"
+                                                                   },
+                                                                   {
+                                                                         "name": "EVENT_SINK_Invoke",
+                                                                      "address": "0x401040"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaRaiseEvent",
+                                                                      "address": "0x401044"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFreeObjList",
+                                                                      "address": "0x401048"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x40104c"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaStrErrVarCopy",
+                                                                      "address": "0x401050"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401054"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fprem1",
+                                                                      "address": "0x401058"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaRecAnsiToUni",
+                                                                      "address": "0x40105c"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401060"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaCopyBytes",
+                                                                      "address": "0x401064"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaStrCat",
+                                                                      "address": "0x401068"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaLsetFixstr",
+                                                                      "address": "0x40106c"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaRecDestruct",
+                                                                      "address": "0x401070"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaSetSystemError",
+                                                                      "address": "0x401074"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaHresultCheckObj",
+                                                                      "address": "0x401078"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaNameFile",
+                                                                      "address": "0x40107c"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fdiv_m32",
+                                                                      "address": "0x401080"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaAryVar",
+                                                                      "address": "0x401084"
+                                                                   },
+                                                                   {
+                                                                         "name": "Zombie_GetTypeInfo",
+                                                                      "address": "0x401088"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaAryDestruct",
+                                                                      "address": "0x40108c"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401090"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaBoolStr",
+                                                                      "address": "0x401094"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaExitProc",
+                                                                      "address": "0x401098"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaI4Abs",
+                                                                      "address": "0x40109c"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x4010a0"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaOnError",
+                                                                      "address": "0x4010a4"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaObjSet",
+                                                                      "address": "0x4010a8"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fdiv_m16i",
+                                                                      "address": "0x4010ac"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaObjSetAddref",
+                                                                      "address": "0x4010b0"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fdivr_m16i",
+                                                                      "address": "0x4010b4"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x4010b8"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFpR4",
+                                                                      "address": "0x4010bc"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaStrFixstr",
+                                                                      "address": "0x4010c0"
+                                                                   },
+                                                                   {
+                                                                         "name": "_CIsin",
+                                                                      "address": "0x4010c4"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaErase",
+                                                                      "address": "0x4010c8"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x4010cc"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x4010d0"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x4010d4"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaChkstk",
+                                                                      "address": "0x4010d8"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFileClose",
+                                                                      "address": "0x4010dc"
+                                                                   },
+                                                                   {
+                                                                         "name": "EVENT_SINK_AddRef",
+                                                                      "address": "0x4010e0"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaGenerateBoundsError",
+                                                                      "address": "0x4010e4"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaGet3",
+                                                                      "address": "0x4010e8"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x4010ec"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaStrCmp",
+                                                                      "address": "0x4010f0"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaGet4",
+                                                                      "address": "0x4010f4"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaPutOwner3",
+                                                                      "address": "0x4010f8"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaAryConstruct2",
+                                                                      "address": "0x4010fc"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaVarTstEq",
+                                                                      "address": "0x401100"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaObjVar",
+                                                                      "address": "0x401104"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaI2I4",
+                                                                      "address": "0x401108"
+                                                                   },
+                                                                   {
+                                                                         "name": "DllFunctionCall",
+                                                                      "address": "0x40110c"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaVarLateMemSt",
+                                                                      "address": "0x401110"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFpUI1",
+                                                                      "address": "0x401114"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaRedimPreserve",
+                                                                      "address": "0x401118"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaStrR4",
+                                                                      "address": "0x40111c"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fpatan",
+                                                                      "address": "0x401120"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFixstrConstruct",
+                                                                      "address": "0x401124"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaLateIdCallLd",
+                                                                      "address": "0x401128"
+                                                                   },
+                                                                   {
+                                                                         "name": "Zombie_GetTypeInfoCount",
+                                                                      "address": "0x40112c"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaRedim",
+                                                                      "address": "0x401130"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaRecUniToAnsi",
+                                                                      "address": "0x401134"
+                                                                   },
+                                                                   {
+                                                                         "name": "EVENT_SINK_Release",
+                                                                      "address": "0x401138"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaNew",
+                                                                      "address": "0x40113c"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401140"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaUI1I2",
+                                                                      "address": "0x401144"
+                                                                   },
+                                                                   {
+                                                                         "name": "_CIsqrt",
+                                                                      "address": "0x401148"
+                                                                   },
+                                                                   {
+                                                                         "name": "EVENT_SINK_QueryInterface",
+                                                                      "address": "0x40114c"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaExceptHandler",
+                                                                      "address": "0x401150"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401154"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401158"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaStrToUnicode",
+                                                                      "address": "0x40115c"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401160"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fprem",
+                                                                      "address": "0x401164"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fdivr_m64",
+                                                                      "address": "0x401168"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x40116c"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401170"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401174"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFPException",
+                                                                      "address": "0x401178"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x40117c"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401180"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaGetOwner3",
+                                                                      "address": "0x401184"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaUbound",
+                                                                      "address": "0x401188"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x40118c"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFileSeek",
+                                                                      "address": "0x401190"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401194"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401198"
+                                                                   },
+                                                                   {
+                                                                         "name": "_CIlog",
+                                                                      "address": "0x40119c"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaErrorOverflow",
+                                                                      "address": "0x4011a0"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFileOpen",
+                                                                      "address": "0x4011a4"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaVarLateMemCallLdRf",
+                                                                      "address": "0x4011a8"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x4011ac"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x4011b0"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaNew2",
+                                                                      "address": "0x4011b4"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaInStr",
+                                                                      "address": "0x4011b8"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fdiv_m32i",
+                                                                      "address": "0x4011bc"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x4011c0"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fdivr_m32i",
+                                                                      "address": "0x4011c4"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaStrCopy",
+                                                                      "address": "0x4011c8"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaI4Str",
+                                                                      "address": "0x4011cc"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFreeStrList",
+                                                                      "address": "0x4011d0"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fdivr_m32",
+                                                                      "address": "0x4011d4"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fdiv_r",
+                                                                      "address": "0x4011d8"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x4011dc"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x4011e0"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaVarSetVar",
+                                                                      "address": "0x4011e4"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaI4Var",
+                                                                      "address": "0x4011e8"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x4011ec"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaLateMemCall",
+                                                                      "address": "0x4011f0"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaVarAdd",
+                                                                      "address": "0x4011f4"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaAryLock",
+                                                                      "address": "0x4011f8"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x4011fc"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaStrComp",
+                                                                      "address": "0x401200"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaVarDup",
+                                                                      "address": "0x401204"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaStrToAnsi",
+                                                                      "address": "0x401208"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x40120c"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFpI2",
+                                                                      "address": "0x401210"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFpI4",
+                                                                      "address": "0x401214"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaVarLateMemCallLd",
+                                                                      "address": "0x401218"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x40121c"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaVarSetObjAddref",
+                                                                      "address": "0x401220"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaRecDestructAnsi",
+                                                                      "address": "0x401224"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaLateMemCallLd",
+                                                                      "address": "0x401228"
+                                                                   },
+                                                                   {
+                                                                         "name": "_CIatan",
+                                                                      "address": "0x40122c"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaAryCopy",
+                                                                      "address": "0x401230"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaStrMove",
+                                                                      "address": "0x401234"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401238"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaCastObj",
+                                                                      "address": "0x40123c"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaR8IntI4",
+                                                                      "address": "0x401240"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401244"
+                                                                   },
+                                                                   {
+                                                                         "name": "_allmul",
+                                                                      "address": "0x401248"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaVarLateMemCallSt",
+                                                                      "address": "0x40124c"
+                                                                   },
+                                                                   {
+                                                                         "name": "_CItan",
+                                                                      "address": "0x401250"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401254"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaAryUnlock",
+                                                                      "address": "0x401258"
+                                                                   },
+                                                                   {
+                                                                         "name": "_CIexp",
+                                                                      "address": "0x40125c"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFreeObj",
+                                                                      "address": "0x401260"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFreeStr",
+                                                                      "address": "0x401264"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401268"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x40126c"
+                                                                   }
+                                                                 ]
+                                                   }
+                                                 ],
+                            "exported_dll_name": null,
+                                      "dirents": [
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IMPORT",
+                                                      "virtual_address": "0x000255a4",
+                                                                 "size": "0x00000028"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESOURCE",
+                                                      "virtual_address": "0x00029000",
+                                                                 "size": "0x000005f0"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXCEPTION",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_SECURITY",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BASERELOC",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DEBUG",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COPYRIGHT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_GLOBALPTR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_TLS",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT",
+                                                      "virtual_address": "0x00000228",
+                                                                 "size": "0x00000020"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IAT",
+                                                      "virtual_address": "0x00001000",
+                                                                 "size": "0x00000274"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESERVED",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   }
+                                                 ],
+                                  "versioninfo": [],
+                                    "resources": [
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x00029308",
+                                                         "language": "LANG_NEUTRAL",
+                                                      "sublanguage": "SUBLANG_NEUTRAL",
+                                                             "size": "0x00000cd0",
+                                                          "entropy": "1.97"
+                                                   },
+                                                   {
+                                                             "name": "RT_GROUP_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x000292f4",
+                                                         "language": "LANG_NEUTRAL",
+                                                      "sublanguage": "SUBLANG_NEUTRAL",
+                                                             "size": "0x00000014",
+                                                          "entropy": "1.97"
+                                                   },
+                                                   {
+                                                             "name": "RT_VERSION",
+                                                         "filetype": null,
+                                                           "offset": "0x000290f0",
+                                                         "language": "LANG_ENGLISH",
+                                                      "sublanguage": "SUBLANG_ENGLISH_US",
+                                                             "size": "0x00000204",
+                                                          "entropy": "3.15"
+                                                   }
+                                                 ],
+                                      "pdbpath": null,
+                                    "osversion": "4.0",
+                                   "icon_fuzzy": null,
+                                    "imagebase": "0x00400000",
+                           "imported_dll_count": 1,
+                                    "timestamp": "2012-09-18 06:06:32"
+                        }
+               }
+}

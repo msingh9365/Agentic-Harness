@@ -1,0 +1,1943 @@
+{
+   "behavior": {
+                  "summary": {
+                                             "keys": [
+                                                       "HKEY_CURRENT_USER",
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Sorting\\Versions\\00060101.00060101",
+                                                       "HKEY_CURRENT_USER\\Software\\Embarcadero\\Locales",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Embarcadero\\Locales",
+                                                       "HKEY_CURRENT_USER\\Software\\CodeGear\\Locales",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\CodeGear\\Locales",
+                                                       "HKEY_CURRENT_USER\\Software\\Borland\\Locales",
+                                                       "HKEY_CURRENT_USER\\Software\\Borland\\Delphi\\Locales",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\Windows Error Reporting\\WMR",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\Windows Error Reporting\\WMR\\Disable",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\Locale",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\Locale\\Alternate Sorts",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\Language Groups",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Locale\\00000409",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Language Groups\\1",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\FontSubstitutes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\FontSubstitutes\\MS Shell Dlg 2",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\FontLink\\SystemLink",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\DataStore_V1.0",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\DataStore_V1.0\\Disable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\DataStore_V1.0\\DataFilePath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane1",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane2",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane3",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane4",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane5",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane6",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane7",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane8",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane9",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane10",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane11",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane12",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane13",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane14",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane15",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane16",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Segoe UI",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\CTF\\Compatibility\\2140744C535B35EB7059.exe",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\CTF\\TIP\\{0000897b-83df-4b96-be07-0fb58b01c4a4}\\LanguageProfile\\0x00000000\\{0001bea3-ed56-483d-a2e2-aeae25577436}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\CTF\\TIP\\{0000897b-83df-4b96-be07-0fb58b01c4a4}\\LanguageProfile\\0x00000000\\{0001bea3-ed56-483d-a2e2-aeae25577436}\\Enable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\CTF\\",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\CTF\\EnableAnchorContext",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\CTF\\KnownClasses",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones\\Pacific Standard Time\\Dynamic DST",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones\\Pacific Standard Time\\Dynamic DST\\FirstEntry",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones\\Pacific Standard Time\\Dynamic DST\\LastEntry",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones\\Pacific Standard Time\\Dynamic DST\\2021",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones\\Pacific Standard Time\\Dynamic DST\\2007",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ShellCompatibility\\Applications\\2140744C535B35EB7059.exe",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3479-f160-11ea-9f0e-806e6f6e6963}\\",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3479-f160-11ea-9f0e-806e6f6e6963}\\Data",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3479-f160-11ea-9f0e-806e6f6e6963}\\Generation",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3475-f160-11ea-9f0e-806e6f6e6963}\\",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3475-f160-11ea-9f0e-806e6f6e6963}\\Data",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3475-f160-11ea-9f0e-806e6f6e6963}\\Generation",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3476-f160-11ea-9f0e-806e6f6e6963}\\",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3476-f160-11ea-9f0e-806e6f6e6963}\\Data",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3476-f160-11ea-9f0e-806e6f6e6963}\\Generation"
+                                                     ],
+                                    "resolved_apis": [
+                                                       "kernel32.dll.FlsAlloc",
+                                                       "kernel32.dll.FlsGetValue",
+                                                       "kernel32.dll.FlsSetValue",
+                                                       "kernel32.dll.FlsFree",
+                                                       "kernelbase.dll.InitializeCriticalSectionAndSpinCount",
+                                                       "kernel32.dll.ProcessIdToSessionId",
+                                                       "imm32.dll.ImmCreateContext",
+                                                       "imm32.dll.ImmDestroyContext",
+                                                       "imm32.dll.ImmNotifyIME",
+                                                       "imm32.dll.ImmAssociateContext",
+                                                       "imm32.dll.ImmReleaseContext",
+                                                       "imm32.dll.ImmGetContext",
+                                                       "imm32.dll.ImmGetCompositionStringA",
+                                                       "imm32.dll.ImmSetCompositionStringA",
+                                                       "imm32.dll.ImmGetCompositionStringW",
+                                                       "imm32.dll.ImmSetCompositionStringW",
+                                                       "imm32.dll.ImmSetCandidateWindow",
+                                                       "kernel32.dll.InitializeCriticalSectionEx",
+                                                       "kernel32.dll.CreateEventExW",
+                                                       "kernel32.dll.CreateSemaphoreExW",
+                                                       "kernel32.dll.SetThreadStackGuarantee",
+                                                       "kernel32.dll.CreateThreadpoolTimer",
+                                                       "kernel32.dll.SetThreadpoolTimer",
+                                                       "kernel32.dll.WaitForThreadpoolTimerCallbacks",
+                                                       "kernel32.dll.CloseThreadpoolTimer",
+                                                       "kernel32.dll.CreateThreadpoolWait",
+                                                       "kernel32.dll.SetThreadpoolWait",
+                                                       "kernel32.dll.CloseThreadpoolWait",
+                                                       "kernel32.dll.FlushProcessWriteBuffers",
+                                                       "kernel32.dll.FreeLibraryWhenCallbackReturns",
+                                                       "kernel32.dll.GetCurrentProcessorNumber",
+                                                       "kernel32.dll.GetLogicalProcessorInformation",
+                                                       "kernel32.dll.CreateSymbolicLinkW",
+                                                       "kernel32.dll.SetDefaultDllDirectories",
+                                                       "kernel32.dll.EnumSystemLocalesEx",
+                                                       "kernel32.dll.CompareStringEx",
+                                                       "kernel32.dll.GetDateFormatEx",
+                                                       "kernel32.dll.GetLocaleInfoEx",
+                                                       "kernel32.dll.GetTimeFormatEx",
+                                                       "kernel32.dll.GetUserDefaultLocaleName",
+                                                       "kernel32.dll.IsValidLocaleName",
+                                                       "kernel32.dll.LCMapStringEx",
+                                                       "kernel32.dll.GetTickCount64",
+                                                       "kernel32.dll.SetThreadGroupAffinity",
+                                                       "kernel32.dll.GetThreadGroupAffinity",
+                                                       "kernel32.dll.GetCurrentProcessorNumberEx",
+                                                       "kernel32.dll.GetLogicalProcessorInformationEx",
+                                                       "advapi32.dll.RegisterTraceGuidsW",
+                                                       "advapi32.dll.UnregisterTraceGuids",
+                                                       "advapi32.dll.TraceEvent",
+                                                       "advapi32.dll.GetTraceLoggerHandle",
+                                                       "advapi32.dll.GetTraceEnableLevel",
+                                                       "advapi32.dll.GetTraceEnableFlags",
+                                                       "version.dll.GetFileVersionInfoSizeW",
+                                                       "version.dll.VerQueryValueW",
+                                                       "version.dll.GetFileVersionInfoW",
+                                                       "msvcrt.dll._wcslwr",
+                                                       "msvcrt.dll._wsplitpath",
+                                                       "msvcrt.dll.??2@YAPAXI@Z",
+                                                       "msvcrt.dll.swscanf",
+                                                       "msvcrt.dll.sprintf",
+                                                       "msvcrt.dll._except_handler3",
+                                                       "msvcrt.dll.memset",
+                                                       "kernel32.dll.HeapAlloc",
+                                                       "kernel32.dll.HeapFree",
+                                                       "kernel32.dll.GetProcessHeap",
+                                                       "kernel32.dll.CreateMutexW",
+                                                       "kernel32.dll.FreeResource",
+                                                       "kernel32.dll.FindResourceW",
+                                                       "kernel32.dll.LoadResource",
+                                                       "kernel32.dll.GetVolumeInformationW",
+                                                       "kernel32.dll.VirtualQuery",
+                                                       "kernel32.dll.VirtualProtect",
+                                                       "kernel32.dll.LockResource",
+                                                       "kernel32.dll.WaitForSingleObject",
+                                                       "kernel32.dll.GetTickCount",
+                                                       "kernel32.dll.TerminateThread",
+                                                       "kernel32.dll.ExitThread",
+                                                       "kernel32.dll.GetCurrentThreadId",
+                                                       "kernel32.dll.CloseHandle",
+                                                       "kernel32.dll.GetCurrentProcessId",
+                                                       "kernel32.dll.GetSystemTime",
+                                                       "kernel32.dll.CreateThread",
+                                                       "kernel32.dll.GetCommandLineW",
+                                                       "kernel32.dll.GetComputerNameW",
+                                                       "kernel32.dll.Sleep",
+                                                       "kernel32.dll.GetModuleFileNameW",
+                                                       "kernel32.dll.GetCurrentProcess",
+                                                       "kernel32.dll.GetModuleHandleW",
+                                                       "kernel32.dll.GetSystemDirectoryW",
+                                                       "kernel32.dll.LoadLibraryW",
+                                                       "kernel32.dll.GetProcAddress",
+                                                       "kernel32.dll.IsWow64Process",
+                                                       "kernel32.dll.GetSystemInfo",
+                                                       "kernel32.dll.FreeLibrary",
+                                                       "kernel32.dll.VirtualFree",
+                                                       "kernel32.dll.VirtualAlloc",
+                                                       "kernel32.dll.SleepEx",
+                                                       "user32.dll.FindWindowW"
+                                                     ],
+                                "executed_commands": [],
+                                       "write_keys": [],
+                                            "files": [
+                                                       "C:\\Windows\\Globalization\\Sorting\\sortdefault.nls",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\2140744C535B35EB7059.en-US",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\2140744C535B35EB7059.en",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\2140744C535B35EB7059.ENU",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\2140744C535B35EB7059.EN",
+                                                       "C:\\Windows\\System32\\tzres.dll",
+                                                       "C:\\Windows\\System32\\en-US\\tzres.dll.mui",
+                                                       "\\Device\\KsecDD",
+                                                       "C:\\Windows\\Fonts\\staticcache.dat",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\SECUR32.DLL",
+                                                       "C:\\Windows\\System32\\secur32.dll",
+                                                       "C:\\",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\Downloader\\",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\Downloader",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\2140744C535B35EB7059.exe",
+                                                       "\\??\\MountPointManager"
+                                                     ],
+                                       "read_files": [
+                                                       "C:\\Windows\\Globalization\\Sorting\\sortdefault.nls",
+                                                       "C:\\Windows\\System32\\tzres.dll",
+                                                       "C:\\Windows\\System32\\en-US\\tzres.dll.mui",
+                                                       "\\Device\\KsecDD",
+                                                       "C:\\Windows\\Fonts\\staticcache.dat",
+                                                       "C:\\Windows\\System32\\secur32.dll"
+                                                     ],
+                                 "started_services": [],
+                                 "created_services": [],
+                                      "write_files": [],
+                                      "delete_keys": [],
+                                        "read_keys": [
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Sorting\\Versions\\00060101.00060101",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\Windows Error Reporting\\WMR\\Disable",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Locale\\00000409",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Language Groups\\1",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\FontSubstitutes\\MS Shell Dlg 2",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\DataStore_V1.0\\Disable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\DataStore_V1.0\\DataFilePath",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane1",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane2",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane3",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane4",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane5",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane6",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane7",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane8",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane9",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane10",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane11",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane12",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane13",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane14",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane15",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\LanguagePack\\SurrogateFallback\\Plane16",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\CTF\\TIP\\{0000897b-83df-4b96-be07-0fb58b01c4a4}\\LanguageProfile\\0x00000000\\{0001bea3-ed56-483d-a2e2-aeae25577436}\\Enable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\CTF\\EnableAnchorContext",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones\\Pacific Standard Time\\Dynamic DST\\FirstEntry",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones\\Pacific Standard Time\\Dynamic DST\\LastEntry",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones\\Pacific Standard Time\\Dynamic DST\\2021",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones\\Pacific Standard Time\\Dynamic DST\\2007",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3479-f160-11ea-9f0e-806e6f6e6963}\\Data",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3479-f160-11ea-9f0e-806e6f6e6963}\\Generation",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3475-f160-11ea-9f0e-806e6f6e6963}\\Data",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3475-f160-11ea-9f0e-806e6f6e6963}\\Generation",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3476-f160-11ea-9f0e-806e6f6e6963}\\Data",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3476-f160-11ea-9f0e-806e6f6e6963}\\Generation"
+                                                     ],
+                                     "delete_files": [],
+                                          "mutexes": [
+                                                       "CicLoadWinStaWinSta0",
+                                                       "Local\\MSCTF.CtfMonitorInstMutexDefault1"
+                                                     ]
+                             }
+               },
+     "static": {
+                  "pe": {
+                                    "icon_hash": "2786c87fb1a2c96982f9ee0bc95ce8f2",
+                                     "sections": [
+                                                   {
+                                                              "raw_address": "0x00000400",
+                                                                     "name": ".text",
+                                                          "characteristics": "IMAGE_SCN_CNT_CODE|IMAGE_SCN_MEM_EXECUTE|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x00046b01",
+                                                          "virtual_address": "0x00001000",
+                                                             "size_of_data": "0x00046c00",
+                                                                  "entropy": "6.43",
+                                                      "characteristics_raw": "0x60000020"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00047000",
+                                                                     "name": ".rdata",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x0000b402",
+                                                          "virtual_address": "0x00048000",
+                                                             "size_of_data": "0x0000b600",
+                                                                  "entropy": "4.77",
+                                                      "characteristics_raw": "0x40000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00052600",
+                                                                     "name": ".data",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE",
+                                                             "virtual_size": "0x0373232c",
+                                                          "virtual_address": "0x00054000",
+                                                             "size_of_data": "0x0004e800",
+                                                                  "entropy": "3.58",
+                                                      "characteristics_raw": "0xc0000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x000a0e00",
+                                                                     "name": ".9u46",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x001c0658",
+                                                          "virtual_address": "0x03787000",
+                                                             "size_of_data": "0x001c0800",
+                                                                  "entropy": "4.02",
+                                                      "characteristics_raw": "0x40000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00261600",
+                                                                     "name": ".hp0t3t",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE",
+                                                             "virtual_size": "0x00247050",
+                                                          "virtual_address": "0x03948000",
+                                                             "size_of_data": "0x00247200",
+                                                                  "entropy": "3.42",
+                                                      "characteristics_raw": "0xc0000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x004a8800",
+                                                                     "name": ".hs8e6",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x00158c68",
+                                                          "virtual_address": "0x03b90000",
+                                                             "size_of_data": "0x00158e00",
+                                                                  "entropy": "3.59",
+                                                      "characteristics_raw": "0x40000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00601600",
+                                                                     "name": ".eab5",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE",
+                                                             "virtual_size": "0x000ce638",
+                                                          "virtual_address": "0x03ce9000",
+                                                             "size_of_data": "0x000ce800",
+                                                                  "entropy": "3.59",
+                                                      "characteristics_raw": "0xc0000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x006cfe00",
+                                                                     "name": ".rsrc",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x00031bb4",
+                                                          "virtual_address": "0x03db8000",
+                                                             "size_of_data": "0x00031c00",
+                                                                  "entropy": "7.06",
+                                                      "characteristics_raw": "0x40000040"
+                                                   }
+                                                 ],
+                              "peid_signatures": null,
+                                   "entrypoint": "0x00424674",
+                                      "exports": [],
+                                      "overlay": null,
+                              "digital_signers": [],
+                                      "imphash": "3c50116e52a7dbcc6468796f7cb4a98d",
+                            "reported_checksum": "0x0070d3f4",
+                                         "icon": "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAATZElEQVR4nOWba5BcxXXHf919H/Pe96JlkbRoWdCLh5AgQmAj2dg8xMMIPwLYxlbZJk6ZUMQ45RRVLviSSuK4KlUuF6ngJEWqbOfBwzbGNjESYIIAycYgpKBFQlpp2V2tdlfa3XnP3NudD3dmdnZ3Zh+wOJXkTN2aO3O7T/f59+lzTp/uK0TU5oMgnSoIIAZcWkBvKFBo1L7WSiljMEKjsbCkQIhSFQmIKhYCwGCERAqNFlXPRdWFQAjjmbS0JD7+i1Hc/5QxJ1unX9N+W0sl8EwqYmLj2fHN6VT6bt/3N0spGyzbEkopI4QQnvQIydDMagIw5XtjDEIIjDEAQggxs3x1vaLwxMtSyDcirmvqFZxJHwgA/QP9Tv9w/zUTExNfMsZsdUNuOOSGREkQhBC4wp2XT1ngWoKXwakiaYxJSyUHDRRmVahDSw7AkXeORHPZ3NaxsbGvZ3PZS6ORaLj8bJpAGoQ1XbBqgMr39X5XfwNoTyMtmXFsZ9yKOXqh/ZWLkm4eGjs9FpVS3phKp745Pj7+B1rrsJQSKWXNUdT5yWm/q8sIISpXrTIz/5eW9IG0b/ziYvq8JBrw9uG3hTGmbXJy8qZcPvdH2Uz2ImOM5TgutmNjKQvLtipACCHAgHQTUwIIiTa6JlBQexpUk0bnJDKlhFrw6MMSAHD4yGEBtAkhdvi+f7fWel02l7Uty8J1HGzbxrZtpJQopSogKFvN4lUGoXwPU+qvja78V6bq/ySyAKQ12ltM/98XAH0n+hTQ6RW9u4QQd0aikfOKnqe8oocbcnFcB8d2sGwLy7JQSs07ksA0QavnfjXVAERro1MswgDC+7ABhVRBGW26C/nCncBnI9HIqkgkogCUUjh2MPqWbU0beSkkUshp87salPKz8v/l+2qNAFBSTbcThowUMsuUG10QvScN6B/od0eSI+cXi8UvW5a1PRaPrYyH4spg0NpHKhkIrwLhywBUCwdBV2uBUEtL5nuOJKu1zmlfL8oGLFoD8qm8lcvm1mfSmS9YlrUjEo2siIfiykVhY+F5wRScqfZSBN6gYggnBZMyMHrl/6u9RbXBrABY1qKq7/KVSqaMbdk5Rzn5xcizKA2YSE6o0eToGuAepdQNsXisNRFKCKcKx2Ih8EKWNd3qz1L5Rmis03x1uXo2YJYWNOAoS036+B8cACOnRjZore+1bfumeDyeaHATotqWCwKjVVZ7ZQUjVz1fyzRuxmnwG2YFQxVedfx9LVCEEDTS6ElkMoTzwXiBvnf7LL/g3x+Lx7YnYomYi4MCPKBIEY0mk83g+z6WshBi+ugHU0AhCGxBG8vQqogBjNYYpqLA+ahOmZTBLCoIggUCcLz/ePRY37E0mhtODp2MjY2Nkc/n8TwP3/cBiMViNDc3Vy5LKZRUKGFR1Hky/iSThVHO5AdJ+aMU/DT7teG25qtIWK3E7CZs5QBUwAAwuioEljXWBKXnQorRAFok4C8UADHfcvi7f/fdUD6d33z/A/d/4b6v3ff5wt8UxPfE9wJnY4FjOXiex0MPPkTinAQT/RPcuPUG9vsH8KyfMOY+h8qDFboCRB7MOYzjEfM0yjIkGcbSITzzKjILocZb2KS20bV8K42qEYGhvAo2fklYNQVE+T/gUcuyvhvCecOK1Z8GM5fDdQGYTE2Gjh079qmDBw5+ZWho6PJ0Ju20tbZNWWEpghFWCsdxiEajJBINmEiGAX7DiOhFC43CQhiBEZUFPojAVhj88g+Cj8bXHlIoVsQ3cGnL9bRHVrEQ1y4Qj9rY33aQh2TMqasBC84HHDxwUI2NjTUqpZo6OzutfD5PS0sLUk5Z/LILUpaF47pMiBMc07spWkkEDspIBIHksjxvhQQ0GDEFgABhwBiJFDYGw9sTLzGcOcKHOj7HqsQGJHLa1BAIDKb6e1yjiyCXJhDSWpt4Iq6jsWiQidAQiUZmWeEyCCe9Xt7Rz2KsLMLYpXRNOd+jAiAqpED6SGOhjcYgQGg0fkUDLBEmWTzNC4P/iGc+y+qGLSUe00EofwzGU6giSxUJhkIhOxwJ21prBaCVRajk16vX7UIIBjPvcLiwG21lwVSHrAIoeQMElFaBCIPvg5EGT+coeEW0Z7BVCFfGyekkSkgMkmTxNHuGfkBIJTg3dmFdQSTSA/xFhYH1ABgdGxXaaMvzPNv3fWmMqYz0lHDBdyo/wf7RH+NbKYSZntYTZZAQFUACDASWtPBzRbril9NgL6MttoKzG8+liRaeG/kBewYew1VRBIqJ4igvnPo+Lc63aHRa0egS/0pbBih4eL4bi75/DWh2E2gQE4WkUy5jMNMWJEIIfN/j9Xd/RUGdKY18MMpSCBA+GEU52hblHKYEoYPb4sRj3HbRI7Pav6LtZvYO/hTPFJFCYTSMpvv57chP2dp5F7KKZ5UdUJ7xFuz+ylR3LSDBuI4bch3XdRxHWI6FYwfLW8dycJRD38QBjhdexTNFcn6GbDFFJp8im85jZ1uwvBja5KeEn0rkYgyo1lsZ4d1ZbcdoZv1Z28j7maAsgC/4r+Ru+lJvVOb9FLCIAgURFeFFLYWhjgbImGP8VMEoVAiwDAZVMmTVlvd3Q8/iWzmcYiPtajnLm3tY1txF1Gqkxe5kkmEe6/0LfONhiVJTOvDsGBgvHOPAmRfY1nTnrD5sWnYt+4d34/l5hFAYI8gWU+wd+AmrL7gMj1mzvSCDwPT9A1AipVCuKVs1plQOYCh7gv7s64QjYe646CFaaZ/FIMq59DRdxltjL6OkVVoraMDg4SGxODj8Apc3bSdK47S6nZzPurYr2Tf4c8JWPNhJ8AyD8iD9maN0RlZVBgMgRKgPZqMyH9WdAgKkAEsgzEyV02h+27ebcCREXqcZLR6t28C69g+V+mXQWmOMJnB8/RjnHJLFcQ4kX6xZ99Kzr0Oi0KY0tYWh4Od568yvK30p9RWJVEzfWHl/AAA2YJeAqDQkgBwZBjO9WJaFJW32n3y+LpPlrGFZrJu8l8EQCG+Mhyl2YDgOwG8Gn8GvEb53sZ6elk1kvEnABLlBXzOS7yNDalpZASOLkLtCcwEgy88FmCnXA+OZMfI6CQIc6XJ0/HWGS8LUovXtV5P10miKGIpo4+Mrj5juREmb4fRRDuVfrll38/JbkVh4uhzjGMZyJ0gWxqaZVR+9aANYFrIeCQFKTNuDC66JzCjpwgSUulTQGfom99dl1ONuIu40U9QFtNGBHhjw8ACDrWxeHXyqZt3zrY0sT6whV0yVjKcg46XwyM3wLWJ6mLhAqglAaWNTyCkAsJCVxvJemoKfreT0lLR4Y3g3us4qNESU7qYNFPwivvHxtY/WOfAIcojSon/iLY74r9XooGLLih14plhaNIGnC2j8KqcKCpFlKY1gibcq24DqGM83Hr72SgoJIRlhNDvAAIfrMlvf/uHABhgfgyaDRU7mgqjOgKfz7Bt4umbdNeHNdMYuIOunAREYRWGmaYCufC0BADLmlBfhRWBW/kUUXsH4SdAGbQwemuLkGZ544UKyJGs2tJw1uOoo3xgZoOinsXJZ0ODrUbwzHkrYvHj8QfblXp1VN0SUW1bfxy8z75JKP89D+RTvznD5VjAWucUCMFccYIAwNUBqbroVVxzCSAM6GEG3sZXR4kc5VniTtc6WmgzvW7OXFvcBesf3ErLjgEabOCbh45EjYX2U1aF1Nev2WJfy5tXHyFPgz3KjNNuz4w7AYYk3Rmr61dbEMlyRwPf9IJFhpjzEm8MvzMFMsGPV12m3u3jw+afBaAweRZEjnU1zdcedxInN2SEXh7bQ2Ygl2tedi4th9qkNABI0ExVN5LN5MJRA8LGlS9/4m5xmsC7TOC188cK/5NyoIJk8TTI/jklb3NB5L9d33VUpty/1NCOcqNMxgzW768t5D15grilQ160o4Iqea/nhm3s56xwbSm7Nki4TuWFeH32Oj7TOju/L1EAru+76Ha/teYqOrovoOWsDrSyrPM+R4vFD38G1Iny8+4v0xC+jhQ40PqP0YxebabVbZrLt5z1EgvNlhX3qZFg3dF7Fo3sUhVwBO2xhfI3RoJTFodFX5gQAoMteS9fVa2s+++XQP5D3svjG59/e/CsSoRbaIyvxRZ7J5AQPbHq8niyLnhdzxgEEq6uarsVCcN26z3NmJI3RQaxv8LGkw4nkAQZ4e7F9waPAk0N/y6+P/wsxp4GQCpMItWCMZiDVy3DyOJe37UDVHuip9PEiaD4b4DHHvNqy9uMkzDmkU1mMCGL1YLHkc/DUngV3wqDp9ffx92//KS8c+yFhJ1Z5AsH+oaUszrJXs3nl9fX6GmIJp0CZUZE5gotmWrhpw5f4/ksP0L5SYjsqsAXC5sDI81zVfhsR4rPq+RR5/DffpuuCdZyY7OWt0ZcZywxgSYdEuKV0SMKUhjRIGZuCYuv5d9DIrLlfJof3MAXmAkAS+NQ5kwybOrZwoPNG9g3+lLblCYQCx3IZyZ7gcPY1Lg5fPauOwubBvn9mu2kvNSaIOY0IITFGV6yvQCAkeEXDJQ3buaTpqnrdKKv/orf76yFW1gCPwAjO6V5uv+IeVjdsZaBvBO37SCkpeFkOnHq+bp3rlrtYRuGqMK4Kz94ERSCkIJvLs8q5kptWf2U+WcIsIQCGQPC6RrCaXBy+sPV+1jd+nP53TpPN5AmHYhwa20OayZp1NnXcRtp/PkDaGEx5YVHKIAtpyGYKXOBu4zMX30eYWYcqq6mssUvjBZgygHPagGqKE+erH/kWW87+JP294yTPZMj6SXqzs2N7gMs6t2NJBxCY8ta5BKUEnvY4cyrDpfGb+fyGPydOoiaPGXTe4OQp64s7dy4KhPkAKLCAKVAmB4svXXk/37j+YeyxFQwdSfPz1x+dlb0B6FEbedKsQ0qBlIDQ5HJ5xkdzRJIr+fJl3+H2C+/FYUFnmQVg739jf+jVV16xCWK1BXmEupujpVjgXuBPgK6FMizTacZ4/o2f8eyhx+nsvo4PWZcg5TjaDePaDnkt2LrrWuheQ9eRcc5tO8mViRu5fPmNXLn6WprqW/t69NCqC89/9MTxE0Na6wKB5s6KZmdujiKids3LGOMYY+42xhwxS0S+MaZgPJM3RVMwnpk0GZM3xaVi//Od99x9sYq7zSJqN4ioHRNR2xVRW86Qa9o1X0IkDyR5D4mGWiQBG4WDhY0iThhniY4rG/DXrVvb1NjU6BIkdK2pR3P3aQ6e5IH3lGr6fZOBeENjQyISjoSYEn5e+zUfABkWCcCit2aWjiKO7cTDkXA5HijHMHPSfBmhDJAu3TM4eYrHH3ucsbExUqkU8Xic5uZmdty2g6NHj7J71+7K8bhbPnELq1eczz/966Mc7j1MOBKmu7ubT9/6aV4/+DpPPP4E4YY4933tHh5++GFSqRSRSISNGzeyrGMZz/7qWT7zh5+hs+Esfvzszwi5IYaHhzl+/DiTk5PE43FisRi333E7ZyfaAZxwONxgKctlyoPN673mm4A5IFVi6J6daOePd36V3x58jSefeJJPffpT9Kzoobevl188/Qs+du3H2HLZFp7+j6f50Q9/xM6dO0klU6xbv46enh6eeuopDl18iMnJSRKNCXyTJ5lKks1mueZj13DVxiuRwL6Dr7Fv3z6i0Sg7P7uTifEJGlY28LlP3kn/6ACPPPII27dv55I1l1QEEBAJhUIN4XC4nBZbkDLOBYAuCZ+hCkkFhMIhmpqbUMrCRnD48GEc12H9+vW4KDZcsoHeQ70cPHgQKSXDw8Ok02lWrFhBR0cHp4ZPgQFdOm8gpWTPS3s4ffo0mzdvplAssGbNGvr7+3nmuWcwxgSaVW67qSnYlarqrABXKRW3HduwiGlbFwAZc7ROFdIEWqCpWm+XD0ppHUyxWS8vlE6SeL6HMYahoSEAtm3bRlu4CWUpxsbGWLmyE8uysG2bRCJBx7IOIuEISip6enqwbZu9e/cihGBV96oKbyll5XheFUVD4VCoubnZV0p5NZ7XlnOe56eBSao39gHHcTlz5kzlqMzGjRuRUrLr2V2cOD3IK6+8QjKZZP269TiOw9p1a7n5lpt5+eWXea13P1JKWhpaODOQRGuN53m0t7ezbNkycvkctm2TTCa55ppr6Onp4fDhw5UjuOFwmGQyWQuAeDQSjRbyhay/UOlZWErsDIE7jJVBaG9ro/u882htbQVgeVMHn7j1E+zetZvH/v0xAO648w7O6+ji6KpVSCm5euOVnBw6yalTp1jZtZKV3Svpe+MkUkq6uro4ceIEJ0+eZPmK5axbu46Ojg4a7Rjbt28nk8nQflawdI4Soru7u9J2NSUaEvEPX/1huWvXrgV7rTkPSupUoQXYAXyTIByed6GRx8dl9tsgvwfKD06eeubk0Mm/3rRx00v1Cs0MhecTqEjgBhf8IsL/kPAAMuSGIk1NTTEvVVjwinC+gj6BJ8jxHnLuv2dSSqloNBYNy0Us3OazAUWmXOEAgS3QUPV659z1xYzv6qozy5TvZ7KeC/jqujpshUcBXaTOSwa1GMxjAyTQamAN8KKADYAu+8MZrUzDYoYU9XDygeo3BsQM3pXb0k0tPqLcnoCshiEfPRqKhWqCMOuwtFk4WP8naUnfHP3fSP/vAfhvgQiCxDpjrNIAAAAASUVORK5CYII=",
+                                "guest_signers": {
+                                                         "aux_error": true,
+                                                          "aux_sha1": null,
+                                                     "aux_timestamp": null,
+                                                         "aux_valid": false,
+                                                       "aux_signers": [],
+                                                    "aux_error_desc": "No signature found. SignTool Error File not valid C\\Users\\comp\\AppData\\Local\\Temp\\2140744C535B35EB7059.exe"
+                                                 },
+                              "actual_checksum": "0x0070c466",
+                                      "imports": [
+                                                   {
+                                                          "dll": "COMDLG32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "ReplaceTextW",
+                                                                      "address": "0x448078"
+                                                                   },
+                                                                   {
+                                                                         "name": "FindTextW",
+                                                                      "address": "0x44807c"
+                                                                   },
+                                                                   {
+                                                                         "name": "ChooseColorW",
+                                                                      "address": "0x448080"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetSaveFileNameW",
+                                                                      "address": "0x448084"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "COMCTL32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "ImageList_DrawIndirect",
+                                                                      "address": "0x448000"
+                                                                   },
+                                                                   {
+                                                                         "name": "InitializeFlatSB",
+                                                                      "address": "0x448004"
+                                                                   },
+                                                                   {
+                                                                         "name": "FlatSB_SetScrollProp",
+                                                                      "address": "0x448008"
+                                                                   },
+                                                                   {
+                                                                         "name": "FlatSB_SetScrollInfo",
+                                                                      "address": "0x44800c"
+                                                                   },
+                                                                   {
+                                                                         "name": "FlatSB_SetScrollPos",
+                                                                      "address": "0x448010"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreatePropertySheetPageW",
+                                                                      "address": "0x448014"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x448018"
+                                                                   },
+                                                                   {
+                                                                         "name": "InitCommonControlsEx",
+                                                                      "address": "0x44801c"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_Create",
+                                                                      "address": "0x448020"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_SetImageCount",
+                                                                      "address": "0x448024"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_ReplaceIcon",
+                                                                      "address": "0x448028"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_GetBkColor",
+                                                                      "address": "0x44802c"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_SetOverlayImage",
+                                                                      "address": "0x448030"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_Draw",
+                                                                      "address": "0x448034"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_Replace",
+                                                                      "address": "0x448038"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_AddMasked",
+                                                                      "address": "0x44803c"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_DrawEx",
+                                                                      "address": "0x448040"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_Remove",
+                                                                      "address": "0x448044"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_GetIcon",
+                                                                      "address": "0x448048"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_Copy",
+                                                                      "address": "0x44804c"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_DragEnter",
+                                                                      "address": "0x448050"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_DragMove",
+                                                                      "address": "0x448054"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_DragShowNolock",
+                                                                      "address": "0x448058"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_GetDragImage",
+                                                                      "address": "0x44805c"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_Read",
+                                                                      "address": "0x448060"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_Write",
+                                                                      "address": "0x448064"
+                                                                   },
+                                                                   {
+                                                                         "name": "ImageList_SetIconSize",
+                                                                      "address": "0x448068"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateStatusWindowW",
+                                                                      "address": "0x44806c"
+                                                                   },
+                                                                   {
+                                                                         "name": "FlatSB_GetScrollInfo",
+                                                                      "address": "0x448070"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "KERNEL32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "VirtualAlloc",
+                                                                      "address": "0x44808c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetLastError",
+                                                                      "address": "0x448090"
+                                                                   },
+                                                                   {
+                                                                         "name": "EnterCriticalSection",
+                                                                      "address": "0x448094"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetStdHandle",
+                                                                      "address": "0x448098"
+                                                                   },
+                                                                   {
+                                                                         "name": "LoadLibraryExW",
+                                                                      "address": "0x44809c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetSystemDirectoryW",
+                                                                      "address": "0x4480a0"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetOEMCP",
+                                                                      "address": "0x4480a4"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetUserDefaultLCID",
+                                                                      "address": "0x4480a8"
+                                                                   },
+                                                                   {
+                                                                         "name": "FreeConsole",
+                                                                      "address": "0x4480ac"
+                                                                   },
+                                                                   {
+                                                                         "name": "WriteConsoleW",
+                                                                      "address": "0x4480b0"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetStdHandle",
+                                                                      "address": "0x4480b4"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetStringTypeW",
+                                                                      "address": "0x4480b8"
+                                                                   },
+                                                                   {
+                                                                         "name": "LoadLibraryW",
+                                                                      "address": "0x4480bc"
+                                                                   },
+                                                                   {
+                                                                         "name": "LCMapStringW",
+                                                                      "address": "0x4480c0"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetFilePointerEx",
+                                                                      "address": "0x4480c4"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetConsoleMode",
+                                                                      "address": "0x4480c8"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetConsoleCP",
+                                                                      "address": "0x4480cc"
+                                                                   },
+                                                                   {
+                                                                         "name": "FlushFileBuffers",
+                                                                      "address": "0x4480d0"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCPInfo",
+                                                                      "address": "0x4480d4"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetACP",
+                                                                      "address": "0x4480d8"
+                                                                   },
+                                                                   {
+                                                                         "name": "IsValidCodePage",
+                                                                      "address": "0x4480dc"
+                                                                   },
+                                                                   {
+                                                                         "name": "HeapReAlloc",
+                                                                      "address": "0x4480e0"
+                                                                   },
+                                                                   {
+                                                                         "name": "UnregisterWaitEx",
+                                                                      "address": "0x4480e4"
+                                                                   },
+                                                                   {
+                                                                         "name": "QueryDepthSList",
+                                                                      "address": "0x4480e8"
+                                                                   },
+                                                                   {
+                                                                         "name": "InterlockedFlushSList",
+                                                                      "address": "0x4480ec"
+                                                                   },
+                                                                   {
+                                                                         "name": "InterlockedPushEntrySList",
+                                                                      "address": "0x4480f0"
+                                                                   },
+                                                                   {
+                                                                         "name": "InterlockedPopEntrySList",
+                                                                      "address": "0x4480f4"
+                                                                   },
+                                                                   {
+                                                                         "name": "InitializeSListHead",
+                                                                      "address": "0x4480f8"
+                                                                   },
+                                                                   {
+                                                                         "name": "CloseHandle",
+                                                                      "address": "0x4480fc"
+                                                                   },
+                                                                   {
+                                                                         "name": "DuplicateHandle",
+                                                                      "address": "0x448100"
+                                                                   },
+                                                                   {
+                                                                         "name": "WaitForSingleObject",
+                                                                      "address": "0x448104"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCurrentProcess",
+                                                                      "address": "0x448108"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCurrentThread",
+                                                                      "address": "0x44810c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCurrentThreadId",
+                                                                      "address": "0x448110"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetExitCodeThread",
+                                                                      "address": "0x448114"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetSystemTimeAsFileTime",
+                                                                      "address": "0x448118"
+                                                                   },
+                                                                   {
+                                                                         "name": "LeaveCriticalSection",
+                                                                      "address": "0x44811c"
+                                                                   },
+                                                                   {
+                                                                         "name": "DeleteCriticalSection",
+                                                                      "address": "0x448120"
+                                                                   },
+                                                                   {
+                                                                         "name": "EncodePointer",
+                                                                      "address": "0x448124"
+                                                                   },
+                                                                   {
+                                                                         "name": "DecodePointer",
+                                                                      "address": "0x448128"
+                                                                   },
+                                                                   {
+                                                                         "name": "RtlUnwind",
+                                                                      "address": "0x44812c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCommandLineW",
+                                                                      "address": "0x448130"
+                                                                   },
+                                                                   {
+                                                                         "name": "IsProcessorFeaturePresent",
+                                                                      "address": "0x448134"
+                                                                   },
+                                                                   {
+                                                                         "name": "UnhandledExceptionFilter",
+                                                                      "address": "0x448138"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetUnhandledExceptionFilter",
+                                                                      "address": "0x44813c"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetLastError",
+                                                                      "address": "0x448140"
+                                                                   },
+                                                                   {
+                                                                         "name": "InitializeCriticalSectionAndSpinCount",
+                                                                      "address": "0x448144"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateEventW",
+                                                                      "address": "0x448148"
+                                                                   },
+                                                                   {
+                                                                         "name": "Sleep",
+                                                                      "address": "0x44814c"
+                                                                   },
+                                                                   {
+                                                                         "name": "TerminateProcess",
+                                                                      "address": "0x448150"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsAlloc",
+                                                                      "address": "0x448154"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsGetValue",
+                                                                      "address": "0x448158"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsSetValue",
+                                                                      "address": "0x44815c"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsFree",
+                                                                      "address": "0x448160"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetStartupInfoW",
+                                                                      "address": "0x448164"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetTickCount",
+                                                                      "address": "0x448168"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetModuleHandleW",
+                                                                      "address": "0x44816c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetProcAddress",
+                                                                      "address": "0x448170"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateSemaphoreW",
+                                                                      "address": "0x448174"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateThread",
+                                                                      "address": "0x448178"
+                                                                   },
+                                                                   {
+                                                                         "name": "ExitThread",
+                                                                      "address": "0x44817c"
+                                                                   },
+                                                                   {
+                                                                         "name": "RaiseException",
+                                                                      "address": "0x448180"
+                                                                   },
+                                                                   {
+                                                                         "name": "HeapFree",
+                                                                      "address": "0x448184"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateTimerQueue",
+                                                                      "address": "0x448188"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetEvent",
+                                                                      "address": "0x44818c"
+                                                                   },
+                                                                   {
+                                                                         "name": "WaitForSingleObjectEx",
+                                                                      "address": "0x448190"
+                                                                   },
+                                                                   {
+                                                                         "name": "SignalObjectAndWait",
+                                                                      "address": "0x448194"
+                                                                   },
+                                                                   {
+                                                                         "name": "SwitchToThread",
+                                                                      "address": "0x448198"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetThreadPriority",
+                                                                      "address": "0x44819c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetThreadPriority",
+                                                                      "address": "0x4481a0"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetLogicalProcessorInformation",
+                                                                      "address": "0x4481a4"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateTimerQueueTimer",
+                                                                      "address": "0x4481a8"
+                                                                   },
+                                                                   {
+                                                                         "name": "ChangeTimerQueueTimer",
+                                                                      "address": "0x4481ac"
+                                                                   },
+                                                                   {
+                                                                         "name": "DeleteTimerQueueTimer",
+                                                                      "address": "0x4481b0"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetNumaHighestNodeNumber",
+                                                                      "address": "0x4481b4"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetProcessAffinityMask",
+                                                                      "address": "0x4481b8"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetThreadAffinityMask",
+                                                                      "address": "0x4481bc"
+                                                                   },
+                                                                   {
+                                                                         "name": "RegisterWaitForSingleObject",
+                                                                      "address": "0x4481c0"
+                                                                   },
+                                                                   {
+                                                                         "name": "UnregisterWait",
+                                                                      "address": "0x4481c4"
+                                                                   },
+                                                                   {
+                                                                         "name": "ExitProcess",
+                                                                      "address": "0x4481c8"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetModuleHandleExW",
+                                                                      "address": "0x4481cc"
+                                                                   },
+                                                                   {
+                                                                         "name": "MultiByteToWideChar",
+                                                                      "address": "0x4481d0"
+                                                                   },
+                                                                   {
+                                                                         "name": "WideCharToMultiByte",
+                                                                      "address": "0x4481d4"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetProcessHeap",
+                                                                      "address": "0x4481d8"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetFileType",
+                                                                      "address": "0x4481dc"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetModuleFileNameW",
+                                                                      "address": "0x4481e0"
+                                                                   },
+                                                                   {
+                                                                         "name": "WriteFile",
+                                                                      "address": "0x4481e4"
+                                                                   },
+                                                                   {
+                                                                         "name": "QueryPerformanceCounter",
+                                                                      "address": "0x4481e8"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCurrentProcessId",
+                                                                      "address": "0x4481ec"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetEnvironmentStringsW",
+                                                                      "address": "0x4481f0"
+                                                                   },
+                                                                   {
+                                                                         "name": "FreeEnvironmentStringsW",
+                                                                      "address": "0x4481f4"
+                                                                   },
+                                                                   {
+                                                                         "name": "IsDebuggerPresent",
+                                                                      "address": "0x4481f8"
+                                                                   },
+                                                                   {
+                                                                         "name": "HeapAlloc",
+                                                                      "address": "0x4481fc"
+                                                                   },
+                                                                   {
+                                                                         "name": "HeapSize",
+                                                                      "address": "0x448200"
+                                                                   },
+                                                                   {
+                                                                         "name": "OutputDebugStringW",
+                                                                      "address": "0x448204"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetThreadTimes",
+                                                                      "address": "0x448208"
+                                                                   },
+                                                                   {
+                                                                         "name": "FreeLibrary",
+                                                                      "address": "0x44820c"
+                                                                   },
+                                                                   {
+                                                                         "name": "FreeLibraryAndExitThread",
+                                                                      "address": "0x448210"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetModuleHandleA",
+                                                                      "address": "0x448214"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetVersionExW",
+                                                                      "address": "0x448218"
+                                                                   },
+                                                                   {
+                                                                         "name": "VirtualFree",
+                                                                      "address": "0x44821c"
+                                                                   },
+                                                                   {
+                                                                         "name": "VirtualProtect",
+                                                                      "address": "0x448220"
+                                                                   },
+                                                                   {
+                                                                         "name": "ReleaseSemaphore",
+                                                                      "address": "0x448224"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateFileW",
+                                                                      "address": "0x448228"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "ole32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "CoTaskMemAlloc",
+                                                                      "address": "0x44828c"
+                                                                   },
+                                                                   {
+                                                                         "name": "CoTaskMemFree",
+                                                                      "address": "0x448290"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "USERENV.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "EnterCriticalPolicySection",
+                                                                      "address": "0x448284"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "USER32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "EnumDisplayMonitors",
+                                                                      "address": "0x448230"
+                                                                   },
+                                                                   {
+                                                                         "name": "LoadImageW",
+                                                                      "address": "0x448234"
+                                                                   },
+                                                                   {
+                                                                         "name": "LoadIconW",
+                                                                      "address": "0x448238"
+                                                                   },
+                                                                   {
+                                                                         "name": "LoadCursorW",
+                                                                      "address": "0x44823c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetWindow",
+                                                                      "address": "0x448240"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetTopWindow",
+                                                                      "address": "0x448244"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetClassNameW",
+                                                                      "address": "0x448248"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetRect",
+                                                                      "address": "0x44824c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCursor",
+                                                                      "address": "0x448250"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetWindowTextLengthW",
+                                                                      "address": "0x448254"
+                                                                   },
+                                                                   {
+                                                                         "name": "ValidateRect",
+                                                                      "address": "0x448258"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetDCEx",
+                                                                      "address": "0x44825c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetSystemMenu",
+                                                                      "address": "0x448260"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetMenu",
+                                                                      "address": "0x448264"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetActiveWindow",
+                                                                      "address": "0x448268"
+                                                                   },
+                                                                   {
+                                                                         "name": "CharNextW",
+                                                                      "address": "0x44826c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetNextDlgTabItem",
+                                                                      "address": "0x448270"
+                                                                   },
+                                                                   {
+                                                                         "name": "SendDlgItemMessageW",
+                                                                      "address": "0x448274"
+                                                                   },
+                                                                   {
+                                                                         "name": "IsWindow",
+                                                                      "address": "0x448278"
+                                                                   },
+                                                                   {
+                                                                         "name": "DefWindowProcW",
+                                                                      "address": "0x44827c"
+                                                                   }
+                                                                 ]
+                                                   }
+                                                 ],
+                            "exported_dll_name": null,
+                                      "dirents": [
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IMPORT",
+                                                      "virtual_address": "0x0005248c",
+                                                                 "size": "0x0000008c"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESOURCE",
+                                                      "virtual_address": "0x03db8000",
+                                                                 "size": "0x00031bb4"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXCEPTION",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_SECURITY",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BASERELOC",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DEBUG",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COPYRIGHT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_GLOBALPTR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_TLS",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG",
+                                                      "virtual_address": "0x0004eaa8",
+                                                                 "size": "0x00000040"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IAT",
+                                                      "virtual_address": "0x00048000",
+                                                                 "size": "0x00000298"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESERVED",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   }
+                                                 ],
+                                  "versioninfo": [],
+                                    "resources": [
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "IMAGE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca0b4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000020e",
+                                                          "entropy": "6.12"
+                                                   },
+                                                   {
+                                                             "name": "MUI",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca2c4",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000118",
+                                                          "entropy": "2.92"
+                                                   },
+                                                   {
+                                                             "name": "UIFILE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dca3dc",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x0000824a",
+                                                          "entropy": "5.28"
+                                                   },
+                                                   {
+                                                             "name": "WEVT_TEMPLATE",
+                                                         "filetype": null,
+                                                           "offset": "0x03dd2628",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000622",
+                                                          "entropy": "3.40"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9304",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_GROUP_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9858",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x000000ae",
+                                                          "entropy": "3.09"
+                                                   },
+                                                   {
+                                                             "name": "RT_GROUP_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9858",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x000000ae",
+                                                          "entropy": "3.09"
+                                                   },
+                                                   {
+                                                             "name": "RT_GROUP_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9858",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x000000ae",
+                                                          "entropy": "3.09"
+                                                   },
+                                                   {
+                                                             "name": "RT_VERSION",
+                                                         "filetype": null,
+                                                           "offset": "0x03de9908",
+                                                         "language": null,
+                                                      "sublanguage": "SUBLANG_ARABIC_QATAR",
+                                                             "size": "0x000002ac",
+                                                          "entropy": "3.32"
+                                                   }
+                                                 ],
+                                      "pdbpath": null,
+                                    "osversion": "5.10",
+                                   "icon_fuzzy": "4beb5734f5da6be3b515a7d231b0e158",
+                                    "imagebase": "0x00400000",
+                           "imported_dll_count": 6,
+                                    "timestamp": "2016-08-01 13:46:57"
+                        }
+               }
+}

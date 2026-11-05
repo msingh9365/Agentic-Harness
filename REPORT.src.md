@@ -1,7 +1,9 @@
 # How much does Nebula's 512-token cut throw away?
 
 A measurement study on the full `dtrizna/quovadis-speakeasy` dataset (92,700
-samples), using Nebula's own preprocessing code.
+samples), using Nebula's own preprocessing code. Section 6 repeats it on a
+second sandbox, the Avast-CTU Public CAPEv2 dataset (48,976 reports). A
+two-level model built on these findings is in [`hier_nebula/`](hier_nebula/README.md).
 
 > **Short answer.** Two out of three samples are longer than 512 tokens, and
 > two thirds of all tokens are never seen by the model. What gets cut is
@@ -395,4 +397,90 @@ Scripts: `measure_avast.py` (tokenizer training + measurement),
 `make_avast_examples.py` (example reports in `examples/avast/`).
 Tables: [`results/avast/tables.md`](results/avast/tables.md).
 
-<!-- AVAST_RESULTS -->
+Example reports (one per split and family, raw + record + tokens):
+[`examples/avast/`](examples/avast/README.md).
+
+### 6.2 Avast results
+
+<!-- include: avast: Avast sample accounting -->
+
+#### Tokens per report (no truncation)
+<!-- include: avast: Avast tokens per sample (no truncation) -->
+
+![Avast token histogram](results/avast/plots/hist_tokens.png)
+
+![CDF Avast vs Speakeasy](results/avast/plots/cdf_tokens.png)
+
+#### By family (variant A)
+
+trainset:
+<!-- include: avast: Avast trainset (variant A) -->
+
+testset:
+<!-- include: avast: Avast testset (variant A) -->
+
+![Avast box per family](results/avast/plots/box_family.png)
+
+Variant B, all splits:
+<!-- include: avast: Avast tokens per sample by family (variant B, all splits) -->
+
+#### Which fields survive the cut
+
+Variant A:
+<!-- include: avast: Avast fields, variant A -->
+
+Variant B:
+<!-- include: avast: Avast fields, variant B -->
+
+![Avast field kept](results/avast/plots/field_kept.png)
+
+#### Chunks needed
+<!-- include: avast: Avast: fixed 512-token chunks needed -->
+
+![Avast chunks](results/avast/plots/hist_chunks.png)
+
+#### Length as a family shortcut
+<!-- include: avast: Avast: length as a family shortcut -->
+
+#### Speakeasy vs Avast side by side
+<!-- include: avast: Sandbox comparison -->
+
+### 6.3 What Avast adds to the picture
+
+1. **With Nebula's field choice, Avast reports are shorter than
+   Speakeasy's.** Variant A has a median of 422 tokens (Speakeasy: 1,069).
+   37.4% of reports (18,306 of 48,976) are longer than 512, and the cut
+   drops 30.9% of all tokens (Speakeasy: 66.0% of samples and 66.6% of
+   tokens). Four 512-token chunks already cover 99.6% of all variant-A
+   tokens, and 8 chunks cover 100.0% of reports (48,963 of 48,976). The
+   train split is longer than the test split (33.5% vs 20.5% of tokens
+   dropped).
+2. **The cut removes the mutexes.** `resolved_apis` comes first and
+   makes up 97.9% of the tokens, so `mutexes`, the only other field, is
+   placed after it. Only 30.3% of mutex tokens survive, and in **53.4% of
+   the reports that have mutexes (16,885 of 31,620) all of them are cut**.
+   This mirrors Speakeasy, where the field that comes last (`apis`) is the
+   one that gets cut.
+3. **The answer depends heavily on which fields you keep.** Keeping all 13
+   summary lists (variant B) gives a median of 4,917 tokens. 93.8% of
+   reports are above 512, 94.3% of tokens are dropped, and the p99 report
+   needs 148 chunks. Even 32 chunks cover only 72.4% of the tokens.
+   Variant B's first 512 tokens are mostly registry `keys` (47.6% of all
+   tokens, and the first field), so the `resolved_apis` that Nebula relies
+   on are fully cut in 80.4% of reports. For a richer CAPE representation
+   the chunking idea becomes necessary, not optional, but it would need a
+   field order or field budget, not just more chunks.
+4. **Length is a strong family signal on Avast too.** Qakbot is longer than
+   every other family (one-vs-rest AUC from length alone: 0.960 on test),
+   and njRAT too (0.822). Trickbot gets *shorter* between train and test
+   (median 361 → 104 tokens), so length also drifts over time. A model that
+   reads more chunks gets more of this signal, so per-family evaluation
+   matters here as well.
+5. **Per-process chunking cannot be tested on this data.** The reduced
+   reports keep no process tree or call order. The full reports (13 GB
+   download) would be needed for that, and they were not used.
+
+**For the chunking design:** on Nebula-style Avast input, 512-token chunks
+with **max 4–8 chunks** are enough (4 chunks cover 99.6% of tokens). On
+Speakeasy, 8 are needed. One setting of **chunk size 512 and max 8 chunks**
+therefore covers both datasets with Nebula's field choices.

@@ -1,0 +1,50 @@
+# total tokens: 594   kept by Nebula (first 512): 512   dropped: 82
+# tokenizer: Avast BPE (50k) trained with Nebula's JSONTokenizerBPE.train() on the Avast training split
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: resolved_apis  (tokens 0..592, 593 tokens)
+     0  ▁resolved ▁apis ▁kernel32 ▁dll ▁sortgethandle ▁kernel32 ▁dll ▁sortclosehandle ▁setupapi ▁dll ▁cm ▁get ▁device ▁interface ▁list ▁size
+    16  ▁exw ▁setupapi ▁dll ▁cm ▁get ▁device ▁interface ▁list ▁exw ▁ole32 ▁dll ▁oleinitialize ▁oleaut32 ▁dll ▁dllgetclassobject ▁oleaut32
+    32  ▁dll ▁dllcanunloadnow ▁ieproxy ▁dll ▁dllgetclassobject ▁ieproxy ▁dll ▁dllcanunloadnow ▁photobase ▁dll ▁delete ▁baseprivate ▁yaxpax ▁z ▁advapi32 ▁dll
+    48  ▁unregistertraceguids ▁comctl32 ▁dll ▁321 ▁cryptsp ▁dll ▁cryptreleasecontext ▁kernel32 ▁dll ▁isprocessorfeaturepresent ▁msvbvm60 ▁dll ▁cicos ▁msvbvm60 ▁dll ▁adj
+    64  ▁fptan ▁msvbvm60 ▁dll ▁vbavarmove ▁msvbvm60 ▁dll ▁vbafreevar ▁msvbvm60 ▁dll ▁vbaarymove ▁msvbvm60 ▁dll ▁vbalenbstr ▁msvbvm60 ▁dll ▁vbastrvarmove
+    80  ▁msvbvm60 ▁dll ▁vbafreevarlist ▁msvbvm60 ▁dll ▁adj ▁fdiv ▁m64 ▁msvbvm60 ▁dll ▁516 ▁msvbvm60 ▁dll ▁adj ▁fprem1 ▁msvbvm60
+    96  ▁dll ▁vbarecansitouni ▁msvbvm60 ▁dll ▁vbastrcat ▁msvbvm60 ▁dll ▁vbalsetfixstr ▁msvbvm60 ▁dll ▁vbasetsystemerror ▁msvbvm60 ▁dll ▁vbarecdestruct ▁msvbvm60 ▁dll
+   112  ▁vbahresultcheckobj ▁msvbvm60 ▁dll ▁adj ▁fdiv ▁m32 ▁msvbvm60 ▁dll ▁vbaaryvar ▁msvbvm60 ▁dll ▁vbaarydestruct ▁msvbvm60 ▁dll ▁669 ▁msvbvm60
+   128  ▁dll ▁vbaexitproc ▁msvbvm60 ▁dll ▁vbaonerror ▁msvbvm60 ▁dll ▁adj ▁fdiv ▁m16i ▁msvbvm60 ▁dll ▁adj ▁fdivr ▁m16i ▁msvbvm60
+   144  ▁dll ▁vbavarindexload ▁msvbvm60 ▁dll ▁cisin ▁msvbvm60 ▁dll ▁vbaerase ▁msvbvm60 ▁dll ▁631 ▁msvbvm60 ▁dll ▁632 ▁msvbvm60 ▁dll
+   160  ▁525 ▁msvbvm60 ▁dll ▁vbachkstk ▁msvbvm60 ▁dll ▁526 ▁msvbvm60 ▁dll ▁vbafileclose ▁msvbvm60 ▁dll ▁vbagenerateboundserror ▁msvbvm60 ▁dll ▁vbaget3
+   176  ▁msvbvm60 ▁dll ▁vbai2i4 ▁msvbvm60 ▁dll ▁dllfunctioncall ▁msvbvm60 ▁dll ▁adj ▁fpatan ▁msvbvm60 ▁dll ▁vbafixstrconstruct ▁msvbvm60 ▁dll ▁vbaredim
+   192  ▁msvbvm60 ▁dll ▁vbarecunitoansi ▁msvbvm60 ▁dll ▁600 ▁msvbvm60 ▁dll ▁vbaui1i2 ▁msvbvm60 ▁dll ▁601 ▁msvbvm60 ▁dll ▁cisqrt ▁msvbvm60
+   208  ▁dll ▁vbaexcepthandler ▁msvbvm60 ▁dll ▁711 ▁msvbvm60 ▁dll ▁vbastrtounicode ▁msvbvm60 ▁dll ▁adj ▁fprem ▁msvbvm60 ▁dll ▁adj ▁fdivr
+   224  ▁m64 ▁msvbvm60 ▁dll ▁608 ▁msvbvm60 ▁dll ▁vbafpexception ▁msvbvm60 ▁dll ▁vbastrvarval ▁msvbvm60 ▁dll ▁vbavarcat ▁msvbvm60 ▁dll ▁537
+   240  ▁msvbvm60 ▁dll ▁cilog ▁msvbvm60 ▁dll ▁vbaerroroverflow ▁msvbvm60 ▁dll ▁vbafileopen ▁msvbvm60 ▁dll ▁648 ▁msvbvm60 ▁dll ▁vbainstr ▁msvbvm60
+   256  ▁dll ▁570 ▁msvbvm60 ▁dll ▁vbanew2 ▁msvbvm60 ▁dll ▁adj ▁fdiv ▁m32i ▁msvbvm60 ▁dll ▁adj ▁fdivr ▁m32i ▁msvbvm60
+   272  ▁dll ▁vbastrcopy ▁msvbvm60 ▁dll ▁681 ▁msvbvm60 ▁dll ▁vbafreestrlist ▁msvbvm60 ▁dll ▁adj ▁fdivr ▁m32 ▁msvbvm60 ▁dll ▁vbapowerr8
+   288  ▁msvbvm60 ▁dll ▁adj ▁fdiv ▁r ▁msvbvm60 ▁dll ▁100 ▁msvbvm60 ▁dll ▁vbai4var ▁msvbvm60 ▁dll ▁vbaarylock ▁msvbvm60 ▁dll
+   304  ▁vbastrtoansi ▁msvbvm60 ▁dll ▁vbavardup ▁msvbvm60 ▁dll ▁vbafpi4 ▁msvbvm60 ▁dll ▁616 ▁msvbvm60 ▁dll ▁vbarecdestructansi ▁msvbvm60 ▁dll ▁ciatan
+   320  ▁msvbvm60 ▁dll ▁vbastrmove ▁msvbvm60 ▁dll ▁vbaarycopy ▁msvbvm60 ▁dll ▁allmul ▁msvbvm60 ▁dll ▁citan ▁msvbvm60 ▁dll ▁vbaaryunlock ▁msvbvm60
+   336  ▁dll ▁ciexp ▁msvbvm60 ▁dll ▁vbamidstmtbstr ▁msvbvm60 ▁dll ▁vbafreestr ▁msvbvm60 ▁dll ▁vbafreeobj ▁cryptbase ▁dll ▁systemfunction036 ▁uxtheme ▁dll
+   352  ▁themeinitapihook ▁user32 ▁dll ▁isprocessdpiaware ▁oleaut32 ▁dll ▁oleloadpictureex ▁oleaut32 ▁dll ▁dispcallfunc ▁oleaut32 ▁dll ▁loadtypelibex ▁oleaut32 ▁dll ▁unregistertypelib
+   368  ▁oleaut32 ▁dll ▁createtypelib2 ▁oleaut32 ▁dll ▁vardatefromudate ▁oleaut32 ▁dll ▁varudatefromdate ▁oleaut32 ▁dll ▁getaltmonthnames ▁oleaut32 ▁dll ▁varnumfromparsenum ▁oleaut32
+   384  ▁dll ▁varparsenumfromstr ▁oleaut32 ▁dll ▁vardecfromr4 ▁oleaut32 ▁dll ▁vardecfromr8 ▁oleaut32 ▁dll ▁vardecfromdate ▁oleaut32 ▁dll ▁vardecfromi4 ▁oleaut32 ▁dll
+   400  ▁vardecfromcy ▁oleaut32 ▁dll ▁varr4fromdec ▁oleaut32 ▁dll ▁getrecordinfofromtypeinfo ▁oleaut32 ▁dll ▁getrecordinfofromguids ▁oleaut32 ▁dll ▁safearraygetrecordinfo ▁oleaut32 ▁dll ▁safearraysetrecordinfo
+   416  ▁oleaut32 ▁dll ▁safearraygetiid ▁oleaut32 ▁dll ▁safearraysetiid ▁oleaut32 ▁dll ▁safearraycopydata ▁oleaut32 ▁dll ▁safearrayallocdescriptorex ▁oleaut32 ▁dll ▁safearraycreateex ▁oleaut32
+   432  ▁dll ▁varformat ▁oleaut32 ▁dll ▁varformatdatetime ▁oleaut32 ▁dll ▁varformatnumber ▁oleaut32 ▁dll ▁varformatpercent ▁oleaut32 ▁dll ▁varformatcurrency ▁oleaut32 ▁dll
+   448  ▁varweekdayname ▁oleaut32 ▁dll ▁varmonthname ▁oleaut32 ▁dll ▁varadd ▁oleaut32 ▁dll ▁varand ▁oleaut32 ▁dll ▁varcat ▁oleaut32 ▁dll ▁vardiv
+   464  ▁oleaut32 ▁dll ▁vareqv ▁oleaut32 ▁dll ▁varidiv ▁oleaut32 ▁dll ▁varimp ▁oleaut32 ▁dll ▁varmod ▁oleaut32 ▁dll ▁varmul ▁oleaut32
+   480  ▁dll ▁varor ▁oleaut32 ▁dll ▁varpow ▁oleaut32 ▁dll ▁varsub ▁oleaut32 ▁dll ▁varxor ▁oleaut32 ▁dll ▁varabs ▁oleaut32 ▁dll
+   496  ▁varfix ▁oleaut32 ▁dll ▁varint ▁oleaut32 ▁dll ▁varneg ▁oleaut32 ▁dll ▁varnot ▁oleaut32 ▁dll ▁varround ▁oleaut32 ▁dll ▁varcmp
+
+-------- 512-token cut: Nebula never sees token 512 and later --------
+
+   512  ▁oleaut32 ▁dll ▁vardecadd ▁oleaut32 ▁dll ▁vardeccmp ▁oleaut32 ▁dll ▁varbstrcat ▁oleaut32 ▁dll ▁varcymuli4 ▁oleaut32 ▁dll ▁varbstrcmp ▁ole32
+   528  ▁dll ▁cocreateinstanceex ▁ole32 ▁dll ▁clsidfromprogidex ▁sxs ▁dll ▁sxsoleaut32mapiidorclsidtotypelibrary ▁user32 ▁dll ▁getsystemmetrics ▁user32 ▁dll ▁monitorfromwindow ▁user32 ▁dll
+   544  ▁monitorfromrect ▁user32 ▁dll ▁monitorfrompoint ▁user32 ▁dll ▁enumdisplaymonitors ▁user32 ▁dll ▁getmonitorinfoa ▁kernel32 ▁dll ▁getmodulehandlea ▁kernel32 ▁dll ▁getmodulefilenamea
+   560  ▁kernel32 ▁dll ▁rtlmovememory ▁kernel32 ▁dll ▁createprocessa ▁kernel32 ▁dll ▁getthreadcontext ▁kernel32 ▁dll ▁readprocessmemory ▁ntdll ▁dll ▁zwunmapviewofsection ▁kernel32
+   576  ▁dll ▁virtualallocex ▁kernel32 ▁dll ▁writeprocessmemory ▁kernel32 ▁dll ▁virtualprotectex ▁kernel32 ▁dll ▁setthreadcontext ▁kernel32 ▁dll ▁resumethread ▁oleaut32 ▁dll
+   592  ▁500
+
+## field: mutexes  (tokens 593..593, 1 tokens)
+   593  ▁mutexes
+

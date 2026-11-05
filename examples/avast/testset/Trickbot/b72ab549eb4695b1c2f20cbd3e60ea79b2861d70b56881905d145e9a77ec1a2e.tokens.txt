@@ -1,0 +1,16 @@
+# total tokens: 104   kept by Nebula (first 512): 104   dropped: 0
+# tokenizer: Avast BPE (50k) trained with Nebula's JSONTokenizerBPE.train() on the Avast training split
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: resolved_apis  (tokens 0..86, 87 tokens)
+     0  ▁resolved ▁apis ▁cryptsp ▁dll ▁cryptacquirecontexta ▁cryptsp ▁dll ▁cryptcreatehash ▁cryptsp ▁dll ▁crypthashdata ▁cryptsp ▁dll ▁cryptderivekey ▁cryptsp ▁dll
+    16  ▁cryptencrypt ▁cryptbase ▁dll ▁systemfunction036 ▁uxtheme ▁dll ▁themeinitapihook ▁user32 ▁dll ▁isprocessdpiaware ▁sechost ▁dll ▁lookupaccountnamelocalw ▁advapi32 ▁dll ▁lookupaccountsidw
+    32  ▁sechost ▁dll ▁lookupaccountsidlocalw ▁cryptsp ▁dll ▁cryptacquirecontextw ▁cryptsp ▁dll ▁cryptgenrandom ▁rpcrtremote ▁dll ▁i ▁rpcextinitializeextensionpoint ▁ole32 ▁dll ▁cogetmarshalsizemax
+    48  ▁ole32 ▁dll ▁comarshalinterface ▁ole32 ▁dll ▁counmarshalinterface ▁ole32 ▁dll ▁coreleasemarshaldata ▁ole32 ▁dll ▁cogetclassobject ▁ole32 ▁dll ▁stringfromiid ▁ole32
+    64  ▁dll ▁cogetpsclsid ▁ole32 ▁dll ▁cotaskmemalloc ▁ole32 ▁dll ▁cotaskmemfree ▁ole32 ▁dll ▁cocreateinstance ▁ole32 ▁dll ▁dcomchannelsethresult ▁cmlua ▁dll
+    80  ▁dllgetclassobject ▁cmlua ▁dll ▁dllcanunloadnow ▁cryptsp ▁dll ▁cryptreleasecontext
+
+## field: mutexes  (tokens 87..103, 17 tokens)
+    87  ▁mutexes ▁gcc ▁shmem ▁tdm2 ▁use ▁fc ▁key ▁gcc ▁shmem ▁tdm2 ▁sjlj ▁once ▁gcc ▁shmem ▁tdm2 ▁fc
+   103  ▁key
+

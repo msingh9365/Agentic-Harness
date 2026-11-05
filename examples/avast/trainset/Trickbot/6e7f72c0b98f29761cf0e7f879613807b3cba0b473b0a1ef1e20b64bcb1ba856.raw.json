@@ -1,0 +1,412 @@
+{
+   "behavior": {
+                  "summary": {
+                                             "keys": [
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_CURRENT_USER\\Software\\Classes",
+                                                       "HKEY_CURRENT_USER\\Software\\Classes\\AppID\\6E7F72C0B98F29761CF0.exe",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Services\\Tcpip\\Parameters",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\services\\Tcpip\\Parameters\\Hostname",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Policies\\Microsoft\\System\\DNSclient",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\services\\Tcpip\\Parameters\\Domain",
+                                                       "HKEY_CURRENT_USER\\Software\\Classes\\Interface\\{D4781CD6-E5D3-44DF-AD94-930EFE48A887}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{D4781CD6-E5D3-44DF-AD94-930EFE48A887}\\ProxyStubClsid32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{D4781CD6-E5D3-44DF-AD94-930EFE48A887}\\ProxyStubClsid32\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\CustomLocale",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CustomLocale\\en",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\ExtendedLocale",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\ExtendedLocale\\en",
+                                                       "HKEY_CURRENT_USER\\Software\\Classes\\Interface\\{9556DC99-828C-11CF-A37E-00AA003240C7}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{9556DC99-828C-11CF-A37E-00AA003240C7}\\ProxyStubClsid32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{9556DC99-828C-11CF-A37E-00AA003240C7}\\ProxyStubClsid32\\(Default)",
+                                                       "HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{D68AF00A-29CB-43FA-8504-CE99A996D9EA}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{D68AF00A-29CB-43FA-8504-CE99A996D9EA}\\TreatAs",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{D68AF00A-29CB-43FA-8504-CE99A996D9EA}\\Progid",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\CLSID\\{D68AF00A-29CB-43FA-8504-CE99A996D9EA}\\Progid",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{D68AF00A-29CB-43FA-8504-CE99A996D9EA}\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{D68AF00A-29CB-43FA-8504-CE99A996D9EA}\\InprocServer32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{D68AF00A-29CB-43FA-8504-CE99A996D9EA}\\InprocServer32\\InprocServer32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{D68AF00A-29CB-43FA-8504-CE99A996D9EA}\\InprocServer32\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{D68AF00A-29CB-43FA-8504-CE99A996D9EA}\\InprocServer32\\ThreadingModel",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{D68AF00A-29CB-43FA-8504-CE99A996D9EA}\\InprocHandler32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{D68AF00A-29CB-43FA-8504-CE99A996D9EA}\\InprocHandler",
+                                                       "HKEY_CURRENT_USER\\Software\\Classes\\Interface\\{027947E1-D731-11CE-A357-000000000001}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{027947E1-D731-11CE-A357-000000000001}\\ProxyStubClsid32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{027947E1-D731-11CE-A357-000000000001}\\ProxyStubClsid32\\(Default)",
+                                                       "HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{1B1CAD8C-2DAB-11D2-B604-00104B703EFD}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{1B1CAD8C-2DAB-11D2-B604-00104B703EFD}\\TreatAs",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{1B1CAD8C-2DAB-11D2-B604-00104B703EFD}\\Progid",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\CLSID\\{1B1CAD8C-2DAB-11D2-B604-00104B703EFD}\\Progid",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{1B1CAD8C-2DAB-11D2-B604-00104B703EFD}\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{1B1CAD8C-2DAB-11D2-B604-00104B703EFD}\\InprocServer32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{1B1CAD8C-2DAB-11D2-B604-00104B703EFD}\\InprocServer32\\InprocServer32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{1B1CAD8C-2DAB-11D2-B604-00104B703EFD}\\InprocServer32\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{1B1CAD8C-2DAB-11D2-B604-00104B703EFD}\\InprocServer32\\ThreadingModel",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{1B1CAD8C-2DAB-11D2-B604-00104B703EFD}\\InprocHandler32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{1B1CAD8C-2DAB-11D2-B604-00104B703EFD}\\InprocHandler",
+                                                       "HKEY_CURRENT_USER\\Software\\Classes\\Interface\\{1C1C45EE-4395-11D2-B60B-00104B703EFD}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{1C1C45EE-4395-11D2-B60B-00104B703EFD}\\ProxyStubClsid32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{1C1C45EE-4395-11D2-B60B-00104B703EFD}\\ProxyStubClsid32\\(Default)",
+                                                       "HKEY_CURRENT_USER\\Software\\Classes\\Interface\\{423EC01E-2E35-11D2-B604-00104B703EFD}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{423EC01E-2E35-11D2-B604-00104B703EFD}\\ProxyStubClsid32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{423EC01E-2E35-11D2-B604-00104B703EFD}\\ProxyStubClsid32\\(Default)",
+                                                       "HKEY_CURRENT_USER\\Software",
+                                                       "HKEY_CURRENT_USER\\Software\\ClientID",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows NT\\CurrentVersion\\GRE_Initialize",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\GRE_Initialize\\DisableMetaFiles"
+                                                     ],
+                                    "resolved_apis": [
+                                                       "kernel32.dll.LoadLibraryA",
+                                                       "user32.dll.MessageBoxA",
+                                                       "ntdll.dll.RtlDecompressBuffer",
+                                                       "kernel32.dll.VirtualAlloc",
+                                                       "kernel32.dll.VirtualFree",
+                                                       "kernel32.dll.VirtualProtect",
+                                                       "kernel32.dll.UnmapViewOfFile",
+                                                       "kernel32.dll.ExitProcess",
+                                                       "ws2_32.dll.WSAStartup",
+                                                       "ws2_32.dll.gethostbyname",
+                                                       "ws2_32.dll.htonl",
+                                                       "advapi32.dll.AdjustTokenPrivileges",
+                                                       "advapi32.dll.AllocateAndInitializeSid",
+                                                       "advapi32.dll.CryptAcquireContextW",
+                                                       "advapi32.dll.CryptGenRandom",
+                                                       "advapi32.dll.CryptReleaseContext",
+                                                       "advapi32.dll.EqualSid",
+                                                       "advapi32.dll.FreeSid",
+                                                       "advapi32.dll.GetTokenInformation",
+                                                       "advapi32.dll.LookupPrivilegeValueW",
+                                                       "kernel32.dll.CloseHandle",
+                                                       "kernel32.dll.CreateFileW",
+                                                       "kernel32.dll.CreateRemoteThread",
+                                                       "kernel32.dll.CreateToolhelp32Snapshot",
+                                                       "kernel32.dll.DeleteFileW",
+                                                       "kernel32.dll.FindResourceW",
+                                                       "kernel32.dll.GetCurrentProcess",
+                                                       "kernel32.dll.GetCurrentProcessId",
+                                                       "kernel32.dll.GetExitCodeProcess",
+                                                       "kernel32.dll.GetFileAttributesW",
+                                                       "kernel32.dll.GetFileSize",
+                                                       "kernel32.dll.GetLastError",
+                                                       "kernel32.dll.GetModuleFileNameW",
+                                                       "kernel32.dll.GetModuleHandleW",
+                                                       "kernel32.dll.GetProcAddress",
+                                                       "kernel32.dll.GetProcessHeap",
+                                                       "kernel32.dll.GetSystemTime",
+                                                       "kernel32.dll.HeapAlloc",
+                                                       "kernel32.dll.HeapFree",
+                                                       "kernel32.dll.HeapReAlloc",
+                                                       "kernel32.dll.HeapSize",
+                                                       "kernel32.dll.IsWow64Process",
+                                                       "kernel32.dll.LoadResource",
+                                                       "kernel32.dll.LockResource",
+                                                       "kernel32.dll.MultiByteToWideChar",
+                                                       "kernel32.dll.OpenMutexW",
+                                                       "kernel32.dll.OpenProcess",
+                                                       "kernel32.dll.OpenProcessToken",
+                                                       "kernel32.dll.OutputDebugStringW",
+                                                       "kernel32.dll.Process32FirstW",
+                                                       "kernel32.dll.Process32NextW",
+                                                       "kernel32.dll.ReadFile",
+                                                       "kernel32.dll.ReadProcessMemory",
+                                                       "kernel32.dll.RegCloseKey",
+                                                       "kernel32.dll.RegDeleteValueW",
+                                                       "kernel32.dll.RegOpenKeyExW",
+                                                       "kernel32.dll.RegQueryValueExW",
+                                                       "kernel32.dll.RegSetValueExW",
+                                                       "kernel32.dll.SetFileAttributesW",
+                                                       "kernel32.dll.SetFileTime",
+                                                       "kernel32.dll.SizeofResource",
+                                                       "kernel32.dll.Sleep",
+                                                       "kernel32.dll.SystemTimeToFileTime",
+                                                       "kernel32.dll.TerminateProcess",
+                                                       "kernel32.dll.VirtualAllocEx",
+                                                       "kernel32.dll.WideCharToMultiByte",
+                                                       "kernel32.dll.WriteFile",
+                                                       "kernel32.dll.WriteProcessMemory",
+                                                       "msvcrt.dll._iob",
+                                                       "msvcrt.dll._vsnprintf",
+                                                       "msvcrt.dll._vsnwprintf",
+                                                       "msvcrt.dll.fgetwc",
+                                                       "msvcrt.dll.getc",
+                                                       "msvcrt.dll.memset",
+                                                       "msvcrt.dll.memcpy",
+                                                       "ole32.dll.CoCreateInstance",
+                                                       "ole32.dll.CoInitializeEx",
+                                                       "ole32.dll.CoInitializeSecurity",
+                                                       "ole32.dll.CoSetProxyBlanket",
+                                                       "ole32.dll.CoUninitialize",
+                                                       "oleaut32.dll.VariantClear",
+                                                       "shell32.dll.StrStrIW",
+                                                       "shlwapi.dll.StrCmpIW",
+                                                       "ws2_32.dll.FreeAddrInfoW",
+                                                       "ws2_32.dll.GetAddrInfoW",
+                                                       "ws2_32.dll.WSAGetLastError",
+                                                       "ws2_32.dll.__WSAFDIsSet",
+                                                       "ws2_32.dll.closesocket",
+                                                       "ws2_32.dll.connect",
+                                                       "ws2_32.dll.ioctlsocket",
+                                                       "ws2_32.dll.recv",
+                                                       "ws2_32.dll.select",
+                                                       "ws2_32.dll.send",
+                                                       "ws2_32.dll.setsockopt",
+                                                       "ws2_32.dll.shutdown",
+                                                       "ws2_32.dll.socket",
+                                                       "cryptbase.dll.SystemFunction036",
+                                                       "sechost.dll.LookupAccountNameLocalW",
+                                                       "advapi32.dll.LookupAccountSidW",
+                                                       "sechost.dll.LookupAccountSidLocalW",
+                                                       "kernel32.dll.GetThreadPreferredUILanguages",
+                                                       "kernel32.dll.SetThreadPreferredUILanguages",
+                                                       "kernel32.dll.LocaleNameToLCID",
+                                                       "kernel32.dll.GetLocaleInfoEx",
+                                                       "kernel32.dll.LCIDToLocaleName",
+                                                       "kernel32.dll.GetSystemDefaultLocaleName",
+                                                       "oleaut32.dll.#283",
+                                                       "oleaut32.dll.#284",
+                                                       "ntdll.dll.EtwUnregisterTraceGuids",
+                                                       "oleaut32.dll.#500",
+                                                       "cryptsp.dll.CryptAcquireContextW",
+                                                       "cryptsp.dll.CryptGenRandom",
+                                                       "cryptsp.dll.CryptReleaseContext"
+                                                     ],
+                                "executed_commands": [],
+                                       "write_keys": [
+                                                       "HKEY_CURRENT_USER\\Software\\ClientID"
+                                                     ],
+                                            "files": [
+                                                       "\\Device\\KsecDD",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\6E7F72C0B98F29761CF0.exe"
+                                                     ],
+                                       "read_files": [
+                                                       "\\Device\\KsecDD",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\6E7F72C0B98F29761CF0.exe"
+                                                     ],
+                                 "started_services": [],
+                                 "created_services": [],
+                                      "write_files": [],
+                                      "delete_keys": [],
+                                        "read_keys": [
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\services\\Tcpip\\Parameters\\Hostname",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\services\\Tcpip\\Parameters\\Domain",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{D4781CD6-E5D3-44DF-AD94-930EFE48A887}\\ProxyStubClsid32\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CustomLocale\\en",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\ExtendedLocale\\en",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{9556DC99-828C-11CF-A37E-00AA003240C7}\\ProxyStubClsid32\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{D68AF00A-29CB-43FA-8504-CE99A996D9EA}\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{D68AF00A-29CB-43FA-8504-CE99A996D9EA}\\InprocServer32\\InprocServer32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{D68AF00A-29CB-43FA-8504-CE99A996D9EA}\\InprocServer32\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{D68AF00A-29CB-43FA-8504-CE99A996D9EA}\\InprocServer32\\ThreadingModel",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{027947E1-D731-11CE-A357-000000000001}\\ProxyStubClsid32\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{1B1CAD8C-2DAB-11D2-B604-00104B703EFD}\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{1B1CAD8C-2DAB-11D2-B604-00104B703EFD}\\InprocServer32\\InprocServer32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{1B1CAD8C-2DAB-11D2-B604-00104B703EFD}\\InprocServer32\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{1B1CAD8C-2DAB-11D2-B604-00104B703EFD}\\InprocServer32\\ThreadingModel",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{1C1C45EE-4395-11D2-B60B-00104B703EFD}\\ProxyStubClsid32\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{423EC01E-2E35-11D2-B604-00104B703EFD}\\ProxyStubClsid32\\(Default)",
+                                                       "HKEY_CURRENT_USER\\Software\\ClientID",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\GRE_Initialize\\DisableMetaFiles"
+                                                     ],
+                                     "delete_files": [],
+                                          "mutexes": [
+                                                       "Global\\TIME_MANAGER"
+                                                     ]
+                             }
+               },
+     "static": {
+                  "pe": {
+                                    "icon_hash": null,
+                                     "sections": [
+                                                   {
+                                                              "raw_address": "0x00000400",
+                                                                     "name": ".data",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE",
+                                                             "virtual_size": "0x00003260",
+                                                          "virtual_address": "0x00001000",
+                                                             "size_of_data": "0x00003400",
+                                                                  "entropy": "6.62",
+                                                      "characteristics_raw": "0xc0000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00003800",
+                                                                     "name": ".text",
+                                                          "characteristics": "IMAGE_SCN_CNT_CODE|IMAGE_SCN_MEM_EXECUTE|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x0004070d",
+                                                          "virtual_address": "0x00005000",
+                                                             "size_of_data": "0x00040800",
+                                                                  "entropy": "5.28",
+                                                      "characteristics_raw": "0x60000020"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00044000",
+                                                                     "name": ".idata",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE",
+                                                             "virtual_size": "0x000000ac",
+                                                          "virtual_address": "0x00046000",
+                                                             "size_of_data": "0x00000200",
+                                                                  "entropy": "1.61",
+                                                      "characteristics_raw": "0xc0000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00044200",
+                                                                     "name": ".tls",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE",
+                                                             "virtual_size": "0x00000020",
+                                                          "virtual_address": "0x00047000",
+                                                             "size_of_data": "0x00000200",
+                                                                  "entropy": "0.11",
+                                                      "characteristics_raw": "0xc0000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00044400",
+                                                                     "name": ".rsrc",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE",
+                                                             "virtual_size": "0x00000500",
+                                                          "virtual_address": "0x00048000",
+                                                             "size_of_data": "0x00000600",
+                                                                  "entropy": "4.92",
+                                                      "characteristics_raw": "0xc0000040"
+                                                   }
+                                                 ],
+                              "peid_signatures": null,
+                                   "entrypoint": "0x004431bf",
+                                      "exports": [],
+                                      "overlay": null,
+                              "digital_signers": [],
+                                      "imphash": "3d50aeae850f4182b960c74d87cde0df",
+                            "reported_checksum": "0x00045da0",
+                                         "icon": null,
+                                "guest_signers": {
+                                                         "aux_error": true,
+                                                          "aux_sha1": null,
+                                                     "aux_timestamp": null,
+                                                         "aux_valid": false,
+                                                       "aux_signers": [],
+                                                    "aux_error_desc": "No signature found. SignTool Error File not valid C\\Users\\comp\\AppData\\Local\\Temp\\6E7F72C0B98F29761CF0.exe"
+                                                 },
+                              "actual_checksum": "0x0004c749",
+                                      "imports": [
+                                                   {
+                                                          "dll": "SECUR32.DLL",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "LsaFreeReturnBuffer",
+                                                                      "address": "0x446060"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "ADVAPI32.DLL",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "LsaICLookupSidsWithCreds",
+                                                                      "address": "0x446088"
+                                                                   }
+                                                                 ]
+                                                   }
+                                                 ],
+                            "exported_dll_name": null,
+                                      "dirents": [
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IMPORT",
+                                                      "virtual_address": "0x00046000",
+                                                                 "size": "0x000000ac"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESOURCE",
+                                                      "virtual_address": "0x00048000",
+                                                                 "size": "0x00000500"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXCEPTION",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_SECURITY",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BASERELOC",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DEBUG",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COPYRIGHT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_GLOBALPTR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_TLS",
+                                                      "virtual_address": "0x00047000",
+                                                                 "size": "0x00000020"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IAT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESERVED",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   }
+                                                 ],
+                                  "versioninfo": [],
+                                    "resources": [
+                                                   {
+                                                             "name": "RT_MANIFEST",
+                                                         "filetype": null,
+                                                           "offset": "0x00048058",
+                                                         "language": "LANG_NEUTRAL",
+                                                      "sublanguage": "SUBLANG_NEUTRAL",
+                                                             "size": "0x000004a5",
+                                                          "entropy": "5.18"
+                                                   }
+                                                 ],
+                                      "pdbpath": null,
+                                    "osversion": "5.1",
+                                   "icon_fuzzy": null,
+                                    "imagebase": "0x00400000",
+                           "imported_dll_count": 2,
+                                    "timestamp": "2014-06-15 21:54:19"
+                        }
+               }
+}

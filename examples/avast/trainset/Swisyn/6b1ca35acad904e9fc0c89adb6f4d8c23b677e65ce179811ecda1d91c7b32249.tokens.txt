@@ -1,0 +1,36 @@
+# total tokens: 422   kept by Nebula (first 512): 422   dropped: 0
+# tokenizer: Avast BPE (50k) trained with Nebula's JSONTokenizerBPE.train() on the Avast training split
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: resolved_apis  (tokens 0..420, 421 tokens)
+     0  ▁resolved ▁apis ▁kernel32 ▁dll ▁isprocessorfeaturepresent ▁kernel32 ▁dll ▁sortgethandle ▁kernel32 ▁dll ▁sortclosehandle ▁cryptbase ▁dll ▁systemfunction036 ▁uxtheme ▁dll
+    16  ▁themeinitapihook ▁user32 ▁dll ▁isprocessdpiaware ▁oleaut32 ▁dll ▁oleloadpictureex ▁oleaut32 ▁dll ▁dispcallfunc ▁oleaut32 ▁dll ▁loadtypelibex ▁oleaut32 ▁dll ▁unregistertypelib
+    32  ▁oleaut32 ▁dll ▁createtypelib2 ▁oleaut32 ▁dll ▁vardatefromudate ▁oleaut32 ▁dll ▁varudatefromdate ▁oleaut32 ▁dll ▁getaltmonthnames ▁oleaut32 ▁dll ▁varnumfromparsenum ▁oleaut32
+    48  ▁dll ▁varparsenumfromstr ▁oleaut32 ▁dll ▁vardecfromr4 ▁oleaut32 ▁dll ▁vardecfromr8 ▁oleaut32 ▁dll ▁vardecfromdate ▁oleaut32 ▁dll ▁vardecfromi4 ▁oleaut32 ▁dll
+    64  ▁vardecfromcy ▁oleaut32 ▁dll ▁varr4fromdec ▁oleaut32 ▁dll ▁getrecordinfofromtypeinfo ▁oleaut32 ▁dll ▁getrecordinfofromguids ▁oleaut32 ▁dll ▁safearraygetrecordinfo ▁oleaut32 ▁dll ▁safearraysetrecordinfo
+    80  ▁oleaut32 ▁dll ▁safearraygetiid ▁oleaut32 ▁dll ▁safearraysetiid ▁oleaut32 ▁dll ▁safearraycopydata ▁oleaut32 ▁dll ▁safearrayallocdescriptorex ▁oleaut32 ▁dll ▁safearraycreateex ▁oleaut32
+    96  ▁dll ▁varformat ▁oleaut32 ▁dll ▁varformatdatetime ▁oleaut32 ▁dll ▁varformatnumber ▁oleaut32 ▁dll ▁varformatpercent ▁oleaut32 ▁dll ▁varformatcurrency ▁oleaut32 ▁dll
+   112  ▁varweekdayname ▁oleaut32 ▁dll ▁varmonthname ▁oleaut32 ▁dll ▁varadd ▁oleaut32 ▁dll ▁varand ▁oleaut32 ▁dll ▁varcat ▁oleaut32 ▁dll ▁vardiv
+   128  ▁oleaut32 ▁dll ▁vareqv ▁oleaut32 ▁dll ▁varidiv ▁oleaut32 ▁dll ▁varimp ▁oleaut32 ▁dll ▁varmod ▁oleaut32 ▁dll ▁varmul ▁oleaut32
+   144  ▁dll ▁varor ▁oleaut32 ▁dll ▁varpow ▁oleaut32 ▁dll ▁varsub ▁oleaut32 ▁dll ▁varxor ▁oleaut32 ▁dll ▁varabs ▁oleaut32 ▁dll
+   160  ▁varfix ▁oleaut32 ▁dll ▁varint ▁oleaut32 ▁dll ▁varneg ▁oleaut32 ▁dll ▁varnot ▁oleaut32 ▁dll ▁varround ▁oleaut32 ▁dll ▁varcmp
+   176  ▁oleaut32 ▁dll ▁vardecadd ▁oleaut32 ▁dll ▁vardeccmp ▁oleaut32 ▁dll ▁varbstrcat ▁oleaut32 ▁dll ▁varcymuli4 ▁oleaut32 ▁dll ▁varbstrcmp ▁ole32
+   192  ▁dll ▁cocreateinstanceex ▁ole32 ▁dll ▁clsidfromprogidex ▁sxs ▁dll ▁sxsoleaut32mapiidorclsidtotypelibrary ▁user32 ▁dll ▁getsystemmetrics ▁user32 ▁dll ▁monitorfromwindow ▁user32 ▁dll
+   208  ▁monitorfromrect ▁user32 ▁dll ▁monitorfrompoint ▁user32 ▁dll ▁enumdisplaymonitors ▁user32 ▁dll ▁getmonitorinfoa ▁ole32 ▁dll ▁clsidfromole1class ▁clbcatq ▁dll ▁getcatalogobject
+   224  ▁clbcatq ▁dll ▁getcatalogobject2 ▁cryptsp ▁dll ▁cryptacquirecontextw ▁cryptsp ▁dll ▁cryptgenrandom ▁shell32 ▁dll ▁shgetspecialfolderlocation ▁ole32 ▁dll ▁stringfromguid2 ▁ole32
+   240  ▁dll ▁coinitializeex ▁ole32 ▁dll ▁createbindctx ▁ole32 ▁dll ▁cotaskmemalloc ▁ole32 ▁dll ▁cogetapartmenttype ▁ole32 ▁dll ▁coregisterinitializespy ▁ole32 ▁dll
+   256  ▁cotaskmemfree ▁comctl32 ▁dll ▁236 ▁oleaut32 ▁dll ▁6 ▁ole32 ▁dll ▁cogetmalloc ▁comctl32 ▁dll ▁320 ▁comctl32 ▁dll ▁324
+   272  ▁comctl32 ▁dll ▁323 ▁comctl32 ▁dll ▁328 ▁comctl32 ▁dll ▁334 ▁setupapi ▁dll ▁cm ▁get ▁device ▁interface ▁list
+   288  ▁size ▁exw ▁advapi32 ▁dll ▁regenumkeyw ▁oleaut32 ▁dll ▁2 ▁setupapi ▁dll ▁cm ▁get ▁device ▁interface ▁list ▁exw
+   304  ▁ole32 ▁dll ▁couninitialize ▁comctl32 ▁dll ▁332 ▁shell32 ▁dll ▁shgetpathfromidlista ▁comctl32 ▁dll ▁386 ▁advapi32 ▁dll ▁openthreadtoken ▁shell32
+   320  ▁dll ▁102 ▁ole32 ▁dll ▁cocreateinstance ▁advapi32 ▁dll ▁initializesecuritydescriptor ▁advapi32 ▁dll ▁setentriesinaclw ▁ntmarta ▁dll ▁getmartaextensioninterface ▁advapi32 ▁dll
+   336  ▁setsecuritydescriptordacl ▁advapi32 ▁dll ▁istextunicode ▁comctl32 ▁dll ▁338 ▁comctl32 ▁dll ▁339 ▁kernel32 ▁dll ▁getcomputernamea ▁advapi32 ▁dll ▁getusernamea
+   352  ▁kernel32 ▁dll ▁nlsgetcacheupdatecount ▁kernel32 ▁dll ▁createtoolhelp32snapshot ▁kernel32 ▁dll ▁process32first ▁kernel32 ▁dll ▁openprocess ▁psapi ▁dll ▁getmodulefilenameexa ▁kernel32
+   368  ▁dll ▁process32next ▁kernel32 ▁dll ▁closehandle ▁kernel32 ▁dll ▁getfileattributesa ▁ole32 ▁dll ▁ndroleinitializeextension ▁ole32 ▁dll ▁cogetclassobject ▁ole32 ▁dll
+   384  ▁cogetmarshalsizemax ▁ole32 ▁dll ▁comarshalinterface ▁ole32 ▁dll ▁counmarshalinterface ▁ole32 ▁dll ▁stringfromiid ▁ole32 ▁dll ▁cogetpsclsid ▁ole32 ▁dll ▁coreleasemarshaldata
+   400  ▁ole32 ▁dll ▁dcomchannelsethresult ▁ole32 ▁dll ▁corevokeinitializespy ▁comctl32 ▁dll ▁388 ▁oleaut32 ▁dll ▁500 ▁advapi32 ▁dll ▁unregistertraceguids ▁comctl32
+   416  ▁dll ▁321 ▁cryptsp ▁dll ▁cryptreleasecontext
+
+## field: mutexes  (tokens 421..421, 1 tokens)
+   421  ▁mutexes
+

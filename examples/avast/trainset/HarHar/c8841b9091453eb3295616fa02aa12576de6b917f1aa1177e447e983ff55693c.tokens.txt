@@ -1,0 +1,21 @@
+# total tokens: 183   kept by Nebula (first 512): 183   dropped: 0
+# tokenizer: Avast BPE (50k) trained with Nebula's JSONTokenizerBPE.train() on the Avast training split
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: resolved_apis  (tokens 0..181, 182 tokens)
+     0  ▁resolved ▁apis ▁kernel32 ▁dll ▁flsalloc ▁kernel32 ▁dll ▁flssetvalue ▁kernel32 ▁dll ▁flsgetvalue ▁kernel32 ▁dll ▁lcmapstringex ▁kernel32 ▁dll
+    16  ▁flsfree ▁kernel32 ▁dll ▁initializecriticalsectionex ▁kernel32 ▁dll ▁initonceexecuteonce ▁kernel32 ▁dll ▁createeventexw ▁kernel32 ▁dll ▁createsemaphorew ▁kernel32 ▁dll ▁createsemaphoreexw
+    32  ▁kernel32 ▁dll ▁createthreadpooltimer ▁kernel32 ▁dll ▁setthreadpooltimer ▁kernel32 ▁dll ▁waitforthreadpooltimercallbacks ▁kernel32 ▁dll ▁closethreadpooltimer ▁kernel32 ▁dll ▁createthreadpoolwait ▁kernel32
+    48  ▁dll ▁setthreadpoolwait ▁kernel32 ▁dll ▁closethreadpoolwait ▁kernel32 ▁dll ▁flushprocesswritebuffers ▁kernel32 ▁dll ▁freelibrarywhencallbackreturns ▁kernel32 ▁dll ▁getcurrentprocessornumber ▁kernel32 ▁dll
+    64  ▁createsymboliclinkw ▁kernel32 ▁dll ▁gettickcount64 ▁kernel32 ▁dll ▁getfileinformationbyhandleex ▁kernel32 ▁dll ▁setfileinformationbyhandle ▁kernel32 ▁dll ▁initializeconditionvariable ▁kernel32 ▁dll ▁wakeconditionvariable
+    80  ▁kernel32 ▁dll ▁wakeallconditionvariable ▁kernel32 ▁dll ▁sleepconditionvariablecs ▁kernel32 ▁dll ▁initializesrwlock ▁kernel32 ▁dll ▁acquiresrwlockexclusive ▁kernel32 ▁dll ▁tryacquiresrwlockexclusive ▁kernel32
+    96  ▁dll ▁releasesrwlockexclusive ▁kernel32 ▁dll ▁sleepconditionvariablesrw ▁kernel32 ▁dll ▁createthreadpoolwork ▁kernel32 ▁dll ▁submitthreadpoolwork ▁kernel32 ▁dll ▁closethreadpoolwork ▁kernel32 ▁dll
+   112  ▁comparestringex ▁kernel32 ▁dll ▁getlocaleinfoex ▁api ▁ms ▁win ▁core ▁synch ▁l1 ▁2 ▁0 ▁dll ▁initializeconditionvariable ▁api ▁ms
+   128  ▁win ▁core ▁synch ▁l1 ▁2 ▁0 ▁dll ▁sleepconditionvariablecs ▁api ▁ms ▁win ▁core ▁synch ▁l1 ▁2 ▁0
+   144  ▁dll ▁wakeallconditionvariable ▁ntdll ▁dll ▁rtlntstatustodoserror ▁ntdll ▁dll ▁ntdeviceiocontrolfile ▁ntdll ▁dll ▁ntqueryinformationfile ▁ntdll ▁dll ▁ntsetinformationfile ▁ntdll ▁dll
+   160  ▁ntqueryvolumeinformationfile ▁ntdll ▁dll ▁ntquerydirectoryfile ▁ntdll ▁dll ▁ntquerysysteminformation ▁kernel32 ▁dll ▁getqueuedcompletionstatusex ▁kernel32 ▁dll ▁setfilecompletionnotificationmodes ▁kernel32 ▁dll ▁cancelioex
+   176  ▁kernel32 ▁dll ▁cancelsynchronousio ▁kernel32 ▁dll ▁getfinalpathnamebyhandlew
+
+## field: mutexes  (tokens 182..182, 1 tokens)
+   182  ▁mutexes
+

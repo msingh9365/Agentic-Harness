@@ -1,0 +1,37 @@
+{
+ "resolved_apis": [
+  "cryptsp.dll.cryptacquirecontexta",
+  "cryptsp.dll.cryptcreatehash",
+  "cryptsp.dll.crypthashdata",
+  "cryptsp.dll.cryptderivekey",
+  "cryptsp.dll.cryptencrypt",
+  "cryptbase.dll.systemfunction036",
+  "uxtheme.dll.themeinitapihook",
+  "user32.dll.isprocessdpiaware",
+  "sechost.dll.lookupaccountnamelocalw",
+  "advapi32.dll.lookupaccountsidw",
+  "sechost.dll.lookupaccountsidlocalw",
+  "cryptsp.dll.cryptacquirecontextw",
+  "cryptsp.dll.cryptgenrandom",
+  "rpcrtremote.dll.i_rpcextinitializeextensionpoint",
+  "ole32.dll.cogetmarshalsizemax",
+  "ole32.dll.comarshalinterface",
+  "ole32.dll.counmarshalinterface",
+  "ole32.dll.coreleasemarshaldata",
+  "ole32.dll.cogetclassobject",
+  "ole32.dll.stringfromiid",
+  "ole32.dll.cogetpsclsid",
+  "ole32.dll.cotaskmemalloc",
+  "ole32.dll.cotaskmemfree",
+  "ole32.dll.cocreateinstance",
+  "ole32.dll.dcomchannelsethresult",
+  "cmlua.dll.dllgetclassobject",
+  "cmlua.dll.dllcanunloadnow",
+  "cryptsp.dll.cryptreleasecontext"
+ ],
+ "mutexes": [
+  "gcc-shmem-tdm2-use_fc_key",
+  "gcc-shmem-tdm2-sjlj_once",
+  "gcc-shmem-tdm2-fc_key"
+ ]
+}

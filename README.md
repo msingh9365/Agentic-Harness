@@ -25,6 +25,10 @@ measure_lengths.py   measurement (sanity check, dataset inspection, per-sample C
 analyze.py           tables (results/tables.md), summary.json and plots
 build_report.py      builds REPORT.md from REPORT.src.md + results/tables.md
 make_examples.py     copies 21 example samples into examples/ (raw, filtered, tokens)
+measure_avast.py     Avast-CTU length study (tokenizer training + measurement)
+analyze_avast.py     Avast tables, plots and the Speakeasy comparison
+make_avast_examples.py  copies 20 Avast example reports into examples/avast/
+hier_nebula/         two-level Nebula: 512-token chunks + second-level Transformer
 examples/            the example samples, with their own README explaining the data
 results/             CSVs, tables.md, summary.json, pilot (sample2000_*) outputs
 results/logs/        console output of every run
@@ -73,6 +77,29 @@ python analyze.py --results results
 python build_report.py            # pastes the tables into REPORT.md
 python make_examples.py --nebula ../nebula --data-dir ../hf-git   # examples/
 ```
+
+### Avast-CTU Public CAPEv2 (REPORT.md §6)
+
+```bash
+pip install gdown
+git clone https://github.com/avast/avast-ctu-cape-dataset   # README with the download links (commit b4210e5)
+mkdir -p ../avast/data && cd ../avast/data
+gdown 1xujiSqV0sUv4GinS2xq8XFRpZLvvs1um -O reduced.zip      # "reduced reports", 593 MB zip
+unzip reduced.zip -x "__MACOSX/*" && unzip public_small_reports.zip && rm *.zip   # 11 GB of JSON
+cd -
+python measure_avast.py --data-dir ../avast/data train       # Avast BPE tokenizers (variants A and B)
+python measure_avast.py --data-dir ../avast/data measure     # results/avast/samples.csv (~15 min on 4 cores)
+python analyze_avast.py                                      # results/avast/tables.md + plots
+python make_avast_examples.py --data-dir ../avast/data       # examples/avast/
+python build_report.py
+```
+
+The trained Avast tokenizers are committed in `results/avast/tokenizer/`, so
+`train` can be skipped.
+
+### Two-level model
+
+See [hier_nebula/README.md](hier_nebula/README.md).
 
 `analyze.py` always writes `results/plots/`, so run the pilot `analyze.py`
 before the full one (or move its output), as above.

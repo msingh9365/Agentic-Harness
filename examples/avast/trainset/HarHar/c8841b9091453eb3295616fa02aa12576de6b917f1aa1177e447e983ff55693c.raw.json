@@ -1,0 +1,1105 @@
+{
+   "behavior": {
+                  "summary": {
+                                             "keys": [
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows NT\\CurrentVersion\\GRE_Initialize",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\WINDOWS NT\\CURRENTVERSION\\GRE_Initialize\\DisableMetaFiles"
+                                                     ],
+                                    "resolved_apis": [
+                                                       "kernel32.dll.FlsAlloc",
+                                                       "kernel32.dll.FlsSetValue",
+                                                       "kernel32.dll.FlsGetValue",
+                                                       "kernel32.dll.LCMapStringEx",
+                                                       "kernel32.dll.FlsFree",
+                                                       "kernel32.dll.InitializeCriticalSectionEx",
+                                                       "kernel32.dll.InitOnceExecuteOnce",
+                                                       "kernel32.dll.CreateEventExW",
+                                                       "kernel32.dll.CreateSemaphoreW",
+                                                       "kernel32.dll.CreateSemaphoreExW",
+                                                       "kernel32.dll.CreateThreadpoolTimer",
+                                                       "kernel32.dll.SetThreadpoolTimer",
+                                                       "kernel32.dll.WaitForThreadpoolTimerCallbacks",
+                                                       "kernel32.dll.CloseThreadpoolTimer",
+                                                       "kernel32.dll.CreateThreadpoolWait",
+                                                       "kernel32.dll.SetThreadpoolWait",
+                                                       "kernel32.dll.CloseThreadpoolWait",
+                                                       "kernel32.dll.FlushProcessWriteBuffers",
+                                                       "kernel32.dll.FreeLibraryWhenCallbackReturns",
+                                                       "kernel32.dll.GetCurrentProcessorNumber",
+                                                       "kernel32.dll.CreateSymbolicLinkW",
+                                                       "kernel32.dll.GetTickCount64",
+                                                       "kernel32.dll.GetFileInformationByHandleEx",
+                                                       "kernel32.dll.SetFileInformationByHandle",
+                                                       "kernel32.dll.InitializeConditionVariable",
+                                                       "kernel32.dll.WakeConditionVariable",
+                                                       "kernel32.dll.WakeAllConditionVariable",
+                                                       "kernel32.dll.SleepConditionVariableCS",
+                                                       "kernel32.dll.InitializeSRWLock",
+                                                       "kernel32.dll.AcquireSRWLockExclusive",
+                                                       "kernel32.dll.TryAcquireSRWLockExclusive",
+                                                       "kernel32.dll.ReleaseSRWLockExclusive",
+                                                       "kernel32.dll.SleepConditionVariableSRW",
+                                                       "kernel32.dll.CreateThreadpoolWork",
+                                                       "kernel32.dll.SubmitThreadpoolWork",
+                                                       "kernel32.dll.CloseThreadpoolWork",
+                                                       "kernel32.dll.CompareStringEx",
+                                                       "kernel32.dll.GetLocaleInfoEx",
+                                                       "api-ms-win-core-synch-l1-2-0.dll.InitializeConditionVariable",
+                                                       "api-ms-win-core-synch-l1-2-0.dll.SleepConditionVariableCS",
+                                                       "api-ms-win-core-synch-l1-2-0.dll.WakeAllConditionVariable",
+                                                       "ntdll.dll.RtlNtStatusToDosError",
+                                                       "ntdll.dll.NtDeviceIoControlFile",
+                                                       "ntdll.dll.NtQueryInformationFile",
+                                                       "ntdll.dll.NtSetInformationFile",
+                                                       "ntdll.dll.NtQueryVolumeInformationFile",
+                                                       "ntdll.dll.NtQueryDirectoryFile",
+                                                       "ntdll.dll.NtQuerySystemInformation",
+                                                       "kernel32.dll.GetQueuedCompletionStatusEx",
+                                                       "kernel32.dll.SetFileCompletionNotificationModes",
+                                                       "kernel32.dll.CancelIoEx",
+                                                       "kernel32.dll.CancelSynchronousIo",
+                                                       "kernel32.dll.GetFinalPathNameByHandleW"
+                                                     ],
+                                "executed_commands": [],
+                                       "write_keys": [],
+                                            "files": [
+                                                       "C:\\Windows\\System32\\api-ms-win-core-fibers-l1-1-1.DLL",
+                                                       "C:\\Windows\\System32\\api-ms-win-core-localization-l1-2-1.DLL",
+                                                       "C:\\Windows\\System32\\WSHTCPIP.DLL",
+                                                       "C:\\Windows\\System32\\wship6.dll",
+                                                       "C:\\Windows\\System32\\wshqos.dll",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\config.json",
+                                                       "C:\\Windows\\System32\\api-ms-win-appmodel-runtime-l1-1-1.DLL",
+                                                       "C:\\Windows\\System32\\ext-ms-win-kernel32-package-current-l1-1-0.DLL"
+                                                     ],
+                                       "read_files": [
+                                                       "C:\\Windows\\System32\\wship6.dll",
+                                                       "C:\\Windows\\System32\\wshqos.dll",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\config.json"
+                                                     ],
+                                 "started_services": [],
+                                 "created_services": [],
+                                      "write_files": [],
+                                      "delete_keys": [],
+                                        "read_keys": [
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\WINDOWS NT\\CURRENTVERSION\\GRE_Initialize\\DisableMetaFiles"
+                                                     ],
+                                     "delete_files": [],
+                                          "mutexes": []
+                             }
+               },
+     "static": {
+                  "pe": {
+                                    "icon_hash": null,
+                                     "sections": [
+                                                   {
+                                                              "raw_address": "0x00000400",
+                                                                     "name": ".text",
+                                                          "characteristics": "IMAGE_SCN_CNT_CODE|IMAGE_SCN_MEM_EXECUTE|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x0009bbf2",
+                                                          "virtual_address": "0x00001000",
+                                                             "size_of_data": "0x0009bc00",
+                                                                  "entropy": "6.61",
+                                                      "characteristics_raw": "0x60000020"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x0009c000",
+                                                                     "name": ".rdata",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x0001a036",
+                                                          "virtual_address": "0x0009d000",
+                                                             "size_of_data": "0x0001a200",
+                                                                  "entropy": "5.92",
+                                                      "characteristics_raw": "0x40000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x000b6200",
+                                                                     "name": ".data",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE",
+                                                             "virtual_size": "0x00003204",
+                                                          "virtual_address": "0x000b8000",
+                                                             "size_of_data": "0x00001a00",
+                                                                  "entropy": "4.17",
+                                                      "characteristics_raw": "0xc0000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x000b7c00",
+                                                                     "name": ".rsrc",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x00005e28",
+                                                          "virtual_address": "0x000bc000",
+                                                             "size_of_data": "0x00006000",
+                                                                  "entropy": "4.19",
+                                                      "characteristics_raw": "0x40000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x000bdc00",
+                                                                     "name": ".reloc",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_DISCARDABLE|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x00006118",
+                                                          "virtual_address": "0x000c2000",
+                                                             "size_of_data": "0x00006200",
+                                                                  "entropy": "6.68",
+                                                      "characteristics_raw": "0x42000040"
+                                                   }
+                                                 ],
+                              "peid_signatures": null,
+                                   "entrypoint": "0x00459a94",
+                                      "exports": [],
+                                      "overlay": {
+                                                    "offset": "0x000c3e00",
+                                                      "size": "0x0000064a"
+                                                 },
+                              "digital_signers": [],
+                                      "imphash": "25828571b566c2ab3d5aa4885070ba2a",
+                            "reported_checksum": "0x00000000",
+                                         "icon": null,
+                                "guest_signers": {
+                                                         "aux_error": true,
+                                                          "aux_sha1": null,
+                                                     "aux_timestamp": null,
+                                                         "aux_valid": false,
+                                                       "aux_signers": [],
+                                                    "aux_error_desc": "No signature found. SignTool Error File not valid C\\Users\\comp\\AppData\\Local\\Temp\\C8841B9091453EB32956.exe"
+                                                 },
+                              "actual_checksum": "0x000cc50c",
+                                      "imports": [
+                                                   {
+                                                          "dll": "WS2_32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "WSAGetLastError",
+                                                                      "address": "0x49d2a4"
+                                                                   },
+                                                                   {
+                                                                         "name": "WSASetLastError",
+                                                                      "address": "0x49d2a8"
+                                                                   },
+                                                                   {
+                                                                         "name": "WSAStartup",
+                                                                      "address": "0x49d2ac"
+                                                                   },
+                                                                   {
+                                                                         "name": "select",
+                                                                      "address": "0x49d2b0"
+                                                                   },
+                                                                   {
+                                                                         "name": "WSARecvFrom",
+                                                                      "address": "0x49d2b4"
+                                                                   },
+                                                                   {
+                                                                         "name": "bind",
+                                                                      "address": "0x49d2b8"
+                                                                   },
+                                                                   {
+                                                                         "name": "WSAIoctl",
+                                                                      "address": "0x49d2bc"
+                                                                   },
+                                                                   {
+                                                                         "name": "WSASend",
+                                                                      "address": "0x49d2c0"
+                                                                   },
+                                                                   {
+                                                                         "name": "shutdown",
+                                                                      "address": "0x49d2c4"
+                                                                   },
+                                                                   {
+                                                                         "name": "WSASocketW",
+                                                                      "address": "0x49d2c8"
+                                                                   },
+                                                                   {
+                                                                         "name": "socket",
+                                                                      "address": "0x49d2cc"
+                                                                   },
+                                                                   {
+                                                                         "name": "WSARecv",
+                                                                      "address": "0x49d2d0"
+                                                                   },
+                                                                   {
+                                                                         "name": "ioctlsocket",
+                                                                      "address": "0x49d2d4"
+                                                                   },
+                                                                   {
+                                                                         "name": "FreeAddrInfoW",
+                                                                      "address": "0x49d2d8"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetAddrInfoW",
+                                                                      "address": "0x49d2dc"
+                                                                   },
+                                                                   {
+                                                                         "name": "closesocket",
+                                                                      "address": "0x49d2e0"
+                                                                   },
+                                                                   {
+                                                                         "name": "getsockopt",
+                                                                      "address": "0x49d2e4"
+                                                                   },
+                                                                   {
+                                                                         "name": "setsockopt",
+                                                                      "address": "0x49d2e8"
+                                                                   },
+                                                                   {
+                                                                         "name": "htons",
+                                                                      "address": "0x49d2ec"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "KERNEL32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "EnumSystemLocalesW",
+                                                                      "address": "0x49d02c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetUserDefaultLCID",
+                                                                      "address": "0x49d030"
+                                                                   },
+                                                                   {
+                                                                         "name": "IsValidLocale",
+                                                                      "address": "0x49d034"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetTimeZoneInformation",
+                                                                      "address": "0x49d038"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetModuleFileNameA",
+                                                                      "address": "0x49d03c"
+                                                                   },
+                                                                   {
+                                                                         "name": "HeapFree",
+                                                                      "address": "0x49d040"
+                                                                   },
+                                                                   {
+                                                                         "name": "HeapReAlloc",
+                                                                      "address": "0x49d044"
+                                                                   },
+                                                                   {
+                                                                         "name": "HeapAlloc",
+                                                                      "address": "0x49d048"
+                                                                   },
+                                                                   {
+                                                                         "name": "ExitThread",
+                                                                      "address": "0x49d04c"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetFileAttributesW",
+                                                                      "address": "0x49d050"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetACP",
+                                                                      "address": "0x49d054"
+                                                                   },
+                                                                   {
+                                                                         "name": "HeapSize",
+                                                                      "address": "0x49d058"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetFileAttributesExW",
+                                                                      "address": "0x49d05c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetConsoleCP",
+                                                                      "address": "0x49d060"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetStdHandle",
+                                                                      "address": "0x49d064"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetConsoleMode",
+                                                                      "address": "0x49d068"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetConsoleMode",
+                                                                      "address": "0x49d06c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetWindowsDirectoryA",
+                                                                      "address": "0x49d070"
+                                                                   },
+                                                                   {
+                                                                         "name": "WaitForSingleObject",
+                                                                      "address": "0x49d074"
+                                                                   },
+                                                                   {
+                                                                         "name": "CloseHandle",
+                                                                      "address": "0x49d078"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateThread",
+                                                                      "address": "0x49d07c"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateEventA",
+                                                                      "address": "0x49d080"
+                                                                   },
+                                                                   {
+                                                                         "name": "FreeConsole",
+                                                                      "address": "0x49d084"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetConsoleWindow",
+                                                                      "address": "0x49d088"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetThreadAffinityMask",
+                                                                      "address": "0x49d08c"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetPriorityClass",
+                                                                      "address": "0x49d090"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCurrentProcess",
+                                                                      "address": "0x49d094"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetThreadPriority",
+                                                                      "address": "0x49d098"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCurrentThread",
+                                                                      "address": "0x49d09c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetProcAddress",
+                                                                      "address": "0x49d0a0"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetModuleHandleW",
+                                                                      "address": "0x49d0a4"
+                                                                   },
+                                                                   {
+                                                                         "name": "VirtualFree",
+                                                                      "address": "0x49d0a8"
+                                                                   },
+                                                                   {
+                                                                         "name": "VirtualAlloc",
+                                                                      "address": "0x49d0ac"
+                                                                   },
+                                                                   {
+                                                                         "name": "LocalAlloc",
+                                                                      "address": "0x49d0b0"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetLastError",
+                                                                      "address": "0x49d0b4"
+                                                                   },
+                                                                   {
+                                                                         "name": "LocalFree",
+                                                                      "address": "0x49d0b8"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetConsoleCtrlHandler",
+                                                                      "address": "0x49d0bc"
+                                                                   },
+                                                                   {
+                                                                         "name": "EnterCriticalSection",
+                                                                      "address": "0x49d0c0"
+                                                                   },
+                                                                   {
+                                                                         "name": "LeaveCriticalSection",
+                                                                      "address": "0x49d0c4"
+                                                                   },
+                                                                   {
+                                                                         "name": "InitializeCriticalSection",
+                                                                      "address": "0x49d0c8"
+                                                                   },
+                                                                   {
+                                                                         "name": "PostQueuedCompletionStatus",
+                                                                      "address": "0x49d0cc"
+                                                                   },
+                                                                   {
+                                                                         "name": "Sleep",
+                                                                      "address": "0x49d0d0"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetErrorMode",
+                                                                      "address": "0x49d0d4"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetQueuedCompletionStatus",
+                                                                      "address": "0x49d0d8"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateIoCompletionPort",
+                                                                      "address": "0x49d0dc"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetConsoleScreenBufferInfo",
+                                                                      "address": "0x49d0e0"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetConsoleTextAttribute",
+                                                                      "address": "0x49d0e4"
+                                                                   },
+                                                                   {
+                                                                         "name": "RegisterWaitForSingleObject",
+                                                                      "address": "0x49d0e8"
+                                                                   },
+                                                                   {
+                                                                         "name": "UnregisterWait",
+                                                                      "address": "0x49d0ec"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetConsoleCursorInfo",
+                                                                      "address": "0x49d0f0"
+                                                                   },
+                                                                   {
+                                                                         "name": "DuplicateHandle",
+                                                                      "address": "0x49d0f4"
+                                                                   },
+                                                                   {
+                                                                         "name": "QueueUserWorkItem",
+                                                                      "address": "0x49d0f8"
+                                                                   },
+                                                                   {
+                                                                         "name": "MultiByteToWideChar",
+                                                                      "address": "0x49d0fc"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetConsoleCursorInfo",
+                                                                      "address": "0x49d100"
+                                                                   },
+                                                                   {
+                                                                         "name": "FillConsoleOutputCharacterW",
+                                                                      "address": "0x49d104"
+                                                                   },
+                                                                   {
+                                                                         "name": "ReadConsoleInputW",
+                                                                      "address": "0x49d108"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateFileA",
+                                                                      "address": "0x49d10c"
+                                                                   },
+                                                                   {
+                                                                         "name": "ReadConsoleW",
+                                                                      "address": "0x49d110"
+                                                                   },
+                                                                   {
+                                                                         "name": "WriteConsoleInputW",
+                                                                      "address": "0x49d114"
+                                                                   },
+                                                                   {
+                                                                         "name": "FillConsoleOutputAttribute",
+                                                                      "address": "0x49d118"
+                                                                   },
+                                                                   {
+                                                                         "name": "WriteConsoleW",
+                                                                      "address": "0x49d11c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetNumberOfConsoleInputEvents",
+                                                                      "address": "0x49d120"
+                                                                   },
+                                                                   {
+                                                                         "name": "WideCharToMultiByte",
+                                                                      "address": "0x49d124"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetConsoleCursorPosition",
+                                                                      "address": "0x49d128"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateDirectoryW",
+                                                                      "address": "0x49d12c"
+                                                                   },
+                                                                   {
+                                                                         "name": "ReadFile",
+                                                                      "address": "0x49d130"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetLastError",
+                                                                      "address": "0x49d134"
+                                                                   },
+                                                                   {
+                                                                         "name": "WriteFile",
+                                                                      "address": "0x49d138"
+                                                                   },
+                                                                   {
+                                                                         "name": "DeviceIoControl",
+                                                                      "address": "0x49d13c"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetFileTime",
+                                                                      "address": "0x49d140"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateHardLinkW",
+                                                                      "address": "0x49d144"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateFileW",
+                                                                      "address": "0x49d148"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetFileAttributesW",
+                                                                      "address": "0x49d14c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetFileInformationByHandle",
+                                                                      "address": "0x49d150"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetFilePointerEx",
+                                                                      "address": "0x49d154"
+                                                                   },
+                                                                   {
+                                                                         "name": "MoveFileExW",
+                                                                      "address": "0x49d158"
+                                                                   },
+                                                                   {
+                                                                         "name": "CopyFileW",
+                                                                      "address": "0x49d15c"
+                                                                   },
+                                                                   {
+                                                                         "name": "FlushFileBuffers",
+                                                                      "address": "0x49d160"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetLongPathNameW",
+                                                                      "address": "0x49d164"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetShortPathNameW",
+                                                                      "address": "0x49d168"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCurrentDirectoryW",
+                                                                      "address": "0x49d16c"
+                                                                   },
+                                                                   {
+                                                                         "name": "ReadDirectoryChangesW",
+                                                                      "address": "0x49d170"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetFileType",
+                                                                      "address": "0x49d174"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsSetValue",
+                                                                      "address": "0x49d178"
+                                                                   },
+                                                                   {
+                                                                         "name": "ReleaseSemaphore",
+                                                                      "address": "0x49d17c"
+                                                                   },
+                                                                   {
+                                                                         "name": "WaitForMultipleObjects",
+                                                                      "address": "0x49d180"
+                                                                   },
+                                                                   {
+                                                                         "name": "ResumeThread",
+                                                                      "address": "0x49d184"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetEvent",
+                                                                      "address": "0x49d188"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsAlloc",
+                                                                      "address": "0x49d18c"
+                                                                   },
+                                                                   {
+                                                                         "name": "ResetEvent",
+                                                                      "address": "0x49d190"
+                                                                   },
+                                                                   {
+                                                                         "name": "DeleteCriticalSection",
+                                                                      "address": "0x49d194"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateSemaphoreW",
+                                                                      "address": "0x49d198"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsGetValue",
+                                                                      "address": "0x49d19c"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsFree",
+                                                                      "address": "0x49d1a0"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateSemaphoreA",
+                                                                      "address": "0x49d1a4"
+                                                                   },
+                                                                   {
+                                                                         "name": "CancelIo",
+                                                                      "address": "0x49d1a8"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetHandleInformation",
+                                                                      "address": "0x49d1ac"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetModuleFileNameW",
+                                                                      "address": "0x49d1b0"
+                                                                   },
+                                                                   {
+                                                                         "name": "QueryPerformanceFrequency",
+                                                                      "address": "0x49d1b4"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetSystemInfo",
+                                                                      "address": "0x49d1b8"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCurrentProcessId",
+                                                                      "address": "0x49d1bc"
+                                                                   },
+                                                                   {
+                                                                         "name": "QueryPerformanceCounter",
+                                                                      "address": "0x49d1c0"
+                                                                   },
+                                                                   {
+                                                                         "name": "FormatMessageA",
+                                                                      "address": "0x49d1c4"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetNamedPipeHandleState",
+                                                                      "address": "0x49d1c8"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateNamedPipeW",
+                                                                      "address": "0x49d1cc"
+                                                                   },
+                                                                   {
+                                                                         "name": "PeekNamedPipe",
+                                                                      "address": "0x49d1d0"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetNamedPipeHandleStateA",
+                                                                      "address": "0x49d1d4"
+                                                                   },
+                                                                   {
+                                                                         "name": "SwitchToThread",
+                                                                      "address": "0x49d1d8"
+                                                                   },
+                                                                   {
+                                                                         "name": "ConnectNamedPipe",
+                                                                      "address": "0x49d1dc"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetModuleHandleA",
+                                                                      "address": "0x49d1e0"
+                                                                   },
+                                                                   {
+                                                                         "name": "LoadLibraryA",
+                                                                      "address": "0x49d1e4"
+                                                                   },
+                                                                   {
+                                                                         "name": "TerminateProcess",
+                                                                      "address": "0x49d1e8"
+                                                                   },
+                                                                   {
+                                                                         "name": "UnregisterWaitEx",
+                                                                      "address": "0x49d1ec"
+                                                                   },
+                                                                   {
+                                                                         "name": "LCMapStringW",
+                                                                      "address": "0x49d1f0"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetExitCodeProcess",
+                                                                      "address": "0x49d1f4"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetStartupInfoW",
+                                                                      "address": "0x49d1f8"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetStdHandle",
+                                                                      "address": "0x49d1fc"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetModuleHandleExW",
+                                                                      "address": "0x49d200"
+                                                                   },
+                                                                   {
+                                                                         "name": "ExitProcess",
+                                                                      "address": "0x49d204"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCommandLineW",
+                                                                      "address": "0x49d208"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetProcessHeap",
+                                                                      "address": "0x49d20c"
+                                                                   },
+                                                                   {
+                                                                         "name": "FindClose",
+                                                                      "address": "0x49d210"
+                                                                   },
+                                                                   {
+                                                                         "name": "FindFirstFileExA",
+                                                                      "address": "0x49d214"
+                                                                   },
+                                                                   {
+                                                                         "name": "FindNextFileA",
+                                                                      "address": "0x49d218"
+                                                                   },
+                                                                   {
+                                                                         "name": "IsValidCodePage",
+                                                                      "address": "0x49d21c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetOEMCP",
+                                                                      "address": "0x49d220"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetEnvironmentStringsW",
+                                                                      "address": "0x49d224"
+                                                                   },
+                                                                   {
+                                                                         "name": "FreeEnvironmentStringsW",
+                                                                      "address": "0x49d228"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetEnvironmentVariableA",
+                                                                      "address": "0x49d22c"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetEndOfFile",
+                                                                      "address": "0x49d230"
+                                                                   },
+                                                                   {
+                                                                         "name": "RemoveDirectoryW",
+                                                                      "address": "0x49d234"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCurrentThreadId",
+                                                                      "address": "0x49d238"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetNativeSystemInfo",
+                                                                      "address": "0x49d23c"
+                                                                   },
+                                                                   {
+                                                                         "name": "InitializeCriticalSectionAndSpinCount",
+                                                                      "address": "0x49d240"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateEventW",
+                                                                      "address": "0x49d244"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetSystemTimeAsFileTime",
+                                                                      "address": "0x49d248"
+                                                                   },
+                                                                   {
+                                                                         "name": "EncodePointer",
+                                                                      "address": "0x49d24c"
+                                                                   },
+                                                                   {
+                                                                         "name": "DecodePointer",
+                                                                      "address": "0x49d250"
+                                                                   },
+                                                                   {
+                                                                         "name": "CompareStringW",
+                                                                      "address": "0x49d254"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetLocaleInfoW",
+                                                                      "address": "0x49d258"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetStringTypeW",
+                                                                      "address": "0x49d25c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCPInfo",
+                                                                      "address": "0x49d260"
+                                                                   },
+                                                                   {
+                                                                         "name": "UnhandledExceptionFilter",
+                                                                      "address": "0x49d264"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetUnhandledExceptionFilter",
+                                                                      "address": "0x49d268"
+                                                                   },
+                                                                   {
+                                                                         "name": "IsProcessorFeaturePresent",
+                                                                      "address": "0x49d26c"
+                                                                   },
+                                                                   {
+                                                                         "name": "IsDebuggerPresent",
+                                                                      "address": "0x49d270"
+                                                                   },
+                                                                   {
+                                                                         "name": "InitializeSListHead",
+                                                                      "address": "0x49d274"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetThreadTimes",
+                                                                      "address": "0x49d278"
+                                                                   },
+                                                                   {
+                                                                         "name": "FreeLibrary",
+                                                                      "address": "0x49d27c"
+                                                                   },
+                                                                   {
+                                                                         "name": "FreeLibraryAndExitThread",
+                                                                      "address": "0x49d280"
+                                                                   },
+                                                                   {
+                                                                         "name": "LoadLibraryExW",
+                                                                      "address": "0x49d284"
+                                                                   },
+                                                                   {
+                                                                         "name": "RtlUnwind",
+                                                                      "address": "0x49d288"
+                                                                   },
+                                                                   {
+                                                                         "name": "RaiseException",
+                                                                      "address": "0x49d28c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCommandLineA",
+                                                                      "address": "0x49d290"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "USER32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "ShowWindow",
+                                                                      "address": "0x49d298"
+                                                                   },
+                                                                   {
+                                                                         "name": "MapVirtualKeyW",
+                                                                      "address": "0x49d29c"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "ADVAPI32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "CryptAcquireContextA",
+                                                                      "address": "0x49d000"
+                                                                   },
+                                                                   {
+                                                                         "name": "CryptGenRandom",
+                                                                      "address": "0x49d004"
+                                                                   },
+                                                                   {
+                                                                         "name": "CryptReleaseContext",
+                                                                      "address": "0x49d008"
+                                                                   },
+                                                                   {
+                                                                         "name": "LookupPrivilegeValueW",
+                                                                      "address": "0x49d00c"
+                                                                   },
+                                                                   {
+                                                                         "name": "AdjustTokenPrivileges",
+                                                                      "address": "0x49d010"
+                                                                   },
+                                                                   {
+                                                                         "name": "OpenProcessToken",
+                                                                      "address": "0x49d014"
+                                                                   },
+                                                                   {
+                                                                         "name": "LsaOpenPolicy",
+                                                                      "address": "0x49d018"
+                                                                   },
+                                                                   {
+                                                                         "name": "LsaAddAccountRights",
+                                                                      "address": "0x49d01c"
+                                                                   },
+                                                                   {
+                                                                         "name": "LsaClose",
+                                                                      "address": "0x49d020"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetTokenInformation",
+                                                                      "address": "0x49d024"
+                                                                   }
+                                                                 ]
+                                                   }
+                                                 ],
+                            "exported_dll_name": null,
+                                      "dirents": [
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IMPORT",
+                                                      "virtual_address": "0x000b5f98",
+                                                                 "size": "0x00000064"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESOURCE",
+                                                      "virtual_address": "0x000bc000",
+                                                                 "size": "0x00005e28"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXCEPTION",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_SECURITY",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BASERELOC",
+                                                      "virtual_address": "0x000c2000",
+                                                                 "size": "0x00006118"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DEBUG",
+                                                      "virtual_address": "0x000b18c0",
+                                                                 "size": "0x0000001c"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COPYRIGHT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_GLOBALPTR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_TLS",
+                                                      "virtual_address": "0x000b1980",
+                                                                 "size": "0x00000018"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG",
+                                                      "virtual_address": "0x000b18e0",
+                                                                 "size": "0x00000040"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IAT",
+                                                      "virtual_address": "0x0009d000",
+                                                                 "size": "0x000002f4"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESERVED",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   }
+                                                 ],
+                                  "versioninfo": [],
+                                    "resources": [
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x000c1548",
+                                                         "language": "LANG_ENGLISH",
+                                                      "sublanguage": "SUBLANG_ENGLISH_US",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.06"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x000c1548",
+                                                         "language": "LANG_ENGLISH",
+                                                      "sublanguage": "SUBLANG_ENGLISH_US",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.06"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x000c1548",
+                                                         "language": "LANG_ENGLISH",
+                                                      "sublanguage": "SUBLANG_ENGLISH_US",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.06"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x000c1548",
+                                                         "language": "LANG_ENGLISH",
+                                                      "sublanguage": "SUBLANG_ENGLISH_US",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.06"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x000c1548",
+                                                         "language": "LANG_ENGLISH",
+                                                      "sublanguage": "SUBLANG_ENGLISH_US",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.06"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x000c1548",
+                                                         "language": "LANG_ENGLISH",
+                                                      "sublanguage": "SUBLANG_ENGLISH_US",
+                                                             "size": "0x00000468",
+                                                          "entropy": "4.06"
+                                                   },
+                                                   {
+                                                             "name": "RT_GROUP_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x000c19b0",
+                                                         "language": "LANG_ENGLISH",
+                                                      "sublanguage": "SUBLANG_ENGLISH_US",
+                                                             "size": "0x0000005a",
+                                                          "entropy": "2.70"
+                                                   },
+                                                   {
+                                                             "name": "RT_VERSION",
+                                                         "filetype": null,
+                                                           "offset": "0x000c1a10",
+                                                         "language": "LANG_ENGLISH",
+                                                      "sublanguage": "SUBLANG_ENGLISH_US",
+                                                             "size": "0x00000298",
+                                                          "entropy": "3.33"
+                                                   },
+                                                   {
+                                                             "name": "RT_MANIFEST",
+                                                         "filetype": null,
+                                                           "offset": "0x000c1ca8",
+                                                         "language": "LANG_ENGLISH",
+                                                      "sublanguage": "SUBLANG_ENGLISH_US",
+                                                             "size": "0x0000017d",
+                                                          "entropy": "4.91"
+                                                   }
+                                                 ],
+                                      "pdbpath": null,
+                                    "osversion": "5.1",
+                                   "icon_fuzzy": null,
+                                    "imagebase": "0x00400000",
+                           "imported_dll_count": 4,
+                                    "timestamp": "2018-10-07 02:32:52"
+                        }
+               }
+}

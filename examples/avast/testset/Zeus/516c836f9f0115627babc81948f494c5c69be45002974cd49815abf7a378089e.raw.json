@@ -1,0 +1,444 @@
+{
+   "behavior": {
+                  "summary": {
+                                             "keys": [
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Sorting\\Versions\\00060101.00060101",
+                                                       "HKEY_LOCAL_MACHINE\\software\\microsoft\\windows nt\\currentversion\\winlogon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\userinit",
+                                                       "HKEY_CURRENT_USER\\software\\microsoft\\windows\\currentversion\\run",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\userinit"
+                                                     ],
+                                    "resolved_apis": [
+                                                       "kernel32.dll.GetCommandLineA",
+                                                       "kernel32.dll.GetLogicalDrives",
+                                                       "kernel32.dll.GetDriveTypeW",
+                                                       "kernel32.dll.GetFileSizeEx",
+                                                       "kernel32.dll.CreateFileMappingW",
+                                                       "kernel32.dll.MapViewOfFile",
+                                                       "kernel32.dll.UnmapViewOfFile",
+                                                       "kernel32.dll.ResetEvent",
+                                                       "kernel32.dll.GetTimeZoneInformation",
+                                                       "kernel32.dll.GetVersionExW",
+                                                       "kernel32.dll.GetUserDefaultUILanguage",
+                                                       "kernel32.dll.GetProcessHeap",
+                                                       "kernel32.dll.GetModuleHandleA",
+                                                       "kernel32.dll.Sleep",
+                                                       "kernel32.dll.CopyFileW",
+                                                       "kernel32.dll.GetModuleFileNameW",
+                                                       "kernel32.dll.GetModuleFileNameA",
+                                                       "kernel32.dll.GetLastError",
+                                                       "kernel32.dll.CreateMutexW",
+                                                       "kernel32.dll.OpenMutexW",
+                                                       "kernel32.dll.ReleaseMutex",
+                                                       "kernel32.dll.lstrcmpiW",
+                                                       "kernel32.dll.lstrcmpiA",
+                                                       "kernel32.dll.lstrlenW",
+                                                       "kernel32.dll.lstrlenA",
+                                                       "kernel32.dll.lstrcpyW",
+                                                       "kernel32.dll.lstrcpynW",
+                                                       "kernel32.dll.lstrcpyA",
+                                                       "kernel32.dll.lstrcatW",
+                                                       "kernel32.dll.lstrcatA",
+                                                       "kernel32.dll.CloseHandle",
+                                                       "kernel32.dll.DeleteFileW",
+                                                       "kernel32.dll.SetFileAttributesW",
+                                                       "kernel32.dll.WaitForSingleObject",
+                                                       "kernel32.dll.SetEvent",
+                                                       "kernel32.dll.CreateFileW",
+                                                       "kernel32.dll.CreateEventW",
+                                                       "kernel32.dll.SetFilePointer",
+                                                       "kernel32.dll.HeapAlloc",
+                                                       "kernel32.dll.HeapReAlloc",
+                                                       "kernel32.dll.HeapFree",
+                                                       "kernel32.dll.ConnectNamedPipe",
+                                                       "kernel32.dll.WaitNamedPipeW",
+                                                       "kernel32.dll.SetNamedPipeHandleState",
+                                                       "kernel32.dll.CreateNamedPipeW",
+                                                       "kernel32.dll.GetTickCount",
+                                                       "kernel32.dll.CreateRemoteThread",
+                                                       "kernel32.dll.WriteFile",
+                                                       "kernel32.dll.ReadFile",
+                                                       "kernel32.dll.SetEndOfFile",
+                                                       "kernel32.dll.GetFileSize",
+                                                       "kernel32.dll.FlushFileBuffers",
+                                                       "kernel32.dll.GetLocalTime",
+                                                       "kernel32.dll.DisconnectNamedPipe",
+                                                       "kernel32.dll.WriteProcessMemory",
+                                                       "kernel32.dll.CreateThread",
+                                                       "kernel32.dll.CreateToolhelp32Snapshot",
+                                                       "kernel32.dll.Process32FirstW",
+                                                       "kernel32.dll.Process32NextW",
+                                                       "kernel32.dll.Module32FirstW",
+                                                       "kernel32.dll.Module32NextW",
+                                                       "kernel32.dll.Thread32First",
+                                                       "kernel32.dll.Thread32Next",
+                                                       "kernel32.dll.GetExitCodeProcess",
+                                                       "kernel32.dll.OpenProcess",
+                                                       "kernel32.dll.VirtualQueryEx",
+                                                       "kernel32.dll.VirtualAllocEx",
+                                                       "kernel32.dll.VirtualProtectEx",
+                                                       "kernel32.dll.GetCurrentProcessId",
+                                                       "kernel32.dll.SetThreadPriority",
+                                                       "kernel32.dll.GetThreadPriority",
+                                                       "kernel32.dll.GetCurrentThread",
+                                                       "kernel32.dll.GetCurrentThreadId",
+                                                       "kernel32.dll.CreateProcessW",
+                                                       "kernel32.dll.GetProcessTimes",
+                                                       "kernel32.dll.MultiByteToWideChar",
+                                                       "kernel32.dll.WideCharToMultiByte",
+                                                       "kernel32.dll.MoveFileExW",
+                                                       "kernel32.dll.CreateDirectoryW",
+                                                       "kernel32.dll.GetTempPathW",
+                                                       "kernel32.dll.IsBadReadPtr",
+                                                       "kernel32.dll.IsBadWritePtr",
+                                                       "kernel32.dll.SetLastError",
+                                                       "kernel32.dll.ReadProcessMemory",
+                                                       "kernel32.dll.InitializeCriticalSection",
+                                                       "kernel32.dll.EnterCriticalSection",
+                                                       "kernel32.dll.LeaveCriticalSection",
+                                                       "kernel32.dll.GetSystemTime",
+                                                       "kernel32.dll.GetTempFileNameW",
+                                                       "kernel32.dll.FindFirstFileW",
+                                                       "kernel32.dll.FindNextFileW",
+                                                       "kernel32.dll.FindClose",
+                                                       "kernel32.dll.GetComputerNameW",
+                                                       "kernel32.dll.SetFileTime",
+                                                       "kernel32.dll.GetFileTime",
+                                                       "kernel32.dll.GlobalLock",
+                                                       "kernel32.dll.GlobalUnlock",
+                                                       "kernel32.dll.ExpandEnvironmentStringsW",
+                                                       "shell32.dll.SHGetSpecialFolderPathW",
+                                                       "shlwapi.dll.StrStrW",
+                                                       "shlwapi.dll.StrStrIA",
+                                                       "shlwapi.dll.StrCmpNIA",
+                                                       "shlwapi.dll.StrCmpNIW",
+                                                       "shlwapi.dll.wvnsprintfW",
+                                                       "shlwapi.dll.wvnsprintfA",
+                                                       "shlwapi.dll.wnsprintfW",
+                                                       "shlwapi.dll.wnsprintfA",
+                                                       "shlwapi.dll.PathCombineW",
+                                                       "shlwapi.dll.PathFindFileNameW",
+                                                       "shlwapi.dll.PathFileExistsW",
+                                                       "shlwapi.dll.PathRemoveFileSpecW",
+                                                       "shlwapi.dll.PathMatchSpecW",
+                                                       "shlwapi.dll.SHDeleteKeyA",
+                                                       "psapi.dll.GetModuleFileNameExW",
+                                                       "advapi32.dll.GetUserNameW",
+                                                       "advapi32.dll.LookupPrivilegeValueW",
+                                                       "advapi32.dll.AdjustTokenPrivileges",
+                                                       "advapi32.dll.OpenProcessToken",
+                                                       "advapi32.dll.GetTokenInformation",
+                                                       "advapi32.dll.LookupAccountSidW",
+                                                       "advapi32.dll.RegQueryValueExW",
+                                                       "advapi32.dll.RegCreateKeyExW",
+                                                       "advapi32.dll.RegCreateKeyExA",
+                                                       "advapi32.dll.RegOpenKeyExW",
+                                                       "advapi32.dll.RegCloseKey",
+                                                       "advapi32.dll.RegSetValueExW",
+                                                       "advapi32.dll.RegSetValueExA",
+                                                       "advapi32.dll.RegDeleteValueW",
+                                                       "advapi32.dll.RegEnumKeyExW",
+                                                       "advapi32.dll.InitializeSecurityDescriptor",
+                                                       "advapi32.dll.SetSecurityDescriptorDacl",
+                                                       "advapi32.dll.CreateProcessAsUserW",
+                                                       "advapi32.dll.DuplicateTokenEx",
+                                                       "advapi32.dll.CryptAcquireContextW",
+                                                       "advapi32.dll.CryptCreateHash",
+                                                       "advapi32.dll.CryptHashData",
+                                                       "advapi32.dll.CryptGetHashParam",
+                                                       "advapi32.dll.CryptDestroyHash",
+                                                       "advapi32.dll.CryptReleaseContext",
+                                                       "ole32.dll.CoCreateInstance",
+                                                       "kernel32.dll.SortGetHandle",
+                                                       "kernel32.dll.SortCloseHandle"
+                                                     ],
+                                "executed_commands": [],
+                                       "write_keys": [
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\userinit",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\userinit"
+                                                     ],
+                                            "files": [
+                                                       "C:\\Windows\\Globalization\\Sorting\\sortdefault.nls",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\ntos.exe",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\516C836F9F0115627BAB.exe",
+                                                       "C:\\Windows\\System32\\ntdll.dll"
+                                                     ],
+                                       "read_files": [
+                                                       "C:\\Windows\\Globalization\\Sorting\\sortdefault.nls",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\516C836F9F0115627BAB.exe",
+                                                       "C:\\Windows\\System32\\ntdll.dll"
+                                                     ],
+                                 "started_services": [],
+                                 "created_services": [],
+                                      "write_files": [
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\ntos.exe"
+                                                     ],
+                                      "delete_keys": [],
+                                        "read_keys": [
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Sorting\\Versions\\00060101.00060101",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\userinit"
+                                                     ],
+                                     "delete_files": [
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\ntos.exe"
+                                                     ],
+                                          "mutexes": [
+                                                       "__SYSTEM__91C38905__",
+                                                       "__SYSTEM__64AD0625__"
+                                                     ]
+                             }
+               },
+     "static": {
+                  "pe": {
+                                    "icon_hash": null,
+                                     "sections": [
+                                                   {
+                                                              "raw_address": "0x00000400",
+                                                                     "name": ".whwbmv",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x0000e58a",
+                                                          "virtual_address": "0x00001000",
+                                                             "size_of_data": "0x00009c00",
+                                                                  "entropy": "7.77",
+                                                      "characteristics_raw": "0x40000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x0000a000",
+                                                                     "name": ".vkjoh",
+                                                          "characteristics": "IMAGE_SCN_CNT_CODE|IMAGE_SCN_MEM_EXECUTE|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE",
+                                                             "virtual_size": "0x00001381",
+                                                          "virtual_address": "0x00010000",
+                                                             "size_of_data": "0x00000800",
+                                                                  "entropy": "6.60",
+                                                      "characteristics_raw": "0xe0000020"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x0000a800",
+                                                                     "name": ".upizyf",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x00012000",
+                                                          "virtual_address": "0x00012000",
+                                                             "size_of_data": "0x00001600",
+                                                                  "entropy": "7.34",
+                                                      "characteristics_raw": "0x40000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x0000be00",
+                                                                     "name": ".rsrc",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x00001000",
+                                                          "virtual_address": "0x00024000",
+                                                             "size_of_data": "0x00000400",
+                                                                  "entropy": "2.73",
+                                                      "characteristics_raw": "0x40000040"
+                                                   }
+                                                 ],
+                              "peid_signatures": null,
+                                   "entrypoint": "0x0041030a",
+                                      "exports": [],
+                                      "overlay": null,
+                              "digital_signers": [],
+                                      "imphash": "44d2c775e5ecd668fae9e017d7b91cdb",
+                            "reported_checksum": "0x00000000",
+                                         "icon": null,
+                                "guest_signers": {
+                                                         "aux_error": true,
+                                                          "aux_sha1": null,
+                                                     "aux_timestamp": null,
+                                                         "aux_valid": false,
+                                                       "aux_signers": [],
+                                                    "aux_error_desc": "No signature found. SignTool Error File not valid C\\Users\\comp\\AppData\\Local\\Temp\\516C836F9F0115627BAB.exe"
+                                                 },
+                              "actual_checksum": "0x0001a9e5",
+                                      "imports": [
+                                                   {
+                                                          "dll": "shlwapi.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "wnsprintfA",
+                                                                      "address": "0x413390"
+                                                                   },
+                                                                   {
+                                                                         "name": "PathFindFileNameW",
+                                                                      "address": "0x413394"
+                                                                   },
+                                                                   {
+                                                                         "name": "StrCmpNIW",
+                                                                      "address": "0x413398"
+                                                                   },
+                                                                   {
+                                                                         "name": "StrStrW",
+                                                                      "address": "0x41339c"
+                                                                   },
+                                                                   {
+                                                                         "name": "StrCmpNIA",
+                                                                      "address": "0x4133a0"
+                                                                   },
+                                                                   {
+                                                                         "name": "wvnsprintfA",
+                                                                      "address": "0x4133a4"
+                                                                   },
+                                                                   {
+                                                                         "name": "PathFileExistsW",
+                                                                      "address": "0x4133a8"
+                                                                   },
+                                                                   {
+                                                                         "name": "PathMatchSpecW",
+                                                                      "address": "0x4133ac"
+                                                                   },
+                                                                   {
+                                                                         "name": "SHDeleteKeyA",
+                                                                      "address": "0x4133b0"
+                                                                   },
+                                                                   {
+                                                                         "name": "PathCombineW",
+                                                                      "address": "0x4133b4"
+                                                                   },
+                                                                   {
+                                                                         "name": "wnsprintfW",
+                                                                      "address": "0x4133b8"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "kernel32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "lstrcatA",
+                                                                      "address": "0x4134a5"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "advapi32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "RegDeleteValueA",
+                                                                      "address": "0x4134cd"
+                                                                   },
+                                                                   {
+                                                                         "name": "RegCreateKeyExA",
+                                                                      "address": "0x4134d1"
+                                                                   },
+                                                                   {
+                                                                         "name": "CryptReleaseContext",
+                                                                      "address": "0x4134d5"
+                                                                   },
+                                                                   {
+                                                                         "name": "CryptCreateHash",
+                                                                      "address": "0x4134d9"
+                                                                   },
+                                                                   {
+                                                                         "name": "CryptDestroyHash",
+                                                                      "address": "0x4134dd"
+                                                                   },
+                                                                   {
+                                                                         "name": "RegCloseKey",
+                                                                      "address": "0x4134e1"
+                                                                   },
+                                                                   {
+                                                                         "name": "CryptGetHashParam",
+                                                                      "address": "0x4134e5"
+                                                                   },
+                                                                   {
+                                                                         "name": "DuplicateTokenEx",
+                                                                      "address": "0x4134e9"
+                                                                   }
+                                                                 ]
+                                                   }
+                                                 ],
+                            "exported_dll_name": null,
+                                      "dirents": [
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IMPORT",
+                                                      "virtual_address": "0x00013340",
+                                                                 "size": "0x0000027d"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESOURCE",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXCEPTION",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_SECURITY",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BASERELOC",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DEBUG",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COPYRIGHT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_GLOBALPTR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_TLS",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IAT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESERVED",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   }
+                                                 ],
+                                  "versioninfo": [],
+                                    "resources": [],
+                                      "pdbpath": null,
+                                    "osversion": "5.0",
+                                   "icon_fuzzy": null,
+                                    "imagebase": "0x00400000",
+                           "imported_dll_count": 3,
+                                    "timestamp": "2004-07-03 10:57:48"
+                        }
+               }
+}

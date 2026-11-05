@@ -1,0 +1,45 @@
+# total tokens: 516   kept by Nebula (first 512): 512   dropped: 4
+# tokenizer: Avast BPE (50k) trained with Nebula's JSONTokenizerBPE.train() on the Avast training split
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: resolved_apis  (tokens 0..514, 515 tokens)
+     0  ▁resolved ▁apis ▁kernel32 ▁dll ▁flsalloc ▁kernel32 ▁dll ▁flssetvalue ▁advapi32 ▁dll ▁eventregister ▁advapi32 ▁dll ▁eventsetinformation ▁kernel32 ▁dll
+    16  ▁flsgetvalue ▁kernel32 ▁dll ▁lcmapstringex ▁kernel32 ▁dll ▁flsfree ▁kernel32 ▁dll ▁initializecriticalsectionex ▁kernel32 ▁dll ▁initonceexecuteonce ▁kernel32 ▁dll ▁createeventexw
+    32  ▁kernel32 ▁dll ▁createsemaphorew ▁kernel32 ▁dll ▁createsemaphoreexw ▁kernel32 ▁dll ▁createthreadpooltimer ▁kernel32 ▁dll ▁setthreadpooltimer ▁kernel32 ▁dll ▁waitforthreadpooltimercallbacks ▁kernel32
+    48  ▁dll ▁closethreadpooltimer ▁kernel32 ▁dll ▁createthreadpoolwait ▁kernel32 ▁dll ▁setthreadpoolwait ▁kernel32 ▁dll ▁closethreadpoolwait ▁kernel32 ▁dll ▁flushprocesswritebuffers ▁kernel32 ▁dll
+    64  ▁freelibrarywhencallbackreturns ▁kernel32 ▁dll ▁getcurrentprocessornumber ▁kernel32 ▁dll ▁createsymboliclinkw ▁kernel32 ▁dll ▁gettickcount64 ▁kernel32 ▁dll ▁getfileinformationbyhandleex ▁kernel32 ▁dll ▁setfileinformationbyhandle
+    80  ▁kernel32 ▁dll ▁initializeconditionvariable ▁kernel32 ▁dll ▁wakeconditionvariable ▁kernel32 ▁dll ▁wakeallconditionvariable ▁kernel32 ▁dll ▁sleepconditionvariablecs ▁kernel32 ▁dll ▁initializesrwlock ▁kernel32
+    96  ▁dll ▁acquiresrwlockexclusive ▁kernel32 ▁dll ▁tryacquiresrwlockexclusive ▁kernel32 ▁dll ▁releasesrwlockexclusive ▁kernel32 ▁dll ▁sleepconditionvariablesrw ▁kernel32 ▁dll ▁createthreadpoolwork ▁kernel32 ▁dll
+   112  ▁submitthreadpoolwork ▁kernel32 ▁dll ▁closethreadpoolwork ▁kernel32 ▁dll ▁comparestringex ▁kernel32 ▁dll ▁getlocaleinfoex ▁kernel32 ▁dll ▁queueuserapc ▁kernel32 ▁dll ▁setlasterror
+   128  ▁kernel32 ▁dll ▁getmodulehandlea ▁kernel32 ▁dll ▁exitprocess ▁kernel32 ▁dll ▁getcommandlinew ▁kernel32 ▁dll ▁heapdestroy ▁kernel32 ▁dll ▁heapcreate ▁kernel32
+   144  ▁dll ▁getlasterror ▁kernel32 ▁dll ▁addvectoredexceptionhandler ▁kernel32 ▁dll ▁removevectoredexceptionhandler ▁kernel32 ▁dll ▁closehandle ▁kernel32 ▁dll ▁heapalloc ▁kernel32 ▁dll
+   160  ▁getcurrentprocessid ▁kernel32 ▁dll ▁virtualalloc ▁kernel32 ▁dll ▁lstrcpyw ▁kernel32 ▁dll ▁heapfree ▁kernel32 ▁dll ▁waitforsingleobject ▁kernel32 ▁dll ▁createfilemappingw
+   176  ▁kernel32 ▁dll ▁getexitcodethread ▁kernel32 ▁dll ▁exitthread ▁kernel32 ▁dll ▁mapviewoffile ▁kernel32 ▁dll ▁unmapviewoffile ▁kernel32 ▁dll ▁lstrlenw ▁kernel32
+   192  ▁dll ▁getmodulefilenamew ▁kernel32 ▁dll ▁terminatethread ▁kernel32 ▁dll ▁createthread ▁kernel32 ▁dll ▁getlongpathnamew ▁kernel32 ▁dll ▁openprocess ▁kernel32 ▁dll
+   208  ▁getversion ▁kernel32 ▁dll ▁createeventa ▁kernel32 ▁dll ▁lstrlena ▁kernel32 ▁dll ▁getprocaddress ▁kernel32 ▁dll ▁loadlibrarya ▁kernel32 ▁dll ▁virtualprotect
+   224  ▁kernel32 ▁dll ▁leavecriticalsection ▁kernel32 ▁dll ▁entercriticalsection ▁kernel32 ▁dll ▁tlsgetvalue ▁kernel32 ▁dll ▁deletecriticalsection ▁kernel32 ▁dll ▁tlsalloc ▁kernel32
+   240  ▁dll ▁initializecriticalsection ▁kernel32 ▁dll ▁tlssetvalue ▁kernel32 ▁dll ▁tlsfree ▁kernel32 ▁dll ▁sleepex ▁user32 ▁dll ▁wsprintfw ▁ntdll ▁dll
+   256  ▁memcpy ▁ntdll ▁dll ▁memset ▁ntdll ▁dll ▁zwopenprocess ▁ntdll ▁dll ▁zwclose ▁ntdll ▁dll ▁zwopenprocesstoken ▁ntdll ▁dll ▁wcstombs
+   272  ▁ntdll ▁dll ▁sprintf ▁ntdll ▁dll ▁snprintf ▁ntdll ▁dll ▁strcpy ▁ntdll ▁dll ▁zwqueryinformationtoken ▁ntdll ▁dll ▁mbstowcs ▁ntdll
+   288  ▁dll ▁aulldiv ▁ntdll ▁dll ▁allmul ▁ntdll ▁dll ▁rtlunwind ▁ntdll ▁dll ▁ntqueryvirtualmemory ▁kernel32 ▁dll ▁lstrcata ▁kernel32 ▁dll
+   304  ▁interlockedexchange ▁kernel32 ▁dll ▁localalloc ▁kernel32 ▁dll ▁sleep ▁kernel32 ▁dll ▁interlockedincrement ▁kernel32 ▁dll ▁interlockeddecrement ▁kernel32 ▁dll ▁setevent
+   320  ▁kernel32 ▁dll ▁gettickcount ▁kernel32 ▁dll ▁createwaitabletimera ▁kernel32 ▁dll ▁lstrcpya ▁kernel32 ▁dll ▁getsystemtimeasfiletime ▁kernel32 ▁dll ▁setwaitabletimer ▁kernel32
+   336  ▁dll ▁waitformultipleobjects ▁kernel32 ▁dll ▁openfilemappingw ▁kernel32 ▁dll ▁freelibrary ▁kernel32 ▁dll ▁comparefiletime ▁kernel32 ▁dll ▁findclose ▁kernel32 ▁dll
+   352  ▁findfirstfilea ▁kernel32 ▁dll ▁getfiletime ▁kernel32 ▁dll ▁findnextfilea ▁kernel32 ▁dll ▁expandenvironmentstringsa ▁kernel32 ▁dll ▁lstrcmpa ▁kernel32 ▁dll ▁raiseexception
+   368  ▁kernel32 ▁dll ▁queryperformancecounter ▁kernel32 ▁dll ▁getcomputernamew ▁kernel32 ▁dll ▁resetevent ▁kernel32 ▁dll ▁lstrcmpw ▁kernel32 ▁dll ▁createfilea ▁kernel32
+   384  ▁dll ▁queryperformancefrequency ▁oleaut32 ▁dll ▁6 ▁oleaut32 ▁dll ▁16 ▁oleaut32 ▁dll ▁15 ▁oleaut32 ▁dll ▁2 ▁kernel32 ▁dll
+   400  ▁iswow64process ▁ole32 ▁dll ▁coinitializeex ▁cryptbase ▁dll ▁systemfunction036 ▁uxtheme ▁dll ▁themeinitapihook ▁user32 ▁dll ▁isprocessdpiaware ▁user32 ▁dll ▁wsprintfa
+   416  ▁advapi32 ▁dll ▁getusernamew ▁shlwapi ▁dll ▁strtointexa ▁shlwapi ▁dll ▁strchra ▁shlwapi ▁dll ▁strtrima ▁ole32 ▁dll ▁cocreateinstance ▁kernel32
+   432  ▁dll ▁getthreadpreferreduilanguages ▁kernel32 ▁dll ▁setthreadpreferreduilanguages ▁kernel32 ▁dll ▁localenametolcid ▁kernel32 ▁dll ▁lcidtolocalename ▁kernel32 ▁dll ▁getsystemdefaultlocalename ▁ole32 ▁dll
+   448  ▁cosetproxyblanket ▁oleaut32 ▁dll ▁283 ▁oleaut32 ▁dll ▁284 ▁kernel32 ▁dll ▁regopenkeyexw ▁kernel32 ▁dll ▁regqueryvalueexw ▁kernel32 ▁dll ▁regclosekey
+   464  ▁oleaut32 ▁dll ▁bstr ▁usersize ▁oleaut32 ▁dll ▁bstr ▁usermarshal ▁oleaut32 ▁dll ▁bstr ▁userunmarshal ▁oleaut32 ▁dll ▁bstr ▁userfree
+   480  ▁oleaut32 ▁dll ▁variant ▁usersize ▁oleaut32 ▁dll ▁variant ▁usermarshal ▁oleaut32 ▁dll ▁variant ▁userunmarshal ▁oleaut32 ▁dll ▁variant ▁userfree
+   496  ▁oleaut32 ▁dll ▁lpsafearray ▁usersize ▁oleaut32 ▁dll ▁lpsafearray ▁usermarshal ▁oleaut32 ▁dll ▁lpsafearray ▁userunmarshal ▁oleaut32 ▁dll ▁lpsafearray ▁userfree
+
+-------- 512-token cut: Nebula never sees token 512 and later --------
+
+   512  ▁shlwapi ▁dll ▁strstriw
+
+## field: mutexes  (tokens 515..515, 1 tokens)
+   515  ▁mutexes
+

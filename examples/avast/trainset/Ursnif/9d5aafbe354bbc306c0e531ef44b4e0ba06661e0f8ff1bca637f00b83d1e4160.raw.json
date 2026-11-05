@@ -1,0 +1,880 @@
+{
+   "behavior": {
+                  "summary": {
+                                             "keys": [
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\CustomLocale",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CustomLocale\\en-US",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\ExtendedLocale",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\ExtendedLocale\\en-US",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Sorting\\Versions\\00060101.00060101",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\crypes",
+                                                       "HKEY_USERS\\",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders\\AppData",
+                                                       "HKEY_CURRENT_USER\\Software\\AppDataLow\\Software\\Microsoft\\DA222C12-7194-1C83-CBAE-35102FC23944",
+                                                       "HKEY_CURRENT_USER\\Software\\AppDataLow\\Software\\Microsoft\\DA222C12-7194-1C83-CBAE-35102FC23944\\Client",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows NT\\CurrentVersion\\GRE_Initialize",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\GRE_Initialize\\DisableMetaFiles",
+                                                       "HKEY_CURRENT_USER\\Software\\AppDataLow\\Software\\Microsoft\\DA222C12-7194-1C83-CBAE-35102FC23944\\Ini",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\CTF\\KnownClasses",
+                                                       "HKEY_CURRENT_USER\\Control Panel\\Personalization\\Desktop Slideshow",
+                                                       "HKEY_CURRENT_USER\\Control Panel\\Personalization\\Desktop Slideshow\\Interval",
+                                                       "HKEY_CURRENT_USER\\Control Panel\\Personalization\\Desktop Slideshow\\Shuffle",
+                                                       "HKEY_CURRENT_USER\\Control Panel\\Personalization\\Desktop Slideshow\\AnimationDuration",
+                                                       "HKEY_LOCAL_MACHINE\\Control Panel\\Personalization\\Desktop Slideshow",
+                                                       "HKEY_CURRENT_USER\\Control Panel\\Personalization\\Desktop Slideshow\\Flags"
+                                                     ],
+                                    "resolved_apis": [
+                                                       "kernel32.dll.FlsAlloc",
+                                                       "kernel32.dll.FlsFree",
+                                                       "kernel32.dll.FlsGetValue",
+                                                       "kernel32.dll.FlsSetValue",
+                                                       "kernel32.dll.InitializeCriticalSectionEx",
+                                                       "kernel32.dll.CreateEventExW",
+                                                       "kernel32.dll.CreateSemaphoreExW",
+                                                       "kernel32.dll.SetThreadStackGuarantee",
+                                                       "kernel32.dll.CreateThreadpoolTimer",
+                                                       "kernel32.dll.SetThreadpoolTimer",
+                                                       "kernel32.dll.WaitForThreadpoolTimerCallbacks",
+                                                       "kernel32.dll.CloseThreadpoolTimer",
+                                                       "kernel32.dll.CreateThreadpoolWait",
+                                                       "kernel32.dll.SetThreadpoolWait",
+                                                       "kernel32.dll.CloseThreadpoolWait",
+                                                       "kernel32.dll.FlushProcessWriteBuffers",
+                                                       "kernel32.dll.FreeLibraryWhenCallbackReturns",
+                                                       "kernel32.dll.GetCurrentProcessorNumber",
+                                                       "kernel32.dll.GetLogicalProcessorInformation",
+                                                       "kernel32.dll.CreateSymbolicLinkW",
+                                                       "kernel32.dll.SetDefaultDllDirectories",
+                                                       "kernel32.dll.EnumSystemLocalesEx",
+                                                       "kernel32.dll.CompareStringEx",
+                                                       "kernel32.dll.GetDateFormatEx",
+                                                       "kernel32.dll.GetLocaleInfoEx",
+                                                       "kernel32.dll.GetTimeFormatEx",
+                                                       "kernel32.dll.GetUserDefaultLocaleName",
+                                                       "kernel32.dll.IsValidLocaleName",
+                                                       "kernel32.dll.LCMapStringEx",
+                                                       "kernel32.dll.GetTickCount64",
+                                                       "kernel32.dll.VirtualProtect",
+                                                       "kernel32.dll.LoadLibraryA",
+                                                       "kernel32.dll.VirtualAlloc",
+                                                       "kernel32.dll.VirtualFree",
+                                                       "kernel32.dll.GetVersionExA",
+                                                       "kernel32.dll.TerminateProcess",
+                                                       "kernel32.dll.GetLastError",
+                                                       "kernel32.dll.HeapCreate",
+                                                       "kernel32.dll.GetModuleHandleA",
+                                                       "kernel32.dll.ExitThread",
+                                                       "kernel32.dll.GetProcAddress",
+                                                       "kernel32.dll.Sleep",
+                                                       "kernel32.dll.CreateFileA",
+                                                       "kernel32.dll.WriteFile",
+                                                       "kernel32.dll.ReadFile",
+                                                       "kernel32.dll.CreateMailslotA",
+                                                       "kernel32.dll.CloseHandle",
+                                                       "kernel32.dll.WaitForSingleObject",
+                                                       "kernel32.dll.GetModuleFileNameW",
+                                                       "kernel32.dll.HeapReAlloc",
+                                                       "kernel32.dll.lstrlenA",
+                                                       "kernel32.dll.CreateThread",
+                                                       "kernel32.dll.TerminateThread",
+                                                       "kernel32.dll.HeapAlloc",
+                                                       "kernel32.dll.HeapFree",
+                                                       "kernel32.dll.GetExitCodeThread",
+                                                       "ntdll.dll.memcpy",
+                                                       "ntdll.dll.memset",
+                                                       "ntdll.dll.ZwOpenProcessToken",
+                                                       "ntdll.dll.ZwOpenProcess",
+                                                       "ntdll.dll.ZwQueryInformationToken",
+                                                       "ntdll.dll.NtCreateSection",
+                                                       "ntdll.dll.NtMapViewOfSection",
+                                                       "ntdll.dll.NtUnmapViewOfSection",
+                                                       "ntdll.dll.ZwClose",
+                                                       "ntdll.dll.RtlNtStatusToDosError",
+                                                       "ntdll.dll.mbstowcs",
+                                                       "ntdll.dll.ZwQueryInformationProcess",
+                                                       "ntdll.dll.NtQuerySystemInformation",
+                                                       "ntdll.dll.RtlUpcaseUnicodeString",
+                                                       "ntdll.dll.RtlFreeUnicodeString",
+                                                       "ntdll.dll.RtlUnwind",
+                                                       "ntdll.dll.NtQueryVirtualMemory",
+                                                       "shlwapi.dll.StrRChrA",
+                                                       "shlwapi.dll.PathFindExtensionA",
+                                                       "shlwapi.dll.PathCombineW",
+                                                       "shlwapi.dll.PathFindExtensionW",
+                                                       "shlwapi.dll.StrChrA",
+                                                       "shlwapi.dll.StrStrIW",
+                                                       "shlwapi.dll.StrStrIA",
+                                                       "shlwapi.dll.PathFindFileNameW",
+                                                       "kernel32.dll.CreateWaitableTimerA",
+                                                       "kernel32.dll.CreateProcessA",
+                                                       "kernel32.dll.CreateFileMappingW",
+                                                       "kernel32.dll.SetWaitableTimer",
+                                                       "kernel32.dll.ExitProcess",
+                                                       "kernel32.dll.CreateFileW",
+                                                       "kernel32.dll.GetFileSize",
+                                                       "kernel32.dll.lstrlenW",
+                                                       "kernel32.dll.lstrcmpiW",
+                                                       "kernel32.dll.SetEvent",
+                                                       "kernel32.dll.CreateEventA",
+                                                       "kernel32.dll.lstrcatW",
+                                                       "kernel32.dll.DeleteFileW",
+                                                       "kernel32.dll.MapViewOfFile",
+                                                       "kernel32.dll.ResetEvent",
+                                                       "kernel32.dll.SleepEx",
+                                                       "kernel32.dll.InterlockedDecrement",
+                                                       "kernel32.dll.InterlockedIncrement",
+                                                       "kernel32.dll.HeapDestroy",
+                                                       "kernel32.dll.GetSystemTimeAsFileTime",
+                                                       "kernel32.dll.SetLastError",
+                                                       "kernel32.dll.MoveFileExW",
+                                                       "kernel32.dll.GetTempFileNameA",
+                                                       "kernel32.dll.GetTempPathA",
+                                                       "kernel32.dll.GetCurrentThreadId",
+                                                       "kernel32.dll.GetModuleFileNameA",
+                                                       "kernel32.dll.GetFileTime",
+                                                       "kernel32.dll.FindNextFileA",
+                                                       "kernel32.dll.CompareFileTime",
+                                                       "kernel32.dll.FindClose",
+                                                       "kernel32.dll.FindFirstFileA",
+                                                       "kernel32.dll.ExpandEnvironmentStringsA",
+                                                       "kernel32.dll.lstrcpynA",
+                                                       "kernel32.dll.VerLanguageNameA",
+                                                       "kernel32.dll.OpenProcess",
+                                                       "kernel32.dll.SuspendThread",
+                                                       "kernel32.dll.ResumeThread",
+                                                       "kernel32.dll.VirtualProtectEx",
+                                                       "kernel32.dll.lstrcpyA",
+                                                       "kernel32.dll.lstrcmpA",
+                                                       "kernel32.dll.GetVersion",
+                                                       "kernel32.dll.GetCurrentProcessId",
+                                                       "kernel32.dll.GetLongPathNameW",
+                                                       "kernel32.dll.SetEndOfFile",
+                                                       "kernel32.dll.lstrcpyW",
+                                                       "kernel32.dll.lstrcatA",
+                                                       "kernel32.dll.CreateDirectoryW",
+                                                       "kernel32.dll.FlushFileBuffers",
+                                                       "kernel32.dll.LocalFree",
+                                                       "kernel32.dll.SetFilePointer",
+                                                       "kernel32.dll.GetLocaleInfoA",
+                                                       "kernel32.dll.GetSystemDefaultUILanguage",
+                                                       "kernel32.dll.lstrcmpiA",
+                                                       "user32.dll.GetCursorPos",
+                                                       "user32.dll.wsprintfA",
+                                                       "user32.dll.wsprintfW",
+                                                       "advapi32.dll.RegCreateKeyA",
+                                                       "advapi32.dll.RegSetValueExA",
+                                                       "advapi32.dll.RegQueryValueExA",
+                                                       "advapi32.dll.ConvertStringSecurityDescriptorToSecurityDescriptorA",
+                                                       "advapi32.dll.RegOpenKeyW",
+                                                       "advapi32.dll.RegDeleteValueW",
+                                                       "advapi32.dll.RegEnumKeyExA",
+                                                       "advapi32.dll.OpenProcessToken",
+                                                       "advapi32.dll.RegOpenKeyExA",
+                                                       "advapi32.dll.RegQueryValueExW",
+                                                       "advapi32.dll.RegCloseKey",
+                                                       "advapi32.dll.GetSidSubAuthorityCount",
+                                                       "advapi32.dll.GetTokenInformation",
+                                                       "advapi32.dll.GetSidSubAuthority",
+                                                       "advapi32.dll.RegOpenKeyA",
+                                                       "shell32.dll.ShellExecuteExW",
+                                                       "ole32.dll.CoInitializeEx",
+                                                       "ole32.dll.CoUninitialize",
+                                                       "kernel32.dll.IsWow64Process",
+                                                       "kernel32.dll.SortGetHandle",
+                                                       "kernel32.dll.SortCloseHandle",
+                                                       "user32.dll.FindWindowA",
+                                                       "user32.dll.GetWindowThreadProcessId",
+                                                       "kernel32.dll.Wow64EnableWow64FsRedirection",
+                                                       "ntdll.dll.ZwWow64QueryInformationProcess64",
+                                                       "ntdll.dll.ZwWow64ReadVirtualMemory64",
+                                                       "ntdll.dll._snprintf",
+                                                       "ntdll.dll.strcpy",
+                                                       "ntdll.dll._strupr",
+                                                       "ntdll.dll._wcsupr",
+                                                       "ntdll.dll.memmove",
+                                                       "ntdll.dll.wcscpy",
+                                                       "ntdll.dll.ZwQueryKey",
+                                                       "ntdll.dll.wcstombs",
+                                                       "ntdll.dll.RtlAdjustPrivilege",
+                                                       "ntdll.dll.RtlImageNtHeader",
+                                                       "ntdll.dll.sprintf",
+                                                       "ntdll.dll.__C_specific_handler",
+                                                       "ntdll.dll.__chkstk",
+                                                       "kernel32.dll.WideCharToMultiByte",
+                                                       "kernel32.dll.QueueUserWorkItem",
+                                                       "kernel32.dll.QueryPerformanceCounter",
+                                                       "kernel32.dll.CreateDirectoryA",
+                                                       "kernel32.dll.RemoveDirectoryA",
+                                                       "kernel32.dll.DeleteFileA",
+                                                       "kernel32.dll.SwitchToThread",
+                                                       "kernel32.dll.GetTickCount",
+                                                       "kernel32.dll.CopyFileW",
+                                                       "kernel32.dll.GetCurrentThread",
+                                                       "kernel32.dll.DuplicateHandle",
+                                                       "kernel32.dll.GetWindowsDirectoryA",
+                                                       "kernel32.dll.CreateMutexA",
+                                                       "kernel32.dll.OpenWaitableTimerA",
+                                                       "kernel32.dll.OpenMutexA",
+                                                       "kernel32.dll.UnmapViewOfFile",
+                                                       "kernel32.dll.ReleaseMutex",
+                                                       "kernel32.dll.WaitForMultipleObjects",
+                                                       "kernel32.dll.InitializeCriticalSection",
+                                                       "kernel32.dll.EnterCriticalSection",
+                                                       "kernel32.dll.LeaveCriticalSection",
+                                                       "kernel32.dll.RegisterWaitForSingleObject",
+                                                       "kernel32.dll.TlsAlloc",
+                                                       "kernel32.dll.TlsGetValue",
+                                                       "kernel32.dll.LoadLibraryExW",
+                                                       "kernel32.dll.TlsSetValue",
+                                                       "kernel32.dll.UnregisterWait",
+                                                       "kernel32.dll.GetExitCodeProcess",
+                                                       "kernel32.dll.CreateFileMappingA",
+                                                       "kernel32.dll.GetDriveTypeW",
+                                                       "kernel32.dll.GetLogicalDriveStringsW",
+                                                       "kernel32.dll.OpenFileMappingA",
+                                                       "kernel32.dll.Thread32Next",
+                                                       "kernel32.dll.Thread32First",
+                                                       "kernel32.dll.CreateToolhelp32Snapshot",
+                                                       "kernel32.dll.QueueUserAPC",
+                                                       "kernel32.dll.OpenThread",
+                                                       "kernel32.dll.WaitNamedPipeA",
+                                                       "kernel32.dll.ConnectNamedPipe",
+                                                       "kernel32.dll.GetOverlappedResult",
+                                                       "kernel32.dll.CancelIo",
+                                                       "kernel32.dll.DisconnectNamedPipe",
+                                                       "kernel32.dll.CallNamedPipeA",
+                                                       "kernel32.dll.CreateNamedPipeA",
+                                                       "kernel32.dll.GetSystemTime",
+                                                       "kernel32.dll.RemoveVectoredExceptionHandler",
+                                                       "kernel32.dll.OpenEventA",
+                                                       "kernel32.dll.AddVectoredExceptionHandler",
+                                                       "kernel32.dll.LocalAlloc",
+                                                       "kernel32.dll.FreeLibrary",
+                                                       "kernel32.dll.RaiseException",
+                                                       "kernel32.dll.GetLocalTime",
+                                                       "kernel32.dll.QueryPerformanceFrequency",
+                                                       "kernel32.dll.DeleteCriticalSection",
+                                                       "kernel32.dll.RemoveDirectoryW",
+                                                       "kernel32.dll.ExpandEnvironmentStringsW",
+                                                       "kernel32.dll.GetFileAttributesW",
+                                                       "kernel32.dll.SetFilePointerEx",
+                                                       "kernel32.dll.FindFirstFileW",
+                                                       "kernel32.dll.FindNextFileW",
+                                                       "kernel32.dll.GetComputerNameW",
+                                                       "advapi32.dll.GetUserNameA",
+                                                       "psapi.dll.EnumProcessModules",
+                                                       "shlwapi.dll.StrToIntExA",
+                                                       "shlwapi.dll.StrTrimA",
+                                                       "user32.dll.GetShellWindow",
+                                                       "ntdll.dll.RtlExitUserThread",
+                                                       "kernel32.dll.CreateRemoteThread",
+                                                       "ntdll.dll.EtwUnregisterTraceGuids"
+                                                     ],
+                                "executed_commands": [
+                                                       "C:\\Windows\\system32\\control.exe /?"
+                                                     ],
+                                       "write_keys": [
+                                                       "HKEY_CURRENT_USER\\Software\\AppDataLow\\Software\\Microsoft\\DA222C12-7194-1C83-CBAE-35102FC23944"
+                                                     ],
+                                            "files": [
+                                                       "C:\\Windows\\Su xi",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\msvcr100.dll",
+                                                       "C:\\Windows\\System32\\msvcr100.dll",
+                                                       "C:\\Windows\\system\\msvcr100.dll",
+                                                       "C:\\Windows\\msvcr100.dll",
+                                                       "C:\\Windows\\System32\\wbem\\msvcr100.dll",
+                                                       "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\msvcr100.dll",
+                                                       "C:\\Program Files\\PuTTY\\msvcr100.dll",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Programs\\Python\\Python37-32\\Scripts\\msvcr100.dll",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Programs\\Python\\Python37-32\\msvcr100.dll",
+                                                       "\\??\\mailslot\\msl0",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\9D5AAFBE354BBC306C0E.exe",
+                                                       "C:\\Windows\\Globalization\\Sorting\\sortdefault.nls",
+                                                       "C:\\Windows\\sysnative\\C_1252.NLS",
+                                                       "C:\\Windows\\sysnative\\*.dll",
+                                                       "C:\\Windows\\sysnative",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Microsoft",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Microsoft\\Bitsprop",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Microsoft\\Bitsprop\\asfepcfg.exe",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Microsoft\\Windows\\Themes\\",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Microsoft\\Windows\\Themes\\slideshow.ini"
+                                                     ],
+                                       "read_files": [
+                                                       "C:\\Windows\\Su xi",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\9D5AAFBE354BBC306C0E.exe",
+                                                       "C:\\Windows\\Globalization\\Sorting\\sortdefault.nls",
+                                                       "C:\\Windows\\sysnative\\C_1252.NLS",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Microsoft\\Bitsprop\\asfepcfg.exe",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Microsoft\\Windows\\Themes\\slideshow.ini"
+                                                     ],
+                                 "started_services": [],
+                                 "created_services": [],
+                                      "write_files": [
+                                                       "\\??\\mailslot\\msl0",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Microsoft\\Bitsprop\\asfepcfg.exe"
+                                                     ],
+                                      "delete_keys": [],
+                                        "read_keys": [
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CustomLocale\\en-US",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\ExtendedLocale\\en-US",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Sorting\\Versions\\00060101.00060101",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\crypes",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders\\AppData",
+                                                       "HKEY_CURRENT_USER\\Software\\AppDataLow\\Software\\Microsoft\\DA222C12-7194-1C83-CBAE-35102FC23944\\Client",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\GRE_Initialize\\DisableMetaFiles",
+                                                       "HKEY_CURRENT_USER\\Software\\AppDataLow\\Software\\Microsoft\\DA222C12-7194-1C83-CBAE-35102FC23944\\Ini",
+                                                       "HKEY_CURRENT_USER\\Control Panel\\Personalization\\Desktop Slideshow\\Interval",
+                                                       "HKEY_CURRENT_USER\\Control Panel\\Personalization\\Desktop Slideshow\\Shuffle",
+                                                       "HKEY_CURRENT_USER\\Control Panel\\Personalization\\Desktop Slideshow\\AnimationDuration",
+                                                       "HKEY_CURRENT_USER\\Control Panel\\Personalization\\Desktop Slideshow\\Flags"
+                                                     ],
+                                     "delete_files": [
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\9D5AAFBE354BBC306C0E.exe"
+                                                     ],
+                                          "mutexes": [
+                                                       "{6A75FFF1-C125-2CC4-9B3E-8520FF528954}"
+                                                     ]
+                             }
+               },
+     "static": {
+                  "pe": {
+                                    "icon_hash": null,
+                                     "sections": [
+                                                   {
+                                                              "raw_address": "0x00000400",
+                                                                     "name": ".text",
+                                                          "characteristics": "IMAGE_SCN_CNT_CODE|IMAGE_SCN_MEM_EXECUTE|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x0001845b",
+                                                          "virtual_address": "0x00001000",
+                                                             "size_of_data": "0x00018600",
+                                                                  "entropy": "6.59",
+                                                      "characteristics_raw": "0x60000020"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00018a00",
+                                                                     "name": ".rdata",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x000084ac",
+                                                          "virtual_address": "0x0001a000",
+                                                             "size_of_data": "0x00008600",
+                                                                  "entropy": "4.71",
+                                                      "characteristics_raw": "0x40000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00021000",
+                                                                     "name": ".data",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE",
+                                                             "virtual_size": "0x00006068",
+                                                          "virtual_address": "0x00023000",
+                                                             "size_of_data": "0x00002200",
+                                                                  "entropy": "3.26",
+                                                      "characteristics_raw": "0xc0000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00023200",
+                                                                     "name": ".rsrc",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x00045910",
+                                                          "virtual_address": "0x0002a000",
+                                                             "size_of_data": "0x00045a00",
+                                                                  "entropy": "7.98",
+                                                      "characteristics_raw": "0x40000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00068c00",
+                                                                     "name": ".reloc",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_DISCARDABLE|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x00001920",
+                                                          "virtual_address": "0x00070000",
+                                                             "size_of_data": "0x00001a00",
+                                                                  "entropy": "6.44",
+                                                      "characteristics_raw": "0x42000040"
+                                                   }
+                                                 ],
+                              "peid_signatures": null,
+                                   "entrypoint": "0x00407013",
+                                      "exports": [],
+                                      "overlay": null,
+                              "digital_signers": [],
+                                      "imphash": "ead922bfdbb6ece3dd857df4dbca8dd8",
+                            "reported_checksum": "0x0006c112",
+                                         "icon": null,
+                                "guest_signers": {
+                                                         "aux_error": true,
+                                                          "aux_sha1": null,
+                                                     "aux_timestamp": null,
+                                                         "aux_valid": false,
+                                                       "aux_signers": [],
+                                                    "aux_error_desc": "No signature found. SignTool Error File not valid C\\Users\\comp\\AppData\\Local\\Temp\\9D5AAFBE354BBC306C0E.exe"
+                                                 },
+                              "actual_checksum": "0x0006c112",
+                                      "imports": [
+                                                   {
+                                                          "dll": "KERNEL32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "PulseEvent",
+                                                                      "address": "0x41a000"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetupComm",
+                                                                      "address": "0x41a004"
+                                                                   },
+                                                                   {
+                                                                         "name": "FreeEnvironmentStringsA",
+                                                                      "address": "0x41a008"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetSystemTimes",
+                                                                      "address": "0x41a00c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GlobalAlloc",
+                                                                      "address": "0x41a010"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetConsoleMode",
+                                                                      "address": "0x41a014"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetThreadLocale",
+                                                                      "address": "0x41a018"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetProcAddress",
+                                                                      "address": "0x41a01c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetPrivateProfileStringA",
+                                                                      "address": "0x41a020"
+                                                                   },
+                                                                   {
+                                                                         "name": "LoadLibraryA",
+                                                                      "address": "0x41a024"
+                                                                   },
+                                                                   {
+                                                                         "name": "DnsHostnameToComputerNameA",
+                                                                      "address": "0x41a028"
+                                                                   },
+                                                                   {
+                                                                         "name": "FindFirstVolumeMountPointA",
+                                                                      "address": "0x41a02c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetThreadPriority",
+                                                                      "address": "0x41a030"
+                                                                   },
+                                                                   {
+                                                                         "name": "EraseTape",
+                                                                      "address": "0x41a034"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetVersionExA",
+                                                                      "address": "0x41a038"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetFileAttributesW",
+                                                                      "address": "0x41a03c"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateFileW",
+                                                                      "address": "0x41a040"
+                                                                   },
+                                                                   {
+                                                                         "name": "CloseHandle",
+                                                                      "address": "0x41a044"
+                                                                   },
+                                                                   {
+                                                                         "name": "WriteConsoleW",
+                                                                      "address": "0x41a048"
+                                                                   },
+                                                                   {
+                                                                         "name": "EncodePointer",
+                                                                      "address": "0x41a04c"
+                                                                   },
+                                                                   {
+                                                                         "name": "DecodePointer",
+                                                                      "address": "0x41a050"
+                                                                   },
+                                                                   {
+                                                                         "name": "EnterCriticalSection",
+                                                                      "address": "0x41a054"
+                                                                   },
+                                                                   {
+                                                                         "name": "LeaveCriticalSection",
+                                                                      "address": "0x41a058"
+                                                                   },
+                                                                   {
+                                                                         "name": "DeleteCriticalSection",
+                                                                      "address": "0x41a05c"
+                                                                   },
+                                                                   {
+                                                                         "name": "WideCharToMultiByte",
+                                                                      "address": "0x41a060"
+                                                                   },
+                                                                   {
+                                                                         "name": "MultiByteToWideChar",
+                                                                      "address": "0x41a064"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetStringTypeW",
+                                                                      "address": "0x41a068"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetLastError",
+                                                                      "address": "0x41a06c"
+                                                                   },
+                                                                   {
+                                                                         "name": "HeapFree",
+                                                                      "address": "0x41a070"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCommandLineA",
+                                                                      "address": "0x41a074"
+                                                                   },
+                                                                   {
+                                                                         "name": "RaiseException",
+                                                                      "address": "0x41a078"
+                                                                   },
+                                                                   {
+                                                                         "name": "RtlUnwind",
+                                                                      "address": "0x41a07c"
+                                                                   },
+                                                                   {
+                                                                         "name": "HeapAlloc",
+                                                                      "address": "0x41a080"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCPInfo",
+                                                                      "address": "0x41a084"
+                                                                   },
+                                                                   {
+                                                                         "name": "IsProcessorFeaturePresent",
+                                                                      "address": "0x41a088"
+                                                                   },
+                                                                   {
+                                                                         "name": "UnhandledExceptionFilter",
+                                                                      "address": "0x41a08c"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetUnhandledExceptionFilter",
+                                                                      "address": "0x41a090"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetLastError",
+                                                                      "address": "0x41a094"
+                                                                   },
+                                                                   {
+                                                                         "name": "InitializeCriticalSectionAndSpinCount",
+                                                                      "address": "0x41a098"
+                                                                   },
+                                                                   {
+                                                                         "name": "Sleep",
+                                                                      "address": "0x41a09c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCurrentProcess",
+                                                                      "address": "0x41a0a0"
+                                                                   },
+                                                                   {
+                                                                         "name": "TerminateProcess",
+                                                                      "address": "0x41a0a4"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsAlloc",
+                                                                      "address": "0x41a0a8"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsGetValue",
+                                                                      "address": "0x41a0ac"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsSetValue",
+                                                                      "address": "0x41a0b0"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsFree",
+                                                                      "address": "0x41a0b4"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetStartupInfoW",
+                                                                      "address": "0x41a0b8"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetModuleHandleW",
+                                                                      "address": "0x41a0bc"
+                                                                   },
+                                                                   {
+                                                                         "name": "LCMapStringW",
+                                                                      "address": "0x41a0c0"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetLocaleInfoW",
+                                                                      "address": "0x41a0c4"
+                                                                   },
+                                                                   {
+                                                                         "name": "IsValidLocale",
+                                                                      "address": "0x41a0c8"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetUserDefaultLCID",
+                                                                      "address": "0x41a0cc"
+                                                                   },
+                                                                   {
+                                                                         "name": "EnumSystemLocalesW",
+                                                                      "address": "0x41a0d0"
+                                                                   },
+                                                                   {
+                                                                         "name": "IsDebuggerPresent",
+                                                                      "address": "0x41a0d4"
+                                                                   },
+                                                                   {
+                                                                         "name": "ReadFile",
+                                                                      "address": "0x41a0d8"
+                                                                   },
+                                                                   {
+                                                                         "name": "ReadConsoleW",
+                                                                      "address": "0x41a0dc"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetProcessHeap",
+                                                                      "address": "0x41a0e0"
+                                                                   },
+                                                                   {
+                                                                         "name": "ExitProcess",
+                                                                      "address": "0x41a0e4"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetModuleHandleExW",
+                                                                      "address": "0x41a0e8"
+                                                                   },
+                                                                   {
+                                                                         "name": "HeapSize",
+                                                                      "address": "0x41a0ec"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCurrentThreadId",
+                                                                      "address": "0x41a0f0"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetStdHandle",
+                                                                      "address": "0x41a0f4"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetFileType",
+                                                                      "address": "0x41a0f8"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetModuleFileNameA",
+                                                                      "address": "0x41a0fc"
+                                                                   },
+                                                                   {
+                                                                         "name": "WriteFile",
+                                                                      "address": "0x41a100"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetModuleFileNameW",
+                                                                      "address": "0x41a104"
+                                                                   },
+                                                                   {
+                                                                         "name": "QueryPerformanceCounter",
+                                                                      "address": "0x41a108"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCurrentProcessId",
+                                                                      "address": "0x41a10c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetSystemTimeAsFileTime",
+                                                                      "address": "0x41a110"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetEnvironmentStringsW",
+                                                                      "address": "0x41a114"
+                                                                   },
+                                                                   {
+                                                                         "name": "FreeEnvironmentStringsW",
+                                                                      "address": "0x41a118"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetACP",
+                                                                      "address": "0x41a11c"
+                                                                   },
+                                                                   {
+                                                                         "name": "IsValidCodePage",
+                                                                      "address": "0x41a120"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetOEMCP",
+                                                                      "address": "0x41a124"
+                                                                   },
+                                                                   {
+                                                                         "name": "HeapReAlloc",
+                                                                      "address": "0x41a128"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetStdHandle",
+                                                                      "address": "0x41a12c"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetFilePointerEx",
+                                                                      "address": "0x41a130"
+                                                                   },
+                                                                   {
+                                                                         "name": "LoadLibraryExW",
+                                                                      "address": "0x41a134"
+                                                                   },
+                                                                   {
+                                                                         "name": "OutputDebugStringW",
+                                                                      "address": "0x41a138"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetConsoleCP",
+                                                                      "address": "0x41a13c"
+                                                                   },
+                                                                   {
+                                                                         "name": "FlushFileBuffers",
+                                                                      "address": "0x41a140"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "ole32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "GetHGlobalFromStream",
+                                                                      "address": "0x41a148"
+                                                                   },
+                                                                   {
+                                                                         "name": "OleLoadFromStream",
+                                                                      "address": "0x41a14c"
+                                                                   }
+                                                                 ]
+                                                   }
+                                                 ],
+                            "exported_dll_name": null,
+                                      "dirents": [
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IMPORT",
+                                                      "virtual_address": "0x00021cf4",
+                                                                 "size": "0x0000003c"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESOURCE",
+                                                      "virtual_address": "0x0002a000",
+                                                                 "size": "0x00045910"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXCEPTION",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_SECURITY",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BASERELOC",
+                                                      "virtual_address": "0x00070000",
+                                                                 "size": "0x00001920"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DEBUG",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COPYRIGHT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_GLOBALPTR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_TLS",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG",
+                                                      "virtual_address": "0x00020a58",
+                                                                 "size": "0x00000040"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IAT",
+                                                      "virtual_address": "0x0001a000",
+                                                                 "size": "0x00000154"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESERVED",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   }
+                                                 ],
+                                  "versioninfo": [],
+                                    "resources": [
+                                                   {
+                                                             "name": "GQW",
+                                                         "filetype": null,
+                                                           "offset": "0x0002a134",
+                                                         "language": "LANG_DANISH",
+                                                      "sublanguage": "SUBLANG_DEFAULT",
+                                                             "size": "0x00040cf7",
+                                                          "entropy": "8.00"
+                                                   },
+                                                   {
+                                                             "name": "PENADARAJUHOJOJINUPUCAYIRUREDOPO",
+                                                         "filetype": null,
+                                                           "offset": "0x0006ae2c",
+                                                         "language": "LANG_NEUTRAL",
+                                                      "sublanguage": "SUBLANG_NEUTRAL",
+                                                             "size": "0x000001e1",
+                                                          "entropy": "4.51"
+                                                   },
+                                                   {
+                                                             "name": "RT_BITMAP",
+                                                         "filetype": null,
+                                                           "offset": "0x0006b010",
+                                                         "language": "LANG_NEUTRAL",
+                                                      "sublanguage": "SUBLANG_NEUTRAL",
+                                                             "size": "0x00004900",
+                                                          "entropy": "5.62"
+                                                   }
+                                                 ],
+                                      "pdbpath": null,
+                                    "osversion": "5.1",
+                                   "icon_fuzzy": null,
+                                    "imagebase": "0x00400000",
+                           "imported_dll_count": 2,
+                                    "timestamp": "2018-06-25 23:25:13"
+                        }
+               }
+}

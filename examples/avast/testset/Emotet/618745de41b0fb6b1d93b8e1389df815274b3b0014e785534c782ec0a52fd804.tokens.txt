@@ -1,0 +1,40 @@
+# total tokens: 499   kept by Nebula (first 512): 499   dropped: 0
+# tokenizer: Avast BPE (50k) trained with Nebula's JSONTokenizerBPE.train() on the Avast training split
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: resolved_apis  (tokens 0..477, 478 tokens)
+     0  ▁resolved ▁apis ▁cryptsp ▁dll ▁cryptacquirecontexta ▁cryptsp ▁dll ▁cryptcreatehash ▁cryptsp ▁dll ▁crypthashdata ▁cryptsp ▁dll ▁cryptderivekey ▁cryptsp ▁dll
+    16  ▁cryptencrypt ▁kernel32 ▁dll ▁isprocessorfeaturepresent ▁oleaut32 ▁dll ▁200 ▁ole32 ▁dll ▁coinitializeex ▁cryptbase ▁dll ▁systemfunction036 ▁uxtheme ▁dll ▁themeinitapihook
+    32  ▁user32 ▁dll ▁isprocessdpiaware ▁comctl32 ▁dll ▁385 ▁comctl32 ▁dll ▁320 ▁comctl32 ▁dll ▁324 ▁comctl32 ▁dll ▁323 ▁ole32
+    48  ▁dll ▁createbindctx ▁ole32 ▁dll ▁cotaskmemalloc ▁ole32 ▁dll ▁cogetapartmenttype ▁ole32 ▁dll ▁coregisterinitializespy ▁ole32 ▁dll ▁cotaskmemfree ▁comctl32 ▁dll
+    64  ▁236 ▁oleaut32 ▁dll ▁6 ▁ole32 ▁dll ▁cogetmalloc ▁comctl32 ▁dll ▁328 ▁comctl32 ▁dll ▁334 ▁oleaut32 ▁dll ▁2
+    80  ▁ole32 ▁dll ▁cocreateinstance ▁advapi32 ▁dll ▁initializesecuritydescriptor ▁advapi32 ▁dll ▁setentriesinaclw ▁ntmarta ▁dll ▁getmartaextensioninterface ▁advapi32 ▁dll ▁setsecuritydescriptordacl ▁setupapi
+    96  ▁dll ▁cm ▁get ▁device ▁interface ▁list ▁size ▁exw ▁advapi32 ▁dll ▁istextunicode ▁setupapi ▁dll ▁cm ▁get ▁device
+   112  ▁interface ▁list ▁exw ▁comctl32 ▁dll ▁332 ▁comctl32 ▁dll ▁338 ▁comctl32 ▁dll ▁339 ▁comctl32 ▁dll ▁386 ▁shell32
+   128  ▁dll ▁102 ▁propsys ▁dll ▁pslookuppropertyhandlerclsid ▁advapi32 ▁dll ▁regopenkeyexw ▁advapi32 ▁dll ▁regqueryvalueexw ▁advapi32 ▁dll ▁regclosekey ▁propsys ▁dll
+   144  ▁pscreatepropertystorefromobject ▁propsys ▁dll ▁417 ▁propsys ▁dll ▁propvarianttostringalloc ▁ole32 ▁dll ▁propvariantclear ▁propsys ▁dll ▁pscreatememorypropertystore ▁propsys ▁dll ▁propvarianttobuffer
+   160  ▁propsys ▁dll ▁propvarianttouint64 ▁propsys ▁dll ▁propvarianttoboolean ▁propsys ▁dll ▁initpropvariantfrombuffer ▁advapi32 ▁dll ▁getnamedsecurityinfow ▁ole32 ▁dll ▁couninitialize ▁comctl32
+   176  ▁dll ▁329 ▁comctl32 ▁dll ▁388 ▁comctl32 ▁dll ▁321 ▁ole32 ▁dll ▁corevokeinitializespy ▁oleaut32 ▁dll ▁500 ▁comctl32 ▁dll
+   192  ▁387 ▁comctl32 ▁dll ▁327 ▁advapi32 ▁dll ▁unregistertraceguids ▁cryptsp ▁dll ▁cryptreleasecontext ▁ntdll ▁dll ▁etwunregistertraceguids ▁dui70 ▁dll ▁initprocesspriv
+   208  ▁dui70 ▁dll ▁initthread ▁dui70 ▁dll ▁0hwndelement ▁directui ▁qeaa ▁xz ▁dui70 ▁dll ▁initialize ▁hwndelement ▁directui ▁qeaajpeauhwnd ▁nipeavelement
+   224  ▁2 ▁peak ▁z ▁dui70 ▁dll ▁getclassinfow ▁hwndelement ▁directui ▁ueaapeauiclassinfo ▁2 ▁xz ▁dui70 ▁dll ▁onpropertychanging ▁element ▁directui
+   240  ▁ueaa ▁npebupropertyinfo ▁2 ▁hpeavvalue ▁2 ▁1 ▁z ▁dui70 ▁dll ▁handleuiapropertychanginglistener ▁element ▁directui ▁ueaaxpebupropertyinfo ▁2 ▁z ▁dui70
+   256  ▁dll ▁handleuiapropertylistener ▁element ▁directui ▁ueaaxpebupropertyinfo ▁2 ▁hpeavvalue ▁2 ▁1 ▁z ▁dui70 ▁dll ▁onpropertychanged ▁hwndelement ▁directui ▁ueaaxpebupropertyinfo
+   272  ▁2 ▁hpeavvalue ▁2 ▁1 ▁z ▁dui70 ▁dll ▁create ▁filllayout ▁directui ▁sajpeapeavlayout ▁2 ▁z ▁dui70 ▁dll ▁setlayout
+   288  ▁element ▁directui ▁qeaajpeavlayout ▁2 ▁z ▁dui70 ▁dll ▁setaccessible ▁element ▁directui ▁qeaaj ▁n ▁z ▁dui70 ▁dll ▁setaccrole
+   304  ▁element ▁directui ▁qeaajh ▁z ▁dui70 ▁dll ▁setvisible ▁element ▁directui ▁qeaaj ▁n ▁z ▁dui70 ▁dll ▁gethwnd ▁hwndelement
+   320  ▁directui ▁ueaapeauhwnd ▁xz ▁dui70 ▁dll ▁create ▁duixmlparser ▁directui ▁sajpeapeav12 ▁p6apeavvalue ▁2 ▁pebgpeax ▁z2p6ax11h2 ▁z2 ▁z ▁dui70
+   336  ▁dll ▁setxmlfromresource ▁duixmlparser ▁directui ▁qeaajipeauhinstance ▁0 ▁z ▁xmllite ▁dll ▁createxmlreader ▁xmllite ▁dll ▁createxmlreaderinputwithencodingname ▁dui70 ▁dll ▁createelement
+   352  ▁duixmlparser ▁directui ▁qeaajpebgpeavelement ▁2 ▁1peakpeapeav32 ▁z ▁dui70 ▁dll ▁add ▁element ▁directui ▁qeaajpeav12 ▁z ▁dui70 ▁dll ▁add
+   368  ▁element ▁directui ▁ueaajpeapeav12 ▁i ▁z ▁dui70 ▁dll ▁insert ▁element ▁directui ▁ueaajpeapeav12 ▁ii ▁z ▁dui70 ▁dll ▁strtoid
+   384  ▁dui70 ▁dll ▁finddescendent ▁element ▁directui ▁qeaapeav12 ▁g ▁z ▁dui70 ▁dll ▁setcontentstring ▁element ▁directui ▁qeaajpebg ▁z ▁dui70
+   400  ▁dll ▁setlayoutpos ▁element ▁directui ▁qeaajh ▁z ▁dui70 ▁dll ▁uiaontooltip ▁dui70 ▁dll ▁enddefer ▁element ▁directui ▁qeaaxk ▁z
+   416  ▁dui70 ▁dll ▁ongroupchanged ▁hwndelement ▁directui ▁ueaaxh ▁n ▁z ▁dui70 ▁dll ▁messagecallback ▁element ▁directui ▁ueaaipeautaggmsg ▁z ▁dui70
+   432  ▁dll ▁paint ▁element ▁directui ▁ueaaxpeauhdc ▁pebutagrect ▁1peau4 ▁2 ▁z ▁dui70 ▁dll ▁destroy ▁duixmlparser ▁directui ▁qeaaxxz ▁dui70
+   448  ▁dll ▁handleuiadestroylistener ▁element ▁directui ▁ueaaxxz ▁dui70 ▁dll ▁ondestroy ▁hwndelement ▁directui ▁ueaaxxz ▁dui70 ▁dll ▁onunhosted ▁element ▁directui
+   464  ▁meaaxpeav12 ▁z ▁dui70 ▁dll ▁1hwndelement ▁directui ▁ueaa ▁xz ▁dui70 ▁dll ▁uninitthread ▁dui70 ▁dll ▁uninitprocesspriv
+
+## field: mutexes  (tokens 478..498, 21 tokens)
+   478  ▁mutexes ▁gcc ▁shmem ▁tdm2 ▁use ▁fc ▁key ▁gcc ▁shmem ▁tdm2 ▁sjlj ▁once ▁gcc ▁shmem ▁tdm2 ▁fc
+   494  ▁key ▁global ▁i5c3a8244 ▁global ▁m5c3a8244
+

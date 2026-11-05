@@ -1,0 +1,727 @@
+{
+   "behavior": {
+                  "summary": {
+                                             "keys": [
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\OLEAUT",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\CustomLocale",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CustomLocale\\en-US",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\ExtendedLocale",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\ExtendedLocale\\en-US",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Sorting\\Versions\\00060101.00060101",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\Locale",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\Locale\\Alternate Sorts",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\Language Groups",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Locale\\00000409",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Language Groups\\1",
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\Windows Error Reporting\\WMR",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\Windows Error Reporting\\WMR\\Disable",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\SESSION MANAGER\\SafeProcessSearchMode",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\Codepage",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CodePage\\932",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CodePage\\949",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CodePage\\950",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CodePage\\936",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\VBA\\Monitors",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Cryptography\\MachineGuid",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Mozilla\\Mozilla Firefox",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\ComodoGroup\\IceDragon\\Setup",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Apple Computer, Inc.\\Safari",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\K-Meleon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\mozilla.org\\SeaMonkey",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Mozilla\\SeaMonkey",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Mozilla\\Flock",
+                                                       "HKEY_CURRENT_USER\\Software\\QtWeb.NET\\QtWeb Internet Browser\\AutoComplete"
+                                                     ],
+                                    "resolved_apis": [
+                                                       "kernel32.dll.IsProcessorFeaturePresent",
+                                                       "kernel32.dll.SortGetHandle",
+                                                       "kernel32.dll.SortCloseHandle",
+                                                       "cryptbase.dll.SystemFunction036",
+                                                       "uxtheme.dll.ThemeInitApiHook",
+                                                       "user32.dll.IsProcessDPIAware",
+                                                       "oleaut32.dll.OleLoadPictureEx",
+                                                       "oleaut32.dll.DispCallFunc",
+                                                       "oleaut32.dll.LoadTypeLibEx",
+                                                       "oleaut32.dll.UnRegisterTypeLib",
+                                                       "oleaut32.dll.CreateTypeLib2",
+                                                       "oleaut32.dll.VarDateFromUdate",
+                                                       "oleaut32.dll.VarUdateFromDate",
+                                                       "oleaut32.dll.GetAltMonthNames",
+                                                       "oleaut32.dll.VarNumFromParseNum",
+                                                       "oleaut32.dll.VarParseNumFromStr",
+                                                       "oleaut32.dll.VarDecFromR4",
+                                                       "oleaut32.dll.VarDecFromR8",
+                                                       "oleaut32.dll.VarDecFromDate",
+                                                       "oleaut32.dll.VarDecFromI4",
+                                                       "oleaut32.dll.VarDecFromCy",
+                                                       "oleaut32.dll.VarR4FromDec",
+                                                       "oleaut32.dll.GetRecordInfoFromTypeInfo",
+                                                       "oleaut32.dll.GetRecordInfoFromGuids",
+                                                       "oleaut32.dll.SafeArrayGetRecordInfo",
+                                                       "oleaut32.dll.SafeArraySetRecordInfo",
+                                                       "oleaut32.dll.SafeArrayGetIID",
+                                                       "oleaut32.dll.SafeArraySetIID",
+                                                       "oleaut32.dll.SafeArrayCopyData",
+                                                       "oleaut32.dll.SafeArrayAllocDescriptorEx",
+                                                       "oleaut32.dll.SafeArrayCreateEx",
+                                                       "oleaut32.dll.VarFormat",
+                                                       "oleaut32.dll.VarFormatDateTime",
+                                                       "oleaut32.dll.VarFormatNumber",
+                                                       "oleaut32.dll.VarFormatPercent",
+                                                       "oleaut32.dll.VarFormatCurrency",
+                                                       "oleaut32.dll.VarWeekdayName",
+                                                       "oleaut32.dll.VarMonthName",
+                                                       "oleaut32.dll.VarAdd",
+                                                       "oleaut32.dll.VarAnd",
+                                                       "oleaut32.dll.VarCat",
+                                                       "oleaut32.dll.VarDiv",
+                                                       "oleaut32.dll.VarEqv",
+                                                       "oleaut32.dll.VarIdiv",
+                                                       "oleaut32.dll.VarImp",
+                                                       "oleaut32.dll.VarMod",
+                                                       "oleaut32.dll.VarMul",
+                                                       "oleaut32.dll.VarOr",
+                                                       "oleaut32.dll.VarPow",
+                                                       "oleaut32.dll.VarSub",
+                                                       "oleaut32.dll.VarXor",
+                                                       "oleaut32.dll.VarAbs",
+                                                       "oleaut32.dll.VarFix",
+                                                       "oleaut32.dll.VarInt",
+                                                       "oleaut32.dll.VarNeg",
+                                                       "oleaut32.dll.VarNot",
+                                                       "oleaut32.dll.VarRound",
+                                                       "oleaut32.dll.VarCmp",
+                                                       "oleaut32.dll.VarDecAdd",
+                                                       "oleaut32.dll.VarDecCmp",
+                                                       "oleaut32.dll.VarBstrCat",
+                                                       "oleaut32.dll.VarCyMulI4",
+                                                       "oleaut32.dll.VarBstrCmp",
+                                                       "ole32.dll.CoCreateInstanceEx",
+                                                       "ole32.dll.CLSIDFromProgIDEx",
+                                                       "sxs.dll.SxsOleAut32MapIIDOrCLSIDToTypeLibrary",
+                                                       "user32.dll.GetSystemMetrics",
+                                                       "user32.dll.MonitorFromWindow",
+                                                       "user32.dll.MonitorFromRect",
+                                                       "user32.dll.MonitorFromPoint",
+                                                       "user32.dll.EnumDisplayMonitors",
+                                                       "user32.dll.GetMonitorInfoA",
+                                                       "comdlg32.dll.ChooseFontA",
+                                                       "psapi.dll.EnumPageFilesW",
+                                                       "user32.dll.EnumWindows",
+                                                       "kernel32.dll.VirtualAlloc",
+                                                       "kernel32.dll.GetTickCount",
+                                                       "kernel32.dll.Sleep",
+                                                       "kernel32.dll.SetErrorMode",
+                                                       "kernel32.dll.SetLastError",
+                                                       "kernel32.dll.VirtualAllocEx",
+                                                       "user32.dll.GetCursorPos",
+                                                       "kernel32.dll.CloseHandle",
+                                                       "shell32.dll.ShellExecuteW",
+                                                       "kernel32.dll.WriteFile",
+                                                       "kernel32.dll.CreateFileW",
+                                                       "kernel32.dll.TerminateProcess",
+                                                       "kernel32.dll.VirtualProtectEx",
+                                                       "kernel32.dll.CreateProcessW",
+                                                       "kernel32.dll.GetTempPathW",
+                                                       "kernel32.dll.GetLongPathNameW",
+                                                       "kernel32.dll.GetFileSize",
+                                                       "kernel32.dll.ReadFile",
+                                                       "kernel32.dll.GetCommandLineW",
+                                                       "ntdll.dll.NtAllocateVirtualMemory",
+                                                       "ntdll.dll.NtWriteVirtualMemory",
+                                                       "ntdll.dll.NtTerminateThread",
+                                                       "ntdll.dll.NtOpenEvent",
+                                                       "ntdll.dll.NtUnmapViewOfSection",
+                                                       "ntdll.dll.NtGetContextThread",
+                                                       "ntdll.dll.NtSetContextThread",
+                                                       "ntdll.dll.NtResumeThread",
+                                                       "kernel32.dll.GetExitCodeProcess",
+                                                       "cryptsp.dll.CryptAcquireContextW",
+                                                       "cryptsp.dll.CryptCreateHash",
+                                                       "cryptsp.dll.CryptHashData",
+                                                       "cryptsp.dll.CryptGetHashParam",
+                                                       "cryptsp.dll.CryptDestroyHash",
+                                                       "cryptsp.dll.CryptReleaseContext",
+                                                       "vaultcli.dll.VaultEnumerateItems",
+                                                       "vaultcli.dll.VaultEnumerateVaults",
+                                                       "vaultcli.dll.VaultFree",
+                                                       "vaultcli.dll.VaultGetItem",
+                                                       "vaultcli.dll.VaultOpenVault",
+                                                       "vaultcli.dll.VaultCloseVault"
+                                                     ],
+                                "executed_commands": [
+                                                       "\"C:\\Users\\comp\\AppData\\Local\\Temp\\3F667A6ABC50E89E2616.exe\""
+                                                     ],
+                                       "write_keys": [],
+                                            "files": [
+                                                       "C:\\Windows\\Globalization\\Sorting\\sortdefault.nls",
+                                                       "\\Device\\KsecDD",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\3F667A6ABC50E89E2616.exe.cfg",
+                                                       "C:\\Windows\\sysnative\\C_932.NLS",
+                                                       "C:\\Windows\\sysnative\\C_949.NLS",
+                                                       "C:\\Windows\\sysnative\\C_950.NLS",
+                                                       "C:\\Windows\\sysnative\\C_936.NLS",
+                                                       "C:\\Program Files\\NETGATE\\Black Hawk",
+                                                       "C:\\Program Files (x86)\\Lunascape\\Lunascape6\\plugins\\{9BDD5314-20A6-4d98-AB30-8325A95771EE}",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Comodo\\Dragon\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Comodo\\Dragon\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalComodo\\Dragon\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalComodo\\Dragon\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\MapleStudio\\ChromePlus\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\MapleStudio\\ChromePlus\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalMapleStudio\\ChromePlus\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalMapleStudio\\ChromePlus\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Nichrome\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Nichrome\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalNichrome\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalNichrome\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\RockMelt\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\RockMelt\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalRockMelt\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalRockMelt\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Spark\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Spark\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalSpark\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalSpark\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Chromium\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Chromium\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalChromium\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalChromium\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Titan Browser\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Titan Browser\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalTitan Browser\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalTitan Browser\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Torch\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Torch\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalTorch\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalTorch\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Yandex\\YandexBrowser\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Yandex\\YandexBrowser\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalYandex\\YandexBrowser\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalYandex\\YandexBrowser\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Epic Privacy Browser\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Epic Privacy Browser\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalEpic Privacy Browser\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalEpic Privacy Browser\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\CocCoc\\Browser\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\CocCoc\\Browser\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalCocCoc\\Browser\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalCocCoc\\Browser\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Vivaldi\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Vivaldi\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalVivaldi\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalVivaldi\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Comodo\\Chromodo\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Comodo\\Chromodo\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalComodo\\Chromodo\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalComodo\\Chromodo\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Superbird\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Superbird\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalSuperbird\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalSuperbird\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Coowon\\Coowon\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Coowon\\Coowon\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalCoowon\\Coowon\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalCoowon\\Coowon\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Mustang Browser\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Mustang Browser\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalMustang Browser\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalMustang Browser\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\360Browser\\Browser\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\360Browser\\Browser\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\Local360Browser\\Browser\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local360Browser\\Browser\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\CatalinaGroup\\Citrio\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\CatalinaGroup\\Citrio\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalCatalinaGroup\\Citrio\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalCatalinaGroup\\Citrio\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Google\\Chrome SxS\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Google\\Chrome SxS\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalGoogle\\Chrome SxS\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalGoogle\\Chrome SxS\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Orbitum\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Orbitum\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalOrbitum\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalOrbitum\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Iridium\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Iridium\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalIridium\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\LocalIridium\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Opera\\Opera Next\\data\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Opera\\Opera Next\\data\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Opera\\Opera Next\\data\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Opera\\Opera Next\\data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Opera Software\\Opera Stable\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Opera Software\\Opera Stable\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Opera Software\\Opera Stable\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Opera Software\\Opera Stable\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Fenrir Inc\\Sleipnir\\setting\\modules\\ChromiumViewer\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Fenrir Inc\\Sleipnir\\setting\\modules\\ChromiumViewer\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Fenrir Inc\\Sleipnir\\setting\\modules\\ChromiumViewer\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Fenrir Inc\\Sleipnir\\setting\\modules\\ChromiumViewer\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Fenrir Inc\\Sleipnir5\\setting\\modules\\ChromiumViewer\\User Data\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Fenrir Inc\\Sleipnir5\\setting\\modules\\ChromiumViewer\\User Data\\Default\\Web Data",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Fenrir Inc\\Sleipnir5\\setting\\modules\\ChromiumViewer\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Roaming\\Fenrir Inc\\Sleipnir5\\setting\\modules\\ChromiumViewer\\Default\\Login Data",
+                                                       "C:\\Users\\comp\\AppData\\Local\\QupZilla\\profiles\\default\\browsedata.db"
+                                                     ],
+                                       "read_files": [
+                                                       "C:\\Windows\\Globalization\\Sorting\\sortdefault.nls",
+                                                       "\\Device\\KsecDD",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Login Data"
+                                                     ],
+                                 "started_services": [
+                                                       "VaultSvc"
+                                                     ],
+                                 "created_services": [],
+                                      "write_files": [],
+                                      "delete_keys": [],
+                                        "read_keys": [
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CustomLocale\\en-US",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\ExtendedLocale\\en-US",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Sorting\\Versions\\00060101.00060101",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Locale\\00000409",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\Language Groups\\1",
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\Windows Error Reporting\\WMR\\Disable",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\SESSION MANAGER\\SafeProcessSearchMode",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CodePage\\932",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CodePage\\949",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CodePage\\950",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CodePage\\936",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Cryptography\\MachineGuid"
+                                                     ],
+                                     "delete_files": [],
+                                          "mutexes": [
+                                                       "14E11E0BF783BCDB0BD10C30"
+                                                     ]
+                             }
+               },
+     "static": {
+                  "pe": {
+                                    "icon_hash": null,
+                                     "sections": [
+                                                   {
+                                                              "raw_address": "0x00001000",
+                                                                     "name": ".text",
+                                                          "characteristics": "IMAGE_SCN_CNT_CODE|IMAGE_SCN_MEM_EXECUTE|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x0007230c",
+                                                          "virtual_address": "0x00001000",
+                                                             "size_of_data": "0x00073000",
+                                                                  "entropy": "4.90",
+                                                      "characteristics_raw": "0x60000020"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00074000",
+                                                                     "name": ".data",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE",
+                                                             "virtual_size": "0x00000a80",
+                                                          "virtual_address": "0x00074000",
+                                                             "size_of_data": "0x00001000",
+                                                                  "entropy": "0.00",
+                                                      "characteristics_raw": "0xc0000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00075000",
+                                                                     "name": ".rsrc",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ",
+                                                             "virtual_size": "0x00006a4c",
+                                                          "virtual_address": "0x00075000",
+                                                             "size_of_data": "0x00007000",
+                                                                  "entropy": "3.73",
+                                                      "characteristics_raw": "0x40000040"
+                                                   }
+                                                 ],
+                              "peid_signatures": null,
+                                   "entrypoint": "0x00401228",
+                                      "exports": [],
+                                      "overlay": null,
+                              "digital_signers": [],
+                                      "imphash": "217db05c9f28e2666e8d3d73ba8df42c",
+                            "reported_checksum": "0x000833f0",
+                                         "icon": null,
+                                "guest_signers": {
+                                                         "aux_error": true,
+                                                          "aux_sha1": null,
+                                                     "aux_timestamp": null,
+                                                         "aux_valid": false,
+                                                       "aux_signers": [],
+                                                    "aux_error_desc": "No signature found. SignTool Error File not valid C\\Users\\comp\\AppData\\Local\\Temp\\3F667A6ABC50E89E2616.exe"
+                                                 },
+                              "actual_checksum": "0x0007fc4d",
+                                      "imports": [
+                                                   {
+                                                          "dll": "MSVBVM60.DLL",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "_CIcos",
+                                                                      "address": "0x401000"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fptan",
+                                                                      "address": "0x401004"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaVarMove",
+                                                                      "address": "0x401008"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFreeVar",
+                                                                      "address": "0x40100c"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401010"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaStrVarMove",
+                                                                      "address": "0x401014"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFreeVarList",
+                                                                      "address": "0x401018"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fdiv_m64",
+                                                                      "address": "0x40101c"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fprem1",
+                                                                      "address": "0x401020"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaSetSystemError",
+                                                                      "address": "0x401024"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401028"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fdiv_m32",
+                                                                      "address": "0x40102c"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fdiv_m16i",
+                                                                      "address": "0x401030"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaObjSetAddref",
+                                                                      "address": "0x401034"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fdivr_m16i",
+                                                                      "address": "0x401038"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x40103c"
+                                                                   },
+                                                                   {
+                                                                         "name": "_CIsin",
+                                                                      "address": "0x401040"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaChkstk",
+                                                                      "address": "0x401044"
+                                                                   },
+                                                                   {
+                                                                         "name": "EVENT_SINK_AddRef",
+                                                                      "address": "0x401048"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x40104c"
+                                                                   },
+                                                                   {
+                                                                         "name": "DllFunctionCall",
+                                                                      "address": "0x401050"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401054"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fpatan",
+                                                                      "address": "0x401058"
+                                                                   },
+                                                                   {
+                                                                         "name": "EVENT_SINK_Release",
+                                                                      "address": "0x40105c"
+                                                                   },
+                                                                   {
+                                                                         "name": "_CIsqrt",
+                                                                      "address": "0x401060"
+                                                                   },
+                                                                   {
+                                                                         "name": "EVENT_SINK_QueryInterface",
+                                                                      "address": "0x401064"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaExceptHandler",
+                                                                      "address": "0x401068"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fprem",
+                                                                      "address": "0x40106c"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fdivr_m64",
+                                                                      "address": "0x401070"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401074"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFPException",
+                                                                      "address": "0x401078"
+                                                                   },
+                                                                   {
+                                                                         "name": "_CIlog",
+                                                                      "address": "0x40107c"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401080"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaErrorOverflow",
+                                                                      "address": "0x401084"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaNew2",
+                                                                      "address": "0x401088"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fdiv_m32i",
+                                                                      "address": "0x40108c"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fdivr_m32i",
+                                                                      "address": "0x401090"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x401094"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fdivr_m32",
+                                                                      "address": "0x401098"
+                                                                   },
+                                                                   {
+                                                                         "name": "_adj_fdiv_r",
+                                                                      "address": "0x40109c"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x4010a0"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaInStrB",
+                                                                      "address": "0x4010a4"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaVarDup",
+                                                                      "address": "0x4010a8"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFpI4",
+                                                                      "address": "0x4010ac"
+                                                                   },
+                                                                   {
+                                                                         "name": "_CIatan",
+                                                                      "address": "0x4010b0"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaStrMove",
+                                                                      "address": "0x4010b4"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x4010b8"
+                                                                   },
+                                                                   {
+                                                                         "name": null,
+                                                                      "address": "0x4010bc"
+                                                                   },
+                                                                   {
+                                                                         "name": "_allmul",
+                                                                      "address": "0x4010c0"
+                                                                   },
+                                                                   {
+                                                                         "name": "_CItan",
+                                                                      "address": "0x4010c4"
+                                                                   },
+                                                                   {
+                                                                         "name": "_CIexp",
+                                                                      "address": "0x4010c8"
+                                                                   },
+                                                                   {
+                                                                         "name": "__vbaFreeStr",
+                                                                      "address": "0x4010cc"
+                                                                   }
+                                                                 ]
+                                                   }
+                                                 ],
+                            "exported_dll_name": null,
+                                      "dirents": [
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IMPORT",
+                                                      "virtual_address": "0x00072f74",
+                                                                 "size": "0x00000028"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESOURCE",
+                                                      "virtual_address": "0x00075000",
+                                                                 "size": "0x00006a4c"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXCEPTION",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_SECURITY",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BASERELOC",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DEBUG",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COPYRIGHT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_GLOBALPTR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_TLS",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT",
+                                                      "virtual_address": "0x00000228",
+                                                                 "size": "0x00000020"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IAT",
+                                                      "virtual_address": "0x00001000",
+                                                                 "size": "0x000000d4"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESERVED",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   }
+                                                 ],
+                                  "versioninfo": [],
+                                    "resources": [
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x00075424",
+                                                         "language": "LANG_NEUTRAL",
+                                                      "sublanguage": "SUBLANG_NEUTRAL",
+                                                             "size": "0x00000368",
+                                                          "entropy": "4.46"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x00075424",
+                                                         "language": "LANG_NEUTRAL",
+                                                      "sublanguage": "SUBLANG_NEUTRAL",
+                                                             "size": "0x00000368",
+                                                          "entropy": "4.46"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x00075424",
+                                                         "language": "LANG_NEUTRAL",
+                                                      "sublanguage": "SUBLANG_NEUTRAL",
+                                                             "size": "0x00000368",
+                                                          "entropy": "4.46"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x00075424",
+                                                         "language": "LANG_NEUTRAL",
+                                                      "sublanguage": "SUBLANG_NEUTRAL",
+                                                             "size": "0x00000368",
+                                                          "entropy": "4.46"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x00075424",
+                                                         "language": "LANG_NEUTRAL",
+                                                      "sublanguage": "SUBLANG_NEUTRAL",
+                                                             "size": "0x00000368",
+                                                          "entropy": "4.46"
+                                                   },
+                                                   {
+                                                             "name": "RT_GROUP_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x000753d8",
+                                                         "language": "LANG_NEUTRAL",
+                                                      "sublanguage": "SUBLANG_NEUTRAL",
+                                                             "size": "0x0000004c",
+                                                          "entropy": "3.20"
+                                                   },
+                                                   {
+                                                             "name": "RT_VERSION",
+                                                         "filetype": null,
+                                                           "offset": "0x000751b0",
+                                                         "language": "LANG_ENGLISH",
+                                                      "sublanguage": "SUBLANG_ENGLISH_US",
+                                                             "size": "0x00000228",
+                                                          "entropy": "3.28"
+                                                   }
+                                                 ],
+                                      "pdbpath": null,
+                                    "osversion": "4.0",
+                                   "icon_fuzzy": null,
+                                    "imagebase": "0x00400000",
+                           "imported_dll_count": 1,
+                                    "timestamp": "2018-03-21 05:19:21"
+                        }
+               }
+}

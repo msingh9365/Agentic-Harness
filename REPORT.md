@@ -1,7 +1,9 @@
 # How much does Nebula's 512-token cut throw away?
 
 A measurement study on the full `dtrizna/quovadis-speakeasy` dataset (92,700
-samples), using Nebula's own preprocessing code.
+samples), using Nebula's own preprocessing code. Section 6 repeats it on a
+second sandbox, the Avast-CTU Public CAPEv2 dataset (48,976 reports). A
+two-level model built on these findings is in [`hier_nebula/`](hier_nebula/README.md).
 
 > **Short answer.** Two out of three samples are longer than 512 tokens, and
 > two thirds of all tokens are never seen by the model. What gets cut is
@@ -549,3 +551,256 @@ Entry points whose `error.type` is `max_api_count`: 17,722; of these, 41.1% (7,2
   count. The full non-streaming `load_dataset` fails on this repository (log
   linked in §1.2). All measurements use the raw JSON files at the same
   dataset revision, which is also how Nebula's own preprocessing reads them.
+
+---
+
+## 6. Second sandbox: Avast-CTU Public CAPEv2
+
+Sections 1–5 cover Speakeasy, an emulator. This section repeats the 512-cut
+measurement on reports from a real sandbox, CAPEv2. The data is the
+**Avast-CTU Public CAPEv2 dataset**
+(<https://github.com/avast/avast-ctu-cape-dataset>, repository commit
+`b4210e5caf2829fbef13a49b40a7690d1b805ab5`), **reduced reports** version
+(48,976 reports, MIT licence). A third sandbox ("mcd") is left for later.
+
+### 6.1 Method, and how it differs from Speakeasy
+
+**What the data contains.** Each reduced report has `behavior.summary` (13
+lists: `keys`, `resolved_apis`, `executed_commands`, `write_keys`, `files`,
+`read_files`, `started_services`, `created_services`, `write_files`,
+`delete_keys`, `read_keys`, `delete_files`, `mutexes`) and `static.pe`.
+Labels (family, type, detection date) come from `public_labels.csv`.
+Compared with Speakeasy:
+
+- **Every report is malware** (10 families). There is no benign class, so
+  the malware-vs-benign comparison cannot be made. Length as a shortcut is
+  checked family against family instead.
+- **There is no time-ordered API trace and no process tree.**
+  `resolved_apis` is the *set* of API names the program looked up.
+  Per-process calls exist only in the full reports (13 GB download), so the
+  entry-point / per-process chunking analysis (§2.5) **cannot be repeated on
+  this data**. Only fixed 512-token chunks are measured.
+
+**Preprocessing.** Nebula has no finished Avast pipeline (no Avast tokenizer
+ships in `nebula/objects/`). The study follows the two pieces of Avast code
+that Nebula does have:
+
+| step | source in Nebula | used here |
+|---|---|---|
+| fields | `scripts/concept-testing/preprocessing/avast_1_preprocessing/initial.ipynb` keeps `behavior.summary.resolved_apis` and `.mutexes`, each value lower-cased | **variant A**, same fields, same order (`resolved_apis` first) |
+| train/test split | same notebook: detection date before `2019-08-01` = train | same: 37,512 train / 11,464 test |
+| tokenizer | `preprocess_nebula_avast()` in `nebula/preprocessing/wrappers.py` trains a new `JSONTokenizerBPE` (vocab 50,000, `JSON_CLEANUP_SYMBOLS`, `stopwords=[]`) on the training split | same call, `JSONTokenizerBPE.train()`, on all 37,512 training records (variant A) |
+| cut | `pad_sequence()` keeps the first 512 tokens | same |
+
+**Variant B** is my own sensitivity check, not Nebula code. It keeps all 13
+summary lists (lower-cased, in the order they are stored in the reports),
+with its own 50k BPE tokenizer. That tokenizer was trained on 5,000 random
+training reports (seed 0), to keep SentencePiece's training time and memory
+manageable: the 13 lists are much larger than the two in variant A. Variant B shows how
+much the answer depends on the field choice.
+
+The Nebula notebook was written as concept testing, and Nebula's README warns
+that those files may not match the paper. So treat the Avast numbers as
+"Nebula-style", not as an exact reproduction of the paper's Avast setup.
+
+Scripts: `measure_avast.py` (tokenizer training + measurement),
+`analyze_avast.py` (tables, plots, Speakeasy comparison),
+`make_avast_examples.py` (example reports in `examples/avast/`).
+Tables: [`results/avast/tables.md`](results/avast/tables.md).
+
+Example reports (one per split and family, raw + record + tokens):
+[`examples/avast/`](examples/avast/README.md).
+
+### 6.2 Avast results
+
+| split    |    ok |
+|:---------|------:|
+| testset  | 11464 |
+| trainset | 37512 |
+
+Reports measured (status ok): 48,976 of 48,976. Split by detection date (< 2019-08-01 = trainset), as in Nebula's Avast notebook.
+
+Variant A: field attribution exact for 100.0% (48,976)
+
+Variant B: field attribution exact for 100.0% (48,976)
+
+#### Tokens per report (no truncation)
+| variant / set | n | median | p75 | p90 | p99 | max | >512 | >1024 | >2048 | >4096 | >8192 | tokens dropped by 512 cut |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| A / all | 48,976 | 422 | 716 | 1,135 | 1,884 | 6,994 | 37.4% (18,306) | 12.9% (6,312) | 0.4% (201) | 0.0% (13) | 0.0% (0) | 30.9% (8,532,504 of 27,631,746) |
+| A / trainset | 37,512 | 422 | 758 | 1,283 | 1,903 | 6,994 | 39.8% (14,920) | 15.0% (5,630) | 0.5% (179) | 0.0% (10) | 0.0% (0) | 33.5% (7,400,338 of 22,116,169) |
+| A / testset | 11,464 | 422 | 561 | 852 | 1,737 | 5,259 | 29.5% (3,386) | 5.9% (682) | 0.2% (22) | 0.0% (3) | 0.0% (0) | 20.5% (1,132,166 of 5,515,577) |
+| B / all | 48,976 | 4,917 | 8,650 | 21,081 | 75,368 | 881,128 | 93.8% (45,954) | 85.9% (42,063) | 76.9% (37,649) | 57.9% (28,352) | 37.4% (18,312) | 94.3% (400,183,677 of 424,489,052) |
+| B / trainset | 37,512 | 4,814 | 8,650 | 21,641 | 78,405 | 849,461 | 94.2% (35,333) | 87.4% (32,786) | 78.3% (29,376) | 57.4% (21,549) | 36.1% (13,524) | 94.4% (318,013,007 of 336,740,776) |
+| B / testset | 11,464 | 5,170 | 8,650 | 19,227 | 54,438 | 881,128 | 92.6% (10,621) | 80.9% (9,277) | 72.2% (8,273) | 59.3% (6,803) | 41.8% (4,788) | 93.6% (82,170,670 of 87,748,276) |
+
+Variant A: mean per-sample fraction dropped 14.6%, median 0.0%.
+
+Variant B: mean per-sample fraction dropped 78.9%, median 89.6%.
+
+![Avast token histogram](results/avast/plots/hist_tokens.png)
+
+![CDF Avast vs Speakeasy](results/avast/plots/cdf_tokens.png)
+
+#### By family (variant A)
+
+trainset:
+| family | n | median | p75 | p90 | p99 | max | >512 | >1024 | >2048 | >4096 | >8192 | tokens dropped by 512 cut |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Adload | 699 | 295 | 316 | 390 | 579 | 2,214 | 1.7% (12) | 0.4% (3) | 0.3% (2) | 0.0% (0) | 0.0% (0) | 2.0% (4,405 of 215,301) |
+| Emotet | 10,900 | 331 | 565 | 664 | 982 | 3,366 | 30.5% (3,324) | 0.6% (66) | 0.0% (1) | 0.0% (0) | 0.0% (0) | 11.8% (505,921 of 4,281,355) |
+| HarHar | 586 | 183 | 715 | 923 | 923 | 923 | 28.0% (164) | 0.0% (0) | 0.0% (0) | 0.0% (0) | 0.0% (0) | 25.2% (53,938 of 213,872) |
+| Lokibot | 3,506 | 349 | 513 | 961 | 2,128 | 3,554 | 25.0% (878) | 9.4% (331) | 1.3% (46) | 0.0% (0) | 0.0% (0) | 26.0% (435,874 of 1,678,324) |
+| Qakbot | 4,502 | 1,467 | 1,591 | 1,805 | 1,956 | 2,447 | 98.6% (4,441) | 68.4% (3,080) | 0.4% (19) | 0.0% (0) | 0.0% (0) | 60.5% (3,511,895 of 5,801,184) |
+| Swisyn | 8,333 | 422 | 422 | 471 | 1,249 | 4,535 | 8.0% (667) | 2.0% (164) | 0.2% (16) | 0.0% (1) | 0.0% (0) | 8.2% (304,775 of 3,731,290) |
+| Trickbot | 2,866 | 361 | 785 | 1,040 | 1,124 | 1,808 | 39.7% (1,139) | 11.3% (325) | 0.0% (0) | 0.0% (0) | 0.0% (0) | 29.6% (388,599 of 1,312,855) |
+| Ursnif | 841 | 745 | 999 | 1,271 | 2,282 | 3,148 | 86.4% (727) | 21.6% (182) | 2.0% (17) | 0.0% (0) | 0.0% (0) | 42.2% (299,739 of 710,487) |
+| Zeus | 2,450 | 588 | 851 | 1,158 | 1,908 | 2,722 | 53.2% (1,304) | 15.6% (382) | 0.5% (13) | 0.0% (0) | 0.0% (0) | 38.2% (570,607 of 1,493,211) |
+| njRAT | 2,829 | 902 | 1,211 | 1,542 | 2,667 | 6,994 | 80.0% (2,264) | 38.8% (1,097) | 2.3% (65) | 0.3% (9) | 0.0% (0) | 49.5% (1,324,585 of 2,678,290) |
+
+testset:
+| family | n | median | p75 | p90 | p99 | max | >512 | >1024 | >2048 | >4096 | >8192 | tokens dropped by 512 cut |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Adload | 5 | 307 | 312 | 458 | 546 | 556 | 20.0% (1) | 0.0% (0) | 0.0% (0) | 0.0% (0) | 0.0% (0) | 2.5% (44 of 1,777) |
+| Emotet | 3,529 | 499 | 612 | 804 | 984 | 1,099 | 48.6% (1,716) | 0.7% (26) | 0.0% (0) | 0.0% (0) | 0.0% (0) | 16.1% (262,009 of 1,629,948) |
+| HarHar | 69 | 765 | 795 | 795 | 843 | 944 | 88.4% (61) | 0.0% (0) | 0.0% (0) | 0.0% (0) | 0.0% (0) | 33.3% (16,166 of 48,574) |
+| Lokibot | 685 | 460 | 530 | 807 | 1,581 | 2,645 | 26.6% (182) | 4.8% (33) | 0.4% (3) | 0.0% (0) | 0.0% (0) | 16.3% (51,118 of 313,586) |
+| Qakbot | 393 | 1,484 | 1,605 | 1,824 | 1,978 | 2,036 | 99.0% (389) | 75.6% (297) | 0.0% (0) | 0.0% (0) | 0.0% (0) | 62.3% (330,803 of 530,968) |
+| Swisyn | 4,258 | 422 | 422 | 422 | 1,259 | 3,120 | 5.8% (249) | 2.0% (86) | 0.2% (7) | 0.0% (0) | 0.0% (0) | 6.7% (122,860 of 1,839,515) |
+| Trickbot | 1,336 | 104 | 352 | 427 | 788 | 1,839 | 2.3% (31) | 0.4% (6) | 0.0% (0) | 0.0% (0) | 0.0% (0) | 3.6% (9,782 of 271,937) |
+| Ursnif | 502 | 516 | 732 | 780 | 871 | 5,259 | 50.8% (255) | 1.0% (5) | 0.2% (1) | 0.2% (1) | 0.0% (0) | 19.3% (55,292 of 286,827) |
+| Zeus | 144 | 433 | 828 | 1,436 | 2,388 | 2,760 | 41.0% (59) | 20.8% (30) | 4.2% (6) | 0.0% (0) | 0.0% (0) | 43.6% (37,523 of 86,107) |
+| njRAT | 543 | 883 | 1,184 | 1,484 | 2,008 | 5,101 | 81.6% (443) | 36.6% (199) | 0.9% (5) | 0.4% (2) | 0.0% (0) | 48.7% (246,569 of 506,338) |
+
+![Avast box per family](results/avast/plots/box_family.png)
+
+Variant B, all splits:
+| family | n | median | p75 | p90 | p99 | max | >512 | >1024 | >2048 | >4096 | >8192 | tokens dropped by 512 cut |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Adload | 704 | 1,679 | 1,810 | 4,634 | 4,826 | 312,461 | 98.6% (694) | 97.0% (683) | 22.0% (155) | 14.9% (105) | 0.6% (4) | 81.7% (1,597,610 of 1,955,861) |
+| Emotet | 14,429 | 4,555 | 5,766 | 21,722 | 23,341 | 115,942 | 92.3% (13,321) | 87.5% (12,632) | 83.4% (12,034) | 53.2% (7,674) | 19.1% (2,751) | 92.9% (93,836,453 of 100,958,551) |
+| HarHar | 655 | 375 | 928 | 1,063 | 1,155 | 55,912 | 34.4% (225) | 19.1% (125) | 0.2% (1) | 0.2% (1) | 0.2% (1) | 37.3% (163,407 of 437,526) |
+| Lokibot | 4,191 | 4,113 | 4,598 | 6,328 | 81,133 | 777,697 | 99.4% (4,165) | 95.9% (4,018) | 88.4% (3,706) | 52.3% (2,193) | 6.9% (290) | 92.4% (25,888,877 of 28,029,580) |
+| Qakbot | 4,895 | 5,413 | 6,165 | 6,748 | 24,491 | 336,348 | 99.3% (4,861) | 99.1% (4,851) | 90.5% (4,428) | 56.0% (2,740) | 5.3% (257) | 90.5% (23,739,789 of 26,237,669) |
+| Swisyn | 12,591 | 8,625 | 8,654 | 8,807 | 34,643 | 881,128 | 100.0% (12,587) | 86.5% (10,885) | 85.7% (10,795) | 85.4% (10,747) | 84.6% (10,647) | 94.0% (100,462,510 of 106,908,422) |
+| Trickbot | 4,202 | 1,614 | 25,606 | 42,516 | 64,743 | 116,607 | 76.4% (3,211) | 63.2% (2,655) | 36.4% (1,529) | 30.9% (1,297) | 30.0% (1,261) | 96.2% (47,306,927 of 49,152,585) |
+| Ursnif | 1,343 | 1,934 | 2,598 | 14,945 | 101,813 | 330,067 | 94.9% (1,275) | 88.9% (1,194) | 45.0% (605) | 18.1% (243) | 12.8% (172) | 92.0% (7,750,239 of 8,422,311) |
+| Zeus | 2,594 | 2,876 | 3,996 | 19,622 | 91,397 | 413,831 | 89.6% (2,325) | 70.5% (1,830) | 56.6% (1,467) | 24.3% (630) | 11.8% (305) | 93.9% (19,132,576 of 20,370,966) |
+| njRAT | 3,372 | 14,735 | 28,730 | 66,931 | 109,745 | 424,953 | 97.6% (3,290) | 94.6% (3,190) | 86.9% (2,929) | 80.7% (2,722) | 77.8% (2,624) | 97.9% (80,305,289 of 82,015,581) |
+
+#### Which fields survive the cut
+
+Variant A:
+Field order in the sequence: `resolved_apis → mutexes`.
+
+| field | samples with field | median list length | tokens (all samples) | share of all tokens | % of field tokens kept by 512 cut | samples where field fully cut |
+|---|---|---|---|---|---|---|
+| resolved_apis | 99.6% (48,784) | 136 | 27,063,669 | 97.9% | 69.9% | 0.0% (0) |
+| mutexes | 64.6% (31,620) | 3 | 568,077 | 2.1% | 30.3% | 53.4% (16,885) |
+
+Field tokens include the field's key name; a field with an empty list still costs its key name.
+
+Variant B:
+Field order in the sequence: `keys → resolved_apis → executed_commands → write_keys → files → read_files → started_services → created_services → write_files → delete_keys → read_keys → delete_files → mutexes`.
+
+| field | samples with field | median list length | tokens (all samples) | share of all tokens | % of field tokens kept by 512 cut | samples where field fully cut |
+|---|---|---|---|---|---|---|
+| keys | 100.0% (48,975) | 197 | 202,128,484 | 47.6% | 11.0% | 0.0% (0) |
+| resolved_apis | 99.6% (48,784) | 136 | 27,187,353 | 6.4% | 6.1% | 80.4% (39,232) |
+| executed_commands | 88.8% (43,471) | 2 | 1,864,779 | 0.4% | 2.4% | 95.2% (41,391) |
+| write_keys | 68.7% (33,647) | 2 | 7,359,001 | 1.7% | 0.2% | 98.7% (33,226) |
+| files | 97.8% (47,923) | 30 | 40,128,000 | 9.5% | 0.6% | 93.1% (44,616) |
+| read_files | 97.7% (47,838) | 17 | 7,739,895 | 1.8% | 0.8% | 95.0% (45,460) |
+| started_services | 8.1% (3,961) | 1 | 101,960 | 0.0% | 6.6% | 99.9% (3,956) |
+| created_services | 0.0% (23) | 2 | 98,090 | 0.0% | 6.8% | 100.0% (23) |
+| write_files | 84.8% (41,521) | 2 | 1,865,671 | 0.4% | 0.5% | 99.5% (41,324) |
+| delete_keys | 4.4% (2,169) | 2 | 159,229 | 0.0% | 4.2% | 100.0% (2,169) |
+| read_keys | 100.0% (48,975) | 102 | 133,459,522 | 31.4% | 0.1% | 93.2% (45,648) |
+| delete_files | 76.4% (37,394) | 2 | 1,684,691 | 0.4% | 0.5% | 99.2% (37,092) |
+| mutexes | 64.6% (31,620) | 3 | 712,377 | 0.2% | 1.5% | 97.5% (30,831) |
+
+Field tokens include the field's key name; a field with an empty list still costs its key name.
+
+![Avast field kept](results/avast/plots/field_kept.png)
+
+#### Chunks needed
+| variant | median | p90 | p99 | max | ≤8 chunks | ≤16 chunks | ≤32 chunks | ≤64 chunks |
+|---|---|---|---|---|---|---|---|---|
+| A | 1 | 3 | 4 | 14 | 100.0% (48,963) | 100.0% (48,976) | 100.0% (48,976) | 100.0% (48,976) |
+| B | 10 | 42 | 148 | 1,721 | 42.1% (20,624) | 62.6% (30,664) | 86.9% (42,571) | 96.2% (47,123) |
+
+Share of all tokens covered by the first K chunks:
+
+| variant | K=1 (=Nebula) | K=4 | K=8 | K=16 | K=32 |
+|---|---|---|---|---|---|
+| A | 69.1% | 99.6% | 100.0% | 100.0% | 100.0% |
+| B | 5.7% | 20.8% | 36.6% | 57.3% | 72.4% |
+
+The reduced reports have no process tree and no per-process call sequence, so the entry-point / per-process chunking of the Speakeasy study cannot be measured on them.
+
+![Avast chunks](results/avast/plots/hist_chunks.png)
+
+#### Length as a family shortcut
+There are no benign samples. ROC AUC of token count for one family vs all other families (0.5 = no signal; far from 0.5 either way = length alone separates the family).
+
+| family | n | median A tokens train | median A tokens test | AUC(A tokens) train | AUC(A tokens) test | AUC(min(A,512)) test | AUC(B tokens) test |
+|---|---|---|---|---|---|---|---|
+| Adload | 704 | 295 | 307 | 0.259 | 0.353 | 0.375 | 0.315 |
+| Emotet | 14,429 | 331 | 499 | 0.323 | 0.526 | 0.557 | 0.501 |
+| HarHar | 655 | 183 | 765 | 0.287 | 0.786 | 0.767 | 0.186 |
+| Lokibot | 4,191 | 349 | 460 | 0.391 | 0.491 | 0.498 | 0.434 |
+| Qakbot | 4,895 | 1,467 | 1,484 | 0.923 | 0.960 | 0.858 | 0.443 |
+| Swisyn | 12,591 | 422 | 422 | 0.452 | 0.463 | 0.458 | 0.719 |
+| Trickbot | 4,202 | 361 | 104 | 0.399 | 0.163 | 0.163 | 0.101 |
+| Ursnif | 1,343 | 745 | 516 | 0.737 | 0.663 | 0.672 | 0.235 |
+| Zeus | 2,594 | 588 | 433 | 0.523 | 0.512 | 0.494 | 0.223 |
+| njRAT | 3,372 | 902 | 883 | 0.751 | 0.822 | 0.766 | 0.760 |
+
+`nan` = the family has no samples in that split.
+
+#### Speakeasy vs Avast side by side
+| dataset / preprocessing | samples | median tokens | p90 | p99 | >512 | tokens dropped by 512 cut | fixed chunks p99 | ≤8 chunks |
+|---|---|---|---|---|---|---|---|---|
+| Speakeasy (quovadis), Nebula pipeline | 92,700 | 1,069 | 2,376 | 2,989 | 66.0% (61,207) | 66.6% | 6 | 99.8% (92,506) |
+| Avast-CTU CAPEv2, variant A | 48,976 | 422 | 1,135 | 1,884 | 37.4% (18,306) | 30.9% | 4 | 100.0% (48,963) |
+| Avast-CTU CAPEv2, variant B | 48,976 | 4,917 | 21,081 | 75,368 | 93.8% (45,954) | 94.3% | 148 | 42.1% (20,624) |
+
+### 6.3 What Avast adds to the picture
+
+1. **With Nebula's field choice, Avast reports are shorter than
+   Speakeasy's.** Variant A has a median of 422 tokens (Speakeasy: 1,069).
+   37.4% of reports (18,306 of 48,976) are longer than 512, and the cut
+   drops 30.9% of all tokens (Speakeasy: 66.0% of samples and 66.6% of
+   tokens). Four 512-token chunks already cover 99.6% of all variant-A
+   tokens, and 8 chunks cover 100.0% of reports (48,963 of 48,976). The
+   train split is longer than the test split (33.5% vs 20.5% of tokens
+   dropped).
+2. **The cut removes the mutexes.** `resolved_apis` comes first and
+   makes up 97.9% of the tokens, so `mutexes`, the only other field, is
+   placed after it. Only 30.3% of mutex tokens survive, and in **53.4% of
+   the reports that have mutexes (16,885 of 31,620) all of them are cut**.
+   This mirrors Speakeasy, where the field that comes last (`apis`) is the
+   one that gets cut.
+3. **The answer depends heavily on which fields you keep.** Keeping all 13
+   summary lists (variant B) gives a median of 4,917 tokens. 93.8% of
+   reports are above 512, 94.3% of tokens are dropped, and the p99 report
+   needs 148 chunks. Even 32 chunks cover only 72.4% of the tokens.
+   Variant B's first 512 tokens are mostly registry `keys` (47.6% of all
+   tokens, and the first field), so the `resolved_apis` that Nebula relies
+   on are fully cut in 80.4% of reports. For a richer CAPE representation
+   the chunking idea becomes necessary, not optional, but it would need a
+   field order or field budget, not just more chunks.
+4. **Length is a strong family signal on Avast too.** Qakbot is longer than
+   every other family (one-vs-rest AUC from length alone: 0.960 on test),
+   and njRAT too (0.822). Trickbot gets *shorter* between train and test
+   (median 361 → 104 tokens), so length also drifts over time. A model that
+   reads more chunks gets more of this signal, so per-family evaluation
+   matters here as well.
+5. **Per-process chunking cannot be tested on this data.** The reduced
+   reports keep no process tree or call order. The full reports (13 GB
+   download) would be needed for that, and they were not used.
+
+**For the chunking design:** on Nebula-style Avast input, 512-token chunks
+with **max 4–8 chunks** are enough (4 chunks cover 99.6% of tokens). On
+Speakeasy, 8 are needed. One setting of **chunk size 512 and max 8 chunks**
+therefore covers both datasets with Nebula's field choices.

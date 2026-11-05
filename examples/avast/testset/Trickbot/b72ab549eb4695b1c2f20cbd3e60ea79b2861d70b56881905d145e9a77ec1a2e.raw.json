@@ -1,0 +1,740 @@
+{
+   "behavior": {
+                  "summary": {
+                                             "keys": [
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_CURRENT_USER\\Software\\Classes",
+                                                       "HKEY_CURRENT_USER\\Software\\Classes\\new",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\new\\CLSID",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\new\\CLSID\\(Default)",
+                                                       "HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{3E5FC7F9-9A51-4367-9063-A120244FBEC7}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{3E5FC7F9-9A51-4367-9063-A120244FBEC7}\\TreatAs",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{3E5FC7F9-9A51-4367-9063-A120244FBEC7}\\Progid",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\CLSID\\{3E5FC7F9-9A51-4367-9063-A120244FBEC7}\\Progid",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{3E5FC7F9-9A51-4367-9063-A120244FBEC7}\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{3E5FC7F9-9A51-4367-9063-A120244FBEC7}\\InprocServer32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{3E5FC7F9-9A51-4367-9063-A120244FBEC7}\\InprocServer32\\InprocServer32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{3E5FC7F9-9A51-4367-9063-A120244FBEC7}\\InprocServer32\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{3E5FC7F9-9A51-4367-9063-A120244FBEC7}\\InprocServer32\\ThreadingModel",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{3E5FC7F9-9A51-4367-9063-A120244FBEC7}\\InprocHandler32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{3E5FC7F9-9A51-4367-9063-A120244FBEC7}\\InprocHandler",
+                                                       "HKEY_CURRENT_USER\\Software\\Classes\\AppID\\explorer.exe",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\OLE\\AppCompat",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\OLE\\AppCompat\\RaiseDefaultAuthnLevel",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\OLE",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\OLE\\DefaultAccessPermission",
+                                                       "HKEY_CURRENT_USER\\Software\\Classes\\Interface\\{00000134-0000-0000-C000-000000000046}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{00000134-0000-0000-C000-000000000046}\\ProxyStubClsid32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{00000134-0000-0000-C000-000000000046}\\ProxyStubClsid32\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Rpc\\Extensions",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Rpc\\Extensions\\RemoteRpcDll",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\BFE",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\SQMClient\\Windows\\DisabledProcesses\\",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\SQMClient\\Windows\\DisabledProcesses\\A4CAE9E1",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\SQMClient\\Windows\\DisabledSessions\\",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\SQMClient\\Windows\\DisabledSessions\\MachineThrottling",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\SQMClient\\Windows\\DisabledSessions\\GlobalSession",
+                                                       "HKEY_CURRENT_USER\\Software\\Classes\\Interface\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}\\ProxyStubClsid32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}\\ProxyStubClsid32\\(Default)",
+                                                       "HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}\\TreatAs",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}\\Progid",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\CLSID\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}\\Progid",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}\\InprocServer32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}\\InProcServer32\\InprocServer32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}\\InProcServer32\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}\\InProcServer32\\ThreadingModel",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}\\InprocHandler32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}\\InprocHandler",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows NT\\CurrentVersion\\GRE_Initialize",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\GRE_Initialize\\DisableMetaFiles"
+                                                     ],
+                                    "resolved_apis": [
+                                                       "cryptsp.dll.CryptAcquireContextA",
+                                                       "cryptsp.dll.CryptCreateHash",
+                                                       "cryptsp.dll.CryptHashData",
+                                                       "cryptsp.dll.CryptDeriveKey",
+                                                       "cryptsp.dll.CryptEncrypt",
+                                                       "cryptbase.dll.SystemFunction036",
+                                                       "uxtheme.dll.ThemeInitApiHook",
+                                                       "user32.dll.IsProcessDPIAware",
+                                                       "sechost.dll.LookupAccountNameLocalW",
+                                                       "advapi32.dll.LookupAccountSidW",
+                                                       "sechost.dll.LookupAccountSidLocalW",
+                                                       "cryptsp.dll.CryptAcquireContextW",
+                                                       "cryptsp.dll.CryptGenRandom",
+                                                       "rpcrtremote.dll.I_RpcExtInitializeExtensionPoint",
+                                                       "ole32.dll.CoGetMarshalSizeMax",
+                                                       "ole32.dll.CoMarshalInterface",
+                                                       "ole32.dll.CoUnmarshalInterface",
+                                                       "ole32.dll.CoReleaseMarshalData",
+                                                       "ole32.dll.CoGetClassObject",
+                                                       "ole32.dll.StringFromIID",
+                                                       "ole32.dll.CoGetPSClsid",
+                                                       "ole32.dll.CoTaskMemAlloc",
+                                                       "ole32.dll.CoTaskMemFree",
+                                                       "ole32.dll.CoCreateInstance",
+                                                       "ole32.dll.DcomChannelSetHResult",
+                                                       "cmlua.dll.DllGetClassObject",
+                                                       "cmlua.dll.DllCanUnloadNow",
+                                                       "cryptsp.dll.CryptReleaseContext"
+                                                     ],
+                                "executed_commands": [],
+                                       "write_keys": [],
+                                            "files": [],
+                                       "read_files": [],
+                                 "started_services": [],
+                                 "created_services": [],
+                                      "write_files": [],
+                                      "delete_keys": [],
+                                        "read_keys": [
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\new\\CLSID\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{3E5FC7F9-9A51-4367-9063-A120244FBEC7}\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{3E5FC7F9-9A51-4367-9063-A120244FBEC7}\\InprocServer32\\InprocServer32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{3E5FC7F9-9A51-4367-9063-A120244FBEC7}\\InprocServer32\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{3E5FC7F9-9A51-4367-9063-A120244FBEC7}\\InprocServer32\\ThreadingModel",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\OLE\\AppCompat\\RaiseDefaultAuthnLevel",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\OLE\\DefaultAccessPermission",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{00000134-0000-0000-C000-000000000046}\\ProxyStubClsid32\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Rpc\\Extensions\\RemoteRpcDll",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\SQMClient\\Windows\\DisabledProcesses\\A4CAE9E1",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\SQMClient\\Windows\\DisabledSessions\\MachineThrottling",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\SQMClient\\Windows\\DisabledSessions\\GlobalSession",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\Interface\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}\\ProxyStubClsid32\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}\\InProcServer32\\InprocServer32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}\\InProcServer32\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{6EDD6D74-C007-4E75-B76A-E5740995E24C}\\InProcServer32\\ThreadingModel",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\GRE_Initialize\\DisableMetaFiles"
+                                                     ],
+                                     "delete_files": [],
+                                          "mutexes": [
+                                                       "gcc-shmem-tdm2-use_fc_key",
+                                                       "gcc-shmem-tdm2-sjlj_once",
+                                                       "gcc-shmem-tdm2-fc_key"
+                                                     ]
+                             }
+               },
+     "static": {
+                  "pe": {
+                                    "icon_hash": null,
+                                     "sections": [
+                                                   {
+                                                              "raw_address": "0x00000400",
+                                                                     "name": ".text",
+                                                          "characteristics": "IMAGE_SCN_CNT_CODE|IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_EXECUTE|IMAGE_SCN_MEM_READ|IMAGE_SCN_ALIGN_4BYTES",
+                                                             "virtual_size": "0x00079d28",
+                                                          "virtual_address": "0x00001000",
+                                                             "size_of_data": "0x00079e00",
+                                                                  "entropy": "5.93",
+                                                      "characteristics_raw": "0x60300060"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x0007a200",
+                                                                     "name": ".data",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE|IMAGE_SCN_ALIGN_32BYTES",
+                                                             "virtual_size": "0x0002bdc8",
+                                                          "virtual_address": "0x0007b000",
+                                                             "size_of_data": "0x0002be00",
+                                                                  "entropy": "8.00",
+                                                      "characteristics_raw": "0xc0600040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x000a6000",
+                                                                     "name": ".rdata",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_ALIGN_32BYTES",
+                                                             "virtual_size": "0x000070a0",
+                                                          "virtual_address": "0x000a7000",
+                                                             "size_of_data": "0x00007200",
+                                                                  "entropy": "5.29",
+                                                      "characteristics_raw": "0x40600040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00000000",
+                                                                     "name": ".bss",
+                                                          "characteristics": "IMAGE_SCN_CNT_UNINITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE|IMAGE_SCN_ALIGN_32BYTES",
+                                                             "virtual_size": "0x00006b80",
+                                                          "virtual_address": "0x000af000",
+                                                             "size_of_data": "0x00000000",
+                                                                  "entropy": "0.00",
+                                                      "characteristics_raw": "0xc0600080"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x000ad200",
+                                                                     "name": ".idata",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE|IMAGE_SCN_ALIGN_4BYTES",
+                                                             "virtual_size": "0x00000adc",
+                                                          "virtual_address": "0x000b6000",
+                                                             "size_of_data": "0x00000c00",
+                                                                  "entropy": "4.80",
+                                                      "characteristics_raw": "0xc0300040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x000ade00",
+                                                                     "name": ".CRT",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE|IMAGE_SCN_ALIGN_4BYTES",
+                                                             "virtual_size": "0x00000018",
+                                                          "virtual_address": "0x000b7000",
+                                                             "size_of_data": "0x00000200",
+                                                                  "entropy": "0.11",
+                                                      "characteristics_raw": "0xc0300040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x000ae000",
+                                                                     "name": ".tls",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE|IMAGE_SCN_ALIGN_4BYTES",
+                                                             "virtual_size": "0x00000020",
+                                                          "virtual_address": "0x000b8000",
+                                                             "size_of_data": "0x00000200",
+                                                                  "entropy": "0.22",
+                                                      "characteristics_raw": "0xc0300040"
+                                                   }
+                                                 ],
+                              "peid_signatures": null,
+                                   "entrypoint": "0x00401284",
+                                      "exports": [],
+                                      "overlay": null,
+                              "digital_signers": [],
+                                      "imphash": "87940a1a0821d60eee5e610a3f976afc",
+                            "reported_checksum": "0x000b69e6",
+                                         "icon": null,
+                                "guest_signers": {
+                                                         "aux_error": true,
+                                                          "aux_sha1": null,
+                                                     "aux_timestamp": null,
+                                                         "aux_valid": false,
+                                                       "aux_signers": [],
+                                                    "aux_error_desc": "No signature found. SignTool Error File not valid C\\Users\\comp\\AppData\\Local\\Temp\\B72AB549EB4695B1C2F2.exe"
+                                                 },
+                              "actual_checksum": "0x000b7c8e",
+                                      "imports": [
+                                                   {
+                                                          "dll": "ADVAPI32.DLL",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "SetFileSecurityW",
+                                                                      "address": "0x4b6210"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "KERNEL32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "AddAtomA",
+                                                                      "address": "0x4b6218"
+                                                                   },
+                                                                   {
+                                                                         "name": "CloseHandle",
+                                                                      "address": "0x4b621c"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateMutexA",
+                                                                      "address": "0x4b6220"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateSemaphoreA",
+                                                                      "address": "0x4b6224"
+                                                                   },
+                                                                   {
+                                                                         "name": "DeleteCriticalSection",
+                                                                      "address": "0x4b6228"
+                                                                   },
+                                                                   {
+                                                                         "name": "EnterCriticalSection",
+                                                                      "address": "0x4b622c"
+                                                                   },
+                                                                   {
+                                                                         "name": "ExitProcess",
+                                                                      "address": "0x4b6230"
+                                                                   },
+                                                                   {
+                                                                         "name": "FindAtomA",
+                                                                      "address": "0x4b6234"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetAtomNameA",
+                                                                      "address": "0x4b6238"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCurrentThreadId",
+                                                                      "address": "0x4b623c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetLastError",
+                                                                      "address": "0x4b6240"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetModuleHandleA",
+                                                                      "address": "0x4b6244"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetProcAddress",
+                                                                      "address": "0x4b6248"
+                                                                   },
+                                                                   {
+                                                                         "name": "InitializeCriticalSection",
+                                                                      "address": "0x4b624c"
+                                                                   },
+                                                                   {
+                                                                         "name": "InterlockedDecrement",
+                                                                      "address": "0x4b6250"
+                                                                   },
+                                                                   {
+                                                                         "name": "InterlockedExchange",
+                                                                      "address": "0x4b6254"
+                                                                   },
+                                                                   {
+                                                                         "name": "InterlockedIncrement",
+                                                                      "address": "0x4b6258"
+                                                                   },
+                                                                   {
+                                                                         "name": "IsDBCSLeadByteEx",
+                                                                      "address": "0x4b625c"
+                                                                   },
+                                                                   {
+                                                                         "name": "LeaveCriticalSection",
+                                                                      "address": "0x4b6260"
+                                                                   },
+                                                                   {
+                                                                         "name": "MultiByteToWideChar",
+                                                                      "address": "0x4b6264"
+                                                                   },
+                                                                   {
+                                                                         "name": "ReleaseMutex",
+                                                                      "address": "0x4b6268"
+                                                                   },
+                                                                   {
+                                                                         "name": "ReleaseSemaphore",
+                                                                      "address": "0x4b626c"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetLastError",
+                                                                      "address": "0x4b6270"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetUnhandledExceptionFilter",
+                                                                      "address": "0x4b6274"
+                                                                   },
+                                                                   {
+                                                                         "name": "Sleep",
+                                                                      "address": "0x4b6278"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsAlloc",
+                                                                      "address": "0x4b627c"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsFree",
+                                                                      "address": "0x4b6280"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsGetValue",
+                                                                      "address": "0x4b6284"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsSetValue",
+                                                                      "address": "0x4b6288"
+                                                                   },
+                                                                   {
+                                                                         "name": "VirtualProtect",
+                                                                      "address": "0x4b628c"
+                                                                   },
+                                                                   {
+                                                                         "name": "VirtualQuery",
+                                                                      "address": "0x4b6290"
+                                                                   },
+                                                                   {
+                                                                         "name": "WaitForSingleObject",
+                                                                      "address": "0x4b6294"
+                                                                   },
+                                                                   {
+                                                                         "name": "WideCharToMultiByte",
+                                                                      "address": "0x4b6298"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "msvcrt.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "_fdopen",
+                                                                      "address": "0x4b62a0"
+                                                                   },
+                                                                   {
+                                                                         "name": "_getche",
+                                                                      "address": "0x4b62a4"
+                                                                   },
+                                                                   {
+                                                                         "name": "_putch",
+                                                                      "address": "0x4b62a8"
+                                                                   },
+                                                                   {
+                                                                         "name": "_read",
+                                                                      "address": "0x4b62ac"
+                                                                   },
+                                                                   {
+                                                                         "name": "_write",
+                                                                      "address": "0x4b62b0"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "msvcrt.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "__getmainargs",
+                                                                      "address": "0x4b62b8"
+                                                                   },
+                                                                   {
+                                                                         "name": "__mb_cur_max",
+                                                                      "address": "0x4b62bc"
+                                                                   },
+                                                                   {
+                                                                         "name": "__p__environ",
+                                                                      "address": "0x4b62c0"
+                                                                   },
+                                                                   {
+                                                                         "name": "__p__fmode",
+                                                                      "address": "0x4b62c4"
+                                                                   },
+                                                                   {
+                                                                         "name": "__set_app_type",
+                                                                      "address": "0x4b62c8"
+                                                                   },
+                                                                   {
+                                                                         "name": "_cexit",
+                                                                      "address": "0x4b62cc"
+                                                                   },
+                                                                   {
+                                                                         "name": "_errno",
+                                                                      "address": "0x4b62d0"
+                                                                   },
+                                                                   {
+                                                                         "name": "_filelengthi64",
+                                                                      "address": "0x4b62d4"
+                                                                   },
+                                                                   {
+                                                                         "name": "_fstati64",
+                                                                      "address": "0x4b62d8"
+                                                                   },
+                                                                   {
+                                                                         "name": "_iob",
+                                                                      "address": "0x4b62dc"
+                                                                   },
+                                                                   {
+                                                                         "name": "_lseeki64",
+                                                                      "address": "0x4b62e0"
+                                                                   },
+                                                                   {
+                                                                         "name": "_onexit",
+                                                                      "address": "0x4b62e4"
+                                                                   },
+                                                                   {
+                                                                         "name": "_setmode",
+                                                                      "address": "0x4b62e8"
+                                                                   },
+                                                                   {
+                                                                         "name": "abort",
+                                                                      "address": "0x4b62ec"
+                                                                   },
+                                                                   {
+                                                                         "name": "atexit",
+                                                                      "address": "0x4b62f0"
+                                                                   },
+                                                                   {
+                                                                         "name": "atoi",
+                                                                      "address": "0x4b62f4"
+                                                                   },
+                                                                   {
+                                                                         "name": "calloc",
+                                                                      "address": "0x4b62f8"
+                                                                   },
+                                                                   {
+                                                                         "name": "fclose",
+                                                                      "address": "0x4b62fc"
+                                                                   },
+                                                                   {
+                                                                         "name": "fflush",
+                                                                      "address": "0x4b6300"
+                                                                   },
+                                                                   {
+                                                                         "name": "fgetpos",
+                                                                      "address": "0x4b6304"
+                                                                   },
+                                                                   {
+                                                                         "name": "fopen",
+                                                                      "address": "0x4b6308"
+                                                                   },
+                                                                   {
+                                                                         "name": "fputc",
+                                                                      "address": "0x4b630c"
+                                                                   },
+                                                                   {
+                                                                         "name": "fputs",
+                                                                      "address": "0x4b6310"
+                                                                   },
+                                                                   {
+                                                                         "name": "fread",
+                                                                      "address": "0x4b6314"
+                                                                   },
+                                                                   {
+                                                                         "name": "free",
+                                                                      "address": "0x4b6318"
+                                                                   },
+                                                                   {
+                                                                         "name": "fsetpos",
+                                                                      "address": "0x4b631c"
+                                                                   },
+                                                                   {
+                                                                         "name": "fwrite",
+                                                                      "address": "0x4b6320"
+                                                                   },
+                                                                   {
+                                                                         "name": "getc",
+                                                                      "address": "0x4b6324"
+                                                                   },
+                                                                   {
+                                                                         "name": "getenv",
+                                                                      "address": "0x4b6328"
+                                                                   },
+                                                                   {
+                                                                         "name": "gets",
+                                                                      "address": "0x4b632c"
+                                                                   },
+                                                                   {
+                                                                         "name": "getwc",
+                                                                      "address": "0x4b6330"
+                                                                   },
+                                                                   {
+                                                                         "name": "iswctype",
+                                                                      "address": "0x4b6334"
+                                                                   },
+                                                                   {
+                                                                         "name": "localeconv",
+                                                                      "address": "0x4b6338"
+                                                                   },
+                                                                   {
+                                                                         "name": "malloc",
+                                                                      "address": "0x4b633c"
+                                                                   },
+                                                                   {
+                                                                         "name": "memchr",
+                                                                      "address": "0x4b6340"
+                                                                   },
+                                                                   {
+                                                                         "name": "memmove",
+                                                                      "address": "0x4b6344"
+                                                                   },
+                                                                   {
+                                                                         "name": "printf",
+                                                                      "address": "0x4b6348"
+                                                                   },
+                                                                   {
+                                                                         "name": "putc",
+                                                                      "address": "0x4b634c"
+                                                                   },
+                                                                   {
+                                                                         "name": "puts",
+                                                                      "address": "0x4b6350"
+                                                                   },
+                                                                   {
+                                                                         "name": "putwc",
+                                                                      "address": "0x4b6354"
+                                                                   },
+                                                                   {
+                                                                         "name": "realloc",
+                                                                      "address": "0x4b6358"
+                                                                   },
+                                                                   {
+                                                                         "name": "remove",
+                                                                      "address": "0x4b635c"
+                                                                   },
+                                                                   {
+                                                                         "name": "rename",
+                                                                      "address": "0x4b6360"
+                                                                   },
+                                                                   {
+                                                                         "name": "setlocale",
+                                                                      "address": "0x4b6364"
+                                                                   },
+                                                                   {
+                                                                         "name": "setvbuf",
+                                                                      "address": "0x4b6368"
+                                                                   },
+                                                                   {
+                                                                         "name": "signal",
+                                                                      "address": "0x4b636c"
+                                                                   },
+                                                                   {
+                                                                         "name": "sprintf",
+                                                                      "address": "0x4b6370"
+                                                                   },
+                                                                   {
+                                                                         "name": "strchr",
+                                                                      "address": "0x4b6374"
+                                                                   },
+                                                                   {
+                                                                         "name": "strcmp",
+                                                                      "address": "0x4b6378"
+                                                                   },
+                                                                   {
+                                                                         "name": "strcoll",
+                                                                      "address": "0x4b637c"
+                                                                   },
+                                                                   {
+                                                                         "name": "strcpy",
+                                                                      "address": "0x4b6380"
+                                                                   },
+                                                                   {
+                                                                         "name": "strerror",
+                                                                      "address": "0x4b6384"
+                                                                   },
+                                                                   {
+                                                                         "name": "strftime",
+                                                                      "address": "0x4b6388"
+                                                                   },
+                                                                   {
+                                                                         "name": "strxfrm",
+                                                                      "address": "0x4b638c"
+                                                                   },
+                                                                   {
+                                                                         "name": "toupper",
+                                                                      "address": "0x4b6390"
+                                                                   },
+                                                                   {
+                                                                         "name": "towlower",
+                                                                      "address": "0x4b6394"
+                                                                   },
+                                                                   {
+                                                                         "name": "towupper",
+                                                                      "address": "0x4b6398"
+                                                                   },
+                                                                   {
+                                                                         "name": "ungetc",
+                                                                      "address": "0x4b639c"
+                                                                   },
+                                                                   {
+                                                                         "name": "ungetwc",
+                                                                      "address": "0x4b63a0"
+                                                                   },
+                                                                   {
+                                                                         "name": "vfprintf",
+                                                                      "address": "0x4b63a4"
+                                                                   },
+                                                                   {
+                                                                         "name": "wcscoll",
+                                                                      "address": "0x4b63a8"
+                                                                   },
+                                                                   {
+                                                                         "name": "wcsftime",
+                                                                      "address": "0x4b63ac"
+                                                                   },
+                                                                   {
+                                                                         "name": "wcslen",
+                                                                      "address": "0x4b63b0"
+                                                                   },
+                                                                   {
+                                                                         "name": "wcsxfrm",
+                                                                      "address": "0x4b63b4"
+                                                                   }
+                                                                 ]
+                                                   }
+                                                 ],
+                            "exported_dll_name": null,
+                                      "dirents": [
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IMPORT",
+                                                      "virtual_address": "0x000b6000",
+                                                                 "size": "0x00000adc"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESOURCE",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXCEPTION",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_SECURITY",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BASERELOC",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DEBUG",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COPYRIGHT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_GLOBALPTR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_TLS",
+                                                      "virtual_address": "0x000b8000",
+                                                                 "size": "0x00000018"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IAT",
+                                                      "virtual_address": "0x000b6210",
+                                                                 "size": "0x000001ac"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESERVED",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   }
+                                                 ],
+                                  "versioninfo": [],
+                                    "resources": [],
+                                      "pdbpath": null,
+                                    "osversion": "4.0",
+                                   "icon_fuzzy": null,
+                                    "imagebase": "0x00400000",
+                           "imported_dll_count": 4,
+                                    "timestamp": "2019-11-13 15:25:49"
+                        }
+               }
+}

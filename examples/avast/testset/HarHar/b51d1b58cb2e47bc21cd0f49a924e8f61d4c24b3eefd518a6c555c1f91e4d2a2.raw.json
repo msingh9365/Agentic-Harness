@@ -1,0 +1,590 @@
+{
+   "behavior": {
+                  "summary": {
+                                             "keys": [
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\CMF\\Config",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\CMF\\Config\\SYSTEM",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\Windows Error Reporting\\WMR",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\Windows Error Reporting\\WMR\\Disable",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows NT\\CurrentVersion\\GRE_Initialize",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\WINDOWS NT\\CURRENTVERSION\\GRE_Initialize\\DisableMetaFiles"
+                                                     ],
+                                    "resolved_apis": [
+                                                       "kernel32.dll.SetEndOfFile",
+                                                       "kernel32.dll.GetProcessHeap",
+                                                       "kernel32.dll.SetEnvironmentVariableA",
+                                                       "kernel32.dll.FreeEnvironmentStringsW",
+                                                       "kernel32.dll.GetOEMCP",
+                                                       "kernel32.dll.IsValidCodePage",
+                                                       "kernel32.dll.FindNextFileA",
+                                                       "kernel32.dll.FindFirstFileExA",
+                                                       "kernel32.dll.GetEnvironmentStringsW",
+                                                       "kernel32.dll.FindClose",
+                                                       "kernel32.dll.GetStdHandle",
+                                                       "kernel32.dll.GetConsoleMode",
+                                                       "kernel32.dll.SetConsoleMode",
+                                                       "kernel32.dll.GetCommandLineA",
+                                                       "kernel32.dll.GetWindowsDirectoryA",
+                                                       "kernel32.dll.CreateThread",
+                                                       "kernel32.dll.WaitForSingleObject",
+                                                       "kernel32.dll.CloseHandle",
+                                                       "kernel32.dll.CreateEventA",
+                                                       "kernel32.dll.MultiByteToWideChar",
+                                                       "kernel32.dll.FreeConsole",
+                                                       "kernel32.dll.GetConsoleWindow",
+                                                       "kernel32.dll.GetProcAddress",
+                                                       "kernel32.dll.GetCurrentProcess",
+                                                       "kernel32.dll.GetCurrentThread",
+                                                       "kernel32.dll.SetThreadAffinityMask",
+                                                       "kernel32.dll.SetThreadPriority",
+                                                       "kernel32.dll.GetModuleHandleW",
+                                                       "kernel32.dll.SetPriorityClass",
+                                                       "kernel32.dll.LocalAlloc",
+                                                       "kernel32.dll.LocalFree",
+                                                       "kernel32.dll.GetLastError",
+                                                       "kernel32.dll.FlushInstructionCache",
+                                                       "kernel32.dll.VirtualAlloc",
+                                                       "kernel32.dll.VirtualFree",
+                                                       "kernel32.dll.VirtualProtect",
+                                                       "kernel32.dll.GetLargePageMinimum",
+                                                       "kernel32.dll.LockResource",
+                                                       "kernel32.dll.LoadResource",
+                                                       "kernel32.dll.SizeofResource",
+                                                       "kernel32.dll.FindResourceW",
+                                                       "kernel32.dll.GetFileType",
+                                                       "kernel32.dll.GetConsoleScreenBufferInfo",
+                                                       "kernel32.dll.SetConsoleTextAttribute",
+                                                       "kernel32.dll.RegisterWaitForSingleObject",
+                                                       "kernel32.dll.UnregisterWait",
+                                                       "kernel32.dll.GetConsoleCursorInfo",
+                                                       "kernel32.dll.DuplicateHandle",
+                                                       "kernel32.dll.PostQueuedCompletionStatus",
+                                                       "kernel32.dll.QueueUserWorkItem",
+                                                       "kernel32.dll.SetConsoleCursorInfo",
+                                                       "kernel32.dll.FillConsoleOutputCharacterW",
+                                                       "kernel32.dll.ReadConsoleInputW",
+                                                       "kernel32.dll.CreateFileA",
+                                                       "kernel32.dll.ReadConsoleW",
+                                                       "kernel32.dll.WriteConsoleInputW",
+                                                       "kernel32.dll.FillConsoleOutputAttribute",
+                                                       "kernel32.dll.WriteConsoleW",
+                                                       "kernel32.dll.GetNumberOfConsoleInputEvents",
+                                                       "kernel32.dll.WideCharToMultiByte",
+                                                       "kernel32.dll.SetConsoleCursorPosition",
+                                                       "kernel32.dll.CreateDirectoryW",
+                                                       "kernel32.dll.ReadFile",
+                                                       "kernel32.dll.SetLastError",
+                                                       "kernel32.dll.WriteFile",
+                                                       "kernel32.dll.DeviceIoControl",
+                                                       "kernel32.dll.RemoveDirectoryW",
+                                                       "kernel32.dll.SetFileTime",
+                                                       "kernel32.dll.CreateHardLinkW",
+                                                       "kernel32.dll.GetFileAttributesW",
+                                                       "kernel32.dll.GetFileInformationByHandle",
+                                                       "kernel32.dll.SetFilePointerEx",
+                                                       "kernel32.dll.MoveFileExW",
+                                                       "kernel32.dll.CopyFileW",
+                                                       "kernel32.dll.FlushFileBuffers",
+                                                       "kernel32.dll.TlsSetValue",
+                                                       "kernel32.dll.EnterCriticalSection",
+                                                       "kernel32.dll.ReleaseSemaphore",
+                                                       "kernel32.dll.WaitForMultipleObjects",
+                                                       "kernel32.dll.LeaveCriticalSection",
+                                                       "kernel32.dll.InitializeCriticalSection",
+                                                       "kernel32.dll.ResumeThread",
+                                                       "kernel32.dll.SetEvent",
+                                                       "kernel32.dll.TlsAlloc",
+                                                       "kernel32.dll.ResetEvent",
+                                                       "kernel32.dll.DeleteCriticalSection",
+                                                       "kernel32.dll.CreateSemaphoreW",
+                                                       "kernel32.dll.TlsGetValue",
+                                                       "kernel32.dll.TlsFree",
+                                                       "kernel32.dll.CreateSemaphoreA",
+                                                       "kernel32.dll.GetLongPathNameW",
+                                                       "kernel32.dll.GetShortPathNameW",
+                                                       "kernel32.dll.GetCurrentDirectoryW",
+                                                       "kernel32.dll.ReadDirectoryChangesW",
+                                                       "kernel32.dll.CreateIoCompletionPort",
+                                                       "kernel32.dll.VerifyVersionInfoA",
+                                                       "kernel32.dll.GetModuleFileNameW",
+                                                       "kernel32.dll.QueryPerformanceFrequency",
+                                                       "kernel32.dll.VerSetConditionMask",
+                                                       "kernel32.dll.GetCurrentProcessId",
+                                                       "kernel32.dll.QueryPerformanceCounter",
+                                                       "kernel32.dll.SetConsoleCtrlHandler",
+                                                       "kernel32.dll.Sleep",
+                                                       "kernel32.dll.CancelIo",
+                                                       "kernel32.dll.SetHandleInformation",
+                                                       "kernel32.dll.SetErrorMode",
+                                                       "kernel32.dll.GetQueuedCompletionStatus",
+                                                       "kernel32.dll.SetNamedPipeHandleState",
+                                                       "kernel32.dll.CreateNamedPipeW",
+                                                       "kernel32.dll.PeekNamedPipe",
+                                                       "kernel32.dll.GetNamedPipeHandleStateA",
+                                                       "kernel32.dll.SwitchToThread",
+                                                       "kernel32.dll.ConnectNamedPipe",
+                                                       "kernel32.dll.TerminateProcess",
+                                                       "kernel32.dll.UnregisterWaitEx",
+                                                       "kernel32.dll.LCMapStringW",
+                                                       "kernel32.dll.GetExitCodeProcess",
+                                                       "kernel32.dll.FormatMessageA",
+                                                       "kernel32.dll.GetModuleHandleA",
+                                                       "kernel32.dll.LoadLibraryA",
+                                                       "kernel32.dll.GetStartupInfoW",
+                                                       "kernel32.dll.HeapSize",
+                                                       "kernel32.dll.GetTimeZoneInformation",
+                                                       "kernel32.dll.EnumSystemLocalesW",
+                                                       "kernel32.dll.GetUserDefaultLCID",
+                                                       "kernel32.dll.GetThreadTimes",
+                                                       "kernel32.dll.CreateFileW",
+                                                       "kernel32.dll.GetSystemInfo",
+                                                       "kernel32.dll.InitializeCriticalSectionAndSpinCount",
+                                                       "kernel32.dll.CreateEventW",
+                                                       "kernel32.dll.UnhandledExceptionFilter",
+                                                       "kernel32.dll.SetUnhandledExceptionFilter",
+                                                       "kernel32.dll.IsProcessorFeaturePresent",
+                                                       "kernel32.dll.IsDebuggerPresent",
+                                                       "kernel32.dll.GetCurrentThreadId",
+                                                       "kernel32.dll.GetSystemTimeAsFileTime",
+                                                       "kernel32.dll.InitializeSListHead",
+                                                       "kernel32.dll.CompareStringW",
+                                                       "kernel32.dll.GetLocaleInfoW",
+                                                       "kernel32.dll.GetStringTypeW",
+                                                       "kernel32.dll.GetCPInfo",
+                                                       "kernel32.dll.RaiseException",
+                                                       "kernel32.dll.RtlUnwind",
+                                                       "kernel32.dll.FreeLibrary",
+                                                       "kernel32.dll.LoadLibraryExW",
+                                                       "kernel32.dll.GetCommandLineW",
+                                                       "kernel32.dll.ExitProcess",
+                                                       "kernel32.dll.GetModuleHandleExW",
+                                                       "kernel32.dll.SetStdHandle",
+                                                       "kernel32.dll.GetConsoleCP",
+                                                       "kernel32.dll.GetFileAttributesExW",
+                                                       "kernel32.dll.SetFileAttributesW",
+                                                       "kernel32.dll.ExitThread",
+                                                       "kernel32.dll.FreeLibraryAndExitThread",
+                                                       "kernel32.dll.GetModuleFileNameA",
+                                                       "kernel32.dll.GetACP",
+                                                       "kernel32.dll.HeapFree",
+                                                       "kernel32.dll.HeapAlloc",
+                                                       "kernel32.dll.HeapReAlloc",
+                                                       "kernel32.dll.IsValidLocale",
+                                                       "advapi32.dll.CryptAcquireContextA",
+                                                       "advapi32.dll.CryptGenRandom",
+                                                       "advapi32.dll.CryptReleaseContext",
+                                                       "advapi32.dll.LsaAddAccountRights",
+                                                       "advapi32.dll.LsaOpenPolicy",
+                                                       "advapi32.dll.LsaClose",
+                                                       "advapi32.dll.LookupPrivilegeValueW",
+                                                       "advapi32.dll.AdjustTokenPrivileges",
+                                                       "advapi32.dll.GetTokenInformation",
+                                                       "advapi32.dll.OpenProcessToken",
+                                                       "iphlpapi.dll.GetAdaptersAddresses",
+                                                       "user32.dll.ShowWindow",
+                                                       "user32.dll.MapVirtualKeyW",
+                                                       "ws2_32.dll.#57",
+                                                       "ws2_32.dll.#112",
+                                                       "ws2_32.dll.#115",
+                                                       "ws2_32.dll.#18",
+                                                       "ws2_32.dll.WSARecvFrom",
+                                                       "ws2_32.dll.#2",
+                                                       "ws2_32.dll.WSAIoctl",
+                                                       "ws2_32.dll.#3",
+                                                       "ws2_32.dll.WSASend",
+                                                       "ws2_32.dll.#22",
+                                                       "ws2_32.dll.#13",
+                                                       "ws2_32.dll.WSASocketW",
+                                                       "ws2_32.dll.#5",
+                                                       "ws2_32.dll.#6",
+                                                       "ws2_32.dll.#23",
+                                                       "ws2_32.dll.WSARecv",
+                                                       "ws2_32.dll.#7",
+                                                       "ws2_32.dll.#10",
+                                                       "ws2_32.dll.#21",
+                                                       "ws2_32.dll.FreeAddrInfoW",
+                                                       "ws2_32.dll.GetAddrInfoW",
+                                                       "ws2_32.dll.#8",
+                                                       "ws2_32.dll.#111",
+                                                       "ws2_32.dll.#9",
+                                                       "ws2_32.dll.#15",
+                                                       "kernel32.dll.FlsAlloc",
+                                                       "kernel32.dll.FlsSetValue",
+                                                       "kernel32.dll.FlsGetValue",
+                                                       "kernel32.dll.LCMapStringEx",
+                                                       "api-ms-win-core-synch-l1-2-0.dll.InitializeConditionVariable",
+                                                       "api-ms-win-core-synch-l1-2-0.dll.SleepConditionVariableCS",
+                                                       "api-ms-win-core-synch-l1-2-0.dll.WakeAllConditionVariable",
+                                                       "kernel32.dll.FlsFree",
+                                                       "kernel32.dll.InitializeCriticalSectionEx",
+                                                       "kernel32.dll.InitOnceExecuteOnce",
+                                                       "kernel32.dll.CreateEventExW",
+                                                       "kernel32.dll.CreateSemaphoreExW",
+                                                       "kernel32.dll.CreateThreadpoolTimer",
+                                                       "kernel32.dll.SetThreadpoolTimer",
+                                                       "kernel32.dll.WaitForThreadpoolTimerCallbacks",
+                                                       "kernel32.dll.CloseThreadpoolTimer",
+                                                       "kernel32.dll.CreateThreadpoolWait",
+                                                       "kernel32.dll.SetThreadpoolWait",
+                                                       "kernel32.dll.CloseThreadpoolWait",
+                                                       "kernel32.dll.FlushProcessWriteBuffers",
+                                                       "kernel32.dll.FreeLibraryWhenCallbackReturns",
+                                                       "kernel32.dll.GetCurrentProcessorNumber",
+                                                       "kernel32.dll.CreateSymbolicLinkW",
+                                                       "kernel32.dll.GetTickCount64",
+                                                       "kernel32.dll.GetFileInformationByHandleEx",
+                                                       "kernel32.dll.SetFileInformationByHandle",
+                                                       "kernel32.dll.InitializeConditionVariable",
+                                                       "kernel32.dll.WakeConditionVariable",
+                                                       "kernel32.dll.WakeAllConditionVariable",
+                                                       "kernel32.dll.SleepConditionVariableCS",
+                                                       "kernel32.dll.InitializeSRWLock",
+                                                       "kernel32.dll.AcquireSRWLockExclusive",
+                                                       "kernel32.dll.TryAcquireSRWLockExclusive",
+                                                       "kernel32.dll.ReleaseSRWLockExclusive",
+                                                       "kernel32.dll.SleepConditionVariableSRW",
+                                                       "kernel32.dll.CreateThreadpoolWork",
+                                                       "kernel32.dll.SubmitThreadpoolWork",
+                                                       "kernel32.dll.CloseThreadpoolWork",
+                                                       "kernel32.dll.CompareStringEx",
+                                                       "kernel32.dll.GetLocaleInfoEx"
+                                                     ],
+                                "executed_commands": [],
+                                       "write_keys": [],
+                                            "files": [
+                                                       "C:\\Windows\\System32\\api-ms-win-core-fibers-l1-1-1.DLL",
+                                                       "C:\\Windows\\System32\\api-ms-win-core-localization-l1-2-1.DLL",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\3A8BBD5C-5264-43DA-F709-443772DBCB85.json",
+                                                       "C:\\Windows\\System32\\tzres.dll",
+                                                       "C:\\Windows\\System32\\en-US\\tzres.dll.mui",
+                                                       "C:\\Windows\\System32\\api-ms-win-appmodel-runtime-l1-1-1.DLL",
+                                                       "C:\\Windows\\System32\\ext-ms-win-kernel32-package-current-l1-1-0.DLL"
+                                                     ],
+                                       "read_files": [
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\3A8BBD5C-5264-43DA-F709-443772DBCB85.json",
+                                                       "C:\\Windows\\System32\\tzres.dll",
+                                                       "C:\\Windows\\System32\\en-US\\tzres.dll.mui"
+                                                     ],
+                                 "started_services": [],
+                                 "created_services": [],
+                                      "write_files": [],
+                                      "delete_keys": [],
+                                        "read_keys": [
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\CMF\\Config\\SYSTEM",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\Windows Error Reporting\\WMR\\Disable",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\WINDOWS NT\\CURRENTVERSION\\GRE_Initialize\\DisableMetaFiles"
+                                                     ],
+                                     "delete_files": [],
+                                          "mutexes": []
+                             }
+               },
+     "static": {
+                  "pe": {
+                                    "icon_hash": "0304a765b7d1981a90d07ce1b4f8148c",
+                                     "sections": [
+                                                   {
+                                                              "raw_address": "0x00000400",
+                                                                     "name": "UPX0",
+                                                          "characteristics": "IMAGE_SCN_CNT_UNINITIALIZED_DATA|IMAGE_SCN_MEM_EXECUTE|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE",
+                                                             "virtual_size": "0x0013b000",
+                                                          "virtual_address": "0x00001000",
+                                                             "size_of_data": "0x00000000",
+                                                                  "entropy": "0.00",
+                                                      "characteristics_raw": "0xe0000080"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00000400",
+                                                                     "name": "UPX1",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_EXECUTE|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE",
+                                                             "virtual_size": "0x000a7000",
+                                                          "virtual_address": "0x0013c000",
+                                                             "size_of_data": "0x000a6a00",
+                                                                  "entropy": "7.90",
+                                                      "characteristics_raw": "0xe0000040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x000a6e00",
+                                                                     "name": ".rsrc",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE",
+                                                             "virtual_size": "0x00006000",
+                                                          "virtual_address": "0x001e3000",
+                                                             "size_of_data": "0x00005800",
+                                                                  "entropy": "4.20",
+                                                      "characteristics_raw": "0xc0000040"
+                                                   }
+                                                 ],
+                              "peid_signatures": null,
+                                   "entrypoint": "0x005e2640",
+                                      "exports": [],
+                                      "overlay": {
+                                                    "offset": "0x000ac600",
+                                                      "size": "0x00000050"
+                                                 },
+                              "digital_signers": [],
+                                      "imphash": "4121bdc773e88c5d111c725dbaac5659",
+                            "reported_checksum": "0x00000000",
+                                         "icon": "iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAADn0lEQVR4nO2ZPYtkRRSGn1NVt3tbZdf9EAZlhVkREU2MFBM1ElTESPwDJsbCZiZGRmYmggiCGImZkcmCJuIEg8miqyK4tgvtOLM90933dp1jcPuj7vTH7jLL9G3oB5qpom5XvW9Vna5Tc2HDhg1rjXD1xnPkhzvNzJMFT1RjqFBEm/8FARmVnchMe3DLBxxq+dcw1MDmDzMzZuYdQYRCleLWL+/w+ZvfAIPg+52dhx9o8vJTZ3mw1eTvI48hZA4QKCIcFcaZIDSD0DmMRCATaGaCIERTZGRrmZ4iGt3cCF7AhKiKAHm0yZjBC1HBC4iDhhPEwdbBDX61R8hkyG7x+FcRXge+C1r0+e8Qvt7dRySACCalEhEjc0KhEAQyL3gH0coB1AxVIVctpwkwXWzBxh27qV0nghm88uR5nt8+y2c//MV+L/LaMxd59tGH+PDb3/k4fsFb+iO7cpkPzr/LxUbgFrwB7AQpcuKwQOwA0wjGxABi5AaGUGDkjJ2BTHSWFRtJkqV7ovy+jcwKRgQwYWfwD8XtS+zdvEk/j/zEv+xe98ROh0/80/SzI763bdoHOQ7Fe38hxkgQjbjhANMCUcXEcMZkoxvgbORHxhKmccCozcm0vnAFEhvH+9kb7HOt08bK+eGPP/cnz1+nwVV5EcThB7e5dOEcrVbLdbtdCe7cZa69d2bJrNWPVz/t02q1fLfbDUFUeeGJ7VVruicG+c+0nBMgBGd6rDlfhaY70KjUZKpZnFg8dTn3Tk46saLTSQ9pZUrq+H6uyLjfk/VZMeBnttDJB1jM3fTbSJ47Xi7xpujIhEPrtoXyBeUpokqv11PAXDWI6xjAswiRXq8XgaGTioHGgnK9cKrEGBUY3iF3rD227gZwIQ6TaprI1C0eckp9hk80hzIGjOWZfF0o0780bl15KKR5Yp0ZAlY5yNY/BlYt4KRsDKyajYFV41zlQrMOZwG46jkwFr0e4kErB1kor5TrchKXuOQO47ylJ/F6mLiLO3Ea2/PaV4nN20JlQ/pQiVCaqdcK+XQFXCWZG1MvwVWMdFckV8pxII8z0rpmpoZLs1Fnx1egzrMP5X1g+isUynPAKg/MUq/7giTvIJyY0o7pfyDSFUjNHQK90WcVFIDRjhkuiYGAxd9eevvLKwCCYHO2zvKXFqePJO/mnCBXxKwUacq4nH5WybC3N/smMKkLsAW8Dzx2msLuA23go/FabK1SyQlor1rAhrXnfz9KqfEOlprdAAAAAElFTkSuQmCC",
+                                "guest_signers": {
+                                                         "aux_error": true,
+                                                          "aux_sha1": null,
+                                                     "aux_timestamp": null,
+                                                         "aux_valid": false,
+                                                       "aux_signers": [],
+                                                    "aux_error_desc": "No signature found. SignTool Error File not valid C\\Users\\comp\\AppData\\Local\\Temp\\B51D1B58CB2E47BC21CD.exe"
+                                                 },
+                              "actual_checksum": "0x000b6a70",
+                                      "imports": [
+                                                   {
+                                                          "dll": "ADVAPI32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "LsaClose",
+                                                                      "address": "0x5e858c"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "IPHLPAPI.DLL",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "GetAdaptersAddresses",
+                                                                      "address": "0x5e8594"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "KERNEL32.DLL",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "LoadLibraryA",
+                                                                      "address": "0x5e859c"
+                                                                   },
+                                                                   {
+                                                                         "name": "ExitProcess",
+                                                                      "address": "0x5e85a0"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetProcAddress",
+                                                                      "address": "0x5e85a4"
+                                                                   },
+                                                                   {
+                                                                         "name": "VirtualProtect",
+                                                                      "address": "0x5e85a8"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "USER32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "ShowWindow",
+                                                                      "address": "0x5e85b0"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "WS2_32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "ntohs",
+                                                                      "address": "0x5e85b8"
+                                                                   }
+                                                                 ]
+                                                   }
+                                                 ],
+                            "exported_dll_name": null,
+                                      "dirents": [
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IMPORT",
+                                                      "virtual_address": "0x001e8514",
+                                                                 "size": "0x00000154"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESOURCE",
+                                                      "virtual_address": "0x001e3000",
+                                                                 "size": "0x00005514"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXCEPTION",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_SECURITY",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BASERELOC",
+                                                      "virtual_address": "0x001e8668",
+                                                                 "size": "0x00000024"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DEBUG",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COPYRIGHT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_GLOBALPTR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_TLS",
+                                                      "virtual_address": "0x001e282c",
+                                                                 "size": "0x00000018"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG",
+                                                      "virtual_address": "0x001e284c",
+                                                                 "size": "0x000000a0"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IAT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESERVED",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   }
+                                                 ],
+                                  "versioninfo": [],
+                                    "resources": [
+                                                   {
+                                                             "name": "RT_BITMAP",
+                                                         "filetype": null,
+                                                           "offset": "0x0019b7a0",
+                                                         "language": "LANG_CHINESE",
+                                                      "sublanguage": "SUBLANG_CHINESE_SIMPLIFIED",
+                                                             "size": "0x00036d48",
+                                                          "entropy": "7.91"
+                                                   },
+                                                   {
+                                                             "name": "RT_BITMAP",
+                                                         "filetype": null,
+                                                           "offset": "0x0019b7a0",
+                                                         "language": "LANG_CHINESE",
+                                                      "sublanguage": "SUBLANG_CHINESE_SIMPLIFIED",
+                                                             "size": "0x00036d48",
+                                                          "entropy": "7.91"
+                                                   },
+                                                   {
+                                                             "name": "RT_BITMAP",
+                                                         "filetype": null,
+                                                           "offset": "0x0019b7a0",
+                                                         "language": "LANG_CHINESE",
+                                                      "sublanguage": "SUBLANG_CHINESE_SIMPLIFIED",
+                                                             "size": "0x00036d48",
+                                                          "entropy": "7.91"
+                                                   },
+                                                   {
+                                                             "name": "RT_BITMAP",
+                                                         "filetype": null,
+                                                           "offset": "0x0019b7a0",
+                                                         "language": "LANG_CHINESE",
+                                                      "sublanguage": "SUBLANG_CHINESE_SIMPLIFIED",
+                                                             "size": "0x00036d48",
+                                                          "entropy": "7.91"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x001e6fa0",
+                                                         "language": "LANG_CHINESE",
+                                                      "sublanguage": "SUBLANG_CHINESE_SIMPLIFIED",
+                                                             "size": "0x000010a8",
+                                                          "entropy": "3.44"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x001e6fa0",
+                                                         "language": "LANG_CHINESE",
+                                                      "sublanguage": "SUBLANG_CHINESE_SIMPLIFIED",
+                                                             "size": "0x000010a8",
+                                                          "entropy": "3.44"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x001e6fa0",
+                                                         "language": "LANG_CHINESE",
+                                                      "sublanguage": "SUBLANG_CHINESE_SIMPLIFIED",
+                                                             "size": "0x000010a8",
+                                                          "entropy": "3.44"
+                                                   },
+                                                   {
+                                                             "name": "RT_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x001e6fa0",
+                                                         "language": "LANG_CHINESE",
+                                                      "sublanguage": "SUBLANG_CHINESE_SIMPLIFIED",
+                                                             "size": "0x000010a8",
+                                                          "entropy": "3.44"
+                                                   },
+                                                   {
+                                                             "name": "RT_GROUP_ICON",
+                                                         "filetype": null,
+                                                           "offset": "0x001e804c",
+                                                         "language": "LANG_CHINESE",
+                                                      "sublanguage": "SUBLANG_CHINESE_SIMPLIFIED",
+                                                             "size": "0x0000003e",
+                                                          "entropy": "2.51"
+                                                   },
+                                                   {
+                                                             "name": "RT_VERSION",
+                                                         "filetype": null,
+                                                           "offset": "0x001e8090",
+                                                         "language": "LANG_CHINESE",
+                                                      "sublanguage": "SUBLANG_CHINESE_SIMPLIFIED",
+                                                             "size": "0x00000300",
+                                                          "entropy": "3.36"
+                                                   },
+                                                   {
+                                                             "name": "RT_MANIFEST",
+                                                         "filetype": null,
+                                                           "offset": "0x001e8394",
+                                                         "language": "LANG_ENGLISH",
+                                                      "sublanguage": "SUBLANG_ENGLISH_US",
+                                                             "size": "0x0000017d",
+                                                          "entropy": "4.91"
+                                                   }
+                                                 ],
+                                      "pdbpath": null,
+                                    "osversion": "5.1",
+                                   "icon_fuzzy": "00f093ca5233c12c497c0f3fc1557273",
+                                    "imagebase": "0x00400000",
+                           "imported_dll_count": 5,
+                                    "timestamp": "2019-07-09 11:27:48"
+                        }
+               }
+}

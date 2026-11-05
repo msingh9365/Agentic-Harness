@@ -1,0 +1,32 @@
+# total tokens: 361   kept by Nebula (first 512): 361   dropped: 0
+# tokenizer: Avast BPE (50k) trained with Nebula's JSONTokenizerBPE.train() on the Avast training split
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: resolved_apis  (tokens 0..356, 357 tokens)
+     0  ▁resolved ▁apis ▁kernel32 ▁dll ▁loadlibrarya ▁user32 ▁dll ▁messageboxa ▁ntdll ▁dll ▁rtldecompressbuffer ▁kernel32 ▁dll ▁virtualalloc ▁kernel32 ▁dll
+    16  ▁virtualfree ▁kernel32 ▁dll ▁virtualprotect ▁kernel32 ▁dll ▁unmapviewoffile ▁kernel32 ▁dll ▁exitprocess ▁ws2 ▁32 ▁dll ▁wsastartup ▁ws2 ▁32
+    32  ▁dll ▁gethostbyname ▁ws2 ▁32 ▁dll ▁htonl ▁advapi32 ▁dll ▁adjusttokenprivileges ▁advapi32 ▁dll ▁allocateandinitializesid ▁advapi32 ▁dll ▁cryptacquirecontextw ▁advapi32
+    48  ▁dll ▁cryptgenrandom ▁advapi32 ▁dll ▁cryptreleasecontext ▁advapi32 ▁dll ▁equalsid ▁advapi32 ▁dll ▁freesid ▁advapi32 ▁dll ▁gettokeninformation ▁advapi32 ▁dll
+    64  ▁lookupprivilegevaluew ▁kernel32 ▁dll ▁closehandle ▁kernel32 ▁dll ▁createfilew ▁kernel32 ▁dll ▁createremotethread ▁kernel32 ▁dll ▁createtoolhelp32snapshot ▁kernel32 ▁dll ▁deletefilew
+    80  ▁kernel32 ▁dll ▁findresourcew ▁kernel32 ▁dll ▁getcurrentprocess ▁kernel32 ▁dll ▁getcurrentprocessid ▁kernel32 ▁dll ▁getexitcodeprocess ▁kernel32 ▁dll ▁getfileattributesw ▁kernel32
+    96  ▁dll ▁getfilesize ▁kernel32 ▁dll ▁getlasterror ▁kernel32 ▁dll ▁getmodulefilenamew ▁kernel32 ▁dll ▁getmodulehandlew ▁kernel32 ▁dll ▁getprocaddress ▁kernel32 ▁dll
+   112  ▁getprocessheap ▁kernel32 ▁dll ▁getsystemtime ▁kernel32 ▁dll ▁heapalloc ▁kernel32 ▁dll ▁heapfree ▁kernel32 ▁dll ▁heaprealloc ▁kernel32 ▁dll ▁heapsize
+   128  ▁kernel32 ▁dll ▁iswow64process ▁kernel32 ▁dll ▁loadresource ▁kernel32 ▁dll ▁lockresource ▁kernel32 ▁dll ▁multibytetowidechar ▁kernel32 ▁dll ▁openmutexw ▁kernel32
+   144  ▁dll ▁openprocess ▁kernel32 ▁dll ▁openprocesstoken ▁kernel32 ▁dll ▁outputdebugstringw ▁kernel32 ▁dll ▁process32firstw ▁kernel32 ▁dll ▁process32nextw ▁kernel32 ▁dll
+   160  ▁readfile ▁kernel32 ▁dll ▁readprocessmemory ▁kernel32 ▁dll ▁regclosekey ▁kernel32 ▁dll ▁regdeletevaluew ▁kernel32 ▁dll ▁regopenkeyexw ▁kernel32 ▁dll ▁regqueryvalueexw
+   176  ▁kernel32 ▁dll ▁regsetvalueexw ▁kernel32 ▁dll ▁setfileattributesw ▁kernel32 ▁dll ▁setfiletime ▁kernel32 ▁dll ▁sizeofresource ▁kernel32 ▁dll ▁sleep ▁kernel32
+   192  ▁dll ▁systemtimetofiletime ▁kernel32 ▁dll ▁terminateprocess ▁kernel32 ▁dll ▁virtualallocex ▁kernel32 ▁dll ▁widechartomultibyte ▁kernel32 ▁dll ▁writefile ▁kernel32 ▁dll
+   208  ▁writeprocessmemory ▁msvcrt ▁dll ▁iob ▁msvcrt ▁dll ▁vsnprintf ▁msvcrt ▁dll ▁vsnwprintf ▁msvcrt ▁dll ▁fgetwc ▁msvcrt ▁dll ▁getc
+   224  ▁msvcrt ▁dll ▁memset ▁msvcrt ▁dll ▁memcpy ▁ole32 ▁dll ▁cocreateinstance ▁ole32 ▁dll ▁coinitializeex ▁ole32 ▁dll ▁coinitializesecurity ▁ole32
+   240  ▁dll ▁cosetproxyblanket ▁ole32 ▁dll ▁couninitialize ▁oleaut32 ▁dll ▁variantclear ▁shell32 ▁dll ▁strstriw ▁shlwapi ▁dll ▁strcmpiw ▁ws2 ▁32
+   256  ▁dll ▁freeaddrinfow ▁ws2 ▁32 ▁dll ▁getaddrinfow ▁ws2 ▁32 ▁dll ▁wsagetlasterror ▁ws2 ▁32 ▁dll ▁wsafdisset ▁ws2 ▁32
+   272  ▁dll ▁closesocket ▁ws2 ▁32 ▁dll ▁connect ▁ws2 ▁32 ▁dll ▁ioctlsocket ▁ws2 ▁32 ▁dll ▁recv ▁ws2 ▁32
+   288  ▁dll ▁select ▁ws2 ▁32 ▁dll ▁send ▁ws2 ▁32 ▁dll ▁setsockopt ▁ws2 ▁32 ▁dll ▁shutdown ▁ws2 ▁32
+   304  ▁dll ▁socket ▁cryptbase ▁dll ▁systemfunction036 ▁sechost ▁dll ▁lookupaccountnamelocalw ▁advapi32 ▁dll ▁lookupaccountsidw ▁sechost ▁dll ▁lookupaccountsidlocalw ▁kernel32 ▁dll
+   320  ▁getthreadpreferreduilanguages ▁kernel32 ▁dll ▁setthreadpreferreduilanguages ▁kernel32 ▁dll ▁localenametolcid ▁kernel32 ▁dll ▁getlocaleinfoex ▁kernel32 ▁dll ▁lcidtolocalename ▁kernel32 ▁dll ▁getsystemdefaultlocalename
+   336  ▁oleaut32 ▁dll ▁283 ▁oleaut32 ▁dll ▁284 ▁ntdll ▁dll ▁etwunregistertraceguids ▁oleaut32 ▁dll ▁500 ▁cryptsp ▁dll ▁cryptacquirecontextw ▁cryptsp
+   352  ▁dll ▁cryptgenrandom ▁cryptsp ▁dll ▁cryptreleasecontext
+
+## field: mutexes  (tokens 357..360, 4 tokens)
+   357  ▁mutexes ▁global ▁time ▁manager
+

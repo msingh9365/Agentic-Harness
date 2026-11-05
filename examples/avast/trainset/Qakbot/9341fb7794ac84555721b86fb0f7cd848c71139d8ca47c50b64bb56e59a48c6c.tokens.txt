@@ -1,0 +1,103 @@
+# total tokens: 1467   kept by Nebula (first 512): 512   dropped: 955
+# tokenizer: Avast BPE (50k) trained with Nebula's JSONTokenizerBPE.train() on the Avast training split
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: resolved_apis  (tokens 0..1371, 1372 tokens)
+     0  ▁resolved ▁apis ▁kernel32 ▁dll ▁virtualalloc ▁kernel32 ▁dll ▁loadlibrarya ▁kernel32 ▁dll ▁getprocaddress ▁kernel32 ▁dll ▁virtualprotect ▁kernel32 ▁dll
+    16  ▁freeconsole ▁userenv ▁dll ▁getuserprofiledirectorya ▁shlwapi ▁dll ▁pathmatchspeca ▁shlwapi ▁dll ▁strstriw ▁shlwapi ▁dll ▁strstria ▁shlwapi ▁dll ▁pathunquotespacesa
+    32  ▁shlwapi ▁dll ▁wvnsprintfa ▁shlwapi ▁dll ▁pathcombinea ▁ole32 ▁dll ▁cosetproxyblanket ▁ole32 ▁dll ▁coinitializeex ▁ole32 ▁dll ▁coinitialize ▁ole32
+    48  ▁dll ▁cocreateinstance ▁ole32 ▁dll ▁couninitialize ▁ole32 ▁dll ▁coinitializesecurity ▁shell32 ▁dll ▁shgetfolderpatha ▁shell32 ▁dll ▁shellexecutea ▁setupapi ▁dll
+    64  ▁setupdidestroydeviceinfolist ▁setupapi ▁dll ▁setupdienumdeviceinfo ▁setupapi ▁dll ▁setupdigetclassdevsa ▁setupapi ▁dll ▁setupdigetdeviceregistrypropertya ▁kernel32 ▁dll ▁setfilepointer ▁kernel32 ▁dll ▁systemtimetofiletime
+    80  ▁kernel32 ▁dll ▁sleepex ▁kernel32 ▁dll ▁closehandle ▁kernel32 ▁dll ▁setevent ▁kernel32 ▁dll ▁openeventa ▁kernel32 ▁dll ▁getcurrentprocessid ▁kernel32
+    96  ▁dll ▁sleep ▁kernel32 ▁dll ▁getlasterror ▁kernel32 ▁dll ▁getmodulehandlea ▁kernel32 ▁dll ▁freelibrary ▁kernel32 ▁dll ▁getsystemtime ▁kernel32 ▁dll
+   112  ▁releasemutex ▁kernel32 ▁dll ▁createeventw ▁kernel32 ▁dll ▁exitprocess ▁kernel32 ▁dll ▁getdrivetypea ▁kernel32 ▁dll ▁lstrcmpa ▁kernel32 ▁dll ▁lstrcpya
+   128  ▁kernel32 ▁dll ▁lstrlena ▁kernel32 ▁dll ▁openprocess ▁kernel32 ▁dll ▁copyfilea ▁kernel32 ▁dll ▁getcommandlinea ▁kernel32 ▁dll ▁widechartomultibyte ▁kernel32
+   144  ▁dll ▁multibytetowidechar ▁kernel32 ▁dll ▁getlocaltime ▁kernel32 ▁dll ▁getexitcodeprocess ▁kernel32 ▁dll ▁resumethread ▁kernel32 ▁dll ▁createmutexa ▁kernel32 ▁dll
+   160  ▁openmutexa ▁kernel32 ▁dll ▁lstrcmpia ▁kernel32 ▁dll ▁getsystemtimeasfiletime ▁kernel32 ▁dll ▁deletefilea ▁kernel32 ▁dll ▁getfileattributesa ▁kernel32 ▁dll ▁waitforsingleobject
+   176  ▁kernel32 ▁dll ▁heapalloc ▁kernel32 ▁dll ▁heapfree ▁kernel32 ▁dll ▁getprocessid ▁kernel32 ▁dll ▁getcurrentprocess ▁kernel32 ▁dll ▁getcurrentthread ▁kernel32
+   192  ▁dll ▁localalloc ▁kernel32 ▁dll ▁loadresource ▁kernel32 ▁dll ▁sizeofresource ▁kernel32 ▁dll ▁findresourcea ▁kernel32 ▁dll ▁createfilea ▁kernel32 ▁dll
+   208  ▁getsysteminfo ▁kernel32 ▁dll ▁getversionexa ▁kernel32 ▁dll ▁getmodulefilenamea ▁kernel32 ▁dll ▁setenvironmentvariablea ▁kernel32 ▁dll ▁getenvironmentvariablea ▁kernel32 ▁dll ▁getwindowsdirectorya
+   224  ▁kernel32 ▁dll ▁gettickcount ▁kernel32 ▁dll ▁getthreadcontext ▁kernel32 ▁dll ▁terminatethread ▁kernel32 ▁dll ▁createthread ▁kernel32 ▁dll ▁getfilesize ▁kernel32
+   240  ▁dll ▁virtualfree ▁kernel32 ▁dll ▁lstrcata ▁kernel32 ▁dll ▁getcomputernamea ▁kernel32 ▁dll ▁lstrcpyna ▁kernel32 ▁dll ▁expandenvironmentstringsa ▁kernel32 ▁dll
+   256  ▁heapcreate ▁user32 ▁dll ▁charupperbuffa ▁user32 ▁dll ▁messageboxa ▁advapi32 ▁dll ▁equalsid ▁advapi32 ▁dll ▁registerservicectrlhandlera ▁advapi32 ▁dll ▁startservicectrldispatchera
+   272  ▁advapi32 ▁dll ▁setservicestatus ▁advapi32 ▁dll ▁lookupaccountnamew ▁advapi32 ▁dll ▁createprocessasusera ▁advapi32 ▁dll ▁setfilesecuritya ▁advapi32 ▁dll ▁openprocesstoken ▁advapi32
+   288  ▁dll ▁convertsidtostringsida ▁advapi32 ▁dll ▁regloadkeya ▁advapi32 ▁dll ▁regunloadkeya ▁advapi32 ▁dll ▁initializesecuritydescriptor ▁advapi32 ▁dll ▁setsecuritydescriptordacl ▁advapi32 ▁dll
+   304  ▁getsidsubauthoritycount ▁advapi32 ▁dll ▁getsidsubauthority ▁advapi32 ▁dll ▁gettokeninformation ▁advapi32 ▁dll ▁openthreadtoken ▁netapi32 ▁dll ▁netuserenum ▁netapi32 ▁dll ▁netgetdcname
+   320  ▁netapi32 ▁dll ▁netapibufferfree ▁kernel32 ▁dll ▁createtoolhelp32snapshot ▁kernel32 ▁dll ▁process32first ▁kernel32 ▁dll ▁process32next ▁kernel32 ▁dll ▁module32first ▁kernel32
+   336  ▁dll ▁module32next ▁kernel32 ▁dll ▁createremotethread ▁kernel32 ▁dll ▁writeprocessmemory ▁kernel32 ▁dll ▁readprocessmemory ▁kernel32 ▁dll ▁virtualallocex ▁kernel32 ▁dll
+   352  ▁virtualfreeex ▁kernel32 ▁dll ▁setlasterror ▁kernel32 ▁dll ▁getcurrentdirectorya ▁kernel32 ▁dll ▁setcurrentdirectorya ▁kernel32 ▁dll ▁createprocessa ▁kernel32 ▁dll ▁setendoffile
+   368  ▁kernel32 ▁dll ▁findfirstfilea ▁kernel32 ▁dll ▁findnextfilea ▁kernel32 ▁dll ▁findclose ▁kernel32 ▁dll ▁createfilew ▁kernel32 ▁dll ▁readfile ▁kernel32
+   384  ▁dll ▁writefile ▁kernel32 ▁dll ▁getcurrentthreadid ▁kernel32 ▁dll ▁movefilea ▁kernel32 ▁dll ▁localfree ▁kernel32 ▁dll ▁createdirectorya ▁kernel32 ▁dll
+   400  ▁getvolumeinformationa ▁kernel32 ▁dll ▁openthread ▁kernel32 ▁dll ▁virtualprotectex ▁kernel32 ▁dll ▁interlockedcompareexchange ▁ntdll ▁dll ▁zwqueryinformationthread ▁advapi32 ▁dll ▁adjusttokenprivileges
+   416  ▁advapi32 ▁dll ▁regopenkeyexa ▁advapi32 ▁dll ▁regcreatekeyexa ▁advapi32 ▁dll ▁regqueryinfokeya ▁advapi32 ▁dll ▁regenumvaluea ▁advapi32 ▁dll ▁regenumkeyexa ▁advapi32
+   432  ▁dll ▁regsetvalueexa ▁advapi32 ▁dll ▁regqueryvalueexa ▁advapi32 ▁dll ▁regclosekey ▁advapi32 ▁dll ▁regdeletevaluea ▁advapi32 ▁dll ▁allocateandinitializesid ▁advapi32 ▁dll
+   448  ▁setentriesinacla ▁advapi32 ▁dll ▁setnamedsecurityinfoa ▁advapi32 ▁dll ▁freesid ▁advapi32 ▁dll ▁lookupaccountsida ▁sechost ▁dll ▁lookupaccountsidlocala ▁kernel32 ▁dll ▁iswow64process
+   464  ▁kernel32 ▁dll ▁sortgethandle ▁kernel32 ▁dll ▁sortclosehandle ▁msvcrt ▁dll ▁iswlower ▁msvcrt ▁dll ▁wcsicmp ▁ntdll ▁dll ▁ntquerysysteminformation ▁ntdll
+   480  ▁dll ▁ntduplicateobject ▁ntdll ▁dll ▁ntqueryobject ▁user32 ▁dll ▁findwindowa ▁user32 ▁dll ▁sendmessagea ▁user32 ▁dll ▁postmessagea ▁user32 ▁dll
+   496  ▁getforegroundwindow ▁user32 ▁dll ▁registerclassexa ▁user32 ▁dll ▁createwindowexa ▁user32 ▁dll ▁showwindow ▁user32 ▁dll ▁updatewindow ▁user32 ▁dll ▁getmessagea
+
+-------- 512-token cut: Nebula never sees token 512 and later --------
+
+   512  ▁user32 ▁dll ▁translatemessage ▁user32 ▁dll ▁dispatchmessagea ▁user32 ▁dll ▁destroywindow ▁user32 ▁dll ▁unregisterclassa ▁user32 ▁dll ▁defwindowproca ▁user32
+   528  ▁dll ▁postquitmessage ▁wtsapi32 ▁dll ▁wtsqueryusertoken ▁wtsapi32 ▁dll ▁wtsenumeratesessionsa ▁wtsapi32 ▁dll ▁wtsfreememory ▁sechost ▁dll ▁convertsidtostringsidw ▁ntmarta ▁dll
+   544  ▁getmartaextensioninterface ▁setupapi ▁dll ▁cm ▁get ▁device ▁interface ▁list ▁size ▁exw ▁setupapi ▁dll ▁cm ▁get ▁device ▁interface
+   560  ▁list ▁exw ▁advapi32 ▁dll ▁unregistertraceguids ▁comctl32 ▁dll ▁321 ▁wintrust ▁dll ▁winverifytrust ▁ntdll ▁dll ▁ntunmapviewofsection ▁ntdll ▁dll
+   576  ▁ntcreatesection ▁ntdll ▁dll ▁ntmapviewofsection ▁ntdll ▁dll ▁ntclose ▁kernel32 ▁dll ▁setthreaduilanguage ▁kernel32 ▁dll ▁copyfileexw ▁kernel32 ▁dll ▁isdebuggerpresent
+   592  ▁kernel32 ▁dll ▁setconsoleinputexenamew ▁advapi32 ▁dll ▁eventwrite ▁advapi32 ▁dll ▁eventregister ▁advapi32 ▁dll ▁eventunregister ▁ntdll ▁dll ▁rtlunhandledexceptionfilter ▁ntdll
+   608  ▁dll ▁rtlisthreadwithinloadercallout ▁kernel32 ▁dll ▁regqueryvalueexw ▁advapi32 ▁dll ▁registertraceguidsw ▁advapi32 ▁dll ▁eventenabled ▁uxtheme ▁dll ▁themeinitapihook ▁iphlpapi ▁dll
+   624  ▁getbestroute ▁iphlpapi ▁dll ▁getipaddrtable ▁ws2 ▁32 ▁dll ▁getnameinfo ▁ws2 ▁32 ▁dll ▁4 ▁ws2 ▁32 ▁dll ▁21
+   640  ▁ws2 ▁32 ▁dll ▁10 ▁ws2 ▁32 ▁dll ▁51 ▁ws2 ▁32 ▁dll ▁13 ▁ws2 ▁32 ▁dll ▁9
+   656  ▁ws2 ▁32 ▁dll ▁2 ▁ws2 ▁32 ▁dll ▁111 ▁ws2 ▁32 ▁dll ▁getaddrinfo ▁ws2 ▁32 ▁dll ▁20
+   672  ▁ws2 ▁32 ▁dll ▁freeaddrinfo ▁ws2 ▁32 ▁dll ▁23 ▁ws2 ▁32 ▁dll ▁wsaioctl ▁ws2 ▁32 ▁dll ▁1
+   688  ▁ws2 ▁32 ▁dll ▁8 ▁ws2 ▁32 ▁dll ▁11 ▁ws2 ▁32 ▁dll ▁115 ▁ws2 ▁32 ▁dll ▁116
+   704  ▁ws2 ▁32 ▁dll ▁12 ▁ws2 ▁32 ▁dll ▁52 ▁ws2 ▁32 ▁dll ▁15 ▁ws2 ▁32 ▁dll ▁6
+   720  ▁ws2 ▁32 ▁dll ▁18 ▁ws2 ▁32 ▁dll ▁151 ▁ws2 ▁32 ▁dll ▁3 ▁ws2 ▁32 ▁dll ▁19
+   736  ▁ws2 ▁32 ▁dll ▁16 ▁shlwapi ▁dll ▁strcmpna ▁shlwapi ▁dll ▁wvnsprintfw ▁ole32 ▁dll ▁cotaskmemfree ▁kernel32 ▁dll ▁flushfilebuffers
+   752  ▁kernel32 ▁dll ▁lstrcmpw ▁kernel32 ▁dll ▁getfileattributesw ▁kernel32 ▁dll ▁setfileattributesa ▁kernel32 ▁dll ▁lstrcpyw ▁kernel32 ▁dll ▁createeventa ▁kernel32
+   768  ▁dll ▁resetevent ▁kernel32 ▁dll ▁getexitcodethread ▁kernel32 ▁dll ▁duplicatehandle ▁kernel32 ▁dll ▁movefileexa ▁kernel32 ▁dll ▁setthreadpriority ▁kernel32 ▁dll
+   784  ▁lstrcpynw ▁kernel32 ▁dll ▁lstrlenw ▁kernel32 ▁dll ▁lstrcatw ▁kernel32 ▁dll ▁lstrcmpiw ▁kernel32 ▁dll ▁disconnectnamedpipe ▁kernel32 ▁dll ▁connectnamedpipe
+   800  ▁kernel32 ▁dll ▁createnamedpipea ▁kernel32 ▁dll ▁terminateprocess ▁kernel32 ▁dll ▁deletefilew ▁kernel32 ▁dll ▁leavecriticalsection ▁kernel32 ▁dll ▁entercriticalsection ▁kernel32
+   816  ▁dll ▁waitformultipleobjects ▁kernel32 ▁dll ▁initializecriticalsection ▁kernel32 ▁dll ▁getcomputernamew ▁kernel32 ▁dll ▁deletecriticalsection ▁kernel32 ▁dll ▁getprocessheap ▁kernel32 ▁dll
+   832  ▁heaprealloc ▁kernel32 ▁dll ▁queryperformancecounter ▁kernel32 ▁dll ▁queryperformancefrequency ▁user32 ▁dll ▁messageboxw ▁user32 ▁dll ▁dialogboxparama ▁user32 ▁dll ▁dialogboxparamw
+   848  ▁user32 ▁dll ▁getwindowtexta ▁user32 ▁dll ▁getwindowtextw ▁user32 ▁dll ▁getwindowlonga ▁advapi32 ▁dll ▁convertstringsecuritydescriptortosecuritydescriptorw ▁advapi32 ▁dll ▁getsecuritydescriptorsacl ▁advapi32
+   864  ▁dll ▁setsecurityinfo ▁advapi32 ▁dll ▁cryptacquirecontexta ▁advapi32 ▁dll ▁getusernamew ▁oleaut32 ▁dll ▁6 ▁oleaut32 ▁dll ▁9 ▁oleaut32 ▁dll
+   880  ▁8 ▁user32 ▁dll ▁isprocessdpiaware ▁dwmapi ▁dll ▁dwmiscompositionenabled ▁user32 ▁dll ▁changewindowmessagefilter ▁cryptsp ▁dll ▁cryptacquirecontexta ▁wininet ▁dll ▁internetopena
+   896  ▁wininet ▁dll ▁internetopenurla ▁wininet ▁dll ▁internetclosehandle ▁wininet ▁dll ▁httpqueryinfoa ▁wininet ▁dll ▁internetreadfile ▁wininet ▁dll ▁internetsetoptiona ▁wininet
+   912  ▁dll ▁internetqueryoptiona ▁wininet ▁dll ▁internetconnecta ▁wininet ▁dll ▁httpopenrequesta ▁wininet ▁dll ▁httpsendrequesta ▁wininet ▁dll ▁internetcrackurla ▁wininet ▁dll
+   928  ▁ftpdeletefilea ▁wininet ▁dll ▁internetwritefile ▁wininet ▁dll ▁ftpopenfilea ▁wininet ▁dll ▁ftpgetfilea ▁wininet ▁dll ▁internetgetlastresponseinfoa ▁urlmon ▁dll ▁obtainuseragentstring
+   944  ▁rasapi32 ▁dll ▁rasconnectionnotificationw ▁sechost ▁dll ▁notifyservicestatuschangea ▁cryptbase ▁dll ▁systemfunction036 ▁advapi32 ▁dll ▁regdeletetreea ▁advapi32 ▁dll ▁regdeletetreew ▁ole32
+   960  ▁dll ▁cotaskmemalloc ▁oleaut32 ▁dll ▁dllgetclassobject ▁oleaut32 ▁dll ▁dllcanunloadnow ▁advapi32 ▁dll ▁regopenkeyw ▁ole32 ▁dll ▁stringfromiid ▁iphlpapi ▁dll
+   976  ▁getadaptersaddresses ▁dhcpcsvc ▁dll ▁dhcprequestparams ▁oleaut32 ▁dll ▁2 ▁oleaut32 ▁dll ▁500 ▁sspicli ▁dll ▁getusernameexw ▁mpr ▁dll ▁wnetopenenumw
+   992  ▁mpr ▁dll ▁wnetenumresourcew ▁mpr ▁dll ▁wnetaddconnection2w ▁mpr ▁dll ▁wnetcloseenum ▁mpr ▁dll ▁wnetcancelconnection2w ▁advapi32 ▁dll ▁openscmanagerw ▁advapi32
+  1008  ▁dll ▁createservicew ▁advapi32 ▁dll ▁startservicew ▁advapi32 ▁dll ▁deleteservice ▁advapi32 ▁dll ▁closeservicehandle ▁netapi32 ▁dll ▁netshareenum ▁netapi32 ▁dll
+  1024  ▁netwkstagetinfo ▁wkscli ▁dll ▁netwkstagetinfo ▁cscapi ▁dll ▁cscnetapigetinterface ▁user32 ▁dll ▁loadstringw ▁drprov ▁dll ▁npgetcaps ▁drprov ▁dll ▁npaddconnection
+  1040  ▁drprov ▁dll ▁npaddconnection3 ▁drprov ▁dll ▁npcancelconnection ▁drprov ▁dll ▁npgetconnection ▁drprov ▁dll ▁npgetuniversalname ▁drprov ▁dll ▁npopenenum ▁drprov
+  1056  ▁dll ▁npenumresource ▁drprov ▁dll ▁npcloseenum ▁drprov ▁dll ▁npgetresourceparent ▁drprov ▁dll ▁npgetresourceinformation ▁ntlanman ▁dll ▁npgetcaps ▁ntlanman ▁dll
+  1072  ▁npgetuser ▁ntlanman ▁dll ▁npaddconnection ▁ntlanman ▁dll ▁npaddconnection3 ▁ntlanman ▁dll ▁npgetreconnectflags ▁ntlanman ▁dll ▁npcancelconnection ▁ntlanman ▁dll ▁npgetconnection
+  1088  ▁ntlanman ▁dll ▁npgetconnection3 ▁ntlanman ▁dll ▁npgetuniversalname ▁ntlanman ▁dll ▁npgetconnectionperformance ▁ntlanman ▁dll ▁npopenenum ▁ntlanman ▁dll ▁npenumresource ▁ntlanman
+  1104  ▁dll ▁npcloseenum ▁ntlanman ▁dll ▁npformatnetworkname ▁ntlanman ▁dll ▁npgetresourceparent ▁ntlanman ▁dll ▁npgetresourceinformation ▁davclnt ▁dll ▁npgetcaps ▁davclnt ▁dll
+  1120  ▁npgetuser ▁davclnt ▁dll ▁npaddconnection ▁davclnt ▁dll ▁npaddconnection3 ▁davclnt ▁dll ▁npcancelconnection ▁davclnt ▁dll ▁npgetconnection ▁davclnt ▁dll ▁npgetuniversalname
+  1136  ▁davclnt ▁dll ▁npopenenum ▁davclnt ▁dll ▁npenumresource ▁davclnt ▁dll ▁npcloseenum ▁davclnt ▁dll ▁npformatnetworkname ▁davclnt ▁dll ▁npgetresourceparent ▁davclnt
+  1152  ▁dll ▁npgetresourceinformation ▁advapi32 ▁dll ▁lookupaccountsidw ▁advapi32 ▁dll ▁createwellknownsid ▁rpcrt4 ▁dll ▁rpcstringbindingcomposew ▁rpcrt4 ▁dll ▁rpcbindingfromstringbindingw ▁rpcrt4 ▁dll
+  1168  ▁rpcstringfreew ▁rpcrt4 ▁dll ▁rpcbindingsetauthinfoexw ▁rpcrt4 ▁dll ▁ndrclientcall2 ▁rpcrt4 ▁dll ▁rpcbindingfree ▁netutils ▁dll ▁netapibufferfree ▁browcli ▁dll ▁netserverenum
+  1184  ▁sechost ▁dll ▁openscmanagerw ▁sechost ▁dll ▁openservicew ▁sechost ▁dll ▁queryservicestatus ▁sechost ▁dll ▁closeservicehandle ▁netutils ▁dll ▁netapibufferallocate ▁wkscli
+  1200  ▁dll ▁netwkstausergetinfo ▁netutils ▁dll ▁netpwnamecompare ▁netutils ▁dll ▁netpwnamecanonicalize ▁rpcrt4 ▁dll ▁i ▁rpcexceptionfilter ▁msvcrt ▁dll ▁qsort ▁shlwapi
+  1216  ▁dll ▁pathfindfilenamew ▁psapi ▁dll ▁getmoduleinformation ▁shlwapi ▁dll ▁strcmpnia ▁shlwapi ▁dll ▁pathcombinew ▁kernel32 ▁dll ▁setnamedpipehandlestate ▁kernel32 ▁dll
+  1232  ▁thread32next ▁kernel32 ▁dll ▁thread32first ▁kernel32 ▁dll ▁setthreadcontext ▁kernel32 ▁dll ▁virtualquery ▁kernel32 ▁dll ▁suspendthread ▁kernel32 ▁dll ▁flushinstructioncache
+  1248  ▁kernel32 ▁dll ▁heapdestroy ▁kernel32 ▁dll ▁getprivateprofilestringw ▁kernel32 ▁dll ▁setfileattributesw ▁kernel32 ▁dll ▁getprivateprofileintw ▁user32 ▁dll ▁toascii ▁user32
+  1264  ▁dll ▁getkeyboardstate ▁shell32 ▁dll ▁shgetfolderpathw ▁wininet ▁dll ▁internetsetstatuscallback ▁wininet ▁dll ▁httpqueryinfow ▁wininet ▁dll ▁httpaddrequestheadersa ▁wininet ▁dll
+  1280  ▁internetgetcookiea ▁wininet ▁dll ▁internetgetcookieexa ▁wininet ▁dll ▁internetqueryoptionw ▁wininet ▁dll ▁deleteurlcacheentryw ▁wininet ▁dll ▁geturlcacheentryinfow ▁ntdll ▁dll ▁zwresumethread
+  1296  ▁ntdll ▁dll ▁ldrloaddll ▁ws2 ▁32 ▁dll ▁wsaconnect ▁ws2 ▁32 ▁dll ▁connect ▁ws2 ▁32 ▁dll ▁wsasend ▁ws2
+  1312  ▁32 ▁dll ▁send ▁dnsapi ▁dll ▁dnsquery ▁a ▁dnsapi ▁dll ▁dnsquery ▁w ▁dnsapi ▁dll ▁query ▁main ▁user32
+  1328  ▁dll ▁getclipboarddata ▁wininet ▁dll ▁httpsendrequestw ▁wininet ▁dll ▁internetreadfileexa ▁wininet ▁dll ▁internetquerydataavailable ▁wininet ▁dll ▁httpopenrequestw ▁wininet ▁dll
+  1344  ▁httpsendrequestexw ▁ntdll ▁dll ▁etwunregistertraceguids ▁kernel32 ▁dll ▁interlockedexchange ▁version ▁dll ▁getfileversioninfosizew ▁version ▁dll ▁getfileversioninfow ▁version ▁dll ▁verqueryvaluew
+  1360  ▁sechost ▁dll ▁lookupaccountnamelocalw ▁sechost ▁dll ▁lookupaccountsidlocalw ▁xmllite ▁dll ▁createxmlwriter ▁xmllite ▁dll ▁createxmlwriteroutputwithencodingname
+
+## field: mutexes  (tokens 1372..1466, 95 tokens)
+  1372  ▁mutexes ▁9341 fb7794 ac84555 721a ▁ioqul ▁global ▁jxoqwn ▁global ▁ldgyyhis ▁9341 fb7794 ac84555 721 ▁c ▁jxoqwna
+  1388  ▁jxoqwn ▁c ▁iesqmmutex ▁0 ▁208 ▁yssauwvxilqvnxmuepdgkmpyyxcwqn ▁bd34 052e ▁82 d9 ▁440 f ▁8c 7d ▁a8 576
+  1404  3b13 394 ▁599 42e 52 ▁f86d ▁4d0a ▁9 d6e ▁9081 00d 13c03 ▁9b 2076 61 ▁a
+  1420  027 ▁47 e9 ▁a592 ▁c 8d22 bc9d 933 ▁69 d8 ae7b ▁8 00e ▁4114 ▁a 163
+  1436  ▁0 5c fd2 f9b 107 ▁8fae b4cb ▁a170 ▁448b ▁a0 db ▁9d 08 dc2 d69 72
+  1452  ▁jxoqwn ▁w ▁c3 dd 7e 7c ▁6 b8a ▁4e8e ▁9829 ▁0d 16 a91d 62 a9
+

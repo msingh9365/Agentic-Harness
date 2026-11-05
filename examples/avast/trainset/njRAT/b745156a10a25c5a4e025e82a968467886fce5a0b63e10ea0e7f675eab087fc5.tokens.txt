@@ -1,0 +1,69 @@
+# total tokens: 902   kept by Nebula (first 512): 512   dropped: 390
+# tokenizer: Avast BPE (50k) trained with Nebula's JSONTokenizerBPE.train() on the Avast training split
+# '▁' marks the start of a word. Numbers on the left are token positions.
+
+## field: resolved_apis  (tokens 0..867, 868 tokens)
+     0  ▁resolved ▁apis ▁lpk ▁dll ▁lpkeditcontrol ▁kernel32 ▁dll ▁flsalloc ▁kernel32 ▁dll ▁flsfree ▁kernel32 ▁dll ▁flsgetvalue ▁kernel32 ▁dll
+    16  ▁flssetvalue ▁kernel32 ▁dll ▁initializecriticalsectionex ▁kernel32 ▁dll ▁createeventexw ▁kernel32 ▁dll ▁createsemaphoreexw ▁kernel32 ▁dll ▁setthreadstackguarantee ▁kernel32 ▁dll ▁createthreadpooltimer
+    32  ▁kernel32 ▁dll ▁setthreadpooltimer ▁kernel32 ▁dll ▁waitforthreadpooltimercallbacks ▁kernel32 ▁dll ▁closethreadpooltimer ▁kernel32 ▁dll ▁createthreadpoolwait ▁kernel32 ▁dll ▁setthreadpoolwait ▁kernel32
+    48  ▁dll ▁closethreadpoolwait ▁kernel32 ▁dll ▁flushprocesswritebuffers ▁kernel32 ▁dll ▁freelibrarywhencallbackreturns ▁kernel32 ▁dll ▁getcurrentprocessornumber ▁kernel32 ▁dll ▁getlogicalprocessorinformation ▁kernel32 ▁dll
+    64  ▁createsymboliclinkw ▁kernel32 ▁dll ▁setdefaultdlldirectories ▁kernel32 ▁dll ▁enumsystemlocalesex ▁kernel32 ▁dll ▁comparestringex ▁kernel32 ▁dll ▁getdateformatex ▁kernel32 ▁dll ▁getlocaleinfoex
+    80  ▁kernel32 ▁dll ▁gettimeformatex ▁kernel32 ▁dll ▁getuserdefaultlocalename ▁kernel32 ▁dll ▁isvalidlocalename ▁kernel32 ▁dll ▁lcmapstringex ▁kernel32 ▁dll ▁gettickcount64 ▁kernel32
+    96  ▁dll ▁getnativesysteminfo ▁cryptbase ▁dll ▁systemfunction036 ▁uxtheme ▁dll ▁themeinitapihook ▁user32 ▁dll ▁isprocessdpiaware ▁kernel32 ▁dll ▁wow64disablewow64fsredirection ▁kernel32 ▁dll
+   112  ▁wow64revertwow64fsredirection ▁dwmapi ▁dll ▁dwmiscompositionenabled ▁comctl32 ▁dll ▁registerclassnamew ▁kernel32 ▁dll ▁sortgethandle ▁kernel32 ▁dll ▁sortclosehandle ▁uxtheme ▁dll ▁openthemedata
+   128  ▁uxtheme ▁dll ▁getthemebool ▁imm32 ▁dll ▁immgetcontext ▁imm32 ▁dll ▁immreleasecontext ▁imm32 ▁dll ▁immassociatecontext ▁imm32 ▁dll ▁immisime ▁comctl32
+   144  ▁dll ▁himagelist ▁queryinterface ▁comctl32 ▁dll ▁drawshadowtext ▁comctl32 ▁dll ▁drawsizebox ▁comctl32 ▁dll ▁drawscrollbar ▁comctl32 ▁dll ▁sizeboxhwnd ▁comctl32
+   160  ▁dll ▁scrollbar ▁mousemove ▁comctl32 ▁dll ▁scrollbar ▁menu ▁comctl32 ▁dll ▁handlescrollcmd ▁comctl32 ▁dll ▁detachscrollbars ▁comctl32 ▁dll ▁attachscrollbars
+   176  ▁comctl32 ▁dll ▁ccsetscrollinfo ▁comctl32 ▁dll ▁ccgetscrollinfo ▁comctl32 ▁dll ▁ccenablescrollbar ▁comctl32 ▁dll ▁querysystemgesturestatus ▁uxtheme ▁dll ▁49 ▁kernel32
+   192  ▁dll ▁deletefilew ▁kernel32 ▁dll ▁createmutexw ▁kernel32 ▁dll ▁getlasterror ▁kernel32 ▁dll ▁findresourcew ▁kernel32 ▁dll ▁sizeofresource ▁kernel32 ▁dll
+   208  ▁loadresource ▁kernel32 ▁dll ▁lockresource ▁advapi32 ▁dll ▁cryptacquirecontexta ▁cryptsp ▁dll ▁cryptacquirecontexta ▁advapi32 ▁dll ▁cryptcreatehash ▁cryptsp ▁dll ▁cryptcreatehash
+   224  ▁advapi32 ▁dll ▁crypthashdata ▁cryptsp ▁dll ▁crypthashdata ▁advapi32 ▁dll ▁cryptderivekey ▁cryptsp ▁dll ▁cryptderivekey ▁advapi32 ▁dll ▁cryptdestroyhash ▁cryptsp
+   240  ▁dll ▁cryptdestroyhash ▁advapi32 ▁dll ▁cryptdecrypt ▁cryptsp ▁dll ▁cryptdecrypt ▁advapi32 ▁dll ▁cryptdestroykey ▁cryptsp ▁dll ▁cryptdestroykey ▁advapi32 ▁dll
+   256  ▁cryptreleasecontext ▁cryptsp ▁dll ▁cryptreleasecontext ▁kernel32 ▁dll ▁virtualalloc ▁kernel32 ▁dll ▁virtualfree ▁uxtheme ▁dll ▁closethemedata ▁oleaut32 ▁dll ▁500
+   272  ▁advapi32 ▁dll ▁regopenkeyexw ▁advapi32 ▁dll ▁regqueryinfokeyw ▁advapi32 ▁dll ▁regenumkeyexw ▁advapi32 ▁dll ▁regenumvaluew ▁advapi32 ▁dll ▁regclosekey ▁advapi32
+   288  ▁dll ▁regqueryvalueexw ▁kernel32 ▁dll ▁queryactctxw ▁shlwapi ▁dll ▁urlisw ▁kernel32 ▁dll ▁initializecriticalsectionandspincount ▁kernel32 ▁dll ▁isprocessorfeaturepresent ▁msvcrt ▁dll
+   304  ▁set ▁error ▁mode ▁msvcrt ▁dll ▁set ▁terminate ▁yap6axxzp6axxz ▁z ▁kernel32 ▁dll ▁findactctxsectionstringw ▁kernel32 ▁dll ▁getsystemwindowsdirectoryw ▁mscoree
+   320  ▁dll ▁getprocessexecutableheap ▁mscorwks ▁dll ▁corexemain ▁mscorwks ▁dll ▁getclrfunction ▁advapi32 ▁dll ▁registertraceguidsw ▁advapi32 ▁dll ▁unregistertraceguids ▁advapi32 ▁dll
+   336  ▁gettraceloggerhandle ▁advapi32 ▁dll ▁gettraceenablelevel ▁advapi32 ▁dll ▁gettraceenableflags ▁advapi32 ▁dll ▁traceevent ▁mscoree ▁dll ▁iee ▁mscorwks ▁dll ▁iee
+   352  ▁mscoree ▁dll ▁getstartupflags ▁mscoree ▁dll ▁gethostconfigurationfile ▁mscoree ▁dll ▁getcorsystemdirectory ▁ntdll ▁dll ▁rtlunwind ▁kernel32 ▁dll ▁iswow64process ▁advapi32
+   368  ▁dll ▁allocateandinitializesid ▁advapi32 ▁dll ▁openprocesstoken ▁advapi32 ▁dll ▁gettokeninformation ▁advapi32 ▁dll ▁initializeacl ▁advapi32 ▁dll ▁addaccessallowedace ▁advapi32 ▁dll
+   384  ▁freesid ▁kernel32 ▁dll ▁addvectoredcontinuehandler ▁kernel32 ▁dll ▁removevectoredcontinuehandler ▁advapi32 ▁dll ▁convertsidtostringsidw ▁shell32 ▁dll ▁shgetfolderpathw ▁kernel32 ▁dll ▁getwritewatch
+   400  ▁kernel32 ▁dll ▁resetwritewatch ▁kernel32 ▁dll ▁creatememoryresourcenotification ▁kernel32 ▁dll ▁querymemoryresourcenotification ▁ole32 ▁dll ▁coinitializeex ▁ole32 ▁dll ▁cogetcontexttoken ▁kernel32
+   416  ▁dll ▁getfullpathnamew ▁kernel32 ▁dll ▁getversionexw ▁advapi32 ▁dll ▁cryptgethashparam ▁advapi32 ▁dll ▁cryptimportkey ▁advapi32 ▁dll ▁cryptexportkey ▁advapi32 ▁dll
+   432  ▁cryptgenkey ▁advapi32 ▁dll ▁cryptgetkeyparam ▁advapi32 ▁dll ▁cryptverifysignaturea ▁advapi32 ▁dll ▁cryptsignhasha ▁advapi32 ▁dll ▁cryptgetprovparam ▁advapi32 ▁dll ▁cryptgetuserkey
+   448  ▁advapi32 ▁dll ▁cryptenumprovidersa ▁mscoree ▁dll ▁getmetadatainternalinterface ▁mscorwks ▁dll ▁getmetadatainternalinterface ▁cryptsp ▁dll ▁cryptimportkey ▁cryptsp ▁dll ▁cryptverifysignaturea ▁mscorjit
+   464  ▁dll ▁getjit ▁kernel32 ▁dll ▁getuserdefaultuilanguage ▁kernel32 ▁dll ▁lstrlen ▁kernel32 ▁dll ▁lstrlenw ▁advapi32 ▁dll ▁regsetvalueexw ▁kernel32 ▁dll
+   480  ▁releasemutex ▁kernel32 ▁dll ▁closehandle ▁user32 ▁dll ▁sendmessagetimeouta ▁kernel32 ▁dll ▁getstartupinfow ▁kernel32 ▁dll ▁createprocessw ▁kernel32 ▁dll ▁waitforsingleobject
+   496  ▁kernel32 ▁dll ▁switchtothread ▁user32 ▁dll ▁getasynckeystate ▁user32 ▁dll ▁registerwindowmessagew ▁user32 ▁dll ▁getkeystate ▁kernel32 ▁dll ▁getcurrentprocess ▁kernel32
+
+-------- 512-token cut: Nebula never sees token 512 and later --------
+
+   512  ▁dll ▁getcurrentthread ▁kernel32 ▁dll ▁duplicatehandle ▁kernel32 ▁dll ▁getcurrentthreadid ▁user32 ▁dll ▁getsystemmetrics ▁kernel32 ▁dll ▁getmodulehandlew ▁kernel32 ▁dll
+   528  ▁getprocaddress ▁user32 ▁dll ▁defwindowprocw ▁gdi32 ▁dll ▁getstockobject ▁user32 ▁dll ▁registerclassw ▁ole32 ▁dll ▁cotaskmemalloc ▁ole32 ▁dll ▁cotaskmemfree
+   544  ▁user32 ▁dll ▁createwindowexw ▁user32 ▁dll ▁setwindowlongw ▁user32 ▁dll ▁getwindowlongw ▁user32 ▁dll ▁callwindowprocw ▁user32 ▁dll ▁getclientrect ▁user32
+   560  ▁dll ▁getwindowrect ▁user32 ▁dll ▁getparent ▁ole32 ▁dll ▁oleinitialize ▁ole32 ▁dll ▁coregistermessagefilter ▁user32 ▁dll ▁peekmessagew ▁user32 ▁dll
+   576  ▁getkeyboardstate ▁user32 ▁dll ▁mapvirtualkeya ▁user32 ▁dll ▁getforegroundwindow ▁user32 ▁dll ▁getwindowthreadprocessid ▁user32 ▁dll ▁getkeyboardlayout ▁user32 ▁dll ▁tounicodeex
+   592  ▁kernel32 ▁dll ▁getfileattributesexw ▁kernel32 ▁dll ▁seterrormode ▁kernel32 ▁dll ▁createfilew ▁kernel32 ▁dll ▁getfiletype ▁kernel32 ▁dll ▁getfilesize ▁kernel32
+   608  ▁dll ▁readfile ▁mscoree ▁dll ▁nd ▁ri2 ▁ws2 ▁32 ▁dll ▁wsastartup ▁ws2 ▁32 ▁dll ▁wsasocketw ▁ws2 ▁32
+   624  ▁dll ▁setsockopt ▁ws2 ▁32 ▁dll ▁wsaeventselect ▁ws2 ▁32 ▁dll ▁ioctlsocket ▁ws2 ▁32 ▁dll ▁closesocket ▁kernel32 ▁dll
+   640  ▁getcurrentprocessid ▁kernel32 ▁dll ▁getcomputernamew ▁advapi32 ▁dll ▁convertstringsecuritydescriptortosecuritydescriptorw ▁kernel32 ▁dll ▁localfree ▁kernel32 ▁dll ▁createfilemappingw ▁kernel32 ▁dll ▁mapviewoffile
+   656  ▁kernel32 ▁dll ▁unmapviewoffile ▁kernel32 ▁dll ▁virtualquery ▁advapi32 ▁dll ▁createwellknownsid ▁kernel32 ▁dll ▁openmutexw ▁kernel32 ▁dll ▁openprocess ▁kernel32
+   672  ▁dll ▁getprocesstimes ▁ws2 ▁32 ▁dll ▁getaddrinfo ▁ws2 ▁32 ▁dll ▁freeaddrinfo ▁advapi32 ▁dll ▁lookupprivilegevaluew ▁advapi32 ▁dll ▁adjusttokenprivileges
+   688  ▁kernel32 ▁dll ▁getexitcodeprocess ▁kernel32 ▁dll ▁getprocessworkingsetsize ▁kernel32 ▁dll ▁setprocessworkingsetsize ▁user32 ▁dll ▁getwindowtextlengtha ▁user32 ▁dll ▁getwindowtexta ▁kernel32
+   704  ▁dll ▁formatmessagew ▁advapi32 ▁dll ▁regcreatekeyexw ▁ws2 ▁32 ▁dll ▁shutdown ▁ws2 ▁32 ▁dll ▁wsaconnect ▁comctl32 ▁dll ▁320
+   720  ▁comctl32 ▁dll ▁324 ▁rasmontr ▁dll ▁inithelperdll ▁nshwfp ▁dll ▁inithelperdll ▁dhcpcmonitor ▁dll ▁inithelperdll ▁wshelper ▁dll ▁inithelperdll ▁nshhttp
+   736  ▁dll ▁inithelperdll ▁fwcfg ▁dll ▁inithelperdll ▁authfwcfg ▁dll ▁inithelperdll ▁ifmon ▁dll ▁inithelperdll ▁netiohlp ▁dll ▁inithelperdll ▁whhelper ▁dll
+   752  ▁inithelperdll ▁hnetmon ▁dll ▁inithelperdll ▁rpcnsh ▁dll ▁inithelperdll ▁dot3cfg ▁dll ▁inithelperdll ▁napmontr ▁dll ▁inithelperdll ▁nshipsec ▁dll ▁inithelperdll
+   768  ▁p2pnetsh ▁dll ▁inithelperdll ▁wlancfg ▁dll ▁inithelperdll ▁peerdistsh ▁dll ▁inithelperdll ▁cryptsp ▁dll ▁cryptenumprovidersw ▁user32 ▁dll ▁loadstringw ▁sechost
+   784  ▁dll ▁openscmanagerw ▁sechost ▁dll ▁openservicew ▁sechost ▁dll ▁queryserviceconfigw ▁sechost ▁dll ▁closeservicehandle ▁sechost ▁dll ▁queryservicestatus ▁sechost ▁dll
+   800  ▁lookupaccountnamelocalw ▁advapi32 ▁dll ▁lookupaccountsidw ▁sechost ▁dll ▁lookupaccountsidlocalw ▁cryptsp ▁dll ▁cryptacquirecontextw ▁cryptsp ▁dll ▁cryptgenrandom ▁rpcrtremote ▁dll ▁i
+   816  ▁rpcextinitializeextensionpoint ▁httpapi ▁dll ▁httpinitialize ▁userenv ▁dll ▁registergpnotification ▁userenv ▁dll ▁unregistergpnotification ▁gpapi ▁dll ▁registergpnotificationinternal ▁bcryptprimitives ▁dll ▁gethashinterface
+   832  ▁bcryptprimitives ▁dll ▁getcipherinterface ▁kernel32 ▁dll ▁setthreaduilanguage ▁oleaut32 ▁dll ▁7 ▁shlwapi ▁dll ▁pathcanonicalizew ▁ole32 ▁dll ▁cocreateguid ▁ole32
+   848  ▁dll ▁stringfromguid2 ▁advapi32 ▁dll ▁checktokenmembership ▁ole32 ▁dll ▁couninitialize ▁httpapi ▁dll ▁httpterminate ▁gpapi ▁dll ▁unregistergpnotificationinternal ▁oleaut32 ▁dll
+   864  ▁9 ▁comctl32 ▁dll ▁388
+
+## field: mutexes  (tokens 868..901, 34 tokens)
+   868  ▁mutexes ▁e i py pl v tv ud v br xf os x nd u yc
+   884  ct t lu dl hs ▁global ▁clr ▁casoff ▁mutex ▁fb87381 b0c0de0 9c29 14a9e3 fba8ee03 ▁global ▁net
+   900  ▁clr ▁networking
+

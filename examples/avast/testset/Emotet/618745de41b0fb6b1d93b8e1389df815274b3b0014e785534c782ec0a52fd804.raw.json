@@ -1,0 +1,1151 @@
+{
+   "behavior": {
+                  "summary": {
+                                             "keys": [
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\CustomLocale",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CustomLocale\\en-US",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\ExtendedLocale",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\ExtendedLocale\\en-US",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows NT\\CurrentVersion\\GRE_Initialize",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\WINDOWS NT\\CURRENTVERSION\\GRE_Initialize\\DisableMetaFiles",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\SideBySide",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\NoFileFolderConnection",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoPropertiesMyComputer",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoPropertiesRecycleBin",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoControlPanel",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoSetFolders",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoInternetIcon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ShellCompatibility\\Applications\\618745DE41B0FB6B1D93.exe",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoCommonGroups",
+                                                       "HKEY_CLASSES_ROOT\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\Attributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\CallForAttributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\RestrictedAttributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsFORDISPLAY",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\HideFolderVerbs",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\UseDropHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsFORPARSING",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsParseDisplayName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\QueryForOverlay",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\MapNetDriveVerbs",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\QueryForInfoTip",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\HideInWebView",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\HideOnDesktopPerUser",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsAliasedNotifications",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsUniversalDelegate",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\NoFileFolderJunction",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\PinToNameSpaceTree",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\HasNavigationEnum",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\NonEnum",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\NonEnum",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\NonEnum\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3476-f160-11ea-9f0e-806e6f6e6963}\\",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3476-f160-11ea-9f0e-806e6f6e6963}\\Data",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3476-f160-11ea-9f0e-806e6f6e6963}\\Generation",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                                                       "HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                                                       "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\LSA\\AccessProviders",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Lsa\\AccessProviders\\MartaExtension",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3475-f160-11ea-9f0e-806e6f6e6963}\\",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3475-f160-11ea-9f0e-806e6f6e6963}\\Data",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3475-f160-11ea-9f0e-806e6f6e6963}\\Generation",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\DontShowSuperHidden",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShellState",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoWebView",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\ClassicShell",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\SeparateProcess",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoNetCrawling",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoSimpleStartMenu",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\DontPrettyPath",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideIcons",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\MapNetDrvBtn",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\WebView",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Filter",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\NoNetCrawling",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\AutoCheckSelect",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\AllowFileCLSIDJunctions",
+                                                       "HKEY_CLASSES_ROOT\\.exe",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\.exe\\(Default)",
+                                                       "HKEY_CLASSES_ROOT\\.exe\\OpenWithProgids",
+                                                       "HKEY_CLASSES_ROOT\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.exe\\OpenWithProgids",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.exe",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.exe\\",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.exe\\UserChoice",
+                                                       "HKEY_CLASSES_ROOT\\exefile",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\exefile\\CurVer",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\exefile\\",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\exefile\\ShellEx\\IconHandler",
+                                                       "HKEY_CLASSES_ROOT\\SystemFileAssociations\\.exe",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\SystemFileAssociations\\.exe\\ShellEx\\IconHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\exefile\\DocObject",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\SystemFileAssociations\\.exe\\DocObject",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\exefile\\BrowseInPlace",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\SystemFileAssociations\\.exe\\BrowseInPlace",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\.exe\\Content Type",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\exefile\\Clsid",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\SystemFileAssociations\\.exe\\Clsid",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\exefile\\IsShortcut",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\SystemFileAssociations\\.exe\\IsShortcut",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\exefile\\AlwaysShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\SystemFileAssociations\\.exe\\AlwaysShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\exefile\\NeverShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\SystemFileAssociations\\.exe\\NeverShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\PropertySystem\\PropertyHandlers\\.exe",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\PropertySystem\\PropertyHandlers\\.exe\\(Default)",
+                                                       "HKEY_CLASSES_ROOT\\CLSID\\{66742402-F9B9-11D1-A202-0000F81FEDEE}\\OverrideFileSystemProperties",
+                                                       "HKEY_CLASSES_ROOT\\CLSID\\{66742402-F9B9-11D1-A202-0000F81FEDEE}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{66742402-F9B9-11D1-A202-0000F81FEDEE}\\DisableProcessIsolation",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{66742402-F9B9-11D1-A202-0000F81FEDEE}\\NoOplock",
+                                                       "HKEY_CLASSES_ROOT\\ExplorerCLSIDFlags\\{66742402-F9B9-11D1-A202-0000F81FEDEE}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{66742402-F9B9-11D1-A202-0000F81FEDEE}\\UseInProcHandlerCache",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{66742402-F9B9-11D1-A202-0000F81FEDEE}\\UseOutOfProcHandlerCache",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\Shell\\RegisteredApplications\\UrlAssociations\\Directory\\OpenWithProgids",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\Shell\\Associations\\UrlAssociations\\Directory",
+                                                       "HKEY_CLASSES_ROOT\\Directory",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\CurVer",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\ShellEx\\IconHandler",
+                                                       "HKEY_CLASSES_ROOT\\Folder",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\ShellEx\\IconHandler",
+                                                       "HKEY_CLASSES_ROOT\\AllFilesystemObjects",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\ShellEx\\IconHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\DocObject",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\DocObject",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\DocObject",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\BrowseInPlace",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\BrowseInPlace",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\BrowseInPlace",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\Clsid",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\Clsid",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\Clsid",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\IsShortcut",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\IsShortcut",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\IsShortcut",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\AlwaysShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\NeverShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\NeverShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\NeverShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\ShellEx\\PropertyHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\ShellEx\\PropertyHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\ShellEx\\PropertyHandler",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\MaxUndoItems",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\Advanced\\MaxUndoItems",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\618745DE41B0FB6B1D93.exe",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\618745DE41B0FB6B1D93.exe",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\ShellEx\\{2F711B17-773C-41D4-93FA-7F23EDCECB66}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\ShellEx\\{2F711B17-773C-41D4-93FA-7F23EDCECB66}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\ShellEx\\{2F711B17-773C-41D4-93FA-7F23EDCECB66}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\ForceCopyACLWithFile",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\ShellEx\\{000214F9-0000-0000-C000-000000000046}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\ShellEx\\{000214F9-0000-0000-C000-000000000046}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\ShellEx\\{000214F9-0000-0000-C000-000000000046}",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\MoveSecurityAttributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoEncryptOnMove",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\CTF\\KnownClasses",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\SideBySide\\PreferExternalManifest",
+                                                       "HKEY_CURRENT_USER\\Control Panel\\TimeDate\\AdditionalClocks\\1",
+                                                       "HKEY_CURRENT_USER\\Control Panel\\TimeDate\\AdditionalClocks\\2",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Group Policy\\History",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Group Policy\\History\\NetworkName",
+                                                       "HKEY_CLASSES_ROOT\\CLSID\\{7007ACC7-3202-11D1-AAD2-00805FC1270E}\\InProcServer32",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\CLSID\\{7007ACC7-3202-11D1-AAD2-00805FC1270E}\\InProcServer32\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\CLSID\\{7007ACC7-3202-11D1-AAD2-00805FC1270E}\\InProcServer32\\LoadWithoutCOM",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ShellCompatibility\\Objects\\{7007ACC7-3202-11D1-AAD2-00805FC1270E}",
+                                                       "HKEY_CLASSES_ROOT\\CLSID\\{21EC2020-3AEA-1069-A2DD-08002B30309D}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\CLSID\\{21EC2020-3AEA-1069-A2DD-08002B30309D}\\SortOrderIndex",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Desktop\\NameSpace\\{21EC2020-3AEA-1069-A2DD-08002B30309D}",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Desktop\\NameSpace\\{21EC2020-3AEA-1069-A2DD-08002B30309D}",
+                                                       "HKEY_CLASSES_ROOT\\CLSID\\{7007ACC7-3202-11D1-AAD2-00805FC1270E}",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\CLSID\\{7007ACC7-3202-11D1-AAD2-00805FC1270E}\\SortOrderIndex",
+                                                       "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel\\NameSpace\\{7007ACC7-3202-11D1-AAD2-00805FC1270E}",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel\\NameSpace\\{7007ACC7-3202-11D1-AAD2-00805FC1270E}",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Action Center\\Checks\\{01979c6a-42fa-414c-b8aa-eee2c8202018}.check.100",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Action Center\\Checks\\{01979c6a-42fa-414c-b8aa-eee2c8202018}.check.100\\CheckSetting"
+                                                     ],
+                                    "resolved_apis": [
+                                                       "cryptsp.dll.CryptAcquireContextA",
+                                                       "cryptsp.dll.CryptCreateHash",
+                                                       "cryptsp.dll.CryptHashData",
+                                                       "cryptsp.dll.CryptDeriveKey",
+                                                       "cryptsp.dll.CryptEncrypt",
+                                                       "kernel32.dll.IsProcessorFeaturePresent",
+                                                       "oleaut32.dll.#200",
+                                                       "ole32.dll.CoInitializeEx",
+                                                       "cryptbase.dll.SystemFunction036",
+                                                       "uxtheme.dll.ThemeInitApiHook",
+                                                       "user32.dll.IsProcessDPIAware",
+                                                       "comctl32.dll.#385",
+                                                       "comctl32.dll.#320",
+                                                       "comctl32.dll.#324",
+                                                       "comctl32.dll.#323",
+                                                       "ole32.dll.CreateBindCtx",
+                                                       "ole32.dll.CoTaskMemAlloc",
+                                                       "ole32.dll.CoGetApartmentType",
+                                                       "ole32.dll.CoRegisterInitializeSpy",
+                                                       "ole32.dll.CoTaskMemFree",
+                                                       "comctl32.dll.#236",
+                                                       "oleaut32.dll.#6",
+                                                       "ole32.dll.CoGetMalloc",
+                                                       "comctl32.dll.#328",
+                                                       "comctl32.dll.#334",
+                                                       "oleaut32.dll.#2",
+                                                       "ole32.dll.CoCreateInstance",
+                                                       "advapi32.dll.InitializeSecurityDescriptor",
+                                                       "advapi32.dll.SetEntriesInAclW",
+                                                       "ntmarta.dll.GetMartaExtensionInterface",
+                                                       "advapi32.dll.SetSecurityDescriptorDacl",
+                                                       "setupapi.dll.CM_Get_Device_Interface_List_Size_ExW",
+                                                       "advapi32.dll.IsTextUnicode",
+                                                       "setupapi.dll.CM_Get_Device_Interface_List_ExW",
+                                                       "comctl32.dll.#332",
+                                                       "comctl32.dll.#338",
+                                                       "comctl32.dll.#339",
+                                                       "comctl32.dll.#386",
+                                                       "shell32.dll.#102",
+                                                       "propsys.dll.PSLookupPropertyHandlerCLSID",
+                                                       "advapi32.dll.RegOpenKeyExW",
+                                                       "advapi32.dll.RegQueryValueExW",
+                                                       "advapi32.dll.RegCloseKey",
+                                                       "propsys.dll.PSCreatePropertyStoreFromObject",
+                                                       "propsys.dll.#417",
+                                                       "propsys.dll.PropVariantToStringAlloc",
+                                                       "ole32.dll.PropVariantClear",
+                                                       "propsys.dll.PSCreateMemoryPropertyStore",
+                                                       "propsys.dll.PropVariantToBuffer",
+                                                       "propsys.dll.PropVariantToUInt64",
+                                                       "propsys.dll.PropVariantToBoolean",
+                                                       "propsys.dll.InitPropVariantFromBuffer",
+                                                       "advapi32.dll.GetNamedSecurityInfoW",
+                                                       "ole32.dll.CoUninitialize",
+                                                       "comctl32.dll.#329",
+                                                       "comctl32.dll.#388",
+                                                       "comctl32.dll.#321",
+                                                       "ole32.dll.CoRevokeInitializeSpy",
+                                                       "oleaut32.dll.#500",
+                                                       "comctl32.dll.#387",
+                                                       "comctl32.dll.#327",
+                                                       "advapi32.dll.UnregisterTraceGuids",
+                                                       "cryptsp.dll.CryptReleaseContext",
+                                                       "ntdll.dll.EtwUnregisterTraceGuids",
+                                                       "dui70.dll.InitProcessPriv",
+                                                       "dui70.dll.InitThread",
+                                                       "dui70.dll.??0HWNDElement@DirectUI@@QEAA@XZ",
+                                                       "dui70.dll.?Initialize@HWNDElement@DirectUI@@QEAAJPEAUHWND__@@_NIPEAVElement@2@PEAK@Z",
+                                                       "dui70.dll.?GetClassInfoW@HWNDElement@DirectUI@@UEAAPEAUIClassInfo@2@XZ",
+                                                       "dui70.dll.?OnPropertyChanging@Element@DirectUI@@UEAA_NPEBUPropertyInfo@2@HPEAVValue@2@1@Z",
+                                                       "dui70.dll.?HandleUiaPropertyChangingListener@Element@DirectUI@@UEAAXPEBUPropertyInfo@2@@Z",
+                                                       "dui70.dll.?HandleUiaPropertyListener@Element@DirectUI@@UEAAXPEBUPropertyInfo@2@HPEAVValue@2@1@Z",
+                                                       "dui70.dll.?OnPropertyChanged@HWNDElement@DirectUI@@UEAAXPEBUPropertyInfo@2@HPEAVValue@2@1@Z",
+                                                       "dui70.dll.?Create@FillLayout@DirectUI@@SAJPEAPEAVLayout@2@@Z",
+                                                       "dui70.dll.?SetLayout@Element@DirectUI@@QEAAJPEAVLayout@2@@Z",
+                                                       "dui70.dll.?SetAccessible@Element@DirectUI@@QEAAJ_N@Z",
+                                                       "dui70.dll.?SetAccRole@Element@DirectUI@@QEAAJH@Z",
+                                                       "dui70.dll.?SetVisible@Element@DirectUI@@QEAAJ_N@Z",
+                                                       "dui70.dll.?GetHWND@HWNDElement@DirectUI@@UEAAPEAUHWND__@@XZ",
+                                                       "dui70.dll.?Create@DUIXmlParser@DirectUI@@SAJPEAPEAV12@P6APEAVValue@2@PEBGPEAX@Z2P6AX11H2@Z2@Z",
+                                                       "dui70.dll.?SetXMLFromResource@DUIXmlParser@DirectUI@@QEAAJIPEAUHINSTANCE__@@0@Z",
+                                                       "xmllite.dll.CreateXmlReader",
+                                                       "xmllite.dll.CreateXmlReaderInputWithEncodingName",
+                                                       "dui70.dll.?CreateElement@DUIXmlParser@DirectUI@@QEAAJPEBGPEAVElement@2@1PEAKPEAPEAV32@@Z",
+                                                       "dui70.dll.?Add@Element@DirectUI@@QEAAJPEAV12@@Z",
+                                                       "dui70.dll.?Add@Element@DirectUI@@UEAAJPEAPEAV12@I@Z",
+                                                       "dui70.dll.?Insert@Element@DirectUI@@UEAAJPEAPEAV12@II@Z",
+                                                       "dui70.dll.StrToID",
+                                                       "dui70.dll.?FindDescendent@Element@DirectUI@@QEAAPEAV12@G@Z",
+                                                       "dui70.dll.?SetContentString@Element@DirectUI@@QEAAJPEBG@Z",
+                                                       "dui70.dll.?SetLayoutPos@Element@DirectUI@@QEAAJH@Z",
+                                                       "dui70.dll.UiaOnToolTip",
+                                                       "dui70.dll.?EndDefer@Element@DirectUI@@QEAAXK@Z",
+                                                       "dui70.dll.?OnGroupChanged@HWNDElement@DirectUI@@UEAAXH_N@Z",
+                                                       "dui70.dll.?MessageCallback@Element@DirectUI@@UEAAIPEAUtagGMSG@@@Z",
+                                                       "dui70.dll.?Paint@Element@DirectUI@@UEAAXPEAUHDC__@@PEBUtagRECT@@1PEAU4@2@Z",
+                                                       "dui70.dll.?Destroy@DUIXmlParser@DirectUI@@QEAAXXZ",
+                                                       "dui70.dll.?HandleUiaDestroyListener@Element@DirectUI@@UEAAXXZ",
+                                                       "dui70.dll.?OnDestroy@HWNDElement@DirectUI@@UEAAXXZ",
+                                                       "dui70.dll.?OnUnHosted@Element@DirectUI@@MEAAXPEAV12@@Z",
+                                                       "dui70.dll.??1HWNDElement@DirectUI@@UEAA@XZ",
+                                                       "dui70.dll.UnInitThread",
+                                                       "dui70.dll.UnInitProcessPriv"
+                                                     ],
+                                "executed_commands": [
+                                                       "--c1e7f8f2",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\618745DE41B0FB6B1D93.exe --c1e7f8f2",
+                                                       "\"C:\\Users\\comp\\AppData\\Local\\wndpaint\\wndpaint.exe\"",
+                                                       "--e2bb6d8a",
+                                                       "C:\\Users\\comp\\AppData\\Local\\wndpaint\\wndpaint.exe --e2bb6d8a"
+                                                     ],
+                                       "write_keys": [
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Action Center\\Checks\\{01979c6a-42fa-414c-b8aa-eee2c8202018}.check.100\\CheckSetting"
+                                                     ],
+                                            "files": [
+                                                       "C:\\",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\618745DE41B0FB6B1D93.exe",
+                                                       "C:\\Users\\comp\\AppData\\Local\\cplfsi\\cplfsi.exe",
+                                                       "C:\\Users\\",
+                                                       "C:\\Users\\comp\\",
+                                                       "C:\\Users\\comp\\AppData\\",
+                                                       "C:\\Users\\comp\\AppData\\Local\\",
+                                                       "C:\\Users\\comp\\AppData\\Local\\wndpaint\\",
+                                                       "C:\\Windows\\SysWOW64\\shell32.dll",
+                                                       "C:\\Users\\comp\\AppData\\Local\\wndpaint\\wndpaint.exe",
+                                                       "C:\\Users",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Microsoft\\Windows\\Caches",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Microsoft\\Windows\\Caches\\cversions.1.db",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Microsoft\\Windows\\Caches\\{AFBF9F1A-8EE8-4C77-AF34-C647E37CA0D9}.1.ver0x0000000000000003.db",
+                                                       "C:\\Users\\desktop.ini",
+                                                       "C:\\Users\\comp",
+                                                       "C:\\Users\\comp\\AppData",
+                                                       "C:\\Users\\comp\\AppData\\Local",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp",
+                                                       "\\??\\MountPointManager",
+                                                       "C:\\Users\\comp\\AppData\\Local\\wndpaint",
+                                                       "C:\\Windows\\SysWOW64\\propsys.dll",
+                                                       "C:\\Windows\\sysnative\\propsys.dll",
+                                                       "C:\\Windows\\SysWOW64\\en-US\\SHELL32.DLL.mui",
+                                                       "C:\\Users\\comp\\AppData\\Local\\wndpaint\\wndpaint.exe:Zone.Identifier",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Microsoft\\Windows\\Burn",
+                                                       "C:\\Windows\\sysnative\\timedate.cpl.3.Manifest",
+                                                       "C:\\Windows\\explorer.exe",
+                                                       "C:\\Windows"
+                                                     ],
+                                       "read_files": [
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\618745DE41B0FB6B1D93.exe",
+                                                       "C:\\Windows\\SysWOW64\\shell32.dll",
+                                                       "C:\\",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Microsoft\\Windows\\Caches\\cversions.1.db",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Microsoft\\Windows\\Caches\\{AFBF9F1A-8EE8-4C77-AF34-C647E37CA0D9}.1.ver0x0000000000000003.db",
+                                                       "C:\\Users\\desktop.ini",
+                                                       "C:\\Users",
+                                                       "C:\\Users\\comp",
+                                                       "C:\\Users\\comp\\AppData",
+                                                       "C:\\Users\\comp\\AppData\\Local",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp",
+                                                       "C:\\Windows\\SysWOW64\\en-US\\SHELL32.DLL.mui",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Microsoft\\Windows\\Burn",
+                                                       "C:\\Windows\\sysnative\\timedate.cpl.3.Manifest"
+                                                     ],
+                                 "started_services": [],
+                                 "created_services": [],
+                                      "write_files": [
+                                                       "C:\\Users\\comp\\AppData\\Local\\wndpaint\\wndpaint.exe"
+                                                     ],
+                                      "delete_keys": [],
+                                        "read_keys": [
+                                                       "DisableUserModeCallbackFilter",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CustomLocale\\en-US",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\ExtendedLocale\\en-US",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\WINDOWS NT\\CURRENTVERSION\\GRE_Initialize\\DisableMetaFiles",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\NoFileFolderConnection",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoPropertiesMyComputer",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoPropertiesRecycleBin",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoControlPanel",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoSetFolders",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoInternetIcon",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoCommonGroups",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\Attributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\CallForAttributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\RestrictedAttributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsFORDISPLAY",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\HideFolderVerbs",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\UseDropHandler",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsFORPARSING",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsParseDisplayName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\QueryForOverlay",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\MapNetDriveVerbs",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\QueryForInfoTip",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\HideInWebView",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\HideOnDesktopPerUser",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsAliasedNotifications",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\WantsUniversalDelegate",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\NoFileFolderJunction",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\PinToNameSpaceTree",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\\ShellFolder\\HasNavigationEnum",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\NonEnum\\{20D04FE0-3AEA-1069-A2D8-08002B30309D}",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3476-f160-11ea-9f0e-806e6f6e6963}\\Data",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3476-f160-11ea-9f0e-806e6f6e6963}\\Generation",
+                                                       "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Lsa\\AccessProviders\\MartaExtension",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3475-f160-11ea-9f0e-806e6f6e6963}\\Data",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume\\{5f0c3475-f160-11ea-9f0e-806e6f6e6963}\\Generation",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\DontShowSuperHidden",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShellState",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoWebView",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\ClassicShell",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\SeparateProcess",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoNetCrawling",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoSimpleStartMenu",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\DontPrettyPath",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideIcons",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\MapNetDrvBtn",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\WebView",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Filter",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\NoNetCrawling",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\AutoCheckSelect",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\AllowFileCLSIDJunctions",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\.exe\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\exefile\\DocObject",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\SystemFileAssociations\\.exe\\DocObject",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\exefile\\BrowseInPlace",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\SystemFileAssociations\\.exe\\BrowseInPlace",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\.exe\\Content Type",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\exefile\\IsShortcut",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\SystemFileAssociations\\.exe\\IsShortcut",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\exefile\\AlwaysShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\SystemFileAssociations\\.exe\\AlwaysShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\exefile\\NeverShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\SystemFileAssociations\\.exe\\NeverShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\PropertySystem\\PropertyHandlers\\.exe\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{66742402-F9B9-11D1-A202-0000F81FEDEE}\\DisableProcessIsolation",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{66742402-F9B9-11D1-A202-0000F81FEDEE}\\NoOplock",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{66742402-F9B9-11D1-A202-0000F81FEDEE}\\UseInProcHandlerCache",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Wow6432Node\\CLSID\\{66742402-F9B9-11D1-A202-0000F81FEDEE}\\UseOutOfProcHandlerCache",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\DocObject",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\DocObject",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\DocObject",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\BrowseInPlace",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\BrowseInPlace",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\BrowseInPlace",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\IsShortcut",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\IsShortcut",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\IsShortcut",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\AlwaysShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Directory\\NeverShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Folder\\NeverShowExt",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\AllFilesystemObjects\\NeverShowExt",
+                                                       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\MaxUndoItems",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\Advanced\\MaxUndoItems",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\ForceCopyACLWithFile",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\explorer\\MoveSecurityAttributes",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Policies\\Explorer\\NoEncryptOnMove",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\SideBySide\\PreferExternalManifest",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\MICROSOFT\\Windows\\CurrentVersion\\Group Policy\\History\\NetworkName",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\CLSID\\{7007ACC7-3202-11D1-AAD2-00805FC1270E}\\InProcServer32\\(Default)",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\CLSID\\{7007ACC7-3202-11D1-AAD2-00805FC1270E}\\InProcServer32\\LoadWithoutCOM",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\CLSID\\{21EC2020-3AEA-1069-A2DD-08002B30309D}\\SortOrderIndex",
+                                                       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\CLSID\\{7007ACC7-3202-11D1-AAD2-00805FC1270E}\\SortOrderIndex"
+                                                     ],
+                                     "delete_files": [
+                                                       "C:\\Users\\comp\\AppData\\Local\\cplfsi\\cplfsi.exe",
+                                                       "C:\\Users\\comp\\AppData\\Local\\Temp\\618745DE41B0FB6B1D93.exe",
+                                                       "C:\\Users\\comp\\AppData\\Local\\wndpaint\\wndpaint.exe:Zone.Identifier"
+                                                     ],
+                                          "mutexes": [
+                                                       "gcc-shmem-tdm2-use_fc_key",
+                                                       "gcc-shmem-tdm2-sjlj_once",
+                                                       "gcc-shmem-tdm2-fc_key",
+                                                       "Global\\I5C3A8244",
+                                                       "Global\\M5C3A8244"
+                                                     ]
+                             }
+               },
+     "static": {
+                  "pe": {
+                                    "icon_hash": null,
+                                     "sections": [
+                                                   {
+                                                              "raw_address": "0x00000400",
+                                                                     "name": ".text",
+                                                          "characteristics": "IMAGE_SCN_CNT_CODE|IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_EXECUTE|IMAGE_SCN_MEM_READ|IMAGE_SCN_ALIGN_16BYTES",
+                                                             "virtual_size": "0x000133c4",
+                                                          "virtual_address": "0x00001000",
+                                                             "size_of_data": "0x00013400",
+                                                                  "entropy": "6.15",
+                                                      "characteristics_raw": "0x60500060"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00013800",
+                                                                     "name": ".data",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE|IMAGE_SCN_ALIGN_32BYTES",
+                                                             "virtual_size": "0x00004a84",
+                                                          "virtual_address": "0x00015000",
+                                                             "size_of_data": "0x00004c00",
+                                                                  "entropy": "0.04",
+                                                      "characteristics_raw": "0xc0600040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00018400",
+                                                                     "name": ".rdata",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_ALIGN_32BYTES",
+                                                             "virtual_size": "0x00017aa0",
+                                                          "virtual_address": "0x0001a000",
+                                                             "size_of_data": "0x00017c00",
+                                                                  "entropy": "6.18",
+                                                      "characteristics_raw": "0x40600040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00000000",
+                                                                     "name": ".bss",
+                                                          "characteristics": "IMAGE_SCN_CNT_UNINITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE|IMAGE_SCN_ALIGN_32BYTES",
+                                                             "virtual_size": "0x0000102c",
+                                                          "virtual_address": "0x00032000",
+                                                             "size_of_data": "0x00000000",
+                                                                  "entropy": "0.00",
+                                                      "characteristics_raw": "0xc0600080"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00030000",
+                                                                     "name": ".edata",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_ALIGN_4BYTES",
+                                                             "virtual_size": "0x00000054",
+                                                          "virtual_address": "0x00034000",
+                                                             "size_of_data": "0x00000200",
+                                                                  "entropy": "1.02",
+                                                      "characteristics_raw": "0x40300040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00030200",
+                                                                     "name": ".idata",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE|IMAGE_SCN_ALIGN_4BYTES",
+                                                             "virtual_size": "0x00000c24",
+                                                          "virtual_address": "0x00035000",
+                                                             "size_of_data": "0x00000e00",
+                                                                  "entropy": "4.73",
+                                                      "characteristics_raw": "0xc0300040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00031000",
+                                                                     "name": ".CRT",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE|IMAGE_SCN_ALIGN_4BYTES",
+                                                             "virtual_size": "0x00000034",
+                                                          "virtual_address": "0x00036000",
+                                                             "size_of_data": "0x00000200",
+                                                                  "entropy": "0.26",
+                                                      "characteristics_raw": "0xc0300040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00031200",
+                                                                     "name": ".tls",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE|IMAGE_SCN_ALIGN_4BYTES",
+                                                             "virtual_size": "0x00000020",
+                                                          "virtual_address": "0x00037000",
+                                                             "size_of_data": "0x00000200",
+                                                                  "entropy": "0.22",
+                                                      "characteristics_raw": "0xc0300040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00031400",
+                                                                     "name": ".rsrc",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_READ|IMAGE_SCN_MEM_WRITE|IMAGE_SCN_ALIGN_4BYTES",
+                                                             "virtual_size": "0x000000dc",
+                                                          "virtual_address": "0x00038000",
+                                                             "size_of_data": "0x00000200",
+                                                                  "entropy": "1.53",
+                                                      "characteristics_raw": "0xc0300040"
+                                                   },
+                                                   {
+                                                              "raw_address": "0x00031600",
+                                                                     "name": ".reloc",
+                                                          "characteristics": "IMAGE_SCN_CNT_INITIALIZED_DATA|IMAGE_SCN_MEM_DISCARDABLE|IMAGE_SCN_MEM_READ|IMAGE_SCN_ALIGN_4BYTES",
+                                                             "virtual_size": "0x00001044",
+                                                          "virtual_address": "0x00039000",
+                                                             "size_of_data": "0x00001200",
+                                                                  "entropy": "6.26",
+                                                      "characteristics_raw": "0x42300040"
+                                                   }
+                                                 ],
+                              "peid_signatures": null,
+                                   "entrypoint": "0x004014c0",
+                                      "exports": [
+                                                   {
+                                                         "name": "fsgjhghjfdFADZxcRFTg",
+                                                      "ordinal": 1,
+                                                      "address": "0x4032f9"
+                                                   }
+                                                 ],
+                                      "overlay": {
+                                                    "offset": "0x00032800",
+                                                      "size": "0x000000aa"
+                                                 },
+                              "digital_signers": [],
+                                      "imphash": "0c02dc405eb4428f7787a1883dd7568c",
+                            "reported_checksum": "0x0003759f",
+                                         "icon": null,
+                                "guest_signers": {
+                                                         "aux_error": true,
+                                                          "aux_sha1": null,
+                                                     "aux_timestamp": null,
+                                                         "aux_valid": false,
+                                                       "aux_signers": [],
+                                                    "aux_error_desc": "No signature found. SignTool Error File not valid C\\Users\\comp\\AppData\\Local\\Temp\\618745DE41B0FB6B1D93.exe"
+                                                 },
+                              "actual_checksum": "0x00033ec6",
+                                      "imports": [
+                                                   {
+                                                          "dll": "ADVAPI32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "SetFileSecurityW",
+                                                                      "address": "0x435258"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "GDI32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "CreateFontA",
+                                                                      "address": "0x435260"
+                                                                   },
+                                                                   {
+                                                                         "name": "DeleteObject",
+                                                                      "address": "0x435264"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "KERNEL32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "AddAtomA",
+                                                                      "address": "0x43526c"
+                                                                   },
+                                                                   {
+                                                                         "name": "CloseHandle",
+                                                                      "address": "0x435270"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateDirectoryA",
+                                                                      "address": "0x435274"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateMutexA",
+                                                                      "address": "0x435278"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateSemaphoreA",
+                                                                      "address": "0x43527c"
+                                                                   },
+                                                                   {
+                                                                         "name": "DeleteCriticalSection",
+                                                                      "address": "0x435280"
+                                                                   },
+                                                                   {
+                                                                         "name": "EnterCriticalSection",
+                                                                      "address": "0x435284"
+                                                                   },
+                                                                   {
+                                                                         "name": "FindAtomA",
+                                                                      "address": "0x435288"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetAtomNameA",
+                                                                      "address": "0x43528c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCurrentDirectoryA",
+                                                                      "address": "0x435290"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCurrentProcess",
+                                                                      "address": "0x435294"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCurrentProcessId",
+                                                                      "address": "0x435298"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetCurrentThreadId",
+                                                                      "address": "0x43529c"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetLastError",
+                                                                      "address": "0x4352a0"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetModuleHandleA",
+                                                                      "address": "0x4352a4"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetProcAddress",
+                                                                      "address": "0x4352a8"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetStartupInfoA",
+                                                                      "address": "0x4352ac"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetSystemTimeAsFileTime",
+                                                                      "address": "0x4352b0"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetTickCount",
+                                                                      "address": "0x4352b4"
+                                                                   },
+                                                                   {
+                                                                         "name": "InitializeCriticalSection",
+                                                                      "address": "0x4352b8"
+                                                                   },
+                                                                   {
+                                                                         "name": "IsDBCSLeadByteEx",
+                                                                      "address": "0x4352bc"
+                                                                   },
+                                                                   {
+                                                                         "name": "LeaveCriticalSection",
+                                                                      "address": "0x4352c0"
+                                                                   },
+                                                                   {
+                                                                         "name": "LoadLibraryW",
+                                                                      "address": "0x4352c4"
+                                                                   },
+                                                                   {
+                                                                         "name": "MultiByteToWideChar",
+                                                                      "address": "0x4352c8"
+                                                                   },
+                                                                   {
+                                                                         "name": "QueryPerformanceCounter",
+                                                                      "address": "0x4352cc"
+                                                                   },
+                                                                   {
+                                                                         "name": "ReleaseMutex",
+                                                                      "address": "0x4352d0"
+                                                                   },
+                                                                   {
+                                                                         "name": "ReleaseSemaphore",
+                                                                      "address": "0x4352d4"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetLastError",
+                                                                      "address": "0x4352d8"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetUnhandledExceptionFilter",
+                                                                      "address": "0x4352dc"
+                                                                   },
+                                                                   {
+                                                                         "name": "Sleep",
+                                                                      "address": "0x4352e0"
+                                                                   },
+                                                                   {
+                                                                         "name": "TerminateProcess",
+                                                                      "address": "0x4352e4"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsAlloc",
+                                                                      "address": "0x4352e8"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsFree",
+                                                                      "address": "0x4352ec"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsGetValue",
+                                                                      "address": "0x4352f0"
+                                                                   },
+                                                                   {
+                                                                         "name": "TlsSetValue",
+                                                                      "address": "0x4352f4"
+                                                                   },
+                                                                   {
+                                                                         "name": "UnhandledExceptionFilter",
+                                                                      "address": "0x4352f8"
+                                                                   },
+                                                                   {
+                                                                         "name": "VirtualProtect",
+                                                                      "address": "0x4352fc"
+                                                                   },
+                                                                   {
+                                                                         "name": "VirtualQuery",
+                                                                      "address": "0x435300"
+                                                                   },
+                                                                   {
+                                                                         "name": "WaitForSingleObject",
+                                                                      "address": "0x435304"
+                                                                   },
+                                                                   {
+                                                                         "name": "WideCharToMultiByte",
+                                                                      "address": "0x435308"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "msvcrt.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "_write",
+                                                                      "address": "0x435310"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "msvcrt.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "__dllonexit",
+                                                                      "address": "0x435318"
+                                                                   },
+                                                                   {
+                                                                         "name": "__getmainargs",
+                                                                      "address": "0x43531c"
+                                                                   },
+                                                                   {
+                                                                         "name": "__initenv",
+                                                                      "address": "0x435320"
+                                                                   },
+                                                                   {
+                                                                         "name": "__lconv_init",
+                                                                      "address": "0x435324"
+                                                                   },
+                                                                   {
+                                                                         "name": "__mb_cur_max",
+                                                                      "address": "0x435328"
+                                                                   },
+                                                                   {
+                                                                         "name": "__set_app_type",
+                                                                      "address": "0x43532c"
+                                                                   },
+                                                                   {
+                                                                         "name": "__setusermatherr",
+                                                                      "address": "0x435330"
+                                                                   },
+                                                                   {
+                                                                         "name": "_acmdln",
+                                                                      "address": "0x435334"
+                                                                   },
+                                                                   {
+                                                                         "name": "_amsg_exit",
+                                                                      "address": "0x435338"
+                                                                   },
+                                                                   {
+                                                                         "name": "_cexit",
+                                                                      "address": "0x43533c"
+                                                                   },
+                                                                   {
+                                                                         "name": "_errno",
+                                                                      "address": "0x435340"
+                                                                   },
+                                                                   {
+                                                                         "name": "_fmode",
+                                                                      "address": "0x435344"
+                                                                   },
+                                                                   {
+                                                                         "name": "_initterm",
+                                                                      "address": "0x435348"
+                                                                   },
+                                                                   {
+                                                                         "name": "_iob",
+                                                                      "address": "0x43534c"
+                                                                   },
+                                                                   {
+                                                                         "name": "_lock",
+                                                                      "address": "0x435350"
+                                                                   },
+                                                                   {
+                                                                         "name": "_onexit",
+                                                                      "address": "0x435354"
+                                                                   },
+                                                                   {
+                                                                         "name": "_unlock",
+                                                                      "address": "0x435358"
+                                                                   },
+                                                                   {
+                                                                         "name": "abort",
+                                                                      "address": "0x43535c"
+                                                                   },
+                                                                   {
+                                                                         "name": "atoi",
+                                                                      "address": "0x435360"
+                                                                   },
+                                                                   {
+                                                                         "name": "calloc",
+                                                                      "address": "0x435364"
+                                                                   },
+                                                                   {
+                                                                         "name": "exit",
+                                                                      "address": "0x435368"
+                                                                   },
+                                                                   {
+                                                                         "name": "fputc",
+                                                                      "address": "0x43536c"
+                                                                   },
+                                                                   {
+                                                                         "name": "fputs",
+                                                                      "address": "0x435370"
+                                                                   },
+                                                                   {
+                                                                         "name": "free",
+                                                                      "address": "0x435374"
+                                                                   },
+                                                                   {
+                                                                         "name": "fwrite",
+                                                                      "address": "0x435378"
+                                                                   },
+                                                                   {
+                                                                         "name": "getenv",
+                                                                      "address": "0x43537c"
+                                                                   },
+                                                                   {
+                                                                         "name": "localeconv",
+                                                                      "address": "0x435380"
+                                                                   },
+                                                                   {
+                                                                         "name": "malloc",
+                                                                      "address": "0x435384"
+                                                                   },
+                                                                   {
+                                                                         "name": "memcmp",
+                                                                      "address": "0x435388"
+                                                                   },
+                                                                   {
+                                                                         "name": "memcpy",
+                                                                      "address": "0x43538c"
+                                                                   },
+                                                                   {
+                                                                         "name": "memset",
+                                                                      "address": "0x435390"
+                                                                   },
+                                                                   {
+                                                                         "name": "printf",
+                                                                      "address": "0x435394"
+                                                                   },
+                                                                   {
+                                                                         "name": "realloc",
+                                                                      "address": "0x435398"
+                                                                   },
+                                                                   {
+                                                                         "name": "setlocale",
+                                                                      "address": "0x43539c"
+                                                                   },
+                                                                   {
+                                                                         "name": "signal",
+                                                                      "address": "0x4353a0"
+                                                                   },
+                                                                   {
+                                                                         "name": "sprintf",
+                                                                      "address": "0x4353a4"
+                                                                   },
+                                                                   {
+                                                                         "name": "strchr",
+                                                                      "address": "0x4353a8"
+                                                                   },
+                                                                   {
+                                                                         "name": "strcmp",
+                                                                      "address": "0x4353ac"
+                                                                   },
+                                                                   {
+                                                                         "name": "strcpy",
+                                                                      "address": "0x4353b0"
+                                                                   },
+                                                                   {
+                                                                         "name": "strerror",
+                                                                      "address": "0x4353b4"
+                                                                   },
+                                                                   {
+                                                                         "name": "strlen",
+                                                                      "address": "0x4353b8"
+                                                                   },
+                                                                   {
+                                                                         "name": "strncmp",
+                                                                      "address": "0x4353bc"
+                                                                   },
+                                                                   {
+                                                                         "name": "wcslen",
+                                                                      "address": "0x4353c0"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "SHELL32.DLL",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "SHBrowseForFolderA",
+                                                                      "address": "0x4353c8"
+                                                                   },
+                                                                   {
+                                                                         "name": "SHGetMalloc",
+                                                                      "address": "0x4353cc"
+                                                                   },
+                                                                   {
+                                                                         "name": "SHGetPathFromIDListA",
+                                                                      "address": "0x4353d0"
+                                                                   }
+                                                                 ]
+                                                   },
+                                                   {
+                                                          "dll": "USER32.dll",
+                                                      "imports": [
+                                                                   {
+                                                                         "name": "CallWindowProcA",
+                                                                      "address": "0x4353d8"
+                                                                   },
+                                                                   {
+                                                                         "name": "CreateWindowExA",
+                                                                      "address": "0x4353dc"
+                                                                   },
+                                                                   {
+                                                                         "name": "DialogBoxParamA",
+                                                                      "address": "0x4353e0"
+                                                                   },
+                                                                   {
+                                                                         "name": "EnableWindow",
+                                                                      "address": "0x4353e4"
+                                                                   },
+                                                                   {
+                                                                         "name": "EndDialog",
+                                                                      "address": "0x4353e8"
+                                                                   },
+                                                                   {
+                                                                         "name": "FindWindowExA",
+                                                                      "address": "0x4353ec"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetClientRect",
+                                                                      "address": "0x4353f0"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetParent",
+                                                                      "address": "0x4353f4"
+                                                                   },
+                                                                   {
+                                                                         "name": "GetWindowTextA",
+                                                                      "address": "0x4353f8"
+                                                                   },
+                                                                   {
+                                                                         "name": "MessageBoxA",
+                                                                      "address": "0x4353fc"
+                                                                   },
+                                                                   {
+                                                                         "name": "SendMessageA",
+                                                                      "address": "0x435400"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetWindowLongA",
+                                                                      "address": "0x435404"
+                                                                   },
+                                                                   {
+                                                                         "name": "SetWindowTextA",
+                                                                      "address": "0x435408"
+                                                                   }
+                                                                 ]
+                                                   }
+                                                 ],
+                            "exported_dll_name": "Project3.exe",
+                                      "dirents": [
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXPORT",
+                                                      "virtual_address": "0x00034000",
+                                                                 "size": "0x00000054"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IMPORT",
+                                                      "virtual_address": "0x00035000",
+                                                                 "size": "0x00000c24"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESOURCE",
+                                                      "virtual_address": "0x00038000",
+                                                                 "size": "0x000000dc"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_EXCEPTION",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_SECURITY",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BASERELOC",
+                                                      "virtual_address": "0x00039000",
+                                                                 "size": "0x00001044"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DEBUG",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COPYRIGHT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_GLOBALPTR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_TLS",
+                                                      "virtual_address": "0x00037000",
+                                                                 "size": "0x00000018"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_IAT",
+                                                      "virtual_address": "0x00035258",
+                                                                 "size": "0x000001b8"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   },
+                                                   {
+                                                                 "name": "IMAGE_DIRECTORY_ENTRY_RESERVED",
+                                                      "virtual_address": "0x00000000",
+                                                                 "size": "0x00000000"
+                                                   }
+                                                 ],
+                                  "versioninfo": [],
+                                    "resources": [
+                                                   {
+                                                             "name": "RT_DIALOG",
+                                                         "filetype": null,
+                                                           "offset": "0x00038058",
+                                                         "language": "LANG_ENGLISH",
+                                                      "sublanguage": "SUBLANG_ENGLISH_US",
+                                                             "size": "0x00000082",
+                                                          "entropy": "3.17"
+                                                   }
+                                                 ],
+                                      "pdbpath": null,
+                                    "osversion": "4.0",
+                                   "icon_fuzzy": null,
+                                    "imagebase": "0x00400000",
+                           "imported_dll_count": 7,
+                                    "timestamp": "2019-11-13 07:14:24"
+                        }
+               }
+}

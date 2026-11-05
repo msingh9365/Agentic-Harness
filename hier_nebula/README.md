@@ -99,3 +99,11 @@ weights belong to a different vocabulary. So Avast needs
 * The `frozen` mode makes a quick experiment. The real test of the idea is
   `finetune`, where level 1 can learn to make chunk vectors that are useful
   for level 2.
+
+## Results so far
+
+See REPORT.md §7 and `results/hier/summary.md`. In short (Speakeasy testset,
+one run each): fine-tuned K = 8 beats fine-tuned K = 1 by +0.017 AUC (95%
+bootstrap interval [+0.015, +0.019]), mostly on long reports. Detection at
+FPR ≤ 1% did not clearly change. With frozen level 1, extra chunks give no
+gain. More seeds and epochs on a GPU are the next step.

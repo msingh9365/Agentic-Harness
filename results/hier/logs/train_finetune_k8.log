@@ -1,0 +1,5 @@
+mode=finetune task=binary K=8 train=67769 val=7529 test=17402 trainable params=5,465,090
+epoch 1: train loss 0.0705 val loss 0.0614 val auc 0.9986 (3123s)
+epoch 2: train loss 0.0336 val loss 0.0579 val auc 0.9987 (3110s)
+TEST {"n": 17402, "auc": 0.9638727548134446, "f1@0.5": 0.881431059047016, "acc@0.5": 0.8708769106999196, "tpr@fpr=0.001": 0.5427173103521651, "tpr@fpr=0.01": 0.7466751782104479, "tpr@fpr=0.1": 0.8686030428769018}
+ALL_FINETUNE_DONE

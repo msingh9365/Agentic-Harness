@@ -26,6 +26,9 @@ def main():
     ap.add_argument("--data", required=True)
     ap.add_argument("--runs", nargs="+", required=True)
     ap.add_argument("--out", default="results/hier/summary.md")
+    ap.add_argument("--compare", nargs="*", default=[],
+                    help="pairs 'i,j' of model indices (order of the per-family table) to bootstrap i minus j")
+    ap.add_argument("--n-boot", type=int, default=1000)
     a = ap.parse_args()
     meta = pd.read_csv(os.path.join(a.data, "meta.csv"))
     base = np.load(os.path.join(a.data, "nebula_score_chunk0.npy"))
@@ -53,13 +56,35 @@ def main():
         md.append(f"| {name} | {m['auc']:.4f} | {m['tpr@fpr=0.001']:.4f} | {m['tpr@fpr=0.01']:.4f} | "
                   f"{m['tpr@fpr=0.1']:.4f} | {f1} |")
 
+    names = [n for n in scores if "length" not in n]
+    # paired bootstrap: is a difference bigger than test-set noise?
+    if a.compare:
+        from sklearn.metrics import roc_auc_score, roc_curve
+        def tpr_at(yy, ss, f):
+            fpr, tpr, _ = roc_curve(yy, ss)
+            return tpr[fpr <= f].max()
+        rng = np.random.default_rng(0)
+        boots = [rng.integers(0, len(y), len(y)) for _ in range(a.n_boot)]
+        md += ["", f"## Paired bootstrap of differences ({a.n_boot} resamples of the test set)", "",
+               "Each resample draws test samples with replacement; both models are scored on the same draw. "
+               "95% interval = 2.5th–97.5th percentile of the difference. An interval that contains 0 means "
+               "the difference is within test-set noise. This does not cover training randomness (one seed per run).", "",
+               "| comparison | metric | difference | 95% interval |", "|---|---|---|---|"]
+        for pair in a.compare:
+            n1, n2 = [names[int(i)] for i in pair.split(",")]
+            for metric, fn in [("AUC", roc_auc_score), ("TPR @ FPR 0.1%", lambda yy, ss: tpr_at(yy, ss, 1e-3)),
+                               ("TPR @ FPR 1%", lambda yy, ss: tpr_at(yy, ss, 1e-2))]:
+                point = fn(y, scores[n1]) - fn(y, scores[n2])
+                d = [fn(y[b], scores[n1][b]) - fn(y[b], scores[n2][b]) for b in boots]
+                lo, hi = np.percentile(d, [2.5, 97.5])
+                md.append(f"| {n1} **minus** {n2} | {metric} | {point:+.4f} | [{lo:+.4f}, {hi:+.4f}] |")
+
     # per family detection rate at the threshold giving 1% FPR on test benign
     md += ["", "## Detection rate per family at 1% false-positive rate",
            "", "Threshold chosen on the test benign samples so that 1% of them are flagged; "
            "cell = share of that family's test samples flagged (raw count). "
            "`clean`/`windows_syswow64` rows show the false-positive rate.", ""]
     fam = meta.family.values[rows]
-    names = [n for n in scores if "length" not in n]
     md.append("| family | n | " + " | ".join(names) + " |")
     md.append("|---|---|" + "---|" * len(names))
     thr = {n: threshold_at_fpr(y, scores[n], 0.01) for n in names}

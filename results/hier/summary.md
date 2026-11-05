@@ -8,27 +8,45 @@ Test samples: 17,402 (9,399 malware, 8,003 benign). All models see the same samp
 | length only (number of tokens) | 0.5669 | 0.0038 | 0.0116 | 0.1455 | – |
 | two-level, frozen level 1, K=1 chunks | 0.9590 | 0.4780 | 0.7585 | 0.9068 | 0.8904 |
 | two-level, frozen level 1, K=8 chunks | 0.9582 | 0.4580 | 0.7585 | 0.9045 | 0.8947 |
+| two-level, finetune level 1, K=1 chunks | 0.9467 | 0.4968 | 0.7603 | 0.8495 | 0.8941 |
+| two-level, finetune level 1, K=8 chunks | 0.9639 | 0.5427 | 0.7467 | 0.8686 | 0.8814 |
+
+## Paired bootstrap of differences (1000 resamples of the test set)
+
+Each resample draws test samples with replacement; both models are scored on the same draw. 95% interval = 2.5th–97.5th percentile of the difference. An interval that contains 0 means the difference is within test-set noise. This does not cover training randomness (one seed per run).
+
+| comparison | metric | difference | 95% interval |
+|---|---|---|---|
+| two-level, finetune level 1, K=8 chunks **minus** two-level, finetune level 1, K=1 chunks | AUC | +0.0172 | [+0.0151, +0.0192] |
+| two-level, finetune level 1, K=8 chunks **minus** two-level, finetune level 1, K=1 chunks | TPR @ FPR 0.1% | +0.0460 | [-0.0295, +0.1270] |
+| two-level, finetune level 1, K=8 chunks **minus** two-level, finetune level 1, K=1 chunks | TPR @ FPR 1% | -0.0136 | [-0.0417, +0.0075] |
+| two-level, finetune level 1, K=8 chunks **minus** Nebula (released weights, first 512 tokens) | AUC | +0.0053 | [+0.0034, +0.0073] |
+| two-level, finetune level 1, K=8 chunks **minus** Nebula (released weights, first 512 tokens) | TPR @ FPR 0.1% | +0.0256 | [-0.0686, +0.5428] |
+| two-level, finetune level 1, K=8 chunks **minus** Nebula (released weights, first 512 tokens) | TPR @ FPR 1% | -0.0031 | [-0.0354, +0.0193] |
+| two-level, frozen level 1, K=8 chunks **minus** two-level, frozen level 1, K=1 chunks | AUC | -0.0008 | [-0.0016, +0.0001] |
+| two-level, frozen level 1, K=8 chunks **minus** two-level, frozen level 1, K=1 chunks | TPR @ FPR 0.1% | -0.0200 | [-0.0813, +0.0883] |
+| two-level, frozen level 1, K=8 chunks **minus** two-level, frozen level 1, K=1 chunks | TPR @ FPR 1% | +0.0000 | [-0.0203, +0.0133] |
 
 ## Detection rate per family at 1% false-positive rate
 
 Threshold chosen on the test benign samples so that 1% of them are flagged; cell = share of that family's test samples flagged (raw count). `clean`/`windows_syswow64` rows show the false-positive rate.
 
-| family | n | Nebula (released weights, first 512 tokens) | two-level, frozen level 1, K=1 chunks | two-level, frozen level 1, K=8 chunks |
-|---|---|---|---|---|
-| backdoor | 1,940 | 82.9% (1,608) | 82.2% (1,595) | 83.8% (1,626) |
-| clean | 7,944 | 1.0% (80) | 1.0% (80) | 1.0% (80) |
-| coinminer | 1,684 | 81.9% (1,380) | 79.5% (1,339) | 80.7% (1,359) |
-| dropper | 252 | 73.4% (185) | 71.8% (181) | 73.0% (184) |
-| keylogger | 1,041 | 52.2% (543) | 64.4% (670) | 58.3% (607) |
-| ransomware | 2,139 | 66.8% (1,428) | 66.5% (1,422) | 67.6% (1,446) |
-| rat | 1,258 | 85.5% (1,076) | 83.9% (1,056) | 83.9% (1,055) |
-| trojan | 1,085 | 76.2% (827) | 79.8% (866) | 78.5% (852) |
-| windows_syswow64 | 59 | 0.0% (0) | 0.0% (0) | 0.0% (0) |
+| family | n | Nebula (released weights, first 512 tokens) | two-level, frozen level 1, K=1 chunks | two-level, frozen level 1, K=8 chunks | two-level, finetune level 1, K=1 chunks | two-level, finetune level 1, K=8 chunks |
+|---|---|---|---|---|---|---|
+| backdoor | 1,940 | 82.9% (1,608) | 82.2% (1,595) | 83.8% (1,626) | 83.9% (1,628) | 80.0% (1,552) |
+| clean | 7,944 | 1.0% (80) | 1.0% (80) | 1.0% (80) | 1.0% (80) | 1.0% (80) |
+| coinminer | 1,684 | 81.9% (1,380) | 79.5% (1,339) | 80.7% (1,359) | 66.7% (1,123) | 66.3% (1,116) |
+| dropper | 252 | 73.4% (185) | 71.8% (181) | 73.0% (184) | 78.6% (198) | 77.4% (195) |
+| keylogger | 1,041 | 52.2% (543) | 64.4% (670) | 58.3% (607) | 84.4% (879) | 88.1% (917) |
+| ransomware | 2,139 | 66.8% (1,428) | 66.5% (1,422) | 67.6% (1,446) | 63.4% (1,356) | 60.4% (1,293) |
+| rat | 1,258 | 85.5% (1,076) | 83.9% (1,056) | 83.9% (1,055) | 86.6% (1,089) | 84.8% (1,067) |
+| trojan | 1,085 | 76.2% (827) | 79.8% (866) | 78.5% (852) | 80.5% (873) | 80.9% (878) |
+| windows_syswow64 | 59 | 0.0% (0) | 0.0% (0) | 0.0% (0) | 0.0% (0) | 0.0% (0) |
 
 ## AUC by report length (number of 512-token chunks)
 
-| chunks | n | malware share | Nebula (released weights, first 512 tokens) | two-level, frozen level 1, K=1 chunks | two-level, frozen level 1, K=8 chunks |
-|---|---|---|---|---|---|
-| 1 (fits in 512) | 6,359 | 44.9% | 0.9556 | 0.9663 | 0.9629 |
-| 2–3 | 6,077 | 60.5% | 0.9833 | 0.9830 | 0.9826 |
-| 4–8 | 4,966 | 57.8% | 0.9288 | 0.9256 | 0.9220 |
+| chunks | n | malware share | Nebula (released weights, first 512 tokens) | two-level, frozen level 1, K=1 chunks | two-level, frozen level 1, K=8 chunks | two-level, finetune level 1, K=1 chunks | two-level, finetune level 1, K=8 chunks |
+|---|---|---|---|---|---|---|---|
+| 1 (fits in 512) | 6,359 | 44.9% | 0.9556 | 0.9663 | 0.9629 | 0.9702 | 0.9726 |
+| 2–3 | 6,077 | 60.5% | 0.9833 | 0.9830 | 0.9826 | 0.9763 | 0.9817 |
+| 4–8 | 4,966 | 57.8% | 0.9288 | 0.9256 | 0.9220 | 0.9112 | 0.9358 |

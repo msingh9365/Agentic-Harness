@@ -484,3 +484,83 @@ Variant B:
 with **max 4–8 chunks** are enough (4 chunks cover 99.6% of tokens). On
 Speakeasy, 8 are needed. One setting of **chunk size 512 and max 8 chunks**
 therefore covers both datasets with Nebula's field choices.
+
+---
+
+## 7. First test of the two-level model
+
+Based on §4 and §6, I built the model with **fixed 512-token chunks (max 8)
+and a second-level Transformer** rather than one chunk per process. It is in
+[`hier_nebula/`](hier_nebula/README.md). Level 1 is Nebula itself
+(`TransformerEncoderChunks` with the released `bpe_50000_torch.model`
+weights), run on each chunk. Level 2 is a 2-layer Transformer over the
+chunk vectors with a [CLS] vector. A test checks that level 1 on the first
+chunk, followed by Nebula's own head, reproduces Nebula's original output
+exactly.
+
+**Setup.** Speakeasy only (no Nebula model was released for Avast). Training
+used the dataset's trainset (67,769 samples), with 10% held out (7,529, seed
+0) for choosing the best epoch, and evaluation on the testset (17,402). Two
+ways of training, each with K = 1 and K = 8 chunks:
+
+- **frozen:** Nebula's chunk vectors are fixed, and only level 2 is trained
+  (15 epochs, about 3–8 s per epoch on CPU);
+- **finetune:** both levels are trained end to end from the released weights
+  (2 epochs, batch 32, AdamW lr 3e-4, CPU: about 20 min per epoch for K = 1
+  and 52 min for K = 8).
+
+K = 1 is the fair comparison for K = 8: same model, same training, only the
+number of chunks differs. Logs are in `results/hier/logs/`.
+
+### 7.1 Results (test set)
+
+<!-- include: hier: Two-level Nebula: test-set results (Speakeasy testset) -->
+
+<!-- include: hier: Paired bootstrap of differences (1000 resamples of the test set) -->
+
+#### Where the gain comes from
+<!-- include: hier: AUC by report length (number of 512-token chunks) -->
+
+<!-- include: hier: Detection rate per family at 1% false-positive rate -->
+
+### 7.2 What this shows
+
+1. **Extra chunks help only when level 1 is trained too.** With frozen
+   Nebula vectors, K = 8 and K = 1 are the same (AUC difference −0.0008,
+   95% interval [−0.0016, +0.0001]). Nebula was trained only on the start of
+   reports, so its vectors for later chunks carry little extra information
+   until it is fine-tuned.
+2. **With fine-tuning, reading 8 chunks raises AUC.** Fine-tuned K = 8 beats
+   fine-tuned K = 1 by +0.0172 AUC [+0.0151, +0.0192], and the released
+   Nebula by +0.0053 [+0.0034, +0.0073]. The gain is largest on long reports
+   (4–8 chunks: AUC 0.9358 vs 0.9112 for K = 1 and 0.9288 for Nebula), which
+   is where the extra chunks have content.
+3. **Detection at low false-positive rates did not clearly improve.** At FPR
+   1% and 0.1%, all bootstrap intervals include 0. At FPR 1%, all models
+   detect 74.7%–76.0% of malware. TPR at FPR 0.1% depends on fewer than 10
+   benign samples and is very noisy (the K = 8 vs Nebula interval is
+   [−0.07, +0.54]).
+4. **Fine-tuning itself moves families around more than the chunk count
+   does.** Keylogger detection at FPR 1% goes from 52.2% (Nebula) to 84.4%
+   (fine-tuned, K = 1) and 88.1% (K = 8). Coinminer drops from 81.9% to
+   66.7% and 66.3%. These changes appear with both K = 1 and K = 8, so they
+   come from training on the January data, not from reading more chunks.
+5. **Length alone is weak here** (AUC 0.567), so the gain in point 2 is not
+   simply the model counting chunks. But per-family length effects (§2.3)
+   still apply, and should be checked with more runs.
+
+### 7.3 Limits of this first test
+
+- **One training run per setting, only 2 fine-tune epochs, on CPU.** The
+  bootstrap intervals cover test-set sampling, not training randomness. The
+  fine-tuned K = 1 run ended *below* the released Nebula on AUC (0.9467 vs
+  0.9586), which shows training variation is large. Before claiming a
+  result, repeat each setting with 3–5 seeds and more epochs on a GPU (the
+  commands are in `hier_nebula/README.md`).
+- **Validation AUC is about 0.999 in every run.** The released Nebula was
+  presumably trained on these training samples, so validation cannot rank
+  models well. Choose epochs with a time-based validation split, or by
+  validation loss.
+- **Only binary malware/benign on Speakeasy was run.** Multi-class
+  (`--task multiclass`) and Avast (`--scratch --mode finetune`) are
+  implemented but not yet run.

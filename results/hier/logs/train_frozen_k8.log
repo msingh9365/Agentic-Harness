@@ -1,0 +1,18 @@
+mode=frozen task=binary K=8 train=67769 val=7529 test=17402 trainable params=67,777
+epoch 1: train loss 0.0947 val loss 0.0527 val auc 0.9982 (7s)
+epoch 2: train loss 0.0440 val loss 0.0423 val auc 0.9987 (7s)
+epoch 3: train loss 0.0398 val loss 0.0406 val auc 0.9987 (7s)
+epoch 4: train loss 0.0376 val loss 0.0403 val auc 0.9988 (7s)
+epoch 5: train loss 0.0368 val loss 0.0400 val auc 0.9988 (7s)
+epoch 6: train loss 0.0352 val loss 0.0400 val auc 0.9988 (7s)
+epoch 7: train loss 0.0346 val loss 0.0412 val auc 0.9988 (8s)
+epoch 8: train loss 0.0335 val loss 0.0393 val auc 0.9987 (7s)
+epoch 9: train loss 0.0328 val loss 0.0392 val auc 0.9989 (6s)
+epoch 10: train loss 0.0323 val loss 0.0391 val auc 0.9988 (6s)
+epoch 11: train loss 0.0315 val loss 0.0410 val auc 0.9988 (6s)
+epoch 12: train loss 0.0315 val loss 0.0383 val auc 0.9990 (6s)
+epoch 13: train loss 0.0306 val loss 0.0406 val auc 0.9987 (7s)
+epoch 14: train loss 0.0298 val loss 0.0392 val auc 0.9986 (7s)
+epoch 15: train loss 0.0291 val loss 0.0438 val auc 0.9986 (7s)
+TEST {"n": 17402, "auc": 0.9581877524197391, "f1@0.5": 0.8947035482201392, "acc@0.5": 0.894782208941501, "tpr@fpr=0.001": 0.4580274497286945, "tpr@fpr=0.01": 0.7584849452069369, "tpr@fpr=0.1": 0.9044579210554314}
+NEBULA BASELINE (first 512 tokens) {"n": 17402, "auc": 0.9585963394911077, "f1@0.5": 0.8853536226871865, "acc@0.5": 0.8857027927824388, "tpr@fpr=0.001": 0.5170762847111395, "tpr@fpr=0.01": 0.7497606128311523, "tpr@fpr=0.1": 0.8947760400042558}

@@ -131,7 +131,10 @@ def cmd_train(a):
                          "for other datasets use --scratch --mode finetune.")
     tr, va, te = splits(meta, seed=a.seed)
     if a.limit:
-        tr, va, te = tr[:a.limit], va[:max(1, a.limit // 10)], te[:max(1, a.limit // 5)]
+        # random subsets (the rows are stored folder by folder, so a plain slice would be one class)
+        tr = tr[:a.limit]
+        va = rng.permutation(va)[:max(1, a.limit // 10)]
+        te = rng.permutation(te)[:max(1, a.limit // 5)]
     level1 = build_level1(a.nebula, vocab_size=a.vocab_size, pretrained=not a.scratch)
     model = HierNebula(level1, max_chunks=a.max_chunks, num_classes=num_classes, n_layers=a.layers,
                        dropout=a.dropout)

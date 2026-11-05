@@ -7,10 +7,16 @@ report identical to what analyze.py produced."""
 import re
 import sys
 
-tables = open("results/tables.md").read().splitlines()
+SOURCES = {"": "results/tables.md", "avast": "results/avast/tables.md"}
+TABLES = {k: open(v).read().splitlines() for k, v in SOURCES.items() if __import__("os").path.exists(v)}
 
 
 def block(heading):
+    # "<!-- include: avast: Heading -->" reads results/avast/tables.md
+    src = ""
+    if ":" in heading and heading.split(":", 1)[0].strip() in SOURCES:
+        src, heading = heading.split(":", 1)[0].strip(), heading.split(":", 1)[1].strip()
+    tables = TABLES[src]
     for i, line in enumerate(tables):
         if line.startswith("#") and line.lstrip("#").strip() == heading:
             out = []

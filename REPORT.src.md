@@ -338,3 +338,61 @@ So I measured on the raw files (Git LFS clone of dataset revision
   count. The full non-streaming `load_dataset` fails on this repository (log
   linked in §1.2). All measurements use the raw JSON files at the same
   dataset revision, which is also how Nebula's own preprocessing reads them.
+
+---
+
+## 6. Second sandbox: Avast-CTU Public CAPEv2
+
+Sections 1–5 cover Speakeasy, an emulator. This section repeats the 512-cut
+measurement on reports from a real sandbox, CAPEv2. The data is the
+**Avast-CTU Public CAPEv2 dataset**
+(<https://github.com/avast/avast-ctu-cape-dataset>, repository commit
+`b4210e5caf2829fbef13a49b40a7690d1b805ab5`), **reduced reports** version
+(48,976 reports, MIT licence). A third sandbox ("mcd") is left for later.
+
+### 6.1 Method, and how it differs from Speakeasy
+
+**What the data contains.** Each reduced report has `behavior.summary` (13
+lists: `keys`, `resolved_apis`, `executed_commands`, `write_keys`, `files`,
+`read_files`, `started_services`, `created_services`, `write_files`,
+`delete_keys`, `read_keys`, `delete_files`, `mutexes`) and `static.pe`.
+Labels (family, type, detection date) come from `public_labels.csv`.
+Compared with Speakeasy:
+
+- **Every report is malware** (10 families). There is no benign class, so
+  the malware-vs-benign comparison cannot be made. Length as a shortcut is
+  checked family against family instead.
+- **There is no time-ordered API trace and no process tree.**
+  `resolved_apis` is the *set* of API names the program looked up.
+  Per-process calls exist only in the full reports (13 GB download), so the
+  entry-point / per-process chunking analysis (§2.5) **cannot be repeated on
+  this data**. Only fixed 512-token chunks are measured.
+
+**Preprocessing.** Nebula has no finished Avast pipeline (no Avast tokenizer
+ships in `nebula/objects/`). The study follows the two pieces of Avast code
+that Nebula does have:
+
+| step | source in Nebula | used here |
+|---|---|---|
+| fields | `scripts/concept-testing/preprocessing/avast_1_preprocessing/initial.ipynb` keeps `behavior.summary.resolved_apis` and `.mutexes`, each value lower-cased | **variant A**, same fields, same order (`resolved_apis` first) |
+| train/test split | same notebook: detection date before `2019-08-01` = train | same: 37,512 train / 11,464 test |
+| tokenizer | `preprocess_nebula_avast()` in `nebula/preprocessing/wrappers.py` trains a new `JSONTokenizerBPE` (vocab 50,000, `JSON_CLEANUP_SYMBOLS`, `stopwords=[]`) on the training split | same call, `JSONTokenizerBPE.train()`, on all 37,512 training records (variant A) |
+| cut | `pad_sequence()` keeps the first 512 tokens | same |
+
+**Variant B** is my own sensitivity check, not Nebula code. It keeps all 13
+summary lists (lower-cased, in the order they are stored in the reports),
+with its own 50k BPE tokenizer. That tokenizer was trained on 5,000 random
+training reports (seed 0), to keep SentencePiece's training time and memory
+manageable: the 13 lists are much larger than the two in variant A. Variant B shows how
+much the answer depends on the field choice.
+
+The Nebula notebook was written as concept testing, and Nebula's README warns
+that those files may not match the paper. So treat the Avast numbers as
+"Nebula-style", not as an exact reproduction of the paper's Avast setup.
+
+Scripts: `measure_avast.py` (tokenizer training + measurement),
+`analyze_avast.py` (tables, plots, Speakeasy comparison),
+`make_avast_examples.py` (example reports in `examples/avast/`).
+Tables: [`results/avast/tables.md`](results/avast/tables.md).
+
+<!-- AVAST_RESULTS -->

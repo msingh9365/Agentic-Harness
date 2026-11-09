@@ -8,7 +8,8 @@ of a report and returns the 64-d vector of Nebula's first classifier layer
 
 Level 2 is a small Transformer over the sequence of chunk vectors:
     [CLS] + chunk vectors  ->  + learned chunk-position embedding
-    -> TransformerEncoder (padding chunks masked)  ->  LayerNorm(CLS)  ->  Linear
+    -> TransformerEncoder (padding chunks masked)
+    -> pooling: CLS (default), mean or max over the real chunks  ->  LayerNorm  ->  Linear
 
 With one chunk and level 2 removed this is exactly Nebula, so Nebula is the
 natural baseline.
@@ -42,8 +43,11 @@ def build_level1(nebula_root: str, vocab_size: int, pretrained: bool = True) -> 
 
 class HierNebula(nn.Module):
     def __init__(self, level1: nn.Module, max_chunks: int = 8, d_model: int = 64, n_heads: int = 4,
-                 n_layers: int = 2, d_hidden: int = 128, dropout: float = 0.1, num_classes: int = 1):
+                 n_layers: int = 2, d_hidden: int = 128, dropout: float = 0.1, num_classes: int = 1,
+                 pool: str = "cls"):
         super().__init__()
+        assert pool in ("cls", "mean", "max"), pool
+        self.pool = pool
         self.level1 = level1
         self.max_chunks = max_chunks
         chunk_dim = level1.classifier_head[0][0].out_features      # 64 for the released Nebula
@@ -84,7 +88,15 @@ class HierNebula(nn.Module):
         x = x + self.pos(torch.arange(K + 1, device=x.device))
         pad = torch.cat([torch.zeros(B, 1, dtype=torch.bool, device=mask.device), ~mask], dim=1)
         x = self.level2(x, src_key_padding_mask=pad)
-        return self.head(self.norm(x[:, 0]))
+        if self.pool == "cls":
+            z = x[:, 0]
+        else:                                   # pool over the real chunks only (not CLS, not padding)
+            h, m = x[:, 1:], mask.unsqueeze(-1)
+            if self.pool == "mean":
+                z = (h * m).sum(1) / m.sum(1).clamp(min=1)
+            else:                               # "max": the most suspicious chunk per feature
+                z = h.masked_fill(~m, float("-inf")).max(1).values
+        return self.head(self.norm(z))
 
     def forward(self, ids: Tensor, mask: Tensor) -> Tensor:
         return self.classify(self.encode_chunks(ids, mask), mask)

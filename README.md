@@ -29,6 +29,7 @@ measure_avast.py     Avast-CTU length study (tokenizer training + measurement)
 analyze_avast.py     Avast tables, plots and the Speakeasy comparison
 make_avast_examples.py  copies 20 Avast example reports into examples/avast/
 hier_nebula/         two-level Nebula: 512-token chunks + second-level Transformer
+gpu/                 setup + experiment sweep for a GPU server, with step-by-step instructions
 examples/            the example samples, with their own README explaining the data
 results/             CSVs, tables.md, summary.json, pilot (sample2000_*) outputs
 results/logs/        console output of every run

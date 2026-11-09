@@ -107,3 +107,15 @@ one run each): fine-tuned K = 8 beats fine-tuned K = 1 by +0.017 AUC (95%
 bootstrap interval [+0.015, +0.019]), mostly on long reports. Detection at
 FPR ≤ 1% did not clearly change. With frozen level 1, extra chunks give no
 gain. More seeds and epochs on a GPU are the next step.
+
+## Training options added for the GPU sweep
+
+| option | meaning |
+|---|---|
+| `--device auto` | use the GPU if one is visible (default), else CPU; or `cuda`, `cuda:1`, `cpu` |
+| `--warmup-epochs N` | finetune mode: the first N epochs keep Nebula (level 1) frozen |
+| `--lr-level1 X` | separate, usually much smaller, learning rate for Nebula (level 1) |
+| `--select val_loss` | choose the best epoch by validation loss (default); `val_auc` was used for the first CPU runs |
+| `--pool cls/mean/max` | how level 2 sums up the chunks: [CLS] vector (default), average, or most suspicious chunk |
+
+The ready-made sweep and step-by-step server instructions are in [`../gpu/`](../gpu/README.md).

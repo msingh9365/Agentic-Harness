@@ -921,3 +921,237 @@ Threshold chosen on the test benign samples so that 1% of them are flagged; cell
 - **Only binary malware/benign on Speakeasy was run.** Multi-class
   (`--task multiclass`) and Avast (`--scratch --mode finetune`) are
   implemented but not yet run.
+
+---
+
+## 8. Data-flow links between calls
+
+Is there information that one 512-token chunk needs from another? One concrete
+kind is **data flow**: a call returns a handle or address, and a later call
+passes it back as an argument (`LoadLibraryA` → `GetProcAddress`,
+`HeapAlloc` → `HeapFree`). This section counts such links in the Speakeasy
+reports, and how often they cross chunk boundaries. It is evidence for (or
+against) adding "data-flow links between chunks" to the two-level model in
+§7.
+
+### 8.1 Method
+
+Scripts: `measure_links.py` (measurement) and `analyze_links.py` (tables and
+plot); all tables are in [`results/links/tables.md`](results/links/tables.md).
+
+- **Address-like value:** a string matching `^0x[0-9a-fA-F]+$` whose value is
+  ≥ `0x10000`.
+- **Link:** call *j* has an argument equal to the address-like return value of
+  an earlier call *i* (*i* < *j*). The producer is the **first** call that
+  returned the value, and each matching argument counts as one link.
+- **API sequence:** exactly what Nebula sees after
+  `filter_and_normalize_report()` (all entry points merged, same order). This
+  merged list is the entry points' calls joined in order, which is asserted
+  for every sample. Links are also counted inside each entry point
+  separately.
+- **Chunk of a call:** the 512-token chunk holding the call's first token in
+  Nebula's tokenized report. The report string is cut into the part before the
+  API list plus one piece per call. Each piece is tokenized with Nebula's own
+  `tokenizer.encode`, and it is **asserted** that the pieces' ids, joined,
+  equal the full report's ids. This held for **all 92,700 samples**, so the
+  character-offset fallback was never used. The two-level model reads chunks
+  0–7. A link with an end in a later chunk (only possible in the 194 reports
+  over 8 chunks) is counted separately, not as cross-chunk.
+- **Cross-chunk link:** both ends in chunks 0–7, in different chunks.
+  "Leaving chunk 0" means the producer is in Nebula's 512-token window and
+  the user is not.
+- **Checks:**
+  - *Sanity:* on the 21 example reports, counting by call index inside entry
+    points with ≥ 20 calls reproduces the reference counts exactly
+    ([log](results/logs/links_sanity.log)): 728 links in 19 entry points, 157
+    produced in the first 100 calls and used after them, and 124 spanning
+    more than 100 calls.
+  - *False-link check:* the counts are repeated with only producers from
+    handle-creating APIs (`Create*`, `Open*`, `Alloc*`, `LoadLibrary*`,
+    `GetProcAddress`, `GetModuleHandle*`, `RegOpen*`, `RegCreate*`, `socket`,
+    `connect`).
+  - *Chance baseline:* each sample's calls are put in a random order (one
+    fixed shuffle per sample), and links and token positions are recomputed.
+- **Runs:** a 2,000-sample pilot (seed 0;
+  [tables](results/links/pilot2000_tables.md)), then all 92,700 samples (12
+  min on 4 cores; [log](results/logs/links_full.log)).
+
+### 8.2 Main results
+
+Merged = over the API list as Nebula sees it (entry points merged, same order).
+
+| set | samples | links | links per sample (mean) | cross-chunk links | links leaving chunk 0 | links with an end beyond chunk 7 | samples with ≥1 link | samples with ≥1 cross-chunk link |
+|---|---|---|---|---|---|---|---|---|
+| all | 92,700 | 3,500,779 | 37.8 | 26.3% (920,330) | 22.4% (784,680) | 0.1% (2,667) | 82.8% (76,711) | 42.3% (39,253) |
+| trainset | 75,298 | 2,893,084 | 38.4 | 25.9% (748,495) | 21.7% (627,976) | 0.1% (2,618) | 82.3% (61,998) | 42.4% (31,947) |
+| testset | 17,402 | 607,695 | 34.9 | 28.3% (171,835) | 25.8% (156,704) | 0.0% (49) | 84.5% (14,713) | 42.0% (7,306) |
+
+Within each entry point (links restarted in every entry point):
+
+| set | samples | links | links per sample (mean) | cross-chunk links | links leaving chunk 0 | links with an end beyond chunk 7 | samples with ≥1 link | samples with ≥1 cross-chunk link |
+|---|---|---|---|---|---|---|---|---|
+| all | 92,700 | 3,500,500 | 37.8 | 26.3% (920,051) | 22.4% (784,515) | 0.1% (2,612) | 82.8% (76,711) | 42.3% (39,244) |
+| trainset | 75,298 | 2,892,907 | 38.4 | 25.9% (748,277) | 21.7% (627,811) | 0.1% (2,604) | 82.3% (61,998) | 42.4% (31,939) |
+| testset | 17,402 | 607,593 | 34.9 | 28.3% (171,774) | 25.8% (156,704) | 0.0% (8) | 84.5% (14,713) | 42.0% (7,305) |
+
+Merged links whose producer and user are in different entry points: 0.0% (659).
+
+By report length:
+| chunks | samples | links | links per sample (mean) | cross-chunk links | links leaving chunk 0 | links with an end beyond chunk 7 | samples with ≥1 link | samples with ≥1 cross-chunk link |
+|---|---|---|---|---|---|---|---|---|
+| 1 | 31,493 | 118,247 | 3.8 | 0.0% (0) | 0.0% (0) | 0.0% (0) | 50.1% (15,772) | 0.0% (0) |
+| 2–3 | 33,543 | 1,980,317 | 59.0 | 22.5% (446,070) | 21.0% (415,587) | 0.0% (0) | 99.7% (33,439) | 69.8% (23,402) |
+| 4–8 | 27,470 | 1,379,154 | 50.2 | 33.7% (464,489) | 26.5% (365,486) | 0.0% (0) | 99.4% (27,308) | 57.1% (15,688) |
+| >8 | 194 | 23,061 | 118.9 | 42.4% (9,771) | 15.6% (3,607) | 11.6% (2,667) | 99.0% (192) | 84.0% (163) |
+
+Reports that fit in one chunk cannot have cross-chunk links by definition.
+
+How far the cross-chunk links reach:
+| distance (chunks) | links | share of cross-chunk links |
+|---|---|---|
+| 1 | 622,823 | 67.7% |
+| 2 | 263,144 | 28.6% |
+| 3 | 22,472 | 2.4% |
+| 4 | 9,612 | 1.0% |
+| 5 | 1,367 | 0.1% |
+| 6 | 633 | 0.1% |
+| 7 | 279 | 0.0% |
+
+Within 1–2 chunks: 96.3% of cross-chunk links.
+
+Max chunk distance per sample: median 2 among samples with a cross-chunk link.
+
+What they are (top 20 producer → user pairs):
+| # | producer API | user API | links | share of cross-chunk links | samples |
+|---|---|---|---|---|---|
+| 1 | `KERNEL32.LoadLibraryA` | `KERNEL32.GetProcAddress` | 206,129 | 22.4% | 4,410 |
+| 2 | `KERNEL32.LoadLibraryExW` | `KERNEL32.GetProcAddress` | 182,702 | 19.9% | 11,881 |
+| 3 | `kernel32.LoadLibraryA` | `kernel32.GetProcAddress` | 104,448 | 11.3% | 5,593 |
+| 4 | `kernel32.GetModuleHandleW` | `user32.LoadStringW` | 73,707 | 8.0% | 1,893 |
+| 5 | `kernel32.GetModuleHandleA` | `kernel32.GetProcAddress` | 59,285 | 6.4% | 508 |
+| 6 | `kernel32.GetModuleHandleA` | `user32.LoadStringA` | 58,498 | 6.4% | 1,627 |
+| 7 | `KERNEL32.GetModuleHandleA` | `KERNEL32.GetProcAddress` | 47,045 | 5.1% | 2,778 |
+| 8 | `KERNEL32.GetModuleHandleW` | `KERNEL32.GetProcAddress` | 38,993 | 4.2% | 4,953 |
+| 9 | `KERNEL32.GetModuleHandleA` | `kernel32.GetProcAddress` | 23,070 | 2.5% | 1,653 |
+| 10 | `USER32.CharNextA` | `USER32.CharNextA` | 18,405 | 2.0% | 417 |
+| 11 | `USER32.CharNextW` | `USER32.CharNextW` | 18,265 | 2.0% | 643 |
+| 12 | `kernel32.EncodePointer` | `kernel32.DecodePointer` | 10,669 | 1.2% | 1,741 |
+| 13 | `KERNEL32.LoadLibraryA` | `kernel32.GetProcAddress` | 9,615 | 1.0% | 1,090 |
+| 14 | `KERNEL32.GetModuleHandleA` | `user32.LoadStringA` | 6,866 | 0.7% | 191 |
+| 15 | `KERNEL32.HeapAlloc` | `KERNEL32._lread` | 6,525 | 0.7% | 25 |
+| 16 | `KERNEL32.HeapAlloc` | `KERNEL32.HeapFree` | 6,186 | 0.7% | 1,348 |
+| 17 | `KERNEL32.InterlockedDecrement` | `KERNEL32.MultiByteToWideChar` | 5,972 | 0.6% | 608 |
+| 18 | `KERNEL32.InterlockedDecrement` | `KERNEL32.WideCharToMultiByte` | 4,049 | 0.4% | 287 |
+| 19 | `KERNEL32.HeapAlloc` | `KERNEL32.EnterCriticalSection` | 3,420 | 0.4% | 285 |
+| 20 | `KERNEL32.HeapAlloc` | `KERNEL32.LeaveCriticalSection` | 3,135 | 0.3% | 285 |
+
+Import resolution (`LoadLibrary*` or `GetModuleHandle*` → `GetProcAddress`): 73.5% of cross-chunk links (676,271). Any producer → `GetProcAddress`: 73.5%.
+
+The top 20 pairs cover 96.4% of cross-chunk links; 327 distinct pairs in total.
+
+False-link check:
+Producer API name (without its DLL) starts with `Create`, `Open`, `Alloc`, `LoadLibrary`, `GetProcAddress`, `GetModuleHandle`, `RegOpen` or `RegCreate`, or is `socket` / `connect`.
+
+| version | samples | links | links per sample (mean) | cross-chunk links | links leaving chunk 0 | links with an end beyond chunk 7 | samples with ≥1 link | samples with ≥1 cross-chunk link |
+|---|---|---|---|---|---|---|---|---|
+| all links (as in §1) | 92,700 | 3,500,779 | 37.8 | 26.3% (920,330) | 22.4% (784,680) | 0.1% (2,667) | 82.8% (76,711) | 42.3% (39,253) |
+| handle-creating producers only | 92,700 | 3,104,992 | 33.5 | 26.6% (826,555) | 23.9% (741,912) | 0.0% (26) | 79.2% (73,377) | 37.7% (34,931) |
+
+Share of all links that have a handle-creating producer: 88.7% (3,104,992).
+
+Per split, handle-creating producers only:
+
+| set | samples | links | links per sample (mean) | cross-chunk links | links leaving chunk 0 | links with an end beyond chunk 7 | samples with ≥1 link | samples with ≥1 cross-chunk link |
+|---|---|---|---|---|---|---|---|---|
+| trainset | 75,298 | 2,541,502 | 33.8 | 26.0% (661,336) | 23.2% (588,728) | 0.0% (19) | 79.2% (59,620) | 37.3% (28,106) |
+| testset | 17,402 | 563,490 | 32.4 | 29.3% (165,219) | 27.2% (153,184) | 0.0% (7) | 79.1% (13,757) | 39.2% (6,825) |
+
+Chance baseline:
+Each sample's API calls are put in a random order (one fixed shuffle per sample); links and token positions are recomputed. Ratio = real / shuffled. A ratio below 1 means real links cross chunks *less* often than in a random order, i.e. data flow is more local than chance.
+
+| version | real links | shuffled links | real cross-chunk links | shuffled cross-chunk links | ratio (count) | real cross-chunk share | shuffled cross-chunk share | ratio (share) | real leaving chunk 0 | shuffled leaving chunk 0 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| all links, all | 3,500,779 | 2,224,135 | 920,330 | 1,425,717 | 0.65 | 26.3% | 64.1% | 0.41 | 22.4% | 53.1% |
+| all links, trainset | 2,893,084 | 1,827,915 | 748,495 | 1,166,506 | 0.64 | 25.9% | 63.8% | 0.41 | 21.7% | 52.5% |
+| all links, testset | 607,695 | 396,220 | 171,835 | 259,211 | 0.66 | 28.3% | 65.4% | 0.43 | 25.8% | 55.5% |
+| handle-creating producers, all | 3,104,992 | 1,900,225 | 826,555 | 1,223,706 | 0.68 | 26.6% | 64.4% | 0.41 | 23.9% | 53.7% |
+| handle-creating producers, trainset | 2,541,502 | 1,541,245 | 661,336 | 991,561 | 0.67 | 26.0% | 64.3% | 0.40 | 23.2% | 53.0% |
+| handle-creating producers, testset | 563,490 | 358,980 | 165,219 | 232,145 | 0.71 | 29.3% | 64.7% | 0.45 | 27.2% | 56.7% |
+
+Shuffling removes 36.5% of the links (a value can only link to a later call): in the real order, producers come before their users far more often than chance.
+
+Among reports longer than one chunk only (where crossing is possible):
+
+| version | samples | real cross-chunk share | shuffled cross-chunk share | ratio (share) |
+|---|---|---|---|---|
+| all links | 61,207 | 27.2% | 66.4% | 0.41 |
+| handle-creating producers | 61,207 | 27.5% | 66.7% | 0.41 |
+
+![cross-chunk links per family](results/links/plots/family_cross_chunk.png)
+
+Per-family numbers are in
+[`results/links/tables.md`](results/links/tables.md) (§2a).
+
+### 8.3 Findings
+
+1. **Data-flow links are common, and a quarter of them cross a chunk
+   boundary.** 82.8% of samples have at least one link, with 37.8 links per
+   sample on average (3.5 million in total). 26.3% of links cross a 512-token
+   chunk boundary, and 22.4% start inside Nebula's 512-token window and are
+   used outside it. 42.3% of all samples have at least one cross-chunk link: 69.8% of the
+   2–3-chunk reports, 57.1% of the 4–8-chunk reports and 84.0% of the 194
+   longer ones.
+2. **Most cross-chunk links are one thing: resolving imports.**
+   `LoadLibrary*` / `GetModuleHandle*` → `GetProcAddress` makes up 73.5% of
+   cross-chunk links, and the top 20 pairs cover 96.4%. These are real
+   handle uses, not artifacts, and keeping only handle-creating producers
+   (88.7% of links) gives the same picture (26.6% cross-chunk). A few top
+   pairs look like value coincidences rather than handle passing (for
+   example `InterlockedDecrement` → `MultiByteToWideChar`, under 1% each).
+3. **Links are short-range and follow the real call order.** 67.7% of
+   cross-chunk links go to the very next chunk, and 96.3% stay within two
+   chunks. In a shuffled order, 64.1% of links would cross chunks; in the
+   real order only 26.3% do (ratio 0.41). So data flow is much more local
+   than chance. Shuffling also removes 36.5% of the links, which shows the
+   links depend on the real order and are not random value matches.
+4. **The share differs a lot by class.** Benign reports have the most
+   cross-chunk links (clean 44.9%, syswow64 42.3%). Malware families range
+   from 14.3% (ransomware) to 31.2% (keylogger). Any feature built on these
+   links can therefore also act as a class signal, much like length does
+   (§2.3).
+5. **Entry points do not matter here.** Counting inside each entry point
+   gives almost the same numbers (only 659 of 3.5 million merged links join
+   two different entry points), as expected with 94.7% single-entry-point
+   reports (§2.5).
+
+**For the two-level model:** the data supports *some* cross-chunk
+communication, but the need is narrow. About a quarter of links cross,
+almost all of them into the next one or two chunks, and three quarters are
+import resolution, whose meaning is largely visible in the API names
+themselves. A cheap mechanism would cover most of it: letting each chunk see the next
+one covers 67.7% of cross-chunk links, and reaching two chunks away covers
+96.3%. I would try that (for example overlapping chunks, or attention
+between neighbouring chunks in level 2) before building an explicit link
+graph between chunks.
+
+### 8.4 Caveats
+
+- **Matching is by value only.** An address-like return value that happens
+  to reappear as an argument (a counter, PID or size ≥ `0x10000`) counts as
+  a link. The handle-producer check and the shuffle baseline limit this, but
+  do not remove it.
+- **Out-parameters are invisible.** Many APIs return a handle through a
+  pointer argument (for example `RegOpenKeyExA` returns a status code and
+  writes the key handle into memory). Those handles are never a `ret_val`,
+  so their links are missed. Registry and similar links are undercounted.
+- **Reuse of the same address.** If memory is freed and the same address is
+  returned again, the link is credited to the *first* producer, as the
+  definition says. This can lengthen some links.
+- **The handle-producer list is literal.** `Alloc*` is a prefix, so
+  `VirtualAlloc` and `HeapAlloc` are not handle producers in check 5. Their
+  links are still in the main counts.
+- **Emulator cap and dataset.** Speakeasy stopped runs at 500 API calls
+  (§2.6), and these numbers are for this dataset's Speakeasy reports and
+  Nebula's tokenization only.
+- **One shuffle per sample** in the chance baseline. With 92,700 samples the
+  totals are stable, but per-sample values are noisy.

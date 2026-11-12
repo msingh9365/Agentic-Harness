@@ -564,3 +564,145 @@ number of chunks differs. Logs are in `results/hier/logs/`.
 - **Only binary malware/benign on Speakeasy was run.** Multi-class
   (`--task multiclass`) and Avast (`--scratch --mode finetune`) are
   implemented but not yet run.
+
+---
+
+## 8. Data-flow links between calls
+
+Is there information that one 512-token chunk needs from another? One concrete
+kind is **data flow**: a call returns a handle or address, and a later call
+passes it back as an argument (`LoadLibraryA` → `GetProcAddress`,
+`HeapAlloc` → `HeapFree`). This section counts such links in the Speakeasy
+reports, and how often they cross chunk boundaries. It is evidence for (or
+against) adding "data-flow links between chunks" to the two-level model in
+§7.
+
+### 8.1 Method
+
+Scripts: `measure_links.py` (measurement) and `analyze_links.py` (tables and
+plot); all tables are in [`results/links/tables.md`](results/links/tables.md).
+
+- **Address-like value:** a string matching `^0x[0-9a-fA-F]+$` whose value is
+  ≥ `0x10000`.
+- **Link:** call *j* has an argument equal to the address-like return value of
+  an earlier call *i* (*i* < *j*). The producer is the **first** call that
+  returned the value, and each matching argument counts as one link.
+- **API sequence:** exactly what Nebula sees after
+  `filter_and_normalize_report()` (all entry points merged, same order). This
+  merged list is the entry points' calls joined in order, which is asserted
+  for every sample. Links are also counted inside each entry point
+  separately.
+- **Chunk of a call:** the 512-token chunk holding the call's first token in
+  Nebula's tokenized report. The report string is cut into the part before the
+  API list plus one piece per call. Each piece is tokenized with Nebula's own
+  `tokenizer.encode`, and it is **asserted** that the pieces' ids, joined,
+  equal the full report's ids. This held for **all 92,700 samples**, so the
+  character-offset fallback was never used. The two-level model reads chunks
+  0–7. A link with an end in a later chunk (only possible in the 194 reports
+  over 8 chunks) is counted separately, not as cross-chunk.
+- **Cross-chunk link:** both ends in chunks 0–7, in different chunks.
+  "Leaving chunk 0" means the producer is in Nebula's 512-token window and
+  the user is not.
+- **Checks:**
+  - *Sanity:* on the 21 example reports, counting by call index inside entry
+    points with ≥ 20 calls reproduces the reference counts exactly
+    ([log](results/logs/links_sanity.log)): 728 links in 19 entry points, 157
+    produced in the first 100 calls and used after them, and 124 spanning
+    more than 100 calls.
+  - *False-link check:* the counts are repeated with only producers from
+    handle-creating APIs (`Create*`, `Open*`, `Alloc*`, `LoadLibrary*`,
+    `GetProcAddress`, `GetModuleHandle*`, `RegOpen*`, `RegCreate*`, `socket`,
+    `connect`).
+  - *Chance baseline:* each sample's calls are put in a random order (one
+    fixed shuffle per sample), and links and token positions are recomputed.
+- **Runs:** a 2,000-sample pilot (seed 0;
+  [tables](results/links/pilot2000_tables.md)), then all 92,700 samples (12
+  min on 4 cores; [log](results/logs/links_full.log)).
+
+### 8.2 Main results
+
+<!-- include: links: 1. Links overall and per split -->
+
+By report length:
+<!-- include: links: 2b. Per report length (number of 512-token chunks, merged links) -->
+
+How far the cross-chunk links reach:
+<!-- include: links: 3. Chunk distance of cross-chunk links -->
+
+What they are (top 20 producer → user pairs):
+<!-- include: links: 4. Top 20 (producer API → user API) pairs among cross-chunk links -->
+
+False-link check:
+<!-- include: links: 5. False-link check: producer must be a handle-creating API -->
+
+Chance baseline:
+<!-- include: links: 6. Chance baseline: calls shuffled within each sample -->
+
+![cross-chunk links per family](results/links/plots/family_cross_chunk.png)
+
+Per-family numbers are in
+[`results/links/tables.md`](results/links/tables.md) (§2a).
+
+### 8.3 Findings
+
+1. **Data-flow links are common, and a quarter of them cross a chunk
+   boundary.** 82.8% of samples have at least one link, with 37.8 links per
+   sample on average (3.5 million in total). 26.3% of links cross a 512-token
+   chunk boundary, and 22.4% start inside Nebula's 512-token window and are
+   used outside it. 42.3% of all samples have at least one cross-chunk link: 69.8% of the
+   2–3-chunk reports, 57.1% of the 4–8-chunk reports and 84.0% of the 194
+   longer ones.
+2. **Most cross-chunk links are one thing: resolving imports.**
+   `LoadLibrary*` / `GetModuleHandle*` → `GetProcAddress` makes up 73.5% of
+   cross-chunk links, and the top 20 pairs cover 96.4%. These are real
+   handle uses, not artifacts, and keeping only handle-creating producers
+   (88.7% of links) gives the same picture (26.6% cross-chunk). A few top
+   pairs look like value coincidences rather than handle passing (for
+   example `InterlockedDecrement` → `MultiByteToWideChar`, under 1% each).
+3. **Links are short-range and follow the real call order.** 67.7% of
+   cross-chunk links go to the very next chunk, and 96.3% stay within two
+   chunks. In a shuffled order, 64.1% of links would cross chunks; in the
+   real order only 26.3% do (ratio 0.41). So data flow is much more local
+   than chance. Shuffling also removes 36.5% of the links, which shows the
+   links depend on the real order and are not random value matches.
+4. **The share differs a lot by class.** Benign reports have the most
+   cross-chunk links (clean 44.9%, syswow64 42.3%). Malware families range
+   from 14.3% (ransomware) to 31.2% (keylogger). Any feature built on these
+   links can therefore also act as a class signal, much like length does
+   (§2.3).
+5. **Entry points do not matter here.** Counting inside each entry point
+   gives almost the same numbers (only 659 of 3.5 million merged links join
+   two different entry points), as expected with 94.7% single-entry-point
+   reports (§2.5).
+
+**For the two-level model:** the data supports *some* cross-chunk
+communication, but the need is narrow. About a quarter of links cross,
+almost all of them into the next one or two chunks, and three quarters are
+import resolution, whose meaning is largely visible in the API names
+themselves. A cheap mechanism would cover most of it: letting each chunk see the next
+one covers 67.7% of cross-chunk links, and reaching two chunks away covers
+96.3%. I would try that (for example overlapping chunks, or attention
+between neighbouring chunks in level 2) before building an explicit link
+graph between chunks.
+
+### 8.4 Caveats
+
+- **Matching is by value only.** An address-like return value that happens
+  to reappear as an argument (a counter, PID or size ≥ `0x10000`) counts as
+  a link. The handle-producer check and the shuffle baseline limit this, but
+  do not remove it.
+- **Out-parameters are invisible.** Many APIs return a handle through a
+  pointer argument (for example `RegOpenKeyExA` returns a status code and
+  writes the key handle into memory). Those handles are never a `ret_val`,
+  so their links are missed. Registry and similar links are undercounted.
+- **Reuse of the same address.** If memory is freed and the same address is
+  returned again, the link is credited to the *first* producer, as the
+  definition says. This can lengthen some links.
+- **The handle-producer list is literal.** `Alloc*` is a prefix, so
+  `VirtualAlloc` and `HeapAlloc` are not handle producers in check 5. Their
+  links are still in the main counts.
+- **Emulator cap and dataset.** Speakeasy stopped runs at 500 API calls
+  (§2.6), and these numbers are for this dataset's Speakeasy reports and
+  Nebula's tokenization only.
+- **One shuffle per sample** in the chance baseline. With 92,700 samples the
+  totals are stable, but per-sample values are noisy.

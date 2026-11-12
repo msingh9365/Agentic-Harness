@@ -95,6 +95,8 @@ def main():
     md.append("| distance (chunks) | links | share of cross-chunk links |\n|---|---|---|\n")
     for d in range(1, WINDOW):
         md.append(f"| {d} | {int(ok[f'dist_{d}'].sum()):,} | {pct(ok[f'dist_{d}'].sum(), tot):.1f}% |\n")
+    near = sum(ok[f"dist_{d}"].sum() for d in (1, 2))
+    md.append(f"\nWithin 1–2 chunks: {pct(near, tot):.1f}% of cross-chunk links.\n")
     md.append(f"\nMax chunk distance per sample: median {np.median(ok.max_chunk_distance[ok.n_cross_chunk_links > 0]):.0f} "
               f"among samples with a cross-chunk link.\n")
 
@@ -103,6 +105,13 @@ def main():
     md.append("| # | producer API | user API | links | share of cross-chunk links | samples |\n|---|---|---|---|---|---|\n")
     for i, r in enumerate(pairs.head(20).itertuples(), 1):
         md.append(f"| {i} | `{r.producer_api}` | `{r.user_api}` | {r.links:,} | {pct(r.links, tot):.1f}% | {r.samples:,} |\n")
+    short = lambda x: str(x).split(".")[-1]
+    user_gpa = pairs.user_api.map(short) == "GetProcAddress"
+    prod = pairs.producer_api.map(short)
+    imp = user_gpa & (prod.str.startswith("LoadLibrary") | prod.str.startswith("GetModuleHandle"))
+    md.append(f"\nImport resolution (`LoadLibrary*` or `GetModuleHandle*` → `GetProcAddress`): "
+              f"{pct(pairs[imp].links.sum(), tot):.1f}% of cross-chunk links ({int(pairs[imp].links.sum()):,}). "
+              f"Any producer → `GetProcAddress`: {pct(pairs[user_gpa].links.sum(), tot):.1f}%.\n")
     md.append(f"\nThe top 20 pairs cover {pct(pairs.head(20).links.sum(), tot):.1f}% of cross-chunk links; "
               f"{len(pairs):,} distinct pairs in total.\n")
 
@@ -132,6 +141,9 @@ def main():
             md.append(f"| {name}, {sp} | {int(rl):,} | {int(sl):,} | {int(rc):,} | {int(sc):,} | {rc / sc:.2f} | "
                       f"{pct(rc, rl):.1f}% | {pct(sc, sl):.1f}% | {pct(rc, rl) / pct(sc, sl):.2f} | "
                       f"{pct(r0, rl):.1f}% | {pct(s0, sl):.1f}% |\n")
+    md.append(f"\nShuffling removes {pct(ok.n_links.sum() - ok.shuf_n_links.sum(), ok.n_links.sum()):.1f}% of the links "
+              "(a value can only link to a later call): in the real order, producers come before their users "
+              "far more often than chance.\n")
     md.append("\nAmong reports longer than one chunk only (where crossing is possible):\n\n")
     long = ok[ok.n_chunks > 1]
     md.append("| version | samples | real cross-chunk share | shuffled cross-chunk share | ratio (share) |\n|---|---|---|---|---|\n")

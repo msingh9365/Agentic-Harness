@@ -66,6 +66,8 @@ Reports that fit in one chunk cannot have cross-chunk links by definition.
 | 6 | 36 | 0.2% |
 | 7 | 9 | 0.0% |
 
+Within 1–2 chunks: 95.3% of cross-chunk links.
+
 Max chunk distance per sample: median 2 among samples with a cross-chunk link.
 
 ## 4. Top 20 (producer API → user API) pairs among cross-chunk links
@@ -92,6 +94,8 @@ Max chunk distance per sample: median 2 among samples with a cross-chunk link.
 | 18 | `KERNEL32.LoadLibraryA` | `kernel32.GetProcAddress` | 84 | 0.4% | 24 |
 | 19 | `KERNEL32.InterlockedDecrement` | `KERNEL32.WideCharToMultiByte` | 82 | 0.4% | 5 |
 | 20 | `KERNEL32.GetProcAddress` | `kernel32.DecodePointer` | 60 | 0.3% | 30 |
+
+Import resolution (`LoadLibrary*` or `GetModuleHandle*` → `GetProcAddress`): 71.4% of cross-chunk links (13,527). Any producer → `GetProcAddress`: 71.4%.
 
 The top 20 pairs cover 96.4% of cross-chunk links; 94 distinct pairs in total.
 
@@ -125,6 +129,8 @@ Each sample's API calls are put in a random order (one fixed shuffle per sample)
 | handle-creating producers, all | 65,768 | 39,824 | 16,976 | 25,159 | 0.67 | 25.8% | 63.2% | 0.41 | 23.6% | 52.6% |
 | handle-creating producers, trainset | 55,011 | 33,183 | 14,203 | 21,064 | 0.67 | 25.8% | 63.5% | 0.41 | 23.6% | 52.4% |
 | handle-creating producers, testset | 10,757 | 6,641 | 2,773 | 4,095 | 0.68 | 25.8% | 61.7% | 0.42 | 23.2% | 53.7% |
+
+Shuffling removes 37.1% of the links (a value can only link to a later call): in the real order, producers come before their users far more often than chance.
 
 Among reports longer than one chunk only (where crossing is possible):
 

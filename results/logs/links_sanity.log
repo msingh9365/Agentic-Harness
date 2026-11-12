@@ -1,0 +1,4 @@
+21 example reports in examples
+728 links in 19 entry points (>= 20 calls); 157 produced in the first 100 calls and used after them; 124 spanning more than 100 calls
+token-position check: 21/21 reports exact (no fallback)
+MATCHES the reference (728, 19, 157, 124)

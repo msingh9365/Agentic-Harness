@@ -1,0 +1,1410 @@
+{
+ "file_access": [
+  {
+   "event": "create",
+   "path": "<drive>\\windows\\mshlpda32.dll"
+  }
+ ],
+ "apis": [
+  {
+   "api_name": "KERNEL32.LoadLibraryA",
+   "args": [
+    "KERNEL32.DLL"
+   ],
+   "ret_val": "0x77000000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "SetHandleInformation"
+   ],
+   "ret_val": "0xfeee0000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "WaitForSingleObject"
+   ],
+   "ret_val": "0xfeee0001"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "SetEvent"
+   ],
+   "ret_val": "0xfeee0002"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetTickCount"
+   ],
+   "ret_val": "0xfeee0003"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetProcessHeap"
+   ],
+   "ret_val": "0xfeee0004"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "WriteFile"
+   ],
+   "ret_val": "0xfeee0005"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetSystemTimes"
+   ],
+   "ret_val": "0xfeee0006"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetDriveTypeA"
+   ],
+   "ret_val": "0xfeee0007"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetProcessTimes"
+   ],
+   "ret_val": "0xfeee0008"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "OpenProcess"
+   ],
+   "ret_val": "0xfeee0009"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GlobalAlloc"
+   ],
+   "ret_val": "0xfeee000a"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "WideCharToMultiByte"
+   ],
+   "ret_val": "0xfeee000b"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "TerminateThread"
+   ],
+   "ret_val": "0xfeee000c"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "InitializeCriticalSectionAndSpinCount"
+   ],
+   "ret_val": "0xfeee000d"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "Sleep"
+   ],
+   "ret_val": "0xfeee000e"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateEventA"
+   ],
+   "ret_val": "0xfeee000f"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "LeaveCriticalSection"
+   ],
+   "ret_val": "0xfeee0010"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetComputerNameExA"
+   ],
+   "ret_val": "0xfeee0011"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateProcessA"
+   ],
+   "ret_val": "0xfeee0012"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "TerminateProcess"
+   ],
+   "ret_val": "0xfeee0013"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "FileTimeToSystemTime"
+   ],
+   "ret_val": "0xfeee0014"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "ReadFile"
+   ],
+   "ret_val": "0xfeee0015"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetModuleFileNameW"
+   ],
+   "ret_val": "0xfeee0016"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateFileW"
+   ],
+   "ret_val": "0xfeee0017"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "MultiByteToWideChar"
+   ],
+   "ret_val": "0xfeee0018"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "RaiseException"
+   ],
+   "ret_val": "0xfeee0019"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateDirectoryA"
+   ],
+   "ret_val": "0xfeee001a"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "SetCurrentDirectoryA"
+   ],
+   "ret_val": "0xfeee001b"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "FindFirstFileA"
+   ],
+   "ret_val": "0xfeee001c"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetLastError"
+   ],
+   "ret_val": "0xfeee001d"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "SetLastError"
+   ],
+   "ret_val": "0xfeee001e"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "Process32First"
+   ],
+   "ret_val": "0xfeee001f"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "HeapSize"
+   ],
+   "ret_val": "0xfeee0020"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CopyFileA"
+   ],
+   "ret_val": "0xfeee0021"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "EnterCriticalSection"
+   ],
+   "ret_val": "0xfeee0022"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "FindClose"
+   ],
+   "ret_val": "0xfeee0023"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "LoadLibraryA"
+   ],
+   "ret_val": "0xfeee0024"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "Process32Next"
+   ],
+   "ret_val": "0xfeee0025"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "DecodePointer"
+   ],
+   "ret_val": "0xfeee0026"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetSystemInfo"
+   ],
+   "ret_val": "0xfeee0027"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreatePipe"
+   ],
+   "ret_val": "0xfeee0028"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetModuleFileNameA"
+   ],
+   "ret_val": "0xfeee0029"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "FindNextFileA"
+   ],
+   "ret_val": "0xfeee002a"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetModuleHandleA"
+   ],
+   "ret_val": "0xfeee002b"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "FindNextFileW"
+   ],
+   "ret_val": "0xfeee002c"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetCurrentDirectoryA"
+   ],
+   "ret_val": "0xfeee002d"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateToolhelp32Snapshot"
+   ],
+   "ret_val": "0xfeee002e"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "DeleteCriticalSection"
+   ],
+   "ret_val": "0xfeee002f"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetDiskFreeSpaceExA"
+   ],
+   "ret_val": "0xfeee0030"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetVersionExA"
+   ],
+   "ret_val": "0xfeee0031"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CloseHandle"
+   ],
+   "ret_val": "0xfeee0032"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "DeleteFileW"
+   ],
+   "ret_val": "0xfeee0033"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetCurrentProcessId"
+   ],
+   "ret_val": "0xfeee0034"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetCurrentProcess"
+   ],
+   "ret_val": "0xfeee0035"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetSystemTime"
+   ],
+   "ret_val": "0xfeee0036"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "DeleteFileA"
+   ],
+   "ret_val": "0xfeee0037"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateThread"
+   ],
+   "ret_val": "0xfeee0038"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "UnhandledExceptionFilter"
+   ],
+   "ret_val": "0xfeee0039"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "IsProcessorFeaturePresent"
+   ],
+   "ret_val": "0xfeee003a"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "SetEndOfFile"
+   ],
+   "ret_val": "0xfeee003b"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "VirtualQuery"
+   ],
+   "ret_val": "0xfeee003c"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "SetEnvironmentVariableA"
+   ],
+   "ret_val": "0xfeee003d"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "WriteConsoleW"
+   ],
+   "ret_val": "0xfeee003e"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "SetStdHandle"
+   ],
+   "ret_val": "0xfeee003f"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetProcAddress"
+   ],
+   "ret_val": "0xfeee0040"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "HeapFree"
+   ],
+   "ret_val": "0xfeee0041"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "InterlockedDecrement"
+   ],
+   "ret_val": "0xfeee0042"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "InterlockedIncrement"
+   ],
+   "ret_val": "0xfeee0043"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "HeapAlloc"
+   ],
+   "ret_val": "0xfeee0044"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateProcessW"
+   ],
+   "ret_val": "0xfeee0045"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "lstrlenA"
+   ],
+   "ret_val": "0xfeee0046"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetNativeSystemInfo"
+   ],
+   "ret_val": "0xfeee0047"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "FindFirstFileW"
+   ],
+   "ret_val": "0xfeee0048"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "FlushFileBuffers"
+   ],
+   "ret_val": "0xfeee0049"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "LoadLibraryExW"
+   ],
+   "ret_val": "0xfeee004a"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "FreeLibrary"
+   ],
+   "ret_val": "0xfeee004b"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetTimeZoneInformation"
+   ],
+   "ret_val": "0xfeee004c"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "SetFilePointerEx"
+   ],
+   "ret_val": "0xfeee004d"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetConsoleCP"
+   ],
+   "ret_val": "0xfeee004e"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "ReadConsoleW"
+   ],
+   "ret_val": "0xfeee004f"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "RtlUnwind"
+   ],
+   "ret_val": "0xfeee0050"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetCPInfo"
+   ],
+   "ret_val": "0xfeee0051"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "AreFileApisANSI"
+   ],
+   "ret_val": "0xfeee0052"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetModuleHandleExW"
+   ],
+   "ret_val": "0xfeee0053"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetSystemTimeAsFileTime"
+   ],
+   "ret_val": "0xfeee0054"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetCommandLineA"
+   ],
+   "ret_val": "0xfeee0055"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetConsoleMode"
+   ],
+   "ret_val": "0xfeee0056"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "FreeEnvironmentStringsW"
+   ],
+   "ret_val": "0xfeee0057"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetEnvironmentStringsW"
+   ],
+   "ret_val": "0xfeee0058"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "QueryPerformanceCounter"
+   ],
+   "ret_val": "0xfeee0059"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetFileType"
+   ],
+   "ret_val": "0xfeee005a"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetOEMCP"
+   ],
+   "ret_val": "0xfeee005b"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetACP"
+   ],
+   "ret_val": "0xfeee005c"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "IsValidCodePage"
+   ],
+   "ret_val": "0xfeee005d"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetCurrentThreadId"
+   ],
+   "ret_val": "0xfeee005e"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetStdHandle"
+   ],
+   "ret_val": "0xfeee005f"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "EnumSystemLocalesW"
+   ],
+   "ret_val": "0xfeee0060"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetUserDefaultLCID"
+   ],
+   "ret_val": "0xfeee0061"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "IsValidLocale"
+   ],
+   "ret_val": "0xfeee0062"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetLocaleInfoW"
+   ],
+   "ret_val": "0xfeee0063"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "LCMapStringW"
+   ],
+   "ret_val": "0xfeee0064"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CompareStringW"
+   ],
+   "ret_val": "0xfeee0065"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetTimeFormatW"
+   ],
+   "ret_val": "0xfeee0066"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetDateFormatW"
+   ],
+   "ret_val": "0xfeee0067"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetModuleHandleW"
+   ],
+   "ret_val": "0xfeee0068"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetStartupInfoW"
+   ],
+   "ret_val": "0xfeee0069"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "TlsFree"
+   ],
+   "ret_val": "0xfeee006a"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "TlsSetValue"
+   ],
+   "ret_val": "0xfeee006b"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "TlsGetValue"
+   ],
+   "ret_val": "0xfeee006c"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "TlsAlloc"
+   ],
+   "ret_val": "0xfeee006d"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "CreateFileA"
+   ],
+   "ret_val": "0xfeee006e"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "HeapReAlloc"
+   ],
+   "ret_val": "0xfeee006f"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "LocalFree"
+   ],
+   "ret_val": "0xfeee0070"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "ExitProcess"
+   ],
+   "ret_val": "0xfeee0071"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "GetStringTypeW"
+   ],
+   "ret_val": "0xfeee0072"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "EncodePointer"
+   ],
+   "ret_val": "0xfeee0073"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "IsDebuggerPresent"
+   ],
+   "ret_val": "0xfeee0074"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "OutputDebugStringW"
+   ],
+   "ret_val": "0xfeee0075"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77000000",
+    "SetUnhandledExceptionFilter"
+   ],
+   "ret_val": "0xfeee0076"
+  },
+  {
+   "api_name": "KERNEL32.LoadLibraryA",
+   "args": [
+    "ADVAPI32.dll"
+   ],
+   "ret_val": "0x78000000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "GetSecurityInfo"
+   ],
+   "ret_val": "0xfeee0077"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "GetTokenInformation"
+   ],
+   "ret_val": "0xfeee0078"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "LookupAccountSidA"
+   ],
+   "ret_val": "0xfeee0079"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "AdjustTokenPrivileges"
+   ],
+   "ret_val": "0xfeee007a"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "OpenProcessToken"
+   ],
+   "ret_val": "0xfeee007b"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78000000",
+    "LookupPrivilegeValueA"
+   ],
+   "ret_val": "0xfeee007c"
+  },
+  {
+   "api_name": "KERNEL32.LoadLibraryA",
+   "args": [
+    "CRYPT32.dll"
+   ],
+   "ret_val": "0x58000000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x58000000",
+    "CryptDecodeObjectEx"
+   ],
+   "ret_val": "0xfeee007d"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x58000000",
+    "CryptStringToBinaryA"
+   ],
+   "ret_val": "0xfeee007e"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x58000000",
+    "CryptImportPublicKeyInfo"
+   ],
+   "ret_val": "0xfeee007f"
+  },
+  {
+   "api_name": "KERNEL32.LoadLibraryA",
+   "args": [
+    "ole32.dll"
+   ],
+   "ret_val": "0x65500000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x65500000",
+    "CoInitializeEx"
+   ],
+   "ret_val": "0xfeee0080"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x65500000",
+    "CoInitializeSecurity"
+   ],
+   "ret_val": "0xfeee0081"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x65500000",
+    "CoUninitialize"
+   ],
+   "ret_val": "0xfeee0082"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x65500000",
+    "CoSetProxyBlanket"
+   ],
+   "ret_val": "0xfeee0083"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x65500000",
+    "CoCreateInstance"
+   ],
+   "ret_val": "0xfeee0084"
+  },
+  {
+   "api_name": "KERNEL32.LoadLibraryA",
+   "args": [
+    "OLEAUT32.dll"
+   ],
+   "ret_val": "0x5f800000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "0x6"
+   ],
+   "ret_val": "0xfeee0085"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "0xc"
+   ],
+   "ret_val": "0xfeee0086"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "0x8"
+   ],
+   "ret_val": "0xfeee0087"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "0x96"
+   ],
+   "ret_val": "0xfeee0088"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "0x9"
+   ],
+   "ret_val": "0xfeee0089"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "0x7"
+   ],
+   "ret_val": "0xfeee008a"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x5f800000",
+    "0x2"
+   ],
+   "ret_val": "0xfeee008b"
+  },
+  {
+   "api_name": "KERNEL32.LoadLibraryA",
+   "args": [
+    "PSAPI.DLL"
+   ],
+   "ret_val": "0x71000000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x71000000",
+    "EnumProcesses"
+   ],
+   "ret_val": "0xfeee008c"
+  },
+  {
+   "api_name": "KERNEL32.LoadLibraryA",
+   "args": [
+    "SHELL32.dll"
+   ],
+   "ret_val": "0x69000000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x69000000",
+    "ShellExecuteA"
+   ],
+   "ret_val": "0xfeee008d"
+  },
+  {
+   "api_name": "KERNEL32.LoadLibraryA",
+   "args": [
+    "USER32.dll"
+   ],
+   "ret_val": "0x77d10000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x77d10000",
+    "wsprintfA"
+   ],
+   "ret_val": "0xfeee008e"
+  },
+  {
+   "api_name": "KERNEL32.LoadLibraryA",
+   "args": [
+    "WS2_32.dll"
+   ],
+   "ret_val": "0x78c00000"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0x15"
+   ],
+   "ret_val": "0xfeee008f"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0x14"
+   ],
+   "ret_val": "0xfeee0090"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0x10"
+   ],
+   "ret_val": "0xfeee0091"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0x2"
+   ],
+   "ret_val": "0xfeee0092"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0x17"
+   ],
+   "ret_val": "0xfeee0093"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0x9"
+   ],
+   "ret_val": "0xfeee0094"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0x3"
+   ],
+   "ret_val": "0xfeee0095"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0x13"
+   ],
+   "ret_val": "0xfeee0096"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0xd"
+   ],
+   "ret_val": "0xfeee0097"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0x1"
+   ],
+   "ret_val": "0xfeee0098"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0x12"
+   ],
+   "ret_val": "0xfeee0099"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0xb"
+   ],
+   "ret_val": "0xfeee009a"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0x11"
+   ],
+   "ret_val": "0xfeee009b"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0x73"
+   ],
+   "ret_val": "0xfeee009c"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0xc"
+   ],
+   "ret_val": "0xfeee009d"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0x39"
+   ],
+   "ret_val": "0xfeee009e"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0x4"
+   ],
+   "ret_val": "0xfeee009f"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0x97"
+   ],
+   "ret_val": "0xfeee00a0"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0xa"
+   ],
+   "ret_val": "0xfeee00a1"
+  },
+  {
+   "api_name": "KERNEL32.GetProcAddress",
+   "args": [
+    "0x78c00000",
+    "0x34"
+   ],
+   "ret_val": "0xfeee00a2"
+  },
+  {
+   "api_name": "KERNEL32.VirtualProtect",
+   "args": [
+    "0x400000",
+    "0x1000",
+    "0x4",
+    "0x1faffc4"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "KERNEL32.VirtualProtect",
+   "args": [
+    "0x400000",
+    "0x1000",
+    "0x40",
+    "0x1faffc4"
+   ],
+   "ret_val": "0x1"
+  },
+  {
+   "api_name": "kernel32.CreateFileA",
+   "args": [
+    "C:\\Windows\\mshlpda32.dll",
+    "GENERIC_READ",
+    "0x0",
+    "0x0",
+    "OPEN_EXISTING",
+    "0x80",
+    "0x0"
+   ],
+   "ret_val": "0xffffffff"
+  }
+ ]
+}

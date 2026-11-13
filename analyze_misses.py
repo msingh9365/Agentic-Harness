@@ -234,7 +234,8 @@ def cmd_analyze(a):
         test[f"{h}_conflict"] = rep.set_index("row").loc[test.row, f"{h}_conflict"].values
     fp_cols = ["tokens", "n_apis_raw", "tok_registry_access", "tok_network_events.traffic", "tok_file_access",
                "tok_apis", "n_entry_points"]
-    rep["fp"] = rep[fp_cols].astype(str).agg("|".join, axis=1)
+    # absent field = empty cell in samples.csv; a present field always has > 0 tokens, so 0 is unambiguous
+    rep["fp"] = rep[fp_cols].fillna(0).astype("int64").astype(str).agg("|".join, axis=1)
     g = rep.groupby("fp")
     rep["fp_size"] = g.fp.transform("size"); rep["fp_mal_share"] = g.label.transform("mean")
     rep["fp_conflict"] = ((rep.fp_mal_share > 0) & (rep.fp_mal_share < 1)).astype(int)
@@ -343,6 +344,21 @@ def cmd_analyze(a):
                                    [Seqs_cache().names(int(rep[rep.hash_report == h].row.iloc[0])) for h in top.hash_report]]
     top["hash_report"] = top.hash_report.str[:10]
     md.append(md_table(top[["hash_report", "size", "malware", "benign", "calls", "API names (first 6)"]]))
+
+    ga = rep.groupby("hash_apis").agg(size=("label", "size"), malware=("label", "sum"), calls=("n_calls", "first"),
+                                      row=("row", "first"))
+    ga = ga[(ga.malware > 0) & (ga.malware < ga["size"])].sort_values("size", ascending=False)
+    lop = (ga.malware / ga["size"] >= 0.99) | (ga.malware / ga["size"] <= 0.01)
+    md.append(f"\nLargest API-name-sequence groups with both labels ({len(ga):,} groups, {int(ga['size'].sum()):,} reports; "
+              f"groups where one label is ≥ 99% of the reports: {int(lop.sum()):,}, holding "
+              f"{c(ga[lop]['size'].sum(), ga['size'].sum())} of their reports):\n\n")
+    ta = ga.head(12).reset_index()
+    ta["benign"] = ta["size"] - ta.malware
+    ta["families"] = [", ".join(f"{k} {v:,}" for k, v in rep[rep.hash_apis == h].family.value_counts().head(3).items())
+                      for h in ta.hash_apis]
+    ta["first API names"] = [", ".join(short(n) for n in Seqs_cache().names(int(r))[:6]) for r in ta.row]
+    ta["hash_apis"] = ta.hash_apis.str[:10]
+    md.append(md_table(ta[["hash_apis", "size", "malware", "benign", "calls", "families", "first API names"]]))
 
     # ---- task 2: why emulation stopped
     md.append("\n## 3. Why emulation stopped (task 2)\n\n")
@@ -513,14 +529,28 @@ def cmd_analyze(a):
     md.append(f"\nClosest January coinminer by edit distance over API-name sequences (lower-case; {len(uniq):,} distinct "
               f"January coinminer sequences searched): `{jrr.sample_id}`, distance **{d}** "
               f"({len(tl)} vs {len(js)} calls; {int((rep.hash_apis == jrr.hash_apis).sum()):,} reports share that January sequence).\n\n")
-    import difflib
-    ops = difflib.SequenceMatcher(a=tl, b=js, autojunk=False).get_opcodes()
-    md.append("Differences (April group report → closest January report):\n\n| change | April calls | January calls |\n|---|---|---|\n")
-    for tag, i1, i2, j1, j2 in ops:
-        if tag == "equal":
-            continue
-        md.append(f"| {tag} at April call {i1} | {', '.join(short(x) for x in tl[i1:i2]) or '–'} | "
-                  f"{', '.join(short(x) for x in js[j1:j2]) or '–'} |\n")
+    # minimal edit script (same alignment as the distance), consecutive edits merged into blocks
+    ops = Levenshtein.editops(tl, js)
+    blocks = []
+    for op in ops:
+        tag, i, j = op.tag, op.src_pos, op.dest_pos
+        if blocks and blocks[-1]["tag"] == tag and i - blocks[-1]["i_end"] <= 1 and j - blocks[-1]["j_end"] <= 1:
+            b_ = blocks[-1]
+        else:
+            b_ = {"tag": tag, "i0": i, "j0": j, "april": [], "jan": []}
+            blocks.append(b_)
+        if tag in ("replace", "delete"):
+            b_["april"].append(tl[i])
+        if tag in ("replace", "insert"):
+            b_["jan"].append(js[j])
+        b_["i_end"], b_["j_end"] = i, j
+    md.append(f"Minimal edit script ({len(ops)} edits; `delete` = only in April, `insert` = only in January), "
+              f"consecutive edits merged:\n\n| edit | at April call | April calls | January calls |\n|---|---|---|---|\n")
+    for b_ in blocks:
+        md.append(f"| {b_['tag']} | {b_['i0']} | {', '.join(short(x) for x in b_['april']) or '–'} | "
+                  f"{', '.join(short(x) for x in b_['jan']) or '–'} |\n")
+    md.append(f"\nLast 6 calls: April `{' → '.join(short(x) for x in tl[-6:])}`; January `{' → '.join(short(x) for x in js[-6:])}`.\n")
+
     with open(os.path.join(R, "coinminer_group_example.txt"), "w") as fh:
         fh.write(f"# One report of the big April coinminer group: {grp[grp.row == rep_row].sample_id.iloc[0]}\n"
                  f"# exact filtered-report hash {hv.index[0]}; {len(target)} API calls, one per line\n")
@@ -547,14 +577,23 @@ def cmd_analyze(a):
                          "≤10 API calls": c((hi.n_calls <= 10).sum(), len(hi)) if len(hi) else "–",
                          "median exact-group size": f"{np.median(hi.hash_report_size):.0f}" if len(hi) else "–",
                          "in a group with malware": c((hi.hash_report_mal_share > 0).sum(), len(hi)) if len(hi) else "–",
+                         "same API-name sequence as some malware": c((hi.hash_apis_mal_share > 0).sum(), len(hi)) if len(hi) else "–",
                          "median malware share of their group": f"{np.median(hi.hash_report_mal_share):.2f}" if len(hi) else "–"})
     md.append(md_table(pd.DataFrame(rows)))
+    for m in MODELS:
+        mx = test[m].max()
+        near = test[test[m] >= mx - 0.0005]
+        md.append(f"\n`{m}`: highest test score {mx:.5f}; {len(near):,} reports within 0.0005 of it "
+                  f"({int((near.label == 0).sum()):,} benign, {int((near.label == 1).sum()):,} malware). "
+                  f"The 1% FPR threshold {thr[m]:.5f} is {mx - thr[m]:.5f} below the highest score.\n")
     md.append("\nThe 10 highest-scoring April benign reports (`finetune_k8`):\n\n")
     top = ben.sort_values("finetune_k8", ascending=False).head(10)
     t2 = pd.DataFrame({"family": top.family, "finetune_k8": top.finetune_k8.map("{:.5f}".format),
                        "frozen_k1": top.frozen_k1.map("{:.4f}".format), "API calls": top.n_calls,
-                       "exact-group size": top.hash_report_size,
-                       "group malware share": top.hash_report_mal_share.map("{:.2f}".format),
+                       "exact group: malware / size": [f"{int(round(ms * sz)):,} / {int(sz):,}" for sz, ms in
+                                                      zip(top.hash_report_size, top.hash_report_mal_share)],
+                       "API-sequence group: malware / size": [f"{int(round(ms * sz)):,} / {int(sz):,}" for sz, ms in
+                                                              zip(top.hash_apis_size, top.hash_apis_mal_share)],
                        "API names": [", ".join(short(x) for x in seqs.names(int(r))[:8]) for r in top.row]})
     md.append(md_table(t2))
     summary["calib"] = {m: [int((ben[m] > t).sum()) for t in [0.9, 0.99, 0.999]] for m in MODELS}
@@ -578,6 +617,26 @@ def cmd_analyze(a):
     axes[0].set_ylabel("April reports (log scale)"); axes[1].legend(frameon=False, loc="upper center", fontsize=8)
     fig.suptitle("Test-set score distributions", fontweight="bold")
     fig.tight_layout(); fig.savefig(os.path.join(R, "plots", "score_hist.png"), dpi=150); plt.close(fig)
+
+    # the top end, spread out: x = -log10(1 - score); 1 = 0.9, 2 = 0.99, 3 = 0.999
+    big_rows = set(test[test.fp == big_fp].row)
+    fig, axes = plt.subplots(1, 2, figsize=(11, 4.2), sharey=True)
+    for ax, m in zip(axes, MODELS):
+        style(ax)
+        tx = lambda v: -np.log10(np.clip(1 - v, 1e-6, 1))
+        bins = np.linspace(0, 5, 61)
+        ax.hist(tx(test[test.label == 0][m]), bins=bins, histtype="step", lw=2, color=BLUE, label="benign")
+        ax.hist(tx(test[(test.label == 1) & ~test.row.isin(big_rows)][m]), bins=bins, histtype="step", lw=2, color=ORANGE,
+                label="malware (other)")
+        ax.hist(tx(test[test.row.isin(big_rows)][m]), bins=bins, histtype="stepfilled", alpha=0.5, color=INK2,
+                label="the 265-report coinminer group")
+        ax.axvline(tx(np.array([thr[m]]))[0], color=INK, ls="--", lw=1.2)
+        ax.text(tx(np.array([thr[m]]))[0], 3e3, f" threshold {thr[m]:.5f}", fontsize=8)
+        ax.set_yscale("log"); ax.set_xticks([0, 1, 2, 3, 4, 5], ["0", "0.9", "0.99", "0.999", "0.9999", "0.99999"])
+        ax.set_xlabel("score (axis spread out near 1)"); ax.set_title(m)
+    axes[0].set_ylabel("April reports (log scale)"); axes[0].legend(frameon=False, loc="upper left", fontsize=8)
+    fig.suptitle("The top end of the score range", fontweight="bold")
+    fig.tight_layout(); fig.savefig(os.path.join(R, "plots", "score_tail.png"), dpi=150); plt.close(fig)
 
     # ---- task 6: removing unlearnable reports
     md.append("\n## 7. Effect of removing unlearnable reports (task 6, analysis only)\n\n")

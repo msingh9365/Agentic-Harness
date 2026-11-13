@@ -1,0 +1,176 @@
+{
+ "f1": {
+  "misses": 2381,
+  "rc_share": 59.38681226375473,
+  "ransom": [
+   60.44880785413745,
+   66.4796633941094
+  ],
+  "coin": [
+   66.270783847981,
+   79.51306413301663
+  ]
+ },
+ "prelim": [
+  [
+   "1",
+   "misses of finetune_k8",
+   "2,381",
+   "2,381"
+  ],
+  [
+   "1",
+   "ransomware + coinminer share of misses",
+   "59%",
+   "59.4%"
+  ],
+  [
+   "1",
+   "ransomware detection finetune_k8 vs frozen_k1",
+   "60.4% vs 66.5%",
+   "60.4% vs 66.5%"
+  ],
+  [
+   "1",
+   "coinminer detection finetune_k8 vs frozen_k1",
+   "66.3% vs 79.5%",
+   "66.3% vs 79.5%"
+  ],
+  [
+   "2",
+   "ransomware file_access present, missed vs caught (tok_file_access > 0)",
+   "1.4% vs 36.3%",
+   "1.4% vs 36.3%"
+  ],
+  [
+   "2",
+   "ransomware >1 entry point, missed vs caught",
+   "0.1% vs 33.6%",
+   "0.1% vs 33.6%"
+  ],
+  [
+   "2",
+   "ransomware median API calls (n_apis_raw), missed vs caught",
+   "about 140 both",
+   "142 vs 142"
+  ],
+  [
+   "3",
+   "largest coarse fingerprint among coinminer misses",
+   "265 of 568 (47%)",
+   "265 of 568 (47%); fingerprint `939|175|0|0|9|930|1`"
+  ],
+  [
+   "3",
+   "that fingerprint in January",
+   "none",
+   "0"
+  ],
+  [
+   "3",
+   "mean finetune_k8 score (missed reports of that fingerprint)",
+   "0.997",
+   "0.9971"
+  ],
+  [
+   "4",
+   "1% FPR threshold finetune_k8 / frozen_k1",
+   "0.99896 / 0.8745",
+   "0.99896 / 0.8745"
+  ],
+  [
+   "4",
+   "April benign scoring > 0.9, finetune_k8 / frozen_k1",
+   "675 / 73",
+   "675 / 73"
+  ],
+  [
+   "4",
+   "API calls of the 20 highest-scoring benign reports",
+   "1 to 13",
+   "1 to 219"
+  ],
+  [
+   "5",
+   "fingerprints with both labels / reports / median API calls",
+   "609 / 21,215 / 12",
+   "609 / 21,215 / 12"
+  ],
+  [
+   "5",
+   "April malware in such groups",
+   "26.5%",
+   "26.5%"
+  ],
+  [
+   "5",
+   "finetune_k8 misses in such groups",
+   "33.5%",
+   "33.5%"
+  ]
+ ],
+ "conf_hash_report": {
+  "grouping": "filtered report",
+  "groups": "74,925",
+  "reports with a duplicate in the same split": "21.1% (19,527)",
+  "April reports with a duplicate in January": "6.8% (1,192)",
+  "groups with both labels": "45",
+  "reports in those groups": "1.7% (1,545)",
+  "median API calls in those groups": "10",
+  "April malware in those groups": "1.7% (159)",
+  "finetune_k8 misses in those groups": "6.3% (151)"
+ },
+ "conf_hash_apis": {
+  "grouping": "API-name sequence",
+  "groups": "8,643",
+  "reports with a duplicate in the same split": "93.8% (86,925)",
+  "April reports with a duplicate in January": "36.4% (6,329)",
+  "groups with both labels": "194",
+  "reports in those groups": "15.2% (14,117)",
+  "median API calls in those groups": "188",
+  "April malware in those groups": "27.3% (2,564)",
+  "finetune_k8 misses in those groups": "29.3% (697)"
+ },
+ "conf_fp": {
+  "grouping": "coarse fingerprint (preliminary)",
+  "groups": "14,579",
+  "reports with a duplicate in the same split": "89.5% (82,968)",
+  "April reports with a duplicate in January": "32.1% (5,582)",
+  "groups with both labels": "609",
+  "reports in those groups": "22.9% (21,215)",
+  "median API calls in those groups": "12",
+  "April malware in those groups": "26.5% (2,490)",
+  "finetune_k8 misses in those groups": "33.5% (797)"
+ },
+ "ransom": {
+  "Apr missed": {
+   "n": 846
+  },
+  "Apr caught": {
+   "n": 1293
+  },
+  "Jan (all)": {
+   "n": 9627
+  }
+ },
+ "coin": {
+  "miss": 568,
+  "fp_size": 265,
+  "n_hash": 1,
+  "top_hash": 265,
+  "dist": 14,
+  "mean8": 0.9971318000000001
+ },
+ "calib": {
+  "finetune_k8": [
+   675,
+   176,
+   76
+  ],
+  "frozen_k1": [
+   73,
+   33,
+   16
+  ]
+ }
+}

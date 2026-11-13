@@ -1,0 +1,2 @@
+row mapping OK: 17,402 test rows, labels match, finetune_k8 AUC 0.9639, bucket AUCs match REPORT §7
+wrote results/misses/tables.md

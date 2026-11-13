@@ -706,3 +706,163 @@ graph between chunks.
   Nebula's tokenization only.
 - **One shuffle per sample** in the chance baseline. With 92,700 samples the
   totals are stable, but per-sample values are noisy.
+
+---
+
+## 9. Why ransomware and coinminer are missed
+
+§7 showed that the fine-tuned two-level model (`finetune_k8`) detects fewer
+April ransomware and coinminer reports than the released Nebula behaviour
+(`frozen_k1`). A first analysis outside this repository, which used only the
+CSV files, proposed five explanations. This section checks them against the
+raw reports and explains the misses.
+
+### 9.1 Method
+
+Script: `analyze_misses.py` (tables in
+[`results/misses/tables.md`](results/misses/tables.md), logs in
+`results/logs/misses_*.log`).
+
+- **Collect:** one pass over all 92,700 raw reports with Nebula's own
+  preprocessing. For each report it records:
+  - an **exact hash** of Nebula's filtered report
+    (`filter_and_normalize_report()` output, JSON with sorted keys);
+  - a hash of the **API-name sequence only**;
+  - each entry point's emulator `error.type` and unsupported API name;
+  - which of the fields that Nebula drops are present;
+  - the full API-name sequence.
+- **Scores and rows:** the scores in `results/hier/<run>/test_scores.csv` are
+  joined to reports through `meta.csv`. The order was also rebuilt
+  independently from `list_files()`; both agree for all 92,700 reports.
+  Labels match for all 17,402 test rows, and `finetune_k8` gives AUC 0.9639
+  and the per-length AUCs of §7 exactly.
+- **Missed / caught:** a report is caught when its score is above the
+  threshold that flags 1% of the 8,003 April benign reports (`finetune_k8`
+  0.99896, `frozen_k1` 0.87452).
+- **Stop reason** of a report is the error type of its first entry point,
+  grouped into five categories (raw types are in the tables).
+
+### 9.2 The five preliminary findings, recomputed as they were defined
+
+<!-- include: misses: 1b. Preliminary findings recomputed with the preliminary definitions -->
+
+### 9.3 Exact duplicates and label conflicts
+
+<!-- include: misses: 2. Exact duplicates and label conflicts (task 1) -->
+
+### 9.4 Why emulation stopped
+
+<!-- include: misses: 3. Why emulation stopped (task 2) -->
+
+### 9.5 What the missed ransomware does
+
+<!-- include: misses: 4. What the missed ransomware does (task 3) -->
+
+### 9.6 The big coinminer group
+
+<!-- include: misses: 5. The big coinminer group (task 4) -->
+
+### 9.7 Score calibration
+
+<!-- include: misses: 6. Score calibration (task 5) -->
+
+![score histograms](results/misses/plots/score_hist.png)
+
+![top of the score range](results/misses/plots/score_tail.png)
+
+### 9.8 Removing reports that cannot be learned (analysis only)
+
+<!-- include: misses: 7. Effect of removing unlearnable reports (task 6, analysis only) -->
+
+### 9.9 Findings
+
+1. **The preliminary numbers reproduce, but the coarse fingerprint misleads.**
+   With the first analysis's definitions, every number reproduces exactly
+   except one: the 20 highest-scoring benign reports have 1 to 219 API calls,
+   not 1 to 13. With **exact** hashes, reports that are identical but carry
+   both labels are rare: 45 groups with 1,545 reports, holding 1.7% of April
+   malware (159) and 6.3% of the `finetune_k8` misses (151). The coarse
+   fingerprint gave 609 groups, 26.5% and 33.5%. Most of those "conflicts"
+   were different reports with the same counts.
+2. **What malware and benign really share is code that runs before the
+   payload.** 194 API-name sequences (ignoring arguments) occur with both
+   labels. They cover 27.3% of April malware (2,564) and 29.3% of the misses
+   (697), and they are not short (median 188 calls). The largest look like
+   compiler run-time start-up code (MSVC `GetSystemTimeAsFileTime,
+   GetCurrentThreadId, …`, Delphi-style `GetModuleHandleW,
+   InitializeCriticalSection, …`) and installer stubs (`SetErrorMode,
+   GetVersion, … SetDefaultDllDirectories`). So the trace is not empty: the
+   emulator recorded the start-up code or wrapper, and stopped before the part
+   that differs. Nine of the 194 groups are lopsided (one label ≥ 99%; the
+   largest has 2,288 malware and 4 benign reports) and hold 40.5% (5,722) of
+   their reports. In the other 185 groups the same trace genuinely appears
+   with both labels.
+3. **Missed ransomware stops before its payload.** It looks like C-runtime
+   start-up (`FlsAlloc`, `HeapCreate`, `TlsSetValue`, …):
+   - 54.5% (461 of 846) stop on an unsupported API (`HeapValidate` alone in
+     255), and 38.8% (328) end without an error record;
+   - only 1.4% (12) touch a file, 0.2% (2) create a crypto context, and none
+     search for files.
+   Its `GetTickCount` and `QueryPerformanceCounter` calls (77–79%) are part of
+   that start-up code, not anti-analysis: `IsDebuggerPresent` and
+   `CheckRemoteDebuggerPresent` appear in no ransomware report. The caught April ransomware gets further: file access 36.3%
+   (469), `CryptAcquireContext*` 31.6% (409), network 31.8% (411), and more
+   than one entry point 33.6% (434). Still, **no ransomware report in the
+   whole dataset reaches `CryptEncrypt` or a `FindFirstFile`/`FindNextFile`
+   loop.** Detection always rests on behaviour before encryption.
+4. **The coinminer misses are one report repeated, and they are a threshold
+   problem, not a recognition problem.** The 265 reports share a single
+   exact hash, and that report never appears in January. Its closest January
+   coinminer differs by 14 API-name edits; the April version goes slightly
+   further (`VirtualProtect` twice, then `CreateFileA` creating
+   `<drive>\windows\mshlpda32.dll`). `frozen_k1` flags all 265 (score 0.9991
+   vs threshold 0.8745). `finetune_k8` scores them 0.9971 and misses them all,
+   because its threshold is 0.99896.
+5. **The fine-tuned model's scores pile up just below 1.** 7,066 April
+   reports (73 benign) score within 0.0005 of its highest score (0.99953),
+   and the 1% FPR threshold sits 0.00057 below that maximum. 675 benign
+   reports score above 0.9 (`frozen_k1`: 73). With exact hashes, they are not
+   copies of malware reports (only 4 of the 675 are in a group with malware),
+   but 11.7% (79) share an API-name sequence with malware, rising to 47.4% of
+   those above 0.999. At this end of the scale, ranking is almost a coin toss
+   among near-identical scores.
+6. **April reports were emulated differently.** In January, no report in any
+   family stops on an unsupported API, except `windows_syswow64`. In April
+   14.4%–75.9% of each malware family do, and 51.9% of clean reports
+   (4,121). The emulator setup
+   apparently changed between the two collections. Models trained on January
+   therefore meet April traces that are cut short in a new way.
+7. **Removing "unlearnable" reports changes little.** Without label-conflict
+   groups, `finetune_k8` detects 62.7% of ransomware (was 60.4%) and 67.8% of
+   coinminer (was 66.3%). Without reports of ≤ 10 API calls, ransomware
+   detection *drops* to 54.3%: short reports are not where ransomware is
+   missed.
+
+**What this means:** the coinminer gap is mostly calibration. A
+temperature-scaled or rank-based threshold, or simply choosing the epoch by
+low-FPR validation metrics, should recover it, because `frozen_k1` already
+separates that group. The ransomware gap is mostly the data. The emulator
+stopped those samples in start-up code that looks like benign software, so
+no model that reads only these traces can be expected to catch them
+reliably.
+
+### 9.10 Caveats
+
+- **One model run.** Missed/caught comes from one `finetune_k8` run (one
+  seed, 2 epochs on CPU). Another run may move individual reports across
+  the threshold.
+- **The stop reason uses the first entry point only.** "No error recorded"
+  cannot tell a normal exit from a timeout.
+- **The emulator version is not in the reports.** The January/April
+  difference in stop reasons is an inference from the error types, not a
+  recorded fact.
+- **The API-name-sequence hash ignores arguments.** Reports in the same
+  sequence group can still differ in what they touch.
+- **API-name matching in §9.5 is case-insensitive and ignores the DLL.**
+  The exact hashes are case-sensitive.
+- **The log-odds lists are descriptive.** They are not tested for
+  significance, and they only include APIs seen in at least 20 reports.
+- **The closest-January search covered only the 257 distinct January
+  coinminer API sequences,** not other families.
+- **§9.8 recomputes the threshold for each subset.** It is not a headline
+  result.

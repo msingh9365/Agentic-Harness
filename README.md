@@ -30,6 +30,9 @@ analyze_avast.py     Avast tables, plots and the Speakeasy comparison
 make_avast_examples.py  copies 20 Avast example reports into examples/avast/
 hier_nebula/         two-level Nebula: 512-token chunks + second-level Transformer
 gpu/                 setup + experiment sweep for a GPU server, with step-by-step instructions
+measure_links.py     data-flow links between API calls and chunk boundaries (REPORT.md §8)
+analyze_links.py     tables and plot for the link study
+analyze_misses.py    why April ransomware/coinminer are missed (REPORT.md §9); `collect` then `analyze`
 examples/            the example samples, with their own README explaining the data
 results/             CSVs, tables.md, summary.json, pilot (sample2000_*) outputs
 results/logs/        console output of every run
@@ -97,6 +100,16 @@ python build_report.py
 
 The trained Avast tokenizers are committed in `results/avast/tokenizer/`, so
 `train` can be skipped.
+
+### Data-flow links and missed reports (REPORT.md §8–9)
+
+```bash
+python measure_links.py sanity && python measure_links.py measure --data-dir ../hf-git && python analyze_links.py
+pip install rapidfuzz
+python analyze_misses.py collect      # one pass over all reports (~8 min on 4 cores); API sequences go to ../hier_data/misses
+python analyze_misses.py analyze      # needs ../hier_data/speakeasy/meta.csv (hier_nebula prepare) and results/hier/*/test_scores.csv
+python build_report.py
+```
 
 ### Two-level model
 

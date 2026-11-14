@@ -20,5 +20,6 @@ hier_data/
 *.pt
 # ...except the four trained two-level models from REPORT.md §7 (23 MB each)
 !results/hier/*/best.pt
-# ...and the released-Nebula scores that go with results/hier/data/meta.csv
+# ...and results/hier/data/ (row index + released-Nebula scores); "data/" above would hide the whole folder
+!results/hier/data/
 !results/hier/data/*.npy

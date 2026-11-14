@@ -245,15 +245,28 @@ def field_features(F):
     return F[["n_file", "n_reg", "n_net"] + ev].astype(np.float32)
 
 
-def fit_lr(Xtr, ytr, Xva, yva, Cs=(0.01, 0.1, 1, 10, 100)):
+def group_weights(meta):
+    """Weights for the validation rows (meta.side == 'val', in row order): each API-name sequence
+    (hash_apis group) adds up to 1, so one large group cannot dominate a validation metric.
+    (The largest validation group holds 2,292 of 9,619 reports.)"""
+    h = pd.Series(meta.hash_apis.values[meta.side.values == "val"])
+    return (1.0 / h.map(h.value_counts())).values
+
+
+def wauc(y, s, w):
+    from sklearn.metrics import roc_auc_score
+    return float(roc_auc_score(y, s, sample_weight=w))
+
+
+def fit_lr(Xtr, ytr, Xva, yva, wva, Cs=(0.01, 0.1, 1, 10, 100)):
     from sklearn.linear_model import LogisticRegression
     best = None
     for C in Cs:
         m = LogisticRegression(C=C, penalty="l2", solver="liblinear", max_iter=2000)
         m.fit(Xtr, ytr)
         s = m.decision_function(Xva)
-        e = evaluate(yva, s)
-        print(f"    LR C={C}: val AUC {e['auc']:.4f}, val TPR@1% {e['tpr1']:.4f}", flush=True)
+        e = {"auc": wauc(yva, s, wva), "plain_auc": auc(yva, s)}
+        print(f"    LR C={C}: val AUC group-weighted {e['auc']:.4f} (plain {e['plain_auc']:.4f})", flush=True)
         if best is None or e["auc"] > best[0]:
             best = (e["auc"], C, m)
     print(f"    LR chosen C={best[1]} (val AUC {best[0]:.4f})", flush=True)
@@ -265,11 +278,11 @@ LGB_PARAMS = dict(objective="binary", learning_rate=0.05, num_leaves=63, min_chi
                   metric="binary_logloss", verbose=-1, num_threads=4, deterministic=True, force_row_wise=True)
 
 
-def fit_lgb(Xtr, ytr, Xva, yva, seed, max_rounds=3000):
+def fit_lgb(Xtr, ytr, Xva, yva, wva, seed, max_rounds=3000):
     import lightgbm as lgb
     p = dict(LGB_PARAMS, seed=seed, bagging_seed=seed, feature_fraction_seed=seed, data_random_seed=seed)
     dtr = lgb.Dataset(Xtr, ytr, free_raw_data=False)
-    dva = lgb.Dataset(Xva, yva, reference=dtr)
+    dva = lgb.Dataset(Xva, yva, weight=wva, reference=dtr)      # group-weighted validation log-loss
     m = lgb.train(p, dtr, max_rounds, valid_sets=[dva], callbacks=[lgb.early_stopping(100, verbose=False)])
     return m
 
@@ -362,6 +375,7 @@ def cmd_baselines(a):
     log_versions()
     meta, F, seqs = load_meta(), load_features(), Seqs()
     rows, sets, keep, info = build_sets(meta, F, seqs)
+    W = group_weights(meta)
     print("features:", info, flush=True)
     y = {s: meta.label.values[rows[s]] for s in rows}
     fam = meta.family.values[rows["test"]]
@@ -369,33 +383,33 @@ def cmd_baselines(a):
     table, famtab, valtab = [], [], []
     for name, key in NEBULA_LIKE:
         e = evaluate(y["test"], ex[key].loc[rows["test"]].values, fam)
-        table.append(result_row(name, [e], {"seeds": "1 (existing scores)", "val AUC": "—"}))
+        table.append(result_row(name, [e], {"seeds": "1 (existing scores)", "val AUC (group-weighted)": "—"}))
         famtab.append(family_row(name, [e]))
     summary = {}
     for fs in ["length", "api", "api_bigram", "api_fields"]:
         lgbX, lrX = sets[fs]
         print(f"== {fs}: train {lgbX[0].shape}", flush=True)
         t0 = time.time()
-        m, C = fit_lr(lrX[0], y["train"], lrX[1], y["val"])
+        m, C = fit_lr(lrX[0], y["train"], lrX[1], y["val"], W)
         s = m.decision_function(lrX[2])
         sv = m.decision_function(lrX[1])
         e = evaluate(y["test"], s, fam)
-        ev = evaluate(y["val"], sv)
+        ev = {"auc": wauc(y["val"], sv, W)}
         mname = f"lr_{fs}"
         save_scores(mname, rows["test"], y["test"], s, np.zeros(len(s), int))
         save_scores(mname + "_janval", rows["val"], y["val"], sv, np.zeros(len(sv), int))
         table.append(result_row(f"LR, {FEATURE_LABEL[fs]}", [e],
-                                {"seeds": f"deterministic (C={C})", "val AUC": f4(ev["auc"])}))
+                                {"seeds": f"deterministic (C={C})", "val AUC (group-weighted)": f4(ev["auc"])}))
         famtab.append(family_row(f"LR, {FEATURE_LABEL[fs]}", [e]))
         summary[mname] = {"test": [e], "val": [ev], "C": C}
         print(f"   LR test AUC {e['auc']:.4f} TPR1 {e['tpr1']:.4f} ({time.time() - t0:.0f}s)", flush=True)
         evs, evvs, allsc, allsv, iters = [], [], [], [], []
         for seed in SEEDS:
             t0 = time.time()
-            m = fit_lgb(lgbX[0], y["train"], lgbX[1], y["val"], seed)
+            m = fit_lgb(lgbX[0], y["train"], lgbX[1], y["val"], W, seed)
             s = m.predict(lgbX[2], num_iteration=m.best_iteration)
             sv = m.predict(lgbX[1], num_iteration=m.best_iteration)
-            evs.append(evaluate(y["test"], s, fam)); evvs.append(evaluate(y["val"], sv))
+            evs.append(evaluate(y["test"], s, fam)); evvs.append({"auc": wauc(y["val"], sv, W)})
             allsc.append(s); allsv.append(sv); iters.append(m.best_iteration)
             print(f"   LGBM seed {seed}: best iter {m.best_iteration}, val AUC {evvs[-1]['auc']:.4f}, "
                   f"test AUC {evs[-1]['auc']:.4f} TPR1 {evs[-1]['tpr1']:.4f} ({time.time() - t0:.0f}s)", flush=True)
@@ -410,7 +424,7 @@ def cmd_baselines(a):
                     np.repeat(SEEDS, len(rows["val"])))
         table.append(result_row(f"LightGBM, {FEATURE_LABEL[fs]}", evs,
                                 {"seeds": f"3 (iters {', '.join(map(str, iters))})",
-                                 "val AUC": mean_range([e["auc"] for e in evvs], f4)}))
+                                 "val AUC (group-weighted)": mean_range([e["auc"] for e in evvs], f4)}))
         famtab.append(family_row(f"LightGBM, {FEATURE_LABEL[fs]}", evs))
         summary[mname] = {"test": evs, "val": evvs}
     # best baseline of each kind, chosen on validation AUC (used by analyses 5 and 6)
@@ -433,17 +447,21 @@ def cmd_baselines(a):
            f"bigrams: {info['n_bigrams']:,} (both kept if seen in ≥ 20 January-train reports); "
            f"field counts: {info['n_field_features']} columns (records per field and per event type). "
            "LR: L2, `liblinear`, TF-IDF (sublinear tf) on the bag features, standardised dense features; C from "
-           "{0.01, 0.1, 1, 10, 100} by validation AUC. LightGBM: raw counts, fixed parameters, early stopping "
-           "(100 rounds) on validation log-loss, seeds 0/1/2: mean [min–max]. TPR thresholds come from the 8,003 April "
+           "{0.01, 0.1, 1, 10, 100} by group-weighted validation AUC. LightGBM: raw counts, fixed parameters, early "
+           "stopping (100 rounds) on group-weighted validation log-loss, seeds 0/1/2: mean [min–max]. "
+           "*Group-weighted*: each API-name sequence of the validation side counts once in total (weight 1 / group "
+           "size), because one sequence covers 2,292 of the 9,619 validation reports. TPR thresholds come from the 8,003 April "
            "benign scores of each model; the 0.1% FPR threshold rests on 8 benign reports. FP = benign reports above "
            "the threshold (one number per seed). Fewer than 80 / 8 means ties at the threshold: a bag model gives "
            "every report with the same API names the same score.\n\n"
-           "Early stopping first used validation AUC; one run (API names + bigrams, seed 2) then stopped after 1 tree, "
-           "because the AUC of the first tree on this small, lopsided validation side was not beaten within 100 rounds. "
-           "All LightGBM runs in this study therefore stop on validation log-loss (log in "
-           "`results/logs/signal_baselines.log`).\n\n" +
+           "Why group-weighted: with plain validation AUC, one run (API names + bigrams, seed 2) stopped after 1 tree "
+           "(log `signal_baselines_auc_early_stop.log`). With plain validation log-loss, the prefix models of "
+           "analysis 2 stopped after 16–48 trees: the 2,292-report group gets an uncertain score on short prefixes and "
+           "its loss alone rises after ~20 trees, while the group-weighted loss keeps falling to ~500 trees (checked "
+           "on January validation only; logs `signal_baselines_plain_logloss.log`, `signal_prefix_plain_logloss.log`). "
+           "All LightGBM and LR choices in this study use the group-weighted validation metrics.\n\n" +
            md_table(pd.DataFrame(table)) +
-           f"\nBest on January validation AUC: LR = `{best['lr']}`, LightGBM = `{best['lgbm']}`.\n\n"
+           f"\nBest on group-weighted January validation AUC: LR = `{best['lr']}`, LightGBM = `{best['lgbm']}`.\n\n"
            "#### 1b. TPR at 1% FPR per family (April)\n\n" + md_table(pd.DataFrame(famtab)) +
            f"\n#### 1c. Released Nebula minus best LightGBM (`{best['lgbm']}`, mean of 3 seeds), paired bootstrap\n\n"
            + md_table(boot) +
@@ -634,6 +652,7 @@ def cmd_links(a):
     LX, pair_names, pair_n = link_features(F, meta)
     print("top 20 pairs (January train):", list(zip(pair_names, pair_n)), flush=True)
     rows, sets, keep, info = build_sets(meta, F, seqs)
+    W = group_weights(meta)
     y = {s: meta.label.values[rows[s]] for s in rows}
     fam = meta.family.values[rows["test"]]
     LXs = [LX.values[rows[s]] for s in ["train", "val", "test"]]
@@ -654,17 +673,17 @@ def cmd_links(a):
         evs, evvs, allsc = [], [], []
         for seed in SEEDS:
             t0 = time.time()
-            m = fit_lgb(X[0], y["train"], X[1], y["val"], seed)
+            m = fit_lgb(X[0], y["train"], X[1], y["val"], W, seed)
             s = m.predict(X[2], num_iteration=m.best_iteration)
             sv = m.predict(X[1], num_iteration=m.best_iteration)
-            evs.append(evaluate(y["test"], s, fam)); evvs.append(evaluate(y["val"], sv)); allsc.append(s)
+            evs.append(evaluate(y["test"], s, fam)); evvs.append({"auc": wauc(y["val"], sv, W)}); allsc.append(s)
             print(f"  {name} seed {seed}: iter {m.best_iteration} val AUC {evvs[-1]['auc']:.4f} test AUC "
                   f"{evs[-1]['auc']:.4f} TPR1 {evs[-1]['tpr1']:.4f} ({time.time() - t0:.0f}s)", flush=True)
         mean_scores[name] = np.mean(allsc, 0)
         if "links" in name:
             save_scores(fname[name], np.tile(rows["test"], 3), np.tile(y["test"], 3), np.concatenate(allsc),
                         np.repeat(SEEDS, len(rows["test"])))
-        table.append(result_row(f"LightGBM, {name}", evs, {"val AUC": mean_range([e["auc"] for e in evvs], f4)}))
+        table.append(result_row(f"LightGBM, {name}", evs, {"val AUC (group-weighted)": mean_range([e["auc"] for e in evvs], f4)}))
         famtab.append(family_row(f"LightGBM, {name}", evs))
     boots = []
     for a_, b_ in [("links only", None), ("length + links", "length only"), ("API names + links", "bag of API names"),
@@ -689,7 +708,7 @@ def cmd_links(a):
            "argument; producer = first call that returned it). Link features: number of links, links per call, "
            "cross-chunk links, links leaving chunk 0, maximum link distance (calls), maximum chunk distance, and counts "
            "of the 20 most common producer→user pairs (API names without DLL, lower-case) in the January training side. "
-           "LightGBM as in analysis 1, seeds 0/1/2.\n\n"
+           "LightGBM as in analysis 1 (early stopping on group-weighted validation log-loss), seeds 0/1/2.\n\n"
            "#### 6a. Top 20 producer→user pairs (January train side)\n\n" +
            md_table(pd.DataFrame({"pair": pair_names, "links": [f"{n:,}" for n in pair_n]})) +
            "\n#### 6b. Link features by class (January train side)\n\n" + md_table(pd.DataFrame(desc)) +
@@ -802,6 +821,7 @@ def cmd_prefix(a):
     y = {s: meta.label.values[rows[s]] for s in rows}
     long_ = F.n_calls.values[rows["test"]] > 200
     V = len(seqs.vocab)
+    W = group_weights(meta)
     curve = []
     # ---- (a) LightGBM on prefixes
     for K in KS:
@@ -812,14 +832,15 @@ def cmd_prefix(a):
         allsc = []
         for seed in SEEDS:
             t0 = time.time()
-            m = fit_lgb(Xs[0], y["train"], Xs[1], y["val"], seed)
+            m = fit_lgb(Xs[0], y["train"], Xs[1], y["val"], W, seed)
             s = m.predict(Xs[2], num_iteration=m.best_iteration)
+            va = wauc(y["val"], m.predict(Xs[1], num_iteration=m.best_iteration), W)
             allsc.append(s)
             e, el = evaluate(y["test"], s), None
             thr = {0.01: e["thr1"], 0.001: e["thr01"]}
             el = evaluate(y["test"][long_], s[long_], thr=thr)
             curve.append({"model": "LightGBM API names + bigrams", "K": klab(K), "seed": seed, "subset": "all April",
-                          **{k: e[k] for k in ["auc", "tpr1", "tpr01", "tp1", "n_mal"]}})
+                          "val_auc": va, **{k: e[k] for k in ["auc", "tpr1", "tpr01", "tp1", "n_mal"]}})
             curve.append({"model": "LightGBM API names + bigrams", "K": klab(K), "seed": seed, "subset": "> 200 calls",
                           **{k: el[k] for k in ["auc", "tpr1", "tpr01", "tp1", "n_mal"]}})
             print(f"  LGBM K={klab(K)} seed {seed}: {X.shape[1]} features, iter {m.best_iteration}, AUC {e['auc']:.4f} "
@@ -872,7 +893,9 @@ def cmd_prefix(a):
             tab.append({"model": mod, "subset": f"{sub_} (malware n={gg.n_mal.iloc[0]:,})", "K (calls)": klab(K),
                         "AUC": mean_range(list(gg.auc), f4), "TPR @1% FPR": mean_range(list(gg.tpr1), pct),
                         "TPR @0.1% FPR": mean_range(list(gg.tpr01), pct),
-                        "malware caught @1%": f"{gg.tp1.mean():,.0f}"})
+                        "malware caught @1%": f"{gg.tp1.mean():,.0f}",
+                        "Jan val AUC (group-weighted)": mean_range(list(gg.val_auc), f4)
+                        if "val_auc" in gg and gg.val_auc.notna().all() else "—"})
     n_long = int(long_.sum())
     txt = ("### 2. Prefix curve: how many API calls are needed?\n\n"
            "#### 2a. How many API calls fit in Nebula's first 512 tokens (measured on the tokenized reports)\n\n"
@@ -881,9 +904,11 @@ def cmd_prefix(a):
            md_table(pd.DataFrame(meas)) +
            f"\n#### 2b. Detection against the number of API calls kept (April; {n_long:,} reports have > 200 calls)\n\n"
            "Only the `apis` list is cut to its first K calls; file, registry and network fields are kept. LightGBM is "
-           "trained and early-stopped on January prefixes of the same length (seeds 0/1/2). Released Nebula is only "
+           "trained on January prefixes of the same length and early-stopped on the group-weighted validation log-loss "
+           "(seeds 0/1/2). Released Nebula is only "
            "re-scored. Thresholds: from the April benign scores of all April reports at the same K (also for the "
-           "> 200-call subset).\n\n" + md_table(pd.DataFrame(tab)) +
+           "> 200-call subset). The last column is the same LightGBM on the January validation side (all reports): "
+           "there, more calls always help.\n\n" + md_table(pd.DataFrame(tab)) +
            "\n![prefix curve](plots/prefix_curve.png)\n")
     write_part("a2_prefix", txt)
     plot_prefix(cv)
@@ -896,7 +921,7 @@ def plot_prefix(cv):
     import matplotlib.pyplot as plt
     os.makedirs(os.path.join(R, "plots"), exist_ok=True)
     xs = {klab(K): i for i, K in enumerate(KS)}
-    fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4.6))
     styles = {("released Nebula", "all April"): ("#2a78d6", "-"), ("released Nebula", "> 200 calls"): ("#2a78d6", "--"),
               ("LightGBM API names + bigrams", "all April"): ("#eb6834", "-"),
               ("LightGBM API names + bigrams", "> 200 calls"): ("#eb6834", "--")}
@@ -913,8 +938,9 @@ def plot_prefix(cv):
         ax.grid(axis="y", alpha=0.3)
         for s in ["top", "right"]:
             ax.spines[s].set_visible(False)
-    axes[0].legend(fontsize=8, frameon=False, loc="lower right")
-    fig.tight_layout()
+    h, l = axes[0].get_legend_handles_labels()
+    fig.legend(h, l, fontsize=9, frameon=False, loc="lower center", ncol=2)
+    fig.tight_layout(rect=(0, 0.12, 1, 1))
     fig.savefig(os.path.join(R, "plots", "prefix_curve.png"), dpi=150)
     print("wrote", os.path.join(R, "plots", "prefix_curve.png"))
 

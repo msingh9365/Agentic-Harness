@@ -1,48 +1,48 @@
 versions: {"python": "3.11.18", "numpy": "2.4.6", "pandas": "3.1.1", "sklearn": "1.9.1", "lightgbm": "4.7.0", "scipy": "1.17.1", "torch": "2.15.0+cpu", "sentencepiece": "0.2.3", "orjson": "3.13.0"}
 features: {'n_unigrams': 633, 'n_bigrams': 2772, 'n_field_features': 11}
 == length: train (65679, 6)
-    LR C=0.01: val AUC 0.4417, val TPR@1% 0.0266
-    LR C=0.1: val AUC 0.4518, val TPR@1% 0.0259
-    LR C=1: val AUC 0.4523, val TPR@1% 0.0259
-    LR C=10: val AUC 0.4539, val TPR@1% 0.0259
-    LR C=100: val AUC 0.4539, val TPR@1% 0.0259
-    LR chosen C=100 (val AUC 0.4539)
-   LR test AUC 0.6018 TPR1 0.0451 (1s)
-   LGBM seed 0: best iter 8, val AUC 0.7177, test AUC 0.7228 TPR1 0.0422 (0s)
-   LGBM seed 1: best iter 6, val AUC 0.7309, test AUC 0.6981 TPR1 0.0526 (0s)
-   LGBM seed 2: best iter 10, val AUC 0.7267, test AUC 0.7111 TPR1 0.0547 (0s)
+    LR C=0.01: val AUC group-weighted 0.6605 (plain 0.4417)
+    LR C=0.1: val AUC group-weighted 0.6788 (plain 0.4518)
+    LR C=1: val AUC group-weighted 0.6793 (plain 0.4523)
+    LR C=10: val AUC group-weighted 0.6789 (plain 0.4539)
+    LR C=100: val AUC group-weighted 0.6789 (plain 0.4539)
+    LR chosen C=1 (val AUC 0.6793)
+   LR test AUC 0.6018 TPR1 0.0451 (0s)
+   LGBM seed 0: best iter 230, val AUC 0.8233, test AUC 0.7529 TPR1 0.2445 (1s)
+   LGBM seed 1: best iter 169, val AUC 0.8257, test AUC 0.7611 TPR1 0.2425 (1s)
+   LGBM seed 2: best iter 189, val AUC 0.8246, test AUC 0.7581 TPR1 0.2432 (1s)
 == api: train (65679, 633)
-    LR C=0.01: val AUC 0.8797, val TPR@1% 0.1736
-    LR C=0.1: val AUC 0.9446, val TPR@1% 0.4138
-    LR C=1: val AUC 0.9640, val TPR@1% 0.8489
-    LR C=10: val AUC 0.9651, val TPR@1% 0.8403
-    LR C=100: val AUC 0.9575, val TPR@1% 0.5349
-    LR chosen C=10 (val AUC 0.9651)
+    LR C=0.01: val AUC group-weighted 0.7892 (plain 0.8797)
+    LR C=0.1: val AUC group-weighted 0.8947 (plain 0.9446)
+    LR C=1: val AUC group-weighted 0.9209 (plain 0.9640)
+    LR C=10: val AUC group-weighted 0.9259 (plain 0.9651)
+    LR C=100: val AUC group-weighted 0.9214 (plain 0.9575)
+    LR chosen C=10 (val AUC 0.9259)
    LR test AUC 0.8778 TPR1 0.2713 (3s)
-   LGBM seed 0: best iter 331, val AUC 0.9757, test AUC 0.9493 TPR1 0.4696 (3s)
-   LGBM seed 1: best iter 192, val AUC 0.9689, test AUC 0.9445 TPR1 0.4433 (2s)
-   LGBM seed 2: best iter 1166, val AUC 0.9830, test AUC 0.9519 TPR1 0.5712 (9s)
+   LGBM seed 0: best iter 604, val AUC 0.9664, test AUC 0.9482 TPR1 0.6393 (5s)
+   LGBM seed 1: best iter 590, val AUC 0.9658, test AUC 0.9501 TPR1 0.6196 (5s)
+   LGBM seed 2: best iter 569, val AUC 0.9666, test AUC 0.9520 TPR1 0.6292 (4s)
 == api_bigram: train (65679, 3405)
-    LR C=0.01: val AUC 0.8831, val TPR@1% 0.1163
-    LR C=0.1: val AUC 0.9417, val TPR@1% 0.4159
-    LR C=1: val AUC 0.9641, val TPR@1% 0.5748
-    LR C=10: val AUC 0.9729, val TPR@1% 0.5764
-    LR C=100: val AUC 0.9735, val TPR@1% 0.5385
-    LR chosen C=100 (val AUC 0.9735)
-   LR test AUC 0.9143 TPR1 0.3964 (18s)
-   LGBM seed 0: best iter 1278, val AUC 0.9820, test AUC 0.9490 TPR1 0.6279 (16s)
-   LGBM seed 1: best iter 1107, val AUC 0.9815, test AUC 0.9507 TPR1 0.5829 (16s)
-   LGBM seed 2: best iter 922, val AUC 0.9788, test AUC 0.9515 TPR1 0.5869 (12s)
+    LR C=0.01: val AUC group-weighted 0.8011 (plain 0.8831)
+    LR C=0.1: val AUC group-weighted 0.9117 (plain 0.9417)
+    LR C=1: val AUC group-weighted 0.9424 (plain 0.9641)
+    LR C=10: val AUC group-weighted 0.9476 (plain 0.9729)
+    LR C=100: val AUC group-weighted 0.9466 (plain 0.9735)
+    LR chosen C=10 (val AUC 0.9476)
+   LR test AUC 0.9252 TPR1 0.3956 (11s)
+   LGBM seed 0: best iter 521, val AUC 0.9673, test AUC 0.9483 TPR1 0.6275 (8s)
+   LGBM seed 1: best iter 520, val AUC 0.9690, test AUC 0.9521 TPR1 0.6132 (8s)
+   LGBM seed 2: best iter 528, val AUC 0.9676, test AUC 0.9503 TPR1 0.6157 (8s)
 == api_fields: train (65679, 644)
-    LR C=0.01: val AUC 0.8904, val TPR@1% 0.4263
-    LR C=0.1: val AUC 0.9461, val TPR@1% 0.5109
-    LR C=1: val AUC 0.9642, val TPR@1% 0.8502
-    LR C=10: val AUC 0.9656, val TPR@1% 0.8409
-    LR C=100: val AUC 0.9551, val TPR@1% 0.5311
-    LR chosen C=10 (val AUC 0.9656)
-   LR test AUC 0.8775 TPR1 0.3072 (15s)
-   LGBM seed 0: best iter 953, val AUC 0.9824, test AUC 0.9496 TPR1 0.5677 (7s)
-   LGBM seed 1: best iter 213, val AUC 0.9687, test AUC 0.9452 TPR1 0.4331 (2s)
-   LGBM seed 2: best iter 920, val AUC 0.9824, test AUC 0.9513 TPR1 0.5691 (7s)
+    LR C=0.01: val AUC group-weighted 0.7884 (plain 0.8904)
+    LR C=0.1: val AUC group-weighted 0.8942 (plain 0.9461)
+    LR C=1: val AUC group-weighted 0.9201 (plain 0.9642)
+    LR C=10: val AUC group-weighted 0.9228 (plain 0.9656)
+    LR C=100: val AUC group-weighted 0.9198 (plain 0.9551)
+    LR chosen C=10 (val AUC 0.9228)
+   LR test AUC 0.8775 TPR1 0.3072 (17s)
+   LGBM seed 0: best iter 509, val AUC 0.9660, test AUC 0.9512 TPR1 0.5984 (4s)
+   LGBM seed 1: best iter 600, val AUC 0.9673, test AUC 0.9484 TPR1 0.6038 (5s)
+   LGBM seed 2: best iter 685, val AUC 0.9676, test AUC 0.9512 TPR1 0.5430 (5s)
 best on validation: {'lr': 'lr_api_bigram', 'lgbm': 'lgbm_api_bigram'}
-wrote results/signal/tables.md from ['a0_split.md', 'a1_baselines.md']
+wrote results/signal/tables.md from ['a0_split.md', 'a1_baselines.md', 'a2_prefix.md', 'a5_drift.md', 'a6_links.md']

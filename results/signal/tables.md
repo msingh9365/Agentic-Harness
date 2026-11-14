@@ -14,25 +14,25 @@ April reports whose API-name sequence also occurs in January: 36.4% (6,329/17,40
 
 ### 1. Simple baselines vs Nebula (April test set)
 
-Features from Nebula's filtered reports. Bag of API names: 633 names, bigrams: 2,772 (both kept if seen in ≥ 20 January-train reports); field counts: 11 columns (records per field and per event type). LR: L2, `liblinear`, TF-IDF (sublinear tf) on the bag features, standardised dense features; C from {0.01, 0.1, 1, 10, 100} by validation AUC. LightGBM: raw counts, fixed parameters, early stopping (100 rounds) on validation log-loss, seeds 0/1/2: mean [min–max]. TPR thresholds come from the 8,003 April benign scores of each model; the 0.1% FPR threshold rests on 8 benign reports. FP = benign reports above the threshold (one number per seed). Fewer than 80 / 8 means ties at the threshold: a bag model gives every report with the same API names the same score.
+Features from Nebula's filtered reports. Bag of API names: 633 names, bigrams: 2,772 (both kept if seen in ≥ 20 January-train reports); field counts: 11 columns (records per field and per event type). LR: L2, `liblinear`, TF-IDF (sublinear tf) on the bag features, standardised dense features; C from {0.01, 0.1, 1, 10, 100} by group-weighted validation AUC. LightGBM: raw counts, fixed parameters, early stopping (100 rounds) on group-weighted validation log-loss, seeds 0/1/2: mean [min–max]. *Group-weighted*: each API-name sequence of the validation side counts once in total (weight 1 / group size), because one sequence covers 2,292 of the 9,619 validation reports. TPR thresholds come from the 8,003 April benign scores of each model; the 0.1% FPR threshold rests on 8 benign reports. FP = benign reports above the threshold (one number per seed). Fewer than 80 / 8 means ties at the threshold: a bag model gives every report with the same API names the same score.
 
-Early stopping first used validation AUC; one run (API names + bigrams, seed 2) then stopped after 1 tree, because the AUC of the first tree on this small, lopsided validation side was not beaten within 100 rounds. All LightGBM runs in this study therefore stop on validation log-loss (log in `results/logs/signal_baselines.log`).
+Why group-weighted: with plain validation AUC, one run (API names + bigrams, seed 2) stopped after 1 tree (log `signal_baselines_auc_early_stop.log`). With plain validation log-loss, the prefix models of analysis 2 stopped after 16–48 trees: the 2,292-report group gets an uncertain score on short prefixes and its loss alone rises after ~20 trees, while the group-weighted loss keeps falling to ~500 trees (checked on January validation only; logs `signal_baselines_plain_logloss.log`, `signal_prefix_plain_logloss.log`). All LightGBM and LR choices in this study use the group-weighted validation metrics.
 
-| model | AUC | TPR @1% FPR | TPR @0.1% FPR | seeds | val AUC |
+| model | AUC | TPR @1% FPR | TPR @0.1% FPR | seeds | val AUC (group-weighted) |
 |---|---|---|---|---|---|
 | released Nebula | 0.9586 | 75.0% (7,047/9,399; FP 80) | 51.7% (4,860/9,399; FP 7) | 1 (existing scores) | — |
 | finetune_k8 | 0.9639 | 74.7% (7,018/9,399; FP 80) | 54.3% (5,101/9,399; FP 8) | 1 (existing scores) | — |
 | frozen_k1 | 0.9590 | 75.8% (7,129/9,399; FP 80) | 47.8% (4,493/9,399; FP 8) | 1 (existing scores) | — |
-| LR, length only | 0.6018 | 4.5% (424/9,399; FP 78) | 4.4% (417/9,399; FP 8) | deterministic (C=100) | 0.4539 |
-| LightGBM, length only | 0.7107 [0.6981–0.7228] | 5.0% [4.2%–5.5%] (468/9,399; FP 39/38/39) | 4.7% [3.9%–5.1%] (440/9,399; FP 1/1/1) | 3 (iters 8, 6, 10) | 0.7251 [0.7177–0.7309] |
-| LR, bag of API names | 0.8778 | 27.1% (2,550/9,399; FP 79) | 13.6% (1,277/9,399; FP 8) | deterministic (C=10) | 0.9651 |
-| LightGBM, bag of API names | 0.9486 [0.9445–0.9519] | 49.5% [44.3%–57.1%] (4,650/9,399; FP 80/76/80) | 31.1% [28.0%–34.6%] (2,919/9,399; FP 8/8/5) | 3 (iters 331, 192, 1166) | 0.9758 [0.9689–0.9830] |
-| LR, API names + bigrams | 0.9143 | 39.6% (3,726/9,399; FP 80) | 20.3% (1,909/9,399; FP 4) | deterministic (C=100) | 0.9735 |
-| LightGBM, API names + bigrams | 0.9504 [0.9490–0.9515] | 59.9% [58.3%–62.8%] (5,632/9,399; FP 80/80/80) | 30.2% [29.3%–31.5%] (2,839/9,399; FP 3/4/4) | 3 (iters 1278, 1107, 922) | 0.9808 [0.9788–0.9820] |
-| LR, API names + field counts | 0.8775 | 30.7% (2,887/9,399; FP 80) | 13.0% (1,219/9,399; FP 8) | deterministic (C=10) | 0.9656 |
-| LightGBM, API names + field counts | 0.9487 [0.9452–0.9513] | 52.3% [43.3%–56.9%] (4,919/9,399; FP 80/79/80) | 31.0% [28.1%–35.4%] (2,912/9,399; FP 6/8/5) | 3 (iters 953, 213, 920) | 0.9778 [0.9687–0.9824] |
+| LR, length only | 0.6018 | 4.5% (424/9,399; FP 78) | 4.4% (417/9,399; FP 8) | deterministic (C=1) | 0.6793 |
+| LightGBM, length only | 0.7574 [0.7529–0.7611] | 24.3% [24.2%–24.4%] (2,288/9,399; FP 80/80/80) | 11.5% [9.7%–14.8%] (1,083/9,399; FP 5/5/5) | 3 (iters 230, 169, 189) | 0.8245 [0.8233–0.8257] |
+| LR, bag of API names | 0.8778 | 27.1% (2,550/9,399; FP 79) | 13.6% (1,277/9,399; FP 8) | deterministic (C=10) | 0.9259 |
+| LightGBM, bag of API names | 0.9501 [0.9482–0.9520] | 62.9% [62.0%–63.9%] (5,916/9,399; FP 80/80/80) | 31.6% [29.2%–32.9%] (2,967/9,399; FP 5/7/7) | 3 (iters 604, 590, 569) | 0.9662 [0.9658–0.9666] |
+| LR, API names + bigrams | 0.9252 | 39.6% (3,718/9,399; FP 80) | 29.2% (2,743/9,399; FP 8) | deterministic (C=10) | 0.9476 |
+| LightGBM, API names + bigrams | 0.9502 [0.9483–0.9521] | 61.9% [61.3%–62.8%] (5,816/9,399; FP 79/79/80) | 35.0% [32.5%–36.5%] (3,292/9,399; FP 4/4/4) | 3 (iters 521, 520, 528) | 0.9679 [0.9673–0.9690] |
+| LR, API names + field counts | 0.8775 | 30.7% (2,887/9,399; FP 80) | 13.0% (1,219/9,399; FP 8) | deterministic (C=10) | 0.9228 |
+| LightGBM, API names + field counts | 0.9503 [0.9484–0.9512] | 58.2% [54.3%–60.4%] (5,468/9,399; FP 79/79/80) | 31.0% [29.2%–33.7%] (2,916/9,399; FP 7/7/6) | 3 (iters 509, 600, 685) | 0.9669 [0.9660–0.9676] |
 
-Best on January validation AUC: LR = `lr_api_bigram`, LightGBM = `lgbm_api_bigram`.
+Best on group-weighted January validation AUC: LR = `lr_api_bigram`, LightGBM = `lgbm_api_bigram`.
 
 #### 1b. TPR at 1% FPR per family (April)
 
@@ -42,36 +42,36 @@ Best on January validation AUC: LR = `lr_api_bigram`, LightGBM = `lgbm_api_bigra
 | finetune_k8 | 80.0% | 66.3% | 77.4% | 88.1% | 60.4% | 84.8% | 80.9% |
 | frozen_k1 | 82.2% | 79.5% | 71.8% | 64.4% | 66.5% | 83.9% | 79.8% |
 | LR, length only | 0.1% | 0.1% | 0.0% | 0.1% | 19.5% | 0.1% | 0.2% |
-| LightGBM, length only | 22.7% [19.1%–24.6%] | 0.1% [0.0%–0.1%] | 0.4% [0.4%–0.4%] | 0.7% [0.3%–1.4%] | 0.5% [0.5%–0.5%] | 0.2% [0.1%–0.3%] | 0.5% [0.5%–0.5%] |
+| LightGBM, length only | 53.6% [53.6%–53.7%] | 7.5% [7.5%–7.5%] | 4.6% [4.4%–5.2%] | 3.7% [3.0%–4.4%] | 32.7% [32.7%–32.7%] | 10.9% [10.9%–10.9%] | 21.7% [21.6%–21.9%] |
 | LR, bag of API names | 51.3% | 18.4% | 57.5% | 8.2% | 23.7% | 0.6% | 46.2% |
-| LightGBM, bag of API names | 79.6% [75.7%–81.8%] | 30.8% [16.7%–58.1%] | 49.2% [48.0%–50.8%] | 13.2% [10.3%–16.9%] | 47.3% [33.9%–55.0%] | 47.8% [31.2%–78.9%] | 65.6% [60.9%–72.9%] |
-| LR, API names + bigrams | 76.2% | 9.3% | 68.7% | 13.5% | 40.7% | 14.3% | 66.9% |
-| LightGBM, API names + bigrams | 78.0% [75.3%–83.2%] | 58.7% [58.1%–59.7%] | 56.1% [50.8%–66.3%] | 17.4% [17.3%–17.5%] | 46.9% [44.1%–52.5%] | 79.2% [79.1%–79.3%] | 74.5% [72.7%–77.7%] |
+| LightGBM, bag of API names | 82.7% [82.6%–82.8%] | 55.7% [54.2%–57.8%] | 51.5% [51.2%–52.0%] | 17.2% [16.9%–17.3%] | 59.9% [56.1%–65.8%] | 78.4% [78.2%–78.5%] | 73.4% [73.3%–73.6%] |
+| LR, API names + bigrams | 77.2% | 24.8% | 62.7% | 13.3% | 29.0% | 12.5% | 67.4% |
+| LightGBM, API names + bigrams | 77.6% [73.6%–83.5%] | 57.1% [56.2%–59.0%] | 51.6% [51.2%–52.0%] | 17.0% [16.8%–17.3%] | 58.4% [58.3%–58.4%] | 79.0% [77.9%–80.1%] | 73.6% [73.5%–73.7%] |
 | LR, API names + field counts | 52.1% | 18.5% | 58.7% | 5.7% | 24.9% | 10.9% | 63.5% |
-| LightGBM, API names + field counts | 77.5% [67.8%–82.4%] | 38.4% [16.7%–56.1%] | 50.0% [47.6%–51.2%] | 14.9% [10.1%–17.6%] | 44.0% [33.7%–54.9%] | 62.9% [31.1%–78.9%] | 69.6% [63.0%–73.0%] |
+| LightGBM, API names + field counts | 82.6% [82.5%–82.7%] | 41.0% [39.4%–42.2%] | 51.3% [50.8%–52.4%] | 17.1% [16.8%–17.3%] | 50.5% [35.2%–58.8%] | 78.7% [78.5%–78.9%] | 73.4% [73.0%–73.6%] |
 
 #### 1c. Released Nebula minus best LightGBM (`lgbm_api_bigram`, mean of 3 seeds), paired bootstrap
 
 | metric | difference | 95% interval |
 |---|---|---|
-| AUC | +0.0081 | [+0.0054, +0.0108] |
-| TPR @1% FPR | +16.6 pp | [+11.3 pp, +20.4 pp] |
-| TPR @0.1% FPR | +21.7 pp | [-30.4 pp, +31.1 pp] |
+| AUC | +0.0082 | [+0.0054, +0.0109] |
+| TPR @1% FPR | +11.7 pp | [+10.0 pp, +15.9 pp] |
+| TPR @0.1% FPR | +16.4 pp | [-35.7 pp, +25.8 pp] |
 
 #### 1d. Top 15 LightGBM features by gain (API names + bigrams, seed 0)
 
 | feature | gain share |
 |---|---|
-| queryperformancecounter>isprocessorfeaturepresent | 42.9% |
+| queryperformancecounter>isprocessorfeaturepresent | 43.4% |
 | getprocaddress>getprocaddress | 12.0% |
-| getprocaddress | 4.2% |
 | heapalloc>multibytetowidechar | 3.9% |
+| getprocaddress | 3.9% |
 | loadlibraryexw | 3.4% |
-| loadlibraryexw>getprocaddress | 3.3% |
+| loadlibraryexw>getprocaddress | 3.4% |
 | getmodulehandlea | 1.9% |
 | getsystemtimeasfiletime | 1.5% |
 | initializecriticalsection | 1.4% |
-| getprocaddress>getsysteminfo | 1.2% |
+| getprocaddress>getsysteminfo | 1.3% |
 | sleep | 1.2% |
 | getcurrentthreadid | 1.2% |
 | __set_app_type>setunhandledexceptionfilter | 1.1% |
@@ -79,6 +79,56 @@ Best on January validation AUC: LR = `lr_api_bigram`, LightGBM = `lgbm_api_bigra
 | setlasterror>getlasterror | 1.1% |
 
 (gain share is relative to the top 40 features.)
+
+### 2. Prefix curve: how many API calls are needed?
+
+#### 2a. How many API calls fit in Nebula's first 512 tokens (measured on the tokenized reports)
+
+`calls fully inside 512` counts calls whose last token is at position < 512; `calls starting inside 512` counts calls whose first token is. For reports ≤ 512 tokens every call fits.
+
+| reports | calls fully inside 512: median [p25–p75] | calls starting inside 512: median [p25–p75] | tokens before the API list: median [p25–p75] | tokens per call (median) |
+|---|---|---|---|---|
+| all reports (n=92,700) | 82 [25–97] | 83 [25–98] | 1 [1–8] | 5.41 |
+| reports > 512 tokens (n=61,207) | 92 [82–100] | 93 [83–101] | 1 [1–11] | 5.34 |
+| reports > 512 tokens, January (n=50,164) | 92 [83–100] | 93 [83–101] | 1 [1–11] | 5.30 |
+| reports > 512 tokens, April (n=11,043) | 94 [81–100] | 95 [82–101] | 1 [1–1] | 5.41 |
+
+#### 2b. Detection against the number of API calls kept (April; 6,857 reports have > 200 calls)
+
+Only the `apis` list is cut to its first K calls; file, registry and network fields are kept. LightGBM is trained on January prefixes of the same length and early-stopped on the group-weighted validation log-loss (seeds 0/1/2). Released Nebula is only re-scored. Thresholds: from the April benign scores of all April reports at the same K (also for the > 200-call subset). The last column is the same LightGBM on the January validation side (all reports): there, more calls always help.
+
+| model | subset | K (calls) | AUC | TPR @1% FPR | TPR @0.1% FPR | malware caught @1% | Jan val AUC (group-weighted) |
+|---|---|---|---|---|---|---|---|
+| LightGBM API names + bigrams | all April (malware n=9,399) | 10 | 0.9048 [0.8981–0.9082] | 24.9% [22.3%–27.5%] | 16.1% [13.5%–18.7%] | 2,337 | 0.9013 [0.8947–0.9139] |
+| LightGBM API names + bigrams | all April (malware n=9,399) | 25 | 0.9097 [0.9086–0.9109] | 28.1% [23.9%–33.3%] | 14.7% [13.3%–16.9%] | 2,637 | 0.8972 [0.8956–0.8988] |
+| LightGBM API names + bigrams | all April (malware n=9,399) | 50 | 0.8910 [0.8908–0.8913] | 28.7% [28.7%–28.8%] | 18.9% [18.8%–19.0%] | 2,700 | 0.9271 [0.9259–0.9281] |
+| LightGBM API names + bigrams | all April (malware n=9,399) | 100 | 0.9056 [0.9052–0.9063] | 21.1% [21.0%–21.2%] | 21.1% [21.0%–21.2%] | 1,984 | 0.9392 [0.9384–0.9401] |
+| LightGBM API names + bigrams | all April (malware n=9,399) | 200 | 0.9028 [0.9014–0.9053] | 13.1% [12.8%–13.3%] | 13.1% [12.8%–13.3%] | 1,227 | 0.9550 [0.9543–0.9556] |
+| LightGBM API names + bigrams | all April (malware n=9,399) | 500 | 0.9498 [0.9485–0.9505] | 63.7% [62.7%–65.3%] | 34.9% [34.2%–35.3%] | 5,990 | 0.9686 [0.9684–0.9690] |
+| LightGBM API names + bigrams | all April (malware n=9,399) | all | 0.9502 [0.9483–0.9521] | 61.9% [61.3%–62.8%] | 35.0% [32.5%–36.5%] | 5,816 | 0.9679 [0.9673–0.9690] |
+| LightGBM API names + bigrams | > 200 calls (malware n=4,312) | 10 | 0.8614 [0.8477–0.8686] | 32.9% [29.5%–35.7%] | 18.2% [14.8%–21.0%] | 1,418 | — |
+| LightGBM API names + bigrams | > 200 calls (malware n=4,312) | 25 | 0.8699 [0.8694–0.8706] | 34.3% [31.2%–35.9%] | 17.5% [15.0%–21.0%] | 1,480 | — |
+| LightGBM API names + bigrams | > 200 calls (malware n=4,312) | 50 | 0.8037 [0.8037–0.8038] | 36.0% [36.0%–36.0%] | 21.2% [21.2%–21.2%] | 1,553 | — |
+| LightGBM API names + bigrams | > 200 calls (malware n=4,312) | 100 | 0.8020 [0.8009–0.8041] | 22.6% [22.6%–22.6%] | 22.6% [22.6%–22.6%] | 976 | — |
+| LightGBM API names + bigrams | > 200 calls (malware n=4,312) | 200 | 0.8543 [0.8540–0.8544] | 15.9% [15.6%–16.2%] | 15.9% [15.6%–16.2%] | 685 | — |
+| LightGBM API names + bigrams | > 200 calls (malware n=4,312) | 500 | 0.9552 [0.9533–0.9575] | 76.7% [75.9%–77.3%] | 47.1% [46.9%–47.2%] | 3,306 | — |
+| LightGBM API names + bigrams | > 200 calls (malware n=4,312) | all | 0.9565 [0.9556–0.9572] | 73.2% [71.8%–75.1%] | 45.1% [41.3%–47.4%] | 3,158 | — |
+| released Nebula | all April (malware n=9,399) | 10 | 0.8706 | 32.9% | 17.6% | 3,092 | — |
+| released Nebula | all April (malware n=9,399) | 25 | 0.9094 | 45.7% | 19.8% | 4,296 | — |
+| released Nebula | all April (malware n=9,399) | 50 | 0.9463 | 61.6% | 25.1% | 5,788 | — |
+| released Nebula | all April (malware n=9,399) | 100 | 0.9528 | 74.4% | 50.8% | 6,996 | — |
+| released Nebula | all April (malware n=9,399) | 200 | 0.9586 | 75.0% | 51.7% | 7,047 | — |
+| released Nebula | all April (malware n=9,399) | 500 | 0.9586 | 75.0% | 51.7% | 7,047 | — |
+| released Nebula | all April (malware n=9,399) | all | 0.9586 | 75.0% | 51.7% | 7,047 | — |
+| released Nebula | > 200 calls (malware n=4,312) | 10 | 0.8592 | 26.1% | 13.5% | 1,125 | — |
+| released Nebula | > 200 calls (malware n=4,312) | 25 | 0.8948 | 33.9% | 14.3% | 1,463 | — |
+| released Nebula | > 200 calls (malware n=4,312) | 50 | 0.9461 | 61.9% | 19.5% | 2,667 | — |
+| released Nebula | > 200 calls (malware n=4,312) | 100 | 0.9341 | 84.6% | 57.2% | 3,650 | — |
+| released Nebula | > 200 calls (malware n=4,312) | 200 | 0.9479 | 85.7% | 58.4% | 3,696 | — |
+| released Nebula | > 200 calls (malware n=4,312) | 500 | 0.9479 | 85.7% | 58.4% | 3,696 | — |
+| released Nebula | > 200 calls (malware n=4,312) | all | 0.9479 | 85.7% | 58.4% | 3,696 | — |
+
+![prefix curve](plots/prefix_curve.png)
 
 ### 5. Drift breakdown (April)
 
@@ -105,121 +155,121 @@ Thresholds: each model's global April 1% FPR threshold (LightGBM: per seed, then
 
 | cell | reports (malware / benign) | released Nebula | finetune_k8 | frozen_k1 | LR `lr_api_bigram` | LightGBM `lgbm_api_bigram` |
 |---|---|---|---|---|---|---|
-| no error recorded | 5,083 (2,491 / 2,592) | 74.0% | 70.4% | 73.0% | 50.2% | 72.7% [71.2%–74.6%] |
-| max_api_count (500-call cap) | 2,080 (1,410 / 670) | 82.0% | 81.2% | 80.5% | 80.0% | 77.7% [74.0%–85.0%] |
-| unsupported API | 9,016 (4,844 / 4,172) | 73.9% | 77.7% | 76.2% | 21.2% | 45.2% [43.9%–47.7%] |
-| invalid memory / CPU fault | 1,062 (580 / 482) | 79.0% | 58.3% | 80.9% | 51.4% | 87.6% [87.6%–87.6%] |
-| emulator internal error | 161 (74 / 87) | 9.5% | 27.0% | 21.6% | 31.1% | 37.8% [37.8%–37.8%] |
+| no error recorded | 5,083 (2,491 / 2,592) | 74.0% | 70.4% | 73.0% | 51.7% | 72.6% [72.3%–73.0%] |
+| max_api_count (500-call cap) | 2,080 (1,410 / 670) | 82.0% | 81.2% | 80.5% | 79.4% | 77.6% [74.0%–84.9%] |
+| unsupported API | 9,016 (4,844 / 4,172) | 73.9% | 77.7% | 76.2% | 17.2% | 49.3% [49.0%–49.8%] |
+| invalid memory / CPU fault | 1,062 (580 / 482) | 79.0% | 58.3% | 80.9% | 81.0% | 85.7% [85.7%–85.9%] |
+| emulator internal error | 161 (74 / 87) | 9.5% | 27.0% | 21.6% | 6.8% | 37.8% [37.8%–37.8%] |
 
 #### 5d. By stop reason: share of benign flagged (FPR)
 
 | cell | reports (malware / benign) | released Nebula | finetune_k8 | frozen_k1 | LR `lr_api_bigram` | LightGBM `lgbm_api_bigram` |
 |---|---|---|---|---|---|---|
-| no error recorded | 5,083 (2,491 / 2,592) | 1.3% | 0.9% | 1.1% | 1.9% | 2.2% [2.2%–2.2%] |
-| max_api_count (500-call cap) | 2,080 (1,410 / 670) | 0.9% | 0.3% | 1.0% | 0.1% | 0.4% [0.4%–0.4%] |
-| unsupported API | 9,016 (4,844 / 4,172) | 0.8% | 1.0% | 0.9% | 0.7% | 0.4% [0.4%–0.5%] |
-| invalid memory / CPU fault | 1,062 (580 / 482) | 0.6% | 1.5% | 1.2% | 0.2% | 0.4% [0.4%–0.4%] |
-| emulator internal error | 161 (74 / 87) | 3.4% | 5.7% | 1.1% | 1.1% | 0.0% [0.0%–0.0%] |
+| no error recorded | 5,083 (2,491 / 2,592) | 1.3% | 0.9% | 1.1% | 2.3% | 2.1% [2.0%–2.2%] |
+| max_api_count (500-call cap) | 2,080 (1,410 / 670) | 0.9% | 0.3% | 1.0% | 0.1% | 0.4% [0.3%–0.4%] |
+| unsupported API | 9,016 (4,844 / 4,172) | 0.8% | 1.0% | 0.9% | 0.5% | 0.4% [0.4%–0.4%] |
+| invalid memory / CPU fault | 1,062 (580 / 482) | 0.6% | 1.5% | 1.2% | 0.2% | 1.1% [0.4%–1.5%] |
+| emulator internal error | 161 (74 / 87) | 3.4% | 5.7% | 1.1% | 0.0% | 1.1% [1.1%–1.1%] |
 
 #### 5e. By stop reason: AUC inside the cell
 
 | cell | reports (malware / benign) | released Nebula | finetune_k8 | frozen_k1 | LR `lr_api_bigram` | LightGBM `lgbm_api_bigram` |
 |---|---|---|---|---|---|---|
-| no error recorded | 5,083 (2,491 / 2,592) | 0.9395 | 0.9571 | 0.9313 | 0.9291 | 0.9563 [0.9560–0.9567] |
-| max_api_count (500-call cap) | 2,080 (1,410 / 670) | 0.9671 | 0.9533 | 0.9673 | 0.9025 | 0.9327 [0.9317–0.9335] |
-| unsupported API | 9,016 (4,844 / 4,172) | 0.9689 | 0.9675 | 0.9767 | 0.9292 | 0.9585 [0.9563–0.9603] |
-| invalid memory / CPU fault | 1,062 (580 / 482) | 0.9854 | 0.9844 | 0.9806 | 0.9678 | 0.9782 [0.9776–0.9786] |
-| emulator internal error | 161 (74 / 87) | 0.8978 | 0.8729 | 0.8660 | 0.9390 | 0.8974 [0.8955–0.8990] |
+| no error recorded | 5,083 (2,491 / 2,592) | 0.9395 | 0.9571 | 0.9313 | 0.9423 | 0.9540 [0.9534–0.9548] |
+| max_api_count (500-call cap) | 2,080 (1,410 / 670) | 0.9671 | 0.9533 | 0.9673 | 0.8781 | 0.9332 [0.9326–0.9337] |
+| unsupported API | 9,016 (4,844 / 4,172) | 0.9689 | 0.9675 | 0.9767 | 0.9412 | 0.9586 [0.9555–0.9625] |
+| invalid memory / CPU fault | 1,062 (580 / 482) | 0.9854 | 0.9844 | 0.9806 | 0.9658 | 0.9778 [0.9774–0.9782] |
+| emulator internal error | 161 (74 / 87) | 0.8978 | 0.8729 | 0.8660 | 0.9427 | 0.8806 [0.8599–0.8948] |
 
 #### 5f. By seen / unseen: TPR at 1% FPR (malware in the cell)
 
 | cell | reports (malware / benign) | released Nebula | finetune_k8 | frozen_k1 | LR `lr_api_bigram` | LightGBM `lgbm_api_bigram` |
 |---|---|---|---|---|---|---|
-| seen in January | 6,329 (2,914 / 3,415) | 82.1% | 87.5% | 83.0% | 65.7% | 77.3% [74.4%–82.9%] |
-| unseen | 11,073 (6,485 / 4,588) | 71.8% | 68.9% | 72.6% | 27.9% | 52.1% [51.0%–53.8%] |
+| seen in January | 6,329 (2,914 / 3,415) | 82.1% | 87.5% | 83.0% | 63.2% | 76.7% [74.3%–80.5%] |
+| unseen | 11,073 (6,485 / 4,588) | 71.8% | 68.9% | 72.6% | 28.9% | 55.2% [54.8%–55.9%] |
 
 #### 5g. By seen / unseen: share of benign flagged (FPR)
 
 | cell | reports (malware / benign) | released Nebula | finetune_k8 | frozen_k1 | LR `lr_api_bigram` | LightGBM `lgbm_api_bigram` |
 |---|---|---|---|---|---|---|
-| seen in January | 6,329 (2,914 / 3,415) | 0.7% | 1.1% | 0.8% | 0.7% | 1.2% [1.1%–1.2%] |
-| unseen | 11,073 (6,485 / 4,588) | 1.2% | 0.9% | 1.2% | 1.2% | 0.9% [0.9%–0.9%] |
+| seen in January | 6,329 (2,914 / 3,415) | 0.7% | 1.1% | 0.8% | 0.9% | 1.1% [1.1%–1.1%] |
+| unseen | 11,073 (6,485 / 4,588) | 1.2% | 0.9% | 1.2% | 1.1% | 0.9% [0.9%–0.9%] |
 
 #### 5h. By seen / unseen: AUC inside the cell
 
 | cell | reports (malware / benign) | released Nebula | finetune_k8 | frozen_k1 | LR `lr_api_bigram` | LightGBM `lgbm_api_bigram` |
 |---|---|---|---|---|---|---|
-| seen in January | 6,329 (2,914 / 3,415) | 0.9865 | 0.9909 | 0.9883 | 0.9645 | 0.9756 [0.9748–0.9763] |
-| unseen | 11,073 (6,485 / 4,588) | 0.9371 | 0.9392 | 0.9386 | 0.8784 | 0.9379 [0.9357–0.9402] |
+| seen in January | 6,329 (2,914 / 3,415) | 0.9865 | 0.9909 | 0.9883 | 0.9665 | 0.9737 [0.9724–0.9746] |
+| unseen | 11,073 (6,485 / 4,588) | 0.9371 | 0.9392 | 0.9386 | 0.8881 | 0.9379 [0.9354–0.9395] |
 
 #### 5i. By family: TPR at 1% FPR
 
 | cell | reports (malware / benign) | released Nebula | finetune_k8 | frozen_k1 | LR `lr_api_bigram` | LightGBM `lgbm_api_bigram` |
 |---|---|---|---|---|---|---|
-| backdoor | 1,940 (1,940 / 0) | 82.9% | 80.0% | 82.2% | 76.2% | 78.0% [75.3%–83.2%] |
-| coinminer | 1,684 (1,684 / 0) | 81.9% | 66.3% | 79.5% | 9.3% | 58.7% [58.1%–59.7%] |
-| dropper | 252 (252 / 0) | 73.4% | 77.4% | 71.8% | 68.7% | 56.1% [50.8%–66.3%] |
-| keylogger | 1,041 (1,041 / 0) | 52.2% | 88.1% | 64.4% | 13.5% | 17.4% [17.3%–17.5%] |
-| ransomware | 2,139 (2,139 / 0) | 66.8% | 60.4% | 66.5% | 40.7% | 46.9% [44.1%–52.5%] |
-| rat | 1,258 (1,258 / 0) | 85.5% | 84.8% | 83.9% | 14.3% | 79.2% [79.1%–79.3%] |
-| trojan | 1,085 (1,085 / 0) | 76.2% | 80.9% | 79.8% | 66.9% | 74.5% [72.7%–77.7%] |
+| backdoor | 1,940 (1,940 / 0) | 82.9% | 80.0% | 82.2% | 77.2% | 77.6% [73.6%–83.5%] |
+| coinminer | 1,684 (1,684 / 0) | 81.9% | 66.3% | 79.5% | 24.8% | 57.1% [56.2%–59.0%] |
+| dropper | 252 (252 / 0) | 73.4% | 77.4% | 71.8% | 62.7% | 51.6% [51.2%–52.0%] |
+| keylogger | 1,041 (1,041 / 0) | 52.2% | 88.1% | 64.4% | 13.3% | 17.0% [16.8%–17.3%] |
+| ransomware | 2,139 (2,139 / 0) | 66.8% | 60.4% | 66.5% | 29.0% | 58.4% [58.3%–58.4%] |
+| rat | 1,258 (1,258 / 0) | 85.5% | 84.8% | 83.9% | 12.5% | 79.0% [77.9%–80.1%] |
+| trojan | 1,085 (1,085 / 0) | 76.2% | 80.9% | 79.8% | 67.4% | 73.6% [73.5%–73.7%] |
 
 #### 5j. By family: AUC (family vs all 8,003 April benign)
 
 | cell | reports (malware / benign) | released Nebula | finetune_k8 | frozen_k1 | LR `lr_api_bigram` | LightGBM `lgbm_api_bigram` |
 |---|---|---|---|---|---|---|
-| backdoor vs all benign | 9,943 (1,940 / 8,003) | 0.9577 | 0.9678 | 0.9604 | 0.9378 | 0.9461 [0.9452–0.9468] |
-| coinminer vs all benign | 9,687 (1,684 / 8,003) | 0.9726 | 0.9691 | 0.9684 | 0.9155 | 0.9415 [0.9360–0.9446] |
-| dropper vs all benign | 8,255 (252 / 8,003) | 0.9458 | 0.9678 | 0.9398 | 0.9418 | 0.9586 [0.9559–0.9610] |
-| keylogger vs all benign | 9,044 (1,041 / 8,003) | 0.9640 | 0.9861 | 0.9787 | 0.8209 | 0.9201 [0.9191–0.9211] |
-| ransomware vs all benign | 10,142 (2,139 / 8,003) | 0.9298 | 0.9464 | 0.9195 | 0.8983 | 0.9442 [0.9419–0.9465] |
-| rat vs all benign | 9,261 (1,258 / 8,003) | 0.9842 | 0.9756 | 0.9864 | 0.9408 | 0.9843 [0.9843–0.9843] |
-| trojan vs all benign | 9,088 (1,085 / 8,003) | 0.9634 | 0.9473 | 0.9731 | 0.9546 | 0.9719 [0.9718–0.9720] |
+| backdoor vs all benign | 9,943 (1,940 / 8,003) | 0.9577 | 0.9678 | 0.9604 | 0.9470 | 0.9465 [0.9463–0.9466] |
+| coinminer vs all benign | 9,687 (1,684 / 8,003) | 0.9726 | 0.9691 | 0.9684 | 0.9118 | 0.9393 [0.9332–0.9484] |
+| dropper vs all benign | 8,255 (252 / 8,003) | 0.9458 | 0.9678 | 0.9398 | 0.9464 | 0.9503 [0.9484–0.9520] |
+| keylogger vs all benign | 9,044 (1,041 / 8,003) | 0.9640 | 0.9861 | 0.9787 | 0.8963 | 0.9101 [0.9048–0.9153] |
+| ransomware vs all benign | 10,142 (2,139 / 8,003) | 0.9298 | 0.9464 | 0.9195 | 0.9247 | 0.9526 [0.9510–0.9535] |
+| rat vs all benign | 9,261 (1,258 / 8,003) | 0.9842 | 0.9756 | 0.9864 | 0.9076 | 0.9825 [0.9823–0.9827] |
+| trojan vs all benign | 9,088 (1,085 / 8,003) | 0.9634 | 0.9473 | 0.9731 | 0.9512 | 0.9704 [0.9696–0.9708] |
 
 #### 5k. Stop reason × seen/unseen: TPR at 1% FPR
 
 | cell | reports (malware / benign) | released Nebula | finetune_k8 | frozen_k1 | LR `lr_api_bigram` | LightGBM `lgbm_api_bigram` |
 |---|---|---|---|---|---|---|
-| no error recorded / seen in January | 2,409 (1,245 / 1,164) | 87.0% | 89.3% | 86.3% | 50.4% | 78.0% [75.3%–82.9%] |
-| no error recorded / unseen | 2,674 (1,246 / 1,428) | 61.1% | 51.4% | 59.7% | 50.1% | 67.4% [66.4%–69.3%] |
-| max_api_count (500-call cap) / seen in January | 1,460 (1,161 / 299) | 95.4% | 94.8% | 93.8% | 93.1% | 90.0% [85.5%–98.8%] |
-| max_api_count (500-call cap) / unseen | 620 (249 / 371) | 19.3% | 17.7% | 18.5% | 18.9% | 20.5% [20.5%–20.5%] |
-| unsupported API / seen in January | 1,694 (216 / 1,478) | 9.7% | 38.9% | 26.4% | 0.9% | 0.9% [0.9%–0.9%] |
-| unsupported API / unseen | 7,322 (4,628 / 2,694) | 76.9% | 79.5% | 78.5% | 22.1% | 47.3% [45.9%–49.8%] |
-| invalid memory / CPU fault / seen in January | 709 (268 / 441) | 67.2% | 90.3% | 71.3% | 72.0% | 78.7% [78.7%–78.7%] |
-| invalid memory / CPU fault / unseen | 353 (312 / 41) | 89.1% | 30.8% | 89.1% | 33.7% | 95.2% [95.2%–95.2%] |
-| emulator internal error / seen in January | 57 (24 / 33) | 4.2% | 50.0% | 33.3% | 50.0% | 100.0% [100.0%–100.0%] |
-| emulator internal error / unseen | 104 (50 / 54) | 12.0% | 16.0% | 16.0% | 22.0% | 8.0% [8.0%–8.0%] |
+| no error recorded / seen in January | 2,409 (1,245 / 1,164) | 87.0% | 89.3% | 86.3% | 46.5% | 77.4% [75.7%–78.6%] |
+| no error recorded / unseen | 2,674 (1,246 / 1,428) | 61.1% | 51.4% | 59.7% | 56.9% | 67.8% [66.8%–69.2%] |
+| max_api_count (500-call cap) / seen in January | 1,460 (1,161 / 299) | 95.4% | 94.8% | 93.8% | 92.4% | 90.0% [85.5%–98.8%] |
+| max_api_count (500-call cap) / unseen | 620 (249 / 371) | 19.3% | 17.7% | 18.5% | 18.9% | 20.2% [20.1%–20.5%] |
+| unsupported API / seen in January | 1,694 (216 / 1,478) | 9.7% | 38.9% | 26.4% | 0.9% | 1.9% [1.9%–1.9%] |
+| unsupported API / unseen | 7,322 (4,628 / 2,694) | 76.9% | 79.5% | 78.5% | 18.0% | 51.5% [51.2%–52.0%] |
+| invalid memory / CPU fault / seen in January | 709 (268 / 441) | 67.2% | 90.3% | 71.3% | 69.8% | 74.6% [74.6%–74.6%] |
+| invalid memory / CPU fault / unseen | 353 (312 / 41) | 89.1% | 30.8% | 89.1% | 90.7% | 95.3% [95.2%–95.5%] |
+| emulator internal error / seen in January | 57 (24 / 33) | 4.2% | 50.0% | 33.3% | 4.2% | 100.0% [100.0%–100.0%] |
+| emulator internal error / unseen | 104 (50 / 54) | 12.0% | 16.0% | 16.0% | 8.0% | 8.0% [8.0%–8.0%] |
 
 #### 5l. Stop reason × seen/unseen: share of benign flagged
 
 | cell | reports (malware / benign) | released Nebula | finetune_k8 | frozen_k1 | LR `lr_api_bigram` | LightGBM `lgbm_api_bigram` |
 |---|---|---|---|---|---|---|
-| no error recorded / seen in January | 2,409 (1,245 / 1,164) | 1.1% | 1.1% | 0.9% | 1.9% | 3.0% [3.0%–3.1%] |
-| no error recorded / unseen | 2,674 (1,246 / 1,428) | 1.4% | 0.8% | 1.3% | 1.8% | 1.5% [1.5%–1.5%] |
-| max_api_count (500-call cap) / seen in January | 1,460 (1,161 / 299) | 0.3% | 0.0% | 1.0% | 0.0% | 1.0% [1.0%–1.0%] |
+| no error recorded / seen in January | 2,409 (1,245 / 1,164) | 1.1% | 1.1% | 0.9% | 2.6% | 2.7% [2.7%–2.7%] |
+| no error recorded / unseen | 2,674 (1,246 / 1,428) | 1.4% | 0.8% | 1.3% | 2.0% | 1.5% [1.3%–1.8%] |
+| max_api_count (500-call cap) / seen in January | 1,460 (1,161 / 299) | 0.3% | 0.0% | 1.0% | 0.0% | 0.9% [0.7%–1.0%] |
 | max_api_count (500-call cap) / unseen | 620 (249 / 371) | 1.3% | 0.5% | 1.1% | 0.3% | 0.0% [0.0%–0.0%] |
 | unsupported API / seen in January | 1,694 (216 / 1,478) | 0.4% | 1.0% | 0.6% | 0.0% | 0.0% [0.0%–0.0%] |
-| unsupported API / unseen | 7,322 (4,628 / 2,694) | 1.1% | 1.0% | 1.1% | 1.1% | 0.7% [0.6%–0.7%] |
+| unsupported API / unseen | 7,322 (4,628 / 2,694) | 1.1% | 1.0% | 1.1% | 0.7% | 0.6% [0.6%–0.7%] |
 | invalid memory / CPU fault / seen in January | 709 (268 / 441) | 0.5% | 1.6% | 0.7% | 0.2% | 0.2% [0.2%–0.2%] |
-| invalid memory / CPU fault / unseen | 353 (312 / 41) | 2.4% | 0.0% | 7.3% | 0.0% | 2.4% [2.4%–2.4%] |
-| emulator internal error / seen in January | 57 (24 / 33) | 3.0% | 6.1% | 3.0% | 0.0% | 0.0% [0.0%–0.0%] |
-| emulator internal error / unseen | 104 (50 / 54) | 3.7% | 5.6% | 0.0% | 1.9% | 0.0% [0.0%–0.0%] |
+| invalid memory / CPU fault / unseen | 353 (312 / 41) | 2.4% | 0.0% | 7.3% | 0.0% | 10.6% [2.4%–14.6%] |
+| emulator internal error / seen in January | 57 (24 / 33) | 3.0% | 6.1% | 3.0% | 0.0% | 3.0% [3.0%–3.0%] |
+| emulator internal error / unseen | 104 (50 / 54) | 3.7% | 5.6% | 0.0% | 0.0% | 0.0% [0.0%–0.0%] |
 
 #### 5m. Stop reason × seen/unseen: AUC
 
 | cell | reports (malware / benign) | released Nebula | finetune_k8 | frozen_k1 | LR `lr_api_bigram` | LightGBM `lgbm_api_bigram` |
 |---|---|---|---|---|---|---|
-| no error recorded / seen in January | 2,409 (1,245 / 1,164) | 0.9904 | 0.9903 | 0.9920 | 0.9477 | 0.9665 [0.9646–0.9702] |
-| no error recorded / unseen | 2,674 (1,246 / 1,428) | 0.8754 | 0.9063 | 0.8605 | 0.9111 | 0.9452 [0.9411–0.9494] |
-| max_api_count (500-call cap) / seen in January | 1,460 (1,161 / 299) | 0.9975 | 0.9977 | 0.9966 | 0.9993 | 0.9983 [0.9983–0.9983] |
-| max_api_count (500-call cap) / unseen | 620 (249 / 371) | 0.8500 | 0.7598 | 0.8238 | 0.3657 | 0.4241 [0.4203–0.4281] |
-| unsupported API / seen in January | 1,694 (216 / 1,478) | 0.9278 | 0.9743 | 0.9446 | 0.8595 | 0.8934 [0.8924–0.8948] |
-| unsupported API / unseen | 7,322 (4,628 / 2,694) | 0.9674 | 0.9611 | 0.9754 | 0.9240 | 0.9593 [0.9588–0.9597] |
-| invalid memory / CPU fault / seen in January | 709 (268 / 441) | 0.9887 | 0.9937 | 0.9793 | 0.9574 | 0.9698 [0.9691–0.9712] |
-| invalid memory / CPU fault / unseen | 353 (312 / 41) | 0.9569 | 0.9392 | 0.9570 | 0.8702 | 0.9834 [0.9827–0.9838] |
+| no error recorded / seen in January | 2,409 (1,245 / 1,164) | 0.9904 | 0.9903 | 0.9920 | 0.9503 | 0.9633 [0.9614–0.9650] |
+| no error recorded / unseen | 2,674 (1,246 / 1,428) | 0.8754 | 0.9063 | 0.8605 | 0.9342 | 0.9442 [0.9418–0.9469] |
+| max_api_count (500-call cap) / seen in January | 1,460 (1,161 / 299) | 0.9975 | 0.9977 | 0.9966 | 0.9986 | 0.9985 [0.9983–0.9988] |
+| max_api_count (500-call cap) / unseen | 620 (249 / 371) | 0.8500 | 0.7598 | 0.8238 | 0.3131 | 0.4295 [0.4264–0.4338] |
+| unsupported API / seen in January | 1,694 (216 / 1,478) | 0.9278 | 0.9743 | 0.9446 | 0.8902 | 0.8882 [0.8874–0.8892] |
+| unsupported API / unseen | 7,322 (4,628 / 2,694) | 0.9674 | 0.9611 | 0.9754 | 0.9368 | 0.9594 [0.9570–0.9608] |
+| invalid memory / CPU fault / seen in January | 709 (268 / 441) | 0.9887 | 0.9937 | 0.9793 | 0.9384 | 0.9682 [0.9682–0.9682] |
+| invalid memory / CPU fault / unseen | 353 (312 / 41) | 0.9569 | 0.9392 | 0.9570 | 0.9840 | 0.9829 [0.9824–0.9833] |
 | emulator internal error / seen in January | 57 (24 / 33) | 0.9609 | 0.9583 | 0.9545 | 0.9848 | 1.0000 [1.0000–1.0000] |
-| emulator internal error / unseen | 104 (50 / 54) | 0.8444 | 0.8111 | 0.8000 | 0.9019 | 0.8386 [0.8374–0.8404] |
+| emulator internal error / unseen | 104 (50 / 54) | 0.8444 | 0.8111 | 0.8000 | 0.9359 | 0.8223 [0.7993–0.8456] |
 
 #### 5n. Reference: the same baselines on January validation, by stop reason
 
@@ -227,20 +277,20 @@ Threshold from the January-validation benign scores. Released Nebula is not show
 
 | model | stop reason | reports (malware / benign) | TPR at 1% FPR | AUC |
 |---|---|---|---|---|
-| lr_api_bigram | no error recorded | 3,401 (2,842 / 559) | 84.5% | 0.9817 |
-| lr_api_bigram | max_api_count (500-call cap) | 976 (812 / 164) | 74.1% | 0.9868 |
+| lr_api_bigram | no error recorded | 3,401 (2,842 / 559) | 92.7% | 0.9897 |
+| lr_api_bigram | max_api_count (500-call cap) | 976 (812 / 164) | 74.3% | 0.9817 |
 | lr_api_bigram | unsupported API | 28 (0 / 28) | n<30 | n<30 |
-| lr_api_bigram | invalid memory / CPU fault | 5,178 (3,833 / 1,345) | 27.2% | 0.9634 |
+| lr_api_bigram | invalid memory / CPU fault | 5,178 (3,833 / 1,345) | 28.6% | 0.9630 |
 | lr_api_bigram | emulator internal error | 36 (29 / 7) | 0.0% | — |
-| lgbm_api_bigram | no error recorded | 3,401 (2,842 / 559) | 66.8% [66.8%–66.9%] | 0.9803 [0.9778–0.9818] |
-| lgbm_api_bigram | max_api_count (500-call cap) | 976 (812 / 164) | 93.7% [93.5%–93.8%] | 0.9944 [0.9932–0.9955] |
+| lgbm_api_bigram | no error recorded | 3,401 (2,842 / 559) | 67.6% [67.6%–67.6%] | 0.9801 [0.9755–0.9830] |
+| lgbm_api_bigram | max_api_count (500-call cap) | 976 (812 / 164) | 94.4% [94.1%–94.6%] | 0.9907 [0.9859–0.9931] |
 | lgbm_api_bigram | unsupported API | 28 (0 / 28) | n<30 | n<30 |
-| lgbm_api_bigram | invalid memory / CPU fault | 5,178 (3,833 / 1,345) | 87.5% [87.5%–87.6%] | 0.9757 [0.9753–0.9762] |
-| lgbm_api_bigram | emulator internal error | 36 (29 / 7) | 0.0% [0.0%–0.0%] | — |
+| lgbm_api_bigram | invalid memory / CPU fault | 5,178 (3,833 / 1,345) | 68.0% [27.7%–88.5%] | 0.9734 [0.9728–0.9744] |
+| lgbm_api_bigram | emulator internal error | 36 (29 / 7) | 31.0% [0.0%–93.1%] | — |
 
 ### 6. Do data-flow links separate the classes?
 
-Link = REPORT.md §8 definition (merged API list, address-like return value ≥ 0x10000 reused as a later argument; producer = first call that returned it). Link features: number of links, links per call, cross-chunk links, links leaving chunk 0, maximum link distance (calls), maximum chunk distance, and counts of the 20 most common producer→user pairs (API names without DLL, lower-case) in the January training side. LightGBM as in analysis 1, seeds 0/1/2.
+Link = REPORT.md §8 definition (merged API list, address-like return value ≥ 0x10000 reused as a later argument; producer = first call that returned it). Link features: number of links, links per call, cross-chunk links, links leaving chunk 0, maximum link distance (calls), maximum chunk distance, and counts of the 20 most common producer→user pairs (API names without DLL, lower-case) in the January training side. LightGBM as in analysis 1 (early stopping on group-weighted validation log-loss), seeds 0/1/2.
 
 #### 6a. Top 20 producer→user pairs (January train side)
 
@@ -278,38 +328,38 @@ Link = REPORT.md §8 definition (merged API list, address-like return value ≥ 
 
 #### 6c. Models (April test set)
 
-| model | AUC | TPR @1% FPR | TPR @0.1% FPR | val AUC |
+| model | AUC | TPR @1% FPR | TPR @0.1% FPR | val AUC (group-weighted) |
 |---|---|---|---|---|
-| LightGBM, links only | 0.7504 [0.7446–0.7584] | 8.0% [5.7%–9.3%] (756/9,399; FP 6/12/24) | 4.8% [0.1%–9.2%] (452/9,399; FP 6/7/0) | 0.7792 [0.7678–0.7870] |
-| LightGBM, length only | 0.7107 [0.6981–0.7228] | 5.0% [4.2%–5.5%] (468/9,399; FP 39/38/39) | 4.7% [3.9%–5.1%] (440/9,399; FP 1/1/1) | 0.7251 [0.7177–0.7309] |
-| LightGBM, length + links | 0.8064 [0.8025–0.8084] | 10.5% [7.3%–12.8%] (986/9,399; FP 59/50/15) | 0.0% [0.0%–0.1%] (2/9,399; FP 2/0/0) | 0.8034 [0.7876–0.8220] |
-| LightGBM, bag of API names | 0.9486 [0.9445–0.9519] | 49.5% [44.3%–57.1%] (4,650/9,399; FP 80/76/80) | 31.1% [28.0%–34.6%] (2,919/9,399; FP 8/8/5) | 0.9758 [0.9689–0.9830] |
-| LightGBM, API names + links | 0.9367 [0.9335–0.9415] | 46.9% [46.5%–47.3%] (4,408/9,399; FP 80/70/60) | 33.9% [33.0%–35.2%] (3,183/9,399; FP 8/8/8) | 0.9616 [0.9581–0.9636] |
-| LightGBM, API names + bigrams | 0.9504 [0.9490–0.9515] | 59.9% [58.3%–62.8%] (5,632/9,399; FP 80/80/80) | 30.2% [29.3%–31.5%] (2,839/9,399; FP 3/4/4) | 0.9808 [0.9788–0.9820] |
-| LightGBM, API names + bigrams + links | 0.9398 [0.9347–0.9438] | 47.0% [45.4%–49.5%] (4,421/9,399; FP 64/67/75) | 35.7% [34.6%–36.5%] (3,359/9,399; FP 8/8/7) | 0.9632 [0.9604–0.9668] |
+| LightGBM, links only | 0.7755 [0.7687–0.7790] | 31.1% [29.7%–32.2%] (2,923/9,399; FP 78/80/80) | 24.0% [21.7%–25.2%] (2,253/9,399; FP 6/6/7) | 0.8414 [0.8409–0.8419] |
+| LightGBM, length only | 0.7574 [0.7529–0.7611] | 24.3% [24.2%–24.4%] (2,288/9,399; FP 80/80/80) | 11.5% [9.7%–14.8%] (1,083/9,399; FP 5/5/5) | 0.8245 [0.8233–0.8257] |
+| LightGBM, length + links | 0.8171 [0.8084–0.8276] | 31.4% [29.0%–34.2%] (2,950/9,399; FP 80/80/66) | 19.7% [16.9%–21.7%] (1,850/9,399; FP 8/6/8) | 0.9126 [0.9108–0.9136] |
+| LightGBM, bag of API names | 0.9501 [0.9482–0.9520] | 62.9% [62.0%–63.9%] (5,916/9,399; FP 80/80/80) | 31.6% [29.2%–32.9%] (2,967/9,399; FP 5/7/7) | 0.9662 [0.9658–0.9666] |
+| LightGBM, API names + links | 0.9404 [0.9345–0.9457] | 59.3% [58.9%–59.6%] (5,573/9,399; FP 80/80/80) | 34.4% [34.1%–34.7%] (3,236/9,399; FP 7/7/7) | 0.9668 [0.9656–0.9677] |
+| LightGBM, API names + bigrams | 0.9502 [0.9483–0.9521] | 61.9% [61.3%–62.8%] (5,816/9,399; FP 79/79/80) | 35.0% [32.5%–36.5%] (3,292/9,399; FP 4/4/4) | 0.9679 [0.9673–0.9690] |
+| LightGBM, API names + bigrams + links | 0.9454 [0.9435–0.9488] | 61.2% [61.0%–61.5%] (5,751/9,399; FP 80/80/76) | 35.0% [34.7%–35.4%] (3,287/9,399; FP 4/6/4) | 0.9688 [0.9685–0.9692] |
 
 #### 6d. Paired bootstrap of the difference (mean score over the 3 seeds, 1,000 resamples)
 
 | comparison | metric | difference | 95% interval |
 |---|---|---|---|
-| length + links − length only | AUC | +0.1069 | [+0.0994, +0.1140] |
-| length + links − length only | TPR @1% FPR | +4.4 pp | [+3.7 pp, +5.2 pp] |
-| length + links − length only | TPR @0.1% FPR | -1.1 pp | [-5.3 pp, +5.2 pp] |
-| API names + links − bag of API names | AUC | -0.0129 | [-0.0141, -0.0117] |
-| API names + links − bag of API names | TPR @1% FPR | -10.4 pp | [-18.6 pp, +3.6 pp] |
-| API names + links − bag of API names | TPR @0.1% FPR | -1.1 pp | [-1.7 pp, +6.6 pp] |
-| API names + bigrams + links − API names + bigrams | AUC | -0.0097 | [-0.0110, -0.0084] |
-| API names + bigrams + links − API names + bigrams | TPR @1% FPR | -12.3 pp | [-17.0 pp, -8.6 pp] |
-| API names + bigrams + links − API names + bigrams | TPR @0.1% FPR | +7.8 pp | [-0.6 pp, +8.3 pp] |
+| length + links − length only | AUC | +0.0605 | [+0.0543, +0.0668] |
+| length + links − length only | TPR @1% FPR | +7.1 pp | [+1.1 pp, +8.5 pp] |
+| length + links − length only | TPR @0.1% FPR | +6.2 pp | [+2.1 pp, +7.2 pp] |
+| API names + links − bag of API names | AUC | -0.0091 | [-0.0101, -0.0082] |
+| API names + links − bag of API names | TPR @1% FPR | -2.8 pp | [-13.7 pp, -1.5 pp] |
+| API names + links − bag of API names | TPR @0.1% FPR | +5.0 pp | [+0.7 pp, +5.5 pp] |
+| API names + bigrams + links − API names + bigrams | AUC | -0.0055 | [-0.0062, -0.0049] |
+| API names + bigrams + links − API names + bigrams | TPR @1% FPR | -1.8 pp | [-2.4 pp, +1.3 pp] |
+| API names + bigrams + links − API names + bigrams | TPR @0.1% FPR | -0.7 pp | [-1.9 pp, +2.7 pp] |
 
 #### 6e. TPR at 1% FPR per family
 
 | model | backdoor (n=1,940) | coinminer (n=1,684) | dropper (n=252) | keylogger (n=1,041) | ransomware (n=2,139) | rat (n=1,258) | trojan (n=1,085) |
 |---|---|---|---|---|---|---|---|
-| LightGBM, links only | 13.1% [13.0%–13.1%] | 6.6% [5.5%–7.8%] | 11.9% [4.0%–24.6%] | 0.4% [0.1%–0.8%] | 0.0% [0.0%–0.1%] | 13.2% [0.8%–19.7%] | 17.5% [14.4%–22.9%] |
-| LightGBM, length only | 22.7% [19.1%–24.6%] | 0.1% [0.0%–0.1%] | 0.4% [0.4%–0.4%] | 0.7% [0.3%–1.4%] | 0.5% [0.5%–0.5%] | 0.2% [0.1%–0.3%] | 0.5% [0.5%–0.5%] |
-| LightGBM, length + links | 28.9% [16.8%–41.8%] | 6.6% [5.5%–7.9%] | 8.3% [0.0%–21.0%] | 0.7% [0.1%–1.3%] | 0.4% [0.0%–0.6%] | 13.5% [1.0%–20.3%] | 9.8% [0.8%–23.8%] |
-| LightGBM, bag of API names | 79.6% [75.7%–81.8%] | 30.8% [16.7%–58.1%] | 49.2% [48.0%–50.8%] | 13.2% [10.3%–16.9%] | 47.3% [33.9%–55.0%] | 47.8% [31.2%–78.9%] | 65.6% [60.9%–72.9%] |
-| LightGBM, API names + links | 83.3% [83.0%–83.7%] | 17.5% [17.2%–18.1%] | 48.1% [47.6%–48.4%] | 10.6% [10.0%–11.7%] | 54.9% [54.7%–55.1%] | 32.8% [31.9%–33.4%] | 62.5% [61.2%–63.2%] |
-| LightGBM, API names + bigrams | 78.0% [75.3%–83.2%] | 58.7% [58.1%–59.7%] | 56.1% [50.8%–66.3%] | 17.4% [17.3%–17.5%] | 46.9% [44.1%–52.5%] | 79.2% [79.1%–79.3%] | 74.5% [72.7%–77.7%] |
-| LightGBM, API names + bigrams + links | 74.6% [74.2%–74.9%] | 20.8% [20.4%–21.3%] | 48.1% [47.6%–49.2%] | 12.3% [11.8%–12.9%] | 57.6% [53.6%–63.9%] | 33.7% [32.2%–34.6%] | 66.0% [63.1%–71.6%] |
+| LightGBM, links only | 72.7% [72.5%–72.9%] | 19.2% [18.2%–19.9%] | 47.0% [46.8%–47.2%] | 6.4% [6.4%–6.4%] | 19.9% [13.8%–24.0%] | 22.9% [22.8%–23.0%] | 26.6% [26.3%–27.2%] |
+| LightGBM, length only | 53.6% [53.6%–53.7%] | 7.5% [7.5%–7.5%] | 4.6% [4.4%–5.2%] | 3.7% [3.0%–4.4%] | 32.7% [32.7%–32.7%] | 10.9% [10.9%–10.9%] | 21.7% [21.6%–21.9%] |
+| LightGBM, length + links | 65.2% [63.4%–66.3%] | 18.4% [17.6%–19.0%] | 46.4% [45.2%–47.6%] | 5.8% [5.8%–5.9%] | 20.7% [13.8%–24.8%] | 24.5% [21.5%–30.4%] | 41.4% [32.0%–57.2%] |
+| LightGBM, bag of API names | 82.7% [82.6%–82.8%] | 55.7% [54.2%–57.8%] | 51.5% [51.2%–52.0%] | 17.2% [16.9%–17.3%] | 59.9% [56.1%–65.8%] | 78.4% [78.2%–78.5%] | 73.4% [73.3%–73.6%] |
+| LightGBM, API names + links | 82.1% [82.1%–82.1%] | 39.4% [38.3%–40.6%] | 52.6% [50.8%–53.6%] | 17.2% [16.8%–17.4%] | 56.9% [56.2%–58.0%] | 79.9% [79.2%–80.4%] | 72.2% [71.7%–72.9%] |
+| LightGBM, API names + bigrams | 77.6% [73.6%–83.5%] | 57.1% [56.2%–59.0%] | 51.6% [51.2%–52.0%] | 17.0% [16.8%–17.3%] | 58.4% [58.3%–58.4%] | 79.0% [77.9%–80.1%] | 73.6% [73.5%–73.7%] |
+| LightGBM, API names + bigrams + links | 81.1% [81.0%–81.1%] | 39.2% [38.8%–40.0%] | 51.6% [50.8%–53.2%] | 17.1% [17.0%–17.2%] | 67.0% [66.5%–67.6%] | 79.7% [79.3%–80.5%] | 71.3% [70.8%–71.9%] |

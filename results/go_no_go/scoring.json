@@ -1,0 +1,26 @@
+{
+ "nebula_commit": "1343ae170ef32b01a75d2dd5fb906b5541f073df",
+ "batch_size": 256,
+ "torch": "2.15.0+cpu",
+ "two_level_args": {
+  "nebula": "../nebula",
+  "threads": 4,
+  "cmd": "train",
+  "data": "../hier_data/speakeasy",
+  "out": "results/hier/finetune_k8",
+  "mode": "finetune",
+  "task": "binary",
+  "max_chunks": 8,
+  "layers": 2,
+  "dropout": 0.1,
+  "epochs": 2,
+  "batch_size": 32,
+  "lr": 0.0003,
+  "weight_decay": 0.01,
+  "vocab_size": 50001,
+  "scratch": false,
+  "workers": 2,
+  "limit": 0,
+  "seed": 0
+ }
+}

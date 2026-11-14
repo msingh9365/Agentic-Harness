@@ -1,0 +1,6 @@
+Nebula commit: 1343ae170ef32b01a75d2dd5fb906b5541f073df; batch size 256; torch 2.15.0+cpu
+model.eval(): nebula.training = False ; two-level.training = False
+april: 17,402 reports, 94s; released Nebula vs nebula_score_chunk0.npy max |diff| = 3.64e-12
+april: two-level K=8 vs results/hier/finetune_k8/test_scores.csv max |diff| = 8.34e-07
+janval: 9,619 reports, 59s; released Nebula vs nebula_score_chunk0.npy max |diff| = 1.11e-14
+wrote results/go_no_go/scores

@@ -33,6 +33,8 @@ gpu/                 setup + experiment sweep for a GPU server, with step-by-ste
 measure_links.py     data-flow links between API calls and chunk boundaries (REPORT.md §8)
 analyze_links.py     tables and plot for the link study
 analyze_misses.py    why April ransomware/coinminer are missed (REPORT.md §9); `collect` then `analyze`
+analyze_signal.py    where the signal is: baselines, prefix curve, ablations, attribution, drift, links (REPORT.md §10)
+signal_lib.py        helpers for analyze_signal.py
 examples/            the example samples, with their own README explaining the data
 results/             CSVs, tables.md, summary.json, pilot (sample2000_*) outputs
 results/logs/        console output of every run
@@ -110,6 +112,26 @@ python analyze_misses.py collect      # one pass over all reports (~8 min on 4 c
 python analyze_misses.py analyze      # needs ../hier_data/speakeasy/meta.csv (hier_nebula prepare) and results/hier/*/test_scores.csv
 python build_report.py
 ```
+
+### Where the signal is (REPORT.md §10)
+
+CPU only. Needs CPU PyTorch (`pip install torch --index-url https://download.pytorch.org/whl/cpu`) and
+`lightgbm scikit-learn`, plus `results/hier/data/` (committed).
+
+```bash
+python analyze_signal.py split        # grouped January validation split -> results/signal/val_split.csv
+python analyze_signal.py collect      # one pass over the raw reports (~15 min on 4 cores); big files go to ../hier_data/signal
+python analyze_signal.py baselines    # analysis 1
+python analyze_signal.py drift        # analysis 5 (needs baselines)
+python analyze_signal.py links        # analysis 6
+python analyze_signal.py prefix       # analysis 2
+python analyze_signal.py ablate       # analysis 3
+python analyze_signal.py attrib       # analysis 4
+python build_report.py
+```
+
+Each step writes `results/signal/parts/<step>.md` and rebuilds `results/signal/tables.md`.
+Per-report scores of every new model are in `results/signal/scores/`.
 
 ### Two-level model
 

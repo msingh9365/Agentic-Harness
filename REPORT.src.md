@@ -866,3 +866,290 @@ reliably.
   coinminer API sequences,** not other families.
 - **§9.8 recomputes the threshold for each subset.** It is not a headline
   result.
+
+---
+
+## 10. Where the signal is
+
+Sections 7–9 asked how to read *more* of a report. This section asks what in
+a report actually carries the signal, and what Nebula relies on. Six
+analyses, all on CPU. Only small models were trained (logistic regression and
+LightGBM). Released Nebula was only run, never trained.
+
+"Released Nebula" here always means the released `bpe_50000_torch.model` on
+the first 512 tokens (`results/hier/data/nebula_score_chunk0.npy`, test AUC
+0.9586). `frozen_k1` is *not* the released model: it is the frozen Nebula
+chunk vector plus a trained second level (§7). (§9 calls `frozen_k1` "the
+released Nebula behaviour"; that wording is loose.)
+
+### 10.1 Method
+
+Script: `analyze_signal.py` (helpers in `signal_lib.py`). Tables:
+[`results/signal/tables.md`](results/signal/tables.md). Per-report scores of
+every new model: `results/signal/scores/`. Logs: `results/logs/signal_*.log`.
+
+- **Input.** One pass over all 92,700 raw reports with Nebula's own
+  `filter_and_normalize_report()` (`collect`, 7.7 min on 4 cores). Checks:
+  the API-name hash equals `results/misses/reports.csv`, the token count
+  equals `meta.csv`, and the link counts equal `results/links/samples.csv`,
+  for all 92,700 reports.
+- **Choosing vs reporting.** Nothing was chosen on April. All choices
+  (features kept, LR `C`, LightGBM early stopping, the hex placeholder, the
+  top-20 link pairs) use January only. TPR at 1% and 0.1% FPR takes its
+  threshold from the April benign scores of the model being reported (the
+  convention of §7 and §9). TPR at 0.1% FPR rests on 8 benign reports and is
+  noisy.
+- **Validation split.** January is split by `hash_apis` (the API-name
+  sequence): 10% of the groups go to validation (`GroupShuffleSplit`, seed
+  0; `results/signal/val_split.csv`). The groups are very uneven. The
+  validation side has 678 groups and 9,619 reports (78.1% malware), and one
+  group alone holds 2,292 of them (24%). The training side has 6,093 groups
+  and 65,679 reports, with a largest group of 4,312.
+- **Group-weighted validation.** Because of that one large group, every
+  validation metric used for a choice counts each API-name sequence once
+  (weight 1 / group size). I changed to this after the first runs. With
+  plain validation AUC, one LightGBM run stopped after 1 tree. With plain
+  validation log-loss, the prefix models of §10.3 stopped after 16–48
+  trees, because the loss of that single group rose after ~20 trees. I
+  checked this on January validation only. The earlier logs are kept
+  (`signal_*_plain_logloss.log`, `signal_baselines_auc_early_stop.log`).
+- **Models.** LR: L2, `liblinear`, TF-IDF (sublinear tf) on bag features,
+  `C` ∈ {0.01, 0.1, 1, 10, 100}. LightGBM: raw counts, fixed parameters
+  (learning rate 0.05, 63 leaves, feature and bagging fraction 0.8),
+  early stopping after 100 rounds, seeds 0/1/2 shown as mean [min–max].
+  API names are lower-case without the DLL. Names and bigrams are kept if
+  they occur in ≥ 20 January-train reports (633 names, 2,772 bigrams).
+- **Nebula scores in the prefix and ablation runs are logits.** Many
+  changed reports get a probability of exactly 1.0 in float32 (up to 365 of
+  the 8,003 April benign reports). The 1% FPR threshold would then sit on a
+  tie. The logit gives the same ranking without ties. sigmoid(logit) of the
+  unchanged reports reproduces `nebula_score_chunk0.npy` (max |diff| 8e-7).
+- **One fact from the code that matters below.** Nebula's positional
+  encoding (`PositionalEncoding.forward`, batch-first) adds `pe[:1]`, the
+  *same* vector, at every position. Attention runs inside separate 64-token
+  blocks. So inside a block the Transformer sees no order at all. Order
+  reaches the model only through which block a token falls in, and through
+  the classifier head, which reads the flattened 512 × 64 output with one
+  weight per position.
+
+### 10.2 Simple baselines vs Nebula (April)
+
+<!-- include: signal: 1. Simple baselines vs Nebula (April test set) -->
+
+Per family, TPR at 1% FPR:
+<!-- include: signal: 1b. TPR at 1% FPR per family (April) -->
+
+Released Nebula minus the best LightGBM:
+<!-- include: signal: 1c. Released Nebula minus best LightGBM (`lgbm_api_bigram`, mean of 3 seeds), paired bootstrap -->
+
+### 10.3 Prefix curve: how many API calls are needed?
+
+<!-- include: signal: 2a. How many API calls fit in Nebula's first 512 tokens (measured on the tokenized reports) -->
+
+<!-- include: signal: 2b. Detection against the number of API calls kept (April; 6,857 reports have > 200 calls) -->
+
+### 10.4 Ablations: what does Nebula use?
+
+<!-- include: signal: 3a. Placeholder for hex values (chosen on January validation) -->
+
+<!-- include: signal: 3b. Results -->
+
+Per family (April), TPR at 1% FPR:
+<!-- include: signal: 3c. TPR at 1% FPR per family (April) -->
+
+### 10.5 Attribution (integrated gradients)
+
+<!-- include: signal: 4. Attribution: integrated gradients on 1,000 April reports -->
+
+<!-- include: signal: 4a. Share of total absolute attribution per category -->
+
+By position:
+<!-- include: signal: 4b. Share of absolute attribution per 64-token block (Nebula attends only inside these blocks) -->
+
+Top tokens:
+<!-- include: signal: 4c. Top 30 tokens by mean attribution (tokens with ≥ 50 occurrences in the sample) -->
+
+### 10.6 Drift: unseen behaviour or changed emulator stops?
+
+<!-- include: signal: 5a. Composition: stop reasons in January and April -->
+
+<!-- include: signal: 5b. Composition: April reports whose API-name sequence occurs in January -->
+
+By stop reason (TPR at 1% FPR, each model's global April threshold):
+<!-- include: signal: 5c. By stop reason: TPR at 1% FPR (malware in the cell) -->
+
+Seen in January vs unseen (TPR at 1% FPR):
+<!-- include: signal: 5f. By seen / unseen: TPR at 1% FPR (malware in the cell) -->
+
+Seen vs unseen, AUC inside the cell:
+<!-- include: signal: 5h. By seen / unseen: AUC inside the cell -->
+
+Both together (TPR at 1% FPR):
+<!-- include: signal: 5k. Stop reason × seen/unseen: TPR at 1% FPR -->
+
+Per-family tables, AUC and false-positive versions of every table, and the
+January-validation reference are in
+[`results/signal/tables.md`](results/signal/tables.md) (§5).
+
+### 10.7 Do data-flow links add information?
+
+<!-- include: signal: 6b. Link features by class (January train side) -->
+
+<!-- include: signal: 6c. Models (April test set) -->
+
+<!-- include: signal: 6d. Paired bootstrap of the difference (mean score over the 3 seeds, 1,000 resamples) -->
+
+The top 20 producer→user pairs (chosen on the January training side) are
+listed in [`results/signal/tables.md`](results/signal/tables.md) (§6a). As
+in §8, import resolution (`LoadLibrary*` / `GetModuleHandle*` →
+`GetProcAddress`) dominates.
+
+### 10.8 Findings
+
+1. **API names alone carry most of the signal, but not the low-FPR part.**
+   LightGBM on a bag of API names, ignoring order and arguments, reaches
+   AUC 0.9501 [0.9482–0.9520] on April. Released Nebula gets 0.9586. At 1%
+   FPR the gap is large: 62.9% [62.0%–63.9%] of malware (5,916 of 9,399) vs
+   75.0% (7,047). Adding bigrams or field counts does not change this
+   (0.9502 and 0.9503 AUC). The paired bootstrap puts Nebula ahead by
+   +0.0082 AUC [+0.0054, +0.0109] and +11.7 points of TPR at 1% FPR [+10.0,
+   +15.9]. Length alone is weak (AUC 0.757). One reason a names-only model
+   cannot close the gap: 26.9% of April malware (2,532 of 9,399) has an
+   API-name sequence that also occurs in an April benign report, and a bag
+   model must give both the same score. The largest family gaps are
+   keylogger (17.0% vs 52.2%), coinminer (57.1% vs 81.9%) and dropper
+   (51.6% vs 73.4%).
+2. **Nebula's window holds about 92 API calls, and Nebula stops improving
+   at about 100.** In reports longer than 512 tokens (61,207), a median of
+   92 complete calls fit in the first 512 tokens (quartiles 82–100). Non-API
+   fields use almost none of the window (median 1 token). That agrees with
+   the ~100 calls estimated in §3. On prefixes, Nebula's AUC is 0.8706 with
+   10 calls, 0.9464 with 50, 0.9528 with 100 and 0.9586 from 200 on. TPR at
+   1% FPR goes 32.9% → 61.6% → 74.4% → 75.0%. Beyond ~100 calls the curve is
+   flat by construction (no report changes its first 512 tokens). On the
+   6,857 reports with more than 200 calls the picture is the same (84.6% at
+   100 calls, 85.7% at 200).
+3. **The bag model needs the whole trace, and its short-prefix signal does
+   not carry over to April.** On January validation, its AUC rises steadily
+   with K (group-weighted 0.901 at 10 calls, 0.955 at 200, 0.968 for all).
+   On April it stays flat at 0.89–0.91 from 10 to 200 calls, and its TPR at
+   1% FPR even falls (24.9% at 10, 13.1% at 200). It jumps only with 500
+   calls (0.9498, 63.7%). So what this model learns from the first 200
+   January calls breaks under drift. The full trace (including whether the
+   run reached the 500-call cap) restores it. Nebula gets more out of its
+   first 100 calls than a bag model does.
+4. **Nebula's score depends on order and argument values, not on the
+   non-API fields.** On April, shuffling the call order drops AUC from
+   0.9586 to 0.714 (3 seeds: 0.711–0.716), and 31.8% of reports cross the
+   1% threshold. Removing all arguments gives 0.754. Replacing
+   address-like hex values (≥ 0x10000) with one token gives 0.624. Every
+   single-token placeholder tried gives a January-validation AUC between
+   0.746 and 0.819, so this is not about the placeholder chosen (`heap`).
+   Keeping only API names gives 0.623. Removing return values costs less
+   (0.907). Removing the file, registry and network fields barely matters
+   (0.9543; −2.0 points of TPR; 3.4% of reports cross the threshold). The
+   same order holds on January validation. The non-API fields are small
+   (§2.4) and Nebula hardly uses them.
+5. **Dependence is not the same as need.** The ablated reports look unlike
+   anything Nebula was trained on, so these drops show what Nebula *uses*,
+   not what it *needs*. A model trained without order or arguments reaches
+   AUC 0.950 (finding 1). Read together: Nebula built its decision on token
+   values and positions, and pays for that when they change, but most of the
+   ranking (not the low-FPR end) is already in the bag of names.
+6. **Attribution points the same way: hex values get the most credit.**
+   Address-like hex values get 30.3% (malware) and 31.8% (benign) of the
+   absolute attribution, more than API names (22.8% and 24.7%). All hex
+   values together get 43.7% and 53.8%. Address values also push in the
+   right direction: on average +8.65 logits towards malware in malware
+   reports and −13.21 towards benign in benign reports. The single most
+   influential tokens are specific addresses (for example `0x41de98`, −18.1
+   per occurrence), Speakeasy handle-like values (`0xfeee00xx`, +0.8 to
+   +2.0), and API names passed as string arguments to `GetProcAddress`
+   (`gettickcount64`, `createfilea`, `isvalidlocalename`). The first 64
+   tokens hold 37.9% (malware) and 37.7% (benign) of the attribution. So
+   Nebula leans heavily on exact memory addresses, which depend on the
+   emulator and the binary's layout rather than on behaviour.
+7. **On April, Nebula loses more on unseen behaviour than on the changed
+   emulator stops.** Half of April stops on an unsupported API (51.5% of
+   malware, 4,844; 52.1% of benign, 4,172). In January almost none did
+   (0 malware, 210 benign). Yet Nebula detects these reports at its overall
+   rate (73.9% vs 75.0%). The bigger split is seen vs unseen: Nebula
+   detects 82.1% of malware whose API-name sequence occurs in January
+   (2,914) and 71.8% of the rest (6,485), with AUC 0.9865 vs 0.9371. The
+   two-level models behave the same way. The bag baselines lose on both
+   (unsupported API 49.3%, unseen 55.2%), and the two overlap: 4,628 of the
+   4,844 unsupported-API malware reports are unseen. One cell fails for
+   every model: unseen reports that hit the 500-call cap (249 malware,
+   17.7%–20.2% detected).
+8. **Data-flow links add nothing beyond API names.** On their own, link
+   features carry some signal (AUC 0.776, a bit above length alone at
+   0.757). Added to API names they do not help. On January validation the
+   change is +0.0006 (names) and +0.0009 (names + bigrams) of group-weighted
+   AUC. On April it is negative: −0.0091 [−0.0101, −0.0082] and −0.0055
+   [−0.0062, −0.0049] AUC. The common links are import resolution, which the
+   names and bigrams already show.
+
+**What this means for the next model.**
+
+- **"Data-flow attention" is not supported by this evidence.** Link counts
+  and link pairs add nothing to API names here. A data-flow model would
+  need to show value from something these counts miss (for example, which
+  *argument* flows where), and should be tested against a bag-of-API
+  baseline first.
+- **The gap worth chasing is at low FPR, on unseen behaviour.** Nebula's
+  advantage over a bag of names is +12 points of TPR at 1% FPR, and most of
+  April's loss is on API sequences never seen in January. More context does
+  not address that: Nebula is flat after ~100 calls, and the two-level
+  model of §7 gained +0.005 AUC.
+- **Nebula's use of raw addresses is a robustness risk.** Its strongest
+  tokens are exact memory addresses. A model that normalises addresses (or
+  keeps only their role, such as "handle returned by call i") should be
+  less brittle under emulator changes. Note that the ablation in finding 4
+  does *not* test this: it changes the input without retraining. Training
+  with normalised values is the real test.
+- **Keep a bag-of-API LightGBM as a standard baseline.** It trains in
+  seconds and gets within 0.008 AUC of Nebula.
+
+### 10.9 Caveats
+
+- **Released Nebula has probably seen the January reports.** Its January
+  validation AUC is 0.9984. So the January-validation ablation numbers are
+  in-sample for Nebula. They are shown to check the direction of each
+  effect, not its size.
+- **Ablations change the input, not the model.** A shuffled or stripped
+  report is out of distribution for Nebula. The drops measure sensitivity,
+  not how much information the removed part holds. Retraining on ablated
+  input would answer that and was out of scope (no Transformer training
+  here).
+- **Replacing hex values also moves tokens.** A placeholder is one token
+  while a hex value is often several, so later calls shift position and
+  more calls fit in the 512-token window. That is part of the measured
+  effect.
+- **The placeholder matters somewhat.** Five single-token candidates give
+  January-validation AUCs from 0.746 to 0.819 under the address
+  replacement. `heap` was chosen because it moved the January scores least.
+- **Ties.** A bag model gives every report with the same API names the
+  same score (about 2,300 distinct scores for 17,402 April reports). At a
+  threshold, fewer than 80 (or 8) benign reports may be flagged (the FP
+  column). Some bootstrap intervals for TPR therefore do not contain the
+  point estimate.
+- **The validation side is lopsided.** One API-name sequence is 24% of it,
+  and it is 78.1% malware. The group-weighted metrics were introduced after
+  the first runs, for reasons visible on January data only (§10.1). The
+  April results of the first runs are in the kept logs.
+- **Fixed LightGBM settings.** Only `C` (LR) and the number of trees
+  (LightGBM) were chosen. Tuned trees might close part of the gap to
+  Nebula.
+- **Integrated gradients has one baseline.** The empty report `{'apis': []}`
+  (1 real token, then padding). Padding positions match the baseline, so
+  their attribution is zero by construction. Padding's effect on length is
+  therefore invisible here. "String argument" includes API names passed as
+  arguments and decimal numbers. Token categories come from tokenizing the
+  report in pieces; this was exact for all 1,000 reports.
+- **Links use the §8 definition** (value matching, first producer, no
+  out-parameters). Its caveats (§8.4) apply.
+- **Probability vs logit for Nebula.** §10.2 and §10.6 use the saved
+  probabilities. There, Nebula's TPR at 0.1% FPR is 51.7% (4,860); ranked by
+  logit (§10.3, §10.4) it is 51.8% (4,873), because of a few ties at 1.0.
+- **One run each** for `finetune_k8` and `frozen_k1`; the stop reason uses
+  the first entry point only (§9.10).

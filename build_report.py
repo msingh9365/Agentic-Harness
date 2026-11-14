@@ -8,7 +8,8 @@ import re
 import sys
 
 SOURCES = {"": "results/tables.md", "avast": "results/avast/tables.md", "hier": "results/hier/summary.md",
-           "links": "results/links/tables.md", "misses": "results/misses/tables.md"}
+           "links": "results/links/tables.md", "misses": "results/misses/tables.md",
+           "signal": "results/signal/tables.md"}
 TABLES = {k: open(v).read().splitlines() for k, v in SOURCES.items() if __import__("os").path.exists(v)}
 
 

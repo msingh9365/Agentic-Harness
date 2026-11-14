@@ -1610,3 +1610,529 @@ reliably.
   coinminer API sequences,** not other families.
 - **§9.8 recomputes the threshold for each subset.** It is not a headline
   result.
+
+---
+
+## 10. Where the signal is
+
+Sections 7–9 asked how to read *more* of a report. This section asks what in
+a report actually carries the signal, and what Nebula relies on. Six
+analyses, all on CPU. Only small models were trained (logistic regression and
+LightGBM). Released Nebula was only run, never trained.
+
+"Released Nebula" here always means the released `bpe_50000_torch.model` on
+the first 512 tokens (`results/hier/data/nebula_score_chunk0.npy`, test AUC
+0.9586). `frozen_k1` is *not* the released model: it is the frozen Nebula
+chunk vector plus a trained second level (§7). (§9 calls `frozen_k1` "the
+released Nebula behaviour"; that wording is loose.)
+
+### 10.1 Method
+
+Script: `analyze_signal.py` (helpers in `signal_lib.py`). Tables:
+[`results/signal/tables.md`](results/signal/tables.md). Per-report scores of
+every new model: `results/signal/scores/`. Logs: `results/logs/signal_*.log`.
+
+- **Input.** One pass over all 92,700 raw reports with Nebula's own
+  `filter_and_normalize_report()` (`collect`, 7.7 min on 4 cores). Checks:
+  the API-name hash equals `results/misses/reports.csv`, the token count
+  equals `meta.csv`, and the link counts equal `results/links/samples.csv`,
+  for all 92,700 reports.
+- **Choosing vs reporting.** Nothing was chosen on April. All choices
+  (features kept, LR `C`, LightGBM early stopping, the hex placeholder, the
+  top-20 link pairs) use January only. TPR at 1% and 0.1% FPR takes its
+  threshold from the April benign scores of the model being reported (the
+  convention of §7 and §9). TPR at 0.1% FPR rests on 8 benign reports and is
+  noisy.
+- **Validation split.** January is split by `hash_apis` (the API-name
+  sequence): 10% of the groups go to validation (`GroupShuffleSplit`, seed
+  0; `results/signal/val_split.csv`). The groups are very uneven. The
+  validation side has 678 groups and 9,619 reports (78.1% malware), and one
+  group alone holds 2,292 of them (24%). The training side has 6,093 groups
+  and 65,679 reports, with a largest group of 4,312.
+- **Group-weighted validation.** Because of that one large group, every
+  validation metric used for a choice counts each API-name sequence once
+  (weight 1 / group size). I changed to this after the first runs. With
+  plain validation AUC, one LightGBM run stopped after 1 tree. With plain
+  validation log-loss, the prefix models of §10.3 stopped after 16–48
+  trees, because the loss of that single group rose after ~20 trees. I
+  checked this on January validation only. The earlier logs are kept
+  (`signal_*_plain_logloss.log`, `signal_baselines_auc_early_stop.log`).
+- **Models.** LR: L2, `liblinear`, TF-IDF (sublinear tf) on bag features,
+  `C` ∈ {0.01, 0.1, 1, 10, 100}. LightGBM: raw counts, fixed parameters
+  (learning rate 0.05, 63 leaves, feature and bagging fraction 0.8),
+  early stopping after 100 rounds, seeds 0/1/2 shown as mean [min–max].
+  API names are lower-case without the DLL. Names and bigrams are kept if
+  they occur in ≥ 20 January-train reports (633 names, 2,772 bigrams).
+- **Nebula scores in the prefix and ablation runs are logits.** Many
+  changed reports get a probability of exactly 1.0 in float32 (up to 365 of
+  the 8,003 April benign reports). The 1% FPR threshold would then sit on a
+  tie. The logit gives the same ranking without ties. sigmoid(logit) of the
+  unchanged reports reproduces `nebula_score_chunk0.npy` (max |diff| 8e-7).
+- **One fact from the code that matters below.** Nebula's positional
+  encoding (`PositionalEncoding.forward`, batch-first) adds `pe[:1]`, the
+  *same* vector, at every position. Attention runs inside separate 64-token
+  blocks. So inside a block the Transformer sees no order at all. Order
+  reaches the model only through which block a token falls in, and through
+  the classifier head, which reads the flattened 512 × 64 output with one
+  weight per position.
+
+### 10.2 Simple baselines vs Nebula (April)
+
+Features from Nebula's filtered reports. Bag of API names: 633 names, bigrams: 2,772 (both kept if seen in ≥ 20 January-train reports); field counts: 11 columns (records per field and per event type). LR: L2, `liblinear`, TF-IDF (sublinear tf) on the bag features, standardised dense features; C from {0.01, 0.1, 1, 10, 100} by group-weighted validation AUC. LightGBM: raw counts, fixed parameters, early stopping (100 rounds) on group-weighted validation log-loss, seeds 0/1/2: mean [min–max]. *Group-weighted*: each API-name sequence of the validation side counts once in total (weight 1 / group size), because one sequence covers 2,292 of the 9,619 validation reports. TPR thresholds come from the 8,003 April benign scores of each model; the 0.1% FPR threshold rests on 8 benign reports. FP = benign reports above the threshold (one number per seed). Fewer than 80 / 8 means ties at the threshold: a bag model gives every report with the same API names the same score.
+
+Why group-weighted: with plain validation AUC, one run (API names + bigrams, seed 2) stopped after 1 tree (log `signal_baselines_auc_early_stop.log`). With plain validation log-loss, the prefix models of analysis 2 stopped after 16–48 trees: the 2,292-report group gets an uncertain score on short prefixes and its loss alone rises after ~20 trees, while the group-weighted loss keeps falling to ~500 trees (checked on January validation only; logs `signal_baselines_plain_logloss.log`, `signal_prefix_plain_logloss.log`). All LightGBM and LR choices in this study use the group-weighted validation metrics.
+
+| model | AUC | TPR @1% FPR | TPR @0.1% FPR | seeds | val AUC (group-weighted) |
+|---|---|---|---|---|---|
+| released Nebula | 0.9586 | 75.0% (7,047/9,399; FP 80) | 51.7% (4,860/9,399; FP 7) | 1 (existing scores) | — |
+| finetune_k8 | 0.9639 | 74.7% (7,018/9,399; FP 80) | 54.3% (5,101/9,399; FP 8) | 1 (existing scores) | — |
+| frozen_k1 | 0.9590 | 75.8% (7,129/9,399; FP 80) | 47.8% (4,493/9,399; FP 8) | 1 (existing scores) | — |
+| LR, length only | 0.6018 | 4.5% (424/9,399; FP 78) | 4.4% (417/9,399; FP 8) | deterministic (C=1) | 0.6793 |
+| LightGBM, length only | 0.7574 [0.7529–0.7611] | 24.3% [24.2%–24.4%] (2,288/9,399; FP 80/80/80) | 11.5% [9.7%–14.8%] (1,083/9,399; FP 5/5/5) | 3 (iters 230, 169, 189) | 0.8245 [0.8233–0.8257] |
+| LR, bag of API names | 0.8778 | 27.1% (2,550/9,399; FP 79) | 13.6% (1,277/9,399; FP 8) | deterministic (C=10) | 0.9259 |
+| LightGBM, bag of API names | 0.9501 [0.9482–0.9520] | 62.9% [62.0%–63.9%] (5,916/9,399; FP 80/80/80) | 31.6% [29.2%–32.9%] (2,967/9,399; FP 5/7/7) | 3 (iters 604, 590, 569) | 0.9662 [0.9658–0.9666] |
+| LR, API names + bigrams | 0.9252 | 39.6% (3,718/9,399; FP 80) | 29.2% (2,743/9,399; FP 8) | deterministic (C=10) | 0.9476 |
+| LightGBM, API names + bigrams | 0.9502 [0.9483–0.9521] | 61.9% [61.3%–62.8%] (5,816/9,399; FP 79/79/80) | 35.0% [32.5%–36.5%] (3,292/9,399; FP 4/4/4) | 3 (iters 521, 520, 528) | 0.9679 [0.9673–0.9690] |
+| LR, API names + field counts | 0.8775 | 30.7% (2,887/9,399; FP 80) | 13.0% (1,219/9,399; FP 8) | deterministic (C=10) | 0.9228 |
+| LightGBM, API names + field counts | 0.9503 [0.9484–0.9512] | 58.2% [54.3%–60.4%] (5,468/9,399; FP 79/79/80) | 31.0% [29.2%–33.7%] (2,916/9,399; FP 7/7/6) | 3 (iters 509, 600, 685) | 0.9669 [0.9660–0.9676] |
+
+Best on group-weighted January validation AUC: LR = `lr_api_bigram`, LightGBM = `lgbm_api_bigram`.
+
+Per family, TPR at 1% FPR:
+| model | backdoor (n=1,940) | coinminer (n=1,684) | dropper (n=252) | keylogger (n=1,041) | ransomware (n=2,139) | rat (n=1,258) | trojan (n=1,085) |
+|---|---|---|---|---|---|---|---|
+| released Nebula | 82.9% | 81.9% | 73.4% | 52.2% | 66.8% | 85.5% | 76.2% |
+| finetune_k8 | 80.0% | 66.3% | 77.4% | 88.1% | 60.4% | 84.8% | 80.9% |
+| frozen_k1 | 82.2% | 79.5% | 71.8% | 64.4% | 66.5% | 83.9% | 79.8% |
+| LR, length only | 0.1% | 0.1% | 0.0% | 0.1% | 19.5% | 0.1% | 0.2% |
+| LightGBM, length only | 53.6% [53.6%–53.7%] | 7.5% [7.5%–7.5%] | 4.6% [4.4%–5.2%] | 3.7% [3.0%–4.4%] | 32.7% [32.7%–32.7%] | 10.9% [10.9%–10.9%] | 21.7% [21.6%–21.9%] |
+| LR, bag of API names | 51.3% | 18.4% | 57.5% | 8.2% | 23.7% | 0.6% | 46.2% |
+| LightGBM, bag of API names | 82.7% [82.6%–82.8%] | 55.7% [54.2%–57.8%] | 51.5% [51.2%–52.0%] | 17.2% [16.9%–17.3%] | 59.9% [56.1%–65.8%] | 78.4% [78.2%–78.5%] | 73.4% [73.3%–73.6%] |
+| LR, API names + bigrams | 77.2% | 24.8% | 62.7% | 13.3% | 29.0% | 12.5% | 67.4% |
+| LightGBM, API names + bigrams | 77.6% [73.6%–83.5%] | 57.1% [56.2%–59.0%] | 51.6% [51.2%–52.0%] | 17.0% [16.8%–17.3%] | 58.4% [58.3%–58.4%] | 79.0% [77.9%–80.1%] | 73.6% [73.5%–73.7%] |
+| LR, API names + field counts | 52.1% | 18.5% | 58.7% | 5.7% | 24.9% | 10.9% | 63.5% |
+| LightGBM, API names + field counts | 82.6% [82.5%–82.7%] | 41.0% [39.4%–42.2%] | 51.3% [50.8%–52.4%] | 17.1% [16.8%–17.3%] | 50.5% [35.2%–58.8%] | 78.7% [78.5%–78.9%] | 73.4% [73.0%–73.6%] |
+
+Released Nebula minus the best LightGBM:
+| metric | difference | 95% interval |
+|---|---|---|
+| AUC | +0.0082 | [+0.0054, +0.0109] |
+| TPR @1% FPR | +11.7 pp | [+10.0 pp, +15.9 pp] |
+| TPR @0.1% FPR | +16.4 pp | [-35.7 pp, +25.8 pp] |
+
+### 10.3 Prefix curve: how many API calls are needed?
+
+`calls fully inside 512` counts calls whose last token is at position < 512; `calls starting inside 512` counts calls whose first token is. For reports ≤ 512 tokens every call fits.
+
+| reports | calls fully inside 512: median [p25–p75] | calls starting inside 512: median [p25–p75] | tokens before the API list: median [p25–p75] | tokens per call (median) |
+|---|---|---|---|---|
+| all reports (n=92,700) | 82 [25–97] | 83 [25–98] | 1 [1–8] | 5.41 |
+| reports > 512 tokens (n=61,207) | 92 [82–100] | 93 [83–101] | 1 [1–11] | 5.34 |
+| reports > 512 tokens, January (n=50,164) | 92 [83–100] | 93 [83–101] | 1 [1–11] | 5.30 |
+| reports > 512 tokens, April (n=11,043) | 94 [81–100] | 95 [82–101] | 1 [1–1] | 5.41 |
+
+Only the `apis` list is cut to its first K calls; file, registry and network fields are kept. LightGBM is trained on January prefixes of the same length and early-stopped on the group-weighted validation log-loss (seeds 0/1/2). Released Nebula is only re-scored. Thresholds: from the April benign scores of all April reports at the same K (also for the > 200-call subset). Nebula is ranked by its logit (scores files hold logits). The last column is the same LightGBM on the January validation side (all reports): there, AUC rises with K from 25 to 500 calls.
+
+| model | subset | K (calls) | AUC | TPR @1% FPR | TPR @0.1% FPR | malware caught @1% | Jan val AUC (group-weighted) |
+|---|---|---|---|---|---|---|---|
+| LightGBM API names + bigrams | all April (malware n=9,399) | 10 | 0.9048 [0.8981–0.9082] | 24.9% [22.3%–27.5%] | 16.1% [13.5%–18.7%] | 2,337 | 0.9013 [0.8947–0.9139] |
+| LightGBM API names + bigrams | all April (malware n=9,399) | 25 | 0.9097 [0.9086–0.9109] | 28.1% [23.9%–33.3%] | 14.7% [13.3%–16.9%] | 2,637 | 0.8972 [0.8956–0.8988] |
+| LightGBM API names + bigrams | all April (malware n=9,399) | 50 | 0.8910 [0.8908–0.8913] | 28.7% [28.7%–28.8%] | 18.9% [18.8%–19.0%] | 2,700 | 0.9271 [0.9259–0.9281] |
+| LightGBM API names + bigrams | all April (malware n=9,399) | 100 | 0.9056 [0.9052–0.9063] | 21.1% [21.0%–21.2%] | 21.1% [21.0%–21.2%] | 1,984 | 0.9392 [0.9384–0.9401] |
+| LightGBM API names + bigrams | all April (malware n=9,399) | 200 | 0.9028 [0.9014–0.9053] | 13.1% [12.8%–13.3%] | 13.1% [12.8%–13.3%] | 1,227 | 0.9550 [0.9543–0.9556] |
+| LightGBM API names + bigrams | all April (malware n=9,399) | 500 | 0.9498 [0.9485–0.9505] | 63.7% [62.7%–65.3%] | 34.9% [34.2%–35.3%] | 5,990 | 0.9686 [0.9684–0.9690] |
+| LightGBM API names + bigrams | all April (malware n=9,399) | all | 0.9502 [0.9483–0.9521] | 61.9% [61.3%–62.8%] | 35.0% [32.5%–36.5%] | 5,816 | 0.9679 [0.9673–0.9690] |
+| LightGBM API names + bigrams | > 200 calls (malware n=4,312) | 10 | 0.8614 [0.8477–0.8686] | 32.9% [29.5%–35.7%] | 18.2% [14.8%–21.0%] | 1,418 | — |
+| LightGBM API names + bigrams | > 200 calls (malware n=4,312) | 25 | 0.8699 [0.8694–0.8706] | 34.3% [31.2%–35.9%] | 17.5% [15.0%–21.0%] | 1,480 | — |
+| LightGBM API names + bigrams | > 200 calls (malware n=4,312) | 50 | 0.8037 [0.8037–0.8038] | 36.0% [36.0%–36.0%] | 21.2% [21.2%–21.2%] | 1,553 | — |
+| LightGBM API names + bigrams | > 200 calls (malware n=4,312) | 100 | 0.8020 [0.8009–0.8041] | 22.6% [22.6%–22.6%] | 22.6% [22.6%–22.6%] | 976 | — |
+| LightGBM API names + bigrams | > 200 calls (malware n=4,312) | 200 | 0.8543 [0.8540–0.8544] | 15.9% [15.6%–16.2%] | 15.9% [15.6%–16.2%] | 685 | — |
+| LightGBM API names + bigrams | > 200 calls (malware n=4,312) | 500 | 0.9552 [0.9533–0.9575] | 76.7% [75.9%–77.3%] | 47.1% [46.9%–47.2%] | 3,306 | — |
+| LightGBM API names + bigrams | > 200 calls (malware n=4,312) | all | 0.9565 [0.9556–0.9572] | 73.2% [71.8%–75.1%] | 45.1% [41.3%–47.4%] | 3,158 | — |
+| released Nebula | all April (malware n=9,399) | 10 | 0.8706 | 32.9% | 17.6% | 3,092 | — |
+| released Nebula | all April (malware n=9,399) | 25 | 0.9094 | 45.7% | 19.8% | 4,296 | — |
+| released Nebula | all April (malware n=9,399) | 50 | 0.9464 | 61.6% | 25.2% | 5,788 | — |
+| released Nebula | all April (malware n=9,399) | 100 | 0.9528 | 74.4% | 51.3% | 6,996 | — |
+| released Nebula | all April (malware n=9,399) | 200 | 0.9586 | 75.0% | 51.8% | 7,047 | — |
+| released Nebula | all April (malware n=9,399) | 500 | 0.9586 | 75.0% | 51.8% | 7,047 | — |
+| released Nebula | all April (malware n=9,399) | all | 0.9586 | 75.0% | 51.8% | 7,047 | — |
+| released Nebula | > 200 calls (malware n=4,312) | 10 | 0.8592 | 26.1% | 13.5% | 1,125 | — |
+| released Nebula | > 200 calls (malware n=4,312) | 25 | 0.8948 | 33.9% | 14.3% | 1,463 | — |
+| released Nebula | > 200 calls (malware n=4,312) | 50 | 0.9461 | 61.9% | 19.5% | 2,667 | — |
+| released Nebula | > 200 calls (malware n=4,312) | 100 | 0.9341 | 84.6% | 57.5% | 3,650 | — |
+| released Nebula | > 200 calls (malware n=4,312) | 200 | 0.9479 | 85.7% | 58.7% | 3,696 | — |
+| released Nebula | > 200 calls (malware n=4,312) | 500 | 0.9479 | 85.7% | 58.7% | 3,696 | — |
+| released Nebula | > 200 calls (malware n=4,312) | all | 0.9479 | 85.7% | 58.7% | 3,696 | — |
+
+![prefix curve](plots/prefix_curve.png)
+
+### 10.4 Ablations: what does Nebula use?
+
+Candidates must be one known token (not `<unk>`, id 1) and not a hex value. Among them, the one that changes January-validation scores least under the address replacement is used: **`heap`**.
+
+| candidate | pieces | ids | single known token | mean |Δscore| on Jan val (addr_ph) | Jan val AUC |
+|---|---|---|---|---|---|
+| addr | ▁addr | [38884] | True | 0.2930 | 0.7786 |
+| value | ▁value | [29992] | True | 0.4212 | 0.7756 |
+| mem | ▁mem | [543] | True | 0.3867 | 0.7899 |
+| heap | ▁heap | [110] | True | 0.1755 | 0.8192 |
+| ptr | ▁p tr | [357, 64] | False | — | — |
+| handle | ▁ handle | [49966, 212] | False | — | — |
+| buf | ▁ buf | [49966, 7721] | False | — | — |
+| data | ▁data | [28198] | True | 0.3573 | 0.7457 |
+| hex | ▁he x | [3383, 49967] | False | — | — |
+| unk | ▁un k | [1760, 49981] | False | — | — |
+
+| set | change | AUC | TPR @1% FPR | TPR @0.1% FPR | ΔAUC | ΔTPR @1% | ΔTPR @0.1% | crossed the 1% threshold | mean \|Δscore\| | benign at p = 1.0 (float32) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| April test | none (unmodified) | 0.9586 | 75.0% (7,047/9,399) | 51.8% (4,873) |  |  |  |  |  | 5 |
+| April test | shuffle API call order (3 seeds) | 0.7139 [0.7109–0.7158] | 12.1% [11.8%–12.3%] (1,136) | 7.0% [6.6%–7.4%] (661) | -0.2448 [-0.2477–-0.2429] | -62.9 pp [-63.2 pp–-62.7 pp] | -44.8 pp [-45.2 pp–-44.5 pp] | 31.8% [31.6%–32.1%] (3,763 malware lost, 1,216 benign gained) | 0.334 [0.331–0.337] | 41 [31–53] |
+| April test | remove all arguments | 0.7537 | 9.9% (933) | 8.1% (762) | -0.2049 | -65.0 pp | -43.7 pp | 28.8% (4,439 malware lost, 279 benign gained) | 0.281 | 5 |
+| April test | remove return values | 0.9070 | 43.6% (4,095) | 24.6% (2,316) | -0.0517 | -31.4 pp | -27.2 pp | 15.7% (1,695 malware lost, 167 benign gained) | 0.185 | 7 |
+| April test | address-like hex (≥ 0x10000) → placeholder | 0.6236 | 15.7% (1,472) | 6.3% (594) | -0.3351 | -59.3 pp | -45.5 pp | 33.4% (923 malware lost, 4,069 benign gained) | 0.370 | 25 |
+| April test | all hex values → placeholder | 0.7672 | 2.4% (230) | 0.1% (10) | -0.1914 | -72.5 pp | -51.7 pp | 24.9% (2,169 malware lost, 1,398 benign gained) | 0.266 | 365 |
+| April test | remove file, registry, network fields | 0.9543 | 73.0% (6,859) | 46.5% (4,374) | -0.0044 | -2.0 pp | -5.3 pp | 3.4% (354 malware lost, 9 benign gained) | 0.030 | 5 |
+| April test | API names only | 0.6226 | 2.2% (204) | 2.1% (198) | -0.3361 | -72.8 pp | -49.7 pp | 35.1% (5,055 malware lost, 599 benign gained) | 0.358 | 198 |
+| January validation | none (unmodified) | 0.9984 | 98.9% (7,437/7,516) | 78.9% (5,933) |  |  |  |  |  | 1 |
+| January validation | shuffle API call order (3 seeds) | 0.8120 [0.8092–0.8148] | 33.1% [32.1%–33.9%] (2,488) | 24.1% [22.5%–26.5%] (1,813) | -0.1865 [-0.1892–-0.1836] | -65.9 pp [-66.9 pp–-65.1 pp] | -54.8 pp [-56.4 pp–-52.5 pp] | 32.5% [32.3%–32.7%] (2,739 malware lost, 367 benign gained) | 0.291 [0.288–0.294] | 4 [3–5] |
+| January validation | remove all arguments | 0.8839 | 29.8% (2,238) | 19.5% (1,466) | -0.1145 | -69.2 pp | -59.4 pp | 29.4% (2,546 malware lost, 242 benign gained) | 0.223 | 4 |
+| January validation | remove return values | 0.9446 | 61.2% (4,603) | 41.2% (3,096) | -0.0538 | -37.7 pp | -37.7 pp | 24.8% (2,325 malware lost, 38 benign gained) | 0.190 | 1 |
+| January validation | address-like hex (≥ 0x10000) → placeholder | 0.8192 | 37.8% (2,841) | 26.5% (1,995) | -0.1792 | -61.1 pp | -52.4 pp | 19.0% (1,118 malware lost, 677 benign gained) | 0.175 | 9 |
+| January validation | all hex values → placeholder | 0.7552 | 23.4% (1,756) | 5.9% (445) | -0.2433 | -75.6 pp | -73.0 pp | 34.0% (2,948 malware lost, 304 benign gained) | 0.350 | 29 |
+| January validation | remove file, registry, network fields | 0.9845 | 92.3% (6,935) | 65.9% (4,952) | -0.0139 | -6.7 pp | -13.1 pp | 5.4% (508 malware lost, 4 benign gained) | 0.053 | 0 |
+| January validation | API names only | 0.5561 | 18.0% (1,355) | 7.6% (568) | -0.4424 | -80.9 pp | -71.4 pp | 60.0% (5,311 malware lost, 432 benign gained) | 0.599 | 19 |
+
+Per family (April), TPR at 1% FPR:
+| model | backdoor (n=1,940) | coinminer (n=1,684) | dropper (n=252) | keylogger (n=1,041) | ransomware (n=2,139) | rat (n=1,258) | trojan (n=1,085) |
+|---|---|---|---|---|---|---|---|
+| none (unmodified) | 82.9% | 81.9% | 73.4% | 52.2% | 66.8% | 85.5% | 76.2% |
+| shuffle API call order | 8.5% [7.4%–9.6%] | 3.5% [2.8%–4.1%] | 33.7% [32.9%–34.9%] | 2.4% [2.3%–2.7%] | 29.7% [29.2%–30.2%] | 2.0% [1.7%–2.1%] | 13.0% [12.4%–13.9%] |
+| remove all arguments | 9.7% | 1.5% | 29.0% | 1.2% | 20.7% | 0.4% | 17.1% |
+| remove return values | 60.4% | 30.6% | 56.7% | 29.3% | 52.1% | 26.9% | 46.9% |
+| address-like hex (≥ 0x10000) → placeholder | 15.0% | 4.5% | 53.6% | 1.4% | 29.3% | 0.3% | 29.9% |
+| all hex values → placeholder | 0.4% | 1.9% | 7.5% | 0.7% | 1.0% | 0.4% | 12.7% |
+| remove file, registry, network fields | 70.9% | 81.9% | 73.4% | 54.9% | 67.8% | 86.0% | 75.2% |
+| API names only | 0.4% | 1.5% | 24.6% | 1.3% | 1.1% | 0.2% | 6.4% |
+
+### 10.5 Attribution (integrated gradients)
+
+Stratified sample (seed 0): 500 malware (backdoor 72, coinminer 72, dropper 72, keylogger 71, ransomware 71, rat 71, trojan 71) and 500 benign. Method: integrated gradients on the output of Nebula's embedding layer, 128 steps (midpoint rule), target = Nebula's logit, attribution of a token = sum over the 64 embedding dimensions. Baseline = the embedding of the empty report `{'apis': []}` tokenized and padded. Completeness error |Σ attribution − (logit − baseline logit)|: median 0.0384, p95 0.2100 (mean |logit − baseline logit| = 27.79). Token categories come from tokenizing the report in pieces (exact for 1000/1000 reports; the rest are left out of 4a and 4c). Padding positions match the baseline's padding, so their attribution is zero by construction.
+
+| class | API name | address-like hex (≥ 0x10000) | small hex | string argument | field key | file/registry/network value | padding | other |
+|---|---|---|---|---|---|---|---|---|
+| malware (n=500) | 22.8% | 30.3% | 13.4% | 24.4% | 2.1% | 5.9% | 0.0% | 1.2% |
+| malware: share of the 512 positions | 26.3% | 17.5% | 14.3% | 15.7% | 0.3% | 1.8% | 23.1% | 1.1% |
+| malware: mean signed attribution per report (logit) | -9.18 | +8.65 | -3.84 | -2.98 | +2.47 | -4.23 | +0.00 | -0.69 |
+| benign (n=500) | 24.7% | 31.8% | 22.0% | 18.4% | 0.7% | 1.4% | 0.0% | 1.1% |
+| benign: share of the 512 positions | 23.6% | 11.4% | 24.6% | 9.2% | 0.2% | 0.3% | 29.6% | 1.0% |
+| benign: mean signed attribution per report (logit) | -13.00 | -13.21 | -3.10 | -11.17 | +0.68 | -1.08 | +0.00 | +0.01 |
+
+By position:
+| class | tokens 0–63 | tokens 64–127 | tokens 128–191 | tokens 192–255 | tokens 256–319 | tokens 320–383 | tokens 384–447 | tokens 448–511 |
+|---|---|---|---|---|---|---|---|---|
+| malware | 37.9% | 12.1% | 12.3% | 7.1% | 10.9% | 7.0% | 5.9% | 6.8% |
+| benign | 37.7% | 13.6% | 14.5% | 7.6% | 9.1% | 5.8% | 4.5% | 7.3% |
+
+Top tokens:
+| direction | token | category | occurrences | mean attribution | mean \|attribution\| |
+|---|---|---|---|---|---|
+| towards malware (highest mean) | `▁registry` | field key | 93 | +17.4730 | 17.4730 |
+| towards malware (highest mean) | `▁0x7660` | small hex | 89 | +6.4271 | 6.4271 |
+| towards malware (highest mean) | `▁0x1211f20` | address-like hex (≥ 0x10000) | 61 | +4.1111 | 4.1111 |
+| towards malware (highest mean) | `▁0x599b5c` | address-like hex (≥ 0x10000) | 66 | +2.3074 | 2.8790 |
+| towards malware (highest mean) | `▁0x7540` | small hex | 205 | +2.1054 | 2.1054 |
+| towards malware (highest mean) | `▁0xfeee0009` | address-like hex (≥ 0x10000) | 191 | +2.0080 | 2.1762 |
+| towards malware (highest mean) | `▁0x74e0` | small hex | 151 | +1.9644 | 1.9644 |
+| towards malware (highest mean) | `▁0x4c4308` | address-like hex (≥ 0x10000) | 69 | +1.9213 | 1.9213 |
+| towards malware (highest mean) | `▁gettickcount64` | string argument | 55 | +1.7413 | 2.2693 |
+| towards malware (highest mean) | `▁0xfeee001d` | address-like hex (≥ 0x10000) | 157 | +1.5275 | 1.8410 |
+| towards malware (highest mean) | `▁0xfeee005f` | address-like hex (≥ 0x10000) | 54 | +1.5033 | 1.5033 |
+| towards malware (highest mean) | `585` | address-like hex (≥ 0x10000) | 675 | +1.4965 | 2.8846 |
+| towards malware (highest mean) | `▁0x7300` | small hex | 153 | +1.4155 | 1.4155 |
+| towards malware (highest mean) | `▁0x41de08` | address-like hex (≥ 0x10000) | 197 | +1.2980 | 1.4226 |
+| towards malware (highest mean) | `▁getdateformatex` | string argument | 83 | +1.2448 | 1.2448 |
+| towards malware (highest mean) | `▁0xfeee001a` | address-like hex (≥ 0x10000) | 187 | +1.2186 | 1.2253 |
+| towards malware (highest mean) | `▁0xfeee0035` | address-like hex (≥ 0x10000) | 82 | +1.2040 | 1.2040 |
+| towards malware (highest mean) | `▁0x41deb0` | address-like hex (≥ 0x10000) | 68 | +1.1555 | 1.1555 |
+| towards malware (highest mean) | `▁0xfeee0040` | address-like hex (≥ 0x10000) | 81 | +1.1274 | 1.1274 |
+| towards malware (highest mean) | `▁0x78` | small hex | 92 | +1.1143 | 1.7068 |
+| towards malware (highest mean) | `▁2` | string argument | 493 | +1.0996 | 1.1355 |
+| towards malware (highest mean) | `▁createfilea` | string argument | 76 | +1.0285 | 8.5990 |
+| towards malware (highest mean) | `▁0x7810` | small hex | 264 | +1.0218 | 1.0253 |
+| towards malware (highest mean) | `▁wininet` | API name | 53 | +0.9837 | 0.9837 |
+| towards malware (highest mean) | `▁0xfeee0010` | address-like hex (≥ 0x10000) | 191 | +0.9054 | 1.0231 |
+| towards malware (highest mean) | `ect` | string argument | 77 | +0.9051 | 1.0369 |
+| towards malware (highest mean) | `▁gettempw` | string argument | 69 | +0.8916 | 1.5126 |
+| towards malware (highest mean) | `▁getmain` | API name | 72 | +0.8881 | 0.9428 |
+| towards malware (highest mean) | `▁0x7f00` | small hex | 53 | +0.8859 | 0.9464 |
+| towards malware (highest mean) | `▁0xfeee0025` | address-like hex (≥ 0x10000) | 100 | +0.8349 | 3.7029 |
+| towards benign (lowest mean) | `▁0x41de98` | address-like hex (≥ 0x10000) | 68 | -18.1404 | 18.1404 |
+| towards benign (lowest mean) | `▁getsystemtimeasfiletime` | API name | 560 | -9.1841 | 9.6177 |
+| towards benign (lowest mean) | `▁0x405d54` | address-like hex (≥ 0x10000) | 70 | -6.5198 | 6.5198 |
+| towards benign (lowest mean) | `▁pf` | string argument | 320 | -6.1100 | 6.6226 |
+| towards benign (lowest mean) | `▁0x1211fc0` | address-like hex (≥ 0x10000) | 178 | -6.0135 | 6.0135 |
+| towards benign (lowest mean) | `▁isvalidlocalename` | string argument | 82 | -5.0974 | 5.0974 |
+| towards benign (lowest mean) | `▁file` | field key | 89 | -4.0556 | 4.0919 |
+| towards benign (lowest mean) | `▁0x70e0` | small hex | 55 | -3.7652 | 3.7652 |
+| towards benign (lowest mean) | `▁0x41db74` | address-like hex (≥ 0x10000) | 70 | -3.7101 | 3.7101 |
+| towards benign (lowest mean) | `▁0x1211fd4` | address-like hex (≥ 0x10000) | 179 | -3.5635 | 3.5785 |
+| towards benign (lowest mean) | `▁key` | file/registry/network value | 338 | -3.1082 | 3.1082 |
+| towards benign (lowest mean) | `▁0x7360` | small hex | 152 | -2.8631 | 2.8631 |
+| towards benign (lowest mean) | `▁msvcr71` | API name | 64 | -2.5505 | 2.5505 |
+| towards benign (lowest mean) | `▁tlssetvalue` | API name | 190 | -2.4603 | 2.8752 |
+| towards benign (lowest mean) | `▁0x4700` | small hex | 480 | -2.3544 | 3.8672 |
+| towards benign (lowest mean) | `▁getkeyboardtype` | API name | 50 | -2.2455 | 2.2455 |
+| towards benign (lowest mean) | `▁createsymboliclinkw` | string argument | 83 | -2.1477 | 2.1477 |
+| towards benign (lowest mean) | `▁queryperformancecounter` | API name | 576 | -2.0350 | 2.1163 |
+| towards benign (lowest mean) | `▁0x4ac0` | small hex | 314 | -1.9802 | 2.0221 |
+| towards benign (lowest mean) | `▁0x75a0` | small hex | 151 | -1.7878 | 1.7878 |
+| towards benign (lowest mean) | `▁0x10000` | address-like hex (≥ 0x10000) | 75 | -1.7798 | 1.7857 |
+| towards benign (lowest mean) | `▁createthreadpoolwait` | string argument | 83 | -1.7221 | 1.7981 |
+| towards benign (lowest mean) | `▁isprocessorfeaturepresent` | API name | 378 | -1.6989 | 1.7842 |
+| towards benign (lowest mean) | `▁0x7cd0` | small hex | 55 | -1.6788 | 1.6788 |
+| towards benign (lowest mean) | `▁createsemaphoreexw` | string argument | 83 | -1.6453 | 1.6661 |
+| towards benign (lowest mean) | `▁g` | file/registry/network value | 79 | -1.6072 | 1.6072 |
+| towards benign (lowest mean) | `▁getversionexa` | API name | 171 | -1.6035 | 1.9421 |
+| towards benign (lowest mean) | `▁0x7aa0` | small hex | 64 | -1.5731 | 1.5731 |
+| towards benign (lowest mean) | `▁closethreadpooltimer` | string argument | 83 | -1.5249 | 1.5406 |
+| towards benign (lowest mean) | `▁xmmi64` | string argument | 279 | -1.5001 | 1.5334 |
+
+### 10.6 Drift: unseen behaviour or changed emulator stops?
+
+| stop reason | January malware | January benign | April malware | April benign |
+|---|---|---|---|---|
+| no error recorded | 41.6% (21,083/50,630) | 51.4% (12,676/24,668) | 26.5% (2,491/9,399) | 32.4% (2,592/8,003) |
+| max_api_count (500-call cap) | 24.8% (12,540/50,630) | 9.0% (2,209/24,668) | 15.0% (1,410/9,399) | 8.4% (670/8,003) |
+| unsupported API | 0.0% (0/50,630) | 0.9% (210/24,668) | 51.5% (4,844/9,399) | 52.1% (4,172/8,003) |
+| invalid memory / CPU fault | 32.8% (16,614/50,630) | 38.2% (9,432/24,668) | 6.2% (580/9,399) | 6.0% (482/8,003) |
+| emulator internal error | 0.8% (393/50,630) | 0.6% (141/24,668) | 0.8% (74/9,399) | 1.1% (87/8,003) |
+
+| April | seen in January | unseen | same API-name sequence also occurs in April with the other label |
+|---|---|---|---|
+| malware | 31.0% (2,914/9,399) | 69.0% (6,485/9,399) | 26.9% (2,532/9,399) |
+| benign | 42.7% (3,415/8,003) | 57.3% (4,588/8,003) | 15.3% (1,221/8,003) |
+
+By stop reason (TPR at 1% FPR, each model's global April threshold):
+| cell | reports (malware / benign) | released Nebula | finetune_k8 | frozen_k1 | LR `lr_api_bigram` | LightGBM `lgbm_api_bigram` |
+|---|---|---|---|---|---|---|
+| no error recorded | 5,083 (2,491 / 2,592) | 74.0% | 70.4% | 73.0% | 51.7% | 72.6% [72.3%–73.0%] |
+| max_api_count (500-call cap) | 2,080 (1,410 / 670) | 82.0% | 81.2% | 80.5% | 79.4% | 77.6% [74.0%–84.9%] |
+| unsupported API | 9,016 (4,844 / 4,172) | 73.9% | 77.7% | 76.2% | 17.2% | 49.3% [49.0%–49.8%] |
+| invalid memory / CPU fault | 1,062 (580 / 482) | 79.0% | 58.3% | 80.9% | 81.0% | 85.7% [85.7%–85.9%] |
+| emulator internal error | 161 (74 / 87) | 9.5% | 27.0% | 21.6% | 6.8% | 37.8% [37.8%–37.8%] |
+
+Seen in January vs unseen (TPR at 1% FPR):
+| cell | reports (malware / benign) | released Nebula | finetune_k8 | frozen_k1 | LR `lr_api_bigram` | LightGBM `lgbm_api_bigram` |
+|---|---|---|---|---|---|---|
+| seen in January | 6,329 (2,914 / 3,415) | 82.1% | 87.5% | 83.0% | 63.2% | 76.7% [74.3%–80.5%] |
+| unseen | 11,073 (6,485 / 4,588) | 71.8% | 68.9% | 72.6% | 28.9% | 55.2% [54.8%–55.9%] |
+
+Seen vs unseen, AUC inside the cell:
+| cell | reports (malware / benign) | released Nebula | finetune_k8 | frozen_k1 | LR `lr_api_bigram` | LightGBM `lgbm_api_bigram` |
+|---|---|---|---|---|---|---|
+| seen in January | 6,329 (2,914 / 3,415) | 0.9865 | 0.9909 | 0.9883 | 0.9665 | 0.9737 [0.9724–0.9746] |
+| unseen | 11,073 (6,485 / 4,588) | 0.9371 | 0.9392 | 0.9386 | 0.8881 | 0.9379 [0.9354–0.9395] |
+
+Both together (TPR at 1% FPR):
+| cell | reports (malware / benign) | released Nebula | finetune_k8 | frozen_k1 | LR `lr_api_bigram` | LightGBM `lgbm_api_bigram` |
+|---|---|---|---|---|---|---|
+| no error recorded / seen in January | 2,409 (1,245 / 1,164) | 87.0% | 89.3% | 86.3% | 46.5% | 77.4% [75.7%–78.6%] |
+| no error recorded / unseen | 2,674 (1,246 / 1,428) | 61.1% | 51.4% | 59.7% | 56.9% | 67.8% [66.8%–69.2%] |
+| max_api_count (500-call cap) / seen in January | 1,460 (1,161 / 299) | 95.4% | 94.8% | 93.8% | 92.4% | 90.0% [85.5%–98.8%] |
+| max_api_count (500-call cap) / unseen | 620 (249 / 371) | 19.3% | 17.7% | 18.5% | 18.9% | 20.2% [20.1%–20.5%] |
+| unsupported API / seen in January | 1,694 (216 / 1,478) | 9.7% | 38.9% | 26.4% | 0.9% | 1.9% [1.9%–1.9%] |
+| unsupported API / unseen | 7,322 (4,628 / 2,694) | 76.9% | 79.5% | 78.5% | 18.0% | 51.5% [51.2%–52.0%] |
+| invalid memory / CPU fault / seen in January | 709 (268 / 441) | 67.2% | 90.3% | 71.3% | 69.8% | 74.6% [74.6%–74.6%] |
+| invalid memory / CPU fault / unseen | 353 (312 / 41) | 89.1% | 30.8% | 89.1% | 90.7% | 95.3% [95.2%–95.5%] |
+| emulator internal error / seen in January | 57 (24 / 33) | 4.2% | 50.0% | 33.3% | 4.2% | 100.0% [100.0%–100.0%] |
+| emulator internal error / unseen | 104 (50 / 54) | 12.0% | 16.0% | 16.0% | 8.0% | 8.0% [8.0%–8.0%] |
+
+Per-family tables, AUC and false-positive versions of every table, and the
+January-validation reference are in
+[`results/signal/tables.md`](results/signal/tables.md) (§5).
+
+### 10.7 Do data-flow links add information?
+
+| feature | malware median [p25–p75] | benign median [p25–p75] | AUC of the feature alone (Jan train) |
+|---|---|---|---|
+| n_links | 23.00 [2.00–87.00] | 9.00 [1.00–21.00] | 0.6349 |
+| links_per_call | 0.09 [0.02–0.46] | 0.04 [0.02–0.15] | 0.5894 |
+| n_cross_chunk_links | 0.00 [0.00–12.00] | 1.00 [0.00–3.00] | 0.4755 |
+| max_link_distance_calls | 33.00 [4.00–114.00] | 103.00 [1.00–168.00] | 0.4300 |
+
+| model | AUC | TPR @1% FPR | TPR @0.1% FPR | val AUC (group-weighted) |
+|---|---|---|---|---|
+| LightGBM, links only | 0.7755 [0.7687–0.7790] | 31.1% [29.7%–32.2%] (2,923/9,399; FP 78/80/80) | 24.0% [21.7%–25.2%] (2,253/9,399; FP 6/6/7) | 0.8414 [0.8409–0.8419] |
+| LightGBM, length only | 0.7574 [0.7529–0.7611] | 24.3% [24.2%–24.4%] (2,288/9,399; FP 80/80/80) | 11.5% [9.7%–14.8%] (1,083/9,399; FP 5/5/5) | 0.8245 [0.8233–0.8257] |
+| LightGBM, length + links | 0.8171 [0.8084–0.8276] | 31.4% [29.0%–34.2%] (2,950/9,399; FP 80/80/66) | 19.7% [16.9%–21.7%] (1,850/9,399; FP 8/6/8) | 0.9126 [0.9108–0.9136] |
+| LightGBM, bag of API names | 0.9501 [0.9482–0.9520] | 62.9% [62.0%–63.9%] (5,916/9,399; FP 80/80/80) | 31.6% [29.2%–32.9%] (2,967/9,399; FP 5/7/7) | 0.9662 [0.9658–0.9666] |
+| LightGBM, API names + links | 0.9404 [0.9345–0.9457] | 59.3% [58.9%–59.6%] (5,573/9,399; FP 80/80/80) | 34.4% [34.1%–34.7%] (3,236/9,399; FP 7/7/7) | 0.9668 [0.9656–0.9677] |
+| LightGBM, API names + bigrams | 0.9502 [0.9483–0.9521] | 61.9% [61.3%–62.8%] (5,816/9,399; FP 79/79/80) | 35.0% [32.5%–36.5%] (3,292/9,399; FP 4/4/4) | 0.9679 [0.9673–0.9690] |
+| LightGBM, API names + bigrams + links | 0.9454 [0.9435–0.9488] | 61.2% [61.0%–61.5%] (5,751/9,399; FP 80/80/76) | 35.0% [34.7%–35.4%] (3,287/9,399; FP 4/6/4) | 0.9688 [0.9685–0.9692] |
+
+| comparison | metric | difference | 95% interval |
+|---|---|---|---|
+| length + links − length only | AUC | +0.0605 | [+0.0543, +0.0668] |
+| length + links − length only | TPR @1% FPR | +7.1 pp | [+1.1 pp, +8.5 pp] |
+| length + links − length only | TPR @0.1% FPR | +6.2 pp | [+2.1 pp, +7.2 pp] |
+| API names + links − bag of API names | AUC | -0.0091 | [-0.0101, -0.0082] |
+| API names + links − bag of API names | TPR @1% FPR | -2.8 pp | [-13.7 pp, -1.5 pp] |
+| API names + links − bag of API names | TPR @0.1% FPR | +5.0 pp | [+0.7 pp, +5.5 pp] |
+| API names + bigrams + links − API names + bigrams | AUC | -0.0055 | [-0.0062, -0.0049] |
+| API names + bigrams + links − API names + bigrams | TPR @1% FPR | -1.8 pp | [-2.4 pp, +1.3 pp] |
+| API names + bigrams + links − API names + bigrams | TPR @0.1% FPR | -0.7 pp | [-1.9 pp, +2.7 pp] |
+
+The top 20 producer→user pairs (chosen on the January training side) are
+listed in [`results/signal/tables.md`](results/signal/tables.md) (§6a). As
+in §8, import resolution (`LoadLibrary*` / `GetModuleHandle*` →
+`GetProcAddress`) dominates.
+
+### 10.8 Findings
+
+1. **API names alone carry most of the signal, but not the low-FPR part.**
+   LightGBM on a bag of API names, ignoring order and arguments, reaches
+   AUC 0.9501 [0.9482–0.9520] on April. Released Nebula gets 0.9586. At 1%
+   FPR the gap is large: 62.9% [62.0%–63.9%] of malware (5,916 of 9,399) vs
+   75.0% (7,047). Adding bigrams or field counts does not change this
+   (0.9502 and 0.9503 AUC). The paired bootstrap puts Nebula ahead by
+   +0.0082 AUC [+0.0054, +0.0109] and +11.7 points of TPR at 1% FPR [+10.0,
+   +15.9]. Length alone is weak (AUC 0.757). One reason a names-only model
+   cannot close the gap: 26.9% of April malware (2,532 of 9,399) has an
+   API-name sequence that also occurs in an April benign report, and a bag
+   model must give both the same score. The largest family gaps are
+   keylogger (17.0% vs 52.2%), coinminer (57.1% vs 81.9%) and dropper
+   (51.6% vs 73.4%).
+2. **Nebula's window holds about 92 API calls, and Nebula stops improving
+   at about 100.** In reports longer than 512 tokens (61,207), a median of
+   92 complete calls fit in the first 512 tokens (quartiles 82–100). Non-API
+   fields use almost none of the window (median 1 token). That agrees with
+   the ~100 calls estimated in §3. On prefixes, Nebula's AUC is 0.8706 with
+   10 calls, 0.9464 with 50, 0.9528 with 100 and 0.9586 from 200 on. TPR at
+   1% FPR goes 32.9% → 61.6% → 74.4% → 75.0%. Beyond ~100 calls the curve is
+   flat by construction (no report changes its first 512 tokens). On the
+   6,857 reports with more than 200 calls the picture is the same (84.6% at
+   100 calls, 85.7% at 200).
+3. **The bag model needs the whole trace, and its short-prefix signal does
+   not carry over to April.** On January validation, its AUC rises steadily
+   with K (group-weighted 0.901 at 10 calls, 0.955 at 200, 0.968 for all).
+   On April it stays flat at 0.89–0.91 from 10 to 200 calls, and its TPR at
+   1% FPR even falls (24.9% at 10, 13.1% at 200). It jumps only with 500
+   calls (0.9498, 63.7%). So what this model learns from the first 200
+   January calls breaks under drift. The full trace (including whether the
+   run reached the 500-call cap) restores it. Nebula gets more out of its
+   first 100 calls than a bag model does.
+4. **Nebula's score depends on order and argument values, not on the
+   non-API fields.** On April, shuffling the call order drops AUC from
+   0.9586 to 0.714 (3 seeds: 0.711–0.716), and 31.8% of reports cross the
+   1% threshold. Removing all arguments gives 0.754. Replacing
+   address-like hex values (≥ 0x10000) with one token gives 0.624. Every
+   single-token placeholder tried gives a January-validation AUC between
+   0.746 and 0.819, so this is not about the placeholder chosen (`heap`).
+   Keeping only API names gives 0.623. Removing return values costs less
+   (0.907). Removing the file, registry and network fields barely matters
+   (0.9543; −2.0 points of TPR; 3.4% of reports cross the threshold). The
+   same order holds on January validation. The non-API fields are small
+   (§2.4) and Nebula hardly uses them.
+5. **Dependence is not the same as need.** The ablated reports look unlike
+   anything Nebula was trained on, so these drops show what Nebula *uses*,
+   not what it *needs*. A model trained without order or arguments reaches
+   AUC 0.950 (finding 1). Read together: Nebula built its decision on token
+   values and positions, and pays for that when they change, but most of the
+   ranking (not the low-FPR end) is already in the bag of names.
+6. **Attribution points the same way: hex values get the most credit.**
+   Address-like hex values get 30.3% (malware) and 31.8% (benign) of the
+   absolute attribution, more than API names (22.8% and 24.7%). All hex
+   values together get 43.7% and 53.8%. Address values also push in the
+   right direction: on average +8.65 logits towards malware in malware
+   reports and −13.21 towards benign in benign reports. The single most
+   influential tokens are specific addresses (for example `0x41de98`, −18.1
+   per occurrence), Speakeasy handle-like values (`0xfeee00xx`, +0.8 to
+   +2.0), and API names passed as string arguments to `GetProcAddress`
+   (`gettickcount64`, `createfilea`, `isvalidlocalename`). The first 64
+   tokens hold 37.9% (malware) and 37.7% (benign) of the attribution. So
+   Nebula leans heavily on exact memory addresses, which depend on the
+   emulator and the binary's layout rather than on behaviour.
+7. **On April, Nebula loses more on unseen behaviour than on the changed
+   emulator stops.** Half of April stops on an unsupported API (51.5% of
+   malware, 4,844; 52.1% of benign, 4,172). In January almost none did
+   (0 malware, 210 benign). Yet Nebula detects these reports at its overall
+   rate (73.9% vs 75.0%). The bigger split is seen vs unseen: Nebula
+   detects 82.1% of malware whose API-name sequence occurs in January
+   (2,914) and 71.8% of the rest (6,485), with AUC 0.9865 vs 0.9371. The
+   two-level models behave the same way. The bag baselines lose on both
+   (unsupported API 49.3%, unseen 55.2%), and the two overlap: 4,628 of the
+   4,844 unsupported-API malware reports are unseen. One cell fails for
+   every model: unseen reports that hit the 500-call cap (249 malware,
+   17.7%–20.2% detected).
+8. **Data-flow links add nothing beyond API names.** On their own, link
+   features carry some signal (AUC 0.776, a bit above length alone at
+   0.757). Added to API names they do not help. On January validation the
+   change is +0.0006 (names) and +0.0009 (names + bigrams) of group-weighted
+   AUC. On April it is negative: −0.0091 [−0.0101, −0.0082] and −0.0055
+   [−0.0062, −0.0049] AUC. The common links are import resolution, which the
+   names and bigrams already show.
+
+**What this means for the next model.**
+
+- **"Data-flow attention" is not supported by this evidence.** Link counts
+  and link pairs add nothing to API names here. A data-flow model would
+  need to show value from something these counts miss (for example, which
+  *argument* flows where), and should be tested against a bag-of-API
+  baseline first.
+- **The gap worth chasing is at low FPR, on unseen behaviour.** Nebula's
+  advantage over a bag of names is +12 points of TPR at 1% FPR, and most of
+  April's loss is on API sequences never seen in January. More context does
+  not address that: Nebula is flat after ~100 calls, and the two-level
+  model of §7 gained +0.005 AUC.
+- **Nebula's use of raw addresses is a robustness risk.** Its strongest
+  tokens are exact memory addresses. A model that normalises addresses (or
+  keeps only their role, such as "handle returned by call i") should be
+  less brittle under emulator changes. Note that the ablation in finding 4
+  does *not* test this: it changes the input without retraining. Training
+  with normalised values is the real test.
+- **Keep a bag-of-API LightGBM as a standard baseline.** It trains in
+  seconds and gets within 0.008 AUC of Nebula.
+
+### 10.9 Caveats
+
+- **Released Nebula has probably seen the January reports.** Its January
+  validation AUC is 0.9984. So the January-validation ablation numbers are
+  in-sample for Nebula. They are shown to check the direction of each
+  effect, not its size.
+- **Ablations change the input, not the model.** A shuffled or stripped
+  report is out of distribution for Nebula. The drops measure sensitivity,
+  not how much information the removed part holds. Retraining on ablated
+  input would answer that and was out of scope (no Transformer training
+  here).
+- **Replacing hex values also moves tokens.** A placeholder is one token
+  while a hex value is often several, so later calls shift position and
+  more calls fit in the 512-token window. That is part of the measured
+  effect.
+- **The placeholder matters somewhat.** Five single-token candidates give
+  January-validation AUCs from 0.746 to 0.819 under the address
+  replacement. `heap` was chosen because it moved the January scores least.
+- **Ties.** A bag model gives every report with the same API names the
+  same score (about 2,300 distinct scores for 17,402 April reports). At a
+  threshold, fewer than 80 (or 8) benign reports may be flagged (the FP
+  column). Some bootstrap intervals for TPR therefore do not contain the
+  point estimate.
+- **The validation side is lopsided.** One API-name sequence is 24% of it,
+  and it is 78.1% malware. The group-weighted metrics were introduced after
+  the first runs, for reasons visible on January data only (§10.1). The
+  April results of the first runs are in the kept logs.
+- **Fixed LightGBM settings.** Only `C` (LR) and the number of trees
+  (LightGBM) were chosen. Tuned trees might close part of the gap to
+  Nebula.
+- **Integrated gradients has one baseline.** The empty report `{'apis': []}`
+  (1 real token, then padding). Padding positions match the baseline, so
+  their attribution is zero by construction. Padding's effect on length is
+  therefore invisible here. "String argument" includes API names passed as
+  arguments and decimal numbers. Token categories come from tokenizing the
+  report in pieces; this was exact for all 1,000 reports.
+- **Links use the §8 definition** (value matching, first producer, no
+  out-parameters). Its caveats (§8.4) apply.
+- **Probability vs logit for Nebula.** §10.2 and §10.6 use the saved
+  probabilities. There, Nebula's TPR at 0.1% FPR is 51.7% (4,860); ranked by
+  logit (§10.3, §10.4) it is 51.8% (4,873), because of a few ties at 1.0.
+- **One run each** for `finetune_k8` and `frozen_k1`; the stop reason uses
+  the first entry point only (§9.10).

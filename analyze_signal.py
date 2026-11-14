@@ -912,7 +912,7 @@ def cmd_prefix(a):
            "(seeds 0/1/2). Released Nebula is only "
            "re-scored. Thresholds: from the April benign scores of all April reports at the same K (also for the "
            "> 200-call subset). Nebula is ranked by its logit (scores files hold logits). The last column is the same LightGBM on the January validation side (all reports): "
-           "there, more calls always help.\n\n" + md_table(pd.DataFrame(tab)) +
+           "there, AUC rises with K from 25 to 500 calls.\n\n" + md_table(pd.DataFrame(tab)) +
            "\n![prefix curve](plots/prefix_curve.png)\n")
     write_part("a2_prefix", txt)
     plot_prefix(cv)

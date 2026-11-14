@@ -22,6 +22,7 @@ set being reported (REPORT.md §7, §9).
 """
 import argparse
 import hashlib
+import warnings
 import json
 import os
 import platform
@@ -37,6 +38,7 @@ from signal_lib import (R, WORK, SEQ_LEN, WINDOW, FAMILIES, short_lower, hex_val
                         Seqs, Reps, load_nebula, nebula_scores, forward_from_embedding)
 
 SEEDS = [0, 1, 2]
+warnings.filterwarnings("ignore", category=FutureWarning)     # sklearn 1.9: 'penalty' deprecation notice
 
 
 def log_versions():
@@ -260,7 +262,7 @@ def fit_lr(Xtr, ytr, Xva, yva, Cs=(0.01, 0.1, 1, 10, 100)):
 
 LGB_PARAMS = dict(objective="binary", learning_rate=0.05, num_leaves=63, min_child_samples=20,
                   feature_fraction=0.8, bagging_fraction=0.8, bagging_freq=1, lambda_l2=1.0,
-                  metric="auc", verbose=-1, num_threads=4, deterministic=True, force_row_wise=True)
+                  metric="binary_logloss", verbose=-1, num_threads=4, deterministic=True, force_row_wise=True)
 
 
 def fit_lgb(Xtr, ytr, Xva, yva, seed, max_rounds=3000):
@@ -342,7 +344,8 @@ def result_row(name, evs, extra=None):
             r[lab] = f"{pct(e0['tpr' + tag])} ({e0['tp' + tag]:,}/{e0['n_mal']:,}; FP {e0['fp' + tag]})"
         else:
             r[lab] = (mean_range([e["tpr" + tag] for e in evs], pct) +
-                      f" ({np.mean([e['tp' + tag] for e in evs]):,.0f}/{e0['n_mal']:,})")
+                      f" ({np.mean([e['tp' + tag] for e in evs]):,.0f}/{e0['n_mal']:,}; "
+                      f"FP {'/'.join(str(e['fp' + tag]) for e in evs)})")
     if extra:
         r.update(extra)
     return r
@@ -431,8 +434,14 @@ def cmd_baselines(a):
            f"field counts: {info['n_field_features']} columns (records per field and per event type). "
            "LR: L2, `liblinear`, TF-IDF (sublinear tf) on the bag features, standardised dense features; C from "
            "{0.01, 0.1, 1, 10, 100} by validation AUC. LightGBM: raw counts, fixed parameters, early stopping "
-           "(100 rounds) on validation AUC, seeds 0/1/2: mean [min–max]. TPR thresholds come from the 8,003 April "
-           "benign scores of each model; the 0.1% FPR threshold rests on 8 benign reports.\n\n" +
+           "(100 rounds) on validation log-loss, seeds 0/1/2: mean [min–max]. TPR thresholds come from the 8,003 April "
+           "benign scores of each model; the 0.1% FPR threshold rests on 8 benign reports. FP = benign reports above "
+           "the threshold (one number per seed). Fewer than 80 / 8 means ties at the threshold: a bag model gives "
+           "every report with the same API names the same score.\n\n"
+           "Early stopping first used validation AUC; one run (API names + bigrams, seed 2) then stopped after 1 tree, "
+           "because the AUC of the first tree on this small, lopsided validation side was not beaten within 100 rounds. "
+           "All LightGBM runs in this study therefore stop on validation log-loss (log in "
+           "`results/logs/signal_baselines.log`).\n\n" +
            md_table(pd.DataFrame(table)) +
            f"\nBest on January validation AUC: LR = `{best['lr']}`, LightGBM = `{best['lgbm']}`.\n\n"
            "#### 1b. TPR at 1% FPR per family (April)\n\n" + md_table(pd.DataFrame(famtab)) +

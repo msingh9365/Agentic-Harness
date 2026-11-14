@@ -1,0 +1,88 @@
+versions: {"python": "3.11.18", "numpy": "2.4.6", "pandas": "3.1.1", "sklearn": "1.9.1", "lightgbm": "4.7.0", "scipy": "1.17.1", "torch": "2.15.0+cpu", "sentencepiece": "0.2.3", "orjson": "3.13.0"}
+features: {'n_unigrams': 633, 'n_bigrams': 2772, 'n_field_features': 11}
+== length: train (65679, 6)
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=0.01: val AUC 0.4417, val TPR@1% 0.0266
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=0.1: val AUC 0.4518, val TPR@1% 0.0259
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=1: val AUC 0.4523, val TPR@1% 0.0259
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=10: val AUC 0.4539, val TPR@1% 0.0259
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=100: val AUC 0.4539, val TPR@1% 0.0259
+    LR chosen C=100 (val AUC 0.4539)
+   LR test AUC 0.6018 TPR1 0.0451 (1s)
+   LGBM seed 0: best iter 9, val AUC 0.7220, test AUC 0.7224 TPR1 0.0532 (1s)
+   LGBM seed 1: best iter 15, val AUC 0.7474, test AUC 0.7090 TPR1 0.1274 (0s)
+   LGBM seed 2: best iter 10, val AUC 0.7267, test AUC 0.7111 TPR1 0.0547 (0s)
+== api: train (65679, 633)
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=0.01: val AUC 0.8797, val TPR@1% 0.1736
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=0.1: val AUC 0.9446, val TPR@1% 0.4138
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=1: val AUC 0.9640, val TPR@1% 0.8489
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=10: val AUC 0.9651, val TPR@1% 0.8403
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=100: val AUC 0.9575, val TPR@1% 0.5349
+    LR chosen C=10 (val AUC 0.9651)
+   LR test AUC 0.8778 TPR1 0.2713 (3s)
+   LGBM seed 0: best iter 814, val AUC 0.9824, test AUC 0.9494 TPR1 0.5539 (6s)
+   LGBM seed 1: best iter 272, val AUC 0.9696, test AUC 0.9457 TPR1 0.4555 (3s)
+   LGBM seed 2: best iter 408, val AUC 0.9769, test AUC 0.9514 TPR1 0.5344 (4s)
+== api_bigram: train (65679, 3405)
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=0.01: val AUC 0.8831, val TPR@1% 0.1163
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=0.1: val AUC 0.9417, val TPR@1% 0.4159
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=1: val AUC 0.9641, val TPR@1% 0.5748
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=10: val AUC 0.9729, val TPR@1% 0.5764
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=100: val AUC 0.9735, val TPR@1% 0.5385
+    LR chosen C=100 (val AUC 0.9735)
+   LR test AUC 0.9143 TPR1 0.3964 (20s)
+   LGBM seed 0: best iter 887, val AUC 0.9820, test AUC 0.9486 TPR1 0.5952 (13s)
+   LGBM seed 1: best iter 599, val AUC 0.9790, test AUC 0.9528 TPR1 0.6161 (9s)
+   LGBM seed 2: best iter 1, val AUC 0.9263, test AUC 0.8913 TPR1 0.0000 (2s)
+== api_fields: train (65679, 644)
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=0.01: val AUC 0.8904, val TPR@1% 0.4263
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=0.1: val AUC 0.9461, val TPR@1% 0.5109
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=1: val AUC 0.9642, val TPR@1% 0.8502
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=10: val AUC 0.9656, val TPR@1% 0.8409
+/home/user/nebula-venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+    LR C=100: val AUC 0.9551, val TPR@1% 0.5311
+    LR chosen C=10 (val AUC 0.9656)
+   LR test AUC 0.8775 TPR1 0.3072 (26s)
+   LGBM seed 0: best iter 804, val AUC 0.9823, test AUC 0.9518 TPR1 0.5676 (7s)
+   LGBM seed 1: best iter 258, val AUC 0.9725, test AUC 0.9438 TPR1 0.4414 (3s)
+   LGBM seed 2: best iter 997, val AUC 0.9828, test AUC 0.9507 TPR1 0.5712 (9s)
+best on validation: {'lr': 'lr_api_bigram', 'lgbm': 'lgbm_api_fields'}
+wrote results/signal/tables.md from ['a0_split.md', 'a1_baselines.md']

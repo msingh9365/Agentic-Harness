@@ -119,3 +119,37 @@ gain. More seeds and epochs on a GPU are the next step.
 | `--pool cls/mean/max` | how level 2 sums up the chunks: [CLS] vector (default), average, or most suspicious chunk |
 
 The ready-made sweep and step-by-step server instructions are in [`../gpu/`](../gpu/README.md).
+
+## Trained models (in the repository)
+
+The four models from REPORT.md §7 are saved as `results/hier/<run>/best.pt`
+(23 MB each). Each run's settings are in `results/hier/<run>/result.json`,
+and its test-set scores are in `test_scores.csv`.
+
+| run | level 1 | chunks | test AUC |
+|---|---|---|---|
+| `frozen_k1` | frozen released Nebula | 1 | 0.9590 |
+| `frozen_k8` | frozen released Nebula | up to 8 | 0.9582 |
+| `finetune_k1` | fine-tuned, 2 epochs on CPU | 1 | 0.9467 |
+| `finetune_k8` | fine-tuned, 2 epochs on CPU | up to 8 | 0.9639 |
+
+Loading one (from the repository root, with `../nebula` present):
+
+```python
+import json, torch
+from hier_nebula.model import HierNebula, build_level1
+
+run = "finetune_k8"
+args = json.load(open(f"results/hier/{run}/result.json"))["args"]
+level1 = build_level1("../nebula", vocab_size=args["vocab_size"], pretrained=False)  # weights come from best.pt
+model = HierNebula(level1, max_chunks=args["max_chunks"], n_layers=args["layers"],
+                   dropout=args["dropout"], pool=args.get("pool", "cls"))
+model.load_state_dict(torch.load(f"results/hier/{run}/best.pt", weights_only=True))
+model.eval()
+# model(ids, mask) -> logits; ids [B, K, 512] token ids from hier_nebula/data.py, mask [B, K]
+```
+
+A check reloaded each checkpoint and re-scored 64 test reports: the scores
+match `test_scores.csv` to within 3 × 10⁻⁸. The `frozen_*` runs score cached
+chunk vectors with `model.classify(vecs, mask)`; `model(ids, mask)` gives the
+same result from token ids.

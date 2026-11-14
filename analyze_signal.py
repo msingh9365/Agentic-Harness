@@ -35,7 +35,7 @@ import pandas as pd
 
 from signal_lib import (R, WORK, SEQ_LEN, WINDOW, FAMILIES, short_lower, hex_value, evaluate, threshold, auc,
                         pct, cnt, mean_range, f4, md_table, write_part, save_scores, load_meta, load_features,
-                        Seqs, Reps, load_nebula, nebula_scores, forward_from_embedding)
+                        Seqs, Reps, load_nebula, nebula_scores, sigmoid32, forward_from_embedding)
 
 SEEDS = [0, 1, 2]
 warnings.filterwarnings("ignore", category=FutureWarning)     # sklearn 1.9: 'penalty' deprecation notice
@@ -855,8 +855,12 @@ def cmd_prefix(a):
     trow = rows["test"]
     start512 = F.calls_start_in_512.values[trow]
     ncalls = F.n_calls.values[trow]
-    base = meta.nebula.values[trow]
     with Pool(a.workers, initializer=_init_tok, initargs=(a.nebula,)) as pool:
+        # Nebula's logits on the unchanged reports (metrics use logits: same ranking, no float32 ties at 1.0)
+        base = nebula_scores(model, tokenize_jobs(pool, [(int(r), "orig", 0, None, None) for r in trow]), logit=True)
+        d = np.abs(sigmoid32(base) - meta.nebula.values[trow]).max()
+        print(f"check: sigmoid(logit) of unchanged April reports vs nebula_score_chunk0.npy: max |diff| {d:.2e}", flush=True)
+        assert d < 1e-4
         # check: when the prefix keeps every call that starts inside the window, the first 512 tokens do not change
         rng = np.random.default_rng(0)
         cand = np.flatnonzero((ncalls > start512 + 1))
@@ -874,8 +878,8 @@ def cmd_prefix(a):
             need = np.flatnonzero(start512 > K) if K is not None else np.zeros(0, int)
             if len(need):
                 ids = tokenize_jobs(pool, [(int(trow[i]), "prefix", 0, None, K) for i in need])
-                s[need] = nebula_scores(model, ids)
-            save_scores(f"nebula_prefix_{klab(K)}", trow, y["test"], s, np.zeros(len(s), int))
+                s[need] = nebula_scores(model, ids, logit=True)
+            save_scores(f"nebula_prefix_{klab(K)}", trow, y["test"], s, np.zeros(len(s), int))   # score = logit
             e = evaluate(y["test"], s)
             el = evaluate(y["test"][long_], s[long_], thr={0.01: e["thr1"], 0.001: e["thr01"]})
             for sub_, ee in [("all April", e), ("> 200 calls", el)]:
@@ -907,7 +911,7 @@ def cmd_prefix(a):
            "trained on January prefixes of the same length and early-stopped on the group-weighted validation log-loss "
            "(seeds 0/1/2). Released Nebula is only "
            "re-scored. Thresholds: from the April benign scores of all April reports at the same K (also for the "
-           "> 200-call subset). The last column is the same LightGBM on the January validation side (all reports): "
+           "> 200-call subset). Nebula is ranked by its logit (scores files hold logits). The last column is the same LightGBM on the January validation side (all reports): "
            "there, more calls always help.\n\n" + md_table(pd.DataFrame(tab)) +
            "\n![prefix curve](plots/prefix_curve.png)\n")
     write_part("a2_prefix", txt)
@@ -967,8 +971,8 @@ def cmd_ablate(a):
         # ---- unmodified: must reproduce nebula_score_chunk0.npy
         for sn, rows in sets.items():
             t0 = time.time()
-            s = nebula_scores(model, tokenize_jobs(pool, [(int(r), "orig", 0, None, None) for r in rows]))
-            d = np.abs(s - meta.nebula.values[rows])
+            s = nebula_scores(model, tokenize_jobs(pool, [(int(r), "orig", 0, None, None) for r in rows]), logit=True)
+            d = np.abs(sigmoid32(s) - meta.nebula.values[rows])
             print(f"check ({sn}): unmodified vs nebula_score_chunk0.npy max |diff| = {d.max():.2e} "
                   f"({len(rows):,} reports, {time.time() - t0:.0f}s)", flush=True)
             assert d.max() < 1e-4
@@ -981,8 +985,8 @@ def cmd_ablate(a):
             r = {"candidate": c, "pieces": " ".join(sp_.encode_as_pieces(c)), "ids": str(ids), "single known token": single}
             if single:
                 rows = sets["January validation"]
-                s = nebula_scores(model, tokenize_jobs(pool, [(int(x), "addr_ph", 0, c, None) for x in rows]))
-                r["mean |Δscore| on Jan val (addr_ph)"] = float(np.abs(s - scores[("January validation", "orig", 0)]).mean())
+                s = nebula_scores(model, tokenize_jobs(pool, [(int(x), "addr_ph", 0, c, None) for x in rows]), logit=True)
+                r["mean |Δscore| on Jan val (addr_ph)"] = float(np.abs(sigmoid32(s) - sigmoid32(scores[("January validation", "orig", 0)])).mean())
                 r["Jan val AUC"] = auc(meta.label.values[rows], s)
             ph_log.append(r)
             print("placeholder candidate:", r, flush=True)
@@ -995,7 +999,7 @@ def cmd_ablate(a):
             for sn, rows in sets.items():
                 for seed in seeds:
                     t0 = time.time()
-                    s = nebula_scores(model, tokenize_jobs(pool, [(int(r), kind, seed, ph, None) for r in rows]))
+                    s = nebula_scores(model, tokenize_jobs(pool, [(int(r), kind, seed, ph, None) for r in rows]), logit=True)
                     scores[(sn, kind, seed)] = s
                     print(f"  {kind} seed {seed} on {sn}: AUC {auc(meta.label.values[rows], s):.4f} "
                           f"({time.time() - t0:.0f}s)", flush=True)
@@ -1012,16 +1016,18 @@ def cmd_ablate(a):
         out.append({"set": sn, "change": "none (unmodified)", "AUC": f4(e0["auc"]),
                     "TPR @1% FPR": f"{pct(e0['tpr1'])} ({e0['tp1']:,}/{e0['n_mal']:,})",
                     "TPR @0.1% FPR": f"{pct(e0['tpr01'])} ({e0['tp01']:,})", "ΔAUC": "", "ΔTPR @1%": "",
-                    "ΔTPR @0.1%": "", "crossed the 1% threshold": "", "mean |Δscore|": ""})
+                    "ΔTPR @0.1%": "", "crossed the 1% threshold": "", "mean |Δscore|": "",
+                    "benign at p = 1.0 (float32)": f"{((sigmoid32(scores[(sn, 'orig', 0)]) == 1.0) & (y == 0)).sum():,}"})
         for kind, lab in ABLATIONS:
             seeds = SEEDS if kind == "shuffle" else [0]
             evs = [evaluate(y, scores[(sn, kind, sd)], fam) for sd in seeds]
-            cr, down, up, md = [], [], [], []
+            cr, down, up, md, sat = [], [], [], [], []
             for sd in seeds:
                 f1 = scores[(sn, kind, sd)] > e0["thr1"]
                 cr.append((f1 != flag0).mean()); down.append(int((flag0 & ~f1 & (y == 1)).sum()))
                 up.append(int((~flag0 & f1 & (y == 0)).sum()))
-                md.append(np.abs(scores[(sn, kind, sd)] - scores[(sn, "orig", 0)]).mean())
+                md.append(np.abs(sigmoid32(scores[(sn, kind, sd)]) - sigmoid32(scores[(sn, "orig", 0)])).mean())
+                sat.append(((sigmoid32(scores[(sn, kind, sd)]) == 1.0) & (y == 0)).sum())
             pp = lambda x: f"{100 * x:+.1f} pp"
             out.append({"set": sn, "change": lab + (" (3 seeds)" if len(seeds) > 1 else ""),
                         "AUC": mean_range([e["auc"] for e in evs], f4),
@@ -1032,7 +1038,8 @@ def cmd_ablate(a):
                         "ΔTPR @0.1%": mean_range([e["tpr01"] - e0["tpr01"] for e in evs], pp),
                         "crossed the 1% threshold": mean_range(cr, pct) +
                         f" ({np.mean(down):,.0f} malware lost, {np.mean(up):,.0f} benign gained)",
-                        "mean |Δscore|": mean_range(md, lambda x: f"{x:.3f}")})
+                        "mean |Δscore|": mean_range(md, lambda x: f"{x:.3f}"),
+                        "benign at p = 1.0 (float32)": mean_range(sat, lambda x: f"{x:,.0f}")})
     famtab = []
     rows = sets["April test"]
     y, fam = meta.label.values[rows], meta.family.values[rows]
@@ -1048,7 +1055,10 @@ def cmd_ablate(a):
            "Each change is applied to Nebula's filtered report, which is then tokenized and cut to 512 tokens as "
            "usual. Thresholds come from the benign scores of the changed reports; `crossed` uses the unmodified "
            "model's 1% FPR threshold and counts reports on the other side after the change (either direction). "
-           "Unmodified scores reproduce `nebula_score_chunk0.npy` (max |diff| in the log). Removing arguments or "
+           "Metrics rank reports by Nebula's logit: the changed reports push hundreds of benign scores to exactly "
+           "1.0 in float32 (last column), and with the probability the 1% threshold would sit on that tie. Scores files "
+           "hold logits; `mean |Δscore|` is on the probability scale. sigmoid(logit) of the unmodified reports "
+           "reproduces `nebula_score_chunk0.npy` (max |diff| in the log). Removing arguments or "
            "return values deletes the key from every call (the key names are stopwords, so they produce no tokens "
            "either way).\n\n"
            "#### 3a. Placeholder for hex values (chosen on January validation)\n\n"

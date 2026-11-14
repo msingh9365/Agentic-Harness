@@ -13,7 +13,7 @@
 
 #### 2b. Detection against the number of API calls kept (April; 6,857 reports have > 200 calls)
 
-Only the `apis` list is cut to its first K calls; file, registry and network fields are kept. LightGBM is trained on January prefixes of the same length and early-stopped on the group-weighted validation log-loss (seeds 0/1/2). Released Nebula is only re-scored. Thresholds: from the April benign scores of all April reports at the same K (also for the > 200-call subset). The last column is the same LightGBM on the January validation side (all reports): there, more calls always help.
+Only the `apis` list is cut to its first K calls; file, registry and network fields are kept. LightGBM is trained on January prefixes of the same length and early-stopped on the group-weighted validation log-loss (seeds 0/1/2). Released Nebula is only re-scored. Thresholds: from the April benign scores of all April reports at the same K (also for the > 200-call subset). Nebula is ranked by its logit (scores files hold logits). The last column is the same LightGBM on the January validation side (all reports): there, more calls always help.
 
 | model | subset | K (calls) | AUC | TPR @1% FPR | TPR @0.1% FPR | malware caught @1% | Jan val AUC (group-weighted) |
 |---|---|---|---|---|---|---|---|
@@ -33,17 +33,17 @@ Only the `apis` list is cut to its first K calls; file, registry and network fie
 | LightGBM API names + bigrams | > 200 calls (malware n=4,312) | all | 0.9565 [0.9556–0.9572] | 73.2% [71.8%–75.1%] | 45.1% [41.3%–47.4%] | 3,158 | — |
 | released Nebula | all April (malware n=9,399) | 10 | 0.8706 | 32.9% | 17.6% | 3,092 | — |
 | released Nebula | all April (malware n=9,399) | 25 | 0.9094 | 45.7% | 19.8% | 4,296 | — |
-| released Nebula | all April (malware n=9,399) | 50 | 0.9463 | 61.6% | 25.1% | 5,788 | — |
-| released Nebula | all April (malware n=9,399) | 100 | 0.9528 | 74.4% | 50.8% | 6,996 | — |
-| released Nebula | all April (malware n=9,399) | 200 | 0.9586 | 75.0% | 51.7% | 7,047 | — |
-| released Nebula | all April (malware n=9,399) | 500 | 0.9586 | 75.0% | 51.7% | 7,047 | — |
-| released Nebula | all April (malware n=9,399) | all | 0.9586 | 75.0% | 51.7% | 7,047 | — |
+| released Nebula | all April (malware n=9,399) | 50 | 0.9464 | 61.6% | 25.2% | 5,788 | — |
+| released Nebula | all April (malware n=9,399) | 100 | 0.9528 | 74.4% | 51.3% | 6,996 | — |
+| released Nebula | all April (malware n=9,399) | 200 | 0.9586 | 75.0% | 51.8% | 7,047 | — |
+| released Nebula | all April (malware n=9,399) | 500 | 0.9586 | 75.0% | 51.8% | 7,047 | — |
+| released Nebula | all April (malware n=9,399) | all | 0.9586 | 75.0% | 51.8% | 7,047 | — |
 | released Nebula | > 200 calls (malware n=4,312) | 10 | 0.8592 | 26.1% | 13.5% | 1,125 | — |
 | released Nebula | > 200 calls (malware n=4,312) | 25 | 0.8948 | 33.9% | 14.3% | 1,463 | — |
 | released Nebula | > 200 calls (malware n=4,312) | 50 | 0.9461 | 61.9% | 19.5% | 2,667 | — |
-| released Nebula | > 200 calls (malware n=4,312) | 100 | 0.9341 | 84.6% | 57.2% | 3,650 | — |
-| released Nebula | > 200 calls (malware n=4,312) | 200 | 0.9479 | 85.7% | 58.4% | 3,696 | — |
-| released Nebula | > 200 calls (malware n=4,312) | 500 | 0.9479 | 85.7% | 58.4% | 3,696 | — |
-| released Nebula | > 200 calls (malware n=4,312) | all | 0.9479 | 85.7% | 58.4% | 3,696 | — |
+| released Nebula | > 200 calls (malware n=4,312) | 100 | 0.9341 | 84.6% | 57.5% | 3,650 | — |
+| released Nebula | > 200 calls (malware n=4,312) | 200 | 0.9479 | 85.7% | 58.7% | 3,696 | — |
+| released Nebula | > 200 calls (malware n=4,312) | 500 | 0.9479 | 85.7% | 58.7% | 3,696 | — |
+| released Nebula | > 200 calls (malware n=4,312) | all | 0.9479 | 85.7% | 58.7% | 3,696 | — |
 
 ![prefix curve](plots/prefix_curve.png)

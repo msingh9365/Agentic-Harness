@@ -180,15 +180,23 @@ def load_nebula(nebula_root="../nebula"):
     return m
 
 
-def nebula_scores(model, ids, bs=512):
-    """ids: int array [N, 512] -> sigmoid(level1(ids)) (released Nebula's prediction)."""
+def nebula_scores(model, ids, bs=512, logit=False):
+    """ids: int array [N, 512] -> sigmoid(level1(ids)) (released Nebula's prediction), or the logit
+    level1(ids) itself. The logit gives the same ranking without float32 saturation at 1.0."""
     import torch
     out = np.zeros(len(ids), dtype=np.float64)
     with torch.no_grad():
         for a in range(0, len(ids), bs):
             x = torch.from_numpy(np.asarray(ids[a:a + bs], dtype=np.int64))
-            out[a:a + bs] = torch.sigmoid(model(x)).squeeze(-1).double().numpy()
+            z = model(x).squeeze(-1)
+            out[a:a + bs] = (z if logit else torch.sigmoid(z)).double().numpy()
     return out
+
+
+def sigmoid32(z):
+    """Nebula's probability as the model computes it (float32), from a logit."""
+    import torch
+    return torch.sigmoid(torch.as_tensor(np.asarray(z), dtype=torch.float32)).double().numpy()
 
 
 def forward_from_embedding(model, emb):

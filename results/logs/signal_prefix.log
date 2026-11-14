@@ -10,28 +10,29 @@ versions: {"python": "3.11.18", "numpy": "2.4.6", "pandas": "3.1.1", "sklearn": 
   LGBM K=25 seed 0: 1512 features, iter 46, AUC 0.9086 TPR1 0.2694; >200 calls AUC 0.8694 TPR1 0.3585 (1s)
   LGBM K=25 seed 1: 1512 features, iter 47, AUC 0.9096 TPR1 0.2389; >200 calls AUC 0.8697 TPR1 0.3119 (1s)
   LGBM K=25 seed 2: 1512 features, iter 71, AUC 0.9109 TPR1 0.3333; >200 calls AUC 0.8706 TPR1 0.3590 (1s)
-  LGBM K=50 seed 0: 1931 features, iter 367, AUC 0.8908 TPR1 0.2867; >200 calls AUC 0.8037 TPR1 0.3602 (3s)
+  LGBM K=50 seed 0: 1931 features, iter 367, AUC 0.8908 TPR1 0.2867; >200 calls AUC 0.8037 TPR1 0.3602 (4s)
   LGBM K=50 seed 1: 1931 features, iter 440, AUC 0.8913 TPR1 0.2866; >200 calls AUC 0.8037 TPR1 0.3602 (4s)
-  LGBM K=50 seed 2: 1931 features, iter 393, AUC 0.8910 TPR1 0.2883; >200 calls AUC 0.8038 TPR1 0.3602 (3s)
+  LGBM K=50 seed 2: 1931 features, iter 393, AUC 0.8910 TPR1 0.2883; >200 calls AUC 0.8038 TPR1 0.3602 (4s)
   LGBM K=100 seed 0: 2217 features, iter 375, AUC 0.9063 TPR1 0.2110; >200 calls AUC 0.8041 TPR1 0.2263 (4s)
   LGBM K=100 seed 1: 2217 features, iter 449, AUC 0.9053 TPR1 0.2120; >200 calls AUC 0.8011 TPR1 0.2263 (5s)
   LGBM K=100 seed 2: 2217 features, iter 382, AUC 0.9052 TPR1 0.2101; >200 calls AUC 0.8009 TPR1 0.2263 (4s)
-  LGBM K=200 seed 0: 2673 features, iter 631, AUC 0.9017 TPR1 0.1331; >200 calls AUC 0.8544 TPR1 0.1619 (7s)
-  LGBM K=200 seed 1: 2673 features, iter 531, AUC 0.9053 TPR1 0.1302; >200 calls AUC 0.8544 TPR1 0.1589 (6s)
-  LGBM K=200 seed 2: 2673 features, iter 551, AUC 0.9014 TPR1 0.1284; >200 calls AUC 0.8540 TPR1 0.1556 (6s)
-  LGBM K=500 seed 0: 3389 features, iter 537, AUC 0.9485 TPR1 0.6527; >200 calls AUC 0.9533 TPR1 0.7732 (8s)
-  LGBM K=500 seed 1: 3389 features, iter 530, AUC 0.9505 TPR1 0.6270; >200 calls AUC 0.9549 TPR1 0.7586 (8s)
-  LGBM K=500 seed 2: 3389 features, iter 532, AUC 0.9505 TPR1 0.6321; >200 calls AUC 0.9575 TPR1 0.7683 (8s)
-  LGBM K=all seed 0: 3405 features, iter 521, AUC 0.9483 TPR1 0.6275; >200 calls AUC 0.9556 TPR1 0.7514 (8s)
-  LGBM K=all seed 1: 3405 features, iter 520, AUC 0.9521 TPR1 0.6132; >200 calls AUC 0.9572 TPR1 0.7175 (7s)
-  LGBM K=all seed 2: 3405 features, iter 528, AUC 0.9503 TPR1 0.6157; >200 calls AUC 0.9568 TPR1 0.7282 (7s)
+  LGBM K=200 seed 0: 2673 features, iter 631, AUC 0.9017 TPR1 0.1331; >200 calls AUC 0.8544 TPR1 0.1619 (8s)
+  LGBM K=200 seed 1: 2673 features, iter 531, AUC 0.9053 TPR1 0.1302; >200 calls AUC 0.8544 TPR1 0.1589 (9s)
+  LGBM K=200 seed 2: 2673 features, iter 551, AUC 0.9014 TPR1 0.1284; >200 calls AUC 0.8540 TPR1 0.1556 (9s)
+  LGBM K=500 seed 0: 3389 features, iter 537, AUC 0.9485 TPR1 0.6527; >200 calls AUC 0.9533 TPR1 0.7732 (10s)
+  LGBM K=500 seed 1: 3389 features, iter 530, AUC 0.9505 TPR1 0.6270; >200 calls AUC 0.9549 TPR1 0.7586 (10s)
+  LGBM K=500 seed 2: 3389 features, iter 532, AUC 0.9505 TPR1 0.6321; >200 calls AUC 0.9575 TPR1 0.7683 (10s)
+  LGBM K=all seed 0: 3405 features, iter 521, AUC 0.9483 TPR1 0.6275; >200 calls AUC 0.9556 TPR1 0.7514 (10s)
+  LGBM K=all seed 1: 3405 features, iter 520, AUC 0.9521 TPR1 0.6132; >200 calls AUC 0.9572 TPR1 0.7175 (9s)
+  LGBM K=all seed 2: 3405 features, iter 528, AUC 0.9503 TPR1 0.6157; >200 calls AUC 0.9568 TPR1 0.7282 (9s)
+check: sigmoid(logit) of unchanged April reports vs nebula_score_chunk0.npy: max |diff| 7.75e-07
 check: prefix with K >= calls starting in 512 keeps the first 512 tokens: 300/300
   Nebula K=10: 14,752 reports re-scored, AUC 0.8706 TPR1 0.3290; >200 calls AUC 0.8592 TPR1 0.2609
   Nebula K=25: 13,506 reports re-scored, AUC 0.9094 TPR1 0.4571; >200 calls AUC 0.8948 TPR1 0.3393
-  Nebula K=50: 11,905 reports re-scored, AUC 0.9463 TPR1 0.6158; >200 calls AUC 0.9461 TPR1 0.6185
+  Nebula K=50: 11,905 reports re-scored, AUC 0.9464 TPR1 0.6158; >200 calls AUC 0.9461 TPR1 0.6185
   Nebula K=100: 3,009 reports re-scored, AUC 0.9528 TPR1 0.7443; >200 calls AUC 0.9341 TPR1 0.8465
   Nebula K=200: 0 reports re-scored, AUC 0.9586 TPR1 0.7498; >200 calls AUC 0.9479 TPR1 0.8571
   Nebula K=500: 0 reports re-scored, AUC 0.9586 TPR1 0.7498; >200 calls AUC 0.9479 TPR1 0.8571
   Nebula K=all: 0 reports re-scored, AUC 0.9586 TPR1 0.7498; >200 calls AUC 0.9479 TPR1 0.8571
 wrote results/signal/plots/prefix_curve.png
-wrote results/signal/tables.md from ['a0_split.md', 'a1_baselines.md', 'a2_prefix.md', 'a5_drift.md', 'a6_links.md']
+wrote results/signal/tables.md from ['a0_split.md', 'a1_baselines.md', 'a2_prefix.md', 'a3_ablate.md', 'a5_drift.md', 'a6_links.md']

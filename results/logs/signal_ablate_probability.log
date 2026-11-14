@@ -1,0 +1,33 @@
+versions: {"python": "3.11.18", "numpy": "2.4.6", "pandas": "3.1.1", "sklearn": "1.9.1", "lightgbm": "4.7.0", "scipy": "1.17.1", "torch": "2.15.0+cpu", "sentencepiece": "0.2.3", "orjson": "3.13.0"}
+check (April test): unmodified vs nebula_score_chunk0.npy max |diff| = 7.75e-07 (17,402 reports, 36s)
+check (January validation): unmodified vs nebula_score_chunk0.npy max |diff| = 4.77e-07 (9,619 reports, 18s)
+placeholder candidate: {'candidate': 'addr', 'pieces': '▁addr', 'ids': '[38884]', 'single known token': True, 'mean |Δscore| on Jan val (addr_ph)': 0.2929887877755719, 'Jan val AUC': 0.7780467764821637}
+placeholder candidate: {'candidate': 'value', 'pieces': '▁value', 'ids': '[29992]', 'single known token': True, 'mean |Δscore| on Jan val (addr_ph)': 0.4212016751967656, 'Jan val AUC': 0.7756349301550258}
+placeholder candidate: {'candidate': 'mem', 'pieces': '▁mem', 'ids': '[543]', 'single known token': True, 'mean |Δscore| on Jan val (addr_ph)': 0.3867483599453829, 'Jan val AUC': 0.7899416733286313}
+placeholder candidate: {'candidate': 'heap', 'pieces': '▁heap', 'ids': '[110]', 'single known token': True, 'mean |Δscore| on Jan val (addr_ph)': 0.17547029716556545, 'Jan val AUC': 0.8186965603510735}
+placeholder candidate: {'candidate': 'ptr', 'pieces': '▁p tr', 'ids': '[357, 64]', 'single known token': False}
+placeholder candidate: {'candidate': 'handle', 'pieces': '▁ handle', 'ids': '[49966, 212]', 'single known token': False}
+placeholder candidate: {'candidate': 'buf', 'pieces': '▁ buf', 'ids': '[49966, 7721]', 'single known token': False}
+placeholder candidate: {'candidate': 'data', 'pieces': '▁data', 'ids': '[28198]', 'single known token': True, 'mean |Δscore| on Jan val (addr_ph)': 0.35730757719465733, 'Jan val AUC': 0.7457042348331802}
+placeholder candidate: {'candidate': 'hex', 'pieces': '▁he x', 'ids': '[3383, 49967]', 'single known token': False}
+placeholder candidate: {'candidate': 'unk', 'pieces': '▁un k', 'ids': '[1760, 49981]', 'single known token': False}
+chosen placeholder: 'heap' (smallest mean |Δscore| on January validation)
+  shuffle seed 0 on April test: AUC 0.7157 (32s)
+  shuffle seed 1 on April test: AUC 0.7148 (32s)
+  shuffle seed 2 on April test: AUC 0.7107 (33s)
+  shuffle seed 0 on January validation: AUC 0.8091 (18s)
+  shuffle seed 1 on January validation: AUC 0.8146 (18s)
+  shuffle seed 2 on January validation: AUC 0.8115 (18s)
+  no_args seed 0 on April test: AUC 0.7537 (29s)
+  no_args seed 0 on January validation: AUC 0.8838 (16s)
+  no_ret seed 0 on April test: AUC 0.9069 (32s)
+  no_ret seed 0 on January validation: AUC 0.9445 (18s)
+  addr_ph seed 0 on April test: AUC 0.6235 (34s)
+  addr_ph seed 0 on January validation: AUC 0.8187 (19s)
+  hex_ph seed 0 on April test: AUC 0.7669 (36s)
+  hex_ph seed 0 on January validation: AUC 0.7545 (18s)
+  no_fields seed 0 on April test: AUC 0.9542 (36s)
+  no_fields seed 0 on January validation: AUC 0.9845 (19s)
+  names_only seed 0 on April test: AUC 0.6225 (28s)
+  names_only seed 0 on January validation: AUC 0.5555 (15s)
+wrote results/signal/tables.md from ['a0_split.md', 'a1_baselines.md', 'a2_prefix.md', 'a3_ablate.md', 'a5_drift.md', 'a6_links.md']

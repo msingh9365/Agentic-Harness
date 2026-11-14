@@ -541,10 +541,13 @@ def cmd_drift(a):
                 r[f"{nm} {lab}"] = cnt((dd.stop == st).sum(), len(dd))
         comp.append(r)
     seen_comp = []
+    other = {1: set(test.hash_apis[test.label == 0]), 0: set(test.hash_apis[test.label == 1])}
     for lab, l in [("malware", 1), ("benign", 0)]:
         dd = test[test.label == l]
         seen_comp.append({"April": lab, "seen in January": cnt((dd.seen != "unseen").sum(), len(dd)),
-                          "unseen": cnt((dd.seen == "unseen").sum(), len(dd))})
+                          "unseen": cnt((dd.seen == "unseen").sum(), len(dd)),
+                          "same API-name sequence also occurs in April with the other label":
+                              cnt(dd.hash_apis.isin(other[l]).sum(), len(dd))})
     txt = ("### 5. Drift breakdown (April)\n\n"
            "Thresholds: each model's global April 1% FPR threshold (LightGBM: per seed, then mean [min–max]). "
            "AUC inside a cell needs ≥ 10 reports of each class. Cells with fewer than 30 reports: `n<30`. "

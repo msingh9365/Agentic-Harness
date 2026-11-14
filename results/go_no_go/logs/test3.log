@@ -1,0 +1,76 @@
+unique January sequences: 6,771; unique unseen April sequences: 1,872 (11,073 April reports)
+sequences read and hash-checked in 1s; 3446 distinct API names
+edit distances: 37,440 pairs in 0s (all unseen sequences, no sampling)
+## Test 3: how far is "unseen"?
+
+1,872 unique April API-name sequences do not occur in January (11,073 reports); 6,771 unique January sequences. All of them were compared (no sampling): Jaccard shortlist of 20 on call 3-grams, then Levenshtein distance in calls / longer length (rapidfuzz). 0 unseen sequences have distance 0 (expected: an exact match would make them seen). Window share is undefined for 279 sequences shorter than 16 calls. Label rows count (sequence, label) pairs.
+
+| measure | sequences | n | median [quartiles] |
+|---|---|---|---|
+| nearest January distance | all unseen sequences | 1,872 | 0.083 [0.031–0.193] |
+| nearest January distance | benign | 1,507 | 0.077 [0.029–0.172] |
+| nearest January distance | malware | 398 | 0.139 [0.039–0.333] |
+| share of 16-call windows in January | all unseen sequences | 1,593 | 1.000 [0.933–1.000] |
+| share of 16-call windows in January | benign | 1,332 | 1.000 [0.930–1.000] |
+| share of 16-call windows in January | malware | 283 | 1.000 [0.959–1.000] |
+
+**Histogram (number of (sequence, label) pairs):**
+
+| bin | distance, benign | distance, malware | window share, benign | window share, malware |
+|---|---|---|---|---|
+| 0.0–0.1 | 877 | 167 | 36 | 16 |
+| 0.1–0.2 | 319 | 68 | 1 | 1 |
+| 0.2–0.3 | 141 | 46 | 3 | 0 |
+| 0.3–0.4 | 62 | 24 | 8 | 3 |
+| 0.4–0.5 | 43 | 17 | 7 | 1 |
+| 0.5–0.6 | 20 | 32 | 16 | 2 |
+| 0.6–0.7 | 14 | 7 | 22 | 2 |
+| 0.7–0.8 | 15 | 8 | 65 | 11 |
+| 0.8–0.9 | 3 | 7 | 108 | 16 |
+| 0.9–1.0 | 13 | 22 | 1066 | 231 |
+
+**Unseen April reports by number of chunks:**
+
+| chunks | unseen April reports | nearest distance, median [quartiles] | window share, median [quartiles] |
+|---|---|---|---|
+| 1 | 3,629 | 0.176 [0.100–0.231] | 1.000 [0.412–1.000] |
+| 2-3 | 4,207 | 0.027 [0.012–0.067] | 1.000 [1.000–1.000] |
+| 4-8 | 3,237 | 0.031 [0.004–0.158] | 0.963 [0.855–1.000] |
+
+**Detection by distance quartile and by window share** (quartiles over unique unseen sequences; the window share has its median at 100%, so it is split into 100%, the rest above its lowest quartile, the lowest quartile, and sequences too short for a window; global April thresholds (a) and January thresholds (b); 95% intervals from the group bootstrap):
+
+| April reports | model | n (malware) | AUC | TPR@1% (a) | FPR (a) | TPR@1% (b) | April FPR (b) |
+|---|---|---|---|---|---|---|---|
+| seen in January | released Nebula | 6,329 (2,914) | 0.9865 [0.9709, 0.9944] | 82.1% [71.8%, 89.5%] | 0.7% [0.4%, 1.1%] | 82.8% [73.4%, 90.2%] | 1.0% [0.5%, 1.8%] |
+| seen in January | two-level K=8 | 6,329 (2,914) | 0.9909 [0.9808, 0.9962] | 87.5% [77.1%, 93.8%] | 1.1% [0.4%, 1.8%] | 92.0% [85.4%, 96.6%] | 2.0% [1.1%, 3.5%] |
+| seen in January | LightGBM bag of API names | 6,329 (2,914) | 0.9749 [0.9447, 0.9904] | 79.0% [66.1%, 88.4%] | 1.1% [0.5%, 2.0%] | 78.6% [66.9%, 88.3%] | 1.1% [0.4%, 2.4%] |
+| unseen, all | released Nebula | 11,073 (6,485) | 0.9371 [0.8897, 0.9672] | 71.8% [56.3%, 82.1%] | 1.2% [0.9%, 1.7%] | 73.9% [59.0%, 83.8%] | 1.7% [1.1%, 2.6%] |
+| unseen, all | two-level K=8 | 11,073 (6,485) | 0.9392 [0.8847, 0.9713] | 68.9% [48.0%, 81.4%] | 0.9% [0.5%, 1.5%] | 81.2% [66.7%, 89.3%] | 3.6% [2.6%, 5.1%] |
+| unseen, all | LightGBM bag of API names | 11,073 (6,485) | 0.9384 [0.8917, 0.9754] | 55.7% [18.2%, 72.2%] | 0.9% [0.3%, 1.4%] | 48.7% [30.7%, 67.2%] | 0.9% [0.6%, 1.3%] |
+| distance Q1 (≤ 0.031) | released Nebula | 4,017 (2,816) | 0.9775 [0.9107, 0.9959] | 87.4% [56.6%, 96.0%] | 0.9% [0.4%, 1.8%] | 88.1% [57.6%, 96.4%] | 1.2% [0.6%, 2.4%] |
+| distance Q1 (≤ 0.031) | two-level K=8 | 4,017 (2,816) | 0.9828 [0.9382, 0.9945] | 85.7% [49.8%, 95.0%] | 0.2% [0.0%, 1.0%] | 88.9% [60.5%, 97.0%] | 2.7% [1.3%, 4.8%] |
+| distance Q1 (≤ 0.031) | LightGBM bag of API names | 4,017 (2,816) | 0.9499 [0.8558, 0.9946] | 68.5% [14.0%, 93.9%] | 1.1% [0.2%, 2.1%] | 57.9% [23.4%, 84.0%] | 1.0% [0.4%, 2.0%] |
+| distance Q2 (≤ 0.083) | released Nebula | 1,896 (1,129) | 0.9026 [0.7818, 0.9705] | 66.3% [37.0%, 86.0%] | 2.0% [0.8%, 3.3%] | 68.2% [41.0%, 86.7%] | 2.6% [1.2%, 4.4%] |
+| distance Q2 (≤ 0.083) | two-level K=8 | 1,896 (1,129) | 0.9258 [0.8435, 0.9717] | 38.4% [15.2%, 68.5%] | 0.1% [0.0%, 1.3%] | 69.6% [41.1%, 88.2%] | 3.8% [2.4%, 5.7%] |
+| distance Q2 (≤ 0.083) | LightGBM bag of API names | 1,896 (1,129) | 0.9495 [0.9096, 0.9715] | 64.3% [20.6%, 84.0%] | 2.2% [0.8%, 3.8%] | 56.5% [33.2%, 77.1%] | 2.1% [1.0%, 3.3%] |
+| distance Q3 (≤ 0.193) | released Nebula | 2,757 (1,339) | 0.9441 [0.8487, 0.9722] | 47.6% [21.3%, 58.0%] | 0.6% [0.3%, 1.4%] | 53.3% [27.0%, 61.8%] | 1.1% [0.5%, 2.1%] |
+| distance Q3 (≤ 0.193) | two-level K=8 | 2,757 (1,339) | 0.9518 [0.8321, 0.9834] | 59.5% [13.8%, 83.2%] | 1.3% [0.2%, 3.0%] | 82.2% [47.5%, 92.4%] | 3.9% [1.9%, 7.7%] |
+| distance Q3 (≤ 0.193) | LightGBM bag of API names | 2,757 (1,339) | 0.9421 [0.8816, 0.9780] | 9.5% [1.6%, 29.1%] | 0.5% [0.1%, 1.2%] | 5.0% [1.7%, 21.0%] | 0.4% [0.2%, 0.9%] |
+| distance Q4 (> 0.193) | released Nebula | 2,403 (1,201) | 0.8909 [0.7395, 0.9627] | 67.1% [29.6%, 85.4%] | 1.8% [0.8%, 4.5%] | 68.8% [33.6%, 87.8%] | 2.4% [1.0%, 6.4%] |
+| distance Q4 (> 0.193) | two-level K=8 | 2,403 (1,201) | 0.8277 [0.6091, 0.9539] | 68.6% [33.5%, 87.2%] | 1.7% [0.7%, 4.4%] | 72.9% [41.0%, 89.6%] | 4.1% [2.6%, 8.6%] |
+| distance Q4 (> 0.193) | LightGBM bag of API names | 2,403 (1,201) | 0.9586 [0.8695, 0.9836] | 69.2% [10.9%, 86.3%] | 0.4% [0.1%, 1.4%] | 68.6% [33.2%, 86.5%] | 0.4% [0.1%, 1.4%] |
+| window share = 100% | released Nebula | 5,886 (3,660) | 0.9822 [0.9527, 0.9917] | 83.7% [64.9%, 91.8%] | 1.3% [0.7%, 2.0%] | 85.3% [68.2%, 92.7%] | 1.6% [0.9%, 2.5%] |
+| window share = 100% | two-level K=8 | 5,886 (3,660) | 0.9818 [0.9580, 0.9903] | 71.9% [42.0%, 87.7%] | 0.3% [0.1%, 1.2%] | 88.5% [74.4%, 94.4%] | 2.9% [1.8%, 4.3%] |
+| window share = 100% | LightGBM bag of API names | 5,886 (3,660) | 0.9459 [0.8801, 0.9830] | 61.9% [15.2%, 83.1%] | 1.2% [0.4%, 1.9%] | 49.7% [26.8%, 69.0%] | 1.1% [0.6%, 1.7%] |
+| window share 0.933–<100% | released Nebula | 1,265 (957) | 0.7798 [0.4888, 0.9375] | 47.8% [4.5%, 82.1%] | 1.6% [0.0%, 3.6%] | 49.7% [6.1%, 83.1%] | 2.3% [0.7%, 4.7%] |
+| window share 0.933–<100% | two-level K=8 | 1,265 (957) | 0.8253 [0.6053, 0.9557] | 44.2% [0.6%, 79.9%] | 0.0% [0.0%, 1.5%] | 51.3% [7.7%, 84.8%] | 4.9% [2.4%, 8.2%] |
+| window share 0.933–<100% | LightGBM bag of API names | 1,265 (957) | 0.8760 [0.6353, 0.9775] | 55.8% [3.6%, 83.9%] | 2.4% [0.3%, 5.2%] | 55.7% [3.8%, 83.9%] | 2.1% [0.7%, 3.9%] |
+| window share ≤ 0.933 (lowest quartile) | released Nebula | 2,256 (970) | 0.8596 [0.6133, 0.9459] | 46.8% [11.1%, 62.0%] | 0.9% [0.4%, 3.0%] | 50.9% [12.0%, 63.4%] | 1.5% [0.6%, 4.7%] |
+| window share ≤ 0.933 (lowest quartile) | two-level K=8 | 2,256 (970) | 0.8487 [0.4289, 0.9619] | 70.8% [6.5%, 88.3%] | 0.5% [0.1%, 1.9%] | 76.2% [15.4%, 92.0%] | 3.3% [2.0%, 8.1%] |
+| window share ≤ 0.933 (lowest quartile) | LightGBM bag of API names | 2,256 (970) | 0.9644 [0.9082, 0.9811] | 17.9% [3.9%, 72.4%] | 0.4% [0.1%, 1.6%] | 17.8% [4.5%, 70.3%] | 0.4% [0.1%, 1.5%] |
+| shorter than 16 calls (no window) | released Nebula | 1,666 (898) | 0.9618 [0.8757, 0.9884] | 75.8% [30.5%, 91.6%] | 1.4% [0.6%, 3.3%] | 77.8% [39.3%, 93.4%] | 2.2% [1.0%, 4.7%] |
+| shorter than 16 calls (no window) | two-level K=8 | 1,666 (898) | 0.9579 [0.8655, 0.9881] | 80.8% [43.0%, 94.8%] | 3.8% [1.3%, 7.6%] | 88.9% [64.7%, 96.7%] | 5.9% [2.7%, 12.7%] |
+| shorter than 16 calls (no window) | LightGBM bag of API names | 1,666 (898) | 0.9656 [0.8804, 0.9876] | 71.0% [6.5%, 89.0%] | 0.4% [0.0%, 1.2%] | 70.6% [25.6%, 89.8%] | 0.4% [0.0%, 1.2%] |
+
+**Decision.** "Unseen" is mostly near January: the median unseen sequence differs from its nearest January sequence in 8.3% of its calls, and the median share of its 16-call windows already seen in January is 100%; released Nebula catches 87.4% of malware in the nearest quartile but only 47.6%–67.1% in the other three (not monotone, wide intervals).
+

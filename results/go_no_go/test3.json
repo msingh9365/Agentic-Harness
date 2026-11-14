@@ -1,0 +1,27 @@
+{
+ "median_dist": 0.08333333333333333,
+ "quartiles_dist": [
+  0.030911925671375844,
+  0.08333333333333333,
+  0.1931239388794567
+ ],
+ "quartiles_window": [
+  0.9325842696629213,
+  1.0,
+  1.0
+ ],
+ "nebula_tpr1_a_by_quartile": {
+  "seen in January": 0.8212079615648593,
+  "unseen, all": 0.7176561295296839,
+  "distance Q1 (\u2264 0.031)": 0.8742897727272727,
+  "distance Q2 (\u2264 0.083)": 0.662533215234721,
+  "distance Q3 (\u2264 0.193)": 0.4764749813293503,
+  "distance Q4 (> 0.193)": 0.6711074104912573,
+  "window share = 100%": 0.8366120218579235,
+  "window share 0.933\u2013<100%": 0.477533960292581,
+  "window share \u2264 0.933 (lowest quartile)": 0.46804123711340206,
+  "shorter than 16 calls (no window)": 0.7583518930957683
+ },
+ "n_short": 279,
+ "decision": "\"Unseen\" is mostly near January: the median unseen sequence differs from its nearest January sequence in 8.3% of its calls, and the median share of its 16-call windows already seen in January is 100%; released Nebula catches 87.4% of malware in the nearest quartile but only 47.6%\u201367.1% in the other three (not monotone, wide intervals)."
+}

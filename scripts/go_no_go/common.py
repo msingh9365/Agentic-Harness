@@ -119,12 +119,12 @@ def group_weights_boot(groups, n_boot=N_BOOT, seed=0):
 METRIC_COLS = ["auc"] + [f"{m}{tag}_{k}" for _, tag in FPRS for k in "ab" for m in ("tpr", "fpr")]
 
 
-def evaluate_models(test, models, thr_b, n_boot=N_BOOT, diffs=()):
+def evaluate_models(test, models, thr_b, n_boot=N_BOOT, diffs=(), masks=None):
     """models: {name: {seed: April score array in test order}}; thr_b: {name: {seed: {fpr: thr}}}.
     Metric of a model = mean over its seeds. Returns (point table, per-seed table, bootstrap
     percentiles), plus paired differences for (name1, name2) in diffs."""
     y = test.label.values
-    masks = subsets(test)
+    masks = subsets(test) if masks is None else masks
     scorers = {m: {sd: Scorer(y, s, thr_b[m][sd]) for sd, s in d.items()} for m, d in models.items()}
 
     def all_metrics(w):
@@ -174,6 +174,20 @@ def md_table(df):
 
 HEAD = {"auc": "AUC", "tpr1%_a": "TPR@1% (a)", "fpr1%_a": "FPR (a)", "tpr1%_b": "TPR@1% (b)", "fpr1%_b": "April FPR (b)",
         "tpr0.1%_a": "TPR@0.1% (a)", "fpr0.1%_a": "FPR (a) ", "tpr0.1%_b": "TPR@0.1% (b)", "fpr0.1%_b": "April FPR (b) "}
+
+
+def diff_table(point, dci, masks, diffs):
+    rows = []
+    for a_, b_ in diffs:
+        for sub, _ in masks:
+            r = {"difference": f"{a_} − {b_}", "subset": sub}
+            for k in METRIC_COLS:
+                if k.startswith("fpr"):
+                    continue
+                lo, hi = dci[(a_, b_, sub, k)]
+                r[HEAD[k]] = f"{fmt_d(k, point[a_][sub][k] - point[b_][sub][k])} [{fmt_d(k, lo)}, {fmt_d(k, hi)}]"
+            rows.append(r)
+    return pd.DataFrame(rows)
 
 
 def result_tables(point, ci, masks, order, sub_filter=None):

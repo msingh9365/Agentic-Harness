@@ -1,0 +1,17 @@
+{
+ "tpr1_a_diff": 0.4330247898712629,
+ "ci": [
+  0.15802150898058023,
+  0.5621937815879624
+ ],
+ "decision": "The full trace adds +43.3 points of TPR at 1% FPR [+15.8, +56.2] over the first 92 calls, which is more than 1 point, so the rule does not say that long-context modelling has little to win.",
+ "auc_diff": {
+  "all": 0.054312276883117794,
+  "seen": 0.038898898737955045,
+  "unseen": 0.06702546304854362,
+  "1 chunk": -0.009363346234942727,
+  "2-3 chunks": 0.052782006409190285,
+  "4-8 chunks": 0.11862831551511954
+ },
+ "ties": 309
+}

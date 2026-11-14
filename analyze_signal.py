@@ -1255,7 +1255,7 @@ def cmd_attrib(a):
 
 
 def sp_piece(nb, i):
-    return nb.tokenizer.tokenizer.id_to_piece(int(i)).replace("|", "\\|")
+    return nb.tokenizer.tokenizer.id_to_piece(int(i))
 
 
 # =========================================================================== tables
@@ -1283,7 +1283,7 @@ def main():
     p.add_argument("--workers", type=int, default=os.cpu_count())
     p = sub.add_parser("attrib")
     p.add_argument("--n", type=int, default=1000)
-    p.add_argument("--steps", type=int, default=50)
+    p.add_argument("--steps", type=int, default=128)
     a = ap.parse_args()
     os.makedirs(R, exist_ok=True)
     fn = globals()[f"cmd_{a.cmd}"]

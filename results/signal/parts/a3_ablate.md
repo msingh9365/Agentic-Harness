@@ -21,7 +21,7 @@ Candidates must be one known token (not `<unk>`, id 1) and not a hex value. Amon
 
 #### 3b. Results
 
-| set | change | AUC | TPR @1% FPR | TPR @0.1% FPR | ΔAUC | ΔTPR @1% | ΔTPR @0.1% | crossed the 1% threshold | mean |Δscore| | benign at p = 1.0 (float32) |
+| set | change | AUC | TPR @1% FPR | TPR @0.1% FPR | ΔAUC | ΔTPR @1% | ΔTPR @0.1% | crossed the 1% threshold | mean \|Δscore\| | benign at p = 1.0 (float32) |
 |---|---|---|---|---|---|---|---|---|---|---|
 | April test | none (unmodified) | 0.9586 | 75.0% (7,047/9,399) | 51.8% (4,873) |  |  |  |  |  | 5 |
 | April test | shuffle API call order (3 seeds) | 0.7139 [0.7109–0.7158] | 12.1% [11.8%–12.3%] (1,136) | 7.0% [6.6%–7.4%] (661) | -0.2448 [-0.2477–-0.2429] | -62.9 pp [-63.2 pp–-62.7 pp] | -44.8 pp [-45.2 pp–-44.5 pp] | 31.8% [31.6%–32.1%] (3,763 malware lost, 1,216 benign gained) | 0.334 [0.331–0.337] | 41 [31–53] |

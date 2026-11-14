@@ -94,10 +94,11 @@ def f4(x):
 
 
 def md_table(df):
+    esc = lambda v: str(v).replace("|", "\\|")          # a "|" inside a cell would split the column
     cols = list(df.columns)
-    out = "| " + " | ".join(map(str, cols)) + " |\n|" + "---|" * len(cols) + "\n"
+    out = "| " + " | ".join(map(esc, cols)) + " |\n|" + "---|" * len(cols) + "\n"
     for _, r in df.iterrows():
-        out += "| " + " | ".join(str(r[x]) for x in cols) + " |\n"
+        out += "| " + " | ".join(esc(r[x]) for x in cols) + " |\n"
     return out
 
 

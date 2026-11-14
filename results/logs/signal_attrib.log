@@ -1,0 +1,15 @@
+versions: {"python": "3.11.18", "numpy": "2.4.6", "pandas": "3.1.1", "sklearn": "1.9.1", "lightgbm": "4.7.0", "scipy": "1.17.1", "torch": "2.15.0+cpu", "sentencepiece": "0.2.3", "orjson": "3.13.0"}
+sample: 1000 April reports (500 malware: {'backdoor': 72, 'coinminer': 72, 'dropper': 72, 'keylogger': 71, 'ransomware': 71, 'rat': 71, 'trojan': 71}; 500 benign), seed 0
+method: integrated gradients on the embedding-layer output (model.encoder), 128 steps, midpoint Riemann sum, target = Nebula's logit. Baseline = embedding of {'apis': []} tokenized and padded: ids [622, 0, 0, 0, 0]... (1 non-pad tokens)
+  100/1000 done, 0.6 min; median completeness error 0.0265 (logit units)
+  200/1000 done, 1.2 min; median completeness error 0.0265 (logit units)
+  300/1000 done, 1.8 min; median completeness error 0.0243 (logit units)
+  400/1000 done, 2.5 min; median completeness error 0.0251 (logit units)
+  500/1000 done, 3.2 min; median completeness error 0.0216 (logit units)
+  600/1000 done, 3.8 min; median completeness error 0.0256 (logit units)
+  700/1000 done, 4.3 min; median completeness error 0.0285 (logit units)
+  800/1000 done, 4.9 min; median completeness error 0.0316 (logit units)
+  900/1000 done, 5.5 min; median completeness error 0.0367 (logit units)
+  1000/1000 done, 6.0 min; median completeness error 0.0384 (logit units)
+token roles exact for 1000/1000 reports; completeness |sum(attr) - (logit - base)|: median 0.0384, p95 0.2100; mean |logit - base| 27.79; 6.0 min
+wrote results/signal/tables.md from ['a0_split.md', 'a1_baselines.md', 'a2_prefix.md', 'a3_ablate.md', 'a4_attrib.md', 'a5_drift.md', 'a6_links.md']

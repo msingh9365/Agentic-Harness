@@ -51,6 +51,21 @@ can be inspected without downloading 5.5 GB. See
 
 ## How to rerun
 
+**New machine, one command.** `bash scripts/setup_local.sh` rebuilds everything the scripts expect
+next to this folder, from public sources at pinned versions:
+
+| folder | what | source | size |
+|---|---|---|---|
+| `../nebula` | Nebula code, released model and BPE tokenizer (`nebula/objects/bpe_50000_*`) | GitHub `dtrizna/nebula` @ `1343ae1` | ~335 MB |
+| `../hf-git` | the 92,700 Speakeasy reports | Hugging Face `dtrizna/quovadis-speakeasy` @ `fc2e98f` (Git LFS) | ~5.5 GB download |
+| `../nebula-venv` | Python 3.11 + packages (CPU PyTorch, LightGBM, ...) | PyPI | ~2 GB |
+| `../hier_data` | files generated from the two above (`analyze_signal.py collect`, ~8 min) | rebuilt locally | ~1.8 GB |
+
+`../hier_data` is too large for GitHub (one file is 1.7 GB), so it is regenerated; `collect` checks
+itself against the committed results and stops on any difference. Steps can be run one at a time:
+`bash scripts/setup_local.sh nebula|data|venv|hier`. Needs git, git-lfs, uv (or python3.11) and
+~20 GB of free disk. The manual steps are below.
+
 ```bash
 # 0. side-by-side folders:  ./this-repo  ../nebula  ../hf-git
 git clone https://github.com/dtrizna/nebula ../nebula

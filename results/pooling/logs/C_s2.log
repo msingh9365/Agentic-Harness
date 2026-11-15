@@ -1,0 +1,17 @@
+10:27:53 == variant C seed 2 | gpu 0: Tesla T4 | torch 2.11.0+cu130 cuda 13.0 | amp True | python 3.13.16 numpy 2.1.3 pandas 2.3.3
+10:27:53 data /kaggle/input/datasets/msingh9365/nebula-speakeasy-tokens | code /kaggle/input/datasets/msingh9365/nebula-thesis-code
+10:27:53 reports: train=65,679, val=9,619, test=17,402
+10:27:54 model C: 3,304,257 parameters; pooling=mean; fixed_pe=True
+10:27:55 batch 64, 1027 steps/epoch, lr 0.00025, StepLR x0.5 every 1000 steps, clip 0.5, max 10 epochs, patience 2
+10:28:41 epoch 1: train loss 0.26993 | val loss 0.82182 auc 0.95209 | train 45s val 2.0s | peak GPU mem 0.441 GB | best
+10:28:41 checkpoint saved: /kaggle/working/ckpt/C_s2/last.pt
+10:29:25 epoch 2: train loss 0.09310 | val loss 0.81183 auc 0.93797 | train 42s val 1.3s | peak GPU mem 0.443 GB | best
+10:29:25 checkpoint saved: /kaggle/working/ckpt/C_s2/last.pt
+10:30:09 epoch 3: train loss 0.06473 | val loss 0.96156 auc 0.94319 | train 42s val 1.3s | peak GPU mem 0.443 GB | no improvement (1/2)
+10:30:09 checkpoint saved: /kaggle/working/ckpt/C_s2/last.pt
+10:30:53 epoch 4: train loss 0.05625 | val loss 0.85904 auc 0.95456 | train 43s val 1.3s | peak GPU mem 0.443 GB | no improvement (2/2)
+10:30:53 checkpoint saved: /kaggle/working/ckpt/C_s2/last.pt
+10:30:53 training finished (early stop); best epoch 2 val loss 0.81183
+10:30:55 scored april: 17,402 reports, AUC 0.90364
+10:30:56 scored janval: 9,619 reports, AUC 0.93797
+10:30:56 done

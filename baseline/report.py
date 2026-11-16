@@ -220,6 +220,9 @@ def ablate_section(res, out):
     base = os.path.join(res, "detect", "ws50k_time_seed0", "metrics.json")
     if os.path.exists(base):
         got[("ws50k", 512)] = jl(base)
+    base = os.path.join(res, "detect", "ws50k_legacy_time_seed0", "metrics.json")
+    if os.path.exists(base):
+        got[("ws50k_legacy", 512)] = jl(base)
     txt = "## D. Ablations\n\n"
     rows = []
     for k, name in [(5000, "5k"), (10000, "10k"), (30000, "30k"), (50000, "50k"), (70000, "70k")]:
@@ -243,10 +246,12 @@ def ablate_section(res, out):
     for key, name in [("wp50k", "Wordpunct"), ("ws50k", "Whitespace"), ("bpe50k", "BPE")]:
         p = PAPER["table6_test"][key]
         rows.append([f"paper {name}", p[0], p[1], p[2], p[3]])
-        m = got.get((key, 512))
-        if m:
-            t = m["test_mean_std"]
-            rows.append([f"ours {name}", pm(t, "tpr@0.001", 4), pm(t, "auc", 4), pm(t, "f1@0.5", 4), pm(t, "acc@0.5", 4)])
+        for k2, name2 in ([(key, name + (" (pinned-repo cleaning)" if key == "ws50k" else "")), ("ws50k_legacy", "Whitespace (legacy cleaning)")]
+                          if key == "ws50k" else [(key, name)]):
+            m = got.get((k2, 512))
+            if m:
+                t = m["test_mean_std"]
+                rows.append([f"ours {name2}", pm(t, "tpr@0.001", 4), pm(t, "auc", 4), pm(t, "f1@0.5", 4), pm(t, "acc@0.5", 4)])
     txt += "### Tokenizer (paper Table 6, test metrics)\n\n" + md(rows, ["", "TPR@1e-3", "AUC", "F1", "Acc"]) + "\n"
     return txt
 

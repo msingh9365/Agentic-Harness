@@ -1,0 +1,13 @@
+diff --git a/nebula/lit_utils.py b/nebula/lit_utils.py
+index 404fc4a..973745c 100644
+--- a/nebula/lit_utils.py
++++ b/nebula/lit_utils.py
+@@ -382,7 +382,7 @@ class LitTrainerWrapper:
+             log_every_n_steps=self.log_every_n_steps,
+             num_sanity_val_steps=self.lit_sanity_steps,
+             enable_model_summary=False, # added manually with different depth
+-            accumulate_grad_batches=self.accumulate_grad_batches,
++            accumulate_grad_batches=self.accumulate_grad_batches or 1,  # None (= no accumulation) is rejected by lightning >= 2.1; 1 is equivalent
+             gradient_clip_val=self.gradient_clip_val,
+             precision=self.precision,
+             logger=[

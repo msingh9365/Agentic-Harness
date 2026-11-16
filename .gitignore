@@ -23,3 +23,7 @@ hier_data/
 # ...and results/hier/data/ (row index + released-Nebula scores); "data/" above would hide the whole folder
 !results/hier/data/
 !results/hier/data/*.npy
+
+# the pinned Nebula submodule (the rule "nebula/" above would otherwise ignore it)
+!third_party/nebula
+!third_party/nebula/

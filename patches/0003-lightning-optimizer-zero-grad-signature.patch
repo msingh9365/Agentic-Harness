@@ -1,0 +1,13 @@
+diff --git a/nebula/lit_utils.py b/nebula/lit_utils.py
+index 0d7b382..3e76aa8 100644
+--- a/nebula/lit_utils.py
++++ b/nebula/lit_utils.py
+@@ -87,7 +87,7 @@ class PyTorchLightningModelBase(L.LightningModule):
+ 
+         # self.save_hyperparameters(ignore=["model"])
+     
+-    def optimizer_zero_grad(self, epoch: int, batch_idx: int, optimizer: Callable, optimizer_idx: int):
++    def optimizer_zero_grad(self, epoch: int, batch_idx: int, optimizer: Callable, optimizer_idx: int = None):  # lightning >= 2.0 no longer passes optimizer_idx
+         # https://pytorch-lightning.readthedocs.io/en/1.3.8/benchmarking/performance.html#zero-grad-set-to-none-true
+         optimizer.zero_grad(set_to_none=True)
+ 

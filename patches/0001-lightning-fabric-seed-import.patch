@@ -1,0 +1,13 @@
+diff --git a/nebula/lit_utils.py b/nebula/lit_utils.py
+index 404fc4a..cce8730 100644
+--- a/nebula/lit_utils.py
++++ b/nebula/lit_utils.py
+@@ -11,7 +11,7 @@ warnings.filterwarnings("ignore", category=UserWarning)
+ from sklearn.metrics import roc_curve
+ 
+ import lightning as L
+-from lightning.lite.utilities.seed import seed_everything
++from lightning.fabric.utilities.seed import seed_everything
+ from lightning.pytorch.callbacks import TQDMProgressBar, ModelCheckpoint, EarlyStopping, ModelSummary
+ from lightning.pytorch.loggers import CSVLogger, TensorBoardLogger
+ 

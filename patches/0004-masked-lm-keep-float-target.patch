@@ -1,0 +1,15 @@
+diff --git a/nebula/lit_utils.py b/nebula/lit_utils.py
+index 3e76aa8..90f9834 100644
+--- a/nebula/lit_utils.py
++++ b/nebula/lit_utils.py
+@@ -156,7 +156,9 @@ class PyTorchLightningModelBase(L.LightningModule):
+         if y.ndim == 2 and logits.ndim == 3: # e.g. autoregressive pre-training
+             logits, y = logits.view(-1, logits.size(-1)), y.view(-1)
+         elif logits.ndim == 2 and self.out_classes != 1: # multiclass, logits.shape: (batch_size, num_classes)
+-            y = y.squeeze().to(torch.int64)
++            if y.ndim == 1: # class indices
++                y = y.squeeze().to(torch.int64)
++            # else: class-probability target of the logits' shape (masked LM: 1 where a token was masked); keep it float
+         elif y.ndim == 1: # binary classification: (batch_size, ) => (batch_size, 1)
+             y = y.unsqueeze(-1)
+         

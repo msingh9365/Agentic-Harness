@@ -66,6 +66,31 @@ def main():
     n = {v: sum(p.numel() for p in build_variant(a.nebula, v).parameters()) for v in "ABC"}
     assert n["B"] == n["C"] and n["A"] > n["B"]
     print(f"ok: variants build and run; parameters A={n['A']:,} B={n['B']:,} C={n['C']:,}")
+
+    # 7. masked mean pooling (v2): the average runs over real tokens only (id != 0), padding is excluded
+    for vm, vu in (("Bm", "B"), ("Cm", "C")):
+        mm = build_variant(a.nebula, vm).eval()
+        mu = build_variant(a.nebula, vu).eval()
+        mu.load_state_dict(mm.state_dict())                                  # same weights, only the pooling differs
+        full = torch.randint(1, 50000, (3, 512))                             # no padding: masked == unmasked
+        padded = full.clone()
+        padded[0, 100:] = 0                                                  # report 0 has 100 real tokens
+        padded[1, 400:] = 0
+        with torch.no_grad():
+            assert torch.allclose(mm(full), mu(full), atol=1e-6), vm
+            assert not torch.allclose(mm(padded), mu(padded), atol=1e-4), f"{vm}: padding should change the unmasked mean"
+            # by hand: transformer outputs, then the mean over real tokens
+            xs = torch.cat(mm.transform(mm.embed(mm.split(padded))), dim=1)
+            keep = (padded != 0).unsqueeze(-1).float()
+            want = (xs * keep).sum(1) / keep.sum(1)
+            assert torch.allclose(mm.core(padded), want, atol=1e-5)
+            # the pooled vector ignores what sits at padding positions: replace those outputs by huge numbers
+            xs2 = xs.clone(); xs2[0, 100:] = 1e6
+            assert torch.allclose((xs2 * keep).sum(1) / keep.sum(1), want, atol=1e-3)
+            # an all-padding input does not divide by zero
+            assert torch.isfinite(mm(torch.zeros(1, 512, dtype=torch.long))).all()
+    assert sum(p.numel() for p in build_variant(a.nebula, "Bm").parameters()) == n["B"]
+    print("ok: masked mean (Bm, Cm) equals the plain mean without padding, ignores padding positions, same parameters")
     print("ALL POOLING TESTS PASSED")
 
 

@@ -32,3 +32,6 @@ hier_data/
 baseline/kaggle/jobs/
 results/_probe/
 results/_smoke_prep/
+results/_tokens_raw*/
+results/_gpu_smoke/
+results/baseline_raw/

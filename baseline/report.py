@@ -56,7 +56,8 @@ def detection(res, out):
         pk = variant.replace("_legacy", "")                                  # the paper has one Whitespace row
         p = PAPER["table7"][pk]
         if variant != "ws50k_legacy":
-            rows.append([f"**paper**, Nebula {'BPE' if variant == 'bpe50k' else 'Whitespace'}", p["batches"], p["tpr"], p["auc"], p["f1"], p["acc"], PAPER["val_f1"][pk], "Quadro T2000"])
+            rows.append([f"**paper**, Nebula {'BPE' if variant == 'bpe50k' else 'Whitespace'}", 3, p["batches"], p["tpr"], "", p["auc"], p["f1"], p["acc"],
+                         PAPER["val_f1"][pk], "Quadro T2000"])
         for regime in ["time", "batches"]:
             f = os.path.join(res, "detect", f"{variant}_{regime}_seed0", "metrics.json")
             if not os.path.exists(f):
@@ -65,12 +66,16 @@ def detection(res, out):
             t, v = m["test_mean_std"], m["val_mean_std"]
             b = [r["batches_seen"] for r in m["folds"]]
             name = {"bpe50k": "BPE", "ws50k": "WS (pinned-repo cleaning)", "ws50k_legacy": "WS (legacy cleaning)"}[variant]
-            rows.append([f"ours, {name} {'time-matched (5 min/fold)' if regime == 'time' else 'batch-matched'}",
-                         f"{np.mean(b):.0f} ({min(b)}–{max(b)})", pm(t, "tpr@0.001"), pm(t, "auc"), pm(t, "f1@0.5"), pm(t, "acc@0.5"),
-                         pm(v, "f1@0.5"), m["env"].get("gpu", "?")])
-    txt += md(rows, ["run", "batches / fold", "test TPR @ FPR 1e-3", "test AUC", "test F1 (thr 0.5)", "test Acc (thr 0.5)", "val F1 (thr 0.5)", "GPU"])
-    txt += "\nMean ± std (population std, as the authors' CV code) over the three fold models. TPR thresholds come from the test set itself " \
-           "(`get_tpr_at_fpr`, the authors' function).\n\n"
+            p32 = m.get("test_p32_mean_std")
+            rows.append([f"ours, {name} {'time-matched (5 min/fold)' if regime == 'time' else 'batch-matched'}", len(m["folds"]),
+                         f"{np.mean(b):.0f} ({min(b)}–{max(b)})", pm(t, "tpr@0.001"), pm(p32, "tpr@0.001") if p32 else "", pm(t, "auc"),
+                         pm(t, "f1@0.5"), pm(t, "acc@0.5"), pm(v, "f1@0.5"), m["env"].get("gpu", "?")])
+    txt += md(rows, ["run", "fold models", "batches / fold", "test TPR @ FPR 1e-3 (logit-ranked)", "same, literal float32 probabilities", "test AUC",
+                     "test F1 (thr 0.5)", "test Acc (thr 0.5)", "val F1 (thr 0.5)", "GPU"])
+    txt += "\nMean ± std (population std, as the authors' CV code) over the fold models (3 per seed; seeds pooled). The TPR threshold comes from " \
+           "the test set itself (`get_tpr_at_fpr`, the authors' function). **Logit-ranked** is the headline number: after the float32 sigmoid, " \
+           "tens of benign reports tie with the top malware scores at exactly 1.0 (more than the 8 that FPR 1e-3 allows), so the literal " \
+           "procedure returns 0 for those models (an output-precision artifact, see NOTES.md §4).\n\n"
     # secondary table: TPR at other FPRs
     rows = []
     for variant in ["bpe50k", "ws50k", "ws50k_legacy"]:
@@ -246,13 +251,40 @@ def ablate_section(res, out):
     return txt
 
 
+def pool_seeds(res, out):
+    """Merge the fold models of every seed of a configuration (detect/, classify/, ablate/) into one metrics file named
+    <stem>_seed0, in <out>/_pooled, so that the sections below read one record per configuration."""
+    import re
+    import shutil
+    from baseline import cv
+    root = os.path.join(out, "_pooled")
+    shutil.rmtree(root, ignore_errors=True)
+    for kind in ["detect", "classify", "ablate"]:
+        groups = {}
+        for f in glob.glob(os.path.join(res, kind, "*", "metrics.json")):
+            stem = re.sub(r"_seed\d+$", "", os.path.basename(os.path.dirname(f)))
+            groups.setdefault(stem, []).append(f)
+        for stem, fs in groups.items():
+            ms = [jl(f) for f in sorted(fs)]
+            merged = ms[0]
+            merged["folds"] = sum([m["folds"] for m in ms], [])
+            merged["seeds"] = sorted(m["seed"] for m in ms)
+            cv.aggregate(merged, merged["task"])
+            C.dump_json(merged, os.path.join(root, kind, f"{stem}_seed0", "metrics.json"))
+    if os.path.exists(os.path.join(res, "released", "metrics.json")):
+        os.makedirs(os.path.join(root, "released"), exist_ok=True)
+        shutil.copy(os.path.join(res, "released", "metrics.json"), os.path.join(root, "released", "metrics.json"))
+    return root
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--results", required=True)
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
-    parts = [detection(a.results, a.out), ssl_section(a.results, a.out), classify_section(a.results, a.out), ablate_section(a.results, a.out)]
+    pooled = pool_seeds(a.results, a.out)
+    parts = [detection(pooled, a.out), ssl_section(a.results, a.out), classify_section(pooled, a.out), ablate_section(pooled, a.out)]
     with open(os.path.join(a.out, "tables.md"), "w") as f:
         f.write("# Baseline reproduction: tables (generated by baseline/report.py)\n\n" + "\n".join(p for p in parts if p))
     print("wrote", os.path.join(a.out, "tables.md"))

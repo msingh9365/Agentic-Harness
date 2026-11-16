@@ -63,6 +63,17 @@ def predict(trainer, x):
     return p.reshape(-1) if p.shape[1] == 1 else p
 
 
+def predict_logits(model, x, device, bs=256):
+    """Pre-sigmoid scores of a binary model (same forward pass as their predict_proba, without the float32 sigmoid)."""
+    import torch
+    model.eval()
+    out = []
+    with torch.no_grad():
+        for i in range(0, len(x), bs):
+            out.append(model(torch.from_numpy(np.asarray(x[i:i + bs])).long().to(device)).float().cpu())
+    return torch.cat(out).numpy().reshape(-1)
+
+
 def run_cv(x, y, x_test, y_test, folds, vocab_size, out, *, task="binary", regime="time", time_budget=PAPER["time_budget"],
            max_batches=None, batch_size=PAPER["batch_size"], lr=PAPER["lr"], weight_decay=PAPER["weight_decay"],
            device="cuda", seed=0, maxlen=512, chunk_size=64, tag="", save_models=True, model_extra=None):
@@ -95,12 +106,18 @@ def run_cv(x, y, x_test, y_test, folds, vocab_size, out, *, task="binary", regim
         if regime == "batches":
             assert batches == max_batches, f"stopped after {batches} batches, expected {max_batches}"
         losses = np.asarray(trainer.train_losses, dtype=np.float64)
-        pv, pt = predict(trainer, x[va]), predict(trainer, x_test)
+        if task == "binary":
+            pv, pt = predict_logits(model, x[va], device), predict_logits(model, x_test, device)     # logits: tie-free ranking
+            m_val, m_test = metric(y[va], pv, decision=0.0), metric(y_test, pt, decision=0.0)
+            m_test_p32 = metric(y_test, C.sigmoid32(pt))        # the literal procedure on float32 probabilities (saturates)
+        else:
+            pv, pt = predict(trainer, x[va]), predict(trainer, x_test)
+            m_val, m_test, m_test_p32 = metric(y[va], pv), metric(y_test, pt), None
         rec = {"fold": i, "n_train": int(len(tr)), "n_val": int(len(va)), "params": int(n_params), "batches_seen": batches,
                "epochs_seen": round(batches / per_epoch, 2), "train_seconds": round(train_seconds, 1),
                "loss_first100": float(losses[:100].mean()), "loss_last100": float(losses[-100:].mean()),
                "loss_curve_every50": losses[::50].round(4).tolist(),
-               "val": metric(y[va], pv), "test": metric(y_test, pt)}
+               "val": m_val, "test": m_test, "test_p32": m_test_p32}
         res["folds"].append(rec)
         key = "tpr@0.001" if task == "binary" else "f1_macro"
         print(f"[{tag}] fold {i + 1}/{len(folds)}: {batches} batches ({rec['epochs_seen']} epochs, {train_seconds:.0f}s) | "
@@ -108,17 +125,27 @@ def run_cv(x, y, x_test, y_test, folds, vocab_size, out, *, task="binary", regim
               f"{rec['test'].get('auc', rec['test'].get('auc_ovr_macro')):.4f}", flush=True)
         if save_models:
             torch.save(model.state_dict(), os.path.join(out, f"fold{i}_model.pt"))
-            np.save(os.path.join(out, f"fold{i}_test_probs.npy"), pt.astype(np.float32))
-            np.save(os.path.join(out, f"fold{i}_val_probs.npy"), pv.astype(np.float32))
+            suffix = "logits" if task == "binary" else "probs"
+            np.save(os.path.join(out, f"fold{i}_test_{suffix}.npy"), pt.astype(np.float32))
+            np.save(os.path.join(out, f"fold{i}_val_{suffix}.npy"), pv.astype(np.float32))
         del trainer, model
         if device != "cpu":
             torch.cuda.empty_cache()
+    aggregate(res, task)
+    C.dump_json(res, os.path.join(out, "metrics.json"))
+    return res
+
+
+def aggregate(res, task):
+    """Mean and std over the fold models (the authors' CV reports np.nanstd of the folds), mean ROC, per-class F1."""
     for split in ["val", "test"]:
         keys = [k for k, v in res["folds"][0][split].items() if isinstance(v, (int, float)) and not isinstance(v, bool)]
         res[f"{split}_mean_std"] = C.mean_std([r[split] for r in res["folds"]], keys)
         if task == "binary":
             res[f"{split}_roc_mean"] = np.mean([r[split]["roc_on_grid"] for r in res["folds"]], axis=0).round(5).tolist()
+            if split == "test":
+                keys32 = [k for k, v in res["folds"][0]["test_p32"].items() if isinstance(v, (int, float)) and not isinstance(v, bool)]
+                res["test_p32_mean_std"] = C.mean_std([r["test_p32"] for r in res["folds"]], keys32)
         else:
             res[f"{split}_f1_per_class_mean"] = np.mean([r[split]["f1_per_class"] for r in res["folds"]], axis=0).round(4).tolist()
-    C.dump_json(res, os.path.join(out, "metrics.json"))
     return res

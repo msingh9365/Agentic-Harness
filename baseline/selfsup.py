@@ -50,21 +50,19 @@ def finetune(model, x, y, tag, a, seed):
     return w, time.time() - t0, int(np.ceil(len(x) / a.batch_size)) * a.ft_epochs
 
 
-def predict_probs(w, x):
-    import torch
+def predict_logits(w, x):
     loader = w.create_dataloader(x, None, shuffle=False)
-    logits = w.predict_lit_model(loader, return_logits=True)
-    return torch.sigmoid(logits).reshape(-1).numpy()
+    return w.predict_lit_model(loader, return_logits=True).reshape(-1).float().numpy()
 
 
 def evaluate_and_save(w, model, x_test, y_test, run_dir, extra):
     import torch
     os.makedirs(run_dir, exist_ok=True)
-    p = predict_probs(w, x_test)
-    m = C.binary_metrics(y_test, p)
-    np.save(os.path.join(run_dir, "test_probs.npy"), p.astype(np.float32))
+    z = predict_logits(w, x_test)                                  # logits: tie-free ranking (see common.binary_metrics)
+    m = C.binary_metrics(y_test, z, decision=0.0)
+    np.save(os.path.join(run_dir, "test_logits.npy"), z.astype(np.float32))
     torch.save(model.state_dict(), os.path.join(run_dir, "model.pt"))
-    C.dump_json({"test": m, **extra}, os.path.join(run_dir, "metrics.json"))
+    C.dump_json({"test": m, "test_p32": C.binary_metrics(y_test, C.sigmoid32(z)), **extra}, os.path.join(run_dir, "metrics.json"))
     print(f"  [{extra['run']}] TEST TPR@1e-3 {m['tpr@0.001']:.4f} | TPR@1e-2 {m['tpr@0.01']:.4f} | AUC {m['auc']:.4f} | F1@0.5 "
           f"{m['f1@0.5']:.4f} | {extra['train_seconds']:.0f}s", flush=True)
     return m

@@ -68,10 +68,11 @@ def run_released(a):
         model = TransformerEncoderChunks(**cv.model_config(len(vocab)))
         model.load_state_dict(torch.load(os.path.join(nb["nebula_root"], "nebula", "objects", fname), weights_only=True))
         trainer = cv.make_trainer(model, a.device, "binary", 96, 2.5e-4, 1e-2)
-        pt = cv.predict(trainer, xt)
-        ptr = cv.predict(trainer, x)
-        allres[variant] = {"test": C.binary_metrics(yt, pt), "train_in_sample": C.binary_metrics(y, ptr)}
-        np.save(os.path.join(out, f"{variant}_test_probs.npy"), pt.astype(np.float32))
+        pt = cv.predict_logits(model, xt, a.device)
+        ptr = cv.predict_logits(model, x, a.device)
+        allres[variant] = {"test": C.binary_metrics(yt, pt, decision=0.0), "test_p32": C.binary_metrics(yt, C.sigmoid32(pt)),
+                           "train_in_sample": C.binary_metrics(y, ptr, decision=0.0)}
+        np.save(os.path.join(out, f"{variant}_test_logits.npy"), pt.astype(np.float32))
         t = allres[variant]["test"]
         print(f"[{variant}] released weights on our April test set: TPR@1e-3 {t['tpr@0.001']:.4f} AUC {t['auc']:.4f} "
               f"F1@0.5 {t['f1@0.5']:.4f} Acc {t['acc@0.5']:.4f} | on January train: AUC {allres[variant]['train_in_sample']['auc']:.4f}", flush=True)

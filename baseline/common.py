@@ -96,9 +96,19 @@ def find_dir_with(filename, search="/kaggle/input"):
 
 
 # --------------------------------------------------------------------------- metrics
-def binary_metrics(y, p, fprs=FPRS):
+def sigmoid32(z):
+    """P(malware) exactly as the authors' predict_proba computes it: torch.sigmoid in float32. Saturates to exactly 1.0 for
+    logits above about 17, which creates ties (see binary_metrics)."""
+    import torch
+    return torch.sigmoid(torch.as_tensor(np.asarray(z), dtype=torch.float32)).numpy()
+
+
+def binary_metrics(y, p, fprs=FPRS, decision=0.5):
     """AUC, TPR at each FPR (the authors' get_tpr_at_fpr: last ROC point with FPR <= target; the threshold comes from the
-    set being evaluated), F1 and accuracy at threshold 0.5, F1 at each FPR threshold, and the ROC curve on a log FPR grid."""
+    set being evaluated), F1 and accuracy at `decision`, F1 at each FPR threshold, and the ROC curve on a log FPR grid.
+    p: scores to rank by. PASS LOGITS (and decision=0.0) rather than float32 probabilities: after the sigmoid, hundreds of
+    reports tie at exactly 1.0, and when more than FPR * n_benign benign reports tie with the top malware scores, no ROC point
+    has FPR <= target and get_tpr_at_fpr returns 0.0 (an artifact, not a model property; see NOTES.md)."""
     from sklearn.metrics import accuracy_score, f1_score, roc_auc_score, roc_curve
     from nebula.misc import get_tpr_at_fpr
     y = np.asarray(y).astype(int).ravel()
@@ -109,8 +119,9 @@ def binary_metrics(y, p, fprs=FPRS):
         out[f"tpr@{f:g}"] = float(tpr)
         out[f"thr@{f:g}"] = float(thr)
         out[f"f1@fpr{f:g}"] = float(f1_score(y, p >= thr))
-    out["f1@0.5"] = float(f1_score(y, p >= 0.5))
-    out["acc@0.5"] = float(accuracy_score(y, p >= 0.5))
+    out["f1@0.5"] = float(f1_score(y, p >= decision))          # the key says 0.5: P(malware) >= 0.5 is logit >= 0
+    out["acc@0.5"] = float(accuracy_score(y, p >= decision))
+    out["n_tied_at_top"] = int((p == p.max()).sum())            # reports sharing the highest score (many = saturation)
     fpr, tpr, _ = roc_curve(y, p)
     out["roc_on_grid"] = np.interp(ROC_GRID, fpr, tpr).astype(float).round(5).tolist()
     return out

@@ -90,7 +90,7 @@ def _tok_common():
     return dict(cleanup_symbols=JSON_CLEANUP_SYMBOLS, stopwords=SPEAKEASY_TOKEN_STOPWORDS)
 
 
-def build_tokenizer(spec, nebula_root, model_path=None):
+def build_tokenizer(spec, nebula_root, model_path=None, vocab_file=None):
     """spec: a VARIANTS entry. model_path: the trained BPE .model / whitespace vocab .json to load (None = untrained)."""
     from nebula.preprocessing import JSONTokenizerBPE, JSONTokenizerNaive
     objs = os.path.join(nebula_root, "nebula", "objects")
@@ -109,7 +109,7 @@ def build_tokenizer(spec, nebula_root, model_path=None):
     if spec["kind"] == "bpe":
         if model_path is None:
             return JSONTokenizerBPE(vocab_size=spec["vocab"], seq_len=spec["seq"], **common)
-        return JSONTokenizerBPE(vocab_size=spec["vocab"], seq_len=spec["seq"], model_path=model_path, **common)
+        return JSONTokenizerBPE(vocab_size=spec["vocab"], seq_len=spec["seq"], model_path=model_path, vocab=vocab_file, **common)
     tok = JSONTokenizerNaive(vocab_size=spec["vocab"], seq_len=spec["seq"], counter_dump=model_path is None,
                              type=spec["kind"], **common)
     if model_path is not None:
@@ -117,8 +117,10 @@ def build_tokenizer(spec, nebula_root, model_path=None):
     return tok
 
 
-def run_variant(name, events_train, events_test, out_dir, nebula_root, seq_lens=()):
-    """Train the tokenizer on TRAIN only (unless released), encode train and test. Mirrors preprocess_nebula_speakeasy()."""
+def run_variant(name, events_train, events_test, out_dir, nebula_root, seq_lens=(), reuse_dir=None, tok_train_frac=1.0):
+    """Train the tokenizer on TRAIN only (unless released), encode train and test. Mirrors preprocess_nebula_speakeasy().
+    reuse_dir: a published tokens folder; if it holds this variant, its tokenizer is loaded instead of retrained (used to
+    re-encode at other sequence lengths for the length ablation)."""
     import json
     spec = VARIANTS[name]
     vdir = os.path.join(out_dir, "variants", name)
@@ -127,14 +129,24 @@ def run_variant(name, events_train, events_test, out_dir, nebula_root, seq_lens=
         return
     os.makedirs(vdir, exist_ok=True)
     t0 = time.time()
-    if spec.get("released"):
+    reused = os.path.join(reuse_dir, "variants", name) if reuse_dir else None
+    if reused and os.path.exists(os.path.join(reused, "vocab.json")) and not spec.get("released"):
+        files = os.path.join(reused, "tokenizer.model") if spec["kind"] == "bpe" else os.path.join(reused, "vocab.json")
+        tok_train = tok_test = build_tokenizer(spec, nebula_root, model_path=files, vocab_file=os.path.join(reused, "vocab.json"))
+        trained = False
+        print(f"[{name}] reusing the tokenizer of {reused}", flush=True)
+    elif spec.get("released"):
         tok_train = tok_test = build_tokenizer(spec, nebula_root)
         trained = False
     else:
         tok = build_tokenizer(spec, nebula_root)
         prefix = os.path.join(vdir, f"tokenizer_{spec['vocab']}")
-        print(f"[{name}] training {spec['kind']} tokenizer (vocab {spec['vocab']}) on {len(events_train)} train reports ...", flush=True)
-        tok.train(events_train, vocab_size=spec["vocab"], model_prefix=prefix)
+        corpus = events_train
+        if tok_train_frac < 1.0:        # FALLBACK ONLY (memory/time): a random subset of the TRAIN reports; recorded in info.json
+            pick = np.random.default_rng(0).permutation(len(events_train))[:int(tok_train_frac * len(events_train))]
+            corpus = [events_train[i] for i in sorted(pick)]
+        print(f"[{name}] training {spec['kind']} tokenizer (vocab {spec['vocab']}) on {len(corpus)} of {len(events_train)} train reports ...", flush=True)
+        tok.train(corpus, vocab_size=spec["vocab"], model_prefix=prefix)
         print(f"[{name}] tokenizer trained in {(time.time() - t0) / 60:.1f} min", flush=True)
         # as in their wrapper: the test set is encoded with the tokenizer loaded from the files written by train
         model_file = prefix + ".model" if spec["kind"] == "bpe" else prefix + "_vocab.json"
@@ -155,18 +167,19 @@ def run_variant(name, events_train, events_test, out_dir, nebula_root, seq_lens=
     with open(os.path.join(vdir, "vocab.json"), "w") as f:
         json.dump(vocab, f)
     if spec["kind"] == "bpe":
-        src = os.path.join(nebula_root, "nebula", "objects", "bpe_50000_sentencepiece.model") if spec.get("released") \
-            else os.path.join(vdir, f"tokenizer_{spec['vocab']}.model")
-        if not spec.get("released"):
-            shutil.move(src, os.path.join(vdir, "tokenizer.model"))
+        dst = os.path.join(vdir, "tokenizer.model")
+        if spec.get("released"):
+            shutil.copy(os.path.join(nebula_root, "nebula", "objects", "bpe_50000_sentencepiece.model"), dst)
+        elif reused and os.path.exists(os.path.join(reused, "tokenizer.model")):
+            shutil.copy(os.path.join(reused, "tokenizer.model"), dst)           # reused tokenizer: copy, nothing was trained
         else:
-            shutil.copy(src, os.path.join(vdir, "tokenizer.model"))
+            shutil.move(os.path.join(vdir, f"tokenizer_{spec['vocab']}.model"), dst)
     for f in os.listdir(vdir):                      # keep only what is needed
         if f.startswith("tokenizer_") and f != "tokenizer.model":
             if f.endswith("_vocab.json") or f.endswith("_counter.json"):
                 os.remove(os.path.join(vdir, f))
     info = {"name": name, **spec, "trained_on_train": trained, "vocab_entries": len(vocab),
-            "seq_len": spec["seq"], "train_tokens_median": float(np.median(lens["train"])),
+            "seq_len": spec["seq"], "tokenizer_train_fraction": tok_train_frac if trained else None, "train_tokens_median": float(np.median(lens["train"])),
             "share_train_longer_than_seq": float((lens["train"] > spec["seq"]).mean()),
             "share_test_longer_than_seq": float((lens["test"] > spec["seq"]).mean()),
             "minutes_total": round((time.time() - t0) / 60, 1), "minutes_encoding": round((time.time() - t1) / 60, 1)}
@@ -198,6 +211,8 @@ def main():
     ap.add_argument("--limit", type=int, default=None, help="files per folder (smoke tests only)")
     ap.add_argument("--workers", type=int, default=os.cpu_count())
     ap.add_argument("--nebula", default=None)
+    ap.add_argument("--tok-train-frac", type=float, default=1.0, help="fallback: train tokenizers on this fraction of the train reports")
+    ap.add_argument("--reuse", default=None, help="published tokens folder whose tokenizers are reused (no retraining)")
     ap.add_argument("--work", default="/tmp/nebula_events", help="cache for the filtered events")
     a = ap.parse_args()
 
@@ -233,7 +248,7 @@ def main():
     print("counts:", counts, flush=True)
 
     for name in [v for v in a.variants.split(",") if v]:
-        run_variant(name, ev_tr, ev_te, a.out, info["nebula_root"], seq_lens)
+        run_variant(name, ev_tr, ev_te, a.out, info["nebula_root"], seq_lens, a.reuse, a.tok_train_frac)
     print(f"all done in {(time.time() - t0) / 60:.1f} min", flush=True)
 
 

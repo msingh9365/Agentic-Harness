@@ -80,3 +80,19 @@ def test_metrics_follow_their_definition():
     ym = rng.integers(0, 8, 400)
     mm = C.multiclass_metrics(ym, pm)
     assert len(mm["f1_per_class"]) == 8 and 0 <= mm["acc"] <= 1
+
+
+def test_multiclass_path_for_type_classification(tmp_path):
+    rng = np.random.default_rng(0)
+    n = 480
+    ym = rng.integers(0, 8, n)
+    x = np.zeros((n, L), dtype=np.int32)
+    for i in range(n):
+        k = int(rng.integers(40, L))
+        x[i, :k] = rng.integers(10, V, k)
+        x[i, rng.integers(0, k, 15)] = 3 + ym[i]                 # class-specific marker token
+    xt = x[:120].copy(); yt = ym[:120].copy()
+    res = cv.run_cv(x, ym.astype(np.int64), xt, yt.astype(np.int64), folds(n), V, str(tmp_path), task="multiclass", regime="batches",
+                    max_batches=150, batch_size=32, device="cpu", maxlen=L, tag="t", save_models=False)
+    assert res["config"]["numClasses"] == 8
+    assert len(res["test_f1_per_class_mean"]) == 8 and res["test_mean_std"]["acc"]["mean"] > 0.3   # chance is 0.125

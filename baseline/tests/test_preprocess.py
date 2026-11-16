@@ -88,3 +88,22 @@ def test_splits_are_stratified_and_disjoint():
             assert abs(sum(ym[i] == c for i in u) / nc - 0.8) < 0.02
     for f in sp["kfold3"]:
         assert not (set(f["train"]) & set(f["val"])) and len(f["train"]) + len(f["val"]) == 2000
+
+
+def test_reused_tokenizer_and_other_sequence_lengths(sample, sorted_listdir, tmp_path, monkeypatch):
+    """--reuse must give the same arrays as the trained tokenizer, and a shorter sequence length is the 512-token array cut."""
+    V = 400
+    train, test = (os.path.join(sample, f"windows_emulation_{s}set") for s in ["train", "test"])
+    monkeypatch.setitem(P.VARIANTS, "t", dict(kind="bpe", vocab=V, seq=512))
+    ev_tr, _, _ = P.filter_split(train, INFO["nebula_root"], workers=2)
+    ev_te, _, _ = P.filter_split(test, INFO["nebula_root"], workers=2)
+    A, B = str(tmp_path / "a"), str(tmp_path / "b")
+    P.run_variant("t", ev_tr, ev_te, A, INFO["nebula_root"])
+    P.run_variant("t", ev_tr, ev_te, B, INFO["nebula_root"], seq_lens=(64, 128, 1024), reuse_dir=A)
+    a, b = (os.path.join(d, "variants", "t") for d in (A, B))
+    assert (np.load(a + "/x_train.npy") == np.load(b + "/x_train.npy")).all()
+    x512 = np.load(b + "/x_train.npy")
+    for n in (64, 128):
+        assert (np.load(b + f"/x_train_len{n}.npy") == x512[:, :n]).all()
+    x1024 = np.load(b + "/x_train_len1024.npy")
+    assert x1024.shape[1] == 1024 and (x1024[:, :512] == x512).all()

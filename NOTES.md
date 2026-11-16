@@ -94,8 +94,10 @@ Found, **not** patched (we avoid these code paths instead):
 - `nebula.pretraining.AutoRegressiveModelTrainer` (older) slices windows over the *sample* axis, so it does not work on a
   2-D token array.
 - `read_and_filter_json_folders` only lists `*.json` files directly inside each `report_*` folder (`os.listdir`), so reports in
-  sub-folders are silently skipped. The January `report_clean` and `report_backdoor` folders of the dataset are sharded into
-  sub-folders `0`..`f`. We build a flat folder of symlinks and call their function unchanged (no patch).
+  sub-folders are silently skipped. This matters for the **Hugging Face** copy of the dataset, where the January `report_clean` and
+  `report_backdoor` folders are sharded into sub-folders `0`..`f`. The **Kaggle** copy (the one used for all runs here) is flat
+  (checked by the probe kernel: 75,298 train and 17,402 test files directly in the `report_*` folders), so no workaround is needed there.
+  For local tests on the Hugging Face copy, `baseline/tests/make_sample.py` builds a flat sample of symlinks.
 
 ## 6. Dataset
 
@@ -108,11 +110,33 @@ Found, **not** patched (we avoid these code paths instead):
 | Table numbers | the task's "Table 12b" is **Table 9** in arXiv v2; Whitespace F1 is 0.9068 in the paper's Table 6 and 0.9058 in its Table 7 |
 | Other Kaggle datasets in the account | `msingh9365/nebula-speakeasy-tokens` (92,700 tokenized reports, from earlier thesis work) and `msingh9365/nebula-thesis-code`. They are **not touched**. The preprocessing output of this study is published as **`msingh9365/nebula-baseline-tokens`** instead of the slug in the task text, so the earlier data is not overwritten |
 
+## 6b. Kaggle environment (measured by `baseline/kaggle/probe`)
+
+| item | value |
+|---|---|
+| Python | 3.13 (Kaggle image). `speakeasy-emulator`, `lief`, `lightning`, `torchmetrics` all pip-install; `import nebula` works with the real `speakeasy` and `lief` (no stubs) |
+| CPU kernel | 4 cores, 31 GB RAM, 19.5 GB free in `/kaggle/working`; about 2.5x slower per core than the local machine used for development |
+| Dataset mount | `/kaggle/input/datasets/<owner>/<slug>/`; our code finds data by folder name, not by path |
+| GPU | `kaggle kernels push --accelerator NvidiaTeslaT4` gives a T4 x2 session (P100 is retired). Two independent worker processes, one per GPU, use the session time twice as well |
+| Quota (CLI `kaggle quota`) | on 2026-11-16: 26.62 h of 30 h GPU left, resets 2026-11-21 |
+| How code reaches Kaggle | `baseline/kaggle/build_kernel.py` packs `baseline/` and `patches/` into the kernel script; the script clones the authors' repo at the pinned commit, applies the patches and runs one module. The exact code is therefore stored in each pushed kernel version |
+
 ## 7. Decisions log
 
 - New slug `nebula-baseline-tokens` (see above), not `nebula-speakeasy-tokens`.
 - Where the task text and their code differ on MLM and AR, their code is the primary run and the task's spec is run as a labelled
   second variant (cheap): see §4.
+- Preprocessing calls their functions in the order of their wrapper but filters the reports once (in parallel) instead of once per
+  tokenizer variant. A unit test shows the token arrays and labels are bit-identical to `preprocess_nebula_speakeasy` on a sample.
+- Self-supervised runs do not use their `SelfSupervisedLearningEvalFramework`: it splits without stratification, copies weights by
+  name even when shapes differ (this breaks for the AR flatten classifier) and takes the *test set* as validation loader with
+  checkpoint selection on `val_tpr`. We call their trainers (`MaskedLanguageModelTrainer`, `LitTrainerWrapper`) directly, split
+  stratified by family (seeds 0, 1, 2), use fixed budgets and evaluate the final weights once on the test set.
+- Self-supervised budgets (the paper does not give them): pre-training 3 epochs on 98% of the unlabeled 80% (2% held out for the LM
+  validation loss, early stopping with best-weights restore), dropout 0 while pre-training and 0.3 while fine-tuning (as in their
+  example script), batch 96, AdamW lr 2.5e-4, gradient clipping 1.0; fine-tuning 10 epochs for every run (upper bound included).
+- Detection and classification: single CV with seed 0 (the paper has one CV run); the fold split is `KFold(3, shuffle=True,
+  random_state=1763)`, the state used in the authors' CV scripts.
 
 ## 8. GPU-hours log
 

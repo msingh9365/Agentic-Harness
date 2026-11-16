@@ -184,7 +184,7 @@ def orchestrate(a):
     except Exception:
         n_gpu = 1
     n_gpu = min(n_gpu, a.gpus) if a.gpus else n_gpu
-    queue = sorted([(s, u) for s in a.seeds for u in UNITS], key=lambda su: -RUN_COST[su[1]])
+    queue = sorted([(s, u) for s in a.seeds for u in a.units], key=lambda su: -RUN_COST[su[1]])
     running, t0 = {}, time.time()
     os.makedirs(os.path.join(a.out, "logs"), exist_ok=True)
     while queue or running:
@@ -214,6 +214,7 @@ def main():
     ap.add_argument("--unit", default="baselines", choices=list(UNITS))
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--seeds", type=int, nargs="*", default=[0, 1, 2])
+    ap.add_argument("--units", nargs="*", default=list(UNITS), choices=list(UNITS), help="resume aid: run only these units")
     ap.add_argument("--ft-epochs", type=int, default=10)
     ap.add_argument("--pt-epochs", type=int, default=3)
     ap.add_argument("--batch-size", type=int, default=96)

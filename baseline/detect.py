@@ -21,8 +21,8 @@ from baseline import cv
 
 RELEASED = {"released_bpe50k": "bpe_50000_torch.model", "released_ws50k": "whitespace_50000_torch.model",
             "released_ws50k_legacy": "whitespace_50000_torch.model"}      # same weights, legacy cleaning (see preprocess.py)
-MAIN_PLAN = [("bpe50k", "time"), ("ws50k", "time"), ("bpe50k", "batches"), ("ws50k", "batches"),
-             ("ws50k_legacy", "time"), ("ws50k_legacy", "batches")]
+PLANS = {"main": [("bpe50k", "time"), ("ws50k", "time"), ("bpe50k", "batches"), ("ws50k", "batches")],
+         "legacy": [("ws50k_legacy", "time"), ("ws50k_legacy", "batches")]}      # needs the arrays from the second preprocessing job
 
 
 def load_data(tokens, variant):
@@ -61,6 +61,9 @@ def run_released(a):
     os.makedirs(out, exist_ok=True)
     allres = {"nebula": nb, "env": C.env_info()}
     for variant, fname in RELEASED.items():
+        if not os.path.exists(os.path.join(tokens, "variants", variant, "x_test.npy")):
+            print(f"[{variant}] token arrays not available (yet): skipped", flush=True)
+            continue
         x, y, xt, yt, splits, vocab = load_data(tokens, variant)
         model = TransformerEncoderChunks(**cv.model_config(len(vocab)))
         model.load_state_dict(torch.load(os.path.join(nb["nebula_root"], "nebula", "objects", fname), weights_only=True))
@@ -83,7 +86,9 @@ def orchestrate(a):
     except Exception:
         n_gpu = 1
     n_gpu = min(n_gpu, a.gpus) if a.gpus else n_gpu
-    jobs = [["--variant", v, "--regime", r, "--seed", str(s)] for s in a.seeds for v, r in MAIN_PLAN] + [["--released"]]
+    tokens = a.tokens or C.find_dir_with("labels.npz")
+    plan = [(v, r) for v, r in PLANS[a.plan] if os.path.exists(os.path.join(tokens, "variants", v, "x_test.npy"))]
+    jobs = [["--variant", v, "--regime", r, "--seed", str(s)] for s in a.seeds for v, r in plan] + [["--released"]]
     running, queue, t0 = {}, list(jobs), time.time()
     os.makedirs(os.path.join(a.out, "logs"), exist_ok=True)
     while queue or running:
@@ -109,7 +114,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tokens", default=None)
     ap.add_argument("--out", required=True)
-    ap.add_argument("--plan", default=None, choices=[None, "main"])
+    ap.add_argument("--plan", default=None, choices=[None, "main", "legacy"])
     ap.add_argument("--variant", default="bpe50k", choices=["bpe50k", "ws50k", "ws50k_legacy"])
     ap.add_argument("--regime", default="time", choices=["time", "batches"])
     ap.add_argument("--released", action="store_true")

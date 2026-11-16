@@ -39,7 +39,9 @@ def run_one(a):
 def orchestrate(a):
     import torch
     n_gpu = min(max(1, torch.cuda.device_count()), a.gpus or 99)
-    queue = [["--variant", v, "--regime", r] for v in ["bpe50k", "ws50k", "ws50k_legacy"] for r in ["time", "batches"]]
+    tokens = a.tokens or C.find_dir_with("labels.npz")
+    queue = [["--variant", v, "--regime", r] for v in ["bpe50k", "ws50k", "ws50k_legacy"] for r in ["time", "batches"]
+             if os.path.exists(os.path.join(tokens, "variants", v, "x_test.npy"))]       # the legacy arrays come from the second preprocessing job
     running, t0 = {}, time.time()
     os.makedirs(os.path.join(a.out, "logs"), exist_ok=True)
     while queue or running:

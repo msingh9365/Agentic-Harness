@@ -40,6 +40,11 @@ VARIANTS = {
     # released tokenizers (their files, no training): sanity check E
     "released_bpe50k": dict(kind="bpe", released=True, seq=512),
     "released_ws50k": dict(kind="whitespace", released=True, seq=512),
+    # LEGACY cleaning (ours, inferred): the released Whitespace vocabulary contains tokens like 'apiname', 'retval' and
+    # 'kernel32getprocaddress', i.e. it was built with punctuation deleted and the stopwords kept. The pinned repo's tokenizer
+    # does the opposite, and the released Whitespace model scores AUC 0.77 with it but 0.94 with the legacy cleaning (NOTES.md 4).
+    "ws50k_legacy": dict(kind="whitespace", vocab=50000, seq=512, legacy=True),
+    "released_ws50k_legacy": dict(kind="whitespace", released=True, legacy=True, seq=512),
     # ablations (paper Table 4, Table 6)
     "bpe5k": dict(kind="bpe", vocab=5000, seq=512),
     "bpe10k": dict(kind="bpe", vocab=10000, seq=512),
@@ -90,9 +95,27 @@ def _tok_common():
     return dict(cleanup_symbols=JSON_CLEANUP_SYMBOLS, stopwords=SPEAKEASY_TOKEN_STOPWORDS)
 
 
+def legacy_whitespace_class():
+    """OURS (inferred, not their code): their whitespace tokenizer with the cleaning that the released vocabulary implies:
+    the cleanup symbols become spaces, ALL other punctuation is deleted (so 'kernel32.getprocaddress' -> 'kernel32getprocaddress',
+    'api_name' -> 'apiname'), and no stopwords are removed."""
+    import string
+    from nebula.preprocessing import JSONTokenizerNaive
+
+    class LegacyWhitespaceTokenizer(JSONTokenizerNaive):
+        def clear_json_event(self, text):
+            text = str(text).lower()
+            for p in self.cleanup_symbols:
+                text = text.replace(p, " ")
+            return text.translate(str.maketrans("", "", string.punctuation))
+    return LegacyWhitespaceTokenizer
+
+
 def build_tokenizer(spec, nebula_root, model_path=None, vocab_file=None):
     """spec: a VARIANTS entry. model_path: the trained BPE .model / whitespace vocab .json to load (None = untrained)."""
     from nebula.preprocessing import JSONTokenizerBPE, JSONTokenizerNaive
+    if spec.get("legacy"):
+        JSONTokenizerNaive = legacy_whitespace_class()
     objs = os.path.join(nebula_root, "nebula", "objects")
     if spec.get("released"):
         if spec["kind"] == "bpe":

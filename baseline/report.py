@@ -52,9 +52,11 @@ def md(rows, header):
 def detection(res, out):
     txt = "## A. Detection (paper Table 7)\n\n"
     rows = []
-    for variant in ["bpe50k", "ws50k"]:
-        p = PAPER["table7"][variant]
-        rows.append([f"**paper**, Nebula {variant[:3].upper()}", p["batches"], p["tpr"], p["auc"], p["f1"], p["acc"], PAPER["val_f1"][variant], "Quadro T2000"])
+    for variant in ["bpe50k", "ws50k", "ws50k_legacy"]:
+        pk = variant.replace("_legacy", "")                                  # the paper has one Whitespace row
+        p = PAPER["table7"][pk]
+        if variant != "ws50k_legacy":
+            rows.append([f"**paper**, Nebula {'BPE' if variant == 'bpe50k' else 'Whitespace'}", p["batches"], p["tpr"], p["auc"], p["f1"], p["acc"], PAPER["val_f1"][pk], "Quadro T2000"])
         for regime in ["time", "batches"]:
             f = os.path.join(res, "detect", f"{variant}_{regime}_seed0", "metrics.json")
             if not os.path.exists(f):
@@ -62,7 +64,8 @@ def detection(res, out):
             m = jl(f)
             t, v = m["test_mean_std"], m["val_mean_std"]
             b = [r["batches_seen"] for r in m["folds"]]
-            rows.append([f"ours, {variant[:3].upper()} {'time-matched (5 min/fold)' if regime == 'time' else 'batch-matched'}",
+            name = {"bpe50k": "BPE", "ws50k": "WS (pinned-repo cleaning)", "ws50k_legacy": "WS (legacy cleaning)"}[variant]
+            rows.append([f"ours, {name} {'time-matched (5 min/fold)' if regime == 'time' else 'batch-matched'}",
                          f"{np.mean(b):.0f} ({min(b)}–{max(b)})", pm(t, "tpr@0.001"), pm(t, "auc"), pm(t, "f1@0.5"), pm(t, "acc@0.5"),
                          pm(v, "f1@0.5"), m["env"].get("gpu", "?")])
     txt += md(rows, ["run", "batches / fold", "test TPR @ FPR 1e-3", "test AUC", "test F1 (thr 0.5)", "test Acc (thr 0.5)", "val F1 (thr 0.5)", "GPU"])
@@ -70,7 +73,7 @@ def detection(res, out):
            "(`get_tpr_at_fpr`, the authors' function).\n\n"
     # secondary table: TPR at other FPRs
     rows = []
-    for variant in ["bpe50k", "ws50k"]:
+    for variant in ["bpe50k", "ws50k", "ws50k_legacy"]:
         for regime in ["time", "batches"]:
             f = os.path.join(res, "detect", f"{variant}_{regime}_seed0", "metrics.json")
             if os.path.exists(f):
@@ -83,7 +86,10 @@ def detection(res, out):
     if os.path.exists(f):
         r = jl(f)
         rows = []
-        for variant, name in [("released_bpe50k", "released Nebula BPE"), ("released_ws50k", "released Nebula Whitespace")]:
+        for variant, name in [("released_bpe50k", "released Nebula BPE"), ("released_ws50k", "released Nebula Whitespace, pinned-repo tokenizer"),
+                              ("released_ws50k_legacy", "released Nebula Whitespace, legacy cleaning (ours, inferred)")]:
+            if variant not in r:
+                continue
             t = r[variant]["test"]
             rows.append([name, f"{t['tpr@0.001']:.4f}", f"{t['auc']:.4f}", f"{t['f1@0.5']:.4f}", f"{t['acc@0.5']:.4f}",
                          f"{r[variant]['train_in_sample']['auc']:.4f}"])
@@ -100,13 +106,13 @@ def roc_plot(res, out, kind):
     os.makedirs(os.path.join(out, "plots"), exist_ok=True)
     fig, ax = plt.subplots(figsize=(6.4, 4.8))
     i = 0
-    for variant in ["bpe50k", "ws50k"]:
+    for variant in ["bpe50k", "ws50k", "ws50k_legacy"]:
         for regime in ["time", "batches"]:
             f = os.path.join(res, "detect", f"{variant}_{regime}_seed0", "metrics.json")
             if os.path.exists(f):
                 m = jl(f)
                 ax.plot(C.ROC_GRID, m["test_roc_mean"], color=COLORS[i], ls=STYLES[i], lw=2,
-                        label=f"{variant[:3].upper()} {'time' if regime == 'time' else 'batches'}-matched")
+                        label=f"{ {'bpe50k': 'BPE', 'ws50k': 'WS', 'ws50k_legacy': 'WS legacy cleaning'}[variant] } {'time' if regime == 'time' else 'batches'}-matched")
                 i += 1
     ax.axvline(1e-3, color="#898782", lw=1, ls=":")
     ax.set_xscale("log"); ax.set_xlim(1e-4, 1); ax.set_ylim(0, 1)
@@ -179,13 +185,14 @@ def ssl_section(res, out):
 # ----------------------------------------------------------------------------- C: classification
 def classify_section(res, out):
     rows = []
-    for variant in ["bpe50k", "ws50k"]:
-        rows.append([f"**paper**, {variant[:3].upper()}"] + [f"{v:.3f}" for v in PAPER["table9_f1"][variant]] + ["", ""])
+    for variant in ["bpe50k", "ws50k", "ws50k_legacy"]:
+        if variant != "ws50k_legacy":
+            rows.append([f"**paper**, {'BPE' if variant == 'bpe50k' else 'Whitespace'}"] + [f"{v:.3f}" for v in PAPER["table9_f1"][variant]] + ["", ""])
         for regime in ["time", "batches"]:
             f = os.path.join(res, "classify", f"classify_{variant}_{regime}_seed0", "metrics.json")
             if os.path.exists(f):
                 m = jl(f)
-                rows.append([f"ours, {variant[:3].upper()} {regime}-matched"] + [f"{v:.3f}" for v in m["test_f1_per_class_mean"]] +
+                rows.append([f"ours, {variant.replace('50k', '')} {regime}-matched"] + [f"{v:.3f}" for v in m["test_f1_per_class_mean"]] +
                             [pm(m["test_mean_std"], "f1_macro", 3), pm(m["test_mean_std"], "acc", 3)])
     if len(rows) <= 2:
         return ""

@@ -39,7 +39,7 @@ def run_one(a):
 def orchestrate(a):
     import torch
     n_gpu = min(max(1, torch.cuda.device_count()), a.gpus or 99)
-    queue = [["--variant", v, "--regime", r] for v in ["bpe50k", "ws50k"] for r in ["time", "batches"]]
+    queue = [["--variant", v, "--regime", r] for v in ["bpe50k", "ws50k", "ws50k_legacy"] for r in ["time", "batches"]]
     running, t0 = {}, time.time()
     os.makedirs(os.path.join(a.out, "logs"), exist_ok=True)
     while queue or running:
@@ -65,7 +65,7 @@ def main():
     ap.add_argument("--tokens", default=None)
     ap.add_argument("--out", required=True)
     ap.add_argument("--plan", default=None, choices=[None, "main"])
-    ap.add_argument("--variant", default="bpe50k", choices=["bpe50k", "ws50k"])
+    ap.add_argument("--variant", default="bpe50k", choices=["bpe50k", "ws50k", "ws50k_legacy"])
     ap.add_argument("--regime", default="time", choices=["time", "batches"])
     ap.add_argument("--time-budget", type=int, default=cv.PAPER["time_budget"])
     ap.add_argument("--seed", type=int, default=0)

@@ -19,8 +19,10 @@ import numpy as np
 from baseline import common as C
 from baseline import cv
 
-RELEASED = {"released_bpe50k": "bpe_50000_torch.model", "released_ws50k": "whitespace_50000_torch.model"}
-MAIN_PLAN = [("bpe50k", "time"), ("ws50k", "time"), ("bpe50k", "batches"), ("ws50k", "batches")]
+RELEASED = {"released_bpe50k": "bpe_50000_torch.model", "released_ws50k": "whitespace_50000_torch.model",
+            "released_ws50k_legacy": "whitespace_50000_torch.model"}      # same weights, legacy cleaning (see preprocess.py)
+MAIN_PLAN = [("bpe50k", "time"), ("ws50k", "time"), ("bpe50k", "batches"), ("ws50k", "batches"),
+             ("ws50k_legacy", "time"), ("ws50k_legacy", "batches")]
 
 
 def load_data(tokens, variant):
@@ -108,7 +110,7 @@ def main():
     ap.add_argument("--tokens", default=None)
     ap.add_argument("--out", required=True)
     ap.add_argument("--plan", default=None, choices=[None, "main"])
-    ap.add_argument("--variant", default="bpe50k", choices=["bpe50k", "ws50k"])
+    ap.add_argument("--variant", default="bpe50k", choices=["bpe50k", "ws50k", "ws50k_legacy"])
     ap.add_argument("--regime", default="time", choices=["time", "batches"])
     ap.add_argument("--released", action="store_true")
     ap.add_argument("--time-budget", type=int, default=cv.PAPER["time_budget"])

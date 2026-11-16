@@ -107,3 +107,22 @@ def test_reused_tokenizer_and_other_sequence_lengths(sample, sorted_listdir, tmp
         assert (np.load(b + f"/x_train_len{n}.npy") == x512[:, :n]).all()
     x1024 = np.load(b + "/x_train_len1024.npy")
     assert x1024.shape[1] == 1024 and (x1024[:, :512] == x512).all()
+
+
+def test_legacy_whitespace_cleaning_matches_the_released_vocabulary_conventions():
+    """The released Whitespace vocabulary has 'apiname', 'retval', 'kernel32getprocaddress' and keeps 'args', 'event', 'path'
+    (punctuation deleted, stopwords kept). The pinned repo's tokenizer produces 'api name' ... 'kernel32 getprocaddress'."""
+    import json
+    spec = P.VARIANTS["released_ws50k_legacy"]
+    legacy = P.build_tokenizer(spec, INFO["nebula_root"])
+    pinned = P.build_tokenizer(P.VARIANTS["released_ws50k"], INFO["nebula_root"])
+    rep = {"file_access": [{"event": "open", "path": "<drive>\\windows\\x.dll"}],
+           "apis": [{"api_name": "KERNEL32.GetProcAddress", "args": ["0x0"], "ret_val": "0x10"}]}
+    tl, tp = legacy.tokenize(rep), pinned.tokenize(rep)       # a dict gives a flat token list
+    assert "kernel32getprocaddress" in tl and "apiname" in tl and "args" in tl and "retval" in tl and "event" in tl
+    assert "kernel32getprocaddress" not in tp and "kernel32" in tp and "getprocaddress" in tp and "args" not in tp
+    vocab = json.load(open(os.path.join(INFO["nebula_root"], "nebula", "objects", "whitespace_50000_vocab.json")))
+    assert all(t in vocab for t in ("apiname", "retval", "args", "kernel32getprocaddress"))
+    # the legacy cleaning leaves fewer tokens unknown to the released vocabulary than the pinned one
+    unk = lambda tok: float(np.mean([t not in vocab for t in tok.tokenize(rep)]))
+    assert unk(legacy) <= unk(pinned)

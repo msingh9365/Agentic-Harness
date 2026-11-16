@@ -19,7 +19,7 @@ import numpy as np
 from baseline import common as C
 
 PAPER = dict(batch_size=96, lr=2.5e-4, weight_decay=1e-2, time_budget=300, folds=3)
-PAPER_BATCHES = {"bpe50k": 2116, "ws50k": 2159}
+PAPER_BATCHES = {"bpe50k": 2116, "ws50k": 2159, "ws50k_legacy": 2159}
 
 
 def model_config(vocab_size, maxlen=512, n_classes=1, chunk_size=64, dropout=0.3, pooling="flatten", **extra):

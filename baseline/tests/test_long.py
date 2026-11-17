@@ -150,3 +150,18 @@ def selfsup_pretrain(x, vocab, a):
     from baseline import selfsup
     C.set_seed(0)
     return selfsup.pretrain("ar", x, vocab, a, 0, "pre_ar_test")
+
+
+def test_bootstrap_helpers_agree_with_the_authors_tpr_function():
+    from baseline import long_stats as LS
+    rng = np.random.default_rng(0)
+    y = (rng.random(4000) < 0.5).astype(int)
+    z = rng.normal(size=4000) + 1.5 * y
+    m = C.binary_metrics(y, z, decision=0.0)
+    t3, t2 = LS.tprs_at(y, z)
+    assert abs(t3 - m["tpr@0.001"]) < 1e-12 and abs(t2 - m["tpr@0.01"]) < 1e-12
+    # a tiny bootstrap runs, the seed-average ensemble is used, and "resolved" is false for identical runs
+    runs = {n: {s: ({}, z + 0.0, {}) for s in LS.SEEDS} for n in ("upper", "lower", "x")}
+    res = LS.bootstrap(runs, y, ["upper", "lower", "x"], n_boot=20)
+    assert res["x"]["tpr@0.01"]["ens"]["vs_lower"]["resolved"] is False
+    assert res["x"]["tpr@0.01"]["ps"]["point"] == pytest.approx(t2)

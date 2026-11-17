@@ -8,7 +8,7 @@ authors' own code. The numbers and how they compare with the paper are in [`REPR
 | what | where | size |
 |---|---|---|
 | `manifest.json`, `load_baseline.py`, tokenizer files (`tokenizers/bpe50k`, `ws50k`, `bpe8k`) | this folder (git) | small |
-| AR-pre-trained encoders **before fine-tuning**, seeds 0 to 4 (`ssl/ar_pretrained_seed*.pt`) | this folder (git) | about 5 MB each |
+| AR-pre-trained encoders **before fine-tuning**, 3 epochs, seeds 0 to 4 (`ssl/ar_pretrained_seed*.pt`) and the **15-epoch** ones (`ssl/ar_pretrained_long_seed*.pt`, best epoch = 15) | this folder (git) | about 5 MB each |
 | Everything else: detection and classification fold models, all fine-tuned self-supervised models | private Kaggle dataset **`msingh9365/nebula-baseline-models`** (it also contains the files above, so one folder is enough) | about 0.8 GB |
 
 Point the loader at the folder that holds `manifest.json` and the weights:
@@ -29,7 +29,8 @@ p = m.score(report)                                 # report: list of entry poin
 
 c = load_baseline("classify/bpe50k/time/seed0/fold0")     # 8-class model: m.score(report) -> 8 probabilities
                                                     # order: clean, backdoor, coinminer, dropper, keylogger, ransomware, rat, trojan
-ar = load_baseline("ssl/ar_pretrained/seed0")       # the AR-pre-trained encoder with its LM head (no classifier)
+ar = load_baseline("ssl/ar_pretrained/seed0")       # the AR-pre-trained encoder (3 epochs) with its LM head (no classifier)
+ar15 = load_baseline("ssl/ar_pretrained_long/seed0") # the same, pre-trained 15 epochs (best validation LM loss)
 ar.next_token_logits(report)                        # [512, V] next-token logits (V = 8,193, the BPE-8k vocabulary)
 ```
 

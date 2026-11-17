@@ -75,6 +75,173 @@ Validation LM loss per pre-training epoch (a model that guesses uniformly starts
 | ar | 2 | 1.940 → 1.497 → 1.314 | 9.01 |
 
 
+## B2. Longer self-supervised pre-training (follow-up to B)
+
+Same tokens, seeds, 80/20 splits and fine-tuning as B (10 epochs on the labeled 20%); only the pre-training is longer (up to 15 epochs, early stop: patience 2, min delta 0.01 on the validation LM loss, best epoch restored). Upper bound, lower bound and the controls are the runs of B (not retrained). Logit-ranked TPR. 'best' = the epoch with the lowest validation LM loss.
+
+### Absolute numbers (mean ± std over seeds, April test set)
+
+| run | seeds | TPR@1e-3 (min–max) | same, literal float32 | TPR@1e-2 | AUC | F1 (0.5) |
+|---|---|---|---|---|---|---|
+| upper bound (100% supervised) | 5 | 0.387 ± 0.061 (0.293–0.469) | 0.000 ± 0.000 | 0.760 ± 0.011 | 0.9635 ± 0.0033 | 0.9085 ± 0.0027 |
+| lower bound (20% supervised) | 5 | 0.350 ± 0.069 (0.275–0.457) | 0.060 ± 0.119 | 0.622 ± 0.022 | 0.9456 ± 0.0071 | 0.8845 ± 0.0053 |
+| control: full attention, 100% | 5 | 0.424 ± 0.052 (0.333–0.491) | 0.000 ± 0.000 | 0.749 ± 0.037 | 0.9500 ± 0.0066 | 0.8757 ± 0.0118 |
+| control: full attention, 20% | 5 | 0.351 ± 0.057 (0.302–0.457) | 0.195 ± 0.160 | 0.658 ± 0.074 | 0.9422 ± 0.0150 | 0.8513 ± 0.0261 |
+| control: causal last-token, 20%, no pre-training | 5 | 0.392 ± 0.056 (0.305–0.460) | 0.392 ± 0.056 | 0.591 ± 0.040 | 0.9327 ± 0.0128 | 0.8521 ± 0.0275 |
+| AR last-token, 3 epochs (first run) | 5 | 0.420 ± 0.055 (0.326–0.494) | 0.420 ± 0.055 | 0.665 ± 0.041 | 0.9622 ± 0.0062 | 0.8862 ± 0.0160 |
+| AR flatten, 3 epochs (first run) | 5 | 0.358 ± 0.025 (0.324–0.395) | 0.000 ± 0.000 | 0.645 ± 0.026 | 0.9352 ± 0.0121 | 0.8452 ± 0.0194 |
+| MLM per-position, 3 epochs (first run) | 5 | 0.412 ± 0.057 (0.332–0.476) | 0.091 ± 0.183 | 0.669 ± 0.022 | 0.9578 ± 0.0026 | 0.8835 ± 0.0173 |
+| MLM authors' multi-hot, 3 epochs (first run) | 5 | 0.350 ± 0.034 (0.282–0.375) | 0.272 ± 0.138 | 0.648 ± 0.044 | 0.9505 ± 0.0063 | 0.8884 ± 0.0083 |
+| AR last-token, epoch 3 (long run) | 5 | 0.412 ± 0.043 (0.331–0.452) | 0.412 ± 0.043 | 0.670 ± 0.040 | 0.9599 ± 0.0045 | 0.8898 ± 0.0157 |
+| AR last-token, epoch 6 | 5 | 0.450 ± 0.036 (0.408–0.515) | 0.450 ± 0.036 | 0.677 ± 0.038 | 0.9614 ± 0.0042 | 0.8857 ± 0.0145 |
+| AR last-token, epoch 10 | 5 | 0.436 ± 0.036 (0.380–0.495) | 0.436 ± 0.036 | 0.657 ± 0.036 | 0.9622 ± 0.0059 | 0.8891 ± 0.0116 |
+| AR last-token, best epoch | 5 | 0.455 ± 0.035 (0.413–0.506) | 0.455 ± 0.035 | 0.651 ± 0.022 | 0.9622 ± 0.0056 | 0.8914 ± 0.0084 |
+| AR flatten, best epoch | 5 | 0.362 ± 0.094 (0.219–0.516) | 0.000 ± 0.000 | 0.653 ± 0.024 | 0.9416 ± 0.0103 | 0.8586 ± 0.0080 |
+| MLM per-position, best epoch | 5 | 0.424 ± 0.062 (0.335–0.497) | 0.000 ± 0.000 | 0.706 ± 0.044 | 0.9558 ± 0.0079 | 0.8906 ± 0.0079 |
+| MLM authors' multi-hot, best epoch | 5 | 0.330 ± 0.032 (0.283–0.377) | 0.258 ± 0.130 | 0.651 ± 0.049 | 0.9520 ± 0.0063 | 0.8904 ± 0.0138 |
+
+### Paired differences (same seed, same split) and bootstrap CIs
+
+Per-seed differences: mean ± std over the 5 seeds, and in how many seeds the difference is positive. **Bootstrap**: 95% CI over the April test reports (1,000 stratified resamples, same resample for every run and seed), in points of TPR; **resolved** = the CI excludes 0. Two statistics: **per-seed mean** = the mean over the 5 seeds of each seed's own TPR (matches the per-seed columns); **ensemble** = the TPR of the seed-averaged score (mean logit over the 5 seeds), i.e. a 5-model ensemble. The ensemble lifts the low-FPR TPR of every run, the lower bound most, so its differences are smaller (or of opposite sign) than the per-seed ones. The bootstrap measures test-set sampling noise only; the seed std measures training noise.
+
+**TPR@1e-3** (points; run − lower > 0 = better than the lower bound; upper − run > 0 = below the upper bound)
+
+| run | run − lower, per seed | CI, per-seed mean | CI, ensemble | upper − run, per seed | CI, per-seed mean | CI, ensemble |
+|---|---|---|---|---|---|---|
+| **upper bound** (reference) | +3.6 ± 6.0 (3/5 > 0) | +3.6 [-2.6, +11.5] not resolved | -1.7 [-9.9, +8.4] not resolved |  |  |  |
+| control: full attention, 100% | +7.3 ± 11.9 (4/5 > 0) | +7.3 [+3.5, +18.0] **resolved** | +7.3 [-2.0, +16.0] not resolved | -3.7 ± 9.4 | -3.7 [-12.8, +0.9] not resolved | -9.0 [-16.4, +5.3] not resolved |
+| control: full attention, 20% | +0.1 ± 5.5 (3/5 > 0) | +0.1 [-4.7, +4.7] not resolved | -3.4 [-5.6, +8.2] not resolved | +3.5 ± 4.1 | +3.5 [-1.9, +11.4] not resolved | +1.7 [-8.4, +9.4] not resolved |
+| control: causal last-token, 20%, no pre-training | +4.2 ± 11.6 (3/5 > 0) | +4.2 [+0.5, +10.7] **resolved** | +0.6 [-1.0, +5.3] not resolved | -0.6 ± 10.8 | -0.6 [-8.5, +6.7] not resolved | -2.4 [-11.3, +5.7] not resolved |
+| AR last-token, 3 epochs (first run) | +7.0 ± 8.2 (4/5 > 0) | +7.0 [+3.1, +12.7] **resolved** | +12.8 [+4.0, +16.1] **resolved** | -3.3 ± 8.7 | -3.3 [-10.1, +4.0] not resolved | -14.5 [-22.2, +0.5] not resolved |
+| AR flatten, 3 epochs (first run) | +0.7 ± 4.9 (3/5 > 0) | +0.7 [-4.0, +6.3] not resolved | +1.4 [-9.3, +13.1] not resolved | +2.9 ± 4.6 | +2.9 [-4.1, +11.5] not resolved | -3.1 [-14.9, +13.5] not resolved |
+| MLM per-position, 3 epochs (first run) | +6.2 ± 4.1 (5/5 > 0) | +6.2 [+2.4, +12.1] **resolved** | +8.0 [+1.1, +14.5] **resolved** | -2.6 ± 2.2 | -2.6 [-9.2, +3.9] not resolved | -9.7 [-16.1, +3.5] not resolved |
+| MLM authors' multi-hot, 3 epochs (first run) | -0.1 ± 5.1 (3/5 > 0) | -0.1 [-5.7, +7.1] not resolved | -6.0 [-10.6, +15.6] not resolved | +3.7 ± 5.3 | +3.7 [-2.9, +9.7] not resolved | +4.3 [-14.9, +12.4] not resolved |
+| AR last-token, epoch 3 (long run) | +6.2 ± 5.8 (4/5 > 0) | +6.2 [+2.7, +12.2] **resolved** | +8.0 [+3.5, +16.3] **resolved** | -2.6 ± 6.8 | -2.6 [-9.7, +4.4] not resolved | -9.7 [-18.1, +0.7] not resolved |
+| AR last-token, epoch 6 | +10.0 ± 5.0 (5/5 > 0) | +10.0 [+5.2, +14.5] **resolved** | +12.5 [+7.7, +16.0] **resolved** | -6.4 ± 4.5 | -6.4 [-12.3, +1.9] not resolved | -14.2 [-22.6, -4.8] **resolved** |
+| AR last-token, epoch 10 | +8.5 ± 5.8 (4/5 > 0) | +8.5 [+5.1, +12.9] **resolved** | +5.8 [+4.1, +9.8] **resolved** | -4.9 ± 4.7 | -4.9 [-11.0, +2.3] not resolved | -7.6 [-16.6, +1.1] not resolved |
+| AR last-token, best epoch | +10.5 ± 4.5 (5/5 > 0) | +10.5 [+6.9, +14.9] **resolved** | +4.9 [+3.2, +10.1] **resolved** | -6.9 ± 4.8 | -6.9 [-12.8, +1.0] not resolved | -6.7 [-15.6, +2.0] not resolved |
+| AR flatten, best epoch | +1.1 ± 8.1 (3/5 > 0) | +1.1 [-3.6, +7.4] not resolved | +5.5 [-3.8, +15.3] not resolved | +2.5 ± 7.2 | +2.5 [-5.4, +10.9] not resolved | -7.2 [-15.8, +8.0] not resolved |
+| MLM per-position, best epoch | +7.3 ± 9.5 (4/5 > 0) | +7.3 [+4.5, +12.9] **resolved** | +9.6 [+4.1, +20.1] **resolved** | -3.7 ± 9.9 | -3.7 [-10.6, +2.6] not resolved | -11.3 [-20.9, -3.4] **resolved** |
+| MLM authors' multi-hot, best epoch | -2.0 ± 5.5 (3/5 > 0) | -2.0 [-6.9, +7.5] not resolved | -7.5 [-11.1, +13.1] not resolved | +5.6 ± 5.9 | +5.6 [-2.9, +10.7] not resolved | +5.8 [-12.0, +13.0] not resolved |
+
+**TPR@1e-2** (points; run − lower > 0 = better than the lower bound; upper − run > 0 = below the upper bound)
+
+| run | run − lower, per seed | CI, per-seed mean | CI, ensemble | upper − run, per seed | CI, per-seed mean | CI, ensemble |
+|---|---|---|---|---|---|---|
+| **upper bound** (reference) | +13.8 ± 1.2 (5/5 > 0) | +13.8 [+12.5, +16.9] **resolved** | +7.1 [+4.2, +9.1] **resolved** |  |  |  |
+| control: full attention, 100% | +12.7 ± 3.2 (5/5 > 0) | +12.7 [+10.9, +15.9] **resolved** | +6.8 [+3.8, +9.2] **resolved** | +1.1 ± 3.2 | +1.1 [-0.5, +3.0] not resolved | +0.3 [-1.6, +1.8] not resolved |
+| control: full attention, 20% | +3.6 ± 9.0 (3/5 > 0) | +3.6 [+2.1, +6.8] **resolved** | +2.4 [-0.8, +4.5] not resolved | +10.2 ± 8.1 | +10.2 [+8.3, +12.2] **resolved** | +4.7 [+2.6, +7.2] **resolved** |
+| control: causal last-token, 20%, no pre-training | -3.1 ± 5.4 (2/5 > 0) | -3.1 [-4.6, +1.4] not resolved | -3.8 [-7.0, -0.9] **resolved** | +16.9 ± 4.6 | +16.9 [+13.7, +18.7] **resolved** | +10.9 [+8.2, +13.4] **resolved** |
+| AR last-token, 3 epochs (first run) | +4.2 ± 5.6 (3/5 > 0) | +4.2 [+2.7, +7.6] **resolved** | +1.7 [-1.8, +3.9] not resolved | +9.6 ± 4.7 | +9.6 [+7.5, +11.5] **resolved** | +5.3 [+3.4, +8.3] **resolved** |
+| AR flatten, 3 epochs (first run) | +2.3 ± 3.7 (4/5 > 0) | +2.3 [+0.9, +5.4] **resolved** | -2.0 [-5.0, +0.2] not resolved | +11.5 ± 3.0 | +11.5 [+9.5, +13.2] **resolved** | +9.0 [+7.0, +11.4] **resolved** |
+| MLM per-position, 3 epochs (first run) | +4.6 ± 2.1 (5/5 > 0) | +4.6 [+3.3, +7.9] **resolved** | +4.9 [+1.7, +7.0] **resolved** | +9.2 ± 2.1 | +9.2 [+7.3, +10.9] **resolved** | +2.1 [+0.1, +4.3] **resolved** |
+| MLM authors' multi-hot, 3 epochs (first run) | +2.5 ± 5.8 (4/5 > 0) | +2.5 [+1.1, +5.8] **resolved** | +1.5 [-1.1, +3.8] not resolved | +11.3 ± 5.1 | +11.3 [+9.2, +13.0] **resolved** | +5.6 [+3.1, +8.0] **resolved** |
+| AR last-token, epoch 3 (long run) | +4.7 ± 5.6 (4/5 > 0) | +4.7 [+2.9, +7.9] **resolved** | -2.2 [-5.5, +0.9] not resolved | +9.1 ± 4.8 | +9.1 [+6.9, +11.5] **resolved** | +9.3 [+6.0, +12.0] **resolved** |
+| AR last-token, epoch 6 | +5.4 ± 5.8 (4/5 > 0) | +5.4 [+3.7, +8.5] **resolved** | -1.2 [-4.5, +1.0] not resolved | +8.4 ± 4.8 | +8.4 [+6.6, +10.5] **resolved** | +8.2 [+6.1, +11.1] **resolved** |
+| AR last-token, epoch 10 | +3.5 ± 5.4 (3/5 > 0) | +3.5 [+1.6, +6.5] **resolved** | -1.2 [-4.7, +0.9] not resolved | +10.3 ± 4.4 | +10.3 [+8.5, +12.6] **resolved** | +8.3 [+6.3, +11.2] **resolved** |
+| AR last-token, best epoch | +2.8 ± 4.4 (3/5 > 0) | +2.8 [+0.2, +6.1] **resolved** | -5.9 [-8.7, -3.5] **resolved** | +11.0 ± 3.2 | +11.0 [+9.0, +14.4] **resolved** | +12.9 [+10.7, +14.8] **resolved** |
+| AR flatten, best epoch | +3.1 ± 2.3 (4/5 > 0) | +3.1 [+1.1, +6.2] **resolved** | -2.5 [-5.4, +0.0] not resolved | +10.7 ± 2.0 | +10.7 [+9.1, +13.0] **resolved** | +9.6 [+7.3, +11.4] **resolved** |
+| MLM per-position, best epoch | +8.3 ± 5.1 (5/5 > 0) | +8.3 [+7.1, +11.5] **resolved** | +5.9 [+3.1, +8.2] **resolved** | +5.5 ± 4.8 | +5.5 [+3.4, +7.2] **resolved** | +1.1 [-0.9, +2.9] not resolved |
+| MLM authors' multi-hot, best epoch | +2.9 ± 6.0 (4/5 > 0) | +2.9 [+1.3, +5.7] **resolved** | +1.1 [-1.6, +2.9] not resolved | +10.9 ± 5.5 | +10.9 [+9.2, +13.2] **resolved** | +6.0 [+4.0, +8.2] **resolved** |
+
+**AUC** (points, per seed)
+
+| run | run − lower | upper − run |
+|---|---|---|
+| **upper bound** (reference) | +1.79 ± 0.51 (5/5 > 0) |  |
+| control: full attention, 100% | +0.44 ± 1.22 (4/5 > 0) | +1.35 ± 0.80 |
+| control: full attention, 20% | -0.33 ± 1.11 (2/5 > 0) | +2.13 ± 1.31 |
+| control: causal last-token, 20%, no pre-training | -1.28 ± 0.87 (0/5 > 0) | +3.08 ± 1.03 |
+| AR last-token, 3 epochs (first run) | +1.67 ± 0.70 (5/5 > 0) | +0.13 ± 0.42 |
+| AR flatten, 3 epochs (first run) | -1.04 ± 1.47 (2/5 > 0) | +2.83 ± 1.39 |
+| MLM per-position, 3 epochs (first run) | +1.22 ± 0.80 (5/5 > 0) | +0.57 ± 0.52 |
+| MLM authors' multi-hot, 3 epochs (first run) | +0.49 ± 0.76 (4/5 > 0) | +1.30 ± 0.80 |
+| AR last-token, epoch 3 (long run) | +1.43 ± 0.60 (5/5 > 0) | +0.36 ± 0.49 |
+| AR last-token, epoch 6 | +1.58 ± 0.79 (5/5 > 0) | +0.21 ± 0.57 |
+| AR last-token, epoch 10 | +1.66 ± 0.88 (5/5 > 0) | +0.13 ± 0.80 |
+| AR last-token, best epoch | +1.66 ± 0.94 (5/5 > 0) | +0.13 ± 0.81 |
+| AR flatten, best epoch | -0.40 ± 1.73 (3/5 > 0) | +2.19 ± 1.30 |
+| MLM per-position, best epoch | +1.03 ± 1.03 (4/5 > 0) | +0.77 ± 0.99 |
+| MLM authors' multi-hot, best epoch | +0.64 ± 0.58 (5/5 > 0) | +1.15 ± 0.57 |
+
+Bootstrap point estimates and 95% CIs of the two bounds (TPR in %): upper bound (100% supervised): TPR@1e-3 per-seed mean 38.7 [32.7, 45.9], ensemble 44.3 [35.5, 52.6], TPR@1e-2 per-seed mean 76.0 [74.2, 78.0], ensemble 79.1 [77.0, 80.9]; lower bound (20% supervised): TPR@1e-3 per-seed mean 35.0 [30.2, 38.3], ensemble 46.0 [42.3, 47.7], TPR@1e-2 per-seed mean 62.2 [58.8, 64.0], ensemble 72.0 [69.6, 75.4].
+
+### Is the gain from pre-training or from the architecture? AR last-token against the same model without pre-training
+
+The AR last-token classifier is a causal full-attention model that reads the last non-pad token, not the chunked Nebula of the lower bound. Its architecture-matched lower bound is the same model fine-tuned on the same 20% **without** pre-training (extra control `lower_lasttoken`, seeds 0 to 4): TPR@1e-3 0.392 ± 0.056, TPR@1e-2 0.591 ± 0.040, AUC 0.9327 ± 0.0128. Differences (run − control), in points:
+
+| run | TPR@1e-3 per seed | bootstrap CI (per-seed mean) | TPR@1e-2 per seed | bootstrap CI (per-seed mean) | AUC per seed |
+|---|---|---|---|---|---|
+| AR last-token, 3 epochs (first run) | +2.7 ± 7.7 (4/5 > 0) | +2.7 [-2.9, +7.0] not resolved | +7.3 ± 7.0 (5/5 > 0) | +7.3 [+4.3, +9.1] **resolved** | +2.9 ± 0.9 (5/5 > 0) |
+| AR last-token, epoch 3 (long run) | +2.0 ± 8.8 (3/5 > 0) | +2.0 [-3.3, +6.8] not resolved | +7.9 ± 6.5 (5/5 > 0) | +7.9 [+4.4, +9.5] **resolved** | +2.7 ± 1.2 (5/5 > 0) |
+| AR last-token, epoch 6 | +5.8 ± 7.6 (3/5 > 0) | +5.8 [-0.2, +9.1] not resolved | +8.6 ± 5.6 (5/5 > 0) | +8.6 [+5.2, +9.9] **resolved** | +2.9 ± 1.4 (5/5 > 0) |
+| AR last-token, epoch 10 | +4.3 ± 7.5 (3/5 > 0) | +4.3 [-0.8, +7.4] not resolved | +6.6 ± 6.2 (5/5 > 0) | +6.6 [+3.1, +7.8] **resolved** | +2.9 ± 1.6 (5/5 > 0) |
+| AR last-token, best epoch | +6.3 ± 8.3 (4/5 > 0) | +6.3 [+0.9, +9.4] **resolved** | +5.9 ± 3.5 (5/5 > 0) | +5.9 [+1.9, +7.7] **resolved** | +2.9 ± 1.7 (5/5 > 0) |
+
+### Does longer pre-training help? Best epoch minus the 3-epoch run, same seed (points)
+
+Paired per seed (same split, same fine-tuning); mean ± std over the 5 seeds, and in how many seeds the difference is positive. 'Best epoch' is the epoch with the lowest validation LM loss (the authors' MLM stopped early, see below).
+
+| method | best epoch | TPR@1e-3 | TPR@1e-2 | AUC |
+|---|---|---|---|---|
+| AR last-token | 15–15 | +3.6 ± 7.8 (3/5 > 0) | -1.4 ± 3.6 (3/5 > 0) | -0.00 ± 1.13 (2/5 > 0) |
+| AR flatten | 15–15 | +0.4 ± 9.0 (3/5 > 0) | +0.8 ± 2.0 (4/5 > 0) | +0.64 ± 1.38 (4/5 > 0) |
+| MLM per-position (ours) | 15–15 | +1.1 ± 9.1 (2/5 > 0) | +3.7 ± 4.3 (4/5 > 0) | -0.20 ± 0.56 (2/5 > 0) |
+| MLM authors' multi-hot | 4–4 | -1.9 ± 2.4 (2/5 > 0) | +0.4 ± 1.2 (3/5 > 0) | +0.15 ± 0.63 (2/5 > 0) |
+
+### AR last-token: detection against pre-training length
+
+| AR pre-training epoch | seeds | TPR@1e-3 | TPR@1e-2 | AUC |
+|---|---|---|---|---|
+| 3 (first run) | 5 | 0.420 ± 0.055 | 0.665 ± 0.041 | 0.9622 ± 0.0062 |
+| 3 | 5 | 0.412 ± 0.043 | 0.670 ± 0.040 | 0.9599 ± 0.0045 |
+| 6 | 5 | 0.450 ± 0.036 | 0.677 ± 0.038 | 0.9614 ± 0.0042 |
+| 10 | 5 | 0.436 ± 0.036 | 0.657 ± 0.036 | 0.9622 ± 0.0059 |
+| best (epochs 15–15, mean 15.0) | 5 | 0.455 ± 0.035 | 0.651 ± 0.022 | 0.9622 ± 0.0056 |
+
+lower bound: TPR@1e-3 0.350 ± 0.069, TPR@1e-2 0.622 ± 0.022, AUC 0.9456 ± 0.0071.
+
+upper bound: TPR@1e-3 0.387 ± 0.061, TPR@1e-2 0.760 ± 0.011, AUC 0.9635 ± 0.0033.
+
+![AR epochs curve](plots/ar_epochs_curve.png)
+
+### Check: epoch 3 of the long run against the first run
+
+Same procedure (same seed, split, RNG order); GPU kernels are not deterministic, so exact equality is not expected.
+
+| seed | val LM loss ep 3 (first) | (long) | TPR@1e-3 (first) | (long) | TPR@1e-2 (first) | (long) | AUC (first) | (long) |
+|---|---|---|---|---|---|---|---|---|
+| 0 | 1.3677 | 1.3673 | 0.326 | 0.331 | 0.616 | 0.603 | 0.9531 | 0.9572 |
+| 1 | 1.3706 | 1.3721 | 0.494 | 0.433 | 0.672 | 0.678 | 0.9652 | 0.9666 |
+| 2 | 1.3141 | 1.3223 | 0.433 | 0.406 | 0.698 | 0.714 | 0.9584 | 0.9534 |
+| 3 | 1.3403 | 1.3405 | 0.442 | 0.438 | 0.717 | 0.703 | 0.9632 | 0.9624 |
+| 4 | 1.3064 | 1.3083 | 0.404 | 0.452 | 0.619 | 0.650 | 0.9713 | 0.9598 |
+
+### Pre-training runs
+
+| method | seed | epochs run | best epoch | stopped early | val loss, epoch 1 | last epoch | lowest | minutes |
+|---|---|---|---|---|---|---|---|---|
+| AR | 0 | 15 | 15 | no (reached the maximum) | 1.985 | 0.904 | 0.904 | 32 |
+| AR | 1 | 15 | 15 | no (reached the maximum) | 1.953 | 0.917 | 0.917 | 32 |
+| AR | 2 | 15 | 15 | no (reached the maximum) | 1.942 | 0.839 | 0.839 | 32 |
+| AR | 3 | 15 | 15 | no (reached the maximum) | 1.928 | 0.896 | 0.896 | 32 |
+| AR | 4 | 15 | 15 | no (reached the maximum) | 1.940 | 0.857 | 0.857 | 32 |
+| MLM per-position | 0 | 15 | 15 | no (reached the maximum) | 4.096 | 2.992 | 2.992 | 25 |
+| MLM per-position | 1 | 15 | 15 | no (reached the maximum) | 4.108 | 2.959 | 2.959 | 25 |
+| MLM per-position | 2 | 15 | 15 | no (reached the maximum) | 4.092 | 2.947 | 2.947 | 25 |
+| MLM per-position | 3 | 15 | 15 | no (reached the maximum) | 4.078 | 2.956 | 2.956 | 25 |
+| MLM per-position | 4 | 15 | 15 | no (reached the maximum) | 4.106 | 2.939 | 2.939 | 25 |
+| MLM authors' | 0 | 6 | 4 | yes | 134.738 | 129.601 | 129.243 | 5 |
+| MLM authors' | 1 | 6 | 4 | yes | 129.558 | 124.568 | 123.801 | 5 |
+| MLM authors' | 2 | 6 | 4 | yes | 137.507 | 132.723 | 132.119 | 5 |
+| MLM authors' | 3 | 6 | 4 | yes | 133.439 | 128.071 | 127.628 | 5 |
+| MLM authors' | 4 | 6 | 4 | yes | 136.187 | 131.282 | 130.502 | 5 |
+
+![LM loss curves](plots/lm_loss_curves.png)
+
+![Fig 6 long](plots/fig6_long.png)
+
+
 ## C. Type classification (paper Table 9; "Table 12b" in the journal numbering)
 
 | run | clean | backdoor | coinminer | dropper | keylogger | ransomware | rat | trojan | macro F1 | accuracy |

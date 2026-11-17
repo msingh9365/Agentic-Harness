@@ -150,6 +150,9 @@ Kaggle limits: about 12 h per session, about 30 GPU-hours per week.
 | 2026-11-16 | nebula-detect, nebula-detect-seeds | T4 x2 | see below | detection (BPE and Whitespace, time- and batch-matched, seeds 0 to 2), released checkpoints |
 | 2026-11-16 | nebula-ssl, nebula-ssl-more | T4 x2 | see below | self-supervised, seeds 0 to 2 and 3 to 4 |
 | 2026-11-16 | nebula-rest | T4 x2 | see below | legacy Whitespace detection, classification, ablations |
+| 2026-11-17 | nebula-ssl-long-ar (v1 failed after about 3 min: packaging; v2) | T4 x2 | 4.57 (incl. the failed attempt) | B2: AR pre-training up to 15 epochs + fine-tuning from epochs 3, 6, 10, best, 5 seeds |
+| 2026-11-17 | nebula-ssl-long-mlm | T4 x2 | 2.08 | B2: per-position MLM, authors' MLM, AR flatten from the best AR checkpoint, 5 seeds |
+| 2026-11-17 | nebula-ssl-long-ctrl | T4 x2 | 0.21 | B2 extra control: causal last-token classifier without pre-training, 5 seeds |
 
 Per-kernel quota hours were not recorded. What was measured: the sum of per-model training seconds (detection 2.5 h, classification
 1.1 h, ablations 2.5 h, self-supervised fine-tuning 4.1 h, pre-training 1.2 h = **11.4 h of GPU compute**; the figures come from the
@@ -200,3 +203,10 @@ both GPUs for the whole session**, so the quota cost is 2 × wall time, not the 
 Results: all 5 seeds ran the full 15 epochs (the validation LM loss was still falling, 0.84 to 0.92 at epoch 15; early stopping never triggered), so "best" = epoch 15.
 Epoch 3 of the long run reproduces the first run: validation LM loss at epoch 3 agrees to ±0.01 for every seed, and AR last-token TPR@1e-3 is 0.412 against 0.420
 (per-seed difference −0.8 ± 3.6 points), i.e. within noise.
+
+**Measured, kernel 2 (`nebula-ssl-long-mlm`: AR flatten from the best AR checkpoint, per-position MLM, authors' MLM; 5 seeds each) and the extra control.**
+Kernel 2: 102 min wall, quota 15.42 h → 17.50 h (**+2.08 h**). The per-position MLM ran all 15 epochs (25 min per seed, best epoch 15); the authors' MLM stopped early in
+every seed (6 epochs run, best epoch 4, 5 min per seed). Extra control, not in the original plan (`nebula-ssl-long-ctrl`, unit `lasttoken_control`: the causal last-token classifier
+fine-tuned on the labeled 20% without pre-training, the architecture-matched lower bound of the AR last-token runs): about 12 min wall, 17.50 h → 17.71 h (**+0.21 h**).
+**Follow-up total: 17.71 − 10.85 = 6.86 h of quota** (limit set for this follow-up: 15 h). The estimate above (about 9 h) was an upper bound: the authors' MLM stopped early and the control was cheap.
+Quota after the follow-up: **17.71 h used, 12.29 h left** (resets 2026-11-21). Results and the answer to the question: REPRODUCTION_REPORT.md §5.2b and §6.5.

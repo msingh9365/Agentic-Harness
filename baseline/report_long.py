@@ -124,6 +124,22 @@ def section(first, long, out, bootstrap_path=None):
                 f"seeds 0 to 4): TPR@1e-3 {v('tpr@0.001')}, TPR@1e-2 {v('tpr@0.01')}, AUC {v('auc')}. Differences (run − control), in points:\n\n")
         txt += md(ctrl_rows, ["run", "TPR@1e-3 per seed", "bootstrap CI (per-seed mean)", "TPR@1e-2 per seed", "bootstrap CI (per-seed mean)", "AUC per seed"]) + "\n"
 
+    # ---- the effect of pre-training length: long (best epoch) minus the 3-epoch run of the first run, same seed
+    rows = []
+    for long_run, short_run, lab in (("ar_lasttoken_best", "ar_lasttoken_3ep", "AR last-token"), ("ar_flatten_best", "ar_flatten_3ep", "AR flatten"),
+                                     ("mlm_bert_best", "mlm_bert_3ep", "MLM per-position (ours)"), ("mlm_theirs_best", "mlm_theirs_3ep", "MLM authors' multi-hot")):
+        if long_run not in runs or short_run not in runs:
+            continue
+        pr = S.paired(runs, long_run, short_run)
+        eps = [runs[long_run][s][2].get("pretrain_epoch") for s in sorted(runs[long_run])]
+        rows.append([lab, f"{min(eps)}–{max(eps)}"] + [f"{100 * pr[k]['mean']:+.1f} ± {100 * pr[k]['std']:.1f} ({pr[k]['n_positive']}/{pr[k]['n']} > 0)" for k in ("tpr@0.001", "tpr@0.01")]
+                    + [f"{100 * pr['auc']['mean']:+.2f} ± {100 * pr['auc']['std']:.2f} ({pr['auc']['n_positive']}/{pr['auc']['n']} > 0)"])
+    if rows:
+        txt += ("### Does longer pre-training help? Best epoch minus the 3-epoch run, same seed (points)\n\n"
+                "Paired per seed (same split, same fine-tuning); mean ± std over the 5 seeds, and in how many seeds the difference is positive. "
+                "'Best epoch' is the epoch with the lowest validation LM loss (the authors' MLM stopped early, see below).\n\n")
+        txt += md(rows, ["method", "best epoch", "TPR@1e-3", "TPR@1e-2", "AUC"]) + "\n"
+
     # ---- AR epoch curve table
     rows = []
     for k, n in ((3, "ar_lasttoken_ep3"), (6, "ar_lasttoken_ep6"), (10, "ar_lasttoken_ep10"), ("best", "ar_lasttoken_best")):

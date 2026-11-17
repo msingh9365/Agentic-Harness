@@ -31,6 +31,8 @@ RECIPES = {
     "R1_lr1e-3": dict(BASE, lr=1e-3),                                        # H5: weight norms say the authors' training moved the weights about 5x further
     "R2_lr3e-4_clip1": dict(BASE, lr=3e-4, clip=1.0),                        # H4: the settings of the authors' research-branch CV script (run_tokenizer.py, Jan 2024)
     "R3_released_tok": dict(BASE, tok="released_bpe50k"),                    # H3: the released tokenizer
+    "R4_lr3e-3": dict(BASE, lr=3e-3),                                        # H5, further along the lr axis (R1 helped)
+    "R5_data_2of3": dict(BASE, n_train=50199),                               # H1 isolated: R0 on a random 2/3 of January (the size of one of our CV training folds)
 }
 FPRS = [1e-4, 3e-4, 1e-3, 3e-3, 1e-2, 3e-2, 1e-1]
 KEEP = ["auc", "f1@0.5", "acc@0.5"] + [f"tpr@{f:g}" for f in FPRS]
@@ -107,6 +109,8 @@ def run(a, recipe, seed):
         trn, val = r.permutation(trn)[:a.limit], r.permutation(val)[:max(40, a.limit // 4)]
         keep = r.permutation(len(x_test))[:300]
         x_test, y_test = x_test[keep], y_test[keep]
+    if cfg.get("n_train"):                                           # H1: train on fewer reports (random subset, seed-dependent, validation slice untouched)
+        trn = np.sort(np.random.default_rng(1000 + seed).permutation(trn)[:cfg["n_train"]])
     xt, yt, xv, yv = x_all[trn], y_all[trn], x_all[val], y_all[val]
     C.set_seed(seed)
     model = TransformerEncoderChunks(**cv.model_config(len(vocab), dropout=cfg["dropout"]))

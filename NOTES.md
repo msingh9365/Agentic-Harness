@@ -278,3 +278,10 @@ One change at a time against R0 (lr 2.5e-4, clip 0.5, dropout 0.3, batch 96, wd 
 Cost (T4: about 17 batches/s; 706 batches per epoch = 42 s, plus about 5 s of evaluation; 12 epochs = 9.4 min per run): one kernel with 2 recipes x 5 seeds = 10 runs = 5 per GPU = 47 min wall + 5 min set-up, charged for both GPUs: **about 1.7 h of quota**.
 Round 1a: R0 + R1 (1.7 h); round 1b: R2 + R3, or a refinement chosen from 1a (1.7 h); final training of the chosen recipe with 5 seeds and models saved (about 0.5 h); optional re-run of the B bounds with the v2 recipe (about 1 h).
 **Estimate 5 h, hard limit 8 h.** Quota before this follow-up: 17.71 h used, 12.29 h left (2026-11-17). Measured hours go in §8.
+
+**10.8 Round 1a result (validation only; kernel `nebula-gap-r1a`, R0 and R1, 5 seeds, 12 epochs, 47 min wall, quota 17.71 h → 18.51 h = +0.80 h; the 1.7 h estimate was too high).**
+R0 (our current recipe, 90% of January): validation TPR@1e-3 peaks at epochs 1 to 2 (0.75 / 0.79), then falls to about 0.6 at epochs 5 to 12; the validation loss is lowest at epoch 2 (0.099) and then rises steadily (0.30 at epoch 12): **the recipe over-trains
+after 2 epochs (H-A confirmed on validation)**. R1 (lr 1e-3): better at every epoch: epoch 2 val TPR@1e-3 0.867 ± 0.115, TPR@1e-2 0.984, AUC 0.9985, loss 0.065; it also over-trains later (TPR@1e-3 0.70 at epoch 12). R0 at epoch 3 (the same 2,116 batches as our old batch-matched
+2/3-data models) is 0.730 against 0.718 for those, so more data does not visibly help (H1 is tested directly by R5). The authors' own CV validation (0.85 to 0.92 at 1e-3, 0.97 at 1e-2) is matched by R1, not by R0. Validation TPR@1e-3 has a seed std of 0.04 to 0.19 (2 benign reports allowed), so
+recipe choices use TPR@1e-2, AUC and the validation loss next to it.
+Round 1b: R2 (lr 3e-4 + clip 1.0, the research-branch CV script), R3 (released tokenizer), R4 (lr 3e-3), R5 (R0 on a random 2/3 of January), 5 seeds, 8 epochs (everything peaks early).

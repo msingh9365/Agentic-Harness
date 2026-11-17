@@ -44,3 +44,4 @@ results/_models_big/
 !baseline_models/ssl/ar_pretrained_long_seed*.pt
 results/_long_*_raw/
 results/_gap_*_raw/
+results/_b3_*_raw/

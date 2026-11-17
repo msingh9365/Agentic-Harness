@@ -43,3 +43,4 @@ results/_models_big/
 !results/B_selfsup_long/y_test.npy
 !baseline_models/ssl/ar_pretrained_long_seed*.pt
 results/_long_*_raw/
+results/_gap_*_raw/

@@ -1,0 +1,11 @@
+/usr/local/lib/python3.13/dist-packages/unicorn/unicorn.py:6: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+WARNING:root: [!] Iniatialized TransformerEncoderChunks. Total trainable parameters: 5.3973e6
+ [*] Predicting batch: 0/182 [*] Predicting batch: 0/785[released_bpe50k] released weights on our April test set: TPR@1e-3 0.5171 AUC 0.9586 F1@0.5 0.8854 Acc 0.8857 | on January train: AUC 0.9981
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+WARNING:root: [!] Iniatialized TransformerEncoderChunks. Total trainable parameters: 5.3972e6
+ [*] Predicting batch: 0/182 [*] Predicting batch: 0/785[released_ws50k] released weights on our April test set: TPR@1e-3 0.0200 AUC 0.7401 F1@0.5 0.7554 Acc 0.6974 | on January train: AUC 0.7807
+[released_ws50k_legacy] token arrays not available (yet): skipped

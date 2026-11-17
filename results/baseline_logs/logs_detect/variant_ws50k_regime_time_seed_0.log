@@ -1,0 +1,109 @@
+[ws50k_time_seed0] x (75298, 512) test (17402, 512) vocab 50000 malware share train 0.672 test 0.540 | {'python': '3.13.16', 'platform': 'Linux-6.18.55+-x86_64-with-glibc2.39', 'cpus': 4, 'torch': '2.11.0+cu130', 'cuda_available': True, 'gpu': 'Tesla T4', 'gpu_count': 1, 'gpu_mem_gb': 14.6, 'numpy': '2.1.3', 'sklearn': '1.6.1', 'sentencepiece': '0.2.2', 'lightning': '2.6.6', 'torchmetrics': '1.9.0', 'pandas': '2.3.3'}
+/usr/local/lib/python3.13/dist-packages/unicorn/unicorn.py:6: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+WARNING:root: [!] Iniatialized TransformerEncoderChunks. Total trainable parameters: 5.3972e6
+WARNING:root: [*] Training time budget set: 5.0 min
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 10:32:47: Train Epoch: 1 [  0  / 523  (0 %)] | Loss: 0.764603 | Elapsed: 1.78s | FPR 0.0003 -> TPR: 0.01 & F1: 0.03 | AUC: 0.4622
+WARNING:root: [*] Mon Nov 16 10:33:17 2026:    1    | Tr.loss: 0.213345 | Elapsed:   32.30  s | FPR 0.0003 -> TPR: 0.37 & F1: 0.54 | AUC: 0.9685
+WARNING:root: [*] Started epoch: 2
+WARNING:root: [*] 10:33:17: Train Epoch: 2 [  0  / 523  (0 %)] | Loss: 0.113346 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 0.93 & F1: 0.96 | AUC: 0.9944
+WARNING:root: [*] Mon Nov 16 10:33:49 2026:    2    | Tr.loss: 0.069560 | Elapsed:   31.20  s | FPR 0.0003 -> TPR: 0.75 & F1: 0.86 | AUC: 0.9962
+WARNING:root: [*] Started epoch: 3
+WARNING:root: [*] 10:33:49: Train Epoch: 3 [  0  / 523  (0 %)] | Loss: 0.018728 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Mon Nov 16 10:34:21 2026:    3    | Tr.loss: 0.046051 | Elapsed:   32.10  s | FPR 0.0003 -> TPR: 0.79 & F1: 0.88 | AUC: 0.9983
+WARNING:root: [*] Started epoch: 4
+WARNING:root: [*] 10:34:21: Train Epoch: 4 [  0  / 523  (0 %)] | Loss: 0.083642 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 0.96 & F1: 0.98 | AUC: 0.9959
+WARNING:root: [*] Mon Nov 16 10:34:52 2026:    4    | Tr.loss: 0.036887 | Elapsed:   31.49  s | FPR 0.0003 -> TPR: 0.90 & F1: 0.95 | AUC: 0.9989
+WARNING:root: [*] Started epoch: 5
+WARNING:root: [*] 10:34:52: Train Epoch: 5 [  0  / 523  (0 %)] | Loss: 0.012279 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Mon Nov 16 10:35:24 2026:    5    | Tr.loss: 0.032005 | Elapsed:   31.41  s | FPR 0.0003 -> TPR: 0.91 & F1: 0.95 | AUC: 0.9992
+WARNING:root: [*] Started epoch: 6
+WARNING:root: [*] 10:35:24: Train Epoch: 6 [  0  / 523  (0 %)] | Loss: 0.013191 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Mon Nov 16 10:35:55 2026:    6    | Tr.loss: 0.027487 | Elapsed:   31.63  s | FPR 0.0003 -> TPR: 0.91 & F1: 0.95 | AUC: 0.9994
+WARNING:root: [*] Started epoch: 7
+WARNING:root: [*] 10:35:55: Train Epoch: 7 [  0  / 523  (0 %)] | Loss: 0.021578 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Mon Nov 16 10:36:27 2026:    7    | Tr.loss: 0.023220 | Elapsed:   31.38  s | FPR 0.0003 -> TPR: 0.96 & F1: 0.98 | AUC: 0.9996
+WARNING:root: [*] Started epoch: 8
+WARNING:root: [*] 10:36:27: Train Epoch: 8 [  0  / 523  (0 %)] | Loss: 0.007919 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Mon Nov 16 10:36:58 2026:    8    | Tr.loss: 0.020758 | Elapsed:   31.36  s | FPR 0.0003 -> TPR: 0.95 & F1: 0.97 | AUC: 0.9997
+WARNING:root: [*] Started epoch: 9
+WARNING:root: [*] 10:36:58: Train Epoch: 9 [  0  / 523  (0 %)] | Loss: 0.040378 | Elapsed: 0.08s | FPR 0.0003 -> TPR: 0.98 & F1: 0.99 | AUC: 0.9995
+WARNING:root: [*] Mon Nov 16 10:37:29 2026:    9    | Tr.loss: 0.019226 | Elapsed:   31.10  s | FPR 0.0003 -> TPR: 0.95 & F1: 0.98 | AUC: 0.9997
+WARNING:root: [*] Started epoch: 10
+WARNING:root: [*] 10:37:29: Train Epoch: 10 [  0  / 523  (0 %)] | Loss: 0.004231 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [!] Time budget exceeded, training stopped.
+ [*] Predicting batch: 0/262 [*] Predicting batch: 0/182[ws50k_time_seed0] fold 1/3: 4980 batches (9.52 epochs, 300s) | val tpr@0.001 0.0000 | test tpr@0.001 0.0000 | test auc 0.9555
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+WARNING:root: [!] Iniatialized TransformerEncoderChunks. Total trainable parameters: 5.3972e6
+WARNING:root: [*] Training time budget set: 5.0 min
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 10:37:51: Train Epoch: 1 [  0  / 523  (0 %)] | Loss: 0.673758 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.5346
+WARNING:root: [*] Mon Nov 16 10:38:23 2026:    1    | Tr.loss: 0.211853 | Elapsed:   31.81  s | FPR 0.0003 -> TPR: 0.37 & F1: 0.54 | AUC: 0.9689
+WARNING:root: [*] Started epoch: 2
+WARNING:root: [*] 10:38:23: Train Epoch: 2 [  0  / 523  (0 %)] | Loss: 0.161293 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 0.90 & F1: 0.95 | AUC: 0.9858
+WARNING:root: [*] Mon Nov 16 10:38:55 2026:    2    | Tr.loss: 0.070851 | Elapsed:   31.68  s | FPR 0.0003 -> TPR: 0.59 & F1: 0.74 | AUC: 0.9960
+WARNING:root: [*] Started epoch: 3
+WARNING:root: [*] 10:38:55: Train Epoch: 3 [  0  / 523  (0 %)] | Loss: 0.034718 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Mon Nov 16 10:39:26 2026:    3    | Tr.loss: 0.048852 | Elapsed:   31.71  s | FPR 0.0003 -> TPR: 0.76 & F1: 0.86 | AUC: 0.9981
+WARNING:root: [*] Started epoch: 4
+WARNING:root: [*] 10:39:27: Train Epoch: 4 [  0  / 523  (0 %)] | Loss: 0.088105 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 0.98 & F1: 0.99 | AUC: 0.9961
+WARNING:root: [*] Mon Nov 16 10:39:58 2026:    4    | Tr.loss: 0.038631 | Elapsed:   31.63  s | FPR 0.0003 -> TPR: 0.75 & F1: 0.85 | AUC: 0.9988
+WARNING:root: [*] Started epoch: 5
+WARNING:root: [*] 10:39:58: Train Epoch: 5 [  0  / 523  (0 %)] | Loss: 0.016967 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Mon Nov 16 10:40:30 2026:    5    | Tr.loss: 0.032320 | Elapsed:   31.64  s | FPR 0.0003 -> TPR: 0.84 & F1: 0.91 | AUC: 0.9991
+WARNING:root: [*] Started epoch: 6
+WARNING:root: [*] 10:40:30: Train Epoch: 6 [  0  / 523  (0 %)] | Loss: 0.036410 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 0.98 & F1: 0.99 | AUC: 0.9995
+WARNING:root: [*] Mon Nov 16 10:41:01 2026:    6    | Tr.loss: 0.026579 | Elapsed:   31.47  s | FPR 0.0003 -> TPR: 0.83 & F1: 0.91 | AUC: 0.9994
+WARNING:root: [*] Started epoch: 7
+WARNING:root: [*] 10:41:01: Train Epoch: 7 [  0  / 523  (0 %)] | Loss: 0.005765 | Elapsed: 0.05s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Mon Nov 16 10:41:33 2026:    7    | Tr.loss: 0.023269 | Elapsed:   31.72  s | FPR 0.0003 -> TPR: 0.89 & F1: 0.94 | AUC: 0.9996
+WARNING:root: [*] Started epoch: 8
+WARNING:root: [*] 10:41:33: Train Epoch: 8 [  0  / 523  (0 %)] | Loss: 0.003286 | Elapsed: 0.07s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Mon Nov 16 10:42:04 2026:    8    | Tr.loss: 0.021098 | Elapsed:   31.35  s | FPR 0.0003 -> TPR: 0.90 & F1: 0.95 | AUC: 0.9996
+WARNING:root: [*] Started epoch: 9
+WARNING:root: [*] 10:42:04: Train Epoch: 9 [  0  / 523  (0 %)] | Loss: 0.020339 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 0.99 & F1: 0.99 | AUC: 0.9995
+WARNING:root: [*] Mon Nov 16 10:42:36 2026:    9    | Tr.loss: 0.018458 | Elapsed:   31.60  s | FPR 0.0003 -> TPR: 0.91 & F1: 0.95 | AUC: 0.9997
+WARNING:root: [*] Started epoch: 10
+WARNING:root: [*] 10:42:36: Train Epoch: 10 [  0  / 523  (0 %)] | Loss: 0.006980 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [!] Time budget exceeded, training stopped.
+ [*] Predicting batch: 0/262 [*] Predicting batch: 0/182[ws50k_time_seed0] fold 2/3: 4974 batches (9.51 epochs, 300s) | val tpr@0.001 0.8930 | test tpr@0.001 0.5716 | test auc 0.9758
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+WARNING:root: [!] Iniatialized TransformerEncoderChunks. Total trainable parameters: 5.3972e6
+WARNING:root: [*] Training time budget set: 5.0 min
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 10:42:58: Train Epoch: 1 [  0  / 523  (0 %)] | Loss: 0.737507 | Elapsed: 0.07s | FPR 0.0003 -> TPR: 0.05 & F1: 0.10 | AUC: 0.5116
+WARNING:root: [*] Mon Nov 16 10:43:30 2026:    1    | Tr.loss: 0.216218 | Elapsed:   32.21  s | FPR 0.0003 -> TPR: 0.27 & F1: 0.42 | AUC: 0.9674
+WARNING:root: [*] Started epoch: 2
+WARNING:root: [*] 10:43:30: Train Epoch: 2 [  0  / 523  (0 %)] | Loss: 0.038615 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 0.98 & F1: 0.99 | AUC: 0.9996
+WARNING:root: [*] Mon Nov 16 10:44:02 2026:    2    | Tr.loss: 0.071758 | Elapsed:   32.16  s | FPR 0.0003 -> TPR: 0.58 & F1: 0.73 | AUC: 0.9959
+WARNING:root: [*] Started epoch: 3
+WARNING:root: [*] 10:44:02: Train Epoch: 3 [  0  / 523  (0 %)] | Loss: 0.023590 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Mon Nov 16 10:44:34 2026:    3    | Tr.loss: 0.050063 | Elapsed:   31.93  s | FPR 0.0003 -> TPR: 0.76 & F1: 0.86 | AUC: 0.9979
+WARNING:root: [*] Started epoch: 4
+WARNING:root: [*] 10:44:34: Train Epoch: 4 [  0  / 523  (0 %)] | Loss: 0.044230 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 0.97 & F1: 0.98 | AUC: 0.9990
+WARNING:root: [*] Mon Nov 16 10:45:05 2026:    4    | Tr.loss: 0.039512 | Elapsed:   31.47  s | FPR 0.0003 -> TPR: 0.74 & F1: 0.85 | AUC: 0.9987
+WARNING:root: [*] Started epoch: 5
+WARNING:root: [*] 10:45:05: Train Epoch: 5 [  0  / 523  (0 %)] | Loss: 0.004543 | Elapsed: 0.07s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Mon Nov 16 10:45:37 2026:    5    | Tr.loss: 0.033049 | Elapsed:   31.70  s | FPR 0.0003 -> TPR: 0.81 & F1: 0.89 | AUC: 0.9991
+WARNING:root: [*] Started epoch: 6
+WARNING:root: [*] 10:45:37: Train Epoch: 6 [  0  / 523  (0 %)] | Loss: 0.036496 | Elapsed: 0.05s | FPR 0.0003 -> TPR: 0.98 & F1: 0.99 | AUC: 0.9996
+WARNING:root: [*] Mon Nov 16 10:46:09 2026:    6    | Tr.loss: 0.027783 | Elapsed:   32.22  s | FPR 0.0003 -> TPR: 0.89 & F1: 0.94 | AUC: 0.9994
+WARNING:root: [*] Started epoch: 7
+WARNING:root: [*] 10:46:09: Train Epoch: 7 [  0  / 523  (0 %)] | Loss: 0.016697 | Elapsed: 0.07s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Mon Nov 16 10:46:41 2026:    7    | Tr.loss: 0.025155 | Elapsed:   31.66  s | FPR 0.0003 -> TPR: 0.79 & F1: 0.88 | AUC: 0.9995
+WARNING:root: [*] Started epoch: 8
+WARNING:root: [*] 10:46:41: Train Epoch: 8 [  0  / 523  (0 %)] | Loss: 0.007919 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Mon Nov 16 10:47:12 2026:    8    | Tr.loss: 0.022394 | Elapsed:   31.56  s | FPR 0.0003 -> TPR: 0.90 & F1: 0.95 | AUC: 0.9996
+WARNING:root: [*] Started epoch: 9
+WARNING:root: [*] 10:47:12: Train Epoch: 9 [  0  / 523  (0 %)] | Loss: 0.010570 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Mon Nov 16 10:47:44 2026:    9    | Tr.loss: 0.020021 | Elapsed:   31.51  s | FPR 0.0003 -> TPR: 0.88 & F1: 0.94 | AUC: 0.9997
+WARNING:root: [*] Started epoch: 10
+WARNING:root: [*] 10:47:44: Train Epoch: 10 [  0  / 523  (0 %)] | Loss: 0.022771 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [!] Time budget exceeded, training stopped.
+ [*] Predicting batch: 0/262 [*] Predicting batch: 0/182[ws50k_time_seed0] fold 3/3: 4941 batches (9.45 epochs, 300s) | val tpr@0.001 0.0000 | test tpr@0.001 0.0000 | test auc 0.9513
+[ws50k_time_seed0] TEST mean over folds: TPR@1e-3 0.1905 | AUC 0.9609 | F1@0.5 0.8985 | Acc 0.8987

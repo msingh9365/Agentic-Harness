@@ -1,0 +1,30 @@
+{
+ "note": "sha256 of int64(unlabeled) + int64(labeled) of splits.json ssl_80_20_stratified_by_family[seed]; splits.json sha256 3bc9eeff...1601 (dataset nebula-baseline-tokens v4); the long pre-training run asserts them",
+ "seeds": {
+  "0": {
+   "sha256": "91b0145395fe2b528e542c3324842f98",
+   "n_unlabeled": 60238,
+   "n_labeled": 15060
+  },
+  "1": {
+   "sha256": "8a945c3800f33a8de0862977cda2e193",
+   "n_unlabeled": 60238,
+   "n_labeled": 15060
+  },
+  "2": {
+   "sha256": "96e7ffdc7a9d2d0485121bcad495e29f",
+   "n_unlabeled": 60238,
+   "n_labeled": 15060
+  },
+  "3": {
+   "sha256": "a66aaa051a1f97a9b976d6d869a991c1",
+   "n_unlabeled": 60238,
+   "n_labeled": 15060
+  },
+  "4": {
+   "sha256": "3acc2e102a49ee02b77b03abed45554c",
+   "n_unlabeled": 60238,
+   "n_labeled": 15060
+  }
+ }
+}

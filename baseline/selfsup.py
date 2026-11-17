@@ -55,13 +55,14 @@ def predict_logits(w, x):
     return w.predict_lit_model(loader, return_logits=True).reshape(-1).float().numpy()
 
 
-def evaluate_and_save(w, model, x_test, y_test, run_dir, extra):
+def evaluate_and_save(w, model, x_test, y_test, run_dir, extra, save_model=True):
     import torch
     os.makedirs(run_dir, exist_ok=True)
     z = predict_logits(w, x_test)                                  # logits: tie-free ranking (see common.binary_metrics)
     m = C.binary_metrics(y_test, z, decision=0.0)
     np.save(os.path.join(run_dir, "test_logits.npy"), z.astype(np.float32))
-    torch.save(model.state_dict(), os.path.join(run_dir, "model.pt"))
+    if save_model:
+        torch.save(model.state_dict(), os.path.join(run_dir, "model.pt"))
     C.dump_json({"test": m, "test_p32": C.binary_metrics(y_test, C.sigmoid32(z)), **extra}, os.path.join(run_dir, "metrics.json"))
     print(f"  [{extra['run']}] TEST TPR@1e-3 {m['tpr@0.001']:.4f} | TPR@1e-2 {m['tpr@0.01']:.4f} | AUC {m['auc']:.4f} | F1@0.5 "
           f"{m['f1@0.5']:.4f} | {extra['train_seconds']:.0f}s", flush=True)
@@ -97,11 +98,14 @@ def pretrain(kind, x_unl, vocab, a, seed, tag):
         val_loader = trainer.create_dataloader(*lm.ar_tensors(xv), shuffle=False)
     else:
         raise ValueError(kind)
-    trainer.val_callback = lm.ValLossCallback(val_loader, patience=1)
+    cb = lm.ValLossCallback(val_loader, patience=getattr(a, "pt_patience", 1), min_delta=getattr(a, "min_delta", 1e-6),
+                            save_epochs=getattr(a, "save_epochs", ()), ckpt_dir=getattr(a, "ckpt_dir", None))
+    trainer.val_callback = cb
     t0 = time.time()
     trainer.pretrain(xp)
-    hist = {"epochs": trainer.val_callback.history, "seconds": time.time() - t0, "n_pretrain": int(len(xp)), "n_val": int(len(xv)),
-            "initial_loss_expected_ln_V": float(np.log(V))}
+    hist = {"epochs": cb.history, "seconds": time.time() - t0, "n_pretrain": int(len(xp)), "n_val": int(len(xv)),
+            "initial_loss_expected_ln_V": float(np.log(V)), "max_epochs": a.pt_epochs, "patience": cb.patience, "min_delta": cb.min_delta,
+            "best_epoch": cb.best_epoch, "stopped_early": cb.stopped_early}
     return {k: v.detach().cpu() for k, v in model.state_dict().items()}, hist
 
 

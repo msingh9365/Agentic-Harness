@@ -181,7 +181,7 @@ def test_selfsup_pipeline_end_to_end_on_cpu(tmp_path):
     base = tmp_path / "out" / "ssl" / "seed0"
     for run in ["upper", "lower", "mlm_theirs", "mlm_bert", "ar_flatten", "ar_lasttoken", "lower_fullattn", "upper_fullattn"]:
         m = json.load(open(base / run / "metrics.json"))
-        assert 0 <= m["test"]["auc"] <= 1 and (base / run / "test_probs.npy").exists()
+        assert 0 <= m["test"]["auc"] <= 1 and (base / run / "test_logits.npy").exists()
         if run in ("mlm_theirs", "mlm_bert", "ar_flatten", "ar_lasttoken"):
             wp = m["weight_proof"]
             assert wp["after_loading"]["dist_to_pretrained"] < 1e-6 < wp["before_loading"]["dist_to_pretrained"]

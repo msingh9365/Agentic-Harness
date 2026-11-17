@@ -14,6 +14,7 @@ Ours:   - ValLossCallback: per-epoch validation LM loss, early stopping, best-we
 """
 import copy
 import hashlib
+import os
 
 import numpy as np
 import torch
@@ -80,12 +81,17 @@ def _callback_base():
 
 class ValLossCallback(_callback_base()):
     """After every training epoch: validation LM loss on a held-out part of the unlabeled data. Early stopping when it has not
-    improved for `patience` epochs; the best weights are restored at the end of training (before their trainer saves them)."""
+    improved by at least `min_delta` for `patience` epochs; the best weights (lowest validation loss) are restored at the end of
+    training (before their trainer saves them). The defaults (patience 1, min_delta 1e-6) are what the 3-epoch run used.
+    Long pre-training: `save_epochs` + `ckpt_dir` save the model state dict at the end of those epochs (epoch<k>.pt)."""
 
-    def __init__(self, val_loader, patience=1):
+    def __init__(self, val_loader, patience=1, min_delta=1e-6, save_epochs=(), ckpt_dir=None):
         super().__init__()
-        self.val_loader, self.patience = val_loader, patience
-        self.history, self.best, self.best_state, self.bad = [], float("inf"), None, 0
+        self.val_loader, self.patience, self.min_delta = val_loader, patience, min_delta
+        self.save_epochs, self.ckpt_dir = set(save_epochs or ()), ckpt_dir
+        self.history, self.best, self.best_epoch, self.best_state, self.bad = [], float("inf"), None, None, 0
+        self.ref = float("inf")              # last loss that counted as a real improvement (>= min_delta better than the one before)
+        self.stopped_early = False
         self._sum, self._n = 0.0, 0
 
     def on_train_epoch_start(self, trainer, pl_module):
@@ -106,15 +112,22 @@ class ValLossCallback(_callback_base()):
             losses += loss.item() * len(batch[0]); n += len(batch[0])
         pl_module.train(was)
         val = losses / max(1, n)
-        self.history.append({"epoch": trainer.current_epoch + 1, "train_loss": self._sum / max(1, self._n), "val_loss": val})
-        print(f"  [LM] epoch {trainer.current_epoch + 1}: train loss {self.history[-1]['train_loss']:.4f} | val loss {val:.4f}", flush=True)
+        epoch = trainer.current_epoch + 1
+        self.history.append({"epoch": epoch, "train_loss": self._sum / max(1, self._n), "val_loss": val})
+        print(f"  [LM] epoch {epoch}: train loss {self.history[-1]['train_loss']:.4f} | val loss {val:.4f}", flush=True)
+        if epoch in self.save_epochs and self.ckpt_dir:
+            os.makedirs(self.ckpt_dir, exist_ok=True)
+            torch.save({k: v.detach().cpu() for k, v in pl_module.model.state_dict().items()}, os.path.join(self.ckpt_dir, f"epoch{epoch}.pt"))
         if val < self.best - 1e-6:
-            self.best, self.bad = val, 0
+            self.best, self.best_epoch = val, epoch
             self.best_state = copy.deepcopy({k: v.detach().cpu() for k, v in pl_module.model.state_dict().items()})
+        if val < self.ref - self.min_delta:
+            self.ref, self.bad = val, 0
         else:
             self.bad += 1
             if self.bad >= self.patience:
-                print(f"  [LM] validation loss did not improve for {self.patience} epoch(s): stopping early", flush=True)
+                print(f"  [LM] validation loss did not improve by {self.min_delta:g} for {self.patience} epoch(s): stopping early", flush=True)
+                self.stopped_early = True
                 trainer.should_stop = True
 
     def on_train_end(self, trainer, pl_module):

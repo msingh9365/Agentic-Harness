@@ -37,3 +37,7 @@ results/_gpu_smoke/
 results/baseline_raw*/
 results/_models_big/
 !baseline_models/ssl/ar_pretrained_seed*.pt
+# follow-up B2 / B: per-report test logits and the test labels, needed to recompute the bootstrap
+!results/B_selfsup/**/test_logits.npy
+!results/B_selfsup_long/**/test_logits.npy
+!results/B_selfsup_long/y_test.npy

@@ -1,17 +1,58 @@
 [seed 1/arflat] vocab 8193 | unlabeled 54214 labeled 13554 val 7530 test 17402 | split {'sha256': 'bffaec46a187f8bd09f588fd91d58e21', 'n_unlabeled': 54214, 'n_labeled': 13554, 'n_val': 7530} | tokens {'vocab_entries': 8193, 'trained_on_train': True, 'tokenizer_fit_reports': 67768, 'kind': 'bpe'} | {'python': '3.13.16', 'platform': 'Linux-6.18.55+-x86_64-with-glibc2.39', 'cpus': 4, 'torch': '2.11.0+cu130', 'cuda_available': True, 'gpu': 'Tesla T4', 'gpu_count': 1, 'gpu_mem_gb': 14.6, 'numpy': '2.1.3', 'sklearn': '1.6.1', 'sentencepiece': '0.2.2', 'lightning': '2.6.6', 'torchmetrics': '1.9.0', 'pandas': '2.3.3'} | {'nebula_root': '/tmp/nebula', 'nebula_commit': '1343ae170ef32b01a75d2dd5fb906b5541f073df', 'commit_is_pinned': True, 'patches_applied': True}
-Traceback (most recent call last):
-  File "<frozen runpy>", line 203, in _run_module_as_main
-  File "<frozen runpy>", line 88, in _run_code
-  File "/tmp/kcode/baseline/b3.py", line 304, in <module>
-    main()
-    ~~~~^^
-  File "/tmp/kcode/baseline/b3.py", line 300, in main
-    return orchestrate(a) if a.plan else run_unit(a)
-                                         ~~~~~~~~^^^
-  File "/tmp/kcode/baseline/b3.py", line 216, in run_unit
-    execute(a.unit, a, a.seed, x, y, xt, yt, vocab, unl, lab, val, split_info, out)
-    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/tmp/kcode/baseline/b3.py", line 170, in execute
-    assert os.path.exists(os.path.join(out, "pretrained_ar_v2.pt")), "arflat needs the AR pre-training of unit ar (use --import-from)"
-           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: arflat needs the AR pre-training of unit ar (use --import-from)
+  [ar] pre-training ran 6 epochs, best epoch 6, stopped early False, val LM loss [2.035, 1.544, 1.361, 1.251, 1.179, 1.124]
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+  [ar_flatten_lr0.002] fine-tuning starts from the epoch-6 pre-trained weights: encoder checksum 6b038edb59e5ce37 (distance 43.474 -> 0.0e+00)
+WARNING:root: [!] Iniatialized TransformerEncoderModel. Total trainable parameters: 2.7216e6
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 21:34:57: Train Epoch: 1 [  0  / 142  (0 %)] | Loss: 2.154139 | Elapsed: 1.92s | FPR 0.0003 -> TPR: 0.16 & F1: 0.28 | AUC: 0.5857
+WARNING:root: [*] Tue Nov 17 21:35:17 2026:    1    | Tr.loss: 1.331755 | Elapsed:   22.32  s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.8722
+WARNING:root: [*] Started epoch: 2
+  [ar_flatten_lr0.002] epoch 1: val TPR@1e-3 0.664 @1e-2 0.834 AUC 0.9841 loss 0.2237 | 30s
+WARNING:root: [*] 21:35:25: Train Epoch: 2 [  0  / 142  (0 %)] | Loss: 0.236438 | Elapsed: 7.41s | FPR 0.0003 -> TPR: 0.74 & F1: 0.85 | AUC: 0.9747
+WARNING:root: [*] Tue Nov 17 21:35:45 2026:    2    | Tr.loss: 0.196862 | Elapsed:   27.72  s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.9803
+WARNING:root: [*] Started epoch: 3
+  [ar_flatten_lr0.002] epoch 2: val TPR@1e-3 0.709 @1e-2 0.891 AUC 0.9921 loss 0.1529 | 58s
+WARNING:root: [*] 21:35:53: Train Epoch: 3 [  0  / 142  (0 %)] | Loss: 0.128726 | Elapsed: 7.68s | FPR 0.0003 -> TPR: 0.88 & F1: 0.94 | AUC: 0.9838
+WARNING:root: [*] Tue Nov 17 21:36:14 2026:    3    | Tr.loss: 0.159897 | Elapsed:   28.53  s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.9881
+WARNING:root: [*] Started epoch: 4
+  [ar_flatten_lr0.002] epoch 3: val TPR@1e-3 0.762 @1e-2 0.904 AUC 0.9929 loss 0.1290 | 86s
+WARNING:root: [*] 21:36:22: Train Epoch: 4 [  0  / 142  (0 %)] | Loss: 0.097803 | Elapsed: 7.95s | FPR 0.0003 -> TPR: 0.90 & F1: 0.95 | AUC: 0.9913
+WARNING:root: [*] Tue Nov 17 21:36:43 2026:    4    | Tr.loss: 0.125139 | Elapsed:   29.17  s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.9928
+WARNING:root: [*] Started epoch: 5
+  [ar_flatten_lr0.002] epoch 4: val TPR@1e-3 0.777 @1e-2 0.912 AUC 0.9932 loss 0.1532 | 116s
+WARNING:root: [*] 21:36:51: Train Epoch: 5 [  0  / 142  (0 %)] | Loss: 0.289614 | Elapsed: 7.88s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.9827
+WARNING:root: [*] Tue Nov 17 21:37:12 2026:    5    | Tr.loss: 0.105436 | Elapsed:   28.69  s | FPR 0.0003 -> TPR: 0.77 & F1: 0.87 | AUC: 0.9954
+WARNING:root: [*] Started epoch: 6
+  [ar_flatten_lr0.002] epoch 5: val TPR@1e-3 0.562 @1e-2 0.926 AUC 0.9937 loss 0.2208 | 144s
+WARNING:root: [*] 21:37:19: Train Epoch: 6 [  0  / 142  (0 %)] | Loss: 0.068926 | Elapsed: 7.78s | FPR 0.0003 -> TPR: 0.92 & F1: 0.96 | AUC: 0.9969
+WARNING:root: [*] Tue Nov 17 21:37:40 2026:    6    | Tr.loss: 0.119505 | Elapsed:   28.66  s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.9953
+  [ar_flatten_lr0.002] epoch 6: val TPR@1e-3 0.734 @1e-2 0.929 AUC 0.9944 loss 0.5008 | 173s
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+  [ar_flatten_lr0.001] fine-tuning starts from the epoch-6 pre-trained weights: encoder checksum 6b038edb59e5ce37 (distance 43.474 -> 0.0e+00)
+WARNING:root: [!] Iniatialized TransformerEncoderModel. Total trainable parameters: 2.7216e6
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 21:37:48: Train Epoch: 1 [  0  / 142  (0 %)] | Loss: 2.154139 | Elapsed: 0.15s | FPR 0.0003 -> TPR: 0.16 & F1: 0.28 | AUC: 0.5857
+WARNING:root: [*] Tue Nov 17 21:38:10 2026:    1    | Tr.loss: 0.843541 | Elapsed:   21.83  s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.8834
+WARNING:root: [*] Started epoch: 2
+  [ar_flatten_lr0.001] epoch 1: val TPR@1e-3 0.755 @1e-2 0.829 AUC 0.9804 loss 0.2133 | 30s
+WARNING:root: [*] 21:38:18: Train Epoch: 2 [  0  / 142  (0 %)] | Loss: 0.160424 | Elapsed: 7.92s | FPR 0.0003 -> TPR: 0.86 & F1: 0.93 | AUC: 0.9846
+WARNING:root: [*] Tue Nov 17 21:38:39 2026:    2    | Tr.loss: 0.180974 | Elapsed:   29.07  s | FPR 0.0003 -> TPR: 0.30 & F1: 0.47 | AUC: 0.9807
+WARNING:root: [*] Started epoch: 3
+  [ar_flatten_lr0.001] epoch 2: val TPR@1e-3 0.636 @1e-2 0.865 AUC 0.9904 loss 0.1820 | 59s
+WARNING:root: [*] 21:38:47: Train Epoch: 3 [  0  / 142  (0 %)] | Loss: 0.121482 | Elapsed: 7.91s | FPR 0.0003 -> TPR: 0.93 & F1: 0.97 | AUC: 0.9942
+WARNING:root: [*] Tue Nov 17 21:39:08 2026:    3    | Tr.loss: 0.128596 | Elapsed:   29.13  s | FPR 0.0003 -> TPR: 0.38 & F1: 0.55 | AUC: 0.9905
+WARNING:root: [*] Started epoch: 4
+  [ar_flatten_lr0.001] epoch 3: val TPR@1e-3 0.532 @1e-2 0.891 AUC 0.9932 loss 0.2026 | 88s
+WARNING:root: [*] 21:39:16: Train Epoch: 4 [  0  / 142  (0 %)] | Loss: 0.087129 | Elapsed: 7.94s | FPR 0.0003 -> TPR: 0.90 & F1: 0.95 | AUC: 0.9966
+WARNING:root: [*] Tue Nov 17 21:39:37 2026:    4    | Tr.loss: 0.104988 | Elapsed:   29.10  s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.9939
+WARNING:root: [*] Started epoch: 5
+  [ar_flatten_lr0.001] epoch 4: val TPR@1e-3 0.708 @1e-2 0.917 AUC 0.9944 loss 0.1219 | 117s
+WARNING:root: [*] 21:39:45: Train Epoch: 5 [  0  / 142  (0 %)] | Loss: 0.076156 | Elapsed: 7.91s | FPR 0.0003 -> TPR: 0.92 & F1: 0.96 | AUC: 0.9957
+WARNING:root: [*] Tue Nov 17 21:40:06 2026:    5    | Tr.loss: 0.101270 | Elapsed:   29.06  s | FPR 0.0003 -> TPR: 0.54 & F1: 0.70 | AUC: 0.9951
+WARNING:root: [*] Started epoch: 6
+  [ar_flatten_lr0.001] epoch 5: val TPR@1e-3 0.773 @1e-2 0.931 AUC 0.9946 loss 0.3596 | 146s
+WARNING:root: [*] 21:40:14: Train Epoch: 6 [  0  / 142  (0 %)] | Loss: 0.167956 | Elapsed: 7.91s | FPR 0.0003 -> TPR: 0.98 & F1: 0.99 | AUC: 0.9957
+WARNING:root: [*] Tue Nov 17 21:40:36 2026:    6    | Tr.loss: 0.083833 | Elapsed:   29.05  s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.9963
+  [ar_flatten_lr0.001] epoch 6: val TPR@1e-3 0.804 @1e-2 0.935 AUC 0.9954 loss 0.2039 | 175s

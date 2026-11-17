@@ -253,6 +253,8 @@ Same procedure (same seed, split, RNG order); GPU kernels are not deterministic,
 | control: causal last-token, 20%, no pre-training | 0.001 | 3 | 0.747 ± 0.032 (SE) | 0.916 | 0.9950 | 0.129 | 4 | none |
 | AR pre-training + last-token | 0.002 | 3 | 0.791 ± 0.028 (SE) | 0.927 | 0.9950 | 0.107 | 3 | none |
 | per-position MLM pre-training | 0.002 | 6 | 0.796 ± 0.020 (SE) | 0.928 | 0.9947 | 0.259 | 1 | none |
+| AR pre-training + flatten classifier | 0.001 | 6 | 0.804 ± 0.017 (SE) | 0.935 | 0.9951 | 0.205 | 1 | none |
+| the authors' multi-hot MLM pre-training | 0.001 | 3 | 0.731 ± 0.022 (SE) | 0.926 | 0.9948 | 0.131 | 2 | none |
 
 
 #### April test set at the chosen settings (logit-ranked; mean ± std over 5 seeds; bootstrap 95% CI of the per-seed mean)
@@ -264,6 +266,8 @@ Same procedure (same seed, split, RNG order); GPU kernels are not deterministic,
 | control: causal last-token, 20%, no pre-training | 0.412 ± 0.055 | [34.2, 43.8] | 0.650 ± 0.012 | [63.2, 66.5] | 0.9487 ± 0.0106 | 0.862 ± 0.013 | 0.412 ± 0.055 |
 | AR pre-training + last-token | 0.463 ± 0.072 | [43.4, 52.6] | 0.711 ± 0.051 | [69.4, 72.1] | 0.9617 ± 0.0038 | 0.887 ± 0.010 | 0.388 ± 0.223 |
 | per-position MLM pre-training | 0.404 ± 0.037 | [37.0, 45.2] | 0.696 ± 0.040 | [68.1, 71.1] | 0.9566 ± 0.0087 | 0.882 ± 0.019 | 0.000 ± 0.000 |
+| AR pre-training + flatten classifier | 0.407 ± 0.081 | [37.8, 47.7] | 0.681 ± 0.041 | [66.7, 69.7] | 0.9581 ± 0.0086 | 0.876 ± 0.017 | 0.000 ± 0.000 |
+| the authors' multi-hot MLM pre-training | 0.360 ± 0.127 | [32.0, 42.7] | 0.673 ± 0.032 | [64.7, 69.6] | 0.9548 ± 0.0055 | 0.890 ± 0.012 | 0.324 ± 0.193 |
 
 
 #### Paired per-seed differences in points (mean ± std over 5 seeds; positive in n of 5 seeds) and bootstrap 95% CI of the difference of the seed means
@@ -288,6 +292,18 @@ Same procedure (same seed, split, RNG order); GPU kernels are not deterministic,
 | upper − MLM | TPR@1e-3 | +11.8 ± 11.0 | 5/5 | +11.8 [+6.7, +16.0] **resolved** |
 | upper − MLM | TPR@1e-2 | +7.6 ± 2.7 | 5/5 | +7.6 [+6.5, +9.2] **resolved** |
 | upper − MLM | AUC | +1.00 ± 0.62 | 5/5 | +1.0 [+0.9, +1.1] **resolved** |
+| AR flatten − lower | TPR@1e-3 | +3.9 ± 10.4 | 2/5 | +3.9 [+0.0, +9.8] **resolved** |
+| AR flatten − lower | TPR@1e-2 | +1.6 ± 4.5 | 3/5 | +1.6 [+0.3, +2.9] **resolved** |
+| AR flatten − lower | AUC | +0.51 ± 1.34 | 3/5 | +0.5 [+0.4, +0.7] **resolved** |
+| MLM (authors') − lower | TPR@1e-3 | -0.8 ± 17.9 | 2/5 | -0.8 [-4.8, +4.7] not resolved |
+| MLM (authors') − lower | TPR@1e-2 | +0.7 ± 3.9 | 3/5 | +0.7 [-1.1, +2.4] not resolved |
+| MLM (authors') − lower | AUC | +0.18 ± 0.80 | 3/5 | +0.2 [+0.1, +0.3] **resolved** |
+| upper − AR flatten | TPR@1e-3 | +11.4 ± 12.2 | 4/5 | +11.4 [+5.5, +14.7] **resolved** |
+| upper − AR flatten | TPR@1e-2 | +9.1 ± 4.0 | 5/5 | +9.1 [+7.8, +10.9] **resolved** |
+| upper − AR flatten | AUC | +0.85 ± 0.87 | 4/5 | +0.8 [+0.7, +1.0] **resolved** |
+| upper − MLM (authors') | TPR@1e-3 | +16.1 ± 13.1 | 5/5 | +16.1 [+10.0, +20.0] **resolved** |
+| upper − MLM (authors') | TPR@1e-2 | +10.0 ± 3.6 | 5/5 | +10.0 [+8.3, +12.3] **resolved** |
+| upper − MLM (authors') | AUC | +1.18 ± 0.67 | 5/5 | +1.2 [+1.1, +1.3] **resolved** |
 
 
 (AUC differences are in points of AUC x 100.) Seed-ensemble flavour of the CI (mean logit over the 5 seeds) is in `bootstrap.json` (`ens`).
@@ -356,6 +372,30 @@ Same procedure (same seed, split, RNG order); GPU kernels are not deterministic,
 | per-position MLM pre-training | 0.001 | 4 | 0.393 ± 0.043 | 0.622 ± 0.029 | 0.9477 ± 0.0092 | 0.869 ± 0.016 |
 | per-position MLM pre-training | 0.001 | 5 | 0.400 ± 0.088 | 0.641 ± 0.081 | 0.9484 ± 0.0099 | 0.875 ± 0.019 |
 | per-position MLM pre-training | 0.001 | 6 | 0.357 ± 0.061 | 0.641 ± 0.035 | 0.9521 ± 0.0119 | 0.881 ± 0.022 |
+| AR pre-training + flatten classifier | 0.002 | 1 | 0.348 ± 0.063 | 0.536 ± 0.064 | 0.9039 ± 0.0767 | 0.813 ± 0.089 |
+| AR pre-training + flatten classifier | 0.002 | 2 | 0.337 ± 0.073 | 0.585 ± 0.068 | 0.9389 ± 0.0294 | 0.850 ± 0.049 |
+| AR pre-training + flatten classifier | 0.002 | 3 | 0.410 ± 0.033 | 0.624 ± 0.063 | 0.9442 ± 0.0215 | 0.853 ± 0.044 |
+| AR pre-training + flatten classifier | 0.002 | 4 | 0.357 ± 0.039 | 0.635 ± 0.059 | 0.9340 ± 0.0431 | 0.846 ± 0.060 |
+| AR pre-training + flatten classifier | 0.002 | 5 | 0.340 ± 0.126 | 0.648 ± 0.089 | 0.9523 ± 0.0184 | 0.875 ± 0.057 |
+| AR pre-training + flatten classifier | 0.002 | 6 | 0.378 ± 0.081 | 0.679 ± 0.053 | 0.9493 ± 0.0108 | 0.851 ± 0.042 |
+| AR pre-training + flatten classifier | 0.001 | 1 | 0.346 ± 0.075 | 0.522 ± 0.032 | 0.9341 ± 0.0057 | 0.825 ± 0.059 |
+| AR pre-training + flatten classifier | 0.001 | 2 | 0.358 ± 0.058 | 0.611 ± 0.027 | 0.9435 ± 0.0108 | 0.851 ± 0.031 |
+| AR pre-training + flatten classifier | 0.001 | 3 | 0.404 ± 0.064 | 0.691 ± 0.027 | 0.9540 ± 0.0062 | 0.880 ± 0.024 |
+| AR pre-training + flatten classifier | 0.001 | 4 | 0.427 ± 0.060 | 0.653 ± 0.036 | 0.9571 ± 0.0086 | 0.885 ± 0.021 |
+| AR pre-training + flatten classifier | 0.001 | 5 | 0.437 ± 0.074 | 0.673 ± 0.057 | 0.9567 ± 0.0109 | 0.864 ± 0.026 |
+| AR pre-training + flatten classifier | 0.001 | 6 | 0.407 ± 0.081 | 0.681 ± 0.041 | 0.9581 ± 0.0086 | 0.876 ± 0.017 |
+| the authors' multi-hot MLM pre-training | 0.002 | 1 | 0.282 ± 0.062 | 0.626 ± 0.055 | 0.9467 ± 0.0167 | 0.862 ± 0.039 |
+| the authors' multi-hot MLM pre-training | 0.002 | 2 | 0.311 ± 0.100 | 0.637 ± 0.052 | 0.9535 ± 0.0079 | 0.891 ± 0.011 |
+| the authors' multi-hot MLM pre-training | 0.002 | 3 | 0.379 ± 0.101 | 0.643 ± 0.045 | 0.9603 ± 0.0044 | 0.898 ± 0.007 |
+| the authors' multi-hot MLM pre-training | 0.002 | 4 | 0.366 ± 0.107 | 0.665 ± 0.051 | 0.9563 ± 0.0052 | 0.893 ± 0.012 |
+| the authors' multi-hot MLM pre-training | 0.002 | 5 | 0.394 ± 0.033 | 0.667 ± 0.024 | 0.9601 ± 0.0068 | 0.898 ± 0.006 |
+| the authors' multi-hot MLM pre-training | 0.002 | 6 | 0.308 ± 0.066 | 0.646 ± 0.057 | 0.9567 ± 0.0050 | 0.890 ± 0.008 |
+| the authors' multi-hot MLM pre-training | 0.001 | 1 | 0.300 ± 0.049 | 0.575 ± 0.059 | 0.9473 ± 0.0097 | 0.858 ± 0.027 |
+| the authors' multi-hot MLM pre-training | 0.001 | 2 | 0.361 ± 0.056 | 0.651 ± 0.021 | 0.9541 ± 0.0084 | 0.879 ± 0.019 |
+| the authors' multi-hot MLM pre-training | 0.001 | 3 | 0.360 ± 0.127 | 0.673 ± 0.032 | 0.9548 ± 0.0055 | 0.890 ± 0.012 |
+| the authors' multi-hot MLM pre-training | 0.001 | 4 | 0.401 ± 0.084 | 0.666 ± 0.038 | 0.9587 ± 0.0062 | 0.900 ± 0.006 |
+| the authors' multi-hot MLM pre-training | 0.001 | 5 | 0.417 ± 0.070 | 0.669 ± 0.049 | 0.9611 ± 0.0019 | 0.903 ± 0.003 |
+| the authors' multi-hot MLM pre-training | 0.001 | 6 | 0.370 ± 0.057 | 0.647 ± 0.048 | 0.9602 ± 0.0062 | 0.900 ± 0.006 |
 
 
 ![Fig 6 v2](plots/fig6_v2.png)

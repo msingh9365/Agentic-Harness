@@ -161,7 +161,9 @@ Kaggle limits: about 12 h per session, about 30 GPU-hours per week.
 | 2026-11-17 | nebula-b3-tokens | CPU | 0 (no GPU) | B3: BPE-8k refit on the 90% (53 min) |
 | 2026-11-17 | nebula-b3-sup | T4 x2 | about 0.9 | B3: runs 1 to 3, both lrs, 5 seeds (52 min wall) |
 | 2026-11-17 | nebula-b3-pre | T4 x2 | about 1.4 | B3: AR and MLM pre-training + fine-tuning, both lrs, 5 seeds (82 min wall) |
-| | **B3 total** | | **2.26** | quota 20.89 h → 23.15 h (estimate 4.3 h, limit 6 h) |
+| 2026-11-17 | nebula-b3-extra | T4 x2 | 0.44 | B3 addendum: mlm_theirs (5 seeds OK); arflat failed (import path) |
+| 2026-11-17 | nebula-b3-extra2 | T4 x2 | 0.33 | B3 addendum: AR flatten, 5 seeds |
+| | **B3 total** | | **3.03** | quota 20.89 h → 23.92 h (estimate 4.3 h + 0.8 h addendum, limit 6 h); 6.08 h left |
 | | **F total** | | **3.18** | quota 17.71 h → 20.89 h (limit 8 h, estimate 5 h); 9.11 h left, resets 2026-11-21 |
 
 Per-kernel quota hours were not recorded. What was measured: the sum of per-model training seconds (detection 2.5 h, classification
@@ -375,3 +377,6 @@ Same rule as 11.4 (validation only, both lrs, up to 6 epochs, collapse guard), s
 Cost estimate: `mlm_theirs` about 12 min per seed (B2: 16 min for 15 epochs), `ar_flatten` about 6 min per seed (two fine-tunings of the full-attention model), 5 seeds each on two T4s: 5 × 18 = 90 GPU-min = about 45 min wall, **about 0.8 h of quota** (hard limit of the whole B3 follow-up 6 h; so far 2.26 h).
 
 **11.11 Addendum, first kernel (`nebula-b3-extra`: mlm_theirs and arflat; quota 23.15 h → 23.59 h = +0.44 h).** `mlm_theirs` ran for all 5 seeds (exit 0, 25 min wall). `arflat` failed in all 5 seeds in 18 s: my `--import-from /kaggle/input/nebula-b3-pre` guess did not match the mount path (0 AR files imported) and the unit's assertion stopped it as intended (no run started from the wrong weights; the kernel exited with an error, not a false COMPLETE). Fix: search all of `/kaggle/input`. Relaunched as `nebula-b3-extra2` (`arflat` only, estimate 15 min wall, about 0.3 h).
+
+**11.12 Addendum result (`nebula-b3-extra2`: AR flatten, 5 seeds, imported 10 AR files, 19 min wall, +0.33 h; B3 total 3.03 h of 6 h; quota 23.92 h, 6.08 h left).** Chosen on validation by rule 11.4: AR flatten lr 1e-3 epoch 6, the authors' MLM lr 1e-3 epoch 3; no collapse. The five main rows (and their CIs) are bit-identical after adding the two runs (same bootstrap resamples).
+April test: AR flatten TPR@1e-3 0.407 ± 0.081 (+3.9 over lower, CI [+0.0, +9.8]), the authors' MLM 0.360 ± 0.127 (−0.8, [−4.8, +4.7]); TPR@1e-2 0.681 / 0.673; AUC 0.9581 / 0.9548. Literal float32 TPR@1e-3: 0.000 / 0.324. Written into REPORT §5.2c (addendum paragraph).

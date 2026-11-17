@@ -247,7 +247,7 @@ include training noise, which is why per-seed numbers are shown next to it. (5) 
 - **Tokenizer: BPE V = 8192 refit on the 90% only** (variant `bpe8k_v2`; the `bpe8k` of B and B2 was fit on all of January, validation slice included). The refit used 67,768 reports (CPU kernel, no GPU quota).
   **Consequence for follow-up F (§5.7):** its BPE-50k tokenizer was also fit on all of January, so F's validation slice influenced the vocabulary (no labels involved). F's R3 (the released tokenizer, no effect) suggests the influence is negligible; the F test numbers do not depend on it.
 - Runs (5 seeds each, same seeds and splits): **upper** (supervised on the 90%), **lower** (labeled 20% only), **control** (the causal last-token classifier on the 20%, no pre-training), **AR** (full-attention causal LM on the 80%, then the last-token classifier on the 20%), **MLM** (per-position BERT MLM on the 80%, then the chunked classifier on the 20%).
-  The authors' multi-hot MLM and AR flatten were not run (see the end of this section).
+  Addendum runs (same rule, run after the main results were final): AR flatten (the same AR weights with the bidirectional flatten classifier) and the authors' multi-hot MLM; they are at the end of this section.
 - Pre-training: B2's LM settings (AdamW lr 2.5e-4, batch 96), **6 epochs**, early stopping on the validation-slice LM loss (patience 2, min delta 0.01); fine-tuning starts from the lowest-validation-loss epoch (checksum-verified: distance to the pre-trained weights 0 after loading). **All 10 pre-trainings ran all 6 epochs, the validation LM loss was still falling**
   (AR 2.04 → 1.12 to 1.20, MLM 4.2 → 3.3); we did not train longer (specified; B2 showed no gain from more epochs).
 - Supervised and fine-tuning: the v2 recipe (authors' `ModelTrainer`, AdamW weight decay 1e-2, batch 96, dropout 0.3, clip 0.5), up to 6 epochs, **lr 2e-3 and 1e-3 both run for every run type**, validation metrics after every epoch. **(lr, epoch) of each run type chosen on validation only** by the rule written in `NOTES.md` 11.4 (highest mean validation TPR@1e-3; ties within one SE → fewer epochs, then lower validation loss;
@@ -262,9 +262,11 @@ include training noise, which is why per-seed numbers are shown next to it. (5) 
 | control: causal last-token, 20%, no pre-training | 0.001 | 3 | 0.747 ± 0.032 (SE) | 0.916 | 0.9950 | 0.129 | 4 | none |
 | AR pre-training + last-token | 0.002 | 3 | 0.791 ± 0.028 (SE) | 0.927 | 0.9950 | 0.107 | 3 | none |
 | per-position MLM pre-training | 0.002 | 6 | 0.796 ± 0.020 (SE) | 0.928 | 0.9947 | 0.259 | 1 | none |
+| AR pre-training + flatten classifier | 0.001 | 6 | 0.804 ± 0.017 (SE) | 0.935 | 0.9951 | 0.205 | 1 | none |
+| the authors' multi-hot MLM pre-training | 0.001 | 3 | 0.731 ± 0.022 (SE) | 0.926 | 0.9948 | 0.131 | 2 | none |
 
 
-**April test set at the chosen settings (logit-ranked; mean ± std over 5 seeds; bootstrap 95% CI of the per-seed mean)
+**April test set at the chosen settings (logit-ranked; mean ± std over 5 seeds; bootstrap 95% CI of the per-seed mean)**
 
 | run | TPR@1e-3 | 95% CI (pts) | TPR@1e-2 | 95% CI (pts) | AUC | F1 (0.5) | TPR@1e-3 literal float32 |
 |---|---|---|---|---|---|---|---|
@@ -273,9 +275,11 @@ include training noise, which is why per-seed numbers are shown next to it. (5) 
 | control: causal last-token, 20%, no pre-training | 0.412 ± 0.055 | [34.2, 43.8] | 0.650 ± 0.012 | [63.2, 66.5] | 0.9487 ± 0.0106 | 0.862 ± 0.013 | 0.412 ± 0.055 |
 | AR pre-training + last-token | 0.463 ± 0.072 | [43.4, 52.6] | 0.711 ± 0.051 | [69.4, 72.1] | 0.9617 ± 0.0038 | 0.887 ± 0.010 | 0.388 ± 0.223 |
 | per-position MLM pre-training | 0.404 ± 0.037 | [37.0, 45.2] | 0.696 ± 0.040 | [68.1, 71.1] | 0.9566 ± 0.0087 | 0.882 ± 0.019 | 0.000 ± 0.000 |
+| AR pre-training + flatten classifier | 0.407 ± 0.081 | [37.8, 47.7] | 0.681 ± 0.041 | [66.7, 69.7] | 0.9581 ± 0.0086 | 0.876 ± 0.017 | 0.000 ± 0.000 |
+| the authors' multi-hot MLM pre-training | 0.360 ± 0.127 | [32.0, 42.7] | 0.673 ± 0.032 | [64.7, 69.6] | 0.9548 ± 0.0055 | 0.890 ± 0.012 | 0.324 ± 0.193 |
 
 
-**Paired per-seed differences in points (mean ± std over 5 seeds; positive in n of 5 seeds) and bootstrap 95% CI of the difference of the seed means
+**Paired per-seed differences in points (mean ± std over 5 seeds; positive in n of 5 seeds) and bootstrap 95% CI of the difference of the seed means**
 
 | difference | metric | per-seed mean ± std | seeds > 0 | bootstrap 95% CI [pts] |
 |---|---|---|---|---|
@@ -297,10 +301,26 @@ include training noise, which is why per-seed numbers are shown next to it. (5) 
 | upper − MLM | TPR@1e-3 | +11.8 ± 11.0 | 5/5 | +11.8 [+6.7, +16.0] **resolved** |
 | upper − MLM | TPR@1e-2 | +7.6 ± 2.7 | 5/5 | +7.6 [+6.5, +9.2] **resolved** |
 | upper − MLM | AUC | +1.00 ± 0.62 | 5/5 | +1.0 [+0.9, +1.1] **resolved** |
+| AR flatten − lower | TPR@1e-3 | +3.9 ± 10.4 | 2/5 | +3.9 [+0.0, +9.8] **resolved** |
+| AR flatten − lower | TPR@1e-2 | +1.6 ± 4.5 | 3/5 | +1.6 [+0.3, +2.9] **resolved** |
+| AR flatten − lower | AUC | +0.51 ± 1.34 | 3/5 | +0.5 [+0.4, +0.7] **resolved** |
+| MLM (authors') − lower | TPR@1e-3 | -0.8 ± 17.9 | 2/5 | -0.8 [-4.8, +4.7] not resolved |
+| MLM (authors') − lower | TPR@1e-2 | +0.7 ± 3.9 | 3/5 | +0.7 [-1.1, +2.4] not resolved |
+| MLM (authors') − lower | AUC | +0.18 ± 0.80 | 3/5 | +0.2 [+0.1, +0.3] **resolved** |
+| upper − AR flatten | TPR@1e-3 | +11.4 ± 12.2 | 4/5 | +11.4 [+5.5, +14.7] **resolved** |
+| upper − AR flatten | TPR@1e-2 | +9.1 ± 4.0 | 5/5 | +9.1 [+7.8, +10.9] **resolved** |
+| upper − AR flatten | AUC | +0.85 ± 0.87 | 4/5 | +0.8 [+0.7, +1.0] **resolved** |
+| upper − MLM (authors') | TPR@1e-3 | +16.1 ± 13.1 | 5/5 | +16.1 [+10.0, +20.0] **resolved** |
+| upper − MLM (authors') | TPR@1e-2 | +10.0 ± 3.6 | 5/5 | +10.0 [+8.3, +12.3] **resolved** |
+| upper − MLM (authors') | AUC | +1.18 ± 0.67 | 5/5 | +1.2 [+1.1, +1.3] **resolved** |
 
 
 (AUC differences are in points of AUC x 100.) Seed-ensemble flavour of the CI (mean logit over the 5 seeds) is in `bootstrap.json` (`ens`).
 
+
+**Addendum: AR flatten and the authors' multi-hot MLM** (run after the main results were final, same rule, same seeds and splits, rows in the tables above; chosen on validation: AR flatten lr 1e-3 epoch 6, the authors' MLM lr 1e-3 epoch 3). Neither changes the conclusions:
+AR flatten = 0.407 ± 0.081 at 1e-3, only **+3.9 points over the lower bound** (CI [+0.0, +9.8], borderline, 2 of 5 seeds positive; +1.6 at 1e-2, resolved) and 11.4 below the upper bound ([+5.5, +14.7]); the authors' multi-hot MLM = 0.360 ± 0.127, **−0.8** against the lower bound (CI [−4.8, +4.7], no effect; +0.7 at 1e-2, not resolved), 16.1 below the upper bound. This agrees with B2: the AR weights are useful with the causal last-token classifier (+9.5) and much less with the flatten classifier (+3.9);
+the authors' MLM variant gives no measurable gain. For the authors' MLM the literal float32 TPR@1e-3 is 0.324 against 0.360 logit-ranked; for AR flatten it is 0.000 against 0.407.
 
 Plots: `results/baseline/plots/fig6_v2.png` (mean ROC over 5 seeds, log-x), `b3_val_curves.png` (validation per fine-tuning epoch, chosen settings circled).
 
@@ -386,6 +406,30 @@ Pre-trained encoders (best epoch = 6 for all 10): `baseline_models/ssl/ar_pretra
 | per-position MLM pre-training | 0.001 | 4 | 0.393 ± 0.043 | 0.622 ± 0.029 | 0.9477 ± 0.0092 | 0.869 ± 0.016 |
 | per-position MLM pre-training | 0.001 | 5 | 0.400 ± 0.088 | 0.641 ± 0.081 | 0.9484 ± 0.0099 | 0.875 ± 0.019 |
 | per-position MLM pre-training | 0.001 | 6 | 0.357 ± 0.061 | 0.641 ± 0.035 | 0.9521 ± 0.0119 | 0.881 ± 0.022 |
+| AR pre-training + flatten classifier | 0.002 | 1 | 0.348 ± 0.063 | 0.536 ± 0.064 | 0.9039 ± 0.0767 | 0.813 ± 0.089 |
+| AR pre-training + flatten classifier | 0.002 | 2 | 0.337 ± 0.073 | 0.585 ± 0.068 | 0.9389 ± 0.0294 | 0.850 ± 0.049 |
+| AR pre-training + flatten classifier | 0.002 | 3 | 0.410 ± 0.033 | 0.624 ± 0.063 | 0.9442 ± 0.0215 | 0.853 ± 0.044 |
+| AR pre-training + flatten classifier | 0.002 | 4 | 0.357 ± 0.039 | 0.635 ± 0.059 | 0.9340 ± 0.0431 | 0.846 ± 0.060 |
+| AR pre-training + flatten classifier | 0.002 | 5 | 0.340 ± 0.126 | 0.648 ± 0.089 | 0.9523 ± 0.0184 | 0.875 ± 0.057 |
+| AR pre-training + flatten classifier | 0.002 | 6 | 0.378 ± 0.081 | 0.679 ± 0.053 | 0.9493 ± 0.0108 | 0.851 ± 0.042 |
+| AR pre-training + flatten classifier | 0.001 | 1 | 0.346 ± 0.075 | 0.522 ± 0.032 | 0.9341 ± 0.0057 | 0.825 ± 0.059 |
+| AR pre-training + flatten classifier | 0.001 | 2 | 0.358 ± 0.058 | 0.611 ± 0.027 | 0.9435 ± 0.0108 | 0.851 ± 0.031 |
+| AR pre-training + flatten classifier | 0.001 | 3 | 0.404 ± 0.064 | 0.691 ± 0.027 | 0.9540 ± 0.0062 | 0.880 ± 0.024 |
+| AR pre-training + flatten classifier | 0.001 | 4 | 0.427 ± 0.060 | 0.653 ± 0.036 | 0.9571 ± 0.0086 | 0.885 ± 0.021 |
+| AR pre-training + flatten classifier | 0.001 | 5 | 0.437 ± 0.074 | 0.673 ± 0.057 | 0.9567 ± 0.0109 | 0.864 ± 0.026 |
+| AR pre-training + flatten classifier | 0.001 | 6 | 0.407 ± 0.081 | 0.681 ± 0.041 | 0.9581 ± 0.0086 | 0.876 ± 0.017 |
+| the authors' multi-hot MLM pre-training | 0.002 | 1 | 0.282 ± 0.062 | 0.626 ± 0.055 | 0.9467 ± 0.0167 | 0.862 ± 0.039 |
+| the authors' multi-hot MLM pre-training | 0.002 | 2 | 0.311 ± 0.100 | 0.637 ± 0.052 | 0.9535 ± 0.0079 | 0.891 ± 0.011 |
+| the authors' multi-hot MLM pre-training | 0.002 | 3 | 0.379 ± 0.101 | 0.643 ± 0.045 | 0.9603 ± 0.0044 | 0.898 ± 0.007 |
+| the authors' multi-hot MLM pre-training | 0.002 | 4 | 0.366 ± 0.107 | 0.665 ± 0.051 | 0.9563 ± 0.0052 | 0.893 ± 0.012 |
+| the authors' multi-hot MLM pre-training | 0.002 | 5 | 0.394 ± 0.033 | 0.667 ± 0.024 | 0.9601 ± 0.0068 | 0.898 ± 0.006 |
+| the authors' multi-hot MLM pre-training | 0.002 | 6 | 0.308 ± 0.066 | 0.646 ± 0.057 | 0.9567 ± 0.0050 | 0.890 ± 0.008 |
+| the authors' multi-hot MLM pre-training | 0.001 | 1 | 0.300 ± 0.049 | 0.575 ± 0.059 | 0.9473 ± 0.0097 | 0.858 ± 0.027 |
+| the authors' multi-hot MLM pre-training | 0.001 | 2 | 0.361 ± 0.056 | 0.651 ± 0.021 | 0.9541 ± 0.0084 | 0.879 ± 0.019 |
+| the authors' multi-hot MLM pre-training | 0.001 | 3 | 0.360 ± 0.127 | 0.673 ± 0.032 | 0.9548 ± 0.0055 | 0.890 ± 0.012 |
+| the authors' multi-hot MLM pre-training | 0.001 | 4 | 0.401 ± 0.084 | 0.666 ± 0.038 | 0.9587 ± 0.0062 | 0.900 ± 0.006 |
+| the authors' multi-hot MLM pre-training | 0.001 | 5 | 0.417 ± 0.070 | 0.669 ± 0.049 | 0.9611 ± 0.0019 | 0.903 ± 0.003 |
+| the authors' multi-hot MLM pre-training | 0.001 | 6 | 0.370 ± 0.057 | 0.647 ± 0.048 | 0.9602 ± 0.0062 | 0.900 ± 0.006 |
 
 ### 5.3 Experiment C: classification (paper Table 9, "Table 12b" in the task text)
 
@@ -453,7 +497,7 @@ them. The released Whitespace checkpoint only works with the old cleaning (AUC 0
 the extra control (about 12 min wall, **+0.21 h**) = **6.86 h of quota** (the counter went from 10.85 h to 17.71 h; the follow-up budget was 15 h). Kaggle charges for both GPUs of a session. The first AR kernel
 failed after about 3 minutes because of a packaging mistake (a file missing from the kernel payload); its cost is inside the +4.57 h.
 
-**Follow-up B3 (§5.2c):** one CPU kernel (tokenizer refit, 53 min, no GPU quota) and two GPU kernels on 2 × T4 run in parallel: supervised runs 1 to 3 (52 min wall, 15 units) and AR + MLM pre-training with fine-tuning (82 min wall, 10 units); the quota counter went from 20.89 h to **23.15 h = 2.26 h** (estimate 4.3 h, limit 6 h; measured per kernel: about 0.9 h and 1.4 h, i.e. close to the wall time of each session, which is less than the estimate that charged both GPUs).
+**Follow-up B3 (§5.2c):** one CPU kernel (tokenizer refit, 53 min, no GPU quota) and two GPU kernels on 2 × T4 run in parallel: supervised runs 1 to 3 (52 min wall, 15 units) and AR + MLM pre-training with fine-tuning (82 min wall, 10 units); the quota counter went from 20.89 h to **23.15 h = 2.26 h** for the main results (estimate 4.3 h, limit 6 h; measured per kernel: about 0.9 h and 1.4 h, i.e. close to the wall time of each session, which is less than the estimate that charged both GPUs).
 
 **Follow-up F (§5.7):** 5 Kaggle kernels on 2 × T4: rounds 1a to 1d (validation grid of 10 recipes × 5 seeds) +0.80 h, +1.09 h, +0.88 h, +0.30 h and the final retrain of baseline v2 +0.11 h = **3.18 h of quota**
 (the counter went from 17.71 h to 20.89 h; limit set for this follow-up 8 h, estimate 5 h). 9.11 h of the 30 h are left (resets 2026-11-21).

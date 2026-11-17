@@ -5,6 +5,8 @@ Load any model of this baseline reproduction and score a Speakeasy report.
     list_baselines()                                   # keys in manifest.json
     m = load_baseline("detect/bpe50k/time/seed0/fold0")      # the authors' cleaning + tokenizer + our trained Nebula weights
     p = m.score(report)                                # report: list of entry points (or a path to the .json); -> P(malware)
+    m = load_baseline("bpe_v2", seed=0)                # THE baseline (follow-up F): lr 2e-3, 90% of January, 2 epochs; seeds 0 to 4
+    m.score_logit(report)                              # the raw logit: rank by this (the float32 probability saturates at logit 16.6)
     m = load_baseline("ssl/ar_pretrained/seed0")       # AR-pretrained encoder with its LM head (no classifier)
     m.next_token_logits(report)                        # [512, V] next-token logits
 
@@ -105,6 +107,12 @@ class Baseline:
             return float(self.torch.sigmoid(out).item())
         return self.torch.softmax(out, -1)[0].numpy()
 
+    def score_logit(self, report):
+        """The raw output (logit) of a detection model. Rank reports by this: sigmoid in float32 is exactly 1.0 above logit 16.6."""
+        x = self.torch.from_numpy(self.tokenize(report)[None].astype(np.int64))
+        with self.torch.no_grad():
+            return float(self.model(x).item())
+
     def score_many(self, reports):
         return [self.score(r) for r in reports]
 
@@ -114,7 +122,10 @@ class Baseline:
             return self.model.pretrain(x)[0].numpy()
 
 
-def load_baseline(key, root=None, nebula_root=None):
+def load_baseline(key, root=None, nebula_root=None, seed=None):
+    """key: a manifest key, or the alias "bpe_v2" (with seed=0..4) for the baseline v2 detection models of follow-up F."""
+    if key == "bpe_v2":
+        key = f"detect/bpe50k/v2/seed{0 if seed is None else seed}"
     man, r = _manifest(root)
     if key not in man["models"]:
         raise KeyError(f"{key} not in manifest; available: {sorted(man['models'])[:8]} ...")

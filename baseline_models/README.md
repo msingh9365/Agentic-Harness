@@ -3,13 +3,36 @@
 Trained models, tokenizers and a loader for the baseline reproduction of Nebula (Trizna et al., arXiv 2310.10664v2) with the
 authors' own code. The numbers and how they compare with the paper are in [`REPRODUCTION_REPORT.md`](../REPRODUCTION_REPORT.md).
 
+## Baseline v2: THE baseline from follow-up F on
+
+```python
+m = load_baseline("bpe_v2", seed=0)      # seeds 0 to 4; manifest keys detect/bpe50k/v2/seed<k>
+m.score_logit(report)                    # rank reports by this (the logit); m.score(report) = sigmoid(logit) saturates at logit 16.6
+```
+
+Exact recipe (code: `baseline/gap.py`, recipe `R8_lr2e-3`; the authors' `ModelTrainer`, `TransformerEncoderChunks`, patched submodule at the pinned commit):
+
+| setting | value |
+|---|---|
+| model | `TransformerEncoderChunks`, chunk 64, 2 layers, 8 heads, dModel 64, dHidden 256, head [64], flatten pooling, dropout 0.3, 5.397 M parameters |
+| tokenizer | our BPE-50k (`tokenizers/bpe50k`), 512 tokens |
+| optimizer | AdamW, **lr 2e-3**, weight decay 1e-2, constant lr, no schedule; BCE loss; gradient clipping 0.5 (their default); batch 96 |
+| data | **90% of the January training reports** (67,768; family-stratified; split seed 2025, indices hashed in `baseline/gap_split_hash.json`); the other 10% (7,530) is the validation slice |
+| training length | **2 epochs** (1,412 batches), chosen on the validation slice (best mean validation TPR@1e-3, agreed by early stopping on the validation loss) |
+| seeds | 0 to 4 (`C.set_seed(seed)`) |
+| selection | everything on the validation slice; the April test set was not used for any choice (`NOTES.md` §10.10, §10.11; `REPRODUCTION_REPORT.md` §5.7) |
+
+April test numbers (logit-ranked, mean ± std over 5 seeds): TPR@1e-3 **0.561 ± 0.043**, TPR@1e-2 0.793 ± 0.034, AUC 0.9602 ± 0.0051, F1 (0.5) 0.893 ± 0.017; the released model: 0.518 / 0.750 / 0.9586 / 0.885.
+Literal float32 TPR@1e-3: 0.444 ± 0.252 (seed 1 saturates to 0.0): always rank by logit. Each manifest entry lists its validation and test metrics.
+Do **not** train much longer or with a larger lr: lr 5e-3 and 1e-2 collapse to a constant predictor, and more epochs over-train (validation TPR@1e-3 falls and the loss rises after epoch 2).
+
 ## Where the files are
 
 | what | where | size |
 |---|---|---|
 | `manifest.json`, `load_baseline.py`, tokenizer files (`tokenizers/bpe50k`, `ws50k`, `bpe8k`) | this folder (git) | small |
 | AR-pre-trained encoders **before fine-tuning**, 3 epochs, seeds 0 to 4 (`ssl/ar_pretrained_seed*.pt`) and the **15-epoch** ones (`ssl/ar_pretrained_long_seed*.pt`, best epoch = 15) | this folder (git) | about 5 MB each |
-| Everything else: detection and classification fold models, all fine-tuned self-supervised models | private Kaggle dataset **`msingh9365/nebula-baseline-models`** (it also contains the files above, so one folder is enough) | about 0.8 GB |
+| Everything else: detection and classification fold models, all fine-tuned self-supervised models | private Kaggle dataset **`msingh9365/nebula-baseline-models`** (it also contains the files above, so one folder is enough) | about 1.8 GB (includes the 5 baseline-v2 models, `detection/bpe50k/v2/seed*.pt`, 22 MB each) |
 
 Point the loader at the folder that holds `manifest.json` and the weights:
 

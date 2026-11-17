@@ -153,6 +153,12 @@ Kaggle limits: about 12 h per session, about 30 GPU-hours per week.
 | 2026-11-17 | nebula-ssl-long-ar (v1 failed after about 3 min: packaging; v2) | T4 x2 | 4.57 (incl. the failed attempt) | B2: AR pre-training up to 15 epochs + fine-tuning from epochs 3, 6, 10, best, 5 seeds |
 | 2026-11-17 | nebula-ssl-long-mlm | T4 x2 | 2.08 | B2: per-position MLM, authors' MLM, AR flatten from the best AR checkpoint, 5 seeds |
 | 2026-11-17 | nebula-ssl-long-ctrl | T4 x2 | 0.21 | B2 extra control: causal last-token classifier without pre-training, 5 seeds |
+| 2026-11-17 | nebula-gap-r1a | T4 x2 | 0.80 | F: R0, R1, 5 seeds, 12 epochs (47 min wall) |
+| 2026-11-17 | nebula-gap-r1b | T4 x2 | 1.09 | F: R2, R3, R4, R5, 5 seeds, 8 epochs |
+| 2026-11-17 | nebula-gap-r1c | T4 x2 | 0.88 | F: R6, R7, 5 seeds, 6 epochs (24 min wall) |
+| 2026-11-17 | nebula-gap-r1d | T4 x2 | 0.30 | F: R8, R9, 5 seeds, 4 epochs (20 min wall) |
+| 2026-11-17 | nebula-gap-final | T4 x2 | 0.11 | F: baseline v2 = R8, 5 seeds, 2 epochs, models saved |
+| | **F total** | | **3.18** | quota 17.71 h → 20.89 h (limit 8 h, estimate 5 h); 9.11 h left, resets 2026-11-21 |
 
 Per-kernel quota hours were not recorded. What was measured: the sum of per-model training seconds (detection 2.5 h, classification
 1.1 h, ablations 2.5 h, self-supervised fine-tuning 4.1 h, pre-training 1.2 h = **11.4 h of GPU compute**; the figures come from the
@@ -303,3 +309,11 @@ Validation-only effect of lr (epoch 2, mean of 5 seeds): R0 (2.5e-4) 0.794 → R
 R9 (lr 5e-3): **unstable**, 3 of 5 seeds collapse to a constant predictor (AUC 0.5000; the other two reach 0.9984 and 0.9764). So lr 3e-3 (R4) has only a factor of about 1.7 of margin to a recipe that sometimes diverges.
 R8 (lr 2e-3): as good as R4 on validation and safer: epoch 2 TPR@1e-3 0.898 ± 0.088 (R4: 0.899 ± 0.042), TPR@1e-2 0.985 (0.982), AUC 0.9984 (0.9984), and the **lowest validation loss of all recipes, 0.0679 (R4: 0.0872; R1 lr 1e-3: 0.0650 is similar)**. `select_epoch` gives epoch 2; early stopping on validation loss gives epochs [2, 1, 2, 2, 1].
 **Decision by the rule of 10.10 (validation only):** R4 and R8 tie on TPR@1e-3; both change only the learning rate; the tie goes to the lower validation loss, and R4 sits next to a divergence cliff, so the finalist is **R8 = lr 2e-3, clip 0.5, dropout 0.3, batch 96, weight decay 1e-2, our BPE-50k, stop after epoch 2** (selected on validation, not on the test set). Next: final retrain, 5 seeds, models saved at epoch 2 (estimate 0.3 h), then the test evaluation.
+
+**10.12 Final result (kernel `nebula-gap-final`, R8 retrained with 5 seeds, 2 epochs, models and logits saved: +0.11 h; follow-up total 3.18 h of 8 h; quota 20.89 h used, 9.11 h left).**
+Validation of the retrain reproduces round 1d (mean val TPR@1e-3 0.898; seeds 0.930 / 0.941 / 0.930 / 0.741 / 0.947); its test numbers are identical to the grid's R8 (deterministic). Only now were test numbers of the final recipe looked at (`python -m baseline.gap_final`):
+April test, logit-ranked, v2 / released / previous recipe: TPR@1e-3 **0.561 ± 0.043** / 0.518 / 0.406 ± 0.078; TPR@1e-2 0.793 ± 0.034 / 0.750 / 0.700 ± 0.045; AUC 0.9602 / 0.9586 / 0.9521; F1 0.893 / 0.885 / 0.897.
+Bootstrap (1,000 stratified resamples, per-model means): v2 − previous: TPR@1e-3 +0.155 [+0.051, +0.221], TPR@1e-2 +0.093, AUC +0.0082, all resolved; v2 − released: +0.043 [−0.141, +0.183] (not resolved), TPR@1e-2 +0.043 [+0.027, +0.066] (resolved), AUC +0.0016 [−0.0000, +0.0033].
+Literal float32 TPR@1e-3 of v2: 0.515 / 0.0 / 0.586 / 0.515 / 0.605 (seed 1 saturates). Output scale matches the released model (mean |logit| 15.4, 16.6, previous 33.7); total weight L2 420 (released 424, previous 405).
+Verdict: the gap is closed on validation and on test; the explanation is learning rate (2.5e-4 too small) plus over-training. Appendix of the full grid on test (not used for selection) in `results/F_gap/final_table.md`. Baseline v2 models: Kaggle dataset `msingh9365/nebula-baseline-models` (new version), manifest keys `detect/bpe50k/v2/seed<k>`.
+Not done: re-running the B2 upper/lower bounds with the v2 recipe (lowest priority; about 1 to 1.5 h of quota would have fit within the 8 h limit). A slip during the work: a stray `mv` replaced `/dev/null` in the container with a regular file; it was restored (character device 1,3) and `seed0.json` was copied back from the kernel output; nothing in the repository was affected.

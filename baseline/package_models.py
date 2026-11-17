@@ -65,6 +65,36 @@ def add_long(out, big, long_raws):
     print(f"added {n} long AR encoders to the manifest ({len(man['models'])} models in total)")
 
 
+V2_RECIPE = {"name": "baseline v2 (recipe R8_lr2e-3)", "lr": 2e-3, "clip_grad_norm": 0.5, "dropout": 0.3, "batch_size": 96, "weight_decay": 1e-2,
+             "optimizer": "AdamW (the authors' ModelTrainer), BCE, constant lr, no schedule", "epochs": 2, "tokenizer": "bpe50k",
+             "train_data": "90% of the January training reports (stratified by family, seed 2025, hash in baseline/gap_split_hash.json)",
+             "selected_on": "held-out 10% January validation slice only (never on the April test set)"}
+
+
+def add_v2(out, big, v2_dir):
+    """Follow-up F (gap to the released model): add the 5 baseline-v2 detection models (recipe R8, epoch 2) to <big>/detection/bpe50k/v2 and the
+    manifest. The test metrics are the logit-ranked ones; 'test_tpr@0.001_literal_float32' is the authors' number computed on float32 probabilities."""
+    man = json.load(open(os.path.join(out, "manifest.json")))
+    n = 0
+    for f in sorted(glob.glob(os.path.join(v2_dir, "seed*_epoch2_model.pt"))):
+        seed = os.path.basename(f)[4:].split("_")[0]
+        r = json.load(open(os.path.join(v2_dir, f"seed{seed}.json")))
+        e = r["per_epoch"][1]
+        rel = f"detection/bpe50k/v2/seed{seed}.pt"
+        put(f, os.path.join(big, rel))
+        man["models"][f"detect/bpe50k/v2/seed{seed}"] = {
+            "arch": "chunked", "tokenizer": "bpe50k", "weights": rel, "seq_len": 512, "n_classes": 1, "epochs": 2, "batches_seen": e["batches"],
+            "recipe": V2_RECIPE, "seed": int(seed),
+            "validation": {k: e["val"][k] for k in ("auc", "tpr@0.001", "tpr@0.01", "f1@0.5")} | {"loss": e["val_loss"]},
+            "test": {k: e["test_NOT_FOR_SELECTION"][k] for k in ("auc", "tpr@0.001", "tpr@0.01", "f1@0.5", "acc@0.5")},
+            "test_tpr@0.001_literal_float32": e["test_p32_tpr@0.001"],
+            "note": "THE baseline from follow-up F on: load_baseline('bpe_v2', seed=k). Rank by logit (model.score_logit), not by float32 probability."}
+        n += 1
+    for d in (out, big):
+        C.dump_json(man, os.path.join(d, "manifest.json"))
+    print(f"added {n} baseline-v2 models to the manifest ({len(man['models'])} models in total)")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--results", required=True)
@@ -72,7 +102,10 @@ def main():
     ap.add_argument("--out", default="baseline_models")
     ap.add_argument("--big", required=True)
     ap.add_argument("--long-raw", nargs="*", default=None, help="only add the long pre-training encoders of these kernel outputs (contain ssl_long/)")
+    ap.add_argument("--v2", default=None, help="only add the baseline-v2 models of this folder (gap/R8_lr2e-3 of the final kernel output)")
     a = ap.parse_args()
+    if a.v2:
+        return add_v2(a.out, a.big, a.v2)
     if a.long_raw is not None:
         return add_long(a.out, a.big, a.long_raw)
     models = {}

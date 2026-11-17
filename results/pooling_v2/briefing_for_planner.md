@@ -1,9 +1,9 @@
 # Briefing for the planning agent: state of the pooling experiments
 
 Written 2026-11-16 by the agent that executed the runs. Self-contained: assumes no access to the execution session.
-Status of every number: **final** unless marked *3 seeds*. Section 0 (added 2026-11-17) holds the latest results and supersedes the "pending" notes below.
+Status of every number: **final** unless marked *3 seeds*. Section 0 (added 2026-11-17) holds the latest results; sections 5 to 9 were revised to match it.
 
-## 0. Update 2026-11-17: the pending items are done (read this first; it supersedes section 6 and the "pending" marks)
+## 0. Update 2026-11-17: regime J and the graded edits are done (read this first)
 
 **Regime J, 10 seeds (all of January; A 1 epoch, C 10 epochs; no January threshold (b) because validation is in training).**
 
@@ -130,50 +130,50 @@ Mean April AUC after e epochs: A 0.929 (e=1), then flat at 0.924; B 0.933 (e=1),
 
 Seed-paired C − A of the change: shuffle AUC +0.239 [+0.222, +0.256]; insertion AUC +0.0077 [+0.0037, +0.0108]; insertion on the unaffected reports AUC +0.017 [+0.010, +0.026], TPR +10.3 points [+6.6, +13.9] (intervals over seeds only). B behaves like C here (shuffle 0.9287 → 0.9298). Share of April reports whose decision at the January 1% threshold flips after the insertion: A 6.4%, B 3.5%, C 4.0%.
 
-## 5. What I think is established, and what is not
+## 5. What I think is established, and what is not (updated with section 0)
 
 **Established**
-1. Order of API calls carries no measurable accuracy in this setting: an order-free model (C) matches the position-dependent one (A) in AUC and TPR@1% for single models. Consistent with the bag-of-API LightGBM at 0.95.
-2. The flatten model is brittle to anything that shifts token positions (shuffle destroys it; 5 inserted calls cost about 10 TPR points even when nothing leaves the window). The mean-pooled models are not.
-3. Fixed positional encoding is what makes mean pooling competitive: C > B at every equal epoch count; B alone loses about 10 TPR points to A.
-4. Retrained A is weaker than released Nebula as a single model by about 0.026 AUC on the train side; adding the validation reports gives about +0.02; a 10-seed ensemble of A is indistinguishable from released.
+1. Order of API calls carries no measurable accuracy at 1% FPR in this setting: the order-free model C matches or beats the position-dependent A in AUC (regime S +0.009 [−0.006, +0.027]; regime J +0.016 [+0.004, +0.032]) and equals it in TPR@1%. Consistent with the bag-of-API LightGBM at 0.95.
+2. The flatten model is brittle to anything that shifts token positions: shuffling destroys it, one prepended call costs 6.5 TPR points, twenty cost 35 points and push its benign FPR from 1% to 6.3%. The mean-pooled models (B, C) barely move. Holds in both regimes and when no original call leaves the window.
+3. The fixed positional encoding is what makes mean pooling competitive: C > B at every equal epoch count; B alone loses about 10 TPR points to A.
+4. Retrained A matches the released model once trained on all of January: single model −0.010 AUC [−0.026, +0.001], 10-seed ensemble +0.0004 [−0.013, +0.011]. On the train side alone it is 0.026 lower. Epochs, step budget and selection rule do not matter; the training data does.
+5. The Q1 versus Q2-Q4 gap in TPR@1% is not closed by mean pooling (regime J: A +32.7 points, C +28.3, released +27.7). C ranks far sequences better (Q2-Q4 AUC +0.038 [+0.011, +0.075]) but catches no more malware there at 1% FPR.
 
 **Not established**
-1. The original hypothesis (mean pooling closes the Q2-Q4 gap): no significant difference to A on Q2-Q4, and it cannot be decided with this test set (see 4b).
-2. Why C beats B. C is invariant to shuffling the whole call list, so it is not using global order; within-chunk position must be acting through something else (token adjacency inside a call's fields is the obvious candidate, since shuffling whole calls keeps each call's internal token order). Untested.
-3. Whether the robustness matters against a realistic attacker. The insertion test copies calls of the same report; nothing tests prepending, larger insertions, or benign-looking padding.
-4. C is not uniformly as good as A: at 0.1% FPR and in ensembles A is better.
+1. Why C beats B. C is invariant to shuffling the whole call list, so it does not use global order; the within-chunk positions must act through something else (token adjacency inside a call's fields is the obvious candidate, since shuffling whole calls keeps each call's internal token order). Untested.
+2. Whether the brittleness holds for the **released weights themselves**. A has the same architecture, so it is very likely, but the edits were only run on retrained models.
+3. Whether the robustness matters against a realistic attacker: all added calls are copies from the same report; nothing tests attacker-chosen (benign-looking) calls, deletion, or edits to malware only.
+4. Why C is weaker at 0.1% FPR (regime J: −19.2 points [−30.2, +1.6]; regime-S ensembles −20.8 [−39.6, −1.3]).
+5. B in regime J (not run).
 
 **Weaknesses of the evidence**
-- April was used to judge the "reach 0.95" goal (not to pick epochs).
-- Many subsets were tested; isolated significant cells (for example Q2 for C − A, AUC +0.079 [+0.005, +0.143]) may be chance.
-- Under the validation-AUC rule A stops at epoch 1-2 and C at 7; the equal-epoch table (4c) is the cleaner comparison.
+- April was used to judge the "reach 0.95" goal and to decide to add regime J (never to pick epochs).
+- Regime J compares A after 1 epoch with C after 10 (the rule's outcome); at 1 epoch each, C is still ahead (0.9593 against 0.9486).
+- Many subsets were tested; isolated significant cells may be chance. Group-bootstrap intervals are wide because April has few independent groups; 10 seeds instead of 3 barely narrowed them.
 - B0/C0 have 3 seeds. LightGBM has 3 seeds, reused as seed mod 3 in rank averages.
-- Robustness intervals are over seeds only.
+- Robustness and same-epoch intervals marked "over seeds" do not include sampling of April reports.
 
-## 6. Pending right now
+## 6. Pending
 
-- *Pending:* **regime J, 10 seeds** (A trained on all of January for 1 epoch, C for 10 epochs; epoch counts = highest mean validation AUC over the 10 regime-S seeds). The Kaggle run finished; output is downloading; evaluation, ensemble and robustness for it are not done. It will tell how close single-model A gets to released with all of January, and whether C − A holds there.
-- *Pending (approved by the user, not started):* graded edits: insert 1 / 5 / 20 / 50 calls and prepend 1 / 5 / 20 / 50 calls, malware TPR at a fixed threshold, A vs C. CPU only, about an hour.
-- README of round 2 does not yet contain 4c and 4d.
+Nothing is running. Everything planned for round 2 is done, evaluated, written up and pushed (commit `b169be3` on `nebula-length-study`, plus the commit that carries this revision of the briefing).
 
 ## 7. Practical constraints
 
-- **Kaggle:** 2 × T4, two runs at a time; about 48 s per epoch per run; 36 runs × 10 epochs took 149 minutes of wall time. Weekly GPU quota 30 h, **9.7 h used**, resets 2026-11-21 (quota is charged at about 2× wall time with two GPUs). At most 2 concurrent GPU sessions. **Queue waits are unpredictable** (from seconds to several hours); a stuck kernel cannot be cancelled from the CLI, only deleted.
-- **Local:** Mac CPU. Scoring 30 models on April under 2 edits took under an hour; a full evaluation with 1,000 bootstrap resamples about 20-30 minutes. Per-epoch checkpoints of all 36 regime-S runs are on disk (4.7 GB, outside the repo), so any "score existing models on edited inputs" experiment needs no GPU.
+- **Kaggle:** 2 × T4, two runs at a time; about 48 s per epoch per run; 36 runs × 10 epochs took 149 minutes of wall time. Weekly GPU quota 30 h, **10.9 h used**, resets 2026-11-21 (quota is charged at about 2× wall time with two GPUs). At most 2 concurrent GPU sessions. **Queue waits are unpredictable** (from seconds to several hours); a stuck kernel cannot be cancelled from the CLI, only deleted.
+- **Local:** Mac CPU. Scoring one model on all April reports takes about 15 s; 30 models under 8 edits took about an hour; a full evaluation with 1,000 bootstrap resamples 20-30 minutes. Per-epoch checkpoints of all regime-S runs (4.7 GB) and the final weights of the regime-J runs are on disk outside the repo, so any "score existing models on edited inputs" experiment needs no GPU.
 - Scores of every run after every epoch (April and validation logits) are saved, so any selection rule or ensemble can be recomputed without rerunning.
 
 ## 8. Decisions the planner should make
 
-1. **What is the claim?** The data supports "flatten pooling adds brittleness without adding accuracy; order-free pooling with within-chunk positions keeps accuracy" far better than "mean pooling generalises to unseen sequences". Reframing changes the thesis argument.
-2. **Is "A matches released" still a goal?** Options: (i) accept regime J single models (about 0.95) plus the statement that the recipe is undocumented; (ii) use the 10-seed ensemble result (indistinguishable from released); (iii) keep searching (batch 96, static LR, time budget as in the paper). I would not do (iii): the recipe study shows epochs and schedule barely matter.
-3. **How to get statistical power on Q2-Q4**, if that question stays: the limit is the April set. Options: evaluate on the January validation side as a second "unseen" set (group-disjoint by construction, 9,619 reports); pool distance quartiles differently; or drop the question.
-4. **Which robustness tests to add.** Cheap (no GPU): graded insertion and prepending (pending), deleting calls, duplicating calls, within-chunk versus across-chunk shuffles (would also explain C versus B), edits to malware only at a fixed threshold (evasion view).
-5. **Low-FPR behaviour of C.** C loses to A at 0.1% FPR in ensembles. If the thesis cares about low FPR, this needs its own look (TPR@0.1% for the single models is in `tables.md`, for the ensembles in `followups_ensemble.md`).
+1. **What is the claim?** The data supports "flatten pooling adds brittleness without adding accuracy; mean pooling with within-chunk positions keeps (or slightly improves) AUC and removes the brittleness" far better than "mean pooling generalises to unseen sequences" (answered negatively for TPR). Reframing changes the thesis argument.
+2. **Close the "A matches released" question?** I recommend yes: regime J single models are within noise and the ensemble is identical. Further recipe search (batch 96, static LR, time budget as in the paper) is unlikely to pay: epochs and schedule barely mattered.
+3. **Which follow-ups to run** (all CPU only, existing checkpoints, cheapest first): (a) the graded edits on the released Nebula weights; (b) which benign reports limit C at 0.1% FPR; (c) within-chunk versus across-chunk shuffles, to explain C versus B; (d) attacker-chosen padding and edits to malware only. GPU needed only for B in regime J or more LightGBM seeds.
+4. **Statistical power on Q2-Q4**, if that question stays open: the limit is the April set. Options: use the January validation side of regime S as a second group-disjoint "unseen" set (9,619 reports), or drop the question.
+5. **Low-FPR requirement.** If the thesis needs 0.1% FPR, A (or an ensemble of A) is currently the better model and C's robustness comes at a cost there.
 
 ## 9. Where things are
 
-- Results: `results/pooling_v2/README.md` (verdict, tables), `tables.md`, `recipe_study.md`, `released_training.md`, `followups_same_epoch.md`, `followups_ensemble.md`, `perturb_check.json`, `evaluation.json`.
-- Code: `hier_nebula/pooling_variants.py` (flags `fixed_pe`, `masked_mean`), `scripts/kaggle/train_pooling_v2.py`, `launch_pooling_v2.py`, `scripts/pooling_v2/{evaluate_v2,perturb_check,recipe_study,followups}.py`.
-- Kaggle outputs (outside the repo): `../pooling_v2_full_output` (regime S, 36 runs), `../pooling_v2_recipe_merged` (recipe study), `../pooling_v2_all_output` (regime J, downloading).
-- Round 1 is committed and pushed (`78bf5cf` on `nebula-length-study`); round 2 is uncommitted.
+- Results: `results/pooling_v2/README.md` (verdict and all sections), `tables.md` (regime S), `tables_J.md` (regime J), `recipe_study.md`, `released_training.md`, `followups_same_epoch.md`, `followups_ensemble.md`, `graded_edits.md`, and the `.json` files with the numbers.
+- Code: `hier_nebula/pooling_variants.py` (flags `fixed_pe`, `masked_mean`), `scripts/kaggle/train_pooling_v2.py`, `launch_pooling_v2.py`, `scripts/pooling_v2/{evaluate_v2,perturb_check,graded_edits,recipe_study,followups}.py`.
+- Kaggle outputs (outside the repo): `../pooling_v2_full_output` (regime S, 36 runs), `../pooling_v2_all_output` (regime J, 20 runs), `../pooling_v2_recipe_merged` (recipe study).
+- Rounds 1 and 2 are committed and pushed on `nebula-length-study`.

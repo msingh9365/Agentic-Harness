@@ -31,6 +31,7 @@ FIRST_3EP = {"mlm_theirs": "mlm_theirs_3ep", "mlm_bert": "mlm_bert_3ep", "ar_fla
 LABELS = {
     "upper": "upper bound (100% supervised)", "lower": "lower bound (20% supervised)",
     "upper_fullattn": "control: full attention, 100%", "lower_fullattn": "control: full attention, 20%",
+    "lower_lasttoken": "control: causal last-token, 20%, no pre-training",
     "ar_lasttoken_3ep": "AR last-token, 3 epochs (first run)", "ar_flatten_3ep": "AR flatten, 3 epochs (first run)",
     "mlm_bert_3ep": "MLM per-position, 3 epochs (first run)", "mlm_theirs_3ep": "MLM authors' multi-hot, 3 epochs (first run)",
     "ar_lasttoken_ep3": "AR last-token, epoch 3 (long run)", "ar_lasttoken_ep6": "AR last-token, epoch 6",

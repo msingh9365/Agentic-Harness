@@ -12,6 +12,8 @@ Units (per seed), outputs in <out>/ssl_long/seed<k>/:
                    fine-tuned from each of them -> runs ar_lasttoken_ep<k>
   mlm_bert_long    per-position BERT MLM (ours), fine-tuned from the best epoch -> mlm_bert_best
   mlm_theirs_long  the authors' multi-hot MLM, fine-tuned from the best epoch -> mlm_theirs_best
+  lasttoken_control  EXTRA control, no pre-training: the same causal last-non-pad-token classifier fine-tuned on the labeled 20% from scratch
+                   -> lower_lasttoken (the architecture-matched lower bound of ar_lasttoken_*)
   ar_flatten_long  AR flatten classifier, fine-tuned from the best AR checkpoint of ar_long (run ar_long first) -> ar_flatten_best
 
 The RNG order of the first run is kept (set_seed, build the downstream model, pre-train; set_seed, build, transfer, fine-tune), so epoch 3
@@ -32,8 +34,8 @@ from baseline import common as C
 from baseline import lm, selfsup
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-UNITS = {"ar_long": 4, "mlm_bert_long": 2, "mlm_theirs_long": 1, "ar_flatten_long": 0}      # value = scheduling priority (higher first)
-RUN_COST_MIN = {"ar_long": 45, "mlm_bert_long": 27, "mlm_theirs_long": 16, "ar_flatten_long": 5}
+UNITS = {"lasttoken_control": 5, "ar_long": 4, "mlm_bert_long": 2, "mlm_theirs_long": 1, "ar_flatten_long": 0}      # value = scheduling priority (higher first)
+RUN_COST_MIN = {"lasttoken_control": 4, "ar_long": 45, "mlm_bert_long": 27, "mlm_theirs_long": 16, "ar_flatten_long": 5}
 DONE = "unit_done.json"
 
 
@@ -154,6 +156,16 @@ def run_unit(a):
         print(f"  [{kind}] pre-training ran {len(hist['epochs'])} epochs, best epoch {hist['best_epoch']}, stopped early: {hist['stopped_early']}", flush=True)
         finetune_from(f"{kind}_best", os.path.join(out, f"pretrained_{kind}_long.pt"), xl, yl, xt, yt, V, a, a.seed, out,
                       {**base, "pretrain_kind": kind, "pretrain_epoch": hist["best_epoch"], "is_best": True, "pretraining": hist})
+    elif a.unit == "lasttoken_control":
+        run_dir = os.path.join(out, "lower_lasttoken")
+        if not os.path.exists(os.path.join(run_dir, "metrics.json")):
+            C.set_seed(a.seed)
+            model = selfsup.downstream_model("ar_lasttoken", V)               # same constructor and RNG order as ar_lasttoken_*, no checkpoint
+            w, secs, steps = selfsup.finetune(model, xl, yl, f"lower_lasttoken_seed{a.seed}", a, a.seed)
+            extra = {"run": "lower_lasttoken", "seed": a.seed, "ft_epochs": a.ft_epochs, "batch_size": a.batch_size, "lr": a.lr, "env": C.env_info(),
+                     "train_seconds": secs, "finetune_steps": steps, "n_finetune": int(len(xl)), "weight_proof": {}, **base}
+            selfsup.evaluate_and_save(w, model, xt, yt, run_dir, extra, save_model=False)
+            shutil.rmtree(os.path.join(selfsup.LIT_DIR, f"lower_lasttoken_seed{a.seed}"), ignore_errors=True)
     elif a.unit == "ar_flatten_long":
         hist = json.load(open(os.path.join(out, "pretrain_ar_long.json")))
         finetune_from("ar_flatten_best", os.path.join(out, "pretrained_ar_long.pt"), xl, yl, xt, yt, V, a, a.seed, out,

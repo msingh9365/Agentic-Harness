@@ -22,9 +22,12 @@ from baseline import long_stats as LS
 
 SEEDS = [0, 1, 2, 3, 4]
 RUNS = ["upper", "lower", "lower_lasttoken", "ar_lasttoken", "mlm_bert"]
+EXTRA = ["ar_flatten", "mlm_theirs"]          # addendum runs (the authors' multi-hot MLM, AR flatten): included when all 5 seeds exist
+ALL = RUNS + EXTRA
 LABELS = {"upper": "upper bound (90% labeled)", "lower": "lower bound (20% labeled)", "lower_lasttoken": "control: causal last-token, 20%, no pre-training",
-          "ar_lasttoken": "AR pre-training + last-token", "mlm_bert": "per-position MLM pre-training"}
-COLORS = {"upper": "#2a78d6", "lower": "#898782", "lower_lasttoken": "#eda100", "ar_lasttoken": "#1baf7a", "mlm_bert": "#eb6834"}
+          "ar_lasttoken": "AR pre-training + last-token", "mlm_bert": "per-position MLM pre-training",
+          "ar_flatten": "AR pre-training + flatten classifier", "mlm_theirs": "the authors' multi-hot MLM pre-training"}
+COLORS = {"upper": "#2a78d6", "lower": "#898782", "lower_lasttoken": "#eda100", "ar_lasttoken": "#1baf7a", "mlm_bert": "#eb6834", "ar_flatten": "#6250d6", "mlm_theirs": "#e87ba4"}
 COLLAPSE_AUC = 0.6
 
 
@@ -122,7 +125,7 @@ def chosen_runs(R, choice, raw, y):
     """runs[name][seed] = (test metrics, test logits, {"test", "test_p32", ...}) at the chosen settings, in the format of long_stats."""
     runs = {}
     for run, ch in choice.items():
-        if ch["lr"] is None or run not in RUNS:
+        if ch["lr"] is None or run not in ALL:
             continue
         for s in SEEDS:
             z = np.load(os.path.join(raw, f"seed{s}", f"{run}_lr{ch['lr']:g}_test_logits.npy"))[ch["epoch"] - 1].astype(np.float64)
@@ -151,7 +154,7 @@ def tables(R, choice, runs, boot, raw):
     B = boot["bootstrap"]
     L = ["#### Settings chosen on the validation slice (rule: NOTES.md 11.4)", ""]
     rows = []
-    for run in RUNS:
+    for run in ALL:
         if run not in choice or choice[run]["lr"] is None:
             continue
         ch = choice[run]
@@ -161,7 +164,7 @@ def tables(R, choice, runs, boot, raw):
     L.append(md(rows, ["run type", "lr", "epoch", "val TPR@1e-3", "val TPR@1e-2", "val AUC", "val loss", "cells tied", "collapsed"]))
     L += ["", "#### April test set at the chosen settings (logit-ranked; mean ± std over 5 seeds; bootstrap 95% CI of the per-seed mean)", ""]
     rows = []
-    for run in RUNS:
+    for run in ALL:
         if run not in runs:
             continue
         g = lambda k, p32=False: np.array([(runs[run][s][2]["test_p32"] if p32 else runs[run][s][2]["test"])[k] for s in SEEDS])
@@ -172,7 +175,9 @@ def tables(R, choice, runs, boot, raw):
     L += ["", "#### Paired per-seed differences in points (mean ± std over 5 seeds; positive in n of 5 seeds) and bootstrap 95% CI of the difference of the seed means", ""]
     pairs = [("upper − lower", "upper", "lower", "vs_lower"), ("AR − lower", "ar_lasttoken", "lower", "vs_lower"), ("MLM − lower", "mlm_bert", "lower", "vs_lower"),
              ("AR − its causal control", "ar_lasttoken", "lower_lasttoken", "vs_ctrl"), ("upper − AR", "ar_lasttoken", "upper", "upper_minus"),
-             ("upper − MLM", "mlm_bert", "upper", "upper_minus")]
+             ("upper − MLM", "mlm_bert", "upper", "upper_minus"),
+             ("AR flatten − lower", "ar_flatten", "lower", "vs_lower"), ("MLM (authors') − lower", "mlm_theirs", "lower", "vs_lower"),
+             ("upper − AR flatten", "ar_flatten", "upper", "upper_minus"), ("upper − MLM (authors')", "mlm_theirs", "upper", "upper_minus")]
     rows = []
     for label, name, ref, kind in pairs:
         if name not in runs or ref not in runs:
@@ -199,7 +204,7 @@ def tables(R, choice, runs, boot, raw):
 def appendix(R, raw, y):
     """Full grid on test: NOT used for selection."""
     rows = []
-    for run in RUNS:
+    for run in ALL:
         for lr in sorted(R.get(run, {}), reverse=True):
             cell = R[run][lr]
             if sorted(cell) != SEEDS:
@@ -218,7 +223,7 @@ def plot_val_curves(R, choice, plots):
     import matplotlib.pyplot as plt
     fig, axes = plt.subplots(1, 3, figsize=(16, 4.4))
     for ax, (key, title) in zip(axes, LS.METRICS):
-        for run in RUNS:
+        for run in ALL:
             for lr, ls in ((2e-3, "-"), (1e-3, "--")):
                 cell = R.get(run, {}).get(lr)
                 if not cell or sorted(cell) != SEEDS or collapsed(cell):
@@ -243,9 +248,9 @@ def plot_fig6(runs, choice, plots):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    styles = {"upper": "-", "ar_lasttoken": "--", "mlm_bert": "-.", "lower_lasttoken": ":", "lower": "-"}
+    styles = {"upper": "-", "ar_lasttoken": "--", "mlm_bert": "-.", "lower_lasttoken": ":", "lower": "-", "ar_flatten": (0, (5, 1)), "mlm_theirs": (0, (3, 1, 1, 1))}
     fig, ax = plt.subplots(figsize=(6.8, 5.0))
-    for run in ["upper", "ar_lasttoken", "mlm_bert", "lower_lasttoken", "lower"]:
+    for run in ["upper", "ar_lasttoken", "mlm_bert", "ar_flatten", "mlm_theirs", "lower_lasttoken", "lower"]:
         if run not in runs:
             continue
         roc = np.mean([runs[run][s][2]["test"]["roc_on_grid"] for s in SEEDS], axis=0)
@@ -261,7 +266,7 @@ def plot_fig6(runs, choice, plots):
 
 
 def val_report(R, choice):
-    for run in RUNS:
+    for run in ALL:
         if run not in choice:
             continue
         ch = choice[run]
@@ -291,7 +296,7 @@ def main():
     runs = chosen_runs(R, choice, a.raw, y)
     missing = [r for r in RUNS if r not in runs]
     assert not missing, f"no chosen test results for {missing}"
-    boot = {"n_boot": a.boot, "seeds": SEEDS, "bootstrap": bootstrap3(runs, y, [r for r in RUNS if r in runs], n_boot=a.boot)}
+    boot = {"n_boot": a.boot, "seeds": SEEDS, "bootstrap": bootstrap3(runs, y, [r for r in ALL if r in runs], n_boot=a.boot)}
     json.dump(boot, open(os.path.join(a.out, "bootstrap.json"), "w"), indent=1)
     json.dump({r: {str(s): {"lr": runs[r][s][2]["lr"], "epoch": runs[r][s][2]["epoch"], "test": {k: v for k, v in runs[r][s][2]["test"].items() if k != "roc_on_grid"},
                             "test_p32_tpr@0.001": runs[r][s][2]["test_p32"]["tpr@0.001"], "val": runs[r][s][2]["val"]} for s in SEEDS} for r in runs},

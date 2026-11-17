@@ -41,8 +41,10 @@ HASHES = os.path.join(HERE, "b3_split_hashes.json")
 LRS = [2e-3, 1e-3]
 EPOCHS = 6
 WD, CLIP, BATCH, DROPOUT = 1e-2, 0.5, 96, 0.3
-RUNS = {"sup": ["upper", "lower", "lower_lasttoken"], "ar": ["ar_lasttoken"], "mlm": ["mlm_bert"]}
-COST_MIN = {"sup": 20, "ar": 27, "mlm": 19}           # estimated minutes on one T4 (both lrs); the longest units are scheduled first
+RUNS = {"sup": ["upper", "lower", "lower_lasttoken"], "ar": ["ar_lasttoken"], "mlm": ["mlm_bert"], "mlm_theirs": ["mlm_theirs"], "arflat": ["ar_flatten"]}
+# which pre-training a unit needs: "mlm_theirs" = the authors' multi-hot MLM, "arflat" = AR flatten (fine-tunes the AR weights of unit "ar" with the bidirectional flatten classifier; needs them in <out>)
+UNIT_PRE = {"ar": "ar", "mlm": "mlm_bert", "mlm_theirs": "mlm_theirs", "arflat": "ar"}
+COST_MIN = {"sup": 20, "ar": 27, "mlm": 19, "mlm_theirs": 12, "arflat": 6}           # estimated minutes on one T4 (both lrs); the longest units are scheduled first
 DONE = "unit_done.json"
 
 
@@ -91,6 +93,8 @@ def load(tokens, variant):
 def downstream(run, V):
     if run in ("lower_lasttoken", "ar_lasttoken"):
         return lm.build_fullattn(V, DROPOUT, causal=True, last_token=True)
+    if run == "ar_flatten":
+        return lm.build_fullattn(V, DROPOUT, causal=False)
     return lm.build_chunked(V, DROPOUT)
 
 
@@ -147,7 +151,7 @@ def pretrain_cached(kind, x_unl, x_val, vocab, a, seed, out):
     pre, hist = selfsup.pretrain(kind, x_unl, vocab, a, seed, f"b3_pre_{kind}_seed{seed}")
     shutil.rmtree(os.path.join(selfsup.LIT_DIR, f"b3_pre_{kind}_seed{seed}"), ignore_errors=True)
     os.makedirs(out, exist_ok=True)
-    torch.save(pre, cache)
+    torch.save(lm.encoder_state(pre) if kind == "mlm_theirs" else pre, cache)      # their MLM head is huge: keep the encoder only (as in B and B2)
     C.dump_json(hist, hist_path)
     return pre, hist
 
@@ -160,8 +164,10 @@ def execute(unit, a, seed, x, y, xt, yt, vocab, unl, lab, val, split_info, out):
     base = {"seed": seed, "split": split_info, "n_unlabeled": int(len(unl)), "n_labeled": int(len(lab)), "n_val": int(len(val)), "env": C.env_info(),
             "tokenizer": a.variant, "tokens_info": a.tokens_info}
     pre_path, pre_hist = None, None
-    if unit in ("ar", "mlm"):
-        kind = "ar" if unit == "ar" else "mlm_bert"
+    if unit in UNIT_PRE:
+        kind = UNIT_PRE[unit]
+        if unit == "arflat":
+            assert os.path.exists(os.path.join(out, "pretrained_ar_v2.pt")), "arflat needs the AR pre-training of unit ar (use --import-from)"
         pre, pre_hist = pretrain_cached(kind, x[unl], x[val], vocab, a, seed, out)
         pre_path = os.path.join(out, f"pretrained_{kind}_v2.pt")
         print(f"  [{kind}] pre-training ran {len(pre_hist['epochs'])} epochs, best epoch {pre_hist['best_epoch']}, stopped early {pre_hist['stopped_early']}, "
@@ -210,6 +216,22 @@ def run_unit(a):
     execute(a.unit, a, a.seed, x, y, xt, yt, vocab, unl, lab, val, split_info, out)
 
 
+def import_from(root, out):
+    """Copy the AR pre-training results (best weights + history) of an earlier kernel (attached with kernel_sources) into <out>/b3/seed*, so that unit
+    arflat fine-tunes exactly the AR weights of the main run. Returns the number of files copied."""
+    n = 0
+    for dp, dn, fn in os.walk(root):
+        if os.path.basename(dp).startswith("seed") and os.path.basename(os.path.dirname(dp)) == "b3":
+            for f in ("pretrained_ar_v2.pt", "pretrain_ar_v2.json"):
+                if f in fn:
+                    dst = os.path.join(out, "b3", os.path.basename(dp), f)
+                    os.makedirs(os.path.dirname(dst), exist_ok=True)
+                    if not os.path.exists(dst):
+                        shutil.copy(os.path.join(dp, f), dst)
+                        n += 1
+    return n
+
+
 def orchestrate(a):
     try:
         import torch
@@ -254,6 +276,7 @@ def main():
     ap.add_argument("--write-hashes", action="store_true")
     ap.add_argument("--labels", default=None)
     ap.add_argument("--plan", action="store_true")
+    ap.add_argument("--import-from", default=None, help="folder of an earlier kernel's output to take the AR best weights from (unit arflat)")
     ap.add_argument("--unit", default="sup", choices=list(RUNS))
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--seeds", type=int, nargs="*", default=[0, 1, 2, 3, 4])
@@ -272,6 +295,8 @@ def main():
     a = ap.parse_args()
     if a.write_hashes:
         return write_hashes(a.labels)
+    if a.import_from:
+        print(f"imported {import_from(a.import_from, a.out)} AR files from {a.import_from}", flush=True)
     return orchestrate(a) if a.plan else run_unit(a)
 
 

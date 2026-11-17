@@ -75,24 +75,26 @@ def section(first, long, out, bootstrap_path=None):
     for key, label in (("tpr@0.001", "TPR@1e-3"), ("tpr@0.01", "TPR@1e-2")):
         rows = []
         for n in names:
-            if n in ("upper", "lower") or n not in B:
+            if n == "lower" or n not in B:
                 continue
             r = boot["runs"].get(n)
             if not r:
                 continue
-            a, b = r["minus_lower"][key], r["upper_minus"][key]
+            a, b = r["minus_lower"][key], r["upper_minus"][key] if r.get("upper_minus") else None
             ps, en = B[n][key]["ps"], B[n][key]["ens"]
-            rows.append([S.LABELS[n], f"{100 * a['mean']:+.1f} ± {100 * a['std']:.1f} ({a['n_positive']}/{a['n']} > 0)",
+            rows.append([S.LABELS[n] if n != "upper" else "**upper bound** (reference)",
+                         f"{100 * a['mean']:+.1f} ± {100 * a['std']:.1f} ({a['n_positive']}/{a['n']} > 0)",
                          cell(ps.get("vs_lower")), cell(en.get("vs_lower")),
-                         f"{100 * b['mean']:+.1f} ± {100 * b['std']:.1f}", cell(ps.get("upper_minus")), cell(en.get("upper_minus"))])
+                         f"{100 * b['mean']:+.1f} ± {100 * b['std']:.1f}" if b else "", cell(ps.get("upper_minus")), cell(en.get("upper_minus"))])
         txt += f"**{label}** (points; run − lower > 0 = better than the lower bound; upper − run > 0 = below the upper bound)\n\n"
         txt += md(rows, ["run", "run − lower, per seed", "CI, per-seed mean", "CI, ensemble", "upper − run, per seed", "CI, per-seed mean", "CI, ensemble"]) + "\n"
     rows = []
     for n in names:
-        if n in ("upper",) or n not in boot["runs"]:
+        if n == "lower" or n not in boot["runs"]:
             continue
-        a, b = boot["runs"][n]["minus_lower"]["auc"], boot["runs"][n]["upper_minus"]["auc"]
-        rows.append([S.LABELS[n], f"{100 * a['mean']:+.2f} ± {100 * a['std']:.2f} ({a['n_positive']}/{a['n']} > 0)", f"{100 * b['mean']:+.2f} ± {100 * b['std']:.2f}"])
+        a, b = boot["runs"][n]["minus_lower"]["auc"], boot["runs"][n]["upper_minus"]
+        rows.append([S.LABELS[n] if n != "upper" else "**upper bound** (reference)", f"{100 * a['mean']:+.2f} ± {100 * a['std']:.2f} ({a['n_positive']}/{a['n']} > 0)",
+                     f"{100 * b['auc']['mean']:+.2f} ± {100 * b['auc']['std']:.2f}" if b else ""])
     txt += "**AUC** (points, per seed)\n\n" + md(rows, ["run", "run − lower", "upper − run"]) + "\n"
     if "upper" in B and "lower" in B:
         txt += "Bootstrap point estimates and 95% CIs of the two bounds (TPR in %): " + "; ".join(
@@ -100,6 +102,27 @@ def section(first, long, out, bootstrap_path=None):
                 f"TPR@{lab} per-seed mean {100 * B[n][k]['ps']['point']:.1f} [{100 * B[n][k]['ps']['lo']:.1f}, {100 * B[n][k]['ps']['hi']:.1f}], "
                 f"ensemble {100 * B[n][k]['ens']['point']:.1f} [{100 * B[n][k]['ens']['lo']:.1f}, {100 * B[n][k]['ens']['hi']:.1f}]"
                 for k, lab in (("tpr@0.001", "1e-3"), ("tpr@0.01", "1e-2"))) for n in ("upper", "lower")) + ".\n\n"
+
+    # ---- AR last-token against its architecture-matched control (no pre-training)
+    ctrl_rows = []
+    for n in ("ar_lasttoken_3ep", "ar_lasttoken_ep3", "ar_lasttoken_ep6", "ar_lasttoken_ep10", "ar_lasttoken_best"):
+        r = boot["runs"].get(n, {}).get("minus_ctrl")
+        if not r:
+            continue
+        row = [S.LABELS[n]]
+        for key in ("tpr@0.001", "tpr@0.01", "auc"):
+            a = r[key]
+            row.append(f"{100 * a['mean']:+.1f} ± {100 * a['std']:.1f} ({a['n_positive']}/{a['n']} > 0)")
+            if key != "auc":
+                row.append(cell(B[n][key]["ps"].get("vs_ctrl")))
+        ctrl_rows.append(row)
+    if ctrl_rows:
+        v = lambda k: pm(vals(runs, "lower_lasttoken", k), 3 if k != "auc" else 4)
+        txt += ("### Is the gain from pre-training or from the architecture? AR last-token against the same model without pre-training\n\n"
+                "The AR last-token classifier is a causal full-attention model that reads the last non-pad token, not the chunked Nebula of the lower bound. "
+                "Its architecture-matched lower bound is the same model fine-tuned on the same 20% **without** pre-training (extra control `lower_lasttoken`, "
+                f"seeds 0 to 4): TPR@1e-3 {v('tpr@0.001')}, TPR@1e-2 {v('tpr@0.01')}, AUC {v('auc')}. Differences (run − control), in points:\n\n")
+        txt += md(ctrl_rows, ["run", "TPR@1e-3 per seed", "bootstrap CI (per-seed mean)", "TPR@1e-2 per seed", "bootstrap CI (per-seed mean)", "AUC per seed"]) + "\n"
 
     # ---- AR epoch curve table
     rows = []
@@ -151,6 +174,7 @@ def section(first, long, out, bootstrap_path=None):
 
 def plots(runs, long, out):
     import matplotlib
+    import matplotlib.ticker
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     pdir = os.path.join(out, "plots")
@@ -206,8 +230,10 @@ def plots(runs, long, out):
             ax.plot(ep, [e["val_loss"] for e in h["epochs"]], color=COLORS[s % 6], lw=1.8, marker="o", ms=3, label=f"seed {s} val")
             ax.plot(ep, [e["train_loss"] for e in h["epochs"]], color=COLORS[s % 6], lw=1, ls=":", alpha=0.7)
             ax.axvline(h["best_epoch"], color=COLORS[s % 6], lw=0.8, ls="--", alpha=0.5)
-        ax.set_xlabel("epoch"); ax.set_ylabel("LM loss"); ax.set_title(title + " (solid: validation, dotted: train, dashed: best)", loc="left", fontsize=8.5)
+        ax.set_xlabel("epoch"); ax.set_ylabel("LM loss"); ax.set_title(title, loc="left", fontsize=10.5)
+        ax.xaxis.set_major_locator(matplotlib.ticker.MaxNLocator(integer=True))
         ax.grid(alpha=0.3); [ax.spines[s].set_visible(False) for s in ("top", "right")]
         if kind == "ar":
             ax.legend(frameon=False, fontsize=7)
-    fig.tight_layout(); fig.savefig(os.path.join(pdir, "lm_loss_curves.png"), dpi=160); plt.close(fig)
+    fig.text(0.01, 0.01, "solid: validation LM loss, dotted: train loss, dashed vertical line: best epoch (one colour per seed)", fontsize=8, color="#555")
+    fig.tight_layout(rect=(0, 0.04, 1, 1)); fig.savefig(os.path.join(pdir, "lm_loss_curves.png"), dpi=160); plt.close(fig)

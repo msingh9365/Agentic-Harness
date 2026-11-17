@@ -115,7 +115,7 @@ def _ci(draws, point, other_draws=None, other_point=None, sign=+1):
     return {"point": float(sign * (point - other_point)), "lo": float(lo), "hi": float(hi), "resolved": bool(lo > 0 or hi < 0)}
 
 
-def bootstrap(runs, y, names, ref="lower", other="upper", n_boot=1000, seed=0):
+def bootstrap(runs, y, names, ref="lower", other="upper", ctrl="lower_lasttoken", n_boot=1000, seed=0):
     """Stratified bootstrap over test reports (the same resample for every run and seed).
     Two statistics per run:
       "ens"  TPR of the seed-averaged score (mean logit over the 5 seeds): an ENSEMBLE of the seeds (as specified)
@@ -146,6 +146,8 @@ def bootstrap(runs, y, names, ref="lower", other="upper", n_boot=1000, seed=0):
                 e = _ci(draws[kind][n][:, j], point[kind][n][j])
                 if n != ref and ref in draws[kind]:
                     e["vs_lower"] = _ci(draws[kind][n][:, j], point[kind][n][j], draws[kind][ref][:, j], point[kind][ref][j], +1)
+                if ctrl in draws[kind] and n.startswith("ar_lasttoken"):          # architecture-matched control of the AR last-token runs
+                    e["vs_ctrl"] = _ci(draws[kind][n][:, j], point[kind][n][j], draws[kind][ctrl][:, j], point[kind][ctrl][j], +1)
                 if n != other and other in draws[kind]:
                     e["upper_minus"] = _ci(draws[kind][n][:, j], point[kind][n][j], draws[kind][other][:, j], point[kind][other][j], -1)
                 res[n][k][kind] = e
@@ -165,9 +167,12 @@ def main():
     names = [n for n in LABELS if n in runs]
     res = {"n_boot": a.boot, "seeds": SEEDS, "runs": {}, "bootstrap": bootstrap(runs, y, names, n_boot=a.boot)}
     for n in names:
-        if n in ("upper", "lower"):
+        if n == "lower":
             continue
-        res["runs"][n] = {"seeds": seeds_of(runs, n), "minus_lower": paired(runs, n, "lower"), "upper_minus": paired(runs, n, "upper", sign=-1)}
+        res["runs"][n] = {"seeds": seeds_of(runs, n), "minus_lower": paired(runs, n, "lower"),
+                          "upper_minus": paired(runs, n, "upper", sign=-1) if n != "upper" else None}
+        if n.startswith("ar_lasttoken") and "lower_lasttoken" in runs:
+            res["runs"][n]["minus_ctrl"] = paired(runs, n, "lower_lasttoken")
     out = a.out or os.path.join(a.long, "bootstrap.json")
     json.dump(res, open(out, "w"), indent=1)
     print("wrote", out, "| runs:", names)

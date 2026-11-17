@@ -1,0 +1,6 @@
+{
+ "note": "stratified (by family, ym_train) 10% validation slice of the January training set: train_test_split(arange(n), test_size=0.1, stratify=ym_train, random_state=2025); sha256 of int64(train idx)+int64(val idx)",
+ "n_train": 67768,
+ "n_val": 7530,
+ "sha256": "b18269395891ee1e51d69e4a7293f0af"
+}

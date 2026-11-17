@@ -1,0 +1,60 @@
+{
+ "released_pieces": 50000,
+ "ours_pieces": 50000,
+ "common_pieces": 42366,
+ "overlap_pct_of_released": 84.732,
+ "released_byte_pieces": 0,
+ "ours_byte_pieces": 0,
+ "released_january": {
+  "mean_len": 382.4558686817711,
+  "median_len": 511.0,
+  "truncated_pct": 37.808441127254376,
+  "unk_token_pct": 0.0,
+  "len_pctl": {
+   "5": 11.0,
+   "25": 167.0,
+   "50": 511.0,
+   "75": 512.0,
+   "95": 512.0
+  }
+ },
+ "released_april": {
+  "mean_len": 388.01120560855077,
+  "median_len": 511.0,
+  "truncated_pct": 46.2647971497529,
+  "unk_token_pct": 0.0,
+  "len_pctl": {
+   "5": 37.0,
+   "25": 289.0,
+   "50": 511.0,
+   "75": 512.0,
+   "95": 512.0
+  }
+ },
+ "ours_january": {
+  "mean_len": 381.55702674705833,
+  "median_len": 511.0,
+  "truncated_pct": 37.59329597067651,
+  "unk_token_pct": 0.0,
+  "len_pctl": {
+   "5": 11.0,
+   "25": 163.0,
+   "50": 511.0,
+   "75": 512.0,
+   "95": 512.0
+  }
+ },
+ "ours_april": {
+  "mean_len": 386.4655786691185,
+  "median_len": 511.0,
+  "truncated_pct": 46.05217791058499,
+  "unk_token_pct": 0.0,
+  "len_pctl": {
+   "5": 36.0,
+   "25": 286.0,
+   "50": 511.0,
+   "75": 512.0,
+   "95": 512.0
+  }
+ }
+}

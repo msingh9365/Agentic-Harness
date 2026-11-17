@@ -45,13 +45,15 @@ class BatchLimit:
         return self.forward(x)
 
 
-def make_trainer(model, device, task, batch_size, lr, weight_decay, time_budget=None, max_batches=None):
+def make_trainer(model, device, task, batch_size, lr, weight_decay, time_budget=None, max_batches=None, clip_grad_norm=None):
     from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss
     from torch.optim import AdamW
     from nebula import ModelTrainer
     kw = {}
     if max_batches is not None:
         kw["modelForwardPass"] = BatchLimit(model, max_batches)
+    if clip_grad_norm is not None:                 # their default is 0.5; the follow-up recipes set it explicitly
+        kw["clip_grad_norm"] = clip_grad_norm
     return ModelTrainer(model=model, device=device, loss_function=BCEWithLogitsLoss() if task == "binary" else CrossEntropyLoss(),
                         optimizer_class=AdamW, optimizer_config={"lr": lr, "weight_decay": weight_decay}, optim_scheduler=None,
                         batchSize=batch_size, verbosity_n_batches=100000, outputFolder=None, falsePositiveRates=C.FPRS,

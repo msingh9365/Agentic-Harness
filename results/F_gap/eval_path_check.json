@@ -1,0 +1,34 @@
+{
+ "released": {
+  "training_flag_after_predict": false,
+  "dtype_in_file": "int32",
+  "shape": [
+   17402,
+   512
+  ],
+  "pad_id": 0,
+  "pad_side": "right",
+  "maxlen": 512,
+  "pooling": "flatten",
+  "dropout_modules_in_eval": true,
+  "tpr@1e-3_on_3000_subset_logit": 0.48940149625935164,
+  "auc_on_subset": 0.9584960414150869,
+  "matches_saved_logits_max_abs_diff": 3.4332275390625e-05
+ },
+ "ours_fold0_seed0": {
+  "training_flag_after_predict": false,
+  "dtype_in_file": "int32",
+  "shape": [
+   17402,
+   512
+  ],
+  "pad_id": 0,
+  "pad_side": "right",
+  "maxlen": 512,
+  "pooling": "flatten",
+  "dropout_modules_in_eval": true,
+  "tpr@1e-3_on_3000_subset_logit": 0.4476309226932668,
+  "auc_on_subset": 0.9573402632387512,
+  "matches_saved_logits_max_abs_diff": 0.0
+ }
+}

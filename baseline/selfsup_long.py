@@ -161,6 +161,22 @@ def run_unit(a):
     C.dump_json({"unit": a.unit, "seed": a.seed, "finished": time.strftime("%Y-%m-%d %H:%M:%S")}, os.path.join(out, f"{a.unit}_{DONE}"))
 
 
+def import_from(root, out):
+    """Copy the AR pre-training results (best encoder + history) of an earlier kernel (attached with kernel_sources) into <out>,
+    so that ar_flatten_long can start from the same best AR checkpoint. Returns the number of files copied."""
+    n = 0
+    for dp, dn, fn in os.walk(root):
+        if os.path.basename(dp).startswith("seed") and os.path.basename(os.path.dirname(dp)) == "ssl_long":
+            for f in ("pretrained_ar_long.pt", "pretrain_ar_long.json"):
+                if f in fn:
+                    dst = os.path.join(out, "ssl_long", os.path.basename(dp), f)
+                    os.makedirs(os.path.dirname(dst), exist_ok=True)
+                    if not os.path.exists(dst):
+                        shutil.copy(os.path.join(dp, f), dst)
+                        n += 1
+    return n
+
+
 def orchestrate(a):
     try:
         import torch
@@ -211,7 +227,7 @@ def main():
     ap.add_argument("--pt-patience", type=int, default=2)
     ap.add_argument("--min-delta", type=float, default=0.01)
     ap.add_argument("--save-epochs", default="3,6,10")
-    ap.add_argument("--keep-ckpts", action="store_true")
+    ap.add_argument("--import-from", default=None, help="folder of an earlier kernel's output to take the AR best checkpoints from")
     ap.add_argument("--batch-size", type=int, default=96)
     ap.add_argument("--lr", type=float, default=2.5e-4)
     ap.add_argument("--device", default="gpu")
@@ -219,6 +235,8 @@ def main():
     ap.add_argument("--gpus", type=int, default=0)
     ap.add_argument("--limit", type=int, default=0, help="smoke test: use only this many unlabeled reports")
     a = ap.parse_args()
+    if a.import_from:
+        print(f"imported {import_from(a.import_from, a.out)} AR files from {a.import_from}", flush=True)
     return orchestrate(a) if a.plan else run_unit(a)
 
 

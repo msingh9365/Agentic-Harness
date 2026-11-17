@@ -95,6 +95,40 @@ def add_v2(out, big, v2_dir):
     print(f"added {n} baseline-v2 models to the manifest ({len(man['models'])} models in total)")
 
 
+def add_b3(out, big, b3_raws, tokens_dir):
+    """Follow-up B3: the AR and per-position-MLM encoders pre-trained on the v2 splits (best epoch, per seed, with their LM heads) -> <out>/ssl and <big>/ssl,
+    the tokenizer bpe8k_v2 (fit on the 90% of January only) -> tokenizers/bpe8k_v2, and the manifest entries ssl/{ar,mlm}_pretrained_v2/seed<k>."""
+    man = json.load(open(os.path.join(out, "manifest.json")))
+    for d in (out, big):
+        os.makedirs(os.path.join(d, "tokenizers", "bpe8k_v2"), exist_ok=True)
+        for f in ("tokenizer.model", "vocab.json", "info.json"):
+            src = os.path.join(tokens_dir, "variants", "bpe8k_v2", f)
+            if os.path.exists(src):
+                shutil.copy(src, os.path.join(d, "tokenizers", "bpe8k_v2", f))
+    n = 0
+    for raw in b3_raws:
+        for sd in sorted(glob.glob(os.path.join(raw, "b3", "seed*"))):
+            seed = os.path.basename(sd)[4:]
+            for kind, arch, fn in (("ar", "ar_pretrained", "ar_pretrained_v2"), ("mlm_bert", "mlm_pretrained", "mlm_pretrained_v2")):
+                w, hp = os.path.join(sd, f"pretrained_{kind}_v2.pt"), os.path.join(sd, f"pretrain_{kind}_v2.json")
+                if not (os.path.exists(w) and os.path.exists(hp)):
+                    continue
+                h = json.load(open(hp))
+                put(w, os.path.join(out, "ssl", f"{fn}_seed{seed}.pt"))
+                put(w, os.path.join(big, "ssl", f"{fn}_seed{seed}.pt"))
+                man["models"][f"ssl/{fn}/seed{seed}"] = {
+                    "arch": arch, "tokenizer": "bpe8k_v2", "weights": f"ssl/{fn}_seed{seed}.pt", "seq_len": 512, "seed": int(seed),
+                    "pretrain_epoch": h["best_epoch"], "epochs_run": len(h["epochs"]), "val_lm_loss": h["epochs"][h["best_epoch"] - 1]["val_loss"],
+                    "note": ("causal full-attention Nebula, next-token pre-trained (<= 6 epochs, best validation LM loss) on the unlabeled 80% of the 90% of January that is not the "
+                             "validation slice; with LM head" if kind == "ar" else
+                             "chunked Nebula, per-position BERT MLM pre-trained (<= 6 epochs, best validation LM loss) on the same split; with MLM head") +
+                            ". Tokenizer bpe8k_v2 is fit on the 90% only. Splits: baseline/b3_split_hashes.json"}
+                n += 1
+    for d in (out, big):
+        C.dump_json(man, os.path.join(d, "manifest.json"))
+    print(f"added {n} B3 encoders to the manifest ({len(man['models'])} models in total)")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--results", required=True)
@@ -103,7 +137,10 @@ def main():
     ap.add_argument("--big", required=True)
     ap.add_argument("--long-raw", nargs="*", default=None, help="only add the long pre-training encoders of these kernel outputs (contain ssl_long/)")
     ap.add_argument("--v2", default=None, help="only add the baseline-v2 models of this folder (gap/R8_lr2e-3 of the final kernel output)")
+    ap.add_argument("--b3-raw", nargs="*", default=None, help="only add the B3 pre-trained encoders of these kernel outputs (contain b3/seed*/), needs --tokens (folder with variants/bpe8k_v2)")
     a = ap.parse_args()
+    if a.b3_raw is not None:
+        return add_b3(a.out, a.big, a.b3_raw, a.tokens)
     if a.v2:
         return add_v2(a.out, a.big, a.v2)
     if a.long_raw is not None:

@@ -7,6 +7,8 @@ Load any model of this baseline reproduction and score a Speakeasy report.
     p = m.score(report)                                # report: list of entry points (or a path to the .json); -> P(malware)
     m = load_baseline("bpe_v2", seed=0)                # THE baseline (follow-up F): lr 2e-3, 90% of January, 2 epochs; seeds 0 to 4
     m.score_logit(report)                              # the raw logit: rank by this (the float32 probability saturates at logit 16.6)
+    m = load_baseline("ssl/ar_pretrained_v2/seed0")    # B3: AR encoder pre-trained on the v2 splits (tokenizer bpe8k_v2, fit on the 90% of January only)
+    m = load_baseline("ssl/mlm_pretrained_v2/seed0")   # B3: per-position MLM encoder (m.next_token_logits(report) -> [512, V] masked-token logits)
     m = load_baseline("ssl/ar_pretrained/seed0")       # AR-pretrained encoder with its LM head (no classifier)
     m.next_token_logits(report)                        # [512, V] next-token logits
 
@@ -86,6 +88,8 @@ class Baseline:
             return lm.build_fullattn(n, 0.3, causal=False)
         if arch == "fullattn_causal_lasttoken":
             return lm.build_fullattn(n, 0.3, causal=True, last_token=True)
+        if arch == "mlm_pretrained":
+            return lm.build_chunked(n, 0.0, pooling=None, pretrain_layers=[])
         if arch == "ar_pretrained":
             return lm.build_fullattn(n, 0.0, causal=True, pretrain_layers=[])
         raise ValueError(arch)

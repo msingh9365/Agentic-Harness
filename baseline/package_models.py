@@ -36,13 +36,45 @@ def cp(src, dst):
     return os.path.relpath(dst, os.path.dirname(os.path.dirname(dst)))
 
 
+def add_long(out, big, long_raws):
+    """Follow-up B2: add the AR-pretrained encoders of the long pre-training (best epoch, per seed) to <out>/ssl and the manifest, and the
+    epoch-3/6/10 checkpoints to <big>/ssl/ar_long_checkpoints (Kaggle dataset only). Run after the main packaging."""
+    man = json.load(open(os.path.join(out, "manifest.json")))
+    n = 0
+    for raw in long_raws:
+        for sd in sorted(glob.glob(os.path.join(raw, "ssl_long", "seed*"))):
+            seed = os.path.basename(sd)[4:]
+            best = os.path.join(sd, "pretrained_ar_long.pt")
+            if not os.path.exists(best):
+                continue
+            h = json.load(open(os.path.join(sd, "pretrain_ar_long.json")))
+            put(best, os.path.join(out, "ssl", f"ar_pretrained_long_seed{seed}.pt"))
+            put(best, os.path.join(big, "ssl", f"ar_pretrained_long_seed{seed}.pt"))
+            man["models"][f"ssl/ar_pretrained_long/seed{seed}"] = {
+                "arch": "ar_pretrained", "tokenizer": "bpe8k", "weights": f"ssl/ar_pretrained_long_seed{seed}.pt", "seq_len": 512,
+                "pretrain_epoch": h["best_epoch"], "epochs_run": len(h["epochs"]), "val_lm_loss": h["epochs"][h["best_epoch"] - 1]["val_loss"],
+                "note": "causal full-attention Nebula, next-token pre-trained up to 15 epochs on 80% of January (best validation epoch); with LM head. "
+                        "The 3-epoch encoders are ssl/ar_pretrained/seed<k>"}
+            for ep in (3, 6, 10):
+                c = os.path.join(sd, "ckpt_ar", f"epoch{ep}.pt")
+                if os.path.exists(c):
+                    put(c, os.path.join(big, "ssl", "ar_long_checkpoints", f"seed{seed}_epoch{ep}.pt"))
+            n += 1
+    for d in (out, big):
+        C.dump_json(man, os.path.join(d, "manifest.json"))
+    print(f"added {n} long AR encoders to the manifest ({len(man['models'])} models in total)")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--results", required=True)
     ap.add_argument("--tokens", required=True)
     ap.add_argument("--out", default="baseline_models")
     ap.add_argument("--big", required=True)
+    ap.add_argument("--long-raw", nargs="*", default=None, help="only add the long pre-training encoders of these kernel outputs (contain ssl_long/)")
     a = ap.parse_args()
+    if a.long_raw is not None:
+        return add_long(a.out, a.big, a.long_raw)
     models = {}
     for tk in ["bpe50k", "ws50k", "ws50k_legacy", "bpe8k"]:
         src = os.path.join(a.tokens, "variants", tk)

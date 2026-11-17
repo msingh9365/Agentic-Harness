@@ -192,3 +192,11 @@ Two T4s run seeds in parallel, so the quota cost is about half of it (3.8 h) plu
 7.5 h of quota for 11.4 h of compute. Even if quota were charged per GPU the worst case (7.5 h) is half of the **hard limit of 15 GPU-hours for this follow-up**.
 Quota before this follow-up: **10.85 h used, 19.15 h left** (2026-11-17). Order: kernel 1 = item 1 (AR). The epoch-3 point must reproduce
 the first run within noise before anything else is launched; kernel 2 = items 2, 3, 4. Nothing is cut from the list unless the measured cost of kernel 1 changes this estimate.
+
+**Measured, kernel 1 (AR, `nebula-ssl-long-ar`, v2; v1 failed in 1 minute on a packaging bug: the split-hash file was missing from the kernel payload and the
+orchestrator hid the failure, about 0.05 h).** 5 seeds on 2 T4s, 135 min wall. The quota counter went from 10.85 h to **15.42 h (+4.57 h): Kaggle charges
+both GPUs for the whole session**, so the quota cost is 2 × wall time, not the 0.5 × the estimate above assumed. Corrected estimate for kernel 2
+(items 2 to 4, worst case 240 min of compute on two GPUs = 120 min wall): about **4.0 to 4.5 h** of quota, so the follow-up total stays near 9 h, under the 15 h limit.
+Results: all 5 seeds ran the full 15 epochs (the validation LM loss was still falling, 0.84 to 0.92 at epoch 15; early stopping never triggered), so "best" = epoch 15.
+Epoch 3 of the long run reproduces the first run: validation LM loss at epoch 3 agrees to ±0.01 for every seed, and AR last-token TPR@1e-3 is 0.412 against 0.420
+(per-seed difference −0.8 ± 3.6 points), i.e. within noise.

@@ -1280,6 +1280,56 @@
     "tpr@0.001": 0.3330141504415363,
     "f1@0.5": 0.888560885608856
    }
+  },
+  "ssl/ar_pretrained_long/seed0": {
+   "arch": "ar_pretrained",
+   "tokenizer": "bpe8k",
+   "weights": "ssl/ar_pretrained_long_seed0.pt",
+   "seq_len": 512,
+   "pretrain_epoch": 15,
+   "epochs_run": 15,
+   "val_lm_loss": 0.9043840140203305,
+   "note": "causal full-attention Nebula, next-token pre-trained up to 15 epochs on 80% of January (best validation epoch); with LM head. The 3-epoch encoders are ssl/ar_pretrained/seed<k>"
+  },
+  "ssl/ar_pretrained_long/seed1": {
+   "arch": "ar_pretrained",
+   "tokenizer": "bpe8k",
+   "weights": "ssl/ar_pretrained_long_seed1.pt",
+   "seq_len": 512,
+   "pretrain_epoch": 15,
+   "epochs_run": 15,
+   "val_lm_loss": 0.9171000410155996,
+   "note": "causal full-attention Nebula, next-token pre-trained up to 15 epochs on 80% of January (best validation epoch); with LM head. The 3-epoch encoders are ssl/ar_pretrained/seed<k>"
+  },
+  "ssl/ar_pretrained_long/seed2": {
+   "arch": "ar_pretrained",
+   "tokenizer": "bpe8k",
+   "weights": "ssl/ar_pretrained_long_seed2.pt",
+   "seq_len": 512,
+   "pretrain_epoch": 15,
+   "epochs_run": 15,
+   "val_lm_loss": 0.8385896833236035,
+   "note": "causal full-attention Nebula, next-token pre-trained up to 15 epochs on 80% of January (best validation epoch); with LM head. The 3-epoch encoders are ssl/ar_pretrained/seed<k>"
+  },
+  "ssl/ar_pretrained_long/seed3": {
+   "arch": "ar_pretrained",
+   "tokenizer": "bpe8k",
+   "weights": "ssl/ar_pretrained_long_seed3.pt",
+   "seq_len": 512,
+   "pretrain_epoch": 15,
+   "epochs_run": 15,
+   "val_lm_loss": 0.895699352917085,
+   "note": "causal full-attention Nebula, next-token pre-trained up to 15 epochs on 80% of January (best validation epoch); with LM head. The 3-epoch encoders are ssl/ar_pretrained/seed<k>"
+  },
+  "ssl/ar_pretrained_long/seed4": {
+   "arch": "ar_pretrained",
+   "tokenizer": "bpe8k",
+   "weights": "ssl/ar_pretrained_long_seed4.pt",
+   "seq_len": 512,
+   "pretrain_epoch": 15,
+   "epochs_run": 15,
+   "val_lm_loss": 0.8570269138314003,
+   "note": "causal full-attention Nebula, next-token pre-trained up to 15 epochs on 80% of January (best validation epoch); with LM head. The 3-epoch encoders are ssl/ar_pretrained/seed<k>"
   }
  }
 }

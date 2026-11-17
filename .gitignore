@@ -41,3 +41,5 @@ results/_models_big/
 !results/B_selfsup/**/test_logits.npy
 !results/B_selfsup_long/**/test_logits.npy
 !results/B_selfsup_long/y_test.npy
+!baseline_models/ssl/ar_pretrained_long_seed*.pt
+results/_long_*_raw/

@@ -158,6 +158,10 @@ Kaggle limits: about 12 h per session, about 30 GPU-hours per week.
 | 2026-11-17 | nebula-gap-r1c | T4 x2 | 0.88 | F: R6, R7, 5 seeds, 6 epochs (24 min wall) |
 | 2026-11-17 | nebula-gap-r1d | T4 x2 | 0.30 | F: R8, R9, 5 seeds, 4 epochs (20 min wall) |
 | 2026-11-17 | nebula-gap-final | T4 x2 | 0.11 | F: baseline v2 = R8, 5 seeds, 2 epochs, models saved |
+| 2026-11-17 | nebula-b3-tokens | CPU | 0 (no GPU) | B3: BPE-8k refit on the 90% (53 min) |
+| 2026-11-17 | nebula-b3-sup | T4 x2 | about 0.9 | B3: runs 1 to 3, both lrs, 5 seeds (52 min wall) |
+| 2026-11-17 | nebula-b3-pre | T4 x2 | about 1.4 | B3: AR and MLM pre-training + fine-tuning, both lrs, 5 seeds (82 min wall) |
+| | **B3 total** | | **2.26** | quota 20.89 h → 23.15 h (estimate 4.3 h, limit 6 h) |
 | | **F total** | | **3.18** | quota 17.71 h → 20.89 h (limit 8 h, estimate 5 h); 9.11 h left, resets 2026-11-21 |
 
 Per-kernel quota hours were not recorded. What was measured: the sum of per-model training seconds (detection 2.5 h, classification
@@ -357,3 +361,10 @@ Validation only (rule 11.4; no collapse in any cell; curves in `results/baseline
 **Chosen by the rule (final, `results/B3_selfsup_v2/choice.json` once all kernels are in): upper lr 2e-3 epoch 3; lower lr 2e-3 epoch 3; lower_lasttoken lr 1e-3 epoch 3.**
 After these three were chosen, their April test numbers were read once (the choices of the pre-trained run types follow the same mechanical rule and do not depend on them): upper TPR@1e-3 0.522 ± 0.092, lower 0.368 ± 0.075, control 0.412 ± 0.055; TPR@1e-2 0.772 / 0.666 / 0.650; AUC 0.9666 / 0.9530 / 0.9487. **The bounds separate: 15.4 points at 1e-3 (the paper: about 15), 10.6 at 1e-2** (bootstrap CI with the final table).
 Kernel B (`nebula-b3-pre`, AR and MLM) is still running; the projected total is 1.78 + 2.9 = 4.7 h of the 6 h limit.
+
+**11.9 Result (kernel B `nebula-b3-pre`: 10 units all exit 0, 82 min wall; B3 total 2.26 h of 6 h; quota 23.15 h used, 6.85 h left).**
+Pre-training: all 10 runs used all 6 epochs, no early stop, best epoch 6, the validation LM loss still falling (AR 2.04 → 1.12 to 1.20, MLM 4.2 → 3.3). Settings chosen by the rule 11.4 (validation only): AR lr 2e-3 epoch 3 (3 tied cells), MLM lr 2e-3 epoch 6; no collapse in any cell.
+April test (logit-ranked, mean ± std over 5 seeds, chosen settings): TPR@1e-3 upper 0.522 ± 0.092, lower 0.368 ± 0.075, control 0.412 ± 0.055, AR 0.463 ± 0.072, MLM 0.404 ± 0.037; TPR@1e-2 0.772 / 0.666 / 0.650 / 0.711 / 0.696; AUC 0.9666 / 0.9530 / 0.9487 / 0.9617 / 0.9566.
+Paired (per-seed mean, bootstrap CI of the difference): upper − lower +15.3 [+10.9, +18.7] at 1e-3, +10.7 at 1e-2; AR − lower +9.5 [+6.1, +14.6] (62% of the gap), MLM − lower +3.6 [−0.6, +7.6] (not resolved); AR − control +5.1 [+3.0, +12.3] (2 of 5 seeds positive); upper − AR +5.8 [−0.1, +9.5] at 1e-3 and +6.2 [+5.1, +8.1] at 1e-2.
+Seed-ensemble flavour: upper − lower at 1e-3 only +1.7 [−0.4, +12.2]. Literal float32 TPR@1e-3: 0.000 for all 5 MLM seeds.
+Deliverables: `results/B3_selfsup_v2/`, `results/baseline/plots/fig6_v2.png`, `b3_val_curves.png`, encoders `baseline_models/ssl/{ar,mlm}_pretrained_v2_seed*.pt` (manifest keys `ssl/ar_pretrained_v2/seed<k>`, `ssl/mlm_pretrained_v2/seed<k>`, tokenizer `bpe8k_v2`), Kaggle dataset `msingh9365/nebula-baseline-models` v4, REPORT §5.2c, §6.5, `results/baseline/tables.md` regenerated (new sections B3 and F).

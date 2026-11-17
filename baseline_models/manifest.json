@@ -1525,6 +1525,116 @@
    },
    "test_tpr@0.001_literal_float32": 0.6053835514416427,
    "note": "THE baseline from follow-up F on: load_baseline('bpe_v2', seed=k). Rank by logit (model.score_logit), not by float32 probability."
+  },
+  "ssl/ar_pretrained_v2/seed0": {
+   "arch": "ar_pretrained",
+   "tokenizer": "bpe8k_v2",
+   "weights": "ssl/ar_pretrained_v2_seed0.pt",
+   "seq_len": 512,
+   "seed": 0,
+   "pretrain_epoch": 6,
+   "epochs_run": 6,
+   "val_lm_loss": 1.1967841390594542,
+   "note": "causal full-attention Nebula, next-token pre-trained (<= 6 epochs, best validation LM loss) on the unlabeled 80% of the 90% of January that is not the validation slice; with LM head. Tokenizer bpe8k_v2 is fit on the 90% only. Splits: baseline/b3_split_hashes.json"
+  },
+  "ssl/mlm_pretrained_v2/seed0": {
+   "arch": "mlm_pretrained",
+   "tokenizer": "bpe8k_v2",
+   "weights": "ssl/mlm_pretrained_v2_seed0.pt",
+   "seq_len": 512,
+   "seed": 0,
+   "pretrain_epoch": 6,
+   "epochs_run": 6,
+   "val_lm_loss": 3.337558870201567,
+   "note": "chunked Nebula, per-position BERT MLM pre-trained (<= 6 epochs, best validation LM loss) on the same split; with MLM head. Tokenizer bpe8k_v2 is fit on the 90% only. Splits: baseline/b3_split_hashes.json"
+  },
+  "ssl/ar_pretrained_v2/seed1": {
+   "arch": "ar_pretrained",
+   "tokenizer": "bpe8k_v2",
+   "weights": "ssl/ar_pretrained_v2_seed1.pt",
+   "seq_len": 512,
+   "seed": 1,
+   "pretrain_epoch": 6,
+   "epochs_run": 6,
+   "val_lm_loss": 1.123875325134551,
+   "note": "causal full-attention Nebula, next-token pre-trained (<= 6 epochs, best validation LM loss) on the unlabeled 80% of the 90% of January that is not the validation slice; with LM head. Tokenizer bpe8k_v2 is fit on the 90% only. Splits: baseline/b3_split_hashes.json"
+  },
+  "ssl/mlm_pretrained_v2/seed1": {
+   "arch": "mlm_pretrained",
+   "tokenizer": "bpe8k_v2",
+   "weights": "ssl/mlm_pretrained_v2_seed1.pt",
+   "seq_len": 512,
+   "seed": 1,
+   "pretrain_epoch": 6,
+   "epochs_run": 6,
+   "val_lm_loss": 3.3595778235401292,
+   "note": "chunked Nebula, per-position BERT MLM pre-trained (<= 6 epochs, best validation LM loss) on the same split; with MLM head. Tokenizer bpe8k_v2 is fit on the 90% only. Splits: baseline/b3_split_hashes.json"
+  },
+  "ssl/ar_pretrained_v2/seed2": {
+   "arch": "ar_pretrained",
+   "tokenizer": "bpe8k_v2",
+   "weights": "ssl/ar_pretrained_v2_seed2.pt",
+   "seq_len": 512,
+   "seed": 2,
+   "pretrain_epoch": 6,
+   "epochs_run": 6,
+   "val_lm_loss": 1.1356965499095233,
+   "note": "causal full-attention Nebula, next-token pre-trained (<= 6 epochs, best validation LM loss) on the unlabeled 80% of the 90% of January that is not the validation slice; with LM head. Tokenizer bpe8k_v2 is fit on the 90% only. Splits: baseline/b3_split_hashes.json"
+  },
+  "ssl/mlm_pretrained_v2/seed2": {
+   "arch": "mlm_pretrained",
+   "tokenizer": "bpe8k_v2",
+   "weights": "ssl/mlm_pretrained_v2_seed2.pt",
+   "seq_len": 512,
+   "seed": 2,
+   "pretrain_epoch": 6,
+   "epochs_run": 6,
+   "val_lm_loss": 3.3420253453501667,
+   "note": "chunked Nebula, per-position BERT MLM pre-trained (<= 6 epochs, best validation LM loss) on the same split; with MLM head. Tokenizer bpe8k_v2 is fit on the 90% only. Splits: baseline/b3_split_hashes.json"
+  },
+  "ssl/ar_pretrained_v2/seed3": {
+   "arch": "ar_pretrained",
+   "tokenizer": "bpe8k_v2",
+   "weights": "ssl/ar_pretrained_v2_seed3.pt",
+   "seq_len": 512,
+   "seed": 3,
+   "pretrain_epoch": 6,
+   "epochs_run": 6,
+   "val_lm_loss": 1.204656665543636,
+   "note": "causal full-attention Nebula, next-token pre-trained (<= 6 epochs, best validation LM loss) on the unlabeled 80% of the 90% of January that is not the validation slice; with LM head. Tokenizer bpe8k_v2 is fit on the 90% only. Splits: baseline/b3_split_hashes.json"
+  },
+  "ssl/mlm_pretrained_v2/seed3": {
+   "arch": "mlm_pretrained",
+   "tokenizer": "bpe8k_v2",
+   "weights": "ssl/mlm_pretrained_v2_seed3.pt",
+   "seq_len": 512,
+   "seed": 3,
+   "pretrain_epoch": 6,
+   "epochs_run": 6,
+   "val_lm_loss": 3.334190153600685,
+   "note": "chunked Nebula, per-position BERT MLM pre-trained (<= 6 epochs, best validation LM loss) on the same split; with MLM head. Tokenizer bpe8k_v2 is fit on the 90% only. Splits: baseline/b3_split_hashes.json"
+  },
+  "ssl/ar_pretrained_v2/seed4": {
+   "arch": "ar_pretrained",
+   "tokenizer": "bpe8k_v2",
+   "weights": "ssl/ar_pretrained_v2_seed4.pt",
+   "seq_len": 512,
+   "seed": 4,
+   "pretrain_epoch": 6,
+   "epochs_run": 6,
+   "val_lm_loss": 1.1636527865056498,
+   "note": "causal full-attention Nebula, next-token pre-trained (<= 6 epochs, best validation LM loss) on the unlabeled 80% of the 90% of January that is not the validation slice; with LM head. Tokenizer bpe8k_v2 is fit on the 90% only. Splits: baseline/b3_split_hashes.json"
+  },
+  "ssl/mlm_pretrained_v2/seed4": {
+   "arch": "mlm_pretrained",
+   "tokenizer": "bpe8k_v2",
+   "weights": "ssl/mlm_pretrained_v2_seed4.pt",
+   "seq_len": 512,
+   "seed": 4,
+   "pretrain_epoch": 6,
+   "epochs_run": 6,
+   "val_lm_loss": 3.3222615287598387,
+   "note": "chunked Nebula, per-position BERT MLM pre-trained (<= 6 epochs, best validation LM loss) on the same split; with MLM head. Tokenizer bpe8k_v2 is fit on the 90% only. Splits: baseline/b3_split_hashes.json"
   }
  }
 }

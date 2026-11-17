@@ -1,0 +1,16 @@
+{
+ "name": "bpe8k_v2",
+ "kind": "bpe",
+ "vocab": 8192,
+ "seq": 512,
+ "trained_on_train": true,
+ "vocab_entries": 8193,
+ "seq_len": 512,
+ "tokenizer_train_fraction": 1.0,
+ "tokenizer_fit_reports": 67768,
+ "train_tokens_median": 1064.0,
+ "share_train_longer_than_seq": 0.6690615952614943,
+ "share_test_longer_than_seq": 0.6384898287553155,
+ "minutes_total": 15.7,
+ "minutes_encoding": 7.7
+}

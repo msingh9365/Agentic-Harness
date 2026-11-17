@@ -1,0 +1,27 @@
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+WARNING:root: [!] Iniatialized TransformerEncoderChunks. Total trainable parameters: 5.3973e6
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 17:08:51: Train Epoch: 1 [  0  / 706  (0 %)] | Loss: 0.700074 | Elapsed: 0.49s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.4304
+WARNING:root: [*] Tue Nov 17 17:09:32 2026:    1    | Tr.loss: 0.142554 | Elapsed:   41.46  s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.9877
+WARNING:root: [*] Started epoch: 2
+[R7_lr3e-3_clip1 seed 3] epoch 1: val TPR@1e-3 0.819 @1e-2 0.966 AUC 0.9976 loss 0.1024 | 45s
+WARNING:root: [*] 17:09:36: Train Epoch: 2 [  0  / 706  (0 %)] | Loss: 0.039840 | Elapsed: 3.39s | FPR 0.0003 -> TPR: 0.98 & F1: 0.99 | AUC: 0.9985
+WARNING:root: [*] Tue Nov 17 17:10:16 2026:    2    | Tr.loss: 0.046924 | Elapsed:   44.02  s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.9985
+WARNING:root: [*] Started epoch: 3
+[R7_lr3e-3_clip1 seed 3] epoch 2: val TPR@1e-3 0.812 @1e-2 0.978 AUC 0.9982 loss 0.1061 | 89s
+WARNING:root: [*] 17:10:19: Train Epoch: 3 [  0  / 706  (0 %)] | Loss: 0.007884 | Elapsed: 3.30s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 17:11:00 2026:    3    | Tr.loss: 0.039122 | Elapsed:   43.84  s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.9991
+WARNING:root: [*] Started epoch: 4
+[R7_lr3e-3_clip1 seed 3] epoch 3: val TPR@1e-3 0.784 @1e-2 0.970 AUC 0.9978 loss 0.2412 | 133s
+WARNING:root: [*] 17:11:03: Train Epoch: 4 [  0  / 706  (0 %)] | Loss: 0.104307 | Elapsed: 3.34s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 17:11:45 2026:    4    | Tr.loss: 0.034215 | Elapsed:   44.72  s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.9993
+WARNING:root: [*] Started epoch: 5
+[R7_lr3e-3_clip1 seed 3] epoch 4: val TPR@1e-3 0.647 @1e-2 0.975 AUC 0.9979 loss 0.2072 | 177s
+WARNING:root: [*] 17:11:48: Train Epoch: 5 [  0  / 706  (0 %)] | Loss: 0.013448 | Elapsed: 3.32s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 17:12:28 2026:    5    | Tr.loss: 0.032791 | Elapsed:   43.71  s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.9994
+WARNING:root: [*] Started epoch: 6
+[R7_lr3e-3_clip1 seed 3] epoch 5: val TPR@1e-3 0.872 @1e-2 0.978 AUC 0.9981 loss 0.1102 | 221s
+WARNING:root: [*] 17:12:32: Train Epoch: 6 [  0  / 706  (0 %)] | Loss: 0.009565 | Elapsed: 3.33s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 17:13:12 2026:    6    | Tr.loss: 0.033476 | Elapsed:   43.51  s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.9993
+[R7_lr3e-3_clip1 seed 3] epoch 6: val TPR@1e-3 0.736 @1e-2 0.975 AUC 0.9979 loss 0.2400 | 265s

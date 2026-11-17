@@ -1,0 +1,163 @@
+[seed 1/sup] vocab 8193 | unlabeled 54214 labeled 13554 val 7530 test 17402 | split {'sha256': 'bffaec46a187f8bd09f588fd91d58e21', 'n_unlabeled': 54214, 'n_labeled': 13554, 'n_val': 7530} | tokens {'vocab_entries': 8193, 'trained_on_train': True, 'tokenizer_fit_reports': 67768, 'kind': 'bpe'} | {'python': '3.13.16', 'platform': 'Linux-6.18.55+-x86_64-with-glibc2.39', 'cpus': 4, 'torch': '2.11.0+cu130', 'cuda_available': True, 'gpu': 'Tesla T4', 'gpu_count': 1, 'gpu_mem_gb': 14.6, 'numpy': '2.1.3', 'sklearn': '1.6.1', 'sentencepiece': '0.2.2', 'lightning': '2.6.6', 'torchmetrics': '1.9.0', 'pandas': '2.3.3'} | {'nebula_root': '/tmp/nebula', 'nebula_commit': '1343ae170ef32b01a75d2dd5fb906b5541f073df', 'commit_is_pinned': True, 'patches_applied': True}
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+WARNING:root: [!] Iniatialized TransformerEncoderChunks. Total trainable parameters: 2.7216e6
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 19:25:15: Train Epoch: 1 [  0  / 706  (0 %)] | Loss: 0.684647 | Elapsed: 2.07s | FPR 0.0003 -> TPR: 0.05 & F1: 0.09 | AUC: 0.5802
+WARNING:root: [*] Tue Nov 17 19:25:54 2026:    1    | Tr.loss: 0.183402 | Elapsed:   40.52  s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.9804
+WARNING:root: [*] Started epoch: 2
+  [upper_lr0.002] epoch 1: val TPR@1e-3 0.914 @1e-2 0.968 AUC 0.9977 loss 0.0708 | 44s
+WARNING:root: [*] 19:25:57: Train Epoch: 2 [  0  / 706  (0 %)] | Loss: 0.040565 | Elapsed: 3.26s | FPR 0.0003 -> TPR: 0.98 & F1: 0.99 | AUC: 0.9986
+WARNING:root: [*] Tue Nov 17 19:26:36 2026:    2    | Tr.loss: 0.059672 | Elapsed:   42.27  s | FPR 0.0003 -> TPR: 0.69 & F1: 0.82 | AUC: 0.9976
+WARNING:root: [*] Started epoch: 3
+  [upper_lr0.002] epoch 2: val TPR@1e-3 0.930 @1e-2 0.976 AUC 0.9980 loss 0.0721 | 86s
+WARNING:root: [*] 19:26:39: Train Epoch: 3 [  0  / 706  (0 %)] | Loss: 0.009582 | Elapsed: 3.44s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 19:27:19 2026:    3    | Tr.loss: 0.044526 | Elapsed:   42.69  s | FPR 0.0003 -> TPR: 0.76 & F1: 0.86 | AUC: 0.9987
+WARNING:root: [*] Started epoch: 4
+  [upper_lr0.002] epoch 3: val TPR@1e-3 0.873 @1e-2 0.972 AUC 0.9978 loss 0.1138 | 129s
+WARNING:root: [*] 19:27:22: Train Epoch: 4 [  0  / 706  (0 %)] | Loss: 0.136729 | Elapsed: 3.32s | FPR 0.0003 -> TPR: 0.99 & F1: 0.99 | AUC: 0.9923
+WARNING:root: [*] Tue Nov 17 19:28:01 2026:    4    | Tr.loss: 0.038952 | Elapsed:   42.42  s | FPR 0.0003 -> TPR: 0.78 & F1: 0.88 | AUC: 0.9990
+WARNING:root: [*] Started epoch: 5
+  [upper_lr0.002] epoch 4: val TPR@1e-3 0.897 @1e-2 0.975 AUC 0.9980 loss 0.1197 | 171s
+WARNING:root: [*] 19:28:04: Train Epoch: 5 [  0  / 706  (0 %)] | Loss: 0.026890 | Elapsed: 3.38s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 19:28:43 2026:    5    | Tr.loss: 0.034657 | Elapsed:   42.29  s | FPR 0.0003 -> TPR: 0.84 & F1: 0.91 | AUC: 0.9992
+WARNING:root: [*] Started epoch: 6
+  [upper_lr0.002] epoch 5: val TPR@1e-3 0.828 @1e-2 0.981 AUC 0.9978 loss 0.1427 | 214s
+WARNING:root: [*] 19:28:47: Train Epoch: 6 [  0  / 706  (0 %)] | Loss: 0.006985 | Elapsed: 3.34s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 19:29:26 2026:    6    | Tr.loss: 0.029644 | Elapsed:   42.49  s | FPR 0.0003 -> TPR: 0.90 & F1: 0.95 | AUC: 0.9995
+  [upper_lr0.002] epoch 6: val TPR@1e-3 0.913 @1e-2 0.978 AUC 0.9980 loss 0.1328 | 256s
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+WARNING:root: [!] Iniatialized TransformerEncoderChunks. Total trainable parameters: 2.7216e6
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 19:29:29: Train Epoch: 1 [  0  / 706  (0 %)] | Loss: 0.684647 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 0.05 & F1: 0.09 | AUC: 0.5802
+WARNING:root: [*] Tue Nov 17 19:30:09 2026:    1    | Tr.loss: 0.163036 | Elapsed:   39.63  s | FPR 0.0003 -> TPR: 0.24 & F1: 0.38 | AUC: 0.9822
+WARNING:root: [*] Started epoch: 2
+  [upper_lr0.001] epoch 1: val TPR@1e-3 0.905 @1e-2 0.963 AUC 0.9975 loss 0.0681 | 43s
+WARNING:root: [*] 19:30:12: Train Epoch: 2 [  0  / 706  (0 %)] | Loss: 0.015889 | Elapsed: 3.38s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 19:30:51 2026:    2    | Tr.loss: 0.052735 | Elapsed:   42.43  s | FPR 0.0003 -> TPR: 0.65 & F1: 0.78 | AUC: 0.9979
+WARNING:root: [*] Started epoch: 3
+  [upper_lr0.001] epoch 2: val TPR@1e-3 0.948 @1e-2 0.980 AUC 0.9985 loss 0.0496 | 85s
+WARNING:root: [*] 19:30:55: Train Epoch: 3 [  0  / 706  (0 %)] | Loss: 0.007995 | Elapsed: 3.36s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 19:31:34 2026:    3    | Tr.loss: 0.035042 | Elapsed:   42.26  s | FPR 0.0003 -> TPR: 0.86 & F1: 0.93 | AUC: 0.9991
+WARNING:root: [*] Started epoch: 4
+  [upper_lr0.001] epoch 3: val TPR@1e-3 0.902 @1e-2 0.971 AUC 0.9982 loss 0.0794 | 128s
+WARNING:root: [*] 19:31:37: Train Epoch: 4 [  0  / 706  (0 %)] | Loss: 0.155173 | Elapsed: 3.36s | FPR 0.0003 -> TPR: 0.97 & F1: 0.99 | AUC: 0.9923
+WARNING:root: [*] Tue Nov 17 19:32:16 2026:    4    | Tr.loss: 0.028738 | Elapsed:   42.43  s | FPR 0.0003 -> TPR: 0.85 & F1: 0.92 | AUC: 0.9994
+WARNING:root: [*] Started epoch: 5
+  [upper_lr0.001] epoch 4: val TPR@1e-3 0.914 @1e-2 0.981 AUC 0.9983 loss 0.0939 | 170s
+WARNING:root: [*] 19:32:19: Train Epoch: 5 [  0  / 706  (0 %)] | Loss: 0.010935 | Elapsed: 3.37s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 19:32:58 2026:    5    | Tr.loss: 0.023163 | Elapsed:   42.06  s | FPR 0.0003 -> TPR: 0.93 & F1: 0.97 | AUC: 0.9996
+WARNING:root: [*] Started epoch: 6
+  [upper_lr0.001] epoch 5: val TPR@1e-3 0.906 @1e-2 0.987 AUC 0.9983 loss 0.0852 | 212s
+WARNING:root: [*] 19:33:01: Train Epoch: 6 [  0  / 706  (0 %)] | Loss: 0.012110 | Elapsed: 3.35s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 19:33:40 2026:    6    | Tr.loss: 0.020399 | Elapsed:   41.98  s | FPR 0.0003 -> TPR: 0.93 & F1: 0.96 | AUC: 0.9997
+  [upper_lr0.001] epoch 6: val TPR@1e-3 0.888 @1e-2 0.977 AUC 0.9981 loss 0.1137 | 254s
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+WARNING:root: [!] Iniatialized TransformerEncoderChunks. Total trainable parameters: 2.7216e6
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 19:33:44: Train Epoch: 1 [  0  / 142  (0 %)] | Loss: 0.702540 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 0.01 & F1: 0.03 | AUC: 0.5743
+WARNING:root: [*] Tue Nov 17 19:33:51 2026:    1    | Tr.loss: 0.544945 | Elapsed:   7.84   s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.8654
+WARNING:root: [*] Started epoch: 2
+  [lower_lr0.002] epoch 1: val TPR@1e-3 0.607 @1e-2 0.825 AUC 0.9852 loss 0.2154 | 11s
+WARNING:root: [*] 19:33:55: Train Epoch: 2 [  0  / 142  (0 %)] | Loss: 0.148522 | Elapsed: 3.48s | FPR 0.0003 -> TPR: 0.92 & F1: 0.96 | AUC: 0.9929
+WARNING:root: [*] Tue Nov 17 19:34:03 2026:    2    | Tr.loss: 0.135925 | Elapsed:   11.58  s | FPR 0.0003 -> TPR: 0.29 & F1: 0.45 | AUC: 0.9883
+WARNING:root: [*] Started epoch: 3
+  [lower_lr0.002] epoch 2: val TPR@1e-3 0.638 @1e-2 0.914 AUC 0.9924 loss 0.1653 | 23s
+WARNING:root: [*] 19:34:06: Train Epoch: 3 [  0  / 142  (0 %)] | Loss: 0.088611 | Elapsed: 3.48s | FPR 0.0003 -> TPR: 0.95 & F1: 0.97 | AUC: 0.9944
+WARNING:root: [*] Tue Nov 17 19:34:14 2026:    3    | Tr.loss: 0.084907 | Elapsed:   11.24  s | FPR 0.0003 -> TPR: 0.59 & F1: 0.74 | AUC: 0.9955
+WARNING:root: [*] Started epoch: 4
+  [lower_lr0.002] epoch 3: val TPR@1e-3 0.681 @1e-2 0.917 AUC 0.9939 loss 0.2165 | 34s
+WARNING:root: [*] 19:34:18: Train Epoch: 4 [  0  / 142  (0 %)] | Loss: 0.043736 | Elapsed: 3.47s | FPR 0.0003 -> TPR: 0.98 & F1: 0.99 | AUC: 0.9995
+WARNING:root: [*] Tue Nov 17 19:34:25 2026:    4    | Tr.loss: 0.078025 | Elapsed:   11.21  s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.9966
+WARNING:root: [*] Started epoch: 5
+  [lower_lr0.002] epoch 4: val TPR@1e-3 0.586 @1e-2 0.933 AUC 0.9938 loss 0.2311 | 45s
+WARNING:root: [*] 19:34:29: Train Epoch: 5 [  0  / 142  (0 %)] | Loss: 0.112053 | Elapsed: 3.50s | FPR 0.0003 -> TPR: 0.94 & F1: 0.97 | AUC: 0.9972
+WARNING:root: [*] Tue Nov 17 19:34:37 2026:    5    | Tr.loss: 0.047748 | Elapsed:   11.22  s | FPR 0.0003 -> TPR: 0.86 & F1: 0.93 | AUC: 0.9986
+WARNING:root: [*] Started epoch: 6
+  [lower_lr0.002] epoch 5: val TPR@1e-3 0.759 @1e-2 0.907 AUC 0.9944 loss 0.2446 | 56s
+WARNING:root: [*] 19:34:40: Train Epoch: 6 [  0  / 142  (0 %)] | Loss: 0.044617 | Elapsed: 3.50s | FPR 0.0003 -> TPR: 0.95 & F1: 0.98 | AUC: 0.9986
+WARNING:root: [*] Tue Nov 17 19:34:48 2026:    6    | Tr.loss: 0.043126 | Elapsed:   11.20  s | FPR 0.0003 -> TPR: 0.84 & F1: 0.91 | AUC: 0.9990
+  [lower_lr0.002] epoch 6: val TPR@1e-3 0.488 @1e-2 0.920 AUC 0.9945 loss 0.2910 | 68s
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+WARNING:root: [!] Iniatialized TransformerEncoderChunks. Total trainable parameters: 2.7216e6
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 19:34:51: Train Epoch: 1 [  0  / 142  (0 %)] | Loss: 0.702540 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 0.01 & F1: 0.03 | AUC: 0.5743
+WARNING:root: [*] Tue Nov 17 19:35:00 2026:    1    | Tr.loss: 0.420980 | Elapsed:   8.11   s | FPR 0.0003 -> TPR: 0.00 & F1: 0.01 | AUC: 0.8848
+WARNING:root: [*] Started epoch: 2
+  [lower_lr0.001] epoch 1: val TPR@1e-3 0.317 @1e-2 0.678 AUC 0.9623 loss 0.4027 | 11s
+WARNING:root: [*] 19:35:03: Train Epoch: 2 [  0  / 142  (0 %)] | Loss: 0.156565 | Elapsed: 3.37s | FPR 0.0003 -> TPR: 0.83 & F1: 0.91 | AUC: 0.9828
+WARNING:root: [*] Tue Nov 17 19:35:11 2026:    2    | Tr.loss: 0.119551 | Elapsed:   11.08  s | FPR 0.0003 -> TPR: 0.42 & F1: 0.59 | AUC: 0.9899
+WARNING:root: [*] Started epoch: 3
+  [lower_lr0.001] epoch 2: val TPR@1e-3 0.681 @1e-2 0.896 AUC 0.9931 loss 0.1448 | 22s
+WARNING:root: [*] 19:35:14: Train Epoch: 3 [  0  / 142  (0 %)] | Loss: 0.038984 | Elapsed: 3.38s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 19:35:22 2026:    3    | Tr.loss: 0.069529 | Elapsed:   11.08  s | FPR 0.0003 -> TPR: 0.74 & F1: 0.85 | AUC: 0.9966
+WARNING:root: [*] Started epoch: 4
+  [lower_lr0.001] epoch 3: val TPR@1e-3 0.688 @1e-2 0.913 AUC 0.9935 loss 0.1497 | 34s
+WARNING:root: [*] 19:35:25: Train Epoch: 4 [  0  / 142  (0 %)] | Loss: 0.034696 | Elapsed: 3.37s | FPR 0.0003 -> TPR: 0.98 & F1: 0.99 | AUC: 0.9995
+WARNING:root: [*] Tue Nov 17 19:35:33 2026:    4    | Tr.loss: 0.041053 | Elapsed:   11.12  s | FPR 0.0003 -> TPR: 0.81 & F1: 0.90 | AUC: 0.9987
+WARNING:root: [*] Started epoch: 5
+  [lower_lr0.001] epoch 4: val TPR@1e-3 0.811 @1e-2 0.943 AUC 0.9951 loss 0.1395 | 45s
+WARNING:root: [*] 19:35:36: Train Epoch: 5 [  0  / 142  (0 %)] | Loss: 0.036118 | Elapsed: 3.36s | FPR 0.0003 -> TPR: 0.98 & F1: 0.99 | AUC: 0.9995
+WARNING:root: [*] Tue Nov 17 19:35:44 2026:    5    | Tr.loss: 0.028053 | Elapsed:   11.09  s | FPR 0.0003 -> TPR: 0.89 & F1: 0.94 | AUC: 0.9994
+WARNING:root: [*] Started epoch: 6
+  [lower_lr0.001] epoch 5: val TPR@1e-3 0.766 @1e-2 0.924 AUC 0.9950 loss 0.1760 | 56s
+WARNING:root: [*] 19:35:47: Train Epoch: 6 [  0  / 142  (0 %)] | Loss: 0.056781 | Elapsed: 3.40s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 19:35:55 2026:    6    | Tr.loss: 0.021394 | Elapsed:   11.11  s | FPR 0.0003 -> TPR: 0.95 & F1: 0.98 | AUC: 0.9997
+  [lower_lr0.001] epoch 6: val TPR@1e-3 0.582 @1e-2 0.907 AUC 0.9932 loss 0.2541 | 67s
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+WARNING:root: [!] Iniatialized TransformerEncoderModel. Total trainable parameters: 0.6285e6
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 19:35:59: Train Epoch: 1 [  0  / 142  (0 %)] | Loss: 0.691360 | Elapsed: 0.32s | FPR 0.0003 -> TPR: 0.02 & F1: 0.03 | AUC: 0.4616
+WARNING:root: [*] Tue Nov 17 19:36:13 2026:    1    | Tr.loss: 0.270836 | Elapsed:   14.74  s | FPR 0.0003 -> TPR: 0.15 & F1: 0.26 | AUC: 0.9465
+WARNING:root: [*] Started epoch: 2
+  [lower_lasttoken_lr0.002] epoch 1: val TPR@1e-3 0.705 @1e-2 0.904 AUC 0.9935 loss 0.1449 | 31s
+WARNING:root: [*] 19:36:29: Train Epoch: 2 [  0  / 142  (0 %)] | Loss: 0.024533 | Elapsed: 16.03s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 19:36:43 2026:    2    | Tr.loss: 0.083095 | Elapsed:   30.17  s | FPR 0.0003 -> TPR: 0.21 & F1: 0.34 | AUC: 0.9941
+WARNING:root: [*] Started epoch: 3
+  [lower_lasttoken_lr0.002] epoch 2: val TPR@1e-3 0.704 @1e-2 0.909 AUC 0.9944 loss 0.1000 | 61s
+WARNING:root: [*] 19:36:59: Train Epoch: 3 [  0  / 142  (0 %)] | Loss: 0.015497 | Elapsed: 16.01s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 19:37:13 2026:    3    | Tr.loss: 0.058798 | Elapsed:   30.12  s | FPR 0.0003 -> TPR: 0.42 & F1: 0.59 | AUC: 0.9970
+WARNING:root: [*] Started epoch: 4
+  [lower_lasttoken_lr0.002] epoch 3: val TPR@1e-3 0.781 @1e-2 0.899 AUC 0.9948 loss 0.1173 | 91s
+WARNING:root: [*] 19:37:29: Train Epoch: 4 [  0  / 142  (0 %)] | Loss: 0.026179 | Elapsed: 16.04s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 19:37:44 2026:    4    | Tr.loss: 0.041419 | Elapsed:   30.12  s | FPR 0.0003 -> TPR: 0.62 & F1: 0.76 | AUC: 0.9985
+WARNING:root: [*] Started epoch: 5
+  [lower_lasttoken_lr0.002] epoch 4: val TPR@1e-3 0.701 @1e-2 0.902 AUC 0.9946 loss 0.1397 | 121s
+WARNING:root: [*] 19:38:00: Train Epoch: 5 [  0  / 142  (0 %)] | Loss: 0.052599 | Elapsed: 16.02s | FPR 0.0003 -> TPR: 0.98 & F1: 0.99 | AUC: 0.9981
+WARNING:root: [*] Tue Nov 17 19:38:14 2026:    5    | Tr.loss: 0.037138 | Elapsed:   30.11  s | FPR 0.0003 -> TPR: 0.77 & F1: 0.87 | AUC: 0.9986
+WARNING:root: [*] Started epoch: 6
+  [lower_lasttoken_lr0.002] epoch 5: val TPR@1e-3 0.776 @1e-2 0.884 AUC 0.9942 loss 0.1880 | 151s
+WARNING:root: [*] 19:38:30: Train Epoch: 6 [  0  / 142  (0 %)] | Loss: 0.029245 | Elapsed: 16.05s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 19:38:44 2026:    6    | Tr.loss: 0.027931 | Elapsed:   30.16  s | FPR 0.0003 -> TPR: 0.81 & F1: 0.89 | AUC: 0.9993
+  [lower_lasttoken_lr0.002] epoch 6: val TPR@1e-3 0.705 @1e-2 0.897 AUC 0.9939 loss 0.1505 | 181s
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+WARNING:root: [!] Iniatialized TransformerEncoderModel. Total trainable parameters: 0.6285e6
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 19:39:00: Train Epoch: 1 [  0  / 142  (0 %)] | Loss: 0.691360 | Elapsed: 0.11s | FPR 0.0003 -> TPR: 0.02 & F1: 0.03 | AUC: 0.4616
+WARNING:root: [*] Tue Nov 17 19:39:14 2026:    1    | Tr.loss: 0.334070 | Elapsed:   14.48  s | FPR 0.0003 -> TPR: 0.14 & F1: 0.25 | AUC: 0.9151
+WARNING:root: [*] Started epoch: 2
+  [lower_lasttoken_lr0.001] epoch 1: val TPR@1e-3 0.720 @1e-2 0.894 AUC 0.9903 loss 0.1742 | 30s
+WARNING:root: [*] 19:39:30: Train Epoch: 2 [  0  / 142  (0 %)] | Loss: 0.030317 | Elapsed: 16.06s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 19:39:44 2026:    2    | Tr.loss: 0.098945 | Elapsed:   30.17  s | FPR 0.0003 -> TPR: 0.45 & F1: 0.62 | AUC: 0.9920
+WARNING:root: [*] Started epoch: 3
+  [lower_lasttoken_lr0.001] epoch 2: val TPR@1e-3 0.733 @1e-2 0.889 AUC 0.9939 loss 0.1213 | 61s
+WARNING:root: [*] 19:40:01: Train Epoch: 3 [  0  / 142  (0 %)] | Loss: 0.025869 | Elapsed: 16.02s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 19:40:15 2026:    3    | Tr.loss: 0.068276 | Elapsed:   30.10  s | FPR 0.0003 -> TPR: 0.23 & F1: 0.37 | AUC: 0.9960
+WARNING:root: [*] Started epoch: 4
+  [lower_lasttoken_lr0.001] epoch 3: val TPR@1e-3 0.741 @1e-2 0.918 AUC 0.9945 loss 0.1289 | 91s
+WARNING:root: [*] 19:40:31: Train Epoch: 4 [  0  / 142  (0 %)] | Loss: 0.041019 | Elapsed: 16.02s | FPR 0.0003 -> TPR: 0.98 & F1: 0.99 | AUC: 0.9996
+WARNING:root: [*] Tue Nov 17 19:40:45 2026:    4    | Tr.loss: 0.043490 | Elapsed:   30.10  s | FPR 0.0003 -> TPR: 0.81 & F1: 0.89 | AUC: 0.9984
+WARNING:root: [*] Started epoch: 5
+  [lower_lasttoken_lr0.001] epoch 4: val TPR@1e-3 0.702 @1e-2 0.906 AUC 0.9944 loss 0.1385 | 121s
+WARNING:root: [*] 19:41:01: Train Epoch: 5 [  0  / 142  (0 %)] | Loss: 0.089292 | Elapsed: 16.02s | FPR 0.0003 -> TPR: 0.98 & F1: 0.99 | AUC: 0.9916
+WARNING:root: [*] Tue Nov 17 19:41:15 2026:    5    | Tr.loss: 0.038562 | Elapsed:   30.13  s | FPR 0.0003 -> TPR: 0.84 & F1: 0.91 | AUC: 0.9986
+WARNING:root: [*] Started epoch: 6
+  [lower_lasttoken_lr0.001] epoch 5: val TPR@1e-3 0.720 @1e-2 0.911 AUC 0.9942 loss 0.1812 | 151s
+WARNING:root: [*] 19:41:31: Train Epoch: 6 [  0  / 142  (0 %)] | Loss: 0.025938 | Elapsed: 16.01s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 19:41:45 2026:    6    | Tr.loss: 0.030447 | Elapsed:   30.10  s | FPR 0.0003 -> TPR: 0.77 & F1: 0.87 | AUC: 0.9991
+  [lower_lasttoken_lr0.001] epoch 6: val TPR@1e-3 0.751 @1e-2 0.913 AUC 0.9942 loss 0.1722 | 181s

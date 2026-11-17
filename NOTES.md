@@ -351,3 +351,9 @@ Order: kernel A first (the bounds: "do they separate?"), then kernel B. If kerne
 
 **11.7 Launch log (2026-11-17).** `nebula-b3-tokens` (CPU, 53 min, no GPU quota): `bpe8k_v2` fit on 67,768 of 75,298 reports (validation slice left out), labels identical to the published `labels.npz`, max token id 8191, `x_train` encodes all 75,298 reports (the split indices keep their meaning).
 Launched 19:25 UTC: `nebula-b3-sup` (runs 1 to 3, both lrs, 5 seeds; kernel source `nebula-b3-tokens`) and `nebula-b3-pre` (AR and MLM pre-training and fine-tuning, 5 seeds). Quota before: 20.89 h used.
+
+**11.8 Kernel A result (`nebula-b3-sup`, runs 1 to 3, 5 seeds, both lrs, 6 epochs: 15 units all exit 0, 52 min wall, quota 20.89 h → 22.67 h = +1.78 h; the estimate was 1.5 h).**
+Validation only (rule 11.4; no collapse in any cell; curves in `results/baseline/plots/b3_val_curves.png`): upper 0.91 ± 0.01 at lr 2e-3 epoch 3 to 4 (lr 1e-3: 0.86 to 0.89), lower 0.69 to 0.71 (lr 2e-3, epochs 3 to 5), control 0.75 (lr 1e-3, epochs 3 to 5).
+**Chosen by the rule (final, `results/B3_selfsup_v2/choice.json` once all kernels are in): upper lr 2e-3 epoch 3; lower lr 2e-3 epoch 3; lower_lasttoken lr 1e-3 epoch 3.**
+After these three were chosen, their April test numbers were read once (the choices of the pre-trained run types follow the same mechanical rule and do not depend on them): upper TPR@1e-3 0.522 ± 0.092, lower 0.368 ± 0.075, control 0.412 ± 0.055; TPR@1e-2 0.772 / 0.666 / 0.650; AUC 0.9666 / 0.9530 / 0.9487. **The bounds separate: 15.4 points at 1e-3 (the paper: about 15), 10.6 at 1e-2** (bootstrap CI with the final table).
+Kernel B (`nebula-b3-pre`, AR and MLM) is still running; the projected total is 1.78 + 2.9 = 4.7 h of the 6 h limit.

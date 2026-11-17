@@ -127,26 +127,27 @@ def plot_val_curves(gap, plots):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
+    pal = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#6250d6", "#898782", "#0b3d91", "#8c2d04", "#00695c"]
     R = {k: v for k, v in G.load_recipes(gap).items() if not k.startswith("_")}
-    fig, axes = plt.subplots(1, 3, figsize=(15, 4.2))
+    drawn = {k: v for k, v in R.items() if not k.startswith(("R6", "R9"))}               # R6 and R9 collapsed (constant predictor): off every axis
+    fig, axes = plt.subplots(1, 3, figsize=(16, 4.4))
     for ax, (key, title) in zip(axes, M):
-        for i, (name, runs) in enumerate(R.items()):
+        for i, (name, runs) in enumerate(drawn.items()):
+            c = pal[int(name[1]) % len(pal)]
             v = G.curve(runs, key)
             x = np.arange(1, v.shape[1] + 1)
-            m, s = v.mean(0), v.std(0, ddof=1)
-            ax.plot(x, m, color=G.COLORS[i % len(G.COLORS)] if i < 7 else "#333", lw=1.8, ls="-" if i < 7 else "--", label=name)
-            ax.fill_between(x, m - s, m + s, color=G.COLORS[i % len(G.COLORS)], alpha=0.07)
-        ax.set_xlabel("epoch"); ax.set_title(f"validation {title} (mean ± std, 5 seeds)", loc="left", fontsize=10.5)
-        if key == "auc":
-            ax.set_ylim(0.99, 0.9990)
-        elif key == "tpr@0.01":
-            ax.set_ylim(0.9, 1.0)
-        else:
-            ax.set_ylim(0.3, 1.0)
+            m, sd = v.mean(0), v.std(0, ddof=1)
+            hi = name.startswith(("R4", "R8"))
+            ax.plot(x, m, color=c, lw=2.6 if hi else 1.3, ls="-" if int(name[1]) < 7 else "--", label=name)
+            ax.fill_between(x, m - sd, m + sd, color=c, alpha=0.06)
+        ax.set_xlabel("epoch"); ax.set_title(f"validation {title} (mean of 5 seeds)", loc="left", fontsize=10.5)
+        ax.set_ylim({"auc": (0.995, 0.9990), "tpr@0.01": (0.92, 0.99)}.get(key, (0.4, 1.0)))
         ax.grid(alpha=0.3); [ax.spines[s_].set_visible(False) for s_ in ("top", "right")]
-    axes[0].legend(frameon=False, fontsize=7.5, ncol=2, loc="lower left")
-    fig.text(0.01, 0.01, "R6 (lr 1e-2) collapsed to a constant predictor (AUC 0.5) and R9 (lr 5e-3) did in 3 of 5 seeds; both are off the axes.", fontsize=8, color="#555")
-    fig.tight_layout(rect=(0, 0.03, 1, 1)); fig.savefig(os.path.join(plots, "gap_val_curves.png"), dpi=160); plt.close(fig)
+    h, l = axes[0].get_legend_handles_labels()
+    fig.legend(h, l, frameon=False, fontsize=8.5, loc="center right")
+    fig.text(0.01, 0.01, "Bands = ± std over seeds (first panel only is noisy by design: 2,467 validation benign reports allow 2 false alarms at FPR 1e-3). "
+             "Not drawn: R6 (lr 1e-2) collapsed to a constant predictor (AUC 0.5) in all 5 seeds; R9 (lr 5e-3) in 3 of 5.", fontsize=7.5, color="#555")
+    fig.tight_layout(rect=(0, 0.04, 0.88, 1)); fig.savefig(os.path.join(plots, "gap_val_curves.png"), dpi=160); plt.close(fig)
 
 
 def plot_roc(plots, y, groups):

@@ -87,46 +87,67 @@ def paired(runs, name, ref, sign=+1):
     return out
 
 
-def tpr_at(y, z, target):
+def tprs_at(y, z, targets=(1e-3, 1e-2)):
+    """TPR at each target FPR from ONE roc_curve call (the authors' get_tpr_at_fpr: last ROC point with FPR <= target)."""
     from sklearn.metrics import roc_curve
     fpr, tpr, _ = roc_curve(y, z)
-    return float(tpr[fpr <= target][-1])        # the authors' get_tpr_at_fpr
+    return tuple(float(tpr[fpr <= t][-1]) for t in targets)
+
+
+def tpr_at(y, z, target):
+    return tprs_at(y, z, (target,))[0]
 
 
 def seed_average(runs, name, seeds=SEEDS):
     return np.mean([runs[name][s][1] for s in seeds], axis=0)
 
 
+KEYS = ("tpr@0.001", "tpr@0.01")
+
+
+def _ci(draws, point, other_draws=None, other_point=None, sign=+1):
+    if other_draws is None:
+        lo, hi = np.percentile(draws, [2.5, 97.5])
+        return {"point": float(point), "lo": float(lo), "hi": float(hi)}
+    d = sign * (draws - other_draws)
+    lo, hi = np.percentile(d, [2.5, 97.5])
+    return {"point": float(sign * (point - other_point)), "lo": float(lo), "hi": float(hi), "resolved": bool(lo > 0 or hi < 0)}
+
+
 def bootstrap(runs, y, names, ref="lower", other="upper", n_boot=1000, seed=0):
-    """Stratified bootstrap over test reports. Returns {run: {metric: {point, lo, hi, diff_ref: {point, lo, hi, resolved}, ...}}}."""
+    """Stratified bootstrap over test reports (the same resample for every run and seed).
+    Two statistics per run:
+      "ens"  TPR of the seed-averaged score (mean logit over the 5 seeds): an ENSEMBLE of the seeds (as specified)
+      "ps"   the mean over the seeds of each seed's own TPR: matches the per-seed tables (the ensemble lifts the low-FPR TPR of every run, the
+             lower bound most, so the two differ)
+    Returns {run: {metric: {"ens": {point, lo, hi, vs_lower, upper_minus}, "ps": {...}}}}."""
     y = np.asarray(y).astype(int)
     pos, neg = np.where(y == 1)[0], np.where(y == 0)[0]
     rng = np.random.default_rng(seed)
     avail = [n for n in names if n in runs and len(runs[n]) == len(SEEDS)]
     Z = {n: seed_average(runs, n) for n in avail}
-    targets = {"tpr@0.001": 1e-3, "tpr@0.01": 1e-2}
-    draws = {n: {k: np.empty(n_boot) for k in targets} for n in avail}
+    L = {n: [runs[n][s][1] for s in SEEDS] for n in avail}
+    draws = {kind: {n: np.empty((n_boot, 2)) for n in avail} for kind in ("ens", "ps")}
     for b in range(n_boot):
         idx = np.concatenate([rng.choice(pos, len(pos)), rng.choice(neg, len(neg))])
         yb = y[idx]
         for n in avail:
-            zb = Z[n][idx]
-            for k, t in targets.items():
-                draws[n][k][b] = tpr_at(yb, zb, t)
+            draws["ens"][n][b] = tprs_at(yb, Z[n][idx])
+            draws["ps"][n][b] = np.mean([tprs_at(yb, z[idx]) for z in L[n]], axis=0)
+    point = {"ens": {n: np.array(tprs_at(y, Z[n])) for n in avail},
+             "ps": {n: np.mean([tprs_at(y, z) for z in L[n]], axis=0) for n in avail}}
     res = {}
     for n in avail:
         res[n] = {}
-        for k, t in targets.items():
-            point = tpr_at(y, Z[n], t)
-            lo, hi = np.percentile(draws[n][k], [2.5, 97.5])
-            e = {"point": point, "lo": float(lo), "hi": float(hi)}
-            for tag, other_run, sign in (("vs_lower", ref, +1), ("upper_minus", other, -1)):
-                if other_run in draws and n != other_run:
-                    d = sign * (draws[n][k] - draws[other_run][k])
-                    p = sign * (point - tpr_at(y, Z[other_run], t))
-                    dlo, dhi = np.percentile(d, [2.5, 97.5])
-                    e[tag] = {"point": float(p), "lo": float(dlo), "hi": float(dhi), "resolved": bool(dlo > 0 or dhi < 0)}
-            res[n][k] = e
+        for j, k in enumerate(KEYS):
+            res[n][k] = {}
+            for kind in ("ens", "ps"):
+                e = _ci(draws[kind][n][:, j], point[kind][n][j])
+                if n != ref and ref in draws[kind]:
+                    e["vs_lower"] = _ci(draws[kind][n][:, j], point[kind][n][j], draws[kind][ref][:, j], point[kind][ref][j], +1)
+                if n != other and other in draws[kind]:
+                    e["upper_minus"] = _ci(draws[kind][n][:, j], point[kind][n][j], draws[kind][other][:, j], point[kind][other][j], -1)
+                res[n][k][kind] = e
     return res
 
 

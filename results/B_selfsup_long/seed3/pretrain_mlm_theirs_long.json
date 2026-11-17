@@ -1,0 +1,43 @@
+{
+ "epochs": [
+  {
+   "epoch": 1,
+   "train_loss": 142.33765314613902,
+   "val_loss": 133.43923240484193
+  },
+  {
+   "epoch": 2,
+   "train_loss": 130.44019327551368,
+   "val_loss": 129.79307520666788
+  },
+  {
+   "epoch": 3,
+   "train_loss": 125.6548476800686,
+   "val_loss": 128.21194229886382
+  },
+  {
+   "epoch": 4,
+   "train_loss": 121.74618226338208,
+   "val_loss": 127.62788279587248
+  },
+  {
+   "epoch": 5,
+   "train_loss": 118.2914420771405,
+   "val_loss": 127.88142516684294
+  },
+  {
+   "epoch": 6,
+   "train_loss": 115.25333862304687,
+   "val_loss": 128.07147059646556
+  }
+ ],
+ "seconds": 319.71568727493286,
+ "n_pretrain": 59034,
+ "n_val": 1204,
+ "initial_loss_expected_ln_V": 9.011035410141815,
+ "max_epochs": 15,
+ "patience": 2,
+ "min_delta": 0.01,
+ "best_epoch": 4,
+ "stopped_early": true
+}

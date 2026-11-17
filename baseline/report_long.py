@@ -64,8 +64,14 @@ def section(first, long, out, bootstrap_path=None):
     # ---- paired differences + bootstrap
     txt += "### Paired differences (same seed, same split) and bootstrap CIs\n\n"
     txt += ("Per-seed differences: mean ± std over the 5 seeds, and in how many seeds the difference is positive. **Bootstrap**: 95% CI over the April test "
-            "reports (1,000 stratified resamples) of the difference of the seed-averaged scores (mean logit over the seeds), in points of TPR; "
-            "**resolved** = the CI excludes 0. The bootstrap measures test-set sampling noise only; the seed std measures training noise.\n\n")
+            "reports (1,000 stratified resamples, same resample for every run and seed), in points of TPR; **resolved** = the CI excludes 0. Two statistics: "
+            "**per-seed mean** = the mean over the 5 seeds of each seed's own TPR (matches the per-seed columns); **ensemble** = the TPR of the seed-averaged "
+            "score (mean logit over the 5 seeds), i.e. a 5-model ensemble. The ensemble lifts the low-FPR TPR of every run, the lower bound most, so its differences are "
+            "smaller (or of opposite sign) than the per-seed ones. The bootstrap measures test-set sampling noise only; the seed std measures training noise.\n\n")
+
+    def cell(e):
+        return (ci(e) + (" **resolved**" if e["resolved"] else " not resolved")) if e else ""
+
     for key, label in (("tpr@0.001", "TPR@1e-3"), ("tpr@0.01", "TPR@1e-2")):
         rows = []
         for n in names:
@@ -75,25 +81,25 @@ def section(first, long, out, bootstrap_path=None):
             if not r:
                 continue
             a, b = r["minus_lower"][key], r["upper_minus"][key]
-            e = B[n][key]
-            vl, um = e.get("vs_lower"), e.get("upper_minus")
+            ps, en = B[n][key]["ps"], B[n][key]["ens"]
             rows.append([S.LABELS[n], f"{100 * a['mean']:+.1f} ± {100 * a['std']:.1f} ({a['n_positive']}/{a['n']} > 0)",
-                         ci(vl) + (" **resolved**" if vl and vl["resolved"] else " not resolved"),
-                         f"{100 * b['mean']:+.1f} ± {100 * b['std']:.1f}", ci(um) + (" **resolved**" if um and um["resolved"] else " not resolved")])
-        txt += f"**{label}** (points; positive = better than the lower bound; upper − run positive = run is below the upper bound)\n\n"
-        txt += md(rows, ["run", "run − lower (per seed)", "run − lower (bootstrap CI)", "upper − run (per seed)", "upper − run (bootstrap CI)"]) + "\n"
+                         cell(ps.get("vs_lower")), cell(en.get("vs_lower")),
+                         f"{100 * b['mean']:+.1f} ± {100 * b['std']:.1f}", cell(ps.get("upper_minus")), cell(en.get("upper_minus"))])
+        txt += f"**{label}** (points; run − lower > 0 = better than the lower bound; upper − run > 0 = below the upper bound)\n\n"
+        txt += md(rows, ["run", "run − lower, per seed", "CI, per-seed mean", "CI, ensemble", "upper − run, per seed", "CI, per-seed mean", "CI, ensemble"]) + "\n"
     rows = []
     for n in names:
         if n in ("upper",) or n not in boot["runs"]:
             continue
         a, b = boot["runs"][n]["minus_lower"]["auc"], boot["runs"][n]["upper_minus"]["auc"]
-        rows.append([S.LABELS[n], f"{100 * a['mean']:+.2f} ± {100 * a['std']:.2f}", f"{100 * b['mean']:+.2f} ± {100 * b['std']:.2f}"])
+        rows.append([S.LABELS[n], f"{100 * a['mean']:+.2f} ± {100 * a['std']:.2f} ({a['n_positive']}/{a['n']} > 0)", f"{100 * b['mean']:+.2f} ± {100 * b['std']:.2f}"])
     txt += "**AUC** (points, per seed)\n\n" + md(rows, ["run", "run − lower", "upper − run"]) + "\n"
-    e_up, e_lo = B.get("upper", {}), B.get("lower", {})
-    if e_up and e_lo:
-        txt += "Seed-averaged scores with bootstrap 95% CI: " + "; ".join(
-            f"{S.LABELS[n]}: TPR@1e-3 {100 * B[n]['tpr@0.001']['point']:.1f} [{100 * B[n]['tpr@0.001']['lo']:.1f}, {100 * B[n]['tpr@0.001']['hi']:.1f}], "
-            f"TPR@1e-2 {100 * B[n]['tpr@0.01']['point']:.1f} [{100 * B[n]['tpr@0.01']['lo']:.1f}, {100 * B[n]['tpr@0.01']['hi']:.1f}]" for n in ("upper", "lower")) + ".\n\n"
+    if "upper" in B and "lower" in B:
+        txt += "Bootstrap point estimates and 95% CIs of the two bounds (TPR in %): " + "; ".join(
+            f"{S.LABELS[n]}: " + ", ".join(
+                f"TPR@{lab} per-seed mean {100 * B[n][k]['ps']['point']:.1f} [{100 * B[n][k]['ps']['lo']:.1f}, {100 * B[n][k]['ps']['hi']:.1f}], "
+                f"ensemble {100 * B[n][k]['ens']['point']:.1f} [{100 * B[n][k]['ens']['lo']:.1f}, {100 * B[n][k]['ens']['hi']:.1f}]"
+                for k, lab in (("tpr@0.001", "1e-3"), ("tpr@0.01", "1e-2"))) for n in ("upper", "lower")) + ".\n\n"
 
     # ---- AR epoch curve table
     rows = []

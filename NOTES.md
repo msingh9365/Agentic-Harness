@@ -146,14 +146,13 @@ Kaggle limits: about 12 h per session, about 30 GPU-hours per week.
 | date | kernel | GPU | hours | what |
 |---|---|---|---|---|
 | 2026-11-16 | nebula-env-probe, nebula-preprocess-smoke, nebula-preprocess, -b, -lens | none (CPU) | 0 | tokenizer training and token arrays; CPU kernels do not use GPU quota |
-| 2026-11-16 | nebula-gpu-smoke | T4 | < 0.1 | smoke test of the GPU path |
-| 2026-11-16 | nebula-detect | T4 x2 | about 2.0 | detection (BPE, Whitespace; time- and batch-matched), seed 0, released checkpoints |
-| 2026-11-16 | nebula-detect-seeds | T4 x2 | about 1.5 | detection seeds 1 and 2 |
-| 2026-11-16 | nebula-ssl | T4 x2 | about 1.8 | self-supervised, seeds 0 to 2 |
-| 2026-11-16 | nebula-rest | T4 x2 | about 1.5 | legacy Whitespace detection, classification, ablations |
-| 2026-11-16 | nebula-ssl-more | T4 x2 | about 0.7 | self-supervised, seeds 3 and 4 |
+| 2026-11-16 | nebula-gpu-smoke | T4 | not logged (small) | smoke test of the GPU path |
+| 2026-11-16 | nebula-detect, nebula-detect-seeds | T4 x2 | see below | detection (BPE and Whitespace, time- and batch-matched, seeds 0 to 2), released checkpoints |
+| 2026-11-16 | nebula-ssl, nebula-ssl-more | T4 x2 | see below | self-supervised, seeds 0 to 2 and 3 to 4 |
+| 2026-11-16 | nebula-rest | T4 x2 | see below | legacy Whitespace detection, classification, ablations |
 
-Per-kernel hours are estimates from the sum of per-model training seconds (detection 2.5 h, classification 1.1 h, ablations 2.5 h,
-self-supervised fine-tuning 4.1 h, pre-training 1.2 h = 11.4 h of GPU compute) scaled to the quota counter. The quota counter itself
-(`kaggle quota`) read **10.85 h used, 19.15 h left** at the end (it was 3.38 h used before this study, so this study used about 7.5 h
-of session time; two GPUs ran in parallel). The quota resets on 2026-11-21. Nothing was run near the limit.
+Per-kernel quota hours were not recorded. What was measured: the sum of per-model training seconds (detection 2.5 h, classification
+1.1 h, ablations 2.5 h, self-supervised fine-tuning 4.1 h, pre-training 1.2 h = **11.4 h of GPU compute**; the figures come from the
+`train_seconds` fields in `results/*/metrics.json`), and the account quota counter (`kaggle quota`): **10.85 h used, 19.15 h left** at
+the end, 3.38 h of it used before this study, so this study used about **7.5 h** of session time (two GPUs ran in parallel, which is why this
+is less than the 11.4 h of compute). The quota resets on 2026-11-21. Nothing was run near the limit.

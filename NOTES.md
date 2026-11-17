@@ -210,3 +210,71 @@ every seed (6 epochs run, best epoch 4, 5 min per seed). Extra control, not in t
 fine-tuned on the labeled 20% without pre-training, the architecture-matched lower bound of the AR last-token runs): about 12 min wall, 17.50 h → 17.71 h (**+0.21 h**).
 **Follow-up total: 17.71 − 10.85 = 6.86 h of quota** (limit set for this follow-up: 15 h). The estimate above (about 9 h) was an upper bound: the authors' MLM stopped early and the control was cheap.
 Quota after the follow-up: **17.71 h used, 12.29 h left** (resets 2026-11-21). Results and the answer to the question: REPRODUCTION_REPORT.md §5.2b and §6.5.
+
+## 10. Follow-up: why does the authors' released BPE model reach TPR@1e-3 ≈ 0.52 when our retrained models reach ≈ 0.41?
+
+Step 1 (CPU only; code `baseline/gap_analysis.py`, outputs `results/F_gap/`, the extracted history in `/tmp/gap`, not kept). All facts below were read from the authors' git
+history (the pinned submodule has the full history, 377 commits on all branches) or computed.
+
+**10.1 Their history.**
+- The released checkpoint file `nebula/objects/bpe_50000_torch.model` has a long history. Its weights are the **2023-06-02** file (commit `26a8986` "update bpe objects", the same day as
+  `e218c48` "updated tokenizer stopwords filter" and a new sentencepiece model, which is byte-identical to the pinned `bpe_50000_sentencepiece.model`). Everything after that is a rename of keys
+  (Dec 2023 "pip object config", Jan 2024 "Transformer model unification", Feb 2024 "fix of pretrained objects after model class update"): the sorted weight values hash identically in all of
+  them (`cdab5bdc4c90`). The first version (2023-05-12, commit `104c3ab`) was called **`speakeasy_BPE_5ep_torch.model`** ("5ep" = 5 epochs?) and has different weights (`ac2cc3c328f7`).
+  Paper v1 is Oct 2023, v2 Oct 2024: the checkpoint predates both.
+- **There is no script, log or config in the repository that trains the released model** (searched `git log -S`, `git grep` on every commit for `5ep`, `torch.save`, epochs, batch size; no hit). The objects
+  were produced outside the repository.
+- **But the paper's own CV runs are in the `research` branch** (`evaluation/paper_ablation/out_tokenizer/`, April 2023): the logs, the per-fold metrics and the script (`run_tokenizer.py`, Jan 2024 version).
+  They give the authors' training regime for the BPE CV models (the models behind Table 6/7): **batch 96, 5-minute time budget (about 5.3 epochs, 529 batches per epoch, i.e. about 2,800
+  batches on a slower GPU), AdamW with lr 3e-4 (the paper text says 2.5e-4; the repo's default is 2.5e-4), gradient clipping 1.0 (the pinned `ModelTrainer` default is 0.5, which we used), dropout 0.3, no scheduler, our
+  model configuration (5.3972 M parameters, identical)**. The dataset in those logs has **76,126 train reports** (50,750 + 25,376 per fold), **not** the paper's 98,966.
+- The Mar 2024 byte-fallback script (`run_tokenizer.py`, last version) is a different, later recipe (Lightning, one-cycle schedule, 30 epochs, batch 512, dropout 0.5, validation on the test set): not the recipe of the released model.
+- The authors' own per-fold validation metrics for BPE (`bpe_metrics_validation.json`): TPR@1e-3 = [**0.0**, 0.919, 0.846] (fold 1: the float32 tie artifact of §6.4, so **their reported CV numbers contain it too**), TPR@1e-2 = 0.961 / 0.972 / 0.966, AUC 0.9956 / 0.9976 / 0.9974.
+  Ours (9 fold models, same KFold, 5 minutes on a T4): **val TPR@1e-3 0.608**, TPR@3e-3 0.839, TPR@1e-2 0.949, AUC 0.9965. **The gap is already there on in-distribution January validation data
+  (0.85 to 0.92 against 0.61 at equal AUC), so it is not drift between January and April and not the test set.**
+- Dataset: `emulation/kaggle_prep_speakeasy.ipynb` copies the files whose hashes are in `speakeasy_yHashes.json` of the authors' **10k-whitespace preprocessed** train/test sets: 76,126 train and 17,407 test hashes (the
+  notebook's own progress bars). The published folders hold 75,301 / 17,402 files (825 and 5 hashes were not found when copying). The paper's Table 3 counts (98,966 / 27,500) are the raw emulation counts before
+  the authors' own filtering; **the released model was most likely trained on this same ≈ 76k set**, so "it saw more data" is not supported (the difference to ours is 1.1%).
+
+**10.2 The checkpoint** (`results/F_gap/state_dict_table.md`, `state_dict_tables.json`). Same architecture as ours (5,717,313 parameters in the state dict incl. the positional buffer; shapes identical: dModel 64, dHidden 256, 2 layers,
+8 heads, chunk size 64, head [64] with a 32,768-input first layer, flatten pooling, no extra layers). The sinusoidal buffer is identical. **The learned weights are much larger than ours:** L2 norm of the embedding 107 (ours 41, a fresh initialization 36),
+classifier first layer 87 (ours 38, init 29), attention out-projection 4.5 (ours 1.6, init 1.3), feed-forward `linear1` 9.5 (ours 3.3, init 2.6). The May-2023 `5ep` file has the same pattern (105, 85, 4.5, 9.3). Our models grow only slowly
+with training (2,116 batches: embedding 39.6, head 34.4; 5,023 batches: 41.0, 38.2). The authors' training therefore **moved the weights about five times further from the initialization than ours did** (displacement 100 against 20 for the embedding).
+Under Adam this means a much larger learning rate or many more updates than ours (or both).
+
+**10.3 Output calibration** (`results/F_gap/calibration_table.md`, `calibration.json`; logits, eval mode).
+
+| model / data | malware with float32 p = 1.0 (%) | benign with p = 1.0 (n) | benign logit p99 | p99.9 | mean of the 8 highest benign logits | malware median logit |
+|---|---|---|---|---|---|---|
+| released, April test | 42.3 | 5 | 2.5 | 13.5 | **19.8** | 14.3 |
+| ours (9 fold models), April test, mean | 71.3 | 95.2 | 18.1 | 40.9 | **49.5** | 34.0 |
+| released, January (in-sample: it was trained on it) | 72.7 | 3 | 1.1 | 7.8 | 16.3 | 25.8 |
+| ours (seed-0 fold models), held-out January fold, mean | 94.6 | 88.7 | 17.6 | 42.0 | 55.6 | 49.9 |
+
+Our models are **far more over-confident**: logits two to three times larger, 95 benign April reports at float32 1.0 (the released model: 5). This is the quantification of §6.4. Over-confidence and a poor tail (the highest-scoring benign reports score as high as malware) go
+together with overtraining; our own runs agree: **models stopped after 2,116 batches (about 4 epochs) have validation TPR@1e-3 0.718 and test 0.434, models trained for the 5-minute budget (5,023 batches, 9.6 epochs) 0.608 and 0.406**, and the training loss
+of the last 100 batches falls from 0.031 to 0.014.
+
+**10.4 Tokenizer.** Both are BPE-50k models without byte pieces; 42,366 of 50,000 pieces are shared (84.7%). Token-length distributions on the same reports are almost the same (mean 382.5 against 381.6 tokens on January, 388.0 against 386.5 on April; truncated at 512: 37.8% against
+37.6%, 46.3% against 46.1%; no unknown tokens). A tokenizer effect is unlikely (`tokenizer_comparison.json`).
+
+**10.5 Our evaluation path** (`eval_path_check.json`). The released checkpoint and our fold-0 checkpoint were scored through the same function (`cv.predict_logits`: `model.eval()`, `torch.no_grad()`, int ids, 512 tokens, pad id 0 on the right, no dropout, flatten
+pooling) on arrays produced by the same preprocessing code. The saved E logits are reproduced to 3.4e-5. The authors' own trainer also evaluates in `eval()` mode, in 2023 as now.
+
+**10.6 Ranked hypotheses.**
+
+| # | hypothesis | evidence | cheapest test |
+|---|---|---|---|
+| H-A | our models are over-trained (too many updates, over-confident, bad tail) | calibration (10.3); 2,116 vs 5,023 batches; the authors' runs used about 5 epochs; the "5ep" file name | per-epoch validation curves of one recipe (**H2**) |
+| H-B | the learning rate / clipping differ (authors: 3e-4 and 1.0; weight norms say an even larger effective step) | 10.1, 10.2 | lr 1e-3 (**H5**) and lr 3e-4 + clip 1.0 (**H4**), one change each |
+| H-C | training data size (2/3 of January against all of it) | the released model most likely saw all of January | train on 90% of January (**H1**), same recipe |
+| H-D | tokenizer | 84.7% shared pieces, same length distribution: unlikely | our recipe on the released tokenizer (**H3**) |
+| H-E | different data | the published set is the authors' own filtered set (76,126 against our 75,301): unlikely | none (not testable) |
+
+**10.7 Plan and cost.** Selection only on a **held-out validation slice of January**: 10% stratified by family, `train_test_split(random_state=2025)`, hash in `baseline/gap_split_hash.json` (67,768 train / 7,530 validation reports, of which
+**only 2,467 benign**). At FPR 1e-3 that slice allows 2 false alarms, so per-seed validation TPR@1e-3 is extremely noisy; selection uses the **mean over 5 seeds** of val TPR@1e-3, with TPR@3e-3 / TPR@1e-2 and AUC next to it, and ties within one standard error go to the better TPR@1e-2.
+Every recipe gets 5 seeds (0 to 4); every run records validation (and, never used for selection, April test) metrics at every epoch, so the epoch count and early stopping are chosen **after** training from validation alone.
+One change at a time against R0 (lr 2.5e-4, clip 0.5, dropout 0.3, batch 96, wd 1e-2, our BPE-50k, 90% of January): R0 (H1 + H2), R1 lr 1e-3 (H5), R2 lr 3e-4 + clip 1.0 (H4), R3 released tokenizer (H3); combinations only of what helps on validation.
+Cost (T4: about 17 batches/s; 706 batches per epoch = 42 s, plus about 5 s of evaluation; 12 epochs = 9.4 min per run): one kernel with 2 recipes x 5 seeds = 10 runs = 5 per GPU = 47 min wall + 5 min set-up, charged for both GPUs: **about 1.7 h of quota**.
+Round 1a: R0 + R1 (1.7 h); round 1b: R2 + R3, or a refinement chosen from 1a (1.7 h); final training of the chosen recipe with 5 seeds and models saved (about 0.5 h); optional re-run of the B bounds with the v2 recipe (about 1 h).
+**Estimate 5 h, hard limit 8 h.** Quota before this follow-up: 17.71 h used, 12.29 h left (2026-11-17). Measured hours go in §8.

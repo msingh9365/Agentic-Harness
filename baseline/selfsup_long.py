@@ -170,7 +170,7 @@ def orchestrate(a):
     n_gpu = min(n_gpu, a.gpus) if a.gpus else n_gpu
     queue = sorted([(s, u) for s in a.seeds for u in a.units], key=lambda su: -UNITS[su[1]])
     queue = [su for su in queue if not os.path.exists(os.path.join(a.out, "ssl_long", f"seed{su[0]}", f"{su[1]}_{DONE}"))]      # resume
-    running, t0 = {}, time.time()
+    running, t0, failed = {}, time.time(), []
     os.makedirs(os.path.join(a.out, "logs"), exist_ok=True)
     while queue or running:
         for g in range(n_gpu):
@@ -187,10 +187,14 @@ def orchestrate(a):
             if p.poll() is not None:
                 log.close()
                 print(f"[{(time.time() - t0) / 60:.1f} min] GPU {g}: {name} exited with {p.returncode}", flush=True)
+                if p.returncode:
+                    failed.append(name)
                 print("".join(l for l in open(os.path.join(a.out, "logs", f"long_{name}.log")).readlines()
                               if "TEST" in l or "Error" in l or "[ar]" in l or "pre-training ran" in l)[-1800:], flush=True)
                 del running[g]
         time.sleep(5)
+    if failed:
+        raise SystemExit(f"units failed: {failed}")                  # do not let a failed run look like a COMPLETE kernel
 
 
 def main():

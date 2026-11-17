@@ -35,3 +35,5 @@ results/_smoke_prep/
 results/_tokens_raw*/
 results/_gpu_smoke/
 results/baseline_raw*/
+results/_models_big/
+!baseline_models/ssl/ar_pretrained_seed*.pt

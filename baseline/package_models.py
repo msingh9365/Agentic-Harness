@@ -6,10 +6,10 @@ Collect the trained models, tokenizers and the AR-pretrained encoders of a finis
 Layout of --out (small files, committed to git):
     manifest.json                    key -> {arch, tokenizer, weights, ...}; read by baseline_models/load_baseline.py
     tokenizers/<name>/...            tokenizer.model (BPE) + vocab.json for bpe50k, ws50k, bpe8k
-    ssl/ar_pretrained_seed{0,1,2}.pt the AR-pretrained encoder BEFORE fine-tuning (with its LM head), full-attention causal Nebula, V = 8,193
+    ssl/ar_pretrained_seed{0..4}.pt the AR-pretrained encoder BEFORE fine-tuning (with its LM head), full-attention causal Nebula, V = 8,193
 Layout of --big (too large for git, published as the private Kaggle dataset msingh9365/nebula-baseline-models together with the files
 above, so that one folder holds everything):
-    detection/<variant>/<regime>/fold{0,1,2}.pt, classification/..., ssl/<run>/seed<k>.pt
+    detection/<variant>/<regime>/seed<s>_fold<i>.pt, classification/..., ssl/<run>_seed<k>.pt   (variant: bpe50k, ws50k, ws50k_legacy)
 """
 import argparse
 import glob
@@ -20,9 +20,19 @@ import shutil
 from baseline import common as C
 
 
-def cp(src, dst):
+def put(src, dst):
+    """Hard link when possible (same disk, no extra space), else copy."""
     os.makedirs(os.path.dirname(dst), exist_ok=True)
-    shutil.copy(src, dst)
+    if os.path.exists(dst):
+        os.remove(dst)
+    try:
+        os.link(src, dst)
+    except OSError:
+        shutil.copy(src, dst)
+
+
+def cp(src, dst):
+    put(src, dst)
     return os.path.relpath(dst, os.path.dirname(os.path.dirname(dst)))
 
 
@@ -34,7 +44,7 @@ def main():
     ap.add_argument("--big", required=True)
     a = ap.parse_args()
     models = {}
-    for tk in ["bpe50k", "ws50k", "bpe8k"]:
+    for tk in ["bpe50k", "ws50k", "ws50k_legacy", "bpe8k"]:
         src = os.path.join(a.tokens, "variants", tk)
         if not os.path.isdir(src):
             continue
@@ -48,16 +58,16 @@ def main():
         for mf in sorted(glob.glob(os.path.join(a.results, sub, "*", "metrics.json"))):
             m = json.load(open(mf))
             tag = os.path.basename(os.path.dirname(mf))
-            variant = "ws50k" if "ws50k" in tag else "bpe50k"
+            variant = "ws50k_legacy" if "legacy" in tag else ("ws50k" if "ws50k" in tag else "bpe50k")
             regime = "time" if "_time_" in tag else "batches"
+            seed = tag.rsplit("seed", 1)[1]
             for i, fold in enumerate(m["folds"]):
                 w = os.path.join(os.path.dirname(mf), f"fold{i}_model.pt")
                 if not os.path.exists(w):
                     continue
-                rel = f"{'detection' if task == 'detect' else 'classification'}/{variant}/{regime}/fold{i}.pt"
-                shutil.copy(w, os.path.join(a.big, rel)) if os.path.isdir(os.path.dirname(os.path.join(a.big, rel))) else (
-                    os.makedirs(os.path.dirname(os.path.join(a.big, rel)), exist_ok=True), shutil.copy(w, os.path.join(a.big, rel)))
-                key = f"{'detect' if task == 'detect' else 'classify'}/{variant}/{regime}/fold{i}"
+                rel = f"{'detection' if task == 'detect' else 'classification'}/{variant}/{regime}/seed{seed}_fold{i}.pt"
+                put(w, os.path.join(a.big, rel))
+                key = f"{'detect' if task == 'detect' else 'classify'}/{variant}/{regime}/seed{seed}/fold{i}"
                 t = m["test"] if "test" in m else m["folds"][i]["test"]
                 models[key] = {"arch": "chunked", "tokenizer": variant, "weights": rel, "seq_len": 512,
                                "n_classes": 1 if task == "detect" else 8, "batches_seen": fold["batches_seen"],
@@ -68,8 +78,7 @@ def main():
         pre = os.path.join(sd, "pretrained_ar.pt")
         if os.path.exists(pre):
             rel = cp(pre, os.path.join(a.out, "ssl", f"ar_pretrained_seed{seed}.pt"))
-            shutil.copy(pre, os.path.join(a.big, "ssl", f"ar_pretrained_seed{seed}.pt")) if os.path.isdir(os.path.join(a.big, "ssl")) else (
-                os.makedirs(os.path.join(a.big, "ssl"), exist_ok=True), shutil.copy(pre, os.path.join(a.big, "ssl", f"ar_pretrained_seed{seed}.pt")))
+            put(pre, os.path.join(a.big, "ssl", f"ar_pretrained_seed{seed}.pt"))
             models[f"ssl/ar_pretrained/seed{seed}"] = {"arch": "ar_pretrained", "tokenizer": "bpe8k", "weights": f"ssl/ar_pretrained_seed{seed}.pt", "seq_len": 512,
                                                        "note": "causal full-attention Nebula, next-token pre-trained on 80% of January; with LM head"}
         for run in sorted(os.listdir(sd)):
@@ -79,8 +88,7 @@ def main():
             arch = {"upper": "chunked", "lower": "chunked", "mlm_theirs": "chunked", "mlm_bert": "chunked", "ar_flatten": "fullattn",
                     "ar_lasttoken": "fullattn_causal_lasttoken", "lower_fullattn": "fullattn", "upper_fullattn": "fullattn"}[run]
             rel = f"ssl/{run}_seed{seed}.pt"
-            os.makedirs(os.path.join(a.big, "ssl"), exist_ok=True)
-            shutil.copy(f, os.path.join(a.big, rel))
+            put(f, os.path.join(a.big, rel))
             m = json.load(open(os.path.join(sd, run, "metrics.json")))
             models[f"ssl/{run}/seed{seed}"] = {"arch": arch, "tokenizer": "bpe8k", "weights": rel, "seq_len": 512,
                                                "test": {k: m["test"][k] for k in ("auc", "tpr@0.001", "f1@0.5")}}

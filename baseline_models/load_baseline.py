@@ -3,7 +3,7 @@ Load any model of this baseline reproduction and score a Speakeasy report.
 
     from baseline_models.load_baseline import load_baseline, list_baselines
     list_baselines()                                   # keys in manifest.json
-    m = load_baseline("detect/bpe50k/time/fold0")      # the authors' cleaning + tokenizer + our trained Nebula weights
+    m = load_baseline("detect/bpe50k/time/seed0/fold0")      # the authors' cleaning + tokenizer + our trained Nebula weights
     p = m.score(report)                                # report: list of entry points (or a path to the .json); -> P(malware)
     m = load_baseline("ssl/ar_pretrained/seed0")       # AR-pretrained encoder with its LM head (no classifier)
     m.next_token_logits(report)                        # [512, V] next-token logits
@@ -61,6 +61,9 @@ class Baseline:
         if os.path.exists(os.path.join(tdir, "tokenizer.model")):
             self.tokenizer = JSONTokenizerBPE(vocab_size=n, seq_len=seq, vocab=vocab_file, model_path=os.path.join(tdir, "tokenizer.model"))
         else:
+            if tk.endswith("_legacy"):      # ours, inferred: old Whitespace cleaning (see NOTES.md)
+                from baseline.preprocess import legacy_whitespace_class
+                JSONTokenizerNaive = legacy_whitespace_class()
             self.tokenizer = JSONTokenizerNaive(vocab_size=n, seq_len=seq, vocab=vocab_file)
         self.model = self._build(entry, n)
         wp = os.path.join(root, entry["weights"])

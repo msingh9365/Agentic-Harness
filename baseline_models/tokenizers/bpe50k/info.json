@@ -1,0 +1,14 @@
+{
+ "name": "bpe50k",
+ "kind": "bpe",
+ "vocab": 50000,
+ "seq": 512,
+ "trained_on_train": true,
+ "vocab_entries": 50001,
+ "seq_len": 512,
+ "train_tokens_median": 1063.0,
+ "share_train_longer_than_seq": 0.6654625620866425,
+ "share_test_longer_than_seq": 0.6336627973796115,
+ "minutes_total": 17.0,
+ "minutes_encoding": 7.8
+}

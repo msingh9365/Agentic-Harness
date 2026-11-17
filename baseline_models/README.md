@@ -8,7 +8,7 @@ authors' own code. The numbers and how they compare with the paper are in [`REPR
 | what | where | size |
 |---|---|---|
 | `manifest.json`, `load_baseline.py`, tokenizer files (`tokenizers/bpe50k`, `ws50k`, `bpe8k`) | this folder (git) | small |
-| AR-pre-trained encoders **before fine-tuning**, seeds 0, 1, 2 (`ssl/ar_pretrained_seed*.pt`) | this folder (git) | about 5 MB each |
+| AR-pre-trained encoders **before fine-tuning**, seeds 0 to 4 (`ssl/ar_pretrained_seed*.pt`) | this folder (git) | about 5 MB each |
 | Everything else: detection and classification fold models, all fine-tuned self-supervised models | private Kaggle dataset **`msingh9365/nebula-baseline-models`** (it also contains the files above, so one folder is enough) | about 0.8 GB |
 
 Point the loader at the folder that holds `manifest.json` and the weights:
@@ -24,10 +24,10 @@ export NEBULA_BASELINE_MODELS=$PWD/baseline_models_full
 from baseline_models.load_baseline import load_baseline, list_baselines
 
 list_baselines()                                    # all keys
-m = load_baseline("detect/bpe50k/time/fold0")       # detection, BPE tokenizer, time-matched training, CV fold 0
+m = load_baseline("detect/bpe50k/time/seed0/fold0")       # detection, BPE tokenizer, time-matched training, CV fold 0
 p = m.score(report)                                 # report: list of entry points or a path to the .json; returns P(malware)
 
-c = load_baseline("classify/bpe50k/time/fold0")     # 8-class model: m.score(report) -> 8 probabilities
+c = load_baseline("classify/bpe50k/time/seed0/fold0")     # 8-class model: m.score(report) -> 8 probabilities
                                                     # order: clean, backdoor, coinminer, dropper, keylogger, ransomware, rat, trojan
 ar = load_baseline("ssl/ar_pretrained/seed0")       # the AR-pre-trained encoder with its LM head (no classifier)
 ar.next_token_logits(report)                        # [512, V] next-token logits (V = 8,193, the BPE-8k vocabulary)

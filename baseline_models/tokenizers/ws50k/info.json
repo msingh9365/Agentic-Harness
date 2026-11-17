@@ -1,0 +1,14 @@
+{
+ "name": "ws50k",
+ "kind": "whitespace",
+ "vocab": 50000,
+ "seq": 512,
+ "trained_on_train": true,
+ "vocab_entries": 50000,
+ "seq_len": 512,
+ "train_tokens_median": 1032.0,
+ "share_train_longer_than_seq": 0.6583973013891471,
+ "share_test_longer_than_seq": 0.6199862084817837,
+ "minutes_total": 4.6,
+ "minutes_encoding": 2.4
+}

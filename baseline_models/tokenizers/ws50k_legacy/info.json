@@ -1,0 +1,16 @@
+{
+ "name": "ws50k_legacy",
+ "kind": "whitespace",
+ "vocab": 50000,
+ "seq": 512,
+ "legacy": true,
+ "trained_on_train": true,
+ "vocab_entries": 50000,
+ "seq_len": 512,
+ "tokenizer_train_fraction": 1.0,
+ "train_tokens_median": 1341.0,
+ "share_train_longer_than_seq": 0.6841217562219448,
+ "share_test_longer_than_seq": 0.6554419032295139,
+ "minutes_total": 2.7,
+ "minutes_encoding": 1.4
+}

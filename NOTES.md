@@ -285,3 +285,9 @@ after 2 epochs (H-A confirmed on validation)**. R1 (lr 1e-3): better at every ep
 2/3-data models) is 0.730 against 0.718 for those, so more data does not visibly help (H1 is tested directly by R5). The authors' own CV validation (0.85 to 0.92 at 1e-3, 0.97 at 1e-2) is matched by R1, not by R0. Validation TPR@1e-3 has a seed std of 0.04 to 0.19 (2 benign reports allowed), so
 recipe choices use TPR@1e-2, AUC and the validation loss next to it.
 Round 1b: R2 (lr 3e-4 + clip 1.0, the research-branch CV script), R3 (released tokenizer), R4 (lr 3e-3), R5 (R0 on a random 2/3 of January), 5 seeds, 8 epochs (everything peaks early).
+
+**10.9 Round 1b result (validation only; kernel `nebula-gap-r1b`: R2, R3, R4, R5, 5 seeds, 8 epochs, quota 18.51 h → 19.60 h = +1.09 h; follow-up total so far 1.89 h).**
+R2 (lr 3e-4 + clip 1.0, the research-branch script): **no better than R0** (best val TPR@1e-3 0.77 at epoch 3, loss minimum 0.097 at epoch 2 against 0.099): H4 is not the explanation. R3 (released tokenizer): **no effect** (0.79 at epoch 3, loss minimum 0.093): H3 rejected.
+R5 (R0 on a random 2/3 of January): slightly **worse** than R0 (epoch 2: TPR@1e-3 0.73 against 0.79, TPR@1e-2 0.959 against 0.971, AUC 0.9968 against 0.9977): H1 has a small positive effect (more data helps a little; R0 already uses 90%).
+R4 (lr 3e-3): **the best so far**: epoch 2 val TPR@1e-3 0.899 ± 0.038, TPR@1e-3 stays at 0.83 to 0.90 until epoch 8, TPR@1e-2 0.982, AUC 0.9984, lowest val loss of all so far at epoch 2 (0.087). Learning rate is the dominant factor:
+lr 2.5e-4 → 1e-3 → 3e-3 gives epoch-2 val TPR@1e-3 0.794 → 0.867 → 0.899 and TPR@1e-2 0.971 → 0.984 → 0.982. Next (round 1c, 6 epochs, 5 seeds): R6 lr 1e-2 (where does the axis peak?) and R7 = R4 with clip 1.0.

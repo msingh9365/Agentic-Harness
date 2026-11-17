@@ -33,6 +33,8 @@ RECIPES = {
     "R3_released_tok": dict(BASE, tok="released_bpe50k"),                    # H3: the released tokenizer
     "R4_lr3e-3": dict(BASE, lr=3e-3),                                        # H5, further along the lr axis (R1 helped)
     "R5_data_2of3": dict(BASE, n_train=50199),                               # H1 isolated: R0 on a random 2/3 of January (the size of one of our CV training folds)
+    "R6_lr1e-2": dict(BASE, lr=1e-2),                                        # where does the lr axis peak?
+    "R7_lr3e-3_clip1": dict(BASE, lr=3e-3, clip=1.0),                        # R4 with the authors' clipping value
 }
 FPRS = [1e-4, 3e-4, 1e-3, 3e-3, 1e-2, 3e-2, 1e-1]
 KEEP = ["auc", "f1@0.5", "acc@0.5"] + [f"tpr@{f:g}" for f in FPRS]

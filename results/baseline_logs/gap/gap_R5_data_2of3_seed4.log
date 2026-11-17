@@ -1,0 +1,37 @@
+/usr/local/lib/python3.13/dist-packages/unicorn/unicorn.py:6: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+WARNING:root: [!] Iniatialized TransformerEncoderChunks. Total trainable parameters: 5.3973e6
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 15:17:55: Train Epoch: 1 [  0  / 523  (0 %)] | Loss: 0.763552 | Elapsed: 0.46s | FPR 0.0003 -> TPR: 0.03 & F1: 0.06 | AUC: 0.4349
+WARNING:root: [*] Tue Nov 17 15:18:26 2026:    1    | Tr.loss: 0.239169 | Elapsed:   31.88  s | FPR 0.0003 -> TPR: 0.20 & F1: 0.34 | AUC: 0.9601
+WARNING:root: [*] Started epoch: 2
+[R5_data_2of3 seed 4] epoch 1: val TPR@1e-3 0.462 @1e-2 0.864 AUC 0.9897 loss 0.2628 | 36s
+WARNING:root: [*] 15:18:30: Train Epoch: 2 [  0  / 523  (0 %)] | Loss: 0.059718 | Elapsed: 3.64s | FPR 0.0003 -> TPR: 0.98 & F1: 0.99 | AUC: 0.9922
+WARNING:root: [*] Tue Nov 17 15:19:02 2026:    2    | Tr.loss: 0.068229 | Elapsed:   35.76  s | FPR 0.0003 -> TPR: 0.48 & F1: 0.65 | AUC: 0.9965
+WARNING:root: [*] Started epoch: 3
+[R5_data_2of3 seed 4] epoch 2: val TPR@1e-3 0.627 @1e-2 0.952 AUC 0.9960 loss 0.1398 | 71s
+WARNING:root: [*] 15:19:05: Train Epoch: 3 [  0  / 523  (0 %)] | Loss: 0.068675 | Elapsed: 3.55s | FPR 0.0003 -> TPR: 0.99 & F1: 0.99 | AUC: 0.9974
+WARNING:root: [*] Tue Nov 17 15:19:37 2026:    3    | Tr.loss: 0.042997 | Elapsed:   35.53  s | FPR 0.0003 -> TPR: 0.70 & F1: 0.83 | AUC: 0.9986
+WARNING:root: [*] Started epoch: 4
+[R5_data_2of3 seed 4] epoch 3: val TPR@1e-3 0.519 @1e-2 0.969 AUC 0.9975 loss 0.0897 | 107s
+WARNING:root: [*] 15:19:41: Train Epoch: 4 [  0  / 523  (0 %)] | Loss: 0.093572 | Elapsed: 3.60s | FPR 0.0003 -> TPR: 0.97 & F1: 0.98 | AUC: 0.9940
+WARNING:root: [*] Tue Nov 17 15:20:13 2026:    4    | Tr.loss: 0.032788 | Elapsed:   35.35  s | FPR 0.0003 -> TPR: 0.84 & F1: 0.91 | AUC: 0.9991
+WARNING:root: [*] Started epoch: 5
+[R5_data_2of3 seed 4] epoch 4: val TPR@1e-3 0.700 @1e-2 0.975 AUC 0.9978 loss 0.1024 | 142s
+WARNING:root: [*] 15:20:16: Train Epoch: 5 [  0  / 523  (0 %)] | Loss: 0.037526 | Elapsed: 3.58s | FPR 0.0003 -> TPR: 0.99 & F1: 0.99 | AUC: 0.9990
+WARNING:root: [*] Tue Nov 17 15:20:48 2026:    5    | Tr.loss: 0.024929 | Elapsed:   34.91  s | FPR 0.0003 -> TPR: 0.87 & F1: 0.93 | AUC: 0.9995
+WARNING:root: [*] Started epoch: 6
+[R5_data_2of3 seed 4] epoch 5: val TPR@1e-3 0.644 @1e-2 0.972 AUC 0.9977 loss 0.1272 | 177s
+WARNING:root: [*] 15:20:51: Train Epoch: 6 [  0  / 523  (0 %)] | Loss: 0.060408 | Elapsed: 3.56s | FPR 0.0003 -> TPR: 0.98 & F1: 0.99 | AUC: 0.9995
+WARNING:root: [*] Tue Nov 17 15:21:23 2026:    6    | Tr.loss: 0.021673 | Elapsed:   35.10  s | FPR 0.0003 -> TPR: 0.81 & F1: 0.90 | AUC: 0.9996
+WARNING:root: [*] Started epoch: 7
+[R5_data_2of3 seed 4] epoch 6: val TPR@1e-3 0.548 @1e-2 0.955 AUC 0.9970 loss 0.1687 | 212s
+WARNING:root: [*] 15:21:26: Train Epoch: 7 [  0  / 523  (0 %)] | Loss: 0.026762 | Elapsed: 3.58s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 15:21:58 2026:    7    | Tr.loss: 0.018190 | Elapsed:   34.88  s | FPR 0.0003 -> TPR: 0.91 & F1: 0.95 | AUC: 0.9997
+WARNING:root: [*] Started epoch: 8
+[R5_data_2of3 seed 4] epoch 7: val TPR@1e-3 0.505 @1e-2 0.962 AUC 0.9969 loss 0.2187 | 247s
+WARNING:root: [*] 15:22:01: Train Epoch: 8 [  0  / 523  (0 %)] | Loss: 0.008023 | Elapsed: 3.56s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Tue Nov 17 15:22:32 2026:    8    | Tr.loss: 0.015652 | Elapsed:   34.58  s | FPR 0.0003 -> TPR: 0.95 & F1: 0.97 | AUC: 0.9998
+[R5_data_2of3 seed 4] epoch 8: val TPR@1e-3 0.506 @1e-2 0.956 AUC 0.9964 loss 0.2430 | 282s

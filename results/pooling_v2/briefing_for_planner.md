@@ -43,6 +43,18 @@ Seed-paired C − A of the TPR change: prepend 5 +16.1 points [+13.0, +18.9]; pr
 
 **Suggested next steps, cheapest first** (all CPU only, existing checkpoints): (a) run the graded edits on the **released Nebula weights**, to show the brittleness on the published model; (b) explain C's weakness at 0.1% FPR (which benign reports score highest); (c) within-chunk versus across-chunk shuffles to explain why C beats B; (d) attacker-chosen padding (benign-looking calls from other reports, malware only). Needs GPU: B in regime J (not run), more LightGBM seeds.
 
+## 0b. Update 2026-11-17 (round 3, not committed, awaiting review): robustness checks and whole-report model
+
+Details, tables and 5-line verdicts: `results/robustness/README.md` (items 1-4, CPU only) and `results/fulltrace/README.md` (item 5, GPU). Short version:
+
+- **The released Nebula is as position-brittle as A.** Prepending 20 same-report calls: released -39.3 points [-51.3, -26.1], A -43.7, C (J) -2.4 (TPR at the fixed 1% threshold). Most of the released model's loss is original calls being pushed out of the 512-token window; on reports where nothing leaves the window it changes little (-6.8 [-20.2, +4.0]), A still loses 12.8.
+- **C's robustness does not cover padding with benign calls.** With calls from random benign January reports, every model collapses (prepend 20: released 75.0% -> 12.1%, A 71.9% -> 19.5%, C 73.8% -> 42.6%); where no call leaves the window C is worse than A (insert 5: -14.9 points [-18.1, -11.4]). The earlier robustness result is robustness to edits that keep the report's own call mix. The padding was random, fixed k, nothing optimised or saved (a measurement only).
+- **C's low-FPR weakness:** its top benign false positives are short generic start-up sequences (all 1 chunk, 11 distinct sequences among 20, 8 of 20 also occur in malware); the released model's top 20 are more varied and include long reports.
+- **Token order inside a call is not what C uses:** shuffling the tokens inside each call changes A, B, C by at most 0.002 AUC; shuffling all tokens even raises B and C. Why C beats B remains unexplained.
+- **Whole report (model F, 4,096 tokens, regime J, 5 seeds) does not help accuracy:** AUC 0.9635 against C 512 0.9628, A 0.9557, released 0.9586 (all differences inside the intervals); no gain on 4-8 chunk reports (0.938 against 0.948 for C 512); F is robust to same-report padding (|change| <= 1.4 points) but C 512 already is; TPR@0.1% is low (12.7%). F + LightGBM 0.9765 against released + LightGBM 0.9744 (+0.0021 [-0.004, +0.009]). F was not tested with benign-sourced padding.
+- **Cost:** F used 7.36 h of GPU quota (+0.23 h smoke; estimate was 6.3 h; it reaches its final accuracy after one epoch, so 10 epochs were not needed). About 11.5 of 30 h remain (resets Nov 21).
+- Consequences for sections 5 and 8: the case for C as "robust" is narrower than section 5 states (same-report edits only); the case for A or the released model at 0.1% FPR stands; reading longer traces is not supported by these data.
+
 ## 1. Setup you need to know
 
 - **Task.** Malware detection on Speakeasy emulation reports (dataset `dtrizna/quovadis-speakeasy`, 92,700 reports). Model family: Nebula (`TransformerEncoderChunks`: 512 BPE tokens, split into eight 64-token chunks, attention inside a chunk only, then pooling and a small head). Every model here sees only the **first 512 tokens** of a report.
@@ -155,7 +167,7 @@ Seed-paired C − A of the change: shuffle AUC +0.239 [+0.222, +0.256]; insertio
 
 ## 6. Pending
 
-Nothing is running. Everything planned for round 2 is done, evaluated, written up and pushed (commit `b169be3` on `nebula-length-study`, plus the commit that carries this revision of the briefing).
+Nothing is running. Round 3 (section 0b) is done and written up but not committed, awaiting review. Everything planned for round 2 is done, evaluated, written up and pushed (commit `b169be3` on `nebula-length-study`, plus the commit that carries this revision of the briefing).
 
 ## 7. Practical constraints
 

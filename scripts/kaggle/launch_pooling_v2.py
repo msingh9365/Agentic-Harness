@@ -4,7 +4,7 @@ Run several train_pooling_v2.py jobs on a "GPU T4 x2" Kaggle session: one run pe
 
     python launch_pooling_v2.py --jobs A:0,B:0,A:0:tag=_steps3000:steps=3000 [--gpus 0,1] [-- <extra train args>]
 
-Job = VARIANT:SEED[:key=value...] with VARIANT in A, B, C, B0, C0 and keys
+Job = VARIANT:SEED[:key=value...] with VARIANT in A, B, C, B0, C0 (or F with --trainer train_fulltrace.py) and keys
     tag=<suffix of the run name>   steps=<max optimiser steps>   epochs=<n>   all=1 (train on all of January)
 
 Each GPU has a worker that takes the next job from a shared queue, so two runs are always active
@@ -72,6 +72,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--jobs", required=True, help="comma list VARIANT:SEED, e.g. A:0,B:0")
     ap.add_argument("--gpus", default="0,1")
+    ap.add_argument("--trainer", default="train_pooling_v2.py", help="trainer script in the same folder (train_fulltrace.py for results/fulltrace)")
     ap.add_argument("--out", default="/kaggle/working")
     ap.add_argument("--resume-dir", default=None)
     ap.add_argument("rest", nargs="*", help="arguments for train_pooling_v2.py (put them after --)")
@@ -121,7 +122,7 @@ def main():
                 with lock:
                     results[tag] = 0
                 continue
-            cmd = [sys.executable, os.path.join(HERE, "train_pooling_v2.py"), "--variant", variant, "--seed", str(seed),
+            cmd = [sys.executable, os.path.join(HERE, a.trainer), "--variant", variant, "--seed", str(seed),
                    "--gpu", str(gpu), "--out", a.out] + extra
             if "tag" in kv: cmd += ["--tag", kv["tag"]]
             if "steps" in kv: cmd += ["--max-steps", kv["steps"]]

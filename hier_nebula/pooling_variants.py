@@ -37,8 +37,10 @@ VARIANTS = {
     "Cm": dict(pooling="mean", fixed_pe=True, masked_mean=True),
 }
 
-# names used in results/pooling_v2: B and C there are the masked ones; B0 and C0 are the old unmasked B and C
-V2_TO_INTERNAL = {"A": "A", "B": "Bm", "C": "Cm", "B0": "B", "C0": "C"}
+# names used in results/pooling_v2: B and C there are the masked ones; B0 and C0 are the old unmasked B and C.
+# F (results/fulltrace) = C over the whole report: same model as C (Cm) but fed up to 4096 tokens (64 chunks of 64).
+V2_TO_INTERNAL = {"A": "A", "B": "Bm", "C": "Cm", "B0": "B", "C0": "C", "F": "Cm"}
+V2_MAXLEN = {"F": 4096}
 
 
 @functools.lru_cache(maxsize=None)
@@ -88,9 +90,12 @@ def v_flags(v):
     return {"fixed_pe": v["fixed_pe"], "masked_mean": v.get("masked_mean", False)}
 
 
-def build_variant(nebula_root: str, variant: str, vocab_size: int = 50001) -> nn.Module:
-    """Untrained (random-init) model of variant A, B or C; same sizes as the released Nebula."""
+def build_variant(nebula_root: str, variant: str, vocab_size: int = 50001, maxlen: int = 512) -> nn.Module:
+    """Untrained (random-init) model of variant A, B or C; same sizes as the released Nebula.
+    maxlen = number of input tokens (a multiple of 64); only the mean-pooling variants work with maxlen > 512."""
     cfg = dict(NEBULA_CONFIG)
+    cfg["maxlen"] = maxlen
+    assert maxlen == 512 or VARIANTS[variant]["pooling"] == "mean", "flatten pooling is tied to 512 tokens"
     v = VARIANTS[variant]
     cfg["pooling"] = v["pooling"]
     return chunks_class(nebula_root)(vocab_size=vocab_size, **v_flags(v), **cfg)

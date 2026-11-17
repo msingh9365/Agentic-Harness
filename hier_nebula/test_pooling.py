@@ -91,6 +91,24 @@ def main():
             assert torch.isfinite(mm(torch.zeros(1, 512, dtype=torch.long))).all()
     assert sum(p.numel() for p in build_variant(a.nebula, "Bm").parameters()) == n["B"]
     print("ok: masked mean (Bm, Cm) equals the plain mean without padding, ignores padding positions, same parameters")
+
+    # 8. full-trace C (results/fulltrace): same model as Cm, fed up to 4096 tokens; chunks are independent, so a report
+    #    padded to 4096 gives the same output as the same report padded to 512, and chunks beyond 512 add information
+    m512 = build_variant(a.nebula, "Cm").eval()
+    m4k = build_variant(a.nebula, "Cm", maxlen=4096).eval()
+    m4k.load_state_dict(m512.state_dict())
+    short = torch.randint(1, 50000, (3, 512)); short[0, 90:] = 0; short[1, 300:] = 0
+    long_ = torch.cat([short, torch.zeros(3, 3584, dtype=torch.long)], 1)
+    with torch.no_grad():
+        assert torch.allclose(m512(short), m4k(long_), atol=1e-5), "padding a report to 4096 tokens changed the output"
+        two = torch.randint(1, 50000, (2, 1024))
+        p2 = m4k.core(torch.cat([two, torch.zeros(2, 3072, dtype=torch.long)], 1))          # pooled vectors (random-init logits are ~constant)
+        assert not torch.allclose(p2, m512.core(two[:, :512]), atol=1e-3), "the second 512 tokens should change the pooled vector"
+        # by hand: mean over the real tokens of the chunk outputs of all 16 chunks
+        xs = torch.cat(m4k.transform(m4k.embed(m4k.split(two))), dim=1)
+        assert torch.allclose(m4k.core(two), xs.mean(1), atol=1e-5)
+    assert sum(p.numel() for p in m4k.parameters()) == sum(p.numel() for p in m512.parameters())
+    print("ok: full-trace C (maxlen 4096) equals C on short reports, uses chunks beyond 512 tokens, same parameters")
     print("ALL POOLING TESTS PASSED")
 
 

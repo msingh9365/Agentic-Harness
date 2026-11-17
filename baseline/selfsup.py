@@ -75,9 +75,12 @@ def pretrain(kind, x_unl, vocab, a, seed, tag):
     V = len(vocab)
     T = lm.make_lm_trainers()
     rng = np.random.default_rng(seed)
-    perm = rng.permutation(len(x_unl))
-    n_val = max(1, int(0.02 * len(x_unl)))
-    xv, xp = x_unl[perm[:n_val]], x_unl[perm[n_val:]]
+    if getattr(a, "val_x", None) is not None:       # B3: validation LM loss on a separate held-out slice; ALL of x_unl is trained on
+        xv, xp = a.val_x, x_unl
+    else:
+        perm = rng.permutation(len(x_unl))
+        n_val = max(1, int(0.02 * len(x_unl)))
+        xv, xp = x_unl[perm[:n_val]], x_unl[perm[n_val:]]
     common = dict(vocab=vocab, pretrain_epochs=a.pt_epochs, name=tag, log_folder=os.path.join(LIT_DIR, tag), device=a.device,
                   batch_size=a.batch_size, learning_rate=a.lr, gradient_clip_val=1.0, dataloader_workers=a.workers,
                   random_state=seed, verbose=False)

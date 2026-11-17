@@ -37,6 +37,7 @@ VARIANTS = {
     "bpe50k": dict(kind="bpe", vocab=50000, seq=512),
     "ws50k": dict(kind="whitespace", vocab=50000, seq=512),
     "bpe8k": dict(kind="bpe", vocab=8192, seq=512),          # self-supervised experiments (paper Sec. 4.5)
+    "bpe8k_v2": dict(kind="bpe", vocab=8192, seq=512),       # B3: the same, but the tokenizer is fit on the 90% of January that is not the validation slice (--fit-gap-split)
     # released tokenizers (their files, no training): sanity check E
     "released_bpe50k": dict(kind="bpe", released=True, seq=512),
     "released_ws50k": dict(kind="whitespace", released=True, seq=512),
@@ -140,7 +141,7 @@ def build_tokenizer(spec, nebula_root, model_path=None, vocab_file=None):
     return tok
 
 
-def run_variant(name, events_train, events_test, out_dir, nebula_root, seq_lens=(), reuse_dir=None, tok_train_frac=1.0):
+def run_variant(name, events_train, events_test, out_dir, nebula_root, seq_lens=(), reuse_dir=None, tok_train_frac=1.0, tok_fit_idx=None):
     """Train the tokenizer on TRAIN only (unless released), encode train and test. Mirrors preprocess_nebula_speakeasy().
     reuse_dir: a published tokens folder; if it holds this variant, its tokenizer is loaded instead of retrained (used to
     re-encode at other sequence lengths for the length ablation)."""
@@ -165,7 +166,9 @@ def run_variant(name, events_train, events_test, out_dir, nebula_root, seq_lens=
         tok = build_tokenizer(spec, nebula_root)
         prefix = os.path.join(vdir, f"tokenizer_{spec['vocab']}")
         corpus = events_train
-        if tok_train_frac < 1.0:        # FALLBACK ONLY (memory/time): a random subset of the TRAIN reports; recorded in info.json
+        if tok_fit_idx is not None:     # B3: fit on these train reports only (the 90% of follow-up F); all train reports are still encoded
+            corpus = [events_train[i] for i in tok_fit_idx]
+        elif tok_train_frac < 1.0:        # FALLBACK ONLY (memory/time): a random subset of the TRAIN reports; recorded in info.json
             pick = np.random.default_rng(0).permutation(len(events_train))[:int(tok_train_frac * len(events_train))]
             corpus = [events_train[i] for i in sorted(pick)]
         print(f"[{name}] training {spec['kind']} tokenizer (vocab {spec['vocab']}) on {len(corpus)} of {len(events_train)} train reports ...", flush=True)
@@ -202,7 +205,8 @@ def run_variant(name, events_train, events_test, out_dir, nebula_root, seq_lens=
             if f.endswith("_vocab.json") or f.endswith("_counter.json"):
                 os.remove(os.path.join(vdir, f))
     info = {"name": name, **spec, "trained_on_train": trained, "vocab_entries": len(vocab),
-            "seq_len": spec["seq"], "tokenizer_train_fraction": tok_train_frac if trained else None, "train_tokens_median": float(np.median(lens["train"])),
+            "seq_len": spec["seq"], "tokenizer_train_fraction": tok_train_frac if trained else None,
+            "tokenizer_fit_reports": (len(tok_fit_idx) if tok_fit_idx is not None else len(events_train)) if trained else None, "train_tokens_median": float(np.median(lens["train"])),
             "share_train_longer_than_seq": float((lens["train"] > spec["seq"]).mean()),
             "share_test_longer_than_seq": float((lens["test"] > spec["seq"]).mean()),
             "minutes_total": round((time.time() - t0) / 60, 1), "minutes_encoding": round((time.time() - t1) / 60, 1)}
@@ -237,6 +241,7 @@ def main():
     ap.add_argument("--tok-train-frac", type=float, default=1.0, help="fallback: train tokenizers on this fraction of the train reports")
     ap.add_argument("--reuse", default=None, help="published tokens folder whose tokenizers are reused (no retraining)")
     ap.add_argument("--work", default="/tmp/nebula_events", help="cache for the filtered events")
+    ap.add_argument("--fit-gap-split", action="store_true", help="B3: variants ending in _v2 fit their tokenizer on the 90%% training part of follow-up F's split (gap_split_hash.json, asserted)")
     a = ap.parse_args()
 
     info = C.setup_nebula(a.nebula, require_patched=False)
@@ -270,8 +275,13 @@ def main():
                  "minutes_filtering": round((time.time() - t0) / 60, 1)}, os.path.join(a.out, "meta.json"))
     print("counts:", counts, flush=True)
 
+    fit_idx = None
+    if a.fit_gap_split:
+        from baseline import gap
+        fit_idx, val_idx = gap.val_slice(ym_tr)                       # asserts the hash of the stored split
+        print(f"tokenizer fit on {len(fit_idx)} of {len(ym_tr)} train reports (validation slice of {len(val_idx)} left out)", flush=True)
     for name in [v for v in a.variants.split(",") if v]:
-        run_variant(name, ev_tr, ev_te, a.out, info["nebula_root"], seq_lens, a.reuse, a.tok_train_frac)
+        run_variant(name, ev_tr, ev_te, a.out, info["nebula_root"], seq_lens, a.reuse, a.tok_train_frac, fit_idx if name.endswith("_v2") else None)
     print(f"all done in {(time.time() - t0) / 60:.1f} min", flush=True)
 
 

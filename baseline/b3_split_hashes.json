@@ -1,0 +1,35 @@
+{
+ "note": "B3 splits: validation slice of follow-up F (gap_split_hash.json), the rest split 80/20 stratified by family, train_test_split(train_size=0.8, stratify=ym, random_state=seed); sha256 over (unlabeled, labeled, validation) indices",
+ "seeds": {
+  "0": {
+   "sha256": "f9a0bdb6073d595b8aa58220a90a77b0",
+   "n_unlabeled": 54214,
+   "n_labeled": 13554,
+   "n_val": 7530
+  },
+  "1": {
+   "sha256": "bffaec46a187f8bd09f588fd91d58e21",
+   "n_unlabeled": 54214,
+   "n_labeled": 13554,
+   "n_val": 7530
+  },
+  "2": {
+   "sha256": "9aee7f2e7c2e77e5ebdaa2c33b5ee148",
+   "n_unlabeled": 54214,
+   "n_labeled": 13554,
+   "n_val": 7530
+  },
+  "3": {
+   "sha256": "7e6cfb4c143effede0fed551b968e37e",
+   "n_unlabeled": 54214,
+   "n_labeled": 13554,
+   "n_val": 7530
+  },
+  "4": {
+   "sha256": "afa6c5402c1ba29a218568c33b9ff08f",
+   "n_unlabeled": 54214,
+   "n_labeled": 13554,
+   "n_val": 7530
+  }
+ }
+}

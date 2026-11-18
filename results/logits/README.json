@@ -1,0 +1,49 @@
+{
+ "b3_chosen": {
+  "ar_flatten": {
+   "lr": 0.001,
+   "epoch": 6
+  },
+  "ar_lasttoken": {
+   "lr": 0.002,
+   "epoch": 3
+  },
+  "lower_lasttoken": {
+   "lr": 0.001,
+   "epoch": 3
+  },
+  "lower": {
+   "lr": 0.002,
+   "epoch": 3
+  },
+  "mlm_bert": {
+   "lr": 0.002,
+   "epoch": 6
+  },
+  "mlm_theirs": {
+   "lr": 0.001,
+   "epoch": 3
+  },
+  "upper": {
+   "lr": 0.002,
+   "epoch": 3
+  }
+ },
+ "v2": {
+  "epoch": 2,
+  "lr": 0.002,
+  "seeds": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "note": "float32 logits; labels in labels.npz (y_val = the January validation slice of follow-up F in index order, y_test = April); released.npz: val_in_sample is IN-SAMPLE (the released model was trained on January)"
+}

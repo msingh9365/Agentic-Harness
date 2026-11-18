@@ -1358,14 +1358,18 @@
     "tpr@0.001": 0.9296859569425242,
     "tpr@0.01": 0.9840015800908553,
     "f1@0.5": 0.990487514863258,
-    "loss": 0.05939622665264802
+    "loss": 0.05939622665264802,
+    "pauc@0.01": 0.9596949534367177,
+    "pauc@0.001": 0.8679586540757914
    },
    "test": {
     "auc": 0.9651985224128037,
     "tpr@0.001": 0.5149483987658261,
     "tpr@0.01": 0.739972337482711,
     "f1@0.5": 0.8823529411764706,
-    "acc@0.5": 0.8848408228939202
+    "acc@0.5": 0.8848408228939202,
+    "pauc@0.01": 0.6548662070274823,
+    "pauc@0.001": 0.398530197946703
    },
    "test_tpr@0.001_literal_float32": 0.5146292158740291,
    "note": "THE baseline from follow-up F on: load_baseline('bpe_v2', seed=k). Rank by logit (model.score_logit), not by float32 probability."
@@ -1397,14 +1401,18 @@
     "tpr@0.001": 0.9405490815721904,
     "tpr@0.01": 0.9790637961682797,
     "f1@0.5": 0.9886933438206666,
-    "loss": 0.09886018178862258
+    "loss": 0.09886018178862258,
+    "pauc@0.01": 0.949409071159411,
+    "pauc@0.001": 0.781467173924722
    },
    "test": {
     "auc": 0.9619180470904645,
     "tpr@0.001": 0.5838919033939781,
     "tpr@0.01": 0.7857218853069475,
     "f1@0.5": 0.8833948339483395,
-    "acc@0.5": 0.8728881737731295
+    "acc@0.5": 0.8728881737731295,
+    "pauc@0.01": 0.6944923980988775,
+    "pauc@0.001": 0.4146421472413851
    },
    "test_tpr@0.001_literal_float32": 0.0,
    "note": "THE baseline from follow-up F on: load_baseline('bpe_v2', seed=k). Rank by logit (model.score_logit), not by float32 probability."
@@ -1436,14 +1444,18 @@
     "tpr@0.001": 0.9296859569425242,
     "tpr@0.01": 0.9879518072289156,
     "f1@0.5": 0.991574982654376,
-    "loss": 0.053483249179606965
+    "loss": 0.053483249179606965,
+    "pauc@0.01": 0.9658886954250783,
+    "pauc@0.001": 0.8670779791970183
    },
    "test": {
     "auc": 0.957096270300914,
     "tpr@0.001": 0.5858070007447601,
     "tpr@0.01": 0.8113629109479732,
     "f1@0.5": 0.8768462087519904,
-    "acc@0.5": 0.8711067693368578
+    "acc@0.5": 0.8711067693368578,
+    "pauc@0.01": 0.720581441710396,
+    "pauc@0.001": 0.4880274110422763
    },
    "test_tpr@0.001_literal_float32": 0.5858070007447601,
    "note": "THE baseline from follow-up F on: load_baseline('bpe_v2', seed=k). Rank by logit (model.score_logit), not by float32 probability."
@@ -1475,14 +1487,18 @@
     "tpr@0.001": 0.7408650997432352,
     "tpr@0.01": 0.9843966028046612,
     "f1@0.5": 0.9899129746835443,
-    "loss": 0.06500471809572402
+    "loss": 0.06500471809572402,
+    "pauc@0.01": 0.9186502200366182,
+    "pauc@0.001": 0.5693736824403277
    },
    "test": {
     "auc": 0.9640427158147432,
     "tpr@0.001": 0.5153739759548888,
     "tpr@0.01": 0.7972124694116396,
     "f1@0.5": 0.9117579908675799,
-    "acc@0.5": 0.9111596368233537
+    "acc@0.5": 0.9111596368233537,
+    "pauc@0.01": 0.6928030114039717,
+    "pauc@0.001": 0.24498117174566827
    },
    "test_tpr@0.001_literal_float32": 0.5145228215767634,
    "note": "THE baseline from follow-up F on: load_baseline('bpe_v2', seed=k). Rank by logit (model.score_logit), not by float32 probability."
@@ -1514,14 +1530,18 @@
     "tpr@0.001": 0.9468694449930871,
     "tpr@0.01": 0.9883468299427217,
     "f1@0.5": 0.9916732751784298,
-    "loss": 0.06277705210769248
+    "loss": 0.06277705210769248,
+    "pauc@0.01": 0.9564423809253507,
+    "pauc@0.001": 0.7981955131856643
    },
    "test": {
     "auc": 0.9529800486962298,
     "tpr@0.001": 0.6054899457389084,
     "tpr@0.01": 0.8303010958612619,
     "f1@0.5": 0.9095087618500431,
-    "acc@0.5": 0.9094931617055511
+    "acc@0.5": 0.9094931617055511,
+    "pauc@0.01": 0.7448732419565453,
+    "pauc@0.001": 0.4443364193794919
    },
    "test_tpr@0.001_literal_float32": 0.6053835514416427,
    "note": "THE baseline from follow-up F on: load_baseline('bpe_v2', seed=k). Rank by logit (model.score_logit), not by float32 probability."
@@ -1635,6 +1655,221 @@
    "epochs_run": 6,
    "val_lm_loss": 3.3222615287598387,
    "note": "chunked Nebula, per-position BERT MLM pre-trained (<= 6 epochs, best validation LM loss) on the same split; with MLM head. Tokenizer bpe8k_v2 is fit on the 90% only. Splits: baseline/b3_split_hashes.json"
+  },
+  "detect/bpe50k/v2/seed5": {
+   "arch": "chunked",
+   "tokenizer": "bpe50k",
+   "weights": "detection/bpe50k/v2/seed5.pt",
+   "seq_len": 512,
+   "n_classes": 1,
+   "epochs": 2,
+   "batches_seen": 1412,
+   "recipe": {
+    "name": "baseline v2 (recipe R8_lr2e-3)",
+    "lr": 0.002,
+    "clip_grad_norm": 0.5,
+    "dropout": 0.3,
+    "batch_size": 96,
+    "weight_decay": 0.01,
+    "optimizer": "AdamW (the authors' ModelTrainer), BCE, constant lr, no schedule",
+    "epochs": 2,
+    "tokenizer": "bpe50k",
+    "train_data": "90% of the January training reports (stratified by family, seed 2025, hash in baseline/gap_split_hash.json)",
+    "selected_on": "held-out 10% January validation slice only (never on the April test set)"
+   },
+   "seed": 5,
+   "validation": {
+    "auc": 0.9985844352244012,
+    "tpr@0.001": 0.8733952202251629,
+    "tpr@0.01": 0.9879518072289156,
+    "f1@0.5": 0.9907059521455408,
+    "loss": 0.09055755642322119,
+    "pauc@0.01": 0.9437259160439829,
+    "pauc@0.001": 0.7296050309273001
+   },
+   "test": {
+    "auc": 0.9665221629238754,
+    "tpr@0.001": 0.5642089583998298,
+    "tpr@0.01": 0.8029577614639856,
+    "f1@0.5": 0.9141891891891892,
+    "acc@0.5": 0.9124238593265142,
+    "pauc@0.01": 0.7174488123183194,
+    "pauc@0.001": 0.457721601021598
+   },
+   "test_tpr@0.001_literal_float32": 0.0,
+   "note": "THE baseline from follow-up F on: load_baseline('bpe_v2', seed=k). Rank by logit (model.score_logit), not by float32 probability."
+  },
+  "detect/bpe50k/v2/seed6": {
+   "arch": "chunked",
+   "tokenizer": "bpe50k",
+   "weights": "detection/bpe50k/v2/seed6.pt",
+   "seq_len": 512,
+   "n_classes": 1,
+   "epochs": 2,
+   "batches_seen": 1412,
+   "recipe": {
+    "name": "baseline v2 (recipe R8_lr2e-3)",
+    "lr": 0.002,
+    "clip_grad_norm": 0.5,
+    "dropout": 0.3,
+    "batch_size": 96,
+    "weight_decay": 0.01,
+    "optimizer": "AdamW (the authors' ModelTrainer), BCE, constant lr, no schedule",
+    "epochs": 2,
+    "tokenizer": "bpe50k",
+    "train_data": "90% of the January training reports (stratified by family, seed 2025, hash in baseline/gap_split_hash.json)",
+    "selected_on": "held-out 10% January validation slice only (never on the April test set)"
+   },
+   "seed": 6,
+   "validation": {
+    "auc": 0.9979408620413995,
+    "tpr@0.001": 0.8684574363025874,
+    "tpr@0.01": 0.9778787280268616,
+    "f1@0.5": 0.9864413440754569,
+    "loss": 0.13328872953114124,
+    "pauc@0.01": 0.929481640370649,
+    "pauc@0.001": 0.6806335030660696
+   },
+   "test": {
+    "auc": 0.957935326864406,
+    "tpr@0.001": 0.367273114161081,
+    "tpr@0.01": 0.7717842323651453,
+    "f1@0.5": 0.9163632351318548,
+    "acc@0.5": 0.9128835766003908,
+    "pauc@0.01": 0.6375277373974438,
+    "pauc@0.001": 0.20677100858962122
+   },
+   "test_tpr@0.001_literal_float32": 0.0,
+   "note": "THE baseline from follow-up F on: load_baseline('bpe_v2', seed=k). Rank by logit (model.score_logit), not by float32 probability."
+  },
+  "detect/bpe50k/v2/seed7": {
+   "arch": "chunked",
+   "tokenizer": "bpe50k",
+   "weights": "detection/bpe50k/v2/seed7.pt",
+   "seq_len": 512,
+   "n_classes": 1,
+   "epochs": 2,
+   "batches_seen": 1412,
+   "recipe": {
+    "name": "baseline v2 (recipe R8_lr2e-3)",
+    "lr": 0.002,
+    "clip_grad_norm": 0.5,
+    "dropout": 0.3,
+    "batch_size": 96,
+    "weight_decay": 0.01,
+    "optimizer": "AdamW (the authors' ModelTrainer), BCE, constant lr, no schedule",
+    "epochs": 2,
+    "tokenizer": "bpe50k",
+    "train_data": "90% of the January training reports (stratified by family, seed 2025, hash in baseline/gap_split_hash.json)",
+    "selected_on": "held-out 10% January validation slice only (never on the April test set)"
+   },
+   "seed": 7,
+   "validation": {
+    "auc": 0.9985656608372128,
+    "tpr@0.001": 0.901441832905392,
+    "tpr@0.01": 0.9802488643096978,
+    "f1@0.5": 0.9903008709422011,
+    "loss": 0.07263083354852315,
+    "pauc@0.01": 0.9566547836938402,
+    "pauc@0.001": 0.8845488875034717
+   },
+   "test": {
+    "auc": 0.9687330252538424,
+    "tpr@0.001": 0.573678050856474,
+    "tpr@0.01": 0.7917863602510905,
+    "f1@0.5": 0.9103042642235041,
+    "acc@0.5": 0.9088610504539708,
+    "pauc@0.01": 0.7006486248036575,
+    "pauc@0.001": 0.4524207241839583
+   },
+   "test_tpr@0.001_literal_float32": 0.5735716565592084,
+   "note": "THE baseline from follow-up F on: load_baseline('bpe_v2', seed=k). Rank by logit (model.score_logit), not by float32 probability."
+  },
+  "detect/bpe50k/v2/seed8": {
+   "arch": "chunked",
+   "tokenizer": "bpe50k",
+   "weights": "detection/bpe50k/v2/seed8.pt",
+   "seq_len": 512,
+   "n_classes": 1,
+   "epochs": 2,
+   "batches_seen": 1412,
+   "recipe": {
+    "name": "baseline v2 (recipe R8_lr2e-3)",
+    "lr": 0.002,
+    "clip_grad_norm": 0.5,
+    "dropout": 0.3,
+    "batch_size": 96,
+    "weight_decay": 0.01,
+    "optimizer": "AdamW (the authors' ModelTrainer), BCE, constant lr, no schedule",
+    "epochs": 2,
+    "tokenizer": "bpe50k",
+    "train_data": "90% of the January training reports (stratified by family, seed 2025, hash in baseline/gap_split_hash.json)",
+    "selected_on": "held-out 10% January validation slice only (never on the April test set)"
+   },
+   "seed": 8,
+   "validation": {
+    "auc": 0.9985561335362515,
+    "tpr@0.001": 0.8931463559154651,
+    "tpr@0.01": 0.9845941141615643,
+    "f1@0.5": 0.991195963992482,
+    "loss": 0.06087658629132843,
+    "pauc@0.01": 0.9374379774708953,
+    "pauc@0.001": 0.6526420526577927
+   },
+   "test": {
+    "auc": 0.9663095205666636,
+    "tpr@0.001": 0.3945100542610916,
+    "tpr@0.01": 0.7569954250452176,
+    "f1@0.5": 0.8905066977285964,
+    "acc@0.5": 0.891966440639007,
+    "pauc@0.01": 0.6407806270435585,
+    "pauc@0.001": 0.22511406078875332
+   },
+   "test_tpr@0.001_literal_float32": 0.3772741781040536,
+   "note": "THE baseline from follow-up F on: load_baseline('bpe_v2', seed=k). Rank by logit (model.score_logit), not by float32 probability."
+  },
+  "detect/bpe50k/v2/seed9": {
+   "arch": "chunked",
+   "tokenizer": "bpe50k",
+   "weights": "detection/bpe50k/v2/seed9.pt",
+   "seq_len": 512,
+   "n_classes": 1,
+   "epochs": 2,
+   "batches_seen": 1412,
+   "recipe": {
+    "name": "baseline v2 (recipe R8_lr2e-3)",
+    "lr": 0.002,
+    "clip_grad_norm": 0.5,
+    "dropout": 0.3,
+    "batch_size": 96,
+    "weight_decay": 0.01,
+    "optimizer": "AdamW (the authors' ModelTrainer), BCE, constant lr, no schedule",
+    "epochs": 2,
+    "tokenizer": "bpe50k",
+    "train_data": "90% of the January training reports (stratified by family, seed 2025, hash in baseline/gap_split_hash.json)",
+    "selected_on": "held-out 10% January validation slice only (never on the April test set)"
+   },
+   "seed": 9,
+   "validation": {
+    "auc": 0.9984241924271408,
+    "tpr@0.001": 0.9365988544341299,
+    "tpr@0.01": 0.9757061031009283,
+    "f1@0.5": 0.9891304347826086,
+    "loss": 0.08835779473746197,
+    "pauc@0.01": 0.9560270226279804,
+    "pauc@0.001": 0.8971286075945718
+   },
+   "test": {
+    "auc": 0.9633447649705039,
+    "tpr@0.001": 0.5620810724545164,
+    "tpr@0.01": 0.7943398233854665,
+    "f1@0.5": 0.9136936432371885,
+    "acc@0.5": 0.9114469601195265,
+    "pauc@0.01": 0.6997761252872018,
+    "pauc@0.001": 0.47316878204932117
+   },
+   "test_tpr@0.001_literal_float32": 0.0,
+   "note": "THE baseline from follow-up F on: load_baseline('bpe_v2', seed=k). Rank by logit (model.score_logit), not by float32 probability."
   }
  }
 }

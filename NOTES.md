@@ -380,3 +380,13 @@ Cost estimate: `mlm_theirs` about 12 min per seed (B2: 16 min for 15 epochs), `a
 
 **11.12 Addendum result (`nebula-b3-extra2`: AR flatten, 5 seeds, imported 10 AR files, 19 min wall, +0.33 h; B3 total 3.03 h of 6 h; quota 23.92 h, 6.08 h left).** Chosen on validation by rule 11.4: AR flatten lr 1e-3 epoch 6, the authors' MLM lr 1e-3 epoch 3; no collapse. The five main rows (and their CIs) are bit-identical after adding the two runs (same bootstrap resamples).
 April test: AR flatten TPR@1e-3 0.407 ± 0.081 (+3.9 over lower, CI [+0.0, +9.8]), the authors' MLM 0.360 ± 0.127 (−0.8, [−4.8, +4.7]); TPR@1e-2 0.681 / 0.673; AUC 0.9581 / 0.9548. Literal float32 TPR@1e-3: 0.000 / 0.324. Written into REPORT §5.2c (addendum paragraph).
+
+## 12. Follow-up: partial AUC, evaluation protocol, baseline v2 with 10 seeds (2026-11-18)
+
+**Why.** TPR@1e-3 on the April set rests on 8 allowed false alarms (per-seed std 4 to 9 points). Add a more stable low-FPR metric (**partial AUC**), write the evaluation protocol (`EVAL_PROTOCOL.md`) before any thesis experiment, and extend baseline v2 to 10 seeds.
+**Plan.**
+1. `common.pauc(y, logits, max_fpr)`: area under the ROC curve from FPR 0 to `max_fpr` (linear interpolation at exactly `max_fpr`) divided by `max_fpr` (= mean TPR over FPR in [0, max_fpr]); logits only. Reported at 1e-2 (primary) and 1e-3; sklearn's McClish-standardized value stored next to it, labelled. Wired into `binary_metrics`, the bootstrap code (`long_stats`, `b3_report`, `gap_final`) and tests.
+2. Re-score (no re-selection) from stored logits: baseline v2 (5 seeds), the released model, the previous recipe A (9 fold models), every B3 run at its chosen settings; paired differences with bootstrap CIs (same 1,000 resamples and seed as before, so the TPR numbers are reproduced exactly). Logits are all local (`results/F_gap`, `results/B3_selfsup_v2/raw`): no Kaggle download needed. Compressed float32 logits go to `results/logits/` (small).
+3. Baseline v2 seeds 5 to 9 on Kaggle: recipe R8 (lr 2e-3, clip 0.5, dropout 0.3, batch 96, wd 1e-2, BPE-50k, the 90% January slice, 2 epochs), `gap.py` with the asserted split hash, models and logits saved. Cost estimate from the first 5 seeds (+0.11 h for the kernel): **0.15 h**; **hard limit for the whole follow-up 1.5 h**. Quota before: 24.20 h used, 5.80 h left (resets 2026-11-21). Measured hours go into §8.
+4. `EVAL_PROTOCOL.md` (committed before any thesis experiment), REPORT §4, §5.8, status line, `tables.md`.
+Nothing is re-selected: v2's recipe and B3's lr/epoch stay as chosen (on validation TPR@1e-3).

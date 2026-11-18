@@ -20,25 +20,23 @@ import numpy as np
 
 from baseline import common as C, gap_report as G
 
-M = [("tpr@0.001", "TPR@1e-3"), ("tpr@0.01", "TPR@1e-2"), ("auc", "AUC")]
+M = [("tpr@0.001", "TPR@1e-3"), ("tpr@0.01", "TPR@1e-2"), ("auc", "AUC"), ("pauc@0.01", "pAUC@1e-2"), ("pauc@0.001", "pAUC@1e-3")]
 
 
 def roc_metrics(y, z):
-    """(TPR@1e-3, TPR@1e-2, AUC) from one roc_curve call (the authors' get_tpr_at_fpr rule)."""
-    from sklearn.metrics import auc, roc_curve
-    fpr, tpr, _ = roc_curve(y, z)
-    return np.array([tpr[fpr <= 1e-3][-1], tpr[fpr <= 1e-2][-1], auc(fpr, tpr)])
+    """(TPR@1e-3, TPR@1e-2, AUC, pAUC@1e-2, pAUC@1e-3) from one roc_curve call (common.roc_summary; the authors' get_tpr_at_fpr rule for the TPRs)."""
+    return C.roc_summary(y, z)
 
 
 def group_metrics(y, Z, kind):
     return roc_metrics(y, Z.mean(0)) if kind == "ens" else np.mean([roc_metrics(y, z) for z in Z], axis=0)
 
 
-def bootstrap(y, groups, n_boot=1000, seed=0):
+def bootstrap(y, groups, n_boot=1000, seed=0, pairs=(("v2", "released"), ("v2", "current"), ("released", "current"))):
     y = np.asarray(y).astype(int)
     pos, neg = np.where(y == 1)[0], np.where(y == 0)[0]
     rng = np.random.default_rng(seed)
-    draws = {k: {g: np.empty((n_boot, 3)) for g in groups} for k in ("ps", "ens")}
+    draws = {k: {g: np.empty((n_boot, len(M))) for g in groups} for k in ("ps", "ens")}
     for b in range(n_boot):
         idx = np.concatenate([rng.choice(pos, len(pos)), rng.choice(neg, len(neg))])
         for g, Z in groups.items():
@@ -55,7 +53,7 @@ def bootstrap(y, groups, n_boot=1000, seed=0):
                 e[key] = {"point": float(pt[g][j]), "lo": float(lo), "hi": float(hi)}
             out[k][g] = e
         out[k]["diffs"] = {}
-        for a, b in (("v2", "released"), ("v2", "current"), ("released", "current")):
+        for a, b in pairs:
             if a in groups and b in groups:
                 e = {}
                 for j, (key, _) in enumerate(M):
@@ -67,12 +65,12 @@ def bootstrap(y, groups, n_boot=1000, seed=0):
 
 
 def per_model(y, Z):
-    """metrics of every model: TPR@1e-3, TPR@1e-2, AUC, F1@logit 0, literal float32-probability TPR@1e-3."""
+    """metrics of every model: TPR@1e-3, TPR@1e-2, AUC, F1@logit 0, literal float32-probability TPR@1e-3, pAUC@1e-2, pAUC@1e-3."""
     rows = []
     for z in Z:
         m = C.binary_metrics(y, z, decision=0.0)
         lit = C.binary_metrics(y, C.sigmoid32(z))["tpr@0.001"]
-        rows.append([m["tpr@0.001"], m["tpr@0.01"], m["auc"], m["f1@0.5"], lit])
+        rows.append([m["tpr@0.001"], m["tpr@0.01"], m["auc"], m["f1@0.5"], lit, m["pauc@0.01"], m["pauc@0.001"]])
     return np.array(rows)
 
 
@@ -87,19 +85,19 @@ def load_v2(gap):
 
 def tables(gap, y, groups, stats, n_boot):
     pm = {g: per_model(y, Z) for g, Z in groups.items()}
-    L = ["| model | n | TPR@1e-3 | TPR@1e-2 | AUC | F1@0.5 | TPR@1e-3 literal float32 |", "|---|---|---|---|---|---|---|"]
+    L = ["| model | n | TPR@1e-3 | TPR@1e-2 | AUC | F1@0.5 | TPR@1e-3 literal float32 | pAUC@1e-2 | pAUC@1e-3 |", "|---|---|---|---|---|---|---|---|---|"]
     names = {"released": "released checkpoint (authors)", "current": "ours, current recipe (A: lr 2.5e-4, 2/3 of January, fixed budget)", "v2": "**baseline v2** (lr 2e-3, 90% of January, 2 epochs)"}
     for g in groups:
         a = pm[g]
-        L.append(f"| {names[g]} | {len(a)} | " + " | ".join(fmt(a[:, j]) if j != 2 else fmt(a[:, j], 4) for j in (0, 1, 2, 3, 4)) + " |")
+        L.append(f"| {names[g]} | {len(a)} | " + " | ".join(fmt(a[:, j]) if j != 2 else fmt(a[:, j], 4) for j in (0, 1, 2, 3, 4, 5, 6)) + " |")
     L += ["", f"Bootstrap 95% CI over the April test reports ({n_boot} stratified resamples). `ps` = mean of the models' own values, `ens` = ensemble of the group's logits.", "",
-          "| group | statistic | TPR@1e-3 | TPR@1e-2 | AUC |", "|---|---|---|---|---|"]
+          "| group | statistic | TPR@1e-3 | TPR@1e-2 | AUC | pAUC@1e-2 | pAUC@1e-3 |", "|---|---|---|---|---|---|---|"]
     for g in groups:
         for k in ("ps", "ens"):
             e = stats[k][g]
             L.append(f"| {g} | {k} | " + " | ".join(f"{e[key]['point']:.3f} [{e[key]['lo']:.3f}, {e[key]['hi']:.3f}]" if key != "auc" else
                                                      f"{e[key]['point']:.4f} [{e[key]['lo']:.4f}, {e[key]['hi']:.4f}]" for key, _ in M) + " |")
-    L += ["", "Paired differences (same resample):", "", "| difference | statistic | TPR@1e-3 | TPR@1e-2 | AUC |", "|---|---|---|---|---|"]
+    L += ["", "Paired differences (same resample):", "", "| difference | statistic | TPR@1e-3 | TPR@1e-2 | AUC | pAUC@1e-2 | pAUC@1e-3 |", "|---|---|---|---|---|---|---|"]
     for k in ("ps", "ens"):
         for dname, e in stats[k]["diffs"].items():
             L.append(f"| {dname} | {k} | " + " | ".join(
@@ -197,7 +195,7 @@ def main():
     if stats:
         text, pm = tables(a.gap, y, groups, stats, a.boot)
         json.dump({"n_boot": a.boot, "v2_seeds": seeds, "bootstrap": stats, "per_model": {g: p.round(5).tolist() for g, p in pm.items()},
-                   "columns": ["tpr@0.001", "tpr@0.01", "auc", "f1@0.5", "tpr@0.001_literal_float32"]}, open(os.path.join(a.gap, "final_stats.json"), "w"), indent=1)
+                   "columns": ["tpr@0.001", "tpr@0.01", "auc", "f1@0.5", "tpr@0.001_literal_float32", "pauc@0.01", "pauc@0.001"]}, open(os.path.join(a.gap, "final_stats.json"), "w"), indent=1)
         open(os.path.join(a.gap, "final_table.md"), "w").write(text + "\n\n" + appendix(a.gap) + "\n")
         print(text)
     print(appendix(a.gap))

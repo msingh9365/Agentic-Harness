@@ -103,6 +103,52 @@ def sigmoid32(z):
     return torch.sigmoid(torch.as_tensor(np.asarray(z), dtype=torch.float32)).numpy()
 
 
+PAUC_FPRS = (1e-2, 1e-3)            # partial AUC: 1e-2 is the primary low-FPR metric (EVAL_PROTOCOL.md), 1e-3 is reported for reference
+
+
+def pauc_from_roc(fpr, tpr, max_fpr):
+    """Normalized partial AUC from an ROC curve (fpr non-decreasing, as sklearn's roc_curve returns it): the area under the curve for
+    FPR in [0, max_fpr], the curve interpolated linearly at exactly max_fpr, DIVIDED by max_fpr. So it is the mean TPR over FPR in [0, max_fpr]:
+    1.0 for a perfect ranking, max_fpr / 2 for a random one (TPR = FPR). Where the curve has a vertical step exactly at max_fpr the lower value
+    is used (the area up to max_fpr does not include the step)."""
+    fpr, tpr = np.asarray(fpr, dtype=np.float64), np.asarray(tpr, dtype=np.float64)
+    i = int(np.searchsorted(fpr, max_fpr, side="left"))               # first point with fpr >= max_fpr
+    if i >= len(fpr):                                                 # curve ends before max_fpr (cannot happen for a full ROC)
+        t_at = tpr[-1]
+    elif fpr[i] == max_fpr or i == 0:
+        t_at = tpr[i]
+    else:
+        t_at = tpr[i - 1] + (tpr[i] - tpr[i - 1]) * (max_fpr - fpr[i - 1]) / (fpr[i] - fpr[i - 1])
+    x = np.append(fpr[:i], max_fpr)
+    yv = np.append(tpr[:i], t_at)
+    return float(np.sum((x[1:] - x[:-1]) * (yv[1:] + yv[:-1]) / 2.0) / max_fpr)
+
+
+def pauc(y, logits, max_fpr=1e-2):
+    """Normalized partial AUC (see pauc_from_roc) of the ranking `logits` against the binary labels `y`. PASS LOGITS, never float32 probabilities."""
+    from sklearn.metrics import roc_curve
+    fpr, tpr, _ = roc_curve(np.asarray(y).astype(int).ravel(), np.asarray(logits, dtype=np.float64).ravel())
+    return pauc_from_roc(fpr, tpr, max_fpr)
+
+
+def pauc_mcclish(y, logits, max_fpr=1e-2):
+    """sklearn's McClish-standardized partial AUC (0.5 = chance, 1 = perfect): the form used in some papers. NOT the primary metric; the relation to
+    pauc() is mcclish = 0.5 * (1 + (pauc * max_fpr - max_fpr**2 / 2) / (max_fpr - max_fpr**2 / 2))."""
+    from sklearn.metrics import roc_auc_score
+    return float(roc_auc_score(np.asarray(y).astype(int).ravel(), np.asarray(logits, dtype=np.float64).ravel(), max_fpr=max_fpr))
+
+
+SUMMARY_KEYS = ("tpr@0.001", "tpr@0.01", "auc", "pauc@0.01", "pauc@0.001")
+
+
+def roc_summary(y, z):
+    """[TPR@1e-3, TPR@1e-2, AUC, pAUC@1e-2, pAUC@1e-3] from ONE roc_curve call (the authors' get_tpr_at_fpr rule for the TPRs: the last ROC point with
+    FPR <= target). The array the bootstrap code resamples (long_stats, b3_report, gap_final, pauc_report)."""
+    from sklearn.metrics import auc, roc_curve
+    fpr, tpr, _ = roc_curve(np.asarray(y).astype(int).ravel(), np.asarray(z, dtype=np.float64).ravel())
+    return np.array([tpr[fpr <= 1e-3][-1], tpr[fpr <= 1e-2][-1], auc(fpr, tpr), pauc_from_roc(fpr, tpr, 1e-2), pauc_from_roc(fpr, tpr, 1e-3)])
+
+
 def binary_metrics(y, p, fprs=FPRS, decision=0.5):
     """AUC, TPR at each FPR (the authors' get_tpr_at_fpr: last ROC point with FPR <= target; the threshold comes from the
     set being evaluated), F1 and accuracy at `decision`, F1 at each FPR threshold, and the ROC curve on a log FPR grid.
@@ -124,6 +170,9 @@ def binary_metrics(y, p, fprs=FPRS, decision=0.5):
     out["n_tied_at_top"] = int((p == p.max()).sum())            # reports sharing the highest score (many = saturation)
     fpr, tpr, _ = roc_curve(y, p)
     out["roc_on_grid"] = np.interp(ROC_GRID, fpr, tpr).astype(float).round(5).tolist()
+    for f in PAUC_FPRS:                                          # partial AUC (normalized by f; the primary one is f = 1e-2) and sklearn's McClish form
+        out[f"pauc@{f:g}"] = pauc_from_roc(fpr, tpr, f)
+        out[f"pauc_mcclish@{f:g}"] = float(roc_auc_score(y, p, max_fpr=f))
     return out
 
 

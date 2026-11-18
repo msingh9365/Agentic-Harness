@@ -39,7 +39,7 @@ RECIPES = {
     "R9_lr5e-3": dict(BASE, lr=5e-3),
 }
 FPRS = [1e-4, 3e-4, 1e-3, 3e-3, 1e-2, 3e-2, 1e-1]
-KEEP = ["auc", "f1@0.5", "acc@0.5"] + [f"tpr@{f:g}" for f in FPRS]
+KEEP = ["auc", "f1@0.5", "acc@0.5", "pauc@0.01", "pauc@0.001"] + [f"tpr@{f:g}" for f in FPRS]
 
 
 def val_slice(ym_train, seed=2025, hashes=os.path.join(HERE, "gap_split_hash.json")):

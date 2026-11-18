@@ -87,38 +87,9 @@ def choose(R, seeds=SEEDS):
 
 
 def bootstrap3(runs, y, names, ref="lower", other="upper", ctrl="lower_lasttoken", n_boot=1000, seed=0):
-    """The B2 bootstrap (long_stats.bootstrap) with AUC as a third metric: stratified resampling of the April test reports (the same resample for every run and seed);
-    "ps" = mean over the seeds of each seed's own metric, "ens" = metric of the seed-averaged logit. Returns {run: {metric: {"ps"|"ens": {point, lo, hi, vs_lower, upper_minus, vs_ctrl}}}}."""
-    from baseline.gap_final import roc_metrics
-    keys = ("tpr@0.001", "tpr@0.01", "auc")
-    y = np.asarray(y).astype(int)
-    pos, neg = np.where(y == 1)[0], np.where(y == 0)[0]
-    rng = np.random.default_rng(seed)
-    Z = {n: np.mean([runs[n][s][1] for s in SEEDS], axis=0) for n in names}
-    L = {n: [runs[n][s][1] for s in SEEDS] for n in names}
-    draws = {k: {n: np.empty((n_boot, 3)) for n in names} for k in ("ens", "ps")}
-    for b in range(n_boot):
-        idx = np.concatenate([rng.choice(pos, len(pos)), rng.choice(neg, len(neg))])
-        yb = y[idx]
-        for n in names:
-            draws["ens"][n][b] = roc_metrics(yb, Z[n][idx])
-            draws["ps"][n][b] = np.mean([roc_metrics(yb, z[idx]) for z in L[n]], axis=0)
-    point = {"ens": {n: roc_metrics(y, Z[n]) for n in names}, "ps": {n: np.mean([roc_metrics(y, z) for z in L[n]], axis=0) for n in names}}
-    res = {}
-    for n in names:
-        res[n] = {}
-        for j, k in enumerate(keys):
-            res[n][k] = {}
-            for kind in ("ens", "ps"):
-                e = LS._ci(draws[kind][n][:, j], point[kind][n][j])
-                if n != ref and ref in names:
-                    e["vs_lower"] = LS._ci(draws[kind][n][:, j], point[kind][n][j], draws[kind][ref][:, j], point[kind][ref][j], +1)
-                if ctrl in names and n.startswith("ar_lasttoken"):
-                    e["vs_ctrl"] = LS._ci(draws[kind][n][:, j], point[kind][n][j], draws[kind][ctrl][:, j], point[kind][ctrl][j], +1)
-                if n != other and other in names:
-                    e["upper_minus"] = LS._ci(draws[kind][n][:, j], point[kind][n][j], draws[kind][other][:, j], point[kind][other][j], -1)
-                res[n][k][kind] = e
-    return res
+    """The B2 bootstrap (long_stats.bootstrap): 1,000 stratified resamples of the April test reports, the same resample for every run and seed; statistics: TPR@1e-3, TPR@1e-2,
+    AUC, pAUC@1e-2, pAUC@1e-3; "ps" = mean over the seeds of each seed's own metric, "ens" = metric of the seed-averaged logit."""
+    return LS.bootstrap(runs, y, names, ref=ref, other=other, ctrl=ctrl, n_boot=n_boot, seed=seed, seeds=SEEDS)
 
 
 def chosen_runs(R, choice, raw, y):

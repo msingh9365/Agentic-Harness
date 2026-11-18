@@ -24,8 +24,11 @@ import os
 
 import numpy as np
 
+from baseline import common as C
+
 SEEDS = [0, 1, 2, 3, 4]
 METRICS = [("tpr@0.001", "TPR@1e-3"), ("tpr@0.01", "TPR@1e-2"), ("auc", "AUC")]
+METRICS_P = METRICS + [("pauc@0.01", "pAUC@1e-2"), ("pauc@0.001", "pAUC@1e-3")]        # + the partial AUC (normalized by max_fpr; common.pauc); pAUC@1e-2 is the primary one
 FIRST_REUSED = ["upper", "lower", "lower_fullattn", "upper_fullattn"]
 FIRST_3EP = {"mlm_theirs": "mlm_theirs_3ep", "mlm_bert": "mlm_bert_3ep", "ar_flatten": "ar_flatten_3ep", "ar_lasttoken": "ar_lasttoken_3ep"}
 LABELS = {
@@ -52,6 +55,8 @@ def collect(first, long):
     def add(name, seed, d):
         m = jl(os.path.join(d, "metrics.json"))
         z = np.load(os.path.join(d, "test_logits.npy")).astype(np.float64)
+        if "pauc@0.01" not in m["test"]:                          # results written before the partial AUC existed: computed from the stored logits
+            m["test"] = {**m["test"], **_pauc_from_logits(z, d)}
         runs.setdefault(name, {})[seed] = (m["test"], z, m)
 
     for s in SEEDS:
@@ -74,15 +79,28 @@ def collect(first, long):
     return runs
 
 
+_Y = {}
+
+
+def _pauc_from_logits(z, d):
+    """pAUC@1e-2 / @1e-3 of stored logits z (labels: y_test.npy next to the long run, or in the first run's folder)."""
+    root = os.path.dirname(os.path.dirname(d))
+    for cand in (os.path.join(root, "y_test.npy"), os.path.join(os.path.dirname(root), "B_selfsup_long", "y_test.npy")):
+        if os.path.exists(cand):
+            y = _Y.setdefault(cand, np.load(cand).astype(int))
+            return {f"pauc@{f:g}": C.pauc(y, z, f) for f in C.PAUC_FPRS}
+    return {}
+
+
 def seeds_of(runs, name):
     return sorted(runs.get(name, {}))
 
 
-def paired(runs, name, ref, sign=+1):
-    """per-seed value(name) - value(ref) for each metric (sign=-1 gives ref - name); only seeds present for both."""
+def paired(runs, name, ref, sign=+1, metrics=METRICS):
+    """per-seed value(name) - value(ref) for each metric (sign=-1 gives ref - name); only seeds present for both. metrics=METRICS_P adds the partial AUC."""
     common = sorted(set(runs[name]) & set(runs[ref]))
     out = {}
-    for k, _ in METRICS:
+    for k, _ in metrics:
         v = np.array([sign * (runs[name][s][0][k] - runs[ref][s][0][k]) for s in common])
         out[k] = {"mean": float(v.mean()), "std": float(v.std()), "values": v.round(5).tolist(), "n_positive": int((v > 0).sum()), "n": len(common)}
     return out
@@ -99,11 +117,11 @@ def tpr_at(y, z, target):
     return tprs_at(y, z, (target,))[0]
 
 
-def seed_average(runs, name, seeds=SEEDS):
-    return np.mean([runs[name][s][1] for s in seeds], axis=0)
+def seed_average(runs, name, seeds=None):
+    return np.mean([runs[name][s][1] for s in (SEEDS if seeds is None else seeds)], axis=0)
 
 
-KEYS = ("tpr@0.001", "tpr@0.01")
+KEYS = C.SUMMARY_KEYS            # the statistics resampled by the bootstrap: TPR@1e-3, TPR@1e-2, AUC, pAUC@1e-2, pAUC@1e-3
 
 
 def _ci(draws, point, other_draws=None, other_point=None, sign=+1):
@@ -115,28 +133,29 @@ def _ci(draws, point, other_draws=None, other_point=None, sign=+1):
     return {"point": float(sign * (point - other_point)), "lo": float(lo), "hi": float(hi), "resolved": bool(lo > 0 or hi < 0)}
 
 
-def bootstrap(runs, y, names, ref="lower", other="upper", ctrl="lower_lasttoken", n_boot=1000, seed=0):
+def bootstrap(runs, y, names, ref="lower", other="upper", ctrl="lower_lasttoken", n_boot=1000, seed=0, seeds=None):
     """Stratified bootstrap over test reports (the same resample for every run and seed).
     Two statistics per run:
       "ens"  TPR of the seed-averaged score (mean logit over the 5 seeds): an ENSEMBLE of the seeds (as specified)
-      "ps"   the mean over the seeds of each seed's own TPR: matches the per-seed tables (the ensemble lifts the low-FPR TPR of every run, the
+      "ps"   the mean over the seeds of each seed's own metric: matches the per-seed tables (the ensemble lifts the low-FPR TPR of every run, the
              lower bound most, so the two differ)
     Returns {run: {metric: {"ens": {point, lo, hi, vs_lower, upper_minus}, "ps": {...}}}}."""
     y = np.asarray(y).astype(int)
+    seeds = list(SEEDS if seeds is None else seeds)
     pos, neg = np.where(y == 1)[0], np.where(y == 0)[0]
     rng = np.random.default_rng(seed)
-    avail = [n for n in names if n in runs and len(runs[n]) == len(SEEDS)]
-    Z = {n: seed_average(runs, n) for n in avail}
-    L = {n: [runs[n][s][1] for s in SEEDS] for n in avail}
-    draws = {kind: {n: np.empty((n_boot, 2)) for n in avail} for kind in ("ens", "ps")}
+    avail = [n for n in names if n in runs and len(runs[n]) == len(seeds)]
+    Z = {n: seed_average(runs, n, seeds) for n in avail}
+    L = {n: [runs[n][s][1] for s in seeds] for n in avail}
+    draws = {kind: {n: np.empty((n_boot, len(KEYS))) for n in avail} for kind in ("ens", "ps")}
     for b in range(n_boot):
         idx = np.concatenate([rng.choice(pos, len(pos)), rng.choice(neg, len(neg))])
         yb = y[idx]
         for n in avail:
-            draws["ens"][n][b] = tprs_at(yb, Z[n][idx])
-            draws["ps"][n][b] = np.mean([tprs_at(yb, z[idx]) for z in L[n]], axis=0)
-    point = {"ens": {n: np.array(tprs_at(y, Z[n])) for n in avail},
-             "ps": {n: np.mean([tprs_at(y, z) for z in L[n]], axis=0) for n in avail}}
+            draws["ens"][n][b] = C.roc_summary(yb, Z[n][idx])
+            draws["ps"][n][b] = np.mean([C.roc_summary(yb, z[idx]) for z in L[n]], axis=0)
+    point = {"ens": {n: C.roc_summary(y, Z[n]) for n in avail},
+             "ps": {n: np.mean([C.roc_summary(y, z) for z in L[n]], axis=0) for n in avail}}
     res = {}
     for n in avail:
         res[n] = {}

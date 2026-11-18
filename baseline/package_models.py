@@ -71,22 +71,33 @@ V2_RECIPE = {"name": "baseline v2 (recipe R8_lr2e-3)", "lr": 2e-3, "clip_grad_no
              "selected_on": "held-out 10% January validation slice only (never on the April test set)"}
 
 
-def add_v2(out, big, v2_dir):
+def add_v2(out, big, v2_dir, logits_dir=None):
     """Follow-up F (gap to the released model): add the 5 baseline-v2 detection models (recipe R8, epoch 2) to <big>/detection/bpe50k/v2 and the
     manifest. The test metrics are the logit-ranked ones; 'test_tpr@0.001_literal_float32' is the authors' number computed on float32 probabilities."""
+    import numpy as np
     man = json.load(open(os.path.join(out, "manifest.json")))
+    logits_dir = logits_dir or v2_dir
+    labels = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results", "logits", "labels.npz")
     n = 0
     for f in sorted(glob.glob(os.path.join(v2_dir, "seed*_epoch2_model.pt"))):
         seed = os.path.basename(f)[4:].split("_")[0]
         r = json.load(open(os.path.join(v2_dir, f"seed{seed}.json")))
         e = r["per_epoch"][1]
+        pa = {}                                                   # partial AUC (normalized, logit-ranked) from the stored logits
+        if os.path.exists(labels):
+            lab = np.load(labels)
+            for split, y in (("val", lab["y_val"]), ("test", lab["y_test"])):
+                zf = os.path.join(logits_dir, f"seed{seed}_epoch2_{split}_logits.npy")
+                if os.path.exists(zf):
+                    z = np.load(zf).astype(np.float64)
+                    pa[split] = {f"pauc@{q:g}": C.pauc(y, z, q) for q in C.PAUC_FPRS}
         rel = f"detection/bpe50k/v2/seed{seed}.pt"
         put(f, os.path.join(big, rel))
         man["models"][f"detect/bpe50k/v2/seed{seed}"] = {
             "arch": "chunked", "tokenizer": "bpe50k", "weights": rel, "seq_len": 512, "n_classes": 1, "epochs": 2, "batches_seen": e["batches"],
             "recipe": V2_RECIPE, "seed": int(seed),
-            "validation": {k: e["val"][k] for k in ("auc", "tpr@0.001", "tpr@0.01", "f1@0.5")} | {"loss": e["val_loss"]},
-            "test": {k: e["test_NOT_FOR_SELECTION"][k] for k in ("auc", "tpr@0.001", "tpr@0.01", "f1@0.5", "acc@0.5")},
+            "validation": {k: e["val"][k] for k in ("auc", "tpr@0.001", "tpr@0.01", "f1@0.5")} | {"loss": e["val_loss"]} | pa.get("val", {}),
+            "test": {k: e["test_NOT_FOR_SELECTION"][k] for k in ("auc", "tpr@0.001", "tpr@0.01", "f1@0.5", "acc@0.5")} | pa.get("test", {}),
             "test_tpr@0.001_literal_float32": e["test_p32_tpr@0.001"],
             "note": "THE baseline from follow-up F on: load_baseline('bpe_v2', seed=k). Rank by logit (model.score_logit), not by float32 probability."}
         n += 1
@@ -137,12 +148,13 @@ def main():
     ap.add_argument("--big", required=True)
     ap.add_argument("--long-raw", nargs="*", default=None, help="only add the long pre-training encoders of these kernel outputs (contain ssl_long/)")
     ap.add_argument("--v2", default=None, help="only add the baseline-v2 models of this folder (gap/R8_lr2e-3 of the final kernel output)")
+    ap.add_argument("--logits", default=None, help="with --v2: folder holding seed<k>_epoch2_{test,val}_logits.npy (default: --v2)")
     ap.add_argument("--b3-raw", nargs="*", default=None, help="only add the B3 pre-trained encoders of these kernel outputs (contain b3/seed*/), needs --tokens (folder with variants/bpe8k_v2)")
     a = ap.parse_args()
     if a.b3_raw is not None:
         return add_b3(a.out, a.big, a.b3_raw, a.tokens)
     if a.v2:
-        return add_v2(a.out, a.big, a.v2)
+        return add_v2(a.out, a.big, a.v2, a.logits)
     if a.long_raw is not None:
         return add_long(a.out, a.big, a.long_raw)
     models = {}

@@ -18,6 +18,16 @@ real tokens only (token id != 0, 0 = <pad>), not over all 512 positions. Padding
 the attention (as in the original model); only the pooling ignores them.
 
     Bm = B + masked_mean      Cm = C + masked_mean       (A, B, C are unchanged: v1 results stay reproducible)
+
+v4 (results/pooling_v4) adds a third flag, `pool_mode`, for models that are C (fixed position encoding, 512 tokens) with a
+different way of pooling the token vectors. All of them use the real tokens only (id != 0), as Cm:
+
+    Mx   pool_mode="max"      masked max over the real tokens
+    MMx  pool_mode="meanmax"  masked mean and masked max concatenated (the first layer of the head takes 2 x 64 inputs)
+    ATTx pool_mode="attn"     attention pooling: one learned query vector q (64 values, initialised at 0 = the masked mean),
+                              weights = softmax over the real tokens of (x . q) / sqrt(64), output = weighted sum of x
+
+(the two "+aug" models of the round are Cm and ATTx trained on augmented data; the architecture is the same).
 """
 import functools
 import importlib.util
@@ -35,11 +45,17 @@ VARIANTS = {
     "C": dict(pooling="mean", fixed_pe=True),
     "Bm": dict(pooling="mean", fixed_pe=False, masked_mean=True),
     "Cm": dict(pooling="mean", fixed_pe=True, masked_mean=True),
+    "Mx": dict(pooling="mean", fixed_pe=True, pool_mode="max"),
+    "MMx": dict(pooling="mean", fixed_pe=True, pool_mode="meanmax"),
+    "ATTx": dict(pooling="mean", fixed_pe=True, pool_mode="attn"),
 }
 
 # names used in results/pooling_v2: B and C there are the masked ones; B0 and C0 are the old unmasked B and C.
 # F (results/fulltrace) = C over the whole report: same model as C (Cm) but fed up to 4096 tokens (64 chunks of 64).
-V2_TO_INTERNAL = {"A": "A", "B": "Bm", "C": "Cm", "B0": "B", "C0": "C", "F": "Cm"}
+# v4 (results/pooling_v4): M = Mx, MM = MMx, ATT = ATTx; Caug = Cm and ATTaug = ATTx trained on augmented data.
+V2_TO_INTERNAL = {"A": "A", "B": "Bm", "C": "Cm", "B0": "B", "C0": "C", "F": "Cm",
+                  "M": "Mx", "MM": "MMx", "ATT": "ATTx", "Caug": "Cm", "ATTaug": "ATTx",
+                  "Cbal": "Cm", "MMbal": "MMx", "ATTbal": "ATTx"}
 V2_MAXLEN = {"F": 4096}
 
 
@@ -56,21 +72,54 @@ def chunks_class(nebula_root: str):
     TransformerEncoderChunks = mod.TransformerEncoderChunks
 
     class ChunksFlagPE(TransformerEncoderChunks):
-        def __init__(self, *args, fixed_pe: bool = False, masked_mean: bool = False, **kwargs):
+        def __init__(self, *args, fixed_pe: bool = False, masked_mean: bool = False, pool_mode: str = "mean", **kwargs):
             super().__init__(*args, **kwargs)
             self.fixed_pe = fixed_pe
             self.masked_mean = masked_mean
+            self.pool_mode = pool_mode
+            assert pool_mode in ("mean", "max", "meanmax", "attn"), pool_mode
             assert not masked_mean or self.pooling_type == "mean", "masked_mean needs pooling='mean'"
+            if pool_mode != "mean":
+                assert self.pooling_type == "mean"
+                self.masked_mean = True                                            # all new poolings use the real tokens only
+            if pool_mode == "meanmax":                                             # the head sees [mean, max]
+                lin = nn.Linear(2 * self.d_model, self.classifier_head[0][0].out_features)
+                nn.init.normal_(lin.weight, mean=0.0, std=0.02); nn.init.zeros_(lin.bias)
+                self.classifier_head[0][0] = lin
+            if pool_mode == "attn":
+                self.att_query = nn.Parameter(torch.zeros(self.d_model))           # zero = uniform weights = masked mean at the start
+
+        def _encode(self, src, src_mask=None):
+            """token vectors [B, L, d] and the mask of real tokens [B, L, 1] (float32)."""
+            x = torch.cat(self.transform(self.embed(self.split(src)), src_mask), dim=1)
+            keep = (src != 0)                                                     # real tokens (id 0 = <pad>)
+            if keep.size(1) < x.size(1):                                          # split() pads to a multiple of the chunk size
+                keep = torch.nn.functional.pad(keep, (0, x.size(1) - keep.size(1)))
+            return x.float(), keep.unsqueeze(-1).to(torch.float32)
+
+        def attention_weights(self, src, src_mask=None):
+            """[B, L] softmax weights of the attention pooling over the real tokens (0 on padding)."""
+            x, keep = self._encode(src, src_mask)
+            sc = (x @ self.att_query) / math.sqrt(self.d_model)                    # [B, L]
+            sc = sc.masked_fill(keep.squeeze(-1) == 0, float("-inf"))
+            w = torch.softmax(sc, dim=1)
+            return torch.nan_to_num(w, nan=0.0)                                    # a report without any real token: all weights 0
 
         def core(self, src, src_mask=None):
             if not self.masked_mean:
                 return super().core(src, src_mask)          # the original code path, unchanged
-            x = torch.cat(self.transform(self.embed(self.split(src)), src_mask), dim=1)   # [B, L, d]
-            keep = (src != 0)                                                     # real tokens (id 0 = <pad>)
-            if keep.size(1) < x.size(1):                                          # split() pads to a multiple of the chunk size
-                keep = torch.nn.functional.pad(keep, (0, x.size(1) - keep.size(1)))
-            keep = keep.unsqueeze(-1).to(torch.float32)
-            return (x.float() * keep).sum(1) / keep.sum(1).clamp(min=1.0)
+            x, keep = self._encode(src, src_mask)
+            mean = (x * keep).sum(1) / keep.sum(1).clamp(min=1.0)
+            if self.pool_mode == "mean":
+                return mean
+            if self.pool_mode in ("max", "meanmax"):
+                mx = x.masked_fill(keep == 0, float("-inf")).max(1).values
+                mx = torch.where(torch.isfinite(mx), mx, torch.zeros_like(mx))     # report without a real token
+                return mx if self.pool_mode == "max" else torch.cat([mean, mx], dim=-1)
+            sc = (x @ self.att_query) / math.sqrt(self.d_model)
+            sc = sc.masked_fill(keep.squeeze(-1) == 0, float("-inf"))
+            w = torch.nan_to_num(torch.softmax(sc, dim=1), nan=0.0)
+            return (w.unsqueeze(-1) * x).sum(1)
 
         def embed(self, chunks):
             if not self.fixed_pe:
@@ -87,7 +136,7 @@ def chunks_class(nebula_root: str):
 
 
 def v_flags(v):
-    return {"fixed_pe": v["fixed_pe"], "masked_mean": v.get("masked_mean", False)}
+    return {"fixed_pe": v["fixed_pe"], "masked_mean": v.get("masked_mean", False), "pool_mode": v.get("pool_mode", "mean")}
 
 
 def build_variant(nebula_root: str, variant: str, vocab_size: int = 50001, maxlen: int = 512) -> nn.Module:

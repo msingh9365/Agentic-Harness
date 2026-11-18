@@ -109,6 +109,48 @@ def main():
         assert torch.allclose(m4k.core(two), xs.mean(1), atol=1e-5)
     assert sum(p.numel() for p in m4k.parameters()) == sum(p.numel() for p in m512.parameters())
     print("ok: full-trace C (maxlen 4096) equals C on short reports, uses chunks beyond 512 tokens, same parameters")
+    # 9. round-4 poolings (results/pooling_v4): Mx (masked max), MMx (mean and max), ATTx (attention pooling), on top of C
+    cm = build_variant(a.nebula, "Cm").eval()
+    padded = torch.randint(1, 50000, (3, 512)); padded[0, 100:] = 0; padded[1, 400:] = 0
+    padded[2, 1] = 0                                                         # a real-looking report with one id-0 token
+    with torch.no_grad():
+        xs = torch.cat(cm.transform(cm.embed(cm.split(padded))), dim=1)
+        keep = (padded != 0)
+        # Mx: max over the real tokens only; padding positions (huge values) are ignored
+        mx = build_variant(a.nebula, "Mx").eval(); mx.load_state_dict(cm.state_dict())
+        xs_big = xs.clone(); xs_big[~keep] = 1e6
+        want_max = xs.masked_fill(~keep.unsqueeze(-1), float("-inf")).max(1).values
+        assert torch.allclose(mx.core(padded), want_max, atol=1e-5)
+        assert (xs_big.masked_fill(~keep.unsqueeze(-1), float("-inf")).max(1).values == want_max).all()
+        # MMx: concatenation [mean, max]; the head takes 128 inputs
+        mm = build_variant(a.nebula, "MMx").eval()
+        mm.load_state_dict({k: v for k, v in cm.state_dict().items() if "classifier_head.0" not in k}, strict=False)   # same encoder
+        assert mm.classifier_head[0][0].in_features == 128
+        pooled = mm.core(padded)
+        assert pooled.shape == (3, 128) and torch.allclose(pooled[:, :64], cm.core(padded), atol=1e-6) and torch.allclose(pooled[:, 64:], want_max, atol=1e-5)
+        # ATTx: starts as the masked mean (query 0); weights sum to 1 over the real tokens, are 0 on padding
+        at = build_variant(a.nebula, "ATTx").eval(); at.load_state_dict({**cm.state_dict(), "att_query": at.att_query.data}, strict=False)
+        assert torch.allclose(at.core(padded), cm.core(padded), atol=1e-5), "attention pooling with query 0 is not the masked mean"
+        at.att_query.data = torch.randn(64) * 2
+        w = at.attention_weights(padded)
+        assert torch.allclose(w.sum(1), torch.ones(3), atol=1e-5) and (w[~keep] == 0).all() and (w[keep] > 0).all()
+        assert torch.allclose(at.core(padded), (w.unsqueeze(-1) * xs).sum(1), atol=1e-5)
+        # a report without any real token does not give NaN, for all three
+        z = torch.zeros(1, 512, dtype=torch.long)
+        for m in (mx, mm, at):
+            assert torch.isfinite(m(z)).all() and torch.isfinite(m.core(z)).all()
+    at.train(); at.zero_grad(); at(padded).sum().backward()                  # gradients reach the query
+    assert at.att_query.grad.abs().sum() > 0
+    base = sum(p.numel() for p in cm.parameters())
+    assert sum(p.numel() for p in build_variant(a.nebula, "Mx").parameters()) == base
+    assert sum(p.numel() for p in build_variant(a.nebula, "MMx").parameters()) == base + 64 * 64
+    assert sum(p.numel() for p in build_variant(a.nebula, "ATTx").parameters()) == base + 64
+    # variants work with the whole report (4,096 tokens) as well
+    for v in ("Mx", "MMx", "ATTx"):
+        m = build_variant(a.nebula, v, maxlen=4096).eval()
+        with torch.no_grad():
+            assert m(torch.randint(1, 50000, (2, 4096))).shape == (2, 1)
+    print("ok: Mx, MMx, ATTx pool over the real tokens only; ATTx = masked mean at the start; parameters C, C+4,096, C+64")
     print("ALL POOLING TESTS PASSED")
 
 

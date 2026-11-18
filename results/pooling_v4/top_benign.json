@@ -1,0 +1,1103 @@
+{
+ "lists": {
+  "C (J, 2 epochs)": [
+   {
+    "rank": 1,
+    "row": 4073,
+    "logit": "14.79",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 2,
+    "row": 7932,
+    "logit": "13.99",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 11,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfow heapsetinformation interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 3,
+    "row": 4583,
+    "logit": "13.00",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "shares sequence with malware": "no",
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 4,
+    "row": 4296,
+    "logit": "13.00",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "shares sequence with malware": "no",
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 5,
+    "row": 2470,
+    "logit": "13.00",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "shares sequence with malware": "no",
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 6,
+    "row": 6841,
+    "logit": "13.00",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "shares sequence with malware": "no",
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 7,
+    "row": 7367,
+    "logit": "13.00",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "shares sequence with malware": "no",
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 8,
+    "row": 4350,
+    "logit": "11.94",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "shares sequence with malware": "no",
+    "first 30 calls": "coinitialize"
+   },
+   {
+    "rank": 9,
+    "row": 7593,
+    "logit": "11.74",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 10,
+    "row": 3808,
+    "logit": "11.73",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 6,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getprocessheap getcurrentprocess openprocesstoken gettokeninformation heapalloc gettokeninformation"
+   },
+   {
+    "rank": 11,
+    "row": 2937,
+    "logit": "10.66",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 12,
+    "row": 3458,
+    "logit": "10.29",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 50,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter isprocessorfeaturepresent loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex loadlibraryexw getlasterror getprocaddress flsalloc getprocaddress flssetvalue loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex"
+   },
+   {
+    "rank": 13,
+    "row": 3741,
+    "logit": "10.26",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "shares sequence with malware": "no",
+    "first 30 calls": "loadlibrarya"
+   },
+   {
+    "rank": 14,
+    "row": 8928,
+    "logit": "9.92",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 15,
+    "row": 5105,
+    "logit": "9.76",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 9,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "__set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea"
+   },
+   {
+    "rank": 16,
+    "row": 4229,
+    "logit": "9.51",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 18,
+    "shares sequence with malware": "no",
+    "first 30 calls": "__set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea __p___argv __p___argc malloc registerclassexa createwindowexa getmessagea unregisterclassa free exit"
+   },
+   {
+    "rank": 17,
+    "row": 2276,
+    "logit": "8.79",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 13,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getmodulehandlew getsysteminfo getkeyboardtype getcommandlinew getstartupinfoa getacp getcurrentthreadid getversion getmodulehandlew getversion getprocaddress setdefaultdlldirectories getprocaddress"
+   },
+   {
+    "rank": 18,
+    "row": 9178,
+    "logit": "8.72",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 13,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getmodulehandlew getsysteminfo getkeyboardtype getcommandlinew getstartupinfoa getacp getcurrentthreadid getversion getmodulehandlew getversion getprocaddress setdefaultdlldirectories getprocaddress"
+   },
+   {
+    "rank": 19,
+    "row": 3384,
+    "logit": "8.61",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 13,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getmodulehandlew getsysteminfo getkeyboardtype getcommandlinew getstartupinfoa getacp getcurrentthreadid getversion getmodulehandlew getversion getprocaddress setdefaultdlldirectories getprocaddress"
+   },
+   {
+    "rank": 20,
+    "row": 8827,
+    "logit": "8.50",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 13,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getmodulehandlew getsysteminfo getkeyboardtype getcommandlinew getstartupinfoa getacp getcurrentthreadid getversion getmodulehandlew getversion getprocaddress setdefaultdlldirectories getprocaddress"
+   }
+  ],
+  "C (J)": [
+   {
+    "rank": 1,
+    "row": 4073,
+    "logit": "16.57",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 2,
+    "row": 7932,
+    "logit": "15.70",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 11,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfow heapsetinformation interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 3,
+    "row": 4296,
+    "logit": "13.33",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "shares sequence with malware": "no",
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 4,
+    "row": 4583,
+    "logit": "13.33",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "shares sequence with malware": "no",
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 5,
+    "row": 7367,
+    "logit": "13.33",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "shares sequence with malware": "no",
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 6,
+    "row": 2470,
+    "logit": "13.33",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "shares sequence with malware": "no",
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 7,
+    "row": 6841,
+    "logit": "13.33",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "shares sequence with malware": "no",
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 8,
+    "row": 3808,
+    "logit": "13.26",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 6,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getprocessheap getcurrentprocess openprocesstoken gettokeninformation heapalloc gettokeninformation"
+   },
+   {
+    "rank": 9,
+    "row": 7593,
+    "logit": "13.10",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 10,
+    "row": 4350,
+    "logit": "12.95",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "shares sequence with malware": "no",
+    "first 30 calls": "coinitialize"
+   },
+   {
+    "rank": 11,
+    "row": 3741,
+    "logit": "12.89",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "shares sequence with malware": "no",
+    "first 30 calls": "loadlibrarya"
+   },
+   {
+    "rank": 12,
+    "row": 2937,
+    "logit": "11.74",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 13,
+    "row": 5105,
+    "logit": "11.35",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 9,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "__set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea"
+   },
+   {
+    "rank": 14,
+    "row": 3458,
+    "logit": "11.27",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 50,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter isprocessorfeaturepresent loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex loadlibraryexw getlasterror getprocaddress flsalloc getprocaddress flssetvalue loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex"
+   },
+   {
+    "rank": 15,
+    "row": 8928,
+    "logit": "10.99",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 16,
+    "row": 8741,
+    "logit": "10.58",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 9,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "__set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea"
+   },
+   {
+    "rank": 17,
+    "row": 4229,
+    "logit": "10.44",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 18,
+    "shares sequence with malware": "no",
+    "first 30 calls": "__set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea __p___argv __p___argc malloc registerclassexa createwindowexa getmessagea unregisterclassa free exit"
+   },
+   {
+    "rank": 18,
+    "row": 9101,
+    "logit": "8.66",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 4,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getmodulehandlew getmodulehandlew getenvironmentstringsw getcommandlinew"
+   },
+   {
+    "rank": 19,
+    "row": 4364,
+    "logit": "8.55",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 7,
+    "shares sequence with malware": "April",
+    "first 30 calls": "__set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm"
+   },
+   {
+    "rank": 20,
+    "row": 9178,
+    "logit": "8.53",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 13,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getmodulehandlew getsysteminfo getkeyboardtype getcommandlinew getstartupinfoa getacp getcurrentthreadid getversion getmodulehandlew getversion getprocaddress setdefaultdlldirectories getprocaddress"
+   }
+  ],
+  "M (max)": [
+   {
+    "rank": 1,
+    "row": 4350,
+    "logit": "12.08",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "shares sequence with malware": "no",
+    "first 30 calls": "coinitialize"
+   },
+   {
+    "rank": 2,
+    "row": 3741,
+    "logit": "11.59",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "shares sequence with malware": "no",
+    "first 30 calls": "loadlibrarya"
+   },
+   {
+    "rank": 3,
+    "row": 8928,
+    "logit": "9.08",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 4,
+    "row": 9527,
+    "logit": "8.98",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 18,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter isprocessorfeaturepresent loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex loadlibraryexw getlasterror getprocaddress flsalloc getprocaddress flssetvalue loadlibraryexw getprocaddress"
+   },
+   {
+    "rank": 5,
+    "row": 8175,
+    "logit": "8.95",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "shares sequence with malware": "January",
+    "first 30 calls": "getcommandlinea"
+   },
+   {
+    "rank": 6,
+    "row": 3701,
+    "logit": "8.93",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 18,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter isprocessorfeaturepresent loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex loadlibraryexw getlasterror getprocaddress flsalloc getprocaddress flssetvalue loadlibraryexw getprocaddress"
+   },
+   {
+    "rank": 7,
+    "row": 7593,
+    "logit": "8.90",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 8,
+    "row": 3190,
+    "logit": "8.83",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 18,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter isprocessorfeaturepresent loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex loadlibraryexw getlasterror getprocaddress flsalloc getprocaddress flssetvalue loadlibraryexw getprocaddress"
+   },
+   {
+    "rank": 9,
+    "row": 5100,
+    "logit": "8.59",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 18,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter isprocessorfeaturepresent loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex loadlibraryexw getlasterror getprocaddress flsalloc getprocaddress flssetvalue loadlibraryexw getprocaddress"
+   },
+   {
+    "rank": 10,
+    "row": 4364,
+    "logit": "8.38",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 7,
+    "shares sequence with malware": "April",
+    "first 30 calls": "__set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm"
+   },
+   {
+    "rank": 11,
+    "row": 2937,
+    "logit": "8.31",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 12,
+    "row": 3808,
+    "logit": "8.20",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 6,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getprocessheap getcurrentprocess openprocesstoken gettokeninformation heapalloc gettokeninformation"
+   },
+   {
+    "rank": 13,
+    "row": 8193,
+    "logit": "7.75",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 3,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getcommandlinea getstartupinfow getmodulehandlew"
+   },
+   {
+    "rank": 14,
+    "row": 3458,
+    "logit": "7.65",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 50,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter isprocessorfeaturepresent loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex loadlibraryexw getlasterror getprocaddress flsalloc getprocaddress flssetvalue loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex"
+   },
+   {
+    "rank": 15,
+    "row": 5135,
+    "logit": "7.36",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getmodulehandlew"
+   },
+   {
+    "rank": 16,
+    "row": 9178,
+    "logit": "7.31",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 13,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getmodulehandlew getsysteminfo getkeyboardtype getcommandlinew getstartupinfoa getacp getcurrentthreadid getversion getmodulehandlew getversion getprocaddress setdefaultdlldirectories getprocaddress"
+   },
+   {
+    "rank": 17,
+    "row": 8827,
+    "logit": "7.18",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 13,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getmodulehandlew getsysteminfo getkeyboardtype getcommandlinew getstartupinfoa getacp getcurrentthreadid getversion getmodulehandlew getversion getprocaddress setdefaultdlldirectories getprocaddress"
+   },
+   {
+    "rank": 18,
+    "row": 5105,
+    "logit": "7.10",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 9,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "__set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea"
+   },
+   {
+    "rank": 19,
+    "row": 6477,
+    "logit": "7.10",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 13,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getmodulehandlew getsysteminfo getkeyboardtype getcommandlinew getstartupinfoa getacp getcurrentthreadid getversion getmodulehandlew getversion getprocaddress setdefaultdlldirectories getprocaddress"
+   },
+   {
+    "rank": 20,
+    "row": 2276,
+    "logit": "7.08",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 13,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getmodulehandlew getsysteminfo getkeyboardtype getcommandlinew getstartupinfoa getacp getcurrentthreadid getversion getmodulehandlew getversion getprocaddress setdefaultdlldirectories getprocaddress"
+   }
+  ],
+  "ATT (attention)": [
+   {
+    "rank": 1,
+    "row": 4073,
+    "logit": "13.98",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 2,
+    "row": 7932,
+    "logit": "13.27",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 11,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfow heapsetinformation interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 3,
+    "row": 4296,
+    "logit": "12.80",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "shares sequence with malware": "no",
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 4,
+    "row": 2470,
+    "logit": "12.80",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "shares sequence with malware": "no",
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 5,
+    "row": 4583,
+    "logit": "12.80",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "shares sequence with malware": "no",
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 6,
+    "row": 7367,
+    "logit": "12.80",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "shares sequence with malware": "no",
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 7,
+    "row": 6841,
+    "logit": "12.80",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "shares sequence with malware": "no",
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 8,
+    "row": 4350,
+    "logit": "11.25",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "shares sequence with malware": "no",
+    "first 30 calls": "coinitialize"
+   },
+   {
+    "rank": 9,
+    "row": 7593,
+    "logit": "11.20",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 10,
+    "row": 3808,
+    "logit": "11.17",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 6,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getprocessheap getcurrentprocess openprocesstoken gettokeninformation heapalloc gettokeninformation"
+   },
+   {
+    "rank": 11,
+    "row": 3458,
+    "logit": "10.85",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 50,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter isprocessorfeaturepresent loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex loadlibraryexw getlasterror getprocaddress flsalloc getprocaddress flssetvalue loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex"
+   },
+   {
+    "rank": 12,
+    "row": 2937,
+    "logit": "9.99",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 13,
+    "row": 4229,
+    "logit": "9.37",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 18,
+    "shares sequence with malware": "no",
+    "first 30 calls": "__set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea __p___argv __p___argc malloc registerclassexa createwindowexa getmessagea unregisterclassa free exit"
+   },
+   {
+    "rank": 14,
+    "row": 3741,
+    "logit": "9.28",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "shares sequence with malware": "no",
+    "first 30 calls": "loadlibrarya"
+   },
+   {
+    "rank": 15,
+    "row": 8928,
+    "logit": "9.27",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 16,
+    "row": 5105,
+    "logit": "9.11",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 9,
+    "shares sequence with malware": "April+January",
+    "first 30 calls": "__set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea"
+   },
+   {
+    "rank": 17,
+    "row": 5531,
+    "logit": "8.94",
+    "source": "clean",
+    "chunks": 3,
+    "calls": 179,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter isprocessorfeaturepresent loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex loadlibraryexw getlasterror getprocaddress flsalloc getprocaddress flssetvalue loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex"
+   },
+   {
+    "rank": 18,
+    "row": 2457,
+    "logit": "8.92",
+    "source": "clean",
+    "chunks": 5,
+    "calls": 442,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter isprocessorfeaturepresent loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex loadlibraryexw getlasterror getprocaddress flsalloc getprocaddress flssetvalue loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex"
+   },
+   {
+    "rank": 19,
+    "row": 5888,
+    "logit": "8.92",
+    "source": "clean",
+    "chunks": 3,
+    "calls": 170,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter isprocessorfeaturepresent loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex loadlibraryexw getlasterror getprocaddress flsalloc getprocaddress flssetvalue loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex"
+   },
+   {
+    "rank": 20,
+    "row": 6470,
+    "logit": "8.90",
+    "source": "clean",
+    "chunks": 5,
+    "calls": 442,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter isprocessorfeaturepresent loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex loadlibraryexw getlasterror getprocaddress flsalloc getprocaddress flssetvalue loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex"
+   }
+  ],
+  "released Nebula": [
+   {
+    "rank": 1,
+    "row": 3849,
+    "logit": "32.22",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 47,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getcommandlinea getversionexa initializecriticalsection entercriticalsection getprocessheap getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getversionexa initializecriticalsection entercriticalsection heapalloc heapsize leavecriticalsection getprocessheap entercriticalsection heapsize leavecriticalsection initializecriticalsection entercriticalsection heapsize leavecriticalsection initializecriticalsection entercriticalsection heapsize leavecriticalsection initializecriticalsection entercriticalsection"
+   },
+   {
+    "rank": 2,
+    "row": 8175,
+    "logit": "25.42",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "shares sequence with malware": "January",
+    "first 30 calls": "getcommandlinea"
+   },
+   {
+    "rank": 3,
+    "row": 3741,
+    "logit": "24.58",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "shares sequence with malware": "no",
+    "first 30 calls": "loadlibrarya"
+   },
+   {
+    "rank": 4,
+    "row": 2585,
+    "logit": "17.45",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 5,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getprocessheap heapalloc getsysteminfo loadlibrarya getprocaddress"
+   },
+   {
+    "rank": 5,
+    "row": 4364,
+    "logit": "17.13",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 7,
+    "shares sequence with malware": "April",
+    "first 30 calls": "__set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm"
+   },
+   {
+    "rank": 6,
+    "row": 2343,
+    "logit": "14.30",
+    "source": "clean",
+    "chunks": 3,
+    "calls": 234,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getversionexa getmodulehandlea heapcreate getmodulehandlea getprocaddress initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount getmodulehandlea getprocaddress getprocaddress getprocaddress getprocaddress flsalloc heapalloc flssetvalue getcurrentthreadid heapalloc getstartupinfoa"
+   },
+   {
+    "rank": 7,
+    "row": 9154,
+    "logit": "13.82",
+    "source": "clean",
+    "chunks": 3,
+    "calls": 279,
+    "shares sequence with malware": "no",
+    "first 30 calls": "loadlibrarya getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress"
+   },
+   {
+    "rank": 8,
+    "row": 3951,
+    "logit": "13.55",
+    "source": "clean",
+    "chunks": 3,
+    "calls": 219,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter getstartupinfow getprocessheap encodepointer encodepointer getmodulehandlew getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress"
+   },
+   {
+    "rank": 9,
+    "row": 6482,
+    "logit": "13.54",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 4,
+    "shares sequence with malware": "April",
+    "first 30 calls": "__set_app_type setunhandledexceptionfilter __getmainargs __p__fmode"
+   },
+   {
+    "rank": 10,
+    "row": 5200,
+    "logit": "13.19",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 2,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getmodulehandlea loadlibrarya"
+   },
+   {
+    "rank": 11,
+    "row": 5581,
+    "logit": "13.19",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 2,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getmodulehandlea loadlibrarya"
+   },
+   {
+    "rank": 12,
+    "row": 4141,
+    "logit": "12.51",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 3,
+    "shares sequence with malware": "no",
+    "first 30 calls": "memset rtlgetversion iogetcurrentprocess"
+   },
+   {
+    "rank": 13,
+    "row": 5146,
+    "logit": "11.93",
+    "source": "clean",
+    "chunks": 2,
+    "calls": 142,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa heapcreate getmodulehandlew getprocaddress getprocaddress getprocaddress getprocaddress tlsalloc tlssetvalue tlsgetvalue getmodulehandlew getprocaddress encodepointer tlsgetvalue getmodulehandlew getprocaddress encodepointer tlsgetvalue getmodulehandlew getprocaddress encodepointer tlsgetvalue getmodulehandlew getprocaddress encodepointer"
+   },
+   {
+    "rank": 14,
+    "row": 4229,
+    "logit": "10.88",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 18,
+    "shares sequence with malware": "no",
+    "first 30 calls": "__set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea __p___argv __p___argc malloc registerclassexa createwindowexa getmessagea unregisterclassa free exit"
+   },
+   {
+    "rank": 15,
+    "row": 6554,
+    "logit": "10.52",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 8,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getmodulehandlea getcommandlinea getmodulefilenamea createfilea setfilepointer messageboxa closehandle exitprocess"
+   },
+   {
+    "rank": 16,
+    "row": 4350,
+    "logit": "10.27",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "shares sequence with malware": "no",
+    "first 30 calls": "coinitialize"
+   },
+   {
+    "rank": 17,
+    "row": 4608,
+    "logit": "10.21",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 48,
+    "shares sequence with malware": "no",
+    "first 30 calls": "getversion heapcreate heapalloc heapalloc virtualalloc virtualalloc getstartupinfoa getstdhandle getfiletype getstdhandle getfiletype getstdhandle getfiletype sethandlecount getcommandlinea getenvironmentstringsw widechartomultibyte widechartomultibyte freeenvironmentstringsw getacp getcpinfo getcpinfo getstringtypew multibytetowidechar multibytetowidechar getstringtypew lcmapstringw multibytetowidechar multibytetowidechar lcmapstringw"
+   },
+   {
+    "rank": 18,
+    "row": 4725,
+    "logit": "9.86",
+    "source": "clean",
+    "chunks": 3,
+    "calls": 219,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter getstartupinfow getprocessheap encodepointer encodepointer getmodulehandlew getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress"
+   },
+   {
+    "rank": 19,
+    "row": 5967,
+    "logit": "9.85",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "shares sequence with malware": "April",
+    "first 30 calls": "virtualalloc"
+   },
+   {
+    "rank": 20,
+    "row": 4503,
+    "logit": "9.68",
+    "source": "clean",
+    "chunks": 3,
+    "calls": 188,
+    "shares sequence with malware": "April",
+    "first 30 calls": "getmodulehandlea getkeyboardtype getcommandlinea getstartupinfoa getacp getcurrentthreadid getmodulefilenamea getmodulefilenamea regopenkeyexa regopenkeyexa regopenkeyexa lstrcpyna getthreadlocale getlocaleinfoa loadstringa virtualalloc loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa"
+   }
+  ]
+ },
+ "summary": [
+  {
+   "model": "C (J, 2 epochs)",
+   "TPR at 0.1% FPR (of the ensemble)": "15.2%",
+   "median calls": "13",
+   "max calls": 50,
+   "distinct sequences": 11,
+   "one chunk": 20,
+   "share sequence with malware": 9,
+   "source clean/syswow64": "20/0",
+   "in common with C (J, 2 epochs)": "\u2013",
+   "in common with C (J)": 17,
+   "in common with M (max)": 11,
+   "in common with ATT (attention)": 16,
+   "in common with released Nebula": 3
+  },
+  {
+   "model": "C (J)",
+   "TPR at 0.1% FPR (of the ensemble)": "12.5%",
+   "median calls": "10",
+   "max calls": 50,
+   "distinct sequences": 13,
+   "one chunk": 20,
+   "share sequence with malware": 8,
+   "source clean/syswow64": "20/0",
+   "in common with C (J, 2 epochs)": 17,
+   "in common with C (J)": "\u2013",
+   "in common with M (max)": 10,
+   "in common with ATT (attention)": 16,
+   "in common with released Nebula": 4
+  },
+  {
+   "model": "M (max)",
+   "TPR at 0.1% FPR (of the ensemble)": "12.6%",
+   "median calls": "10",
+   "max calls": 50,
+   "distinct sequences": 12,
+   "one chunk": 20,
+   "share sequence with malware": 14,
+   "source clean/syswow64": "20/0",
+   "in common with C (J, 2 epochs)": 11,
+   "in common with C (J)": 10,
+   "in common with M (max)": "\u2013",
+   "in common with ATT (attention)": 8,
+   "in common with released Nebula": 4
+  },
+  {
+   "model": "ATT (attention)",
+   "TPR at 0.1% FPR (of the ensemble)": "16.9%",
+   "median calls": "22",
+   "max calls": 442,
+   "distinct sequences": 13,
+   "one chunk": 16,
+   "share sequence with malware": 7,
+   "source clean/syswow64": "20/0",
+   "in common with C (J, 2 epochs)": 16,
+   "in common with C (J)": 16,
+   "in common with M (max)": 8,
+   "in common with ATT (attention)": "\u2013",
+   "in common with released Nebula": 3
+  },
+  {
+   "model": "released Nebula",
+   "TPR at 0.1% FPR (of the ensemble)": "51.8%",
+   "median calls": "8",
+   "max calls": 279,
+   "distinct sequences": 18,
+   "one chunk": 14,
+   "share sequence with malware": 8,
+   "source clean/syswow64": "20/0",
+   "in common with C (J, 2 epochs)": 3,
+   "in common with C (J)": 4,
+   "in common with M (max)": 4,
+   "in common with ATT (attention)": 3,
+   "in common with released Nebula": "\u2013"
+  }
+ ],
+ "spearman": {
+  "C (J, 2 epochs) vs C (J)": 0.9898040985563018,
+  "C (J, 2 epochs) vs M (max)": 0.9013696375499723,
+  "C (J, 2 epochs) vs ATT (attention)": 0.9834777707435148,
+  "C (J, 2 epochs) vs released Nebula": 0.6508589041668399,
+  "C (J) vs M (max)": 0.8891116945860715,
+  "C (J) vs ATT (attention)": 0.9801230044476582,
+  "C (J) vs released Nebula": 0.6816826765043886,
+  "M (max) vs ATT (attention)": 0.9142349732802536,
+  "M (max) vs released Nebula": 0.5587282669360423,
+  "ATT (attention) vs released Nebula": 0.6908275809668245
+ }
+}

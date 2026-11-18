@@ -6,7 +6,7 @@ authors' own code. The numbers and how they compare with the paper are in [`REPR
 ## Baseline v2: THE baseline from follow-up F on
 
 ```python
-m = load_baseline("bpe_v2", seed=0)      # seeds 0 to 4; manifest keys detect/bpe50k/v2/seed<k>
+m = load_baseline("bpe_v2", seed=0)      # seeds 0 to 9; manifest keys detect/bpe50k/v2/seed<k>
 m.score_logit(report)                    # rank reports by this (the logit); m.score(report) = sigmoid(logit) saturates at logit 16.6
 ```
 
@@ -19,11 +19,11 @@ Exact recipe (code: `baseline/gap.py`, recipe `R8_lr2e-3`; the authors' `ModelTr
 | optimizer | AdamW, **lr 2e-3**, weight decay 1e-2, constant lr, no schedule; BCE loss; gradient clipping 0.5 (their default); batch 96 |
 | data | **90% of the January training reports** (67,768; family-stratified; split seed 2025, indices hashed in `baseline/gap_split_hash.json`); the other 10% (7,530) is the validation slice |
 | training length | **2 epochs** (1,412 batches), chosen on the validation slice (best mean validation TPR@1e-3, agreed by early stopping on the validation loss) |
-| seeds | 0 to 4 (`C.set_seed(seed)`) |
+| seeds | **0 to 9** (`C.set_seed(seed)`); seeds 5 to 9 were added later with the identical recipe and the asserted split |
 | selection | everything on the validation slice; the April test set was not used for any choice (`NOTES.md` §10.10, §10.11; `REPRODUCTION_REPORT.md` §5.7) |
 
-April test numbers (logit-ranked, mean ± std over 5 seeds): TPR@1e-3 **0.561 ± 0.043**, TPR@1e-2 0.793 ± 0.034, AUC 0.9602 ± 0.0051, F1 (0.5) 0.893 ± 0.017; the released model: 0.518 / 0.750 / 0.9586 / 0.885.
-Literal float32 TPR@1e-3: 0.444 ± 0.252 (seed 1 saturates to 0.0): always rank by logit. Each manifest entry lists its validation and test metrics.
+April test numbers (logit-ranked, mean ± std over the **10 seeds**): TPR@1e-3 **0.527 ± 0.082**, TPR@1e-2 0.788 ± 0.026, AUC 0.9624 ± 0.0050, F1 (0.5) 0.901 ± 0.016, **pAUC@1e-2 (primary metric of `EVAL_PROTOCOL.md`) 0.690 ± 0.036**, pAUC@1e-3 0.381 ± 0.110; the released model: 0.518 / 0.750 / 0.9586 / 0.885 / 0.659 / 0.372. (Seeds 0 to 4 alone: 0.561 ± 0.043 at TPR@1e-3; the halves agree within seed noise, REPORT §5.8.)
+Literal float32 TPR@1e-3: 0.317 ± 0.280 over the 10 seeds (several seeds saturate to 0.0): always rank by logit. Logits of every baseline model are in `results/logits/` (git), so metrics can be recomputed without the models. Each manifest entry lists its validation and test metrics.
 Do **not** train much longer or with a larger lr: lr 5e-3 and 1e-2 collapse to a constant predictor, and more epochs over-train (validation TPR@1e-3 falls and the loss rises after epoch 2).
 
 ## Where the files are

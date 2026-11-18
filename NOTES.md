@@ -163,6 +163,8 @@ Kaggle limits: about 12 h per session, about 30 GPU-hours per week.
 | 2026-11-17 | nebula-b3-pre | T4 x2 | about 1.4 | B3: AR and MLM pre-training + fine-tuning, both lrs, 5 seeds (82 min wall) |
 | 2026-11-17 | nebula-b3-extra | T4 x2 | 0.44 | B3 addendum: mlm_theirs (5 seeds OK); arflat failed (import path) |
 | 2026-11-17 | nebula-b3-extra2 | T4 x2 | 0.33 | B3 addendum: AR flatten, 5 seeds |
+| 2026-11-18 | nebula-gap-v2-s59 | T4 x2 | 0.12 | baseline v2 seeds 5-9 (R8, 2 epochs, models + logits saved), 6 min wall |
+| | **pAUC / protocol / v2 seeds 5-9 total** | | **0.12** | quota 24.20 h → 24.32 h (limit 1.5 h); the CPU re-scoring used no GPU |
 | | **B3 total** | | **3.03** | quota 20.89 h → 23.92 h (estimate 4.3 h + 0.8 h addendum, limit 6 h); 6.08 h left |
 | | **F total** | | **3.18** | quota 17.71 h → 20.89 h (limit 8 h, estimate 5 h); 9.11 h left, resets 2026-11-21 |
 
@@ -390,3 +392,8 @@ April test: AR flatten TPR@1e-3 0.407 ± 0.081 (+3.9 over lower, CI [+0.0, +9.8]
 3. Baseline v2 seeds 5 to 9 on Kaggle: recipe R8 (lr 2e-3, clip 0.5, dropout 0.3, batch 96, wd 1e-2, BPE-50k, the 90% January slice, 2 epochs), `gap.py` with the asserted split hash, models and logits saved. Cost estimate from the first 5 seeds (+0.11 h for the kernel): **0.15 h**; **hard limit for the whole follow-up 1.5 h**. Quota before: 24.20 h used, 5.80 h left (resets 2026-11-21). Measured hours go into §8.
 4. `EVAL_PROTOCOL.md` (committed before any thesis experiment), REPORT §4, §5.8, status line, `tables.md`.
 Nothing is re-selected: v2's recipe and B3's lr/epoch stay as chosen (on validation TPR@1e-3).
+
+**12.1 Result (2026-11-18).** Implemented and tested: `common.pauc`, `pauc_mcclish`, `roc_summary`, `binary_metrics` (new keys `pauc@0.01`, `pauc@0.001`, `pauc_mcclish@...`), the bootstrap in `long_stats` (now TPR@1e-3, TPR@1e-2, AUC, pAUC@1e-2, pAUC@1e-3; the earlier TPR and AUC CIs of B3 are reproduced bit-identically), `b3_report`, `gap_final`; `baseline/tests/test_pauc.py` (7 tests; the 21 tests of long/b3/pauc pass).
+Re-scoring (no re-selection; `baseline/pauc_report.py` asserts that B3's chosen lr/epoch are unchanged): `results/pauc/` and `results/logits/`. v2 seeds 5 to 9 (kernel `nebula-gap-v2-s59`, 5 units all exit 0, split hash asserted by `gap.run`, validation 0.87 to 0.94 at TPR@1e-3): +0.12 h.
+v2 over 10 seeds: TPR@1e-3 0.527 ± 0.082 (first 5 seeds 0.561 ± 0.043, seeds 5 to 9 0.492 ± 0.102; Welch p 0.22), pAUC@1e-2 0.690 ± 0.036 (0.702 / 0.679, p 0.35). The std of pAUC@1e-2 relative to its mean is 1.5 to 4 times smaller than that of TPR@1e-3.
+B3 under pAUC@1e-2: upper − lower +12.7 (5/5 seeds), AR − lower +6.9 (5/5), AR − control +6.3 (4/5), upper − AR +5.8 [+3.3, +8.2], MLM − lower +3.5 (3/5), authors' MLM +0.2 (n.s.); seed ensembles: AR − lower +1.6 (n.s.). `EVAL_PROTOCOL.md` written and committed before any thesis experiment. Models dataset `msingh9365/nebula-baseline-models` v5 (+ seeds 5 to 9).

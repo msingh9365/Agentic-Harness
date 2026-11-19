@@ -1,0 +1,28 @@
+[{"stream_name":"stderr","time":1.213470895,"data":"/kaggle/src/script.py:18: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.\n"}
+,{"stream_name":"stderr","time":1.213510719,"data":"  tarfile.open(fileobj=io.BytesIO(base64.b64decode(PAYLOAD)), mode=\"r:gz\").extractall(CODE)\n"}
+,{"stream_name":"stdout","time":18.147425583,"data":"$ pip install -q lightning torchmetrics tensorboard sentencepiece orjson nltk speakeasy-emulator lief lxml scikit-learn matplotlib   [exit 0, 17s]\n"}
+,{"stream_name":"stdout","time":39.404147134,"data":"$ rm -rf /tmp/nebula \u0026\u0026 git clone -q https://github.com/dtrizna/nebula /tmp/nebula \u0026\u0026 git -C /tmp/nebula checkout -q 1343ae170ef32b01a75d2dd5fb906b5541f   [exit 0, 21s]\n"}
+,{"stream_name":"stdout","time":39.441048804,"data":"$ bash /tmp/kcode/patches/apply_patches.sh /tmp/nebula   [exit 0, 0s]\n"}
+,{"stream_name":"stdout","time":43.334273279,"data":"$ pip install -q -e /tmp/nebula --no-deps   [exit 0, 4s]\n"}
+,{"stream_name":"stdout","time":43.336740026,"data":"nebula commit: 1343ae170ef32b01a75d2dd5fb906b5541f073df\n"}
+,{"stream_name":"stdout","time":43.337094391,"data":"RUN: /usr/bin/python3 -m baseline.v2pe --plan --seeds 0 1 --epochs 2 --pe-mode paper --pooling attn --tag tune_smoke --lr 1e-3 --pad-store all.npz --pad-mode replace --pad-labels all --pad-stream 7000 --pad-prob 0.25 --val-robust --every-epoch --out /kaggle/working/out\n"}
+,{"stream_name":"stdout","time":52.266246188,"data":"[0.0 min] GPU 0: started tune_smoke seed 0\n"}
+,{"stream_name":"stdout","time":52.266912,"data":"[0.0 min] GPU 1: started tune_smoke seed 1\n"}
+,{"stream_name":"stdout","time":217.272098187,"data":"[2.8 min] GPU 0: tune_smoke seed0 exited with 0\n"}
+,{"stream_name":"stdout","time":217.272308846,"data":"[tune_smoke seed 0] epoch 1: val TPR@1e-3 0.938 @1e-2 0.982 pAUC@1e-2 0.964 AUC 0.9985 loss 0.0557 | 60s\n"}
+,{"stream_name":"stdout","time":217.272320267,"data":"WARNING:root: [*] Started epoch: 1\n"}
+,{"stream_name":"stdout","time":217.272325982,"data":"[tune_smoke seed 0] epoch 2: val TPR@1e-3 0.925 @1e-2 0.980 pAUC@1e-2 0.963 AUC 0.9985 loss 0.0745 | 116s\n"}
+,{"stream_name":"stdout","time":217.272331177,"data":"\n"}
+,{"stream_name":"stdout","time":217.272387591,"data":"[2.8 min] GPU 1: tune_smoke seed1 exited with 0\n"}
+,{"stream_name":"stdout","time":217.272596927,"data":"[tune_smoke seed 1] epoch 1: val TPR@1e-3 0.892 @1e-2 0.979 pAUC@1e-2 0.937 AUC 0.9981 loss 0.0628 | 59s\n"}
+,{"stream_name":"stdout","time":217.272608811,"data":"WARNING:root: [*] Started epoch: 1\n"}
+,{"stream_name":"stdout","time":217.272631168,"data":"[tune_smoke seed 1] epoch 2: val TPR@1e-3 0.924 @1e-2 0.988 pAUC@1e-2 0.957 AUC 0.9987 loss 0.0521 | 115s\n"}
+,{"stream_name":"stdout","time":217.272636126,"data":"\n"}
+,{"stream_name":"stdout","time":222.662576438,"data":"job exit code: 0\n"}
+,{"stream_name":"stderr","time":224.881249477,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":224.881300022,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":225.152842059,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":225.152870101,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":225.95936465,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":227.049582788,"data":"[NbConvertApp] Writing 497327 bytes to __results__.html\n"}
+]

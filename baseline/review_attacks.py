@@ -23,6 +23,7 @@ PAIRS = [("attbal", "pebal"), ("attkeep", "pekeep")]
 THR = ("1e-2", "1e-3")
 THR_LABEL = {"1e-2": "1% FPR", "1e-3": "0.1% FPR"}
 KS = AR.KS
+FIG_FAMS = ("released", "v2_pe", "pebal", "attbal")
 
 
 def md(rows, header):
@@ -168,9 +169,9 @@ def figure(path, Zr, Za, wb, y, boot, fams, tot_r, tot_a):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    col = {"released": "#2a78d6", "v2_pe": "#eb6834", "pebal": "#1baf7a", "attbal": "#eda100"}
-    mk = {"released": "o", "v2_pe": "s", "pebal": "^", "attbal": "D"}
-    ls = {"released": "-", "v2_pe": "--", "pebal": "-.", "attbal": ":"}
+    col = {"released": "#2a78d6", "v2_pe": "#eb6834", "pebal": "#1baf7a", "attbal": "#eda100", "tuned": "#6250d6"}
+    mk = {"released": "o", "v2_pe": "s", "pebal": "^", "attbal": "D", "tuned": "v"}
+    ls = {"released": "-", "v2_pe": "--", "pebal": "-.", "attbal": ":", "tuned": (0, (5, 1))}
     ink, mute, bg = "#0b0b0b", "#52514e", "#fcfcfb"
     plt.rcParams.update({"font.size": 10, "axes.edgecolor": mute, "axes.labelcolor": ink, "text.color": ink, "xtick.color": mute, "ytick.color": mute, "figure.facecolor": bg, "axes.facecolor": bg})
     panels = [("Random benign calls (REPORT 5.10)", "random"), ("Calls chosen with a LightGBM surrogate", "lgbm"), ("Calls chosen with a v2-PE (seed 0) surrogate", "v2pe"), ("White-box greedy (500 malware, seeds 0-2)", "wb")]
@@ -181,7 +182,7 @@ def figure(path, Zr, Za, wb, y, boot, fams, tot_r, tot_a):
         for s in ("top", "right"):
             ax.spines[s].set_visible(False)
         ends = []
-        for f in [x for x in ("released", "v2_pe", "pebal", "attbal") if x in fams]:
+        for f in [x for x in FIG_FAMS if x in fams]:
             if kind == "wb":
                 if f not in wb:
                     continue

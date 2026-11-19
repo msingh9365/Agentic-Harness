@@ -19,7 +19,8 @@ import numpy as np
 KINDS = {"v2": ("released", "flatten"), "v2_pe": ("paper", "flatten"), "pebal": ("paper", "flatten"), "att": ("paper", "attn"), "attbal": ("paper", "attn"),
          "released": ("released", "flatten"),                                 # the released checkpoint (authors' code: released encoding, flatten)
          "attkeep": ("paper", "attn"), "pekeep": ("paper", "flatten"),         # balanced padding with the clean copies kept (REPORT 5.11)
-         "attaug": ("paper", "attn"), "peaug": ("paper", "flatten")}          # padding of the malware training reports only (REPORT 5.11)
+         "attaug": ("paper", "attn"), "peaug": ("paper", "flatten"),
+         "tuned": ("paper", "attn")}                                           # the candidate chosen in REPORT 5.12: folder TUNED_TAG, epoch TUNED_EPOCH (environment variables)          # padding of the malware training reports only (REPORT 5.11)
 TAGS = {"pebal": "pebal", "att": "att", "attbal": "attbal", "attkeep": "attkeep", "pekeep": "pekeep", "attaug": "attaug", "peaug": "peaug"}              # run tags of baseline/v2pe.py (the output folder name of the training kernel)
 
 
@@ -38,6 +39,12 @@ def find_weights(kind, seed, models_root=None, search=None):
         p = os.path.join(models_root, "detection", "bpe50k", kind, f"seed{seed}.pt")
         if os.path.exists(p):
             return p
+    if kind == "tuned":
+        tag, ep = os.environ["TUNED_TAG"], os.environ["TUNED_EPOCH"]
+        for dp, dn, fn in os.walk(search):
+            if os.path.basename(dp) == tag and f"seed{seed}_epoch{ep}_model.pt" in fn:
+                return os.path.join(dp, f"seed{seed}_epoch{ep}_model.pt")
+        raise FileNotFoundError(f"weights of the tuned candidate {tag} epoch {ep} seed {seed} not found under {search}")
     for root in ([search] if search else []):                      # Kaggle mounts datasets and kernel outputs under paths that are not the slug: search the tree
         for dp, dn, fn in os.walk(root):
             if os.path.basename(dp) == kind and f"seed{seed}.pt" in fn:                    # packaged weights: <root>/<kind>/seed<k>.pt (the review datasets)

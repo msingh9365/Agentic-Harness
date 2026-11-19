@@ -60,6 +60,8 @@ uses `pooling=None`, which cannot run.
 
 ## 4. How to read the numbers
 
+<!-- audit-pointer -->- **Known issues found in the audit (§5.9a, §5.13).** 94.2% of the validation slice shares its API sequence with the training slice (April: 36.4%), so every choice made on it measures memorisation of seen sequences to a large degree; the unknown id of the tokenizer equals the padding id; confidence intervals that treat reports as independent are too narrow (2,509 distinct API sequences in 17,402 April reports). April was used in 13 scoring rounds (§5.13 d).
+
 - **Metric.** TPR at FPR 1e-3 uses the authors' `get_tpr_at_fpr`. The April test set has 8,003 benign reports, so FPR 1e-3 allows
   8 false alarms and the number moves in steps of 1/8,003. F1 and accuracy are at threshold 0.5 (the paper's F1 0.9136 cannot be an F1 at
   the FPR-1e-3 threshold next to TPR 0.52; we also give that F1 in `tables.md`).
@@ -799,6 +801,21 @@ The validation slice shows the same direction as the test set (v2-PE − v2: pAU
 
 **Which model is the thesis baseline from now on: baseline v2-PE** (`load_baseline("bpe_v2_pe", seed=k)`, k = 0 to 9; 10 models, Kaggle dataset `msingh9365/nebula-baseline-models`, `detection/bpe50k/v2_pe/`), because it follows the paper's positional encoding; baseline v2 stays as the reproduction of the released code. This is a choice of fidelity to the paper: **by the claim rule of the protocol, v2-PE is not shown to be better than v2** (it is shown to be better than the released checkpoint at pAUC@1e-2).
 
+
+
+### 5.9a Tokenizer note: unknown pieces get id 0, which is also the padding id (audit)
+
+The SentencePiece models of both tokenizers have `<unk>` = 0 and no padding piece (pad id -1); the Nebula pipeline pads with 0. So a piece that is not in the vocabulary is mapped to **the same id as padding**. The letter "j" is not covered by the vocabulary: in a sample of 1,500 January reports 3,805 of the 3,811 unknown pieces (99.8%) are a single "j" (the rest: "jj" and two rare strings). Real tokens with id 0 among the first 512 tokens of a report (counted on all January and April reports; `baseline/tokenizer_counts.py`):
+
+| tokenizer | part | reports | tokens in the first 512 | id-0 tokens | reports with at least one | per report: mean / median / p95 / max |
+|---|---|---|---|---|---|---|
+| our BPE-50k | January | 75,298 | 28,783,947 | 53,466 (0.186%) | 24,539 (32.6%) | 0.71 / 0 / 4 / 45 |
+| our BPE-50k | April | 17,402 | 6,736,560 | 11,286 (0.168%) | 3,768 (21.7%) | 0.65 / 0 / 4 / 28 |
+| released checkpoint tokenizer | January | 75,298 | 28,851,015 | 52,853 (0.183%) | 24,415 (32.4%) | 0.70 / 0 / 4 / 45 |
+| released checkpoint tokenizer | April | 17,402 | 6,763,012 | 10,841 (0.160%) | 3,736 (21.5%) | 0.62 / 0 / 4 / 26 |
+
+Consequences, next to the positional-encoding issue of §5.9: (1) `nn.Embedding(vocab, d)` has no `padding_idx`, so id 0 is one learned vector shared by padding and by unknown pieces; (2) the models of the released code read padding as ordinary tokens; (3) in the attention pooling of §5.10 (ours) the mask is `id != 0`, so real unknown tokens ("j") are treated as padding and get weight 0 in the pooled vector, and the same holds for the "fits in 512" accounting only through token counts, not through ids; (4) a padding attack that inserts pieces containing "j" would be invisible to an id-0 mask. The effect on the numbers is small in size (0.17 to 0.19% of the tokens; 21.7% of April reports have at least one such token) but it is a property of the tokenizer, not of the models; it was not changed here (`unk_fix`: map unknown pieces to a separate id) and is part of the plan of NOTES 17.
+
 ### 5.10 ATT+bal on top of baseline v2-PE: attention pooling and balanced padding (follow-up)
 
 **What was run** (all models: the v2 recipe unchanged, `pe_mode="paper"` (§5.9), BPE-50k, the 90% January slice with the asserted hash, 2 epochs, seeds 0 to 9; nothing selected on April; same seed = same data order as v2-PE and the same initial weights except the head):
@@ -882,6 +899,8 @@ Costs: ATT 0.18 h, ATT+bal and PE+bal 0.35 h together, padding-test scoring 0.11
 - attbal vs att: **RESOLVED, attbal better** (CI excludes 0; positive in 10/10 seeds)
 - attbal vs pebal: not resolved (CI contains 0; positive in 6/10, negative in 4/10 seeds)
 
+**Duplicate-aware note (audit, §5.13).** With a cluster bootstrap over the hash_apis groups the verdict "attbal vs released" above does not meet the claim rule ("pebal vs released" and the comparisons with att were not recomputed): v2-PE − released +4.59 (CI [-2.48, +13.20], above in 9 of 10 seeds); ATT+bal − released +4.82 (CI [-4.64, +15.28], above in 10 of 10 seeds). ATT+bal − v2-PE stays unresolved: +0.23 (CI [-4.78, +4.29], above in 4 of 10 seeds).
+
 | model | mean abs(logit) | benign logit mean | benign logit p99 | malware above logit 16.6 |
 |---|---|---|---|---|
 | released checkpoint (1 model) | 16.6 | -16.4 | 2.5 | 42% |
@@ -931,7 +950,11 @@ Drop of the share of malware flagged against the unedited reports (points, mean 
 Files: `baseline/pe.py`, `v2pe.py`, `make_pad.py`, `padtest.py`, `att_report.py`, tests `test_pe.py`, `test_make_pad.py`, `test_v2pe.py`; results `results/att_bal/` (per-seed JSON and logits of ATT, ATT+bal, PE+bal, padded scores, `tables.md`, `bootstrap.json`, `per_model.json`), `results/padding/` (row map).
 
 
+
+
 ### 5.11 ATT+bal under clean copies, malware-only padding and attacks it was not trained on (follow-up for the review)
+
+**Status: preliminary. The GPU scoring of the attacks in this section (surrogate-chosen padding, white-box attack, random-padding test, probe) is to be re-run on the author's own Kaggle account.**
 
 **Question.** Does ATT+bal (REPORT 5.10) hold up when (1) the clean copies of the reports are kept next to the padded ones, (2) padding is applied to malware only (a label shortcut), (3) it is attacked with padding it was not trained on: calls chosen with a surrogate model, and a white-box greedy attacker? Everything below was planned in `NOTES.md` section 15 before any result existed; nothing was tuned or selected on April.
 
@@ -955,19 +978,19 @@ Files: `baseline/pe.py`, `v2pe.py`, `make_pad.py`, `padtest.py`, `att_report.py`
 
 | difference | per-seed means, pAUC@1e-2 | seeds > 0 | claim rule | 10-seed ensembles, pAUC@1e-2 |
 |---|---|---|---|---|
-| attbal − v2_pe | +0.23 [-1.70, +2.09] | 4/10 | not resolved | -3.42 [-5.37, -1.55] resolved |
-| pebal − v2_pe | -0.64 [-2.14, +0.76] | 3/10 | not resolved | -3.34 [-4.72, -2.02] resolved |
-| attkeep − v2_pe | -1.17 [-3.17, +0.96] | 3/10 | not resolved | -4.70 [-6.80, -2.60] resolved |
-| pekeep − v2_pe | -0.87 [-2.47, +0.69] | 4/10 | not resolved | -2.88 [-4.19, -1.46] resolved |
-| attaug − v2_pe | -0.45 [-2.34, +1.50] | 5/10 | not resolved | -2.30 [-4.19, -0.38] resolved |
-| peaug − v2_pe | +2.01 [+0.46, +3.49] | 6/10 | not resolved | +1.00 [-0.65, +2.55] not resolved |
-| attbal − pebal | +0.87 [-0.55, +2.33] | 6/10 | not resolved | -0.08 [-1.67, +1.54] not resolved |
-| attkeep − pekeep | -0.31 [-1.79, +1.16] | 6/10 | not resolved | -1.82 [-3.20, -0.28] resolved |
-| attaug − peaug | -2.46 [-4.05, -0.94] | 4/10 | not resolved | -3.29 [-5.15, -1.61] resolved |
-| attkeep − attbal | -1.40 [-2.44, -0.27] | 4/10 | not resolved | -1.28 [-2.31, -0.24] resolved |
-| pekeep − pebal | -0.22 [-1.09, +0.66] | 4/10 | not resolved | +0.46 [-0.41, +1.49] not resolved |
-| attaug − attbal | -0.68 [-1.97, +0.67] | 7/10 | not resolved | +1.13 [-0.28, +2.71] not resolved |
-| peaug − pebal | +2.65 [+1.19, +4.08] | 8/10 | RESOLVED better | +4.34 [+2.94, +5.76] resolved |
+| attbal − v2_pe | +0.23 [-1.70, +2.09] | 4/10 | not resolved | -3.42 [-5.37, -1.55] (CI excludes 0; descriptive) |
+| pebal − v2_pe | -0.64 [-2.14, +0.76] | 3/10 | not resolved | -3.34 [-4.72, -2.02] (CI excludes 0; descriptive) |
+| attkeep − v2_pe | -1.17 [-3.17, +0.96] | 3/10 | not resolved | -4.70 [-6.80, -2.60] (CI excludes 0; descriptive) |
+| pekeep − v2_pe | -0.87 [-2.47, +0.69] | 4/10 | not resolved | -2.88 [-4.19, -1.46] (CI excludes 0; descriptive) |
+| attaug − v2_pe | -0.45 [-2.34, +1.50] | 5/10 | not resolved | -2.30 [-4.19, -0.38] (CI excludes 0; descriptive) |
+| peaug − v2_pe | +2.01 [+0.46, +3.49] | 6/10 | not resolved | +1.00 [-0.65, +2.55] (CI contains 0; descriptive) |
+| attbal − pebal | +0.87 [-0.55, +2.33] | 6/10 | not resolved | -0.08 [-1.67, +1.54] (CI contains 0; descriptive) |
+| attkeep − pekeep | -0.31 [-1.79, +1.16] | 6/10 | not resolved | -1.82 [-3.20, -0.28] (CI excludes 0; descriptive) |
+| attaug − peaug | -2.46 [-4.05, -0.94] | 4/10 | not resolved | -3.29 [-5.15, -1.61] (CI excludes 0; descriptive) |
+| attkeep − attbal | -1.40 [-2.44, -0.27] | 4/10 | not resolved | -1.28 [-2.31, -0.24] (CI excludes 0; descriptive) |
+| pekeep − pebal | -0.22 [-1.09, +0.66] | 4/10 | not resolved | +0.46 [-0.41, +1.49] (CI contains 0; descriptive) |
+| attaug − attbal | -0.68 [-1.97, +0.67] | 7/10 | not resolved | +1.13 [-0.28, +2.71] (CI contains 0; descriptive) |
+| peaug − pebal | +2.65 [+1.19, +4.08] | 8/10 | RESOLVED better | +4.34 [+2.94, +5.76] (CI excludes 0; descriptive) |
 
 **Cluster-bootstrap sensitivity (Table 1 primary metric pAUC@1e-2, per-seed means; duplicate groups resampled together, 1,000 resamples; points × 100).**
 
@@ -981,6 +1004,25 @@ Files: `baseline/pe.py`, `v2pe.py`, `make_pad.py`, `padtest.py`, `att_report.py`
 | attaug − attbal | -0.68 | [-3.16, +1.68] | 7/10 | not resolved |
 | attkeep − pekeep | -0.31 | [-3.33, +2.39] | 6/10 | not resolved |
 | attkeep − attbal | -1.40 | [-3.41, +0.45] | 4/10 | not resolved |
+
+**Duplicate-aware (cluster bootstrap) additions to Table 1.**
+
+**Table 1, duplicate-aware (cluster bootstrap over hash_apis groups; 1,000 resamples). Difference of the per-seed means in points; the released checkpoint is one model. The claim rule applies to the primary metric only; the other rows are descriptive.**
+
+| difference | metric | mean difference | 95% CI (cluster) | seeds > 0 | outcome |
+|---|---|---|---|---|---|
+| v2-PE − released checkpoint | pAUC@1e-2 (primary) | +4.59 | [-2.48, +13.20] | 9/10 | not resolved |
+| v2-PE − released checkpoint | TPR@1e-2 | +6.13 | [+0.02, +12.81] | 10/10 | CI excludes 0 (descriptive) |
+| v2-PE − released checkpoint | TPR@1e-3 | +2.44 | [-10.32, +19.68] | 7/10 | CI contains 0 (descriptive) |
+| v2-PE − released checkpoint | AUC | +0.58 | [-0.14, +1.44] | 7/10 | CI contains 0 (descriptive) |
+| ATT+bal − released checkpoint | pAUC@1e-2 (primary) | +4.82 | [-4.64, +15.28] | 10/10 | not resolved |
+| ATT+bal − released checkpoint | TPR@1e-2 | +4.48 | [-2.88, +12.77] | 9/10 | CI contains 0 (descriptive) |
+| ATT+bal − released checkpoint | TPR@1e-3 | +5.35 | [-11.75, +23.70] | 8/10 | CI contains 0 (descriptive) |
+| ATT+bal − released checkpoint | AUC | +1.26 | [+0.19, +3.07] | 9/10 | CI excludes 0 (descriptive) |
+| ATT+bal − v2-PE | pAUC@1e-2 (primary) | +0.23 | [-4.78, +4.29] | 4/10 | not resolved |
+| ATT+bal − v2-PE | TPR@1e-2 | -1.65 | [-7.21, +3.23] | 3/10 | CI contains 0 (descriptive) |
+| ATT+bal − v2-PE | TPR@1e-3 | +2.91 | [-5.47, +9.49] | 6/10 | CI contains 0 (descriptive) |
+| ATT+bal − v2-PE | AUC | +0.68 | [-0.15, +2.13] | 7/10 | CI contains 0 (descriptive) |
 
 **Table 2 (1% FPR threshold). Malware flagged / padded benign flagged, in % (mean over the 10 seeds; the released checkpoint is one model). Calls prepended or inserted into every April report (9,399 malware, 8,003 benign).**
 
@@ -1015,6 +1057,48 @@ Files: `baseline/pe.py`, `v2pe.py`, `make_pad.py`, `padtest.py`, `att_report.py`
 | ATT+bal-keep | 3 | 74.8 / 50.8 | 63.8 / 27.3 | 61.6 / 24.5 | 44.7 / 7.5 |
 | PE+bal-keep | 3 | 76.1 / 41.8 | 62.8 / 17.1 | 56.1 / 11.0 | 41.1 / 2.5 |
 
+**Duplicate-aware additions to Table 2.**
+
+**Duplicate-aware counts for Table 2: tests (edit sets × two thresholds) in which the first model is higher / lower by the descriptive rule (CI excludes 0 and ≥ 7 of 10 seeds on the same side), stratified bootstrap and, in brackets, the cluster bootstrap over hash_apis groups. For the padded-benign FPR higher is worse. All rows: `results/review/audit_cluster.md`.**
+
+| padding | comparison | rate | tests | first higher (cluster) | first lower (cluster) | neither |
+|---|---|---|---|---|---|---|
+| random padding | v2-PE − released checkpoint | malware TPR | 12 | 6 (4) | 2 (2) | 4 |
+| random padding | v2-PE − released checkpoint | padded-benign FPR | 12 | 0 (0) | 8 (8) | 4 |
+| random padding | ATT+bal − released checkpoint | malware TPR | 12 | 12 (12) | 0 (0) | 0 |
+| random padding | ATT+bal − released checkpoint | padded-benign FPR | 12 | 0 (0) | 8 (8) | 4 |
+| random padding | ATT+bal − v2-PE | malware TPR | 12 | 12 (12) | 0 (0) | 0 |
+| random padding | ATT+bal − v2-PE | padded-benign FPR | 12 | 10 (8) | 0 (0) | 2 |
+| surrogate padding | v2-PE − released checkpoint | malware TPR | 24 | 3 (2) | 16 (13) | 5 |
+| surrogate padding | v2-PE − released checkpoint | padded-benign FPR | 24 | 0 (0) | 14 (12) | 10 |
+| surrogate padding | ATT+bal − released checkpoint | malware TPR | 24 | 19 (16) | 5 (4) | 0 |
+| surrogate padding | ATT+bal − released checkpoint | padded-benign FPR | 24 | 6 (5) | 11 (11) | 7 |
+| surrogate padding | ATT+bal − v2-PE | malware TPR | 24 | 23 (23) | 0 (0) | 1 |
+| surrogate padding | ATT+bal − v2-PE | padded-benign FPR | 24 | 16 (16) | 0 (0) | 8 |
+
+**White-box greedy, 500 reports, seeds 0-2 (the released checkpoint: its one run against every seed); share still flagged after k prepended calls; cluster bootstrap over the hash_apis groups of the 500 reports. Descriptive.**
+
+| difference | threshold | k | mean difference (points) | 95% CI (cluster) | seeds > 0 |
+|---|---|---|---|---|---|
+| v2-PE − released checkpoint | 1% FPR | 5 | +5.8 | [+1.8, +10.3] | 3/3 |
+| v2-PE − released checkpoint | 1% FPR | 10 | +3.7 | [+1.4, +6.5] | 3/3 |
+| v2-PE − released checkpoint | 1% FPR | 20 | +1.0 | [-0.4, +2.6] | 2/3 |
+| v2-PE − released checkpoint | 0.1% FPR | 5 | +0.7 | [+0.1, +1.6] | 3/3 |
+| v2-PE − released checkpoint | 0.1% FPR | 10 | +0.6 | [+0.1, +1.3] | 3/3 |
+| v2-PE − released checkpoint | 0.1% FPR | 20 | +0.2 | [+0.0, +0.6] | 2/3 |
+| ATT+bal − released checkpoint | 1% FPR | 5 | +62.3 | [+47.4, +72.9] | 3/3 |
+| ATT+bal − released checkpoint | 1% FPR | 10 | +61.1 | [+45.8, +71.7] | 3/3 |
+| ATT+bal − released checkpoint | 1% FPR | 20 | +52.1 | [+37.0, +63.6] | 3/3 |
+| ATT+bal − released checkpoint | 0.1% FPR | 5 | +34.5 | [+22.1, +47.4] | 3/3 |
+| ATT+bal − released checkpoint | 0.1% FPR | 10 | +31.7 | [+19.8, +45.0] | 3/3 |
+| ATT+bal − released checkpoint | 0.1% FPR | 20 | +14.6 | [+8.2, +22.1] | 3/3 |
+| ATT+bal − v2-PE | 1% FPR | 5 | +56.5 | [+43.8, +67.6] | 3/3 |
+| ATT+bal − v2-PE | 1% FPR | 10 | +57.3 | [+43.7, +69.1] | 3/3 |
+| ATT+bal − v2-PE | 1% FPR | 20 | +51.1 | [+36.8, +62.8] | 3/3 |
+| ATT+bal − v2-PE | 0.1% FPR | 5 | +33.7 | [+21.6, +46.1] | 3/3 |
+| ATT+bal − v2-PE | 0.1% FPR | 10 | +31.1 | [+19.4, +43.2] | 3/3 |
+| ATT+bal − v2-PE | 0.1% FPR | 20 | +14.4 | [+8.2, +21.4] | 3/3 |
+
 **Table 3. The label shortcut: padding applied to malware training reports only (aug) against padding of all reports (bal). Clean TPR@1% FPR, then padded malware / padded benign flagged at the 1% threshold (random calls, prepend), and the probe AUC for "padding present" (pooled vector, 64-d hidden vector).**
 
 | model | clean TPR@1% (April) | k=20 prepend: malware / benign flagged | k=50 prepend: malware / benign flagged | probe AUC, pooled | probe AUC, hidden |
@@ -1039,11 +1123,11 @@ Files: `baseline/pe.py`, `v2pe.py`, `make_pad.py`, `padtest.py`, `att_report.py`
 
 **Reading.**
 
-1. **Shown: balanced padding buys robustness, not clean accuracy.** ATT+bal, PE+bal and both keep models still flag 64 to 77% of the malware when 20 to 50 random benign calls are prepended or inserted, where v2-PE falls to 8 to 22% (prepend) and the released checkpoint to 12 to 16%. On clean April data no model beats v2-PE on pAUC@1e-2 under the claim rule (ATT+bal +0.23 points, CI [-1.70, +2.09], positive in 4 of 10 seeds); as 10-seed ensembles ATT+bal is 3.4 points lower (resolved).
-2. **Shown: attention pooling adds robustness against large amounts of prepended padding, not elsewhere.** ATT+bal beats PE+bal where the padding is chosen against the model or is long (LightGBM-chosen k = 50 prepend: 36.5 against 10.0% flagged at 1% FPR; white-box after 20 calls: 53.3 against 39.6% at 1% FPR and 14.6 against 3.5% at 0.1%); 18 of 24 surrogate tests are resolved in its favour (14 also under a bootstrap that resamples duplicate reports together) and none against it. For random and LightGBM-chosen inserted calls the two are equal (differences within 0.5 points); against calls chosen with v2-PE, ATT+bal is higher by 1.5 to 7 points. On the 0 to 30% of malware reports whose whole edited text still fits into 512 tokens the picture is mixed (2 tests for ATT+bal, 7 against). The advantage is therefore about what is pushed out of the 512-token window, and it is smaller for the keep models.
-3. **Shown: keeping the clean copies did not help.** The keep models are not better on clean data (pAUC@1e-2 -1.17 and -0.87 points against v2-PE; ATT+bal-keep -1.40 against ATT+bal: the per-seed rule is not met, the 10-seed ensembles differ by -1.28 points, resolved) and are less robust than the replace versions under the strongest attacks (LightGBM-chosen k = 50 prepend 27.1 against 36.5%; white-box after 20 calls at 0.1% FPR: 7.5 against 14.6%).
+1. **Shown: balanced padding buys robustness, not clean accuracy.** ATT+bal, PE+bal and both keep models still flag 64 to 77% of the malware when 20 to 50 random benign calls are prepended or inserted, where v2-PE falls to 8 to 22% (prepend) and the released checkpoint to 12 to 16%. On clean April data no model beats v2-PE on pAUC@1e-2 under the claim rule (ATT+bal +0.23 points, CI [-1.70, +2.09], positive in 4 of 10 seeds); as 10-seed ensembles ATT+bal is 3.4 points lower (the CI excludes 0; descriptive).
+2. **Shown: attention pooling adds robustness against large amounts of prepended padding, not elsewhere.** ATT+bal beats PE+bal where the padding is chosen against the model or is long (LightGBM-chosen k = 50 prepend: 36.5 against 10.0% flagged at 1% FPR; white-box after 20 calls: 53.3 against 39.6% at 1% FPR and 14.6 against 3.5% at 0.1%); in 18 of 24 surrogate tests the CI excludes 0 with at least 7 of 10 seeds in its favour (14 also under a bootstrap that resamples duplicate reports together; descriptive) and in none against it. For random and LightGBM-chosen inserted calls the two are equal (differences within 0.5 points); against calls chosen with v2-PE, ATT+bal is higher by 1.5 to 7 points. On the 0 to 30% of malware reports whose whole edited text still fits into 512 tokens the picture is mixed (2 tests for ATT+bal, 7 against). The advantage is therefore about what is pushed out of the 512-token window, and it is smaller for the keep models.
+3. **Shown: keeping the clean copies did not help.** The keep models are not better on clean data (pAUC@1e-2 -1.17 and -0.87 points against v2-PE; ATT+bal-keep -1.40 against ATT+bal: the per-seed rule is not met, the 10-seed ensembles differ by -1.28 points, the CI excludes 0; descriptive) and are less robust than the replace versions under the strongest attacks (LightGBM-chosen k = 50 prepend 27.1 against 36.5%; white-box after 20 calls at 0.1% FPR: 7.5 against 14.6%).
 4. **Shown: padding malware only teaches the shortcut "padding means malware", and the clean metrics do not show it.** PE+aug has the highest pAUC@1e-2 and TPR@1e-3 of all models (+2.0 points against v2-PE, rule not met) yet flags 99.9% of the malware and 99.7% of the benign reports at k = 50 (ATT+aug 98.5 and 95.3%). A linear probe reads "padding present" from the pooled vector of every flatten model at AUC 0.97 (also from v2-PE, which never saw padding), so the probe shows what can be read, not what the model uses; the attention-pooled vector of ATT+bal is much harder to read (0.71).
-5. **Not shown: that ATT+bal is better than v2-PE on clean data; any robustness against an attacker who knows the defence, who edits something other than adding benign API calls, or who is limited to a different budget; any result on another month.** The white-box attack has 3 seeds and 500 reports. The intervals cover test-set sampling only and the seed-to-seed spread is large (std of pAUC@1e-2 between seeds 1.7 to 6.4 points). April holds 2,509 distinct API sequences in 17,402 reports; with whole duplicate groups resampled together every per-seed-mean comparison of Table 1 is unresolved, including PE+aug against PE+bal.
+5. **Not shown: that ATT+bal is better than v2-PE on clean data; any robustness against an attacker who knows the defence, who edits something other than adding benign API calls, or who is limited to a different budget; any result on another month.** The white-box attack has 3 seeds and 500 reports. The intervals cover test-set sampling only and the seed-to-seed spread is large (std of pAUC@1e-2 between seeds 1.7 to 6.4 points). April holds 2,509 distinct API sequences in 17,402 reports; with whole duplicate groups resampled together no per-seed-mean comparison between the trained models of Table 1 meets the claim rule, including PE+aug against PE+bal.
 
 **Limits and how this was done.**
 
@@ -1053,11 +1137,13 @@ Files: `baseline/pe.py`, `v2pe.py`, `make_pad.py`, `padtest.py`, `att_report.py`
 - **Released checkpoint.** It has its own tokenizer; its attacks use a second call store made with it (checked the same way). At v2-PE-surrogate k = 50 it flags every report (malware 100%, benign 100%), which is not detection.
 - **The probe measures readability, not use** (see line 4); features are z-scored, the same logistic regression for every model; a shuffled-label control gives AUC 0.50 for all.
 - **Training.** Keep runs train on 1.50x as many reports per epoch (101,484 against 67,768; 1,058 against 706 batches), so they take 1.5x the steps in the same 2 epochs. The tokenizer was fitted on all of January, including the validation slice (as in the earlier sections). Nothing was tuned or selected on April; all settings were fixed in NOTES.md section 15 before any attack score was computed. Two choices were made while building and before any attack score existed (NOTES 15.7): the white-box attacker keeps the best edit so far and stops when a report is below the 1% threshold; the "fits in 512 tokens" subset.
-- **Compute.** Training ran on the first Kaggle account; the attack scoring, the random-padding test and the probe on a second account (the owner's, started because the quota of the first did not cover them), from private copies of the original-report call stores and the model weights. The scoring pipeline reproduces the stored April logits of the unedited reports (largest difference 3e-5) and the random-padding edits equal the arrays of REPORT 5.10 token for token (checked on 600 reports x 6 edits).
+- **Preliminary GPU results.** The attack scoring of §5.11 (surrogate-chosen padding, white-box attack, random-padding test, probe) and the training and scoring of §5.12 are preliminary and are to be re-run on the author's own Kaggle account. The scoring pipeline reproduces the stored April logits of the unedited reports (largest difference 3e-5) and the random-padding edits equal the arrays of REPORT 5.10 token for token (checked on 600 reports x 6 edits).
 - **Edited reports exist in memory only.** The edits of the training runs and of every attack are built from the call-token store of the ORIGINAL reports (verified against full re-tokenisation: 0 of 1,500 edits and 0 of 3,000 unedited reports differ; the §5.10 arrays are reproduced exactly) and only scores, logits and AUCs are saved. Artefacts that predate this rule and contain edited tokens: `results/att_bal/pad/april_pad.npz` (tracked in git; pushed in commit 6f22129), the private Kaggle datasets `nebula-v2pe-padtest` and `nebula-v2pe-augb`, and local copies in `results/_pad_train` and `results/_pad_bundle`; they are not used by anything in this section and I have not deleted them (a history purge would need a force-push).
 
 
 ### 5.12 Tuning the padded-training recipe of ATT+bal under EVAL_PROTOCOL §4 (follow-up for the review)
+
+**Status: preliminary. The training and the scoring of this section are to be re-run on the author's own Kaggle account.**
 
 **Question.** ATT+bal lost 1.65 points of TPR@1e-2 to v2-PE (§5.10). Is that a matter of the padded-training recipe? Grid written in `NOTES.md` section 16 before any training: learning rate in {1e-3, 2e-3} x padding probability in {0.25, 0.5}, 4 epochs, seeds 0-9 per cell, everything else as ATT+bal of §5.10; validation measures = clean pAUC@1e-2 (selection metric) and robustness R (share of validation malware still flagged at the validation 1% FPR threshold after 20 TRAIN-pool calls are prepended); rule: exclude collapsed cells (validation AUC < 0.6 in any seed), exclude mean R more than 2 points below the existing ATT+bal's (0.9586), then highest mean validation pAUC@1e-2 with ties within one SE broken by fewest epochs, then p = 0.5, then lower validation loss. April logits of all cells were stored and not opened until the choice was written down.
 
@@ -1103,22 +1189,22 @@ Reproduction check of the cell (2e-3, 0.5): largest per-seed difference of the e
 
 | difference | metric | per-seed means (CI) | seeds >0 / <0 | claim rule | 10-seed ensembles (CI) | cluster bootstrap CI (pAUC only) |
 |---|---|---|---|---|---|---|
-| tuned − v2_pe | pAUC@1e-2 | +0.84 [-0.78, +2.39] | 7/3 | not resolved | -3.02 [-4.54, -1.44] resolved | [-4.00, +4.54] not resolved |
-| tuned − v2_pe | TPR@1e-2 | -1.64 [-2.91, -0.60] | 3/7 | RESOLVED worse | -3.44 [-4.60, -1.98] resolved | — |
-| tuned − v2_pe | TPR@1e-3 | +3.84 [-2.43, +7.38] | 6/4 | not resolved | -0.79 [-6.78, +5.30] not resolved | — |
-| tuned − v2_pe | AUC | +0.44 [+0.31, +0.55] | 7/3 | RESOLVED better | +0.33 [+0.20, +0.45] resolved | — |
-| tuned − attbal | pAUC@1e-2 | +0.61 [-0.52, +1.74] | 7/3 | not resolved | +0.40 [-0.56, +1.42] not resolved | [-1.10, +2.25] not resolved |
-| tuned − attbal | TPR@1e-2 | +0.01 [-0.49, +0.62] | 3/7 | not resolved | +0.31 [-0.47, +0.93] not resolved | — |
-| tuned − attbal | TPR@1e-3 | +0.92 [-4.83, +4.72] | 4/6 | not resolved | +1.50 [-4.74, +5.99] not resolved | — |
-| tuned − attbal | AUC | -0.24 [-0.29, -0.20] | 3/7 | RESOLVED worse | -0.42 [-0.47, -0.37] resolved | — |
-| attbal − v2_pe | pAUC@1e-2 | +0.23 [-1.70, +2.09] | 4/6 | not resolved | -3.42 [-5.37, -1.55] resolved | [-4.78, +4.29] not resolved |
-| attbal − v2_pe | TPR@1e-2 | -1.65 [-2.95, -0.67] | 3/7 | RESOLVED worse | -3.75 [-4.73, -2.18] resolved | — |
-| attbal − v2_pe | TPR@1e-3 | +2.91 [-2.20, +7.16] | 6/4 | not resolved | -2.29 [-7.12, +7.25] not resolved | — |
-| attbal − v2_pe | AUC | +0.68 [+0.57, +0.79] | 7/3 | RESOLVED better | +0.75 [+0.62, +0.87] resolved | — |
+| tuned − v2_pe | pAUC@1e-2 | +0.84 [-0.78, +2.39] | 7/3 | not resolved | -3.02 [-4.54, -1.44] CI excludes 0 (descriptive) | [-4.00, +4.54] not resolved |
+| tuned − v2_pe | TPR@1e-2 | -1.64 [-2.91, -0.60] | 3/7 | rule met, descriptive | -3.44 [-4.60, -1.98] CI excludes 0 (descriptive) | — |
+| tuned − v2_pe | TPR@1e-3 | +3.84 [-2.43, +7.38] | 6/4 | rule not met, descriptive | -0.79 [-6.78, +5.30] CI contains 0 (descriptive) | — |
+| tuned − v2_pe | AUC | +0.44 [+0.31, +0.55] | 7/3 | rule met, descriptive | +0.33 [+0.20, +0.45] CI excludes 0 (descriptive) | — |
+| tuned − attbal | pAUC@1e-2 | +0.61 [-0.52, +1.74] | 7/3 | not resolved | +0.40 [-0.56, +1.42] CI contains 0 (descriptive) | [-1.10, +2.25] not resolved |
+| tuned − attbal | TPR@1e-2 | +0.01 [-0.49, +0.62] | 3/7 | rule not met, descriptive | +0.31 [-0.47, +0.93] CI contains 0 (descriptive) | — |
+| tuned − attbal | TPR@1e-3 | +0.92 [-4.83, +4.72] | 4/6 | rule not met, descriptive | +1.50 [-4.74, +5.99] CI contains 0 (descriptive) | — |
+| tuned − attbal | AUC | -0.24 [-0.29, -0.20] | 3/7 | rule met, descriptive | -0.42 [-0.47, -0.37] CI excludes 0 (descriptive) | — |
+| attbal − v2_pe | pAUC@1e-2 | +0.23 [-1.70, +2.09] | 4/6 | not resolved | -3.42 [-5.37, -1.55] CI excludes 0 (descriptive) | [-4.78, +4.29] not resolved |
+| attbal − v2_pe | TPR@1e-2 | -1.65 [-2.95, -0.67] | 3/7 | rule met, descriptive | -3.75 [-4.73, -2.18] CI excludes 0 (descriptive) | — |
+| attbal − v2_pe | TPR@1e-3 | +2.91 [-2.20, +7.16] | 6/4 | rule not met, descriptive | -2.29 [-7.12, +7.25] CI contains 0 (descriptive) | — |
+| attbal − v2_pe | AUC | +0.68 [+0.57, +0.79] | 7/3 | rule met, descriptive | +0.75 [+0.62, +0.87] CI excludes 0 (descriptive) | — |
 
 **Plainly.**
-1. **The gap to v2-PE at 1% FPR did not close.** The chosen candidate (lr 1e-3, padding probability 0.25, epoch 2) has April TPR@1e-2 0.795 ± 0.011 against 0.811 ± 0.023 for v2-PE: -1.64 points, CI [-2.91, -0.60], resolved (the tuned model is above v2-PE in 3 of 10 seeds). The existing ATT+bal had -1.65. Tuning changed nothing there (tuned − existing: +0.01 points, not resolved). No candidate of the grid reaches v2-PE's TPR@1e-2: the highest mean in the appendix is 0.799 (not used for selection).
-2. **On the primary metric nothing is resolved either.** Tuned − v2-PE in pAUC@1e-2: +0.84 points per-seed means (CI [-0.78, +2.39], above in 7 of 10 seeds: rule not met; cluster bootstrap CI [-4.00, +4.54]); as 10-seed ensembles -3.02 (resolved). Tuned − existing ATT+bal: +0.61 (CI [-0.52, +1.74], 7 of 10 seeds, not resolved). The validation gain that led to the choice (+0.43 points) is of the size of its own standard error (0.15 to 0.23 points); AUC is 0.24 points lower than the existing model (resolved).
+1. **The gap to v2-PE at 1% FPR did not close.** The chosen candidate (lr 1e-3, padding probability 0.25, epoch 2) has April TPR@1e-2 0.795 ± 0.011 against 0.811 ± 0.023 for v2-PE: -1.64 points, CI [-2.91, -0.60] (descriptive: the CI excludes 0 and the tuned model is above v2-PE in only 3 of 10 seeds). The existing ATT+bal had -1.65. Tuning changed nothing there (tuned − existing: +0.01 points, not resolved). No candidate of the grid reaches v2-PE's TPR@1e-2: the highest mean in the appendix is 0.799 (not used for selection).
+2. **On the primary metric nothing is resolved either.** Tuned − v2-PE in pAUC@1e-2: +0.84 points per-seed means (CI [-0.78, +2.39], above in 7 of 10 seeds: rule not met; cluster bootstrap CI [-4.00, +4.54]); as 10-seed ensembles -3.02 (the CI excludes 0; descriptive). Tuned − existing ATT+bal: +0.61 (CI [-0.52, +1.74], 7 of 10 seeds, claim rule not met). The validation gain that led to the choice (+0.43 points) is of the size of its own standard error (0.15 to 0.23 points); AUC is 0.24 points lower than the existing model (descriptive: the CI excludes 0).
 3. **What it cost in robustness: a little everywhere, clearly under the strongest attacks.** Against the existing ATT+bal the tuned model is lower after 20 white-box calls (46.5 against 53.3% flagged at 1% FPR: -6.9 points, 0 of 3 seeds above; 11.6 against 14.6% at 0.1% FPR), under LightGBM-chosen k = 50 prepend (31.5 against 36.5%) and under v2-PE-chosen k = 20 prepend (21.4 against 23.8%); under random padding the two are within about 2 points (66.0 against 67.6% at k = 50 prepend). It stays far above PE+bal (white-box after 20 calls 39.6%) and v2-PE (2.2%). Validation had already pointed this way (R 0.949 against 0.959).
 4. **Reading.** Training with fewer padded reports (p = 0.25) and the lower learning rate buys back nothing at 1% FPR and gives up some robustness: the 1-point gap to v2-PE at 1% FPR is not a matter of these two settings in this grid. Not tested: other recipe changes (a padding schedule, k distribution, other pooling).
 
@@ -1168,9 +1254,9 @@ Reproduction check of the cell (2e-3, 0.5): largest per-seed difference of the e
 | ATT+bal-tuned − v2-PE | 0.1% FPR | 10 | +25.3 | [+22.1, +28.9] | 3/3 |
 | ATT+bal-tuned − v2-PE | 0.1% FPR | 20 | +11.4 | [+9.3, +13.7] | 3/3 |
 
-**ATT+bal-tuned against the existing ATT+bal, counts of tests (edit sets × two thresholds) resolved higher / lower for the tuned model (claim rule; in brackets also resolved under the cluster bootstrap). For the padded-benign FPR higher is worse.**
+**ATT+bal-tuned against the existing ATT+bal, counts of tests (edit sets × two thresholds) in which the tuned model is higher / lower by the descriptive rule (CI excludes 0 and ≥ 7 of 10 seeds on the same side; in brackets the same under the cluster bootstrap). For the padded-benign FPR higher is worse.**
 
-| padding | rate | tests | tuned higher (cluster) | tuned lower (cluster) | not resolved |
+| padding | rate | tests | tuned higher (cluster) | tuned lower (cluster) | neither |
 |---|---|---|---|---|---|
 | random padding | malware TPR | 12 | 2 (0) | 3 (2) | 7 |
 | random padding | malware TPR, fit subset | 12 | 0 (0) | 10 (3) | 2 |
@@ -1211,8 +1297,160 @@ Per-seed mean ± std over 10 seeds and the 10-seed ensemble pAUC@1e-2; the last 
 - **Budget asymmetry (EVAL_PROTOCOL §4.6).** ATT+bal-tuned had 16 candidates (2 tuned hyper-parameters and the epoch); v2-PE and the existing ATT+bal were not re-tuned.
 - **Statistics as in §5.11:** stratified bootstrap (test-set sampling only) + the 7-of-10 seed rule, and the cluster bootstrap over the 2,509 duplicate groups as sensitivity. The white-box comparison has 3 seeds and 500 reports.
 - **Reproduction.** The rerun of the cell (2e-3, 0.5) reproduced the existing ATT+bal exactly on validation (largest per-seed difference of validation pAUC@1e-2 0.0000), so the 4-epoch grid and the earlier runs are the same recipe.
-- **Compute.** Training and scoring ran on the second Kaggle account (the owner's); the scoring pipeline is that of §5.11 (edits built in memory from the store of original reports; only scores saved).
+- **Preliminary.** The training and the scoring of this section are to be re-run on the author's own Kaggle account; the scoring pipeline is that of §5.11 (edits built in memory from the store of original reports; only scores saved).
 
+
+
+### 5.13 Audit: duplicates, validation overlap, further robustness tests
+
+**Status: preliminary.** Statistics and CPU checks only; no training.
+
+**(a) Duplicate-aware checks (cluster bootstrap over `hash_apis` groups).** April has 17,402 reports in 2,509 distinct API sequences (largest groups 864, 833 and 614 reports); identical sequences get identical scores. The stratified bootstrap of EVAL_PROTOCOL.md treats reports as independent; the cluster bootstrap resamples the (group, class) cells. Table 1 and Table 2 of RESULTS_FOR_REVIEW.md carry both.
+
+**Table 1, duplicate-aware (cluster bootstrap over hash_apis groups; 1,000 resamples). Difference of the per-seed means in points; the released checkpoint is one model. The claim rule applies to the primary metric only; the other rows are descriptive.**
+
+| difference | metric | mean difference | 95% CI (cluster) | seeds > 0 | outcome |
+|---|---|---|---|---|---|
+| v2-PE − released checkpoint | pAUC@1e-2 (primary) | +4.59 | [-2.48, +13.20] | 9/10 | not resolved |
+| v2-PE − released checkpoint | TPR@1e-2 | +6.13 | [+0.02, +12.81] | 10/10 | CI excludes 0 (descriptive) |
+| v2-PE − released checkpoint | TPR@1e-3 | +2.44 | [-10.32, +19.68] | 7/10 | CI contains 0 (descriptive) |
+| v2-PE − released checkpoint | AUC | +0.58 | [-0.14, +1.44] | 7/10 | CI contains 0 (descriptive) |
+| ATT+bal − released checkpoint | pAUC@1e-2 (primary) | +4.82 | [-4.64, +15.28] | 10/10 | not resolved |
+| ATT+bal − released checkpoint | TPR@1e-2 | +4.48 | [-2.88, +12.77] | 9/10 | CI contains 0 (descriptive) |
+| ATT+bal − released checkpoint | TPR@1e-3 | +5.35 | [-11.75, +23.70] | 8/10 | CI contains 0 (descriptive) |
+| ATT+bal − released checkpoint | AUC | +1.26 | [+0.19, +3.07] | 9/10 | CI excludes 0 (descriptive) |
+| ATT+bal − v2-PE | pAUC@1e-2 (primary) | +0.23 | [-4.78, +4.29] | 4/10 | not resolved |
+| ATT+bal − v2-PE | TPR@1e-2 | -1.65 | [-7.21, +3.23] | 3/10 | CI contains 0 (descriptive) |
+| ATT+bal − v2-PE | TPR@1e-3 | +2.91 | [-5.47, +9.49] | 6/10 | CI contains 0 (descriptive) |
+| ATT+bal − v2-PE | AUC | +0.68 | [-0.15, +2.13] | 7/10 | CI contains 0 (descriptive) |
+
+**Consequence for the claim rule.** On the primary metric pAUC@1e-2 the comparisons against the released checkpoint that met the claim rule with the report-level bootstrap do not meet it once duplicates are resampled together: v2-PE − released +4.59 (CI [-2.48, +13.20], above in 9 of 10 seeds); ATT+bal − released +4.82 (CI [-4.64, +15.28], above in 10 of 10 seeds). ATT+bal − v2-PE stays unresolved: +0.23 (CI [-4.78, +4.29], above in 4 of 10 seeds). The robustness differences are far larger than their intervals under either bootstrap (counts below), except where stated. The ATT versus v2-PE / v2 and ATT+bal versus ATT comparisons of §5.10 were not recomputed with the cluster bootstrap.
+
+**Duplicate-aware counts for Table 2: tests (edit sets × two thresholds) in which the first model is higher / lower by the descriptive rule (CI excludes 0 and ≥ 7 of 10 seeds on the same side), stratified bootstrap and, in brackets, the cluster bootstrap over hash_apis groups. For the padded-benign FPR higher is worse. All rows: `results/review/audit_cluster.md`.**
+
+| padding | comparison | rate | tests | first higher (cluster) | first lower (cluster) | neither |
+|---|---|---|---|---|---|---|
+| random padding | v2-PE − released checkpoint | malware TPR | 12 | 6 (4) | 2 (2) | 4 |
+| random padding | v2-PE − released checkpoint | padded-benign FPR | 12 | 0 (0) | 8 (8) | 4 |
+| random padding | ATT+bal − released checkpoint | malware TPR | 12 | 12 (12) | 0 (0) | 0 |
+| random padding | ATT+bal − released checkpoint | padded-benign FPR | 12 | 0 (0) | 8 (8) | 4 |
+| random padding | ATT+bal − v2-PE | malware TPR | 12 | 12 (12) | 0 (0) | 0 |
+| random padding | ATT+bal − v2-PE | padded-benign FPR | 12 | 10 (8) | 0 (0) | 2 |
+| surrogate padding | v2-PE − released checkpoint | malware TPR | 24 | 3 (2) | 16 (13) | 5 |
+| surrogate padding | v2-PE − released checkpoint | padded-benign FPR | 24 | 0 (0) | 14 (12) | 10 |
+| surrogate padding | ATT+bal − released checkpoint | malware TPR | 24 | 19 (16) | 5 (4) | 0 |
+| surrogate padding | ATT+bal − released checkpoint | padded-benign FPR | 24 | 6 (5) | 11 (11) | 7 |
+| surrogate padding | ATT+bal − v2-PE | malware TPR | 24 | 23 (23) | 0 (0) | 1 |
+| surrogate padding | ATT+bal − v2-PE | padded-benign FPR | 24 | 16 (16) | 0 (0) | 8 |
+
+**White-box greedy, 500 reports, seeds 0-2 (the released checkpoint: its one run against every seed); share still flagged after k prepended calls; cluster bootstrap over the hash_apis groups of the 500 reports. Descriptive.**
+
+| difference | threshold | k | mean difference (points) | 95% CI (cluster) | seeds > 0 |
+|---|---|---|---|---|---|
+| v2-PE − released checkpoint | 1% FPR | 5 | +5.8 | [+1.8, +10.3] | 3/3 |
+| v2-PE − released checkpoint | 1% FPR | 10 | +3.7 | [+1.4, +6.5] | 3/3 |
+| v2-PE − released checkpoint | 1% FPR | 20 | +1.0 | [-0.4, +2.6] | 2/3 |
+| v2-PE − released checkpoint | 0.1% FPR | 5 | +0.7 | [+0.1, +1.6] | 3/3 |
+| v2-PE − released checkpoint | 0.1% FPR | 10 | +0.6 | [+0.1, +1.3] | 3/3 |
+| v2-PE − released checkpoint | 0.1% FPR | 20 | +0.2 | [+0.0, +0.6] | 2/3 |
+| ATT+bal − released checkpoint | 1% FPR | 5 | +62.3 | [+47.4, +72.9] | 3/3 |
+| ATT+bal − released checkpoint | 1% FPR | 10 | +61.1 | [+45.8, +71.7] | 3/3 |
+| ATT+bal − released checkpoint | 1% FPR | 20 | +52.1 | [+37.0, +63.6] | 3/3 |
+| ATT+bal − released checkpoint | 0.1% FPR | 5 | +34.5 | [+22.1, +47.4] | 3/3 |
+| ATT+bal − released checkpoint | 0.1% FPR | 10 | +31.7 | [+19.8, +45.0] | 3/3 |
+| ATT+bal − released checkpoint | 0.1% FPR | 20 | +14.6 | [+8.2, +22.1] | 3/3 |
+| ATT+bal − v2-PE | 1% FPR | 5 | +56.5 | [+43.8, +67.6] | 3/3 |
+| ATT+bal − v2-PE | 1% FPR | 10 | +57.3 | [+43.7, +69.1] | 3/3 |
+| ATT+bal − v2-PE | 1% FPR | 20 | +51.1 | [+36.8, +62.8] | 3/3 |
+| ATT+bal − v2-PE | 0.1% FPR | 5 | +33.7 | [+21.6, +46.1] | 3/3 |
+| ATT+bal − v2-PE | 0.1% FPR | 10 | +31.1 | [+19.4, +43.2] | 3/3 |
+| ATT+bal − v2-PE | 0.1% FPR | 20 | +14.4 | [+8.2, +21.4] | 3/3 |
+
+**(b) Validation overlap.** Validation slice: 7,530 reports; **94.2% share their API sequence (hash_apis) with the 90% training slice** (7,097 seen, 433 unseen: 99 malware, 334 benign). April: 36.4%.
+
+**V1. Validation metrics at epoch 2 of the models of §5.7 to §5.11 (10 seeds; mean ± std), on all validation reports, on the seen part and on the unseen part.** TPR@1e-2 of the unseen part is read at 3 false alarms of 334 benign reports; pAUC on 334 benign reports is coarse.
+
+| model | pAUC@1e-2 all | TPR@1e-2 all | AUC all | pAUC@1e-2 seen | TPR@1e-2 seen | AUC seen | pAUC@1e-2 unseen | TPR@1e-2 unseen | AUC unseen |
+|---|---|---|---|---|---|---|---|---|---|
+| v2 | 0.947 ± 0.015 | 0.983 | 0.9984 | 0.967 ± 0.010 | 0.993 | 0.9992 | 0.585 ± 0.129 | 0.695 | 0.9361 |
+| v2-PE | 0.962 ± 0.013 | 0.984 | 0.9985 | 0.975 ± 0.009 | 0.992 | 0.9993 | 0.673 ± 0.067 | 0.738 | 0.9358 |
+| ATT | 0.969 ± 0.005 | 0.986 | 0.9987 | 0.979 ± 0.006 | 0.994 | 0.9993 | 0.730 ± 0.022 | 0.756 | 0.9399 |
+| ATT+bal | 0.955 ± 0.007 | 0.981 | 0.9984 | 0.968 ± 0.005 | 0.991 | 0.9991 | 0.687 ± 0.018 | 0.720 | 0.9408 |
+| PE+bal | 0.947 ± 0.009 | 0.980 | 0.9977 | 0.964 ± 0.007 | 0.988 | 0.9988 | 0.631 ± 0.073 | 0.724 | 0.9271 |
+| ATT+bal-keep | 0.954 ± 0.008 | 0.982 | 0.9983 | 0.968 ± 0.006 | 0.991 | 0.9991 | 0.687 ± 0.031 | 0.718 | 0.9366 |
+| PE+bal-keep | 0.951 ± 0.014 | 0.983 | 0.9980 | 0.969 ± 0.009 | 0.991 | 0.9990 | 0.590 ± 0.114 | 0.720 | 0.9317 |
+| ATT+aug | 0.957 ± 0.007 | 0.981 | 0.9984 | 0.969 ± 0.007 | 0.992 | 0.9991 | 0.708 ± 0.025 | 0.745 | 0.9406 |
+| PE+aug | 0.948 ± 0.007 | 0.978 | 0.9981 | 0.967 ± 0.008 | 0.989 | 0.9990 | 0.614 ± 0.074 | 0.709 | 0.9348 |
+
+**V2. The 16 candidates of §5.12 on the unseen part only** (433 reports; unseen robustness R: the 99 unseen validation malware with 20 TRAIN-pool calls prepended, threshold = the 3rd highest of the 334 unseen benign scores; reference = the existing ATT+bal, mean R 0.5869, rule 2 excludes mean R < 0.5669).
+
+| lr | p | epoch | mean pAUC@1e-2 (unseen) | SE | mean R (unseen) | mean loss (unseen) | min AUC | R excluded | note |
+|---|---|---|---|---|---|---|---|---|---|
+| 0.001 | 0.25 | 1 | 0.6905 | 0.0065 | 0.3949 | 0.3952 | 0.9296 | yes |  |
+| 0.001 | 0.25 | 2 | 0.7005 | 0.0098 | 0.4687 | 0.5076 | 0.9358 | yes |  |
+| 0.001 | 0.25 | 3 | 0.6981 | 0.0060 | 0.5030 | 0.5187 | 0.9290 | yes |  |
+| 0.001 | 0.25 | 4 | 0.7064 | 0.0086 | 0.5273 | 0.5671 | 0.9289 | yes |  |
+| 0.001 | 0.5 | 1 | 0.6871 | 0.0074 | 0.4970 | 0.4284 | 0.9264 | yes |  |
+| 0.001 | 0.5 | 2 | 0.6930 | 0.0076 | 0.6061 | 0.5288 | 0.9307 | no |  |
+| 0.001 | 0.5 | 3 | 0.7063 | 0.0081 | 0.6232 | 0.5308 | 0.9255 | no | **best on unseen** |
+| 0.001 | 0.5 | 4 | 0.6987 | 0.0087 | 0.6364 | 0.5551 | 0.9212 | no | tied |
+| 0.002 | 0.25 | 1 | 0.7001 | 0.0076 | 0.4242 | 0.3495 | 0.9206 | yes |  |
+| 0.002 | 0.25 | 2 | 0.6833 | 0.0082 | 0.4788 | 0.4657 | 0.9278 | yes |  |
+| 0.002 | 0.25 | 3 | 0.6687 | 0.0123 | 0.5040 | 0.5532 | 0.9269 | yes |  |
+| 0.002 | 0.25 | 4 | 0.6761 | 0.0117 | 0.5667 | 0.5386 | 0.9239 | yes |  |
+| 0.002 | 0.5 | 1 | 0.6871 | 0.0041 | 0.5333 | 0.3750 | 0.9331 | yes |  |
+| 0.002 | 0.5 | 2 | 0.6872 | 0.0056 | 0.5869 | 0.4763 | 0.9284 | no |  |
+| 0.002 | 0.5 | 3 | 0.6896 | 0.0092 | 0.6182 | 0.4683 | 0.9230 | no |  |
+| 0.002 | 0.5 | 4 | 0.6847 | 0.0054 | 0.6323 | 0.5428 | 0.9280 | no |  |
+
+**The rule of NOTES 16.4 applied to the unseen-part numbers chooses (0.001, 0.5, 3); on the full validation slice it chose (0.001, 0.25, 2).** The choice would change.
+
+Which choices would change: the §5.12 choice (above). The recipe of baseline v2 (§5.7: R8, lr 2e-3, epoch 2 from a grid of 10 recipes on validation TPR@1e-3) and the (lr, epoch) choices of B3 (§5.2c) were made on this slice too; their per-epoch validation logits were not stored (only metrics), so they cannot be recomputed on the unseen part without retraining; they are open. Plan for redoing the §5.12 choice on a group-split slice: NOTES.md section 17 (not run).
+
+**(c) Further robustness tests (CPU, same thresholds and statistics as §5.11).** Rare-API-name padding (calls whose name is among the rarest 20% of the EVAL-pool names by training frequency), block padding (one block of k consecutive calls of an EVAL-pool report), copied calls of the same report, rotation of the call list (the 512-token window then starts later in the report), argument injection (the arguments of the first k calls get the arguments of a random EVAL-pool call appended), k = 5, 20, 50, and the test-time deduplication defence on v2-PE (consecutive identical calls reduced to one, after the edit). The edit builders were checked against full re-tokenisation (0 differences in 150 reports x 23 edit sets, and for the deduplication builder against a dict-level deduplication; with the released tokenizer 60 reports). Edited reports exist in memory only.
+
+**Table X (1% FPR threshold). Further edits: malware flagged / padded benign flagged, in % (mean over the seeds scored; every April report is edited). Unedited malware flagged / benign flagged: released checkpoint: 75.0 / 1.00; v2-PE: 81.1 / 0.99; PE+bal: 78.7 / 1.00; ATT+bal: 79.5 / 0.99; v2-PE + test-time deduplication: 81.1 / 0.99.**
+
+| model | seeds | rare 20 prepend | rare 50 insert | block 50 prepend | block 50 insert | copy 50 prepend | copy 50 insert | rot 50 | inj 50 |
+|---|---|---|---|---|---|---|---|---|---|
+| released checkpoint | 1 | 17.6 / 19.4 | 28.9 / 9.8 | 23.9 / 19.8 | 61.9 / 3.8 | 37.4 / 19.3 | 49.0 / 2.7 | 39.5 / 32.5 | 34.4 / 3.2 |
+| v2-PE | 10 | 11.5 / 1.5 | 25.0 / 0.9 | 21.3 / 4.4 | 65.4 / 1.1 | 57.2 / 4.2 | 67.7 / 1.8 | 54.3 / 5.2 | 46.9 / 0.8 |
+| PE+bal | 10 | 70.0 / 3.8 | 55.1 / 1.7 | 68.2 / 4.1 | 72.0 / 2.0 | 80.5 / 4.5 | 79.7 / 2.6 | 62.7 / 14.6 | 75.0 / 1.4 |
+| ATT+bal | 10 | 70.7 / 1.4 | 52.7 / 1.1 | 72.7 / 3.1 | 72.8 / 2.6 | 79.0 / 3.2 | 80.0 / 1.8 | 62.0 / 10.0 | 76.0 / 1.0 |
+| v2-PE + test-time deduplication | 10 | 11.3 / 1.4 | 24.6 / 0.8 | 21.2 / 4.2 | 65.2 / 1.0 | 57.2 / 4.0 | 67.5 / 1.7 | 53.8 / 5.0 | 46.4 / 0.8 |
+
+**Table X (0.1% FPR threshold). Further edits: malware flagged / padded benign flagged, in % (mean over the seeds scored; every April report is edited). Unedited malware flagged / benign flagged: released checkpoint: 51.8 / 0.10; v2-PE: 54.3 / 0.10; PE+bal: 55.1 / 0.10; ATT+bal: 57.2 / 0.10; v2-PE + test-time deduplication: 54.4 / 0.10.**
+
+| model | seeds | rare 20 prepend | rare 50 insert | block 50 prepend | block 50 insert | copy 50 prepend | copy 50 insert | rot 50 | inj 50 |
+|---|---|---|---|---|---|---|---|---|---|
+| released checkpoint | 1 | 3.5 / 1.1 | 9.5 / 0.2 | 5.4 / 2.9 | 37.3 / 0.3 | 13.1 / 2.0 | 22.9 / 0.1 | 13.4 / 3.6 | 15.4 / 0.0 |
+| v2-PE | 10 | 1.8 / 0.0 | 6.6 / 0.0 | 5.2 / 0.1 | 36.6 / 0.0 | 27.6 / 0.4 | 36.7 / 0.2 | 18.8 / 0.3 | 13.4 / 0.0 |
+| PE+bal | 10 | 30.6 / 0.2 | 24.0 / 0.0 | 32.8 / 0.1 | 44.7 / 0.1 | 65.0 / 1.1 | 61.0 / 0.5 | 32.6 / 0.3 | 46.3 / 0.1 |
+| ATT+bal | 10 | 40.3 / 0.1 | 25.4 / 0.0 | 41.1 / 0.1 | 42.8 / 0.1 | 61.2 / 0.2 | 55.7 / 0.2 | 36.1 / 0.2 | 48.3 / 0.1 |
+| v2-PE + test-time deduplication | 10 | 1.9 / 0.0 | 6.6 / 0.0 | 5.3 / 0.1 | 36.7 / 0.0 | 28.2 / 0.3 | 37.0 / 0.2 | 19.0 / 0.3 | 13.5 / 0.0 |
+
+**Further edits: counts of tests (23 edit sets × two thresholds) in which the first model is higher / lower by the descriptive rule (CI excludes 0 and ≥ 7 of 10 paired seeds on the same side; in brackets the same under the cluster bootstrap). For the padded-benign FPR higher is worse.**
+
+| comparison | rate | tests | first higher (cluster) | first lower (cluster) | neither |
+|---|---|---|---|---|---|
+| ATT+bal − PE+bal | malware TPR | 46 | 19 (10) | 4 (2) | 23 |
+| ATT+bal − PE+bal | padded-benign FPR | 46 | 0 (0) | 21 (20) | 25 |
+| ATT+bal − v2-PE | malware TPR | 46 | 45 (41) | 0 (0) | 1 |
+| ATT+bal − v2-PE | padded-benign FPR | 46 | 14 (7) | 5 (4) | 27 |
+| PE+bal − v2-PE | malware TPR | 46 | 45 (42) | 0 (0) | 1 |
+| PE+bal − v2-PE | padded-benign FPR | 46 | 32 (29) | 1 (0) | 13 |
+| v2-PE + test-time deduplication − v2-PE | malware TPR | 46 | 9 (6) | 6 (5) | 31 |
+| v2-PE + test-time deduplication − v2-PE | padded-benign FPR | 46 | 0 (0) | 8 (8) | 38 |
+
+**Reading of Table X (descriptive; none of these comparisons is a pre-registered claim; 10 seeds for v2-PE, PE+bal, ATT+bal and the deduplication family, one model for the released checkpoint).**
+1. **Models trained with balanced padding hold up against every added-call edit; v2-PE and the released checkpoint do not.** At k = 50 and the 1% FPR threshold PE+bal and ATT+bal flag 53 to 80% of the malware, v2-PE 11 to 25% for rare-name prepend, rare-name insert and block prepend and 57 to 68% for copied calls and block insert; the released checkpoint 18 to 29% (rare, block prepend), 37 to 62% otherwise. ATT+bal is higher than PE+bal in the malware TPR in 19 of 46 tests (10 also under the cluster bootstrap) and lower in 4 (2), mostly rare-name and block prepend (rare-name prepend k = 20 at 0.1% FPR: 40.3 against 30.6%), and ATT+bal flags fewer padded benign reports in 21 tests (20 under the cluster bootstrap).
+2. **Rotation of the call list is the hardest edit for every model.** With the second half of the report first (rot 50) the malware flagged at 1% FPR falls from 81.1 to 54.3% (v2-PE), from 78.7 and 79.5 to 62.7 and 62.0% (PE+bal, ATT+bal; unedited 1% TPRs 0.787 and 0.795), and the share of benign reports flagged rises from 1% to 5.2% (v2-PE), 14.6% (PE+bal) and 10.0% (ATT+bal): the training with balanced padding does not cover this edit and costs false alarms on it.
+3. **Argument injection into the first 50 calls** (arguments of a random EVAL-pool call appended): v2-PE 46.9% (from 81.1), released checkpoint 34.4%, PE+bal 75.0%, ATT+bal 76.0%, padded-benign flagged 0.8 to 1.4%.
+4. **The test-time deduplication defence on v2-PE changes almost nothing**: malware TPR differs by at most about 1 point in 31 of 46 tests (higher in 9, lower in 6 by the descriptive rule), the padded-benign FPR is slightly lower in 8 tests; the padding of these edits rarely produces consecutive identical calls, and the dedup of the unedited reports does not change the clean scores much. It is not a defence against the edits tested.
+5. **The balanced-padding models flag more padded benign reports than v2-PE** (higher in 32 of 46 tests for PE+bal, in 14 of 46 for ATT+bal; in absolute terms 1 to 5% at the 1% threshold for most edits, 10 to 15% for rotation): the robustness is bought with a higher false-alarm rate on edited benign reports.
+**Definitions and limits.** The edits are mine (EVAL-pool calls; rare-name pool = 372 calls of 228 names with training frequency at most 2; block = consecutive calls of one pool report; rotation of the call list as a stand-in for "rotation of the 512 window"; injection = appended arguments of a random pool call). The builders were checked against full re-tokenisation. Thresholds are fixed on the unedited April benign scores of each model (the deduplicated unedited reports for the deduplication family). The non-injection sets were scored on GPU from the call store and the injection sets on CPU; both paths gave identical scores in a test (max difference 0.0). Preliminary: to be re-run on the author's own Kaggle account.
+
+**(d) April.** **How often April was used.** April 2022 (17,402 reports, 2,509 distinct API sequences) is the only test set and every experiment of this report scored it: A, B, B2, B3, C, D, E, F (its recipe grid stored the April numbers of every recipe and epoch but was selected on validation numbers), the pAUC re-scoring (§5.8), v2-PE (§5.9), ATT and ATT+bal (§5.10), §5.11 and §5.12: 13 scoring rounds on the same reports. Within an experiment April was used once per model family (EVAL_PROTOCOL.md §4), and to my knowledge no hyper-parameter was selected on April numbers; from F on, settings were chosen on the validation slice. But the sequence of questions was shaped by April results of the previous round (v2-PE after the gap analysis, ATT+bal after v2-PE, keep/aug and the attacks after ATT+bal, the tuning after the attacks), so April is not an untouched holdout for the thesis claims, and the confidence intervals do not account for the repeated use. In §5.12 the April logits of all 16 candidates were stored and opened only after the choice was written down.
 
 ## 6. Differences from the paper, with likely causes
 

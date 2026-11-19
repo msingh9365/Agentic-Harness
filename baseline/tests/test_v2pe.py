@@ -15,7 +15,7 @@ pytestmark = pytest.mark.skipif(not os.path.exists(os.path.join(TOK, "variants",
 
 def args(tmp, tag, aug=None, seed=0, pooling="attn"):
     return types.SimpleNamespace(tokens=TOK, out=str(tmp), tag=tag, seed=seed, epochs=2, pe_mode="paper", pooling=pooling, variant="bpe8k", device="cpu", limit=200,
-                                 force=True, aug_dir=aug)
+                                 force=True, aug_dir=aug, pad_store=None, pad_mode="replace", pad_labels="all", pad_stream=7000, pad_prob=0.5, lr=None, val_robust=False, every_epoch=False)
 
 
 def make_aug(dirpath, seed, rows, tok):

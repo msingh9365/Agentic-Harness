@@ -11,18 +11,18 @@
 
 | difference | metric | per-seed means (CI) | seeds >0 / <0 | claim rule | 10-seed ensembles (CI) | cluster bootstrap CI (pAUC only) |
 |---|---|---|---|---|---|---|
-| tuned − v2_pe | pAUC@1e-2 | +0.84 [-0.78, +2.39] | 7/3 | not resolved | -3.02 [-4.54, -1.44] resolved | [-4.00, +4.54] not resolved |
-| tuned − v2_pe | TPR@1e-2 | -1.64 [-2.91, -0.60] | 3/7 | RESOLVED worse | -3.44 [-4.60, -1.98] resolved | — |
-| tuned − v2_pe | TPR@1e-3 | +3.84 [-2.43, +7.38] | 6/4 | not resolved | -0.79 [-6.78, +5.30] not resolved | — |
-| tuned − v2_pe | AUC | +0.44 [+0.31, +0.55] | 7/3 | RESOLVED better | +0.33 [+0.20, +0.45] resolved | — |
-| tuned − attbal | pAUC@1e-2 | +0.61 [-0.52, +1.74] | 7/3 | not resolved | +0.40 [-0.56, +1.42] not resolved | [-1.10, +2.25] not resolved |
-| tuned − attbal | TPR@1e-2 | +0.01 [-0.49, +0.62] | 3/7 | not resolved | +0.31 [-0.47, +0.93] not resolved | — |
-| tuned − attbal | TPR@1e-3 | +0.92 [-4.83, +4.72] | 4/6 | not resolved | +1.50 [-4.74, +5.99] not resolved | — |
-| tuned − attbal | AUC | -0.24 [-0.29, -0.20] | 3/7 | RESOLVED worse | -0.42 [-0.47, -0.37] resolved | — |
-| attbal − v2_pe | pAUC@1e-2 | +0.23 [-1.70, +2.09] | 4/6 | not resolved | -3.42 [-5.37, -1.55] resolved | [-4.78, +4.29] not resolved |
-| attbal − v2_pe | TPR@1e-2 | -1.65 [-2.95, -0.67] | 3/7 | RESOLVED worse | -3.75 [-4.73, -2.18] resolved | — |
-| attbal − v2_pe | TPR@1e-3 | +2.91 [-2.20, +7.16] | 6/4 | not resolved | -2.29 [-7.12, +7.25] not resolved | — |
-| attbal − v2_pe | AUC | +0.68 [+0.57, +0.79] | 7/3 | RESOLVED better | +0.75 [+0.62, +0.87] resolved | — |
+| tuned − v2_pe | pAUC@1e-2 | +0.84 [-0.78, +2.39] | 7/3 | not resolved | -3.02 [-4.54, -1.44] CI excludes 0 (descriptive) | [-4.00, +4.54] not resolved |
+| tuned − v2_pe | TPR@1e-2 | -1.64 [-2.91, -0.60] | 3/7 | rule met, descriptive | -3.44 [-4.60, -1.98] CI excludes 0 (descriptive) | — |
+| tuned − v2_pe | TPR@1e-3 | +3.84 [-2.43, +7.38] | 6/4 | rule not met, descriptive | -0.79 [-6.78, +5.30] CI contains 0 (descriptive) | — |
+| tuned − v2_pe | AUC | +0.44 [+0.31, +0.55] | 7/3 | rule met, descriptive | +0.33 [+0.20, +0.45] CI excludes 0 (descriptive) | — |
+| tuned − attbal | pAUC@1e-2 | +0.61 [-0.52, +1.74] | 7/3 | not resolved | +0.40 [-0.56, +1.42] CI contains 0 (descriptive) | [-1.10, +2.25] not resolved |
+| tuned − attbal | TPR@1e-2 | +0.01 [-0.49, +0.62] | 3/7 | rule not met, descriptive | +0.31 [-0.47, +0.93] CI contains 0 (descriptive) | — |
+| tuned − attbal | TPR@1e-3 | +0.92 [-4.83, +4.72] | 4/6 | rule not met, descriptive | +1.50 [-4.74, +5.99] CI contains 0 (descriptive) | — |
+| tuned − attbal | AUC | -0.24 [-0.29, -0.20] | 3/7 | rule met, descriptive | -0.42 [-0.47, -0.37] CI excludes 0 (descriptive) | — |
+| attbal − v2_pe | pAUC@1e-2 | +0.23 [-1.70, +2.09] | 4/6 | not resolved | -3.42 [-5.37, -1.55] CI excludes 0 (descriptive) | [-4.78, +4.29] not resolved |
+| attbal − v2_pe | TPR@1e-2 | -1.65 [-2.95, -0.67] | 3/7 | rule met, descriptive | -3.75 [-4.73, -2.18] CI excludes 0 (descriptive) | — |
+| attbal − v2_pe | TPR@1e-3 | +2.91 [-2.20, +7.16] | 6/4 | rule not met, descriptive | -2.29 [-7.12, +7.25] CI contains 0 (descriptive) | — |
+| attbal − v2_pe | AUC | +0.68 [+0.57, +0.79] | 7/3 | rule met, descriptive | +0.75 [+0.62, +0.87] CI excludes 0 (descriptive) | — |
 
 
 ## Appendix: April clean numbers of every candidate (NOT USED FOR SELECTION; the choice was made on validation numbers)

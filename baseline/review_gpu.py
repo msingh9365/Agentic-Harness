@@ -23,15 +23,30 @@ STAGES = {
 }
 
 
+def run_extra(out):
+    """Stage 'extra': the further edit sets (baseline/extra_run.py) on the two GPUs: worker 0 takes the even seeds and the released checkpoint, worker 1 the odd seeds."""
+    procs = []
+    for g in (0, 1):
+        seeds = [str(s) for s in range(g, 10, 2)]
+        cmd = [sys.executable, "-m", "baseline.extra_run", "--gpu-mode", "--device", "cuda", "--out", out, "--search", "/kaggle/input", "--families", "v2_pe", "pebal", "attbal", "--seeds"] + seeds + ["--dedup-seeds"] + seeds + (["--released"] if g == 0 else [])
+        print("RUN:", " ".join(cmd), flush=True)
+        procs.append(subprocess.Popen(cmd, env=dict(os.environ, CUDA_VISIBLE_DEVICES=str(g))))
+    rc = [p.wait() for p in procs]
+    if any(rc):
+        raise SystemExit(f"extra workers failed: {rc}")
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", required=True, choices=list(STAGES))
+    ap.add_argument("--stage", required=True, choices=list(STAGES) + ["extra"])
     ap.add_argument("--out", required=True)
     ap.add_argument("--tuned-tag", default=None, help="stage 'tuned': the training run folder of the chosen candidate (e.g. tune_lr2e-3_p0.5)")
     ap.add_argument("--tuned-epoch", default=None)
     a = ap.parse_args()
     if a.tuned_tag:
         os.environ["TUNED_TAG"], os.environ["TUNED_EPOCH"] = a.tuned_tag, str(a.tuned_epoch)
+    if a.stage == "extra":
+        return run_extra(a.out)
     for module, extra, jobs in STAGES[a.stage]:
         cmd = [sys.executable, "-m", f"baseline.{module}", "--plan", "--search", "/kaggle/input", "--out", a.out, "--jobs"] + jobs + extra
         print("RUN:", " ".join(cmd), flush=True)

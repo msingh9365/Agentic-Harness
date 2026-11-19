@@ -51,9 +51,9 @@
 | PE+aug | random 20 prepend | 99.3 ± 0.4 | 94.0 ± 4.7 | 89.3 ± 5.6 | 56.2 ± 20.2 | 27.5% | 99.2 | 84.3 |
 | PE+aug | random 50 prepend | 99.9 ± 0.1 | 99.7 ± 0.3 | 96.3 ± 1.7 | 92.9 ± 3.9 | 17.1% | 99.9 | 96.3 |
 
-**Table 2a comparisons: A − B, points (× 100). Mean of the per-seed differences (seed i of A against seed i of B), their standard deviation over the seeds, 95% CI of the stratified bootstrap over the April reports (1,000 resamples, numpy seed 0; it covers the test-set sampling only, not the seed-to-seed spread), seeds above 0 / below 0; resolved = CI excludes 0 and ≥ 7 of 10 seeds with the same sign.**
+**Table 2a comparisons: A − B, points (× 100). Mean of the per-seed differences (seed i of A against seed i of B), their standard deviation over the seeds, 95% CI of the stratified bootstrap over the April reports (1,000 resamples, numpy seed 0; it covers the test-set sampling only, not the seed-to-seed spread), seeds above 0 / below 0; meets rule = CI excludes 0 and ≥ 7 of 10 seeds with the same sign (descriptive: none of these robustness comparisons is a pre-registered claim).**
 
-| comparison | edit | threshold | rate | mean difference | std over seeds | CI (stratified bootstrap) | seeds >0 / <0 | resolved | CI (cluster bootstrap) | resolved (cluster) |
+| comparison | edit | threshold | rate | mean difference | std over seeds | CI (stratified bootstrap) | seeds >0 / <0 | meets rule (descriptive) | CI (cluster bootstrap) | meets rule, cluster (descriptive) |
 |---|---|---|---|---|---|---|---|---|---|---|
 | ATT+bal − PE+bal | random 5 insert | 1% FPR | malware TPR | +0.81 | 3.33 | [+0.61, +1.01] | 7/3 | **yes** | [-0.27, +1.89] | no |
 | ATT+bal − PE+bal | random 5 insert | 1% FPR | padded-benign FPR | -0.05 | 0.17 | [-0.15, +0.05] | 4/6 | no | [-0.19, +0.11] | no |
@@ -205,9 +205,9 @@
 | PE+bal-keep | v2pe 50 insert | 24.1 ± 4.0 | 0.1 ± 0.1 | 4.1 ± 1.9 | 0.0 ± 0.0 | 0.0% | n/a | n/a |
 | PE+bal-keep | v2pe 50 prepend | 2.3 ± 1.7 | 0.0 | 0.1 ± 0.5 | 0.0 | 0.0% | n/a | n/a |
 
-**Table 2b comparisons: A − B, points (× 100). Mean of the per-seed differences (seed i of A against seed i of B), their standard deviation over the seeds, 95% CI of the stratified bootstrap over the April reports (1,000 resamples, numpy seed 0; it covers the test-set sampling only, not the seed-to-seed spread), seeds above 0 / below 0; resolved = CI excludes 0 and ≥ 7 of 10 seeds with the same sign.**
+**Table 2b comparisons: A − B, points (× 100). Mean of the per-seed differences (seed i of A against seed i of B), their standard deviation over the seeds, 95% CI of the stratified bootstrap over the April reports (1,000 resamples, numpy seed 0; it covers the test-set sampling only, not the seed-to-seed spread), seeds above 0 / below 0; meets rule = CI excludes 0 and ≥ 7 of 10 seeds with the same sign (descriptive: none of these robustness comparisons is a pre-registered claim).**
 
-| comparison | edit | threshold | rate | mean difference | std over seeds | CI (stratified bootstrap) | seeds >0 / <0 | resolved | CI (cluster bootstrap) | resolved (cluster) |
+| comparison | edit | threshold | rate | mean difference | std over seeds | CI (stratified bootstrap) | seeds >0 / <0 | meets rule (descriptive) | CI (cluster bootstrap) | meets rule, cluster (descriptive) |
 |---|---|---|---|---|---|---|---|---|---|---|
 | ATT+bal − PE+bal | lgbm 5 insert | 1% FPR | malware TPR | -0.03 | 4.53 | [-0.22, +0.17] | 7/3 | no | [-1.33, +1.18] | no |
 | ATT+bal − PE+bal | lgbm 5 insert | 1% FPR | padded-benign FPR | -0.07 | 0.22 | [-0.16, +0.02] | 4/4 | no | [-0.22, +0.08] | no |

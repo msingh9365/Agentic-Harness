@@ -86,9 +86,10 @@ def main():
             ps, en = bs["ps"]["diffs"][f"{n_} - {b_}"][k], bs["ens"]["diffs"][f"{n_} - {b_}"][k]
             dd = T[n_][k] - T[b_][k]
             pos, neg = int((dd > 0).sum()), int((dd < 0).sum())
-            rule = "RESOLVED " + ("better" if ps["point"] > 0 else "worse") if (ps["lo"] > 0 or ps["hi"] < 0) and max(pos, neg) >= 7 else "not resolved"
+            meets = (ps["lo"] > 0 or ps["hi"] < 0) and max(pos, neg) >= 7
+            rule = (("RESOLVED " + ("better" if ps["point"] > 0 else "worse")) if meets else "not resolved") if k == "pauc@0.01" else ("rule met, " if meets else "rule not met, ") + "descriptive"
             c = cl.get(f"{n_}-{b_}") if k == "pauc@0.01" else None
-            rows.append([f"{n_} − {b_}", lbl, f"{100 * ps['point']:+.2f} [{100 * ps['lo']:+.2f}, {100 * ps['hi']:+.2f}]", f"{pos}/{neg}", rule, f"{100 * en['point']:+.2f} [{100 * en['lo']:+.2f}, {100 * en['hi']:+.2f}]" + (" resolved" if en["resolved"] else " not resolved"),
+            rows.append([f"{n_} − {b_}", lbl, f"{100 * ps['point']:+.2f} [{100 * ps['lo']:+.2f}, {100 * ps['hi']:+.2f}]", f"{pos}/{neg}", rule, f"{100 * en['point']:+.2f} [{100 * en['lo']:+.2f}, {100 * en['hi']:+.2f}]" + (" CI excludes 0 (descriptive)" if en["resolved"] else " CI contains 0 (descriptive)"),
                          (f"[{100 * c['lo']:+.2f}, {100 * c['hi']:+.2f}] " + ("resolved" if c["resolved"] else "not resolved")) if c else "—"])
     L.append(md(rows, ["difference", "metric", "per-seed means (CI)", "seeds >0 / <0", "claim rule", "10-seed ensembles (CI)", "cluster bootstrap CI (pAUC only)"]))
     # appendix

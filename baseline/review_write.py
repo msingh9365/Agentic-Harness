@@ -65,8 +65,8 @@ def main():
                         if d.get("cluster", {}).get("resolved"):
                             both_b += pos; both_w += (not pos)
                 rows.append([lab, rate, n, f"{better} ({both_b})", f"{worse} ({both_w})", n - better - worse])
-        out += [f"**Count of tests ({nm}; edit sets × the two thresholds) in which the first model is resolved higher / lower than the second (claim rule: CI excludes 0 and ≥ 7 of 10 seeds with the same sign). In brackets: also resolved under the cluster bootstrap over duplicate groups. For the padded-benign FPR a higher value is worse.**", "",
-                md(rows, ["comparison", "rate", "tests", "first higher (cluster)", "first lower (cluster)", "not resolved"]), ""]
+        out += [f"**Count of tests ({nm}; edit sets × the two thresholds) in which the first model is higher / lower than the second by the descriptive rule (CI excludes 0 and ≥ 7 of 10 seeds with the same sign). In brackets: the same under the cluster bootstrap over duplicate groups. For the padded-benign FPR a higher value is worse.**", "",
+                md(rows, ["comparison", "rate", "tests", "first higher (cluster)", "first lower (cluster)", "neither"]), ""]
     # Table 3: shortcut
     rows = []
     P = A["probe"]

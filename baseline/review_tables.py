@@ -68,14 +68,14 @@ def main():
         e, ee = bs["ps"]["diffs"][f"{n} - {b}"]["pauc@0.01"], bs["ens"]["diffs"][f"{n} - {b}"]["pauc@0.01"]
         dd = T[n]["pauc@0.01"] - (T[b]["pauc@0.01"] if len(T[b]["pauc@0.01"]) == 10 else T[b]["pauc@0.01"][0])
         rows.append([f"{n} − {b}", f"{100 * e['point']:+.2f} [{100 * e['lo']:+.2f}, {100 * e['hi']:+.2f}]", f"{int((dd > 0).sum())}/10", verdict(e, dd),
-                     f"{100 * ee['point']:+.2f} [{100 * ee['lo']:+.2f}, {100 * ee['hi']:+.2f}]" + (" resolved" if ee["resolved"] else " not resolved")])
+                     f"{100 * ee['point']:+.2f} [{100 * ee['lo']:+.2f}, {100 * ee['hi']:+.2f}]" + (" (CI excludes 0; descriptive)" if ee["resolved"] else " (CI contains 0; descriptive)")])
     L.append(md(rows, ["difference", "per-seed means, pAUC@1e-2", "seeds > 0", "claim rule", "10-seed ensembles, pAUC@1e-2"]))
     L += ["", "**Other metrics, per-seed means, differences against v2-PE (points × 100, 95% CI):**", ""]
     rows = []
     for n in [f for f in fams if f in FAMS[3:]]:
         for k, lbl, _ in KEYS[1:]:
             e = bs["ps"]["diffs"][f"{n} - v2_pe"][k]
-            rows.append([n, lbl, f"{100 * e['point']:+.2f} [{100 * e['lo']:+.2f}, {100 * e['hi']:+.2f}]", "resolved" if e["resolved"] else "not resolved"])
+            rows.append([n, lbl, f"{100 * e['point']:+.2f} [{100 * e['lo']:+.2f}, {100 * e['hi']:+.2f}]", "CI excludes 0 (descriptive)" if e["resolved"] else "CI contains 0 (descriptive)"])
     L.append(md(rows, ["model − v2-PE", "metric", "difference", "CI"]))
     text = "\n".join(L)
     open(os.path.join(a.out, "table1.md"), "w").write(text + "\n")

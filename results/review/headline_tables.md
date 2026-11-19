@@ -31,9 +31,9 @@
 | ATT+bal-keep | 3 | 74.8 / 50.8 | 63.8 / 27.3 | 61.6 / 24.5 | 44.7 / 7.5 |
 | PE+bal-keep | 3 | 76.1 / 41.8 | 62.8 / 17.1 | 56.1 / 11.0 | 41.1 / 2.5 |
 
-**Count of tests (random padding; edit sets × the two thresholds) in which the first model is resolved higher / lower than the second (claim rule: CI excludes 0 and ≥ 7 of 10 seeds with the same sign). In brackets: also resolved under the cluster bootstrap over duplicate groups. For the padded-benign FPR a higher value is worse.**
+**Count of tests (random padding; edit sets × the two thresholds) in which the first model is higher / lower than the second by the descriptive rule (CI excludes 0 and ≥ 7 of 10 seeds with the same sign). In brackets: the same under the cluster bootstrap over duplicate groups. For the padded-benign FPR a higher value is worse.**
 
-| comparison | rate | tests | first higher (cluster) | first lower (cluster) | not resolved |
+| comparison | rate | tests | first higher (cluster) | first lower (cluster) | neither |
 |---|---|---|---|---|---|
 | ATT+bal − PE+bal | malware TPR | 12 | 6 (4) | 0 (0) | 6 |
 | ATT+bal − PE+bal | malware TPR, fit subset | 12 | 2 (1) | 1 (1) | 9 |
@@ -42,9 +42,9 @@
 | ATT+bal-keep − PE+bal-keep | malware TPR, fit subset | 12 | 8 (6) | 0 (0) | 4 |
 | ATT+bal-keep − PE+bal-keep | padded-benign FPR | 12 | 0 (0) | 2 (2) | 10 |
 
-**Count of tests (surrogate padding; edit sets × the two thresholds) in which the first model is resolved higher / lower than the second (claim rule: CI excludes 0 and ≥ 7 of 10 seeds with the same sign). In brackets: also resolved under the cluster bootstrap over duplicate groups. For the padded-benign FPR a higher value is worse.**
+**Count of tests (surrogate padding; edit sets × the two thresholds) in which the first model is higher / lower than the second by the descriptive rule (CI excludes 0 and ≥ 7 of 10 seeds with the same sign). In brackets: the same under the cluster bootstrap over duplicate groups. For the padded-benign FPR a higher value is worse.**
 
-| comparison | rate | tests | first higher (cluster) | first lower (cluster) | not resolved |
+| comparison | rate | tests | first higher (cluster) | first lower (cluster) | neither |
 |---|---|---|---|---|---|
 | ATT+bal − PE+bal | malware TPR | 24 | 18 (14) | 0 (0) | 6 |
 | ATT+bal − PE+bal | malware TPR, fit subset | 20 | 2 (1) | 7 (2) | 11 |

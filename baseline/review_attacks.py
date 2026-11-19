@@ -99,9 +99,9 @@ def comparisons(name, F, tot, y, boot, names, fams_pairs, cboot=None):
                     rows.append([f"{LABEL[a_]} − {LABEL[b_]}", names[j].replace("_", " "), THR_LABEL[t], key, f"{100 * d['mean']:+.2f}", f"{100 * sd:.2f}", f"[{100 * d['lo']:+.2f}, {100 * d['hi']:+.2f}]",
                                  f"{d['seeds_above_0']}/{d['seeds_below_0']}", "**yes**" if d["resolved"] else "no"] + ([f"[{100 * dc['lo']:+.2f}, {100 * dc['hi']:+.2f}]", "yes" if dc["resolved"] else "no"] if dc else []))
                     out[f"{a_}-{b_}|{names[j]}|{t}|{key}"] = d
-    head = ["comparison", "edit", "threshold", "rate", "mean difference", "std over seeds", "CI (stratified bootstrap)", "seeds >0 / <0", "resolved"] + (["CI (cluster bootstrap)", "resolved (cluster)"] if cboot is not None else [])
+    head = ["comparison", "edit", "threshold", "rate", "mean difference", "std over seeds", "CI (stratified bootstrap)", "seeds >0 / <0", "meets rule (descriptive)"] + (["CI (cluster bootstrap)", "meets rule, cluster (descriptive)"] if cboot is not None else [])
     return (f"**{name}: A − B, points (× 100). Mean of the per-seed differences (seed i of A against seed i of B), their standard deviation over the seeds, 95% CI of the stratified bootstrap over the April reports "
-            "(1,000 resamples, numpy seed 0; it covers the test-set sampling only, not the seed-to-seed spread), seeds above 0 / below 0; resolved = CI excludes 0 and ≥ 7 of 10 seeds with the same sign.**\n\n" + md(rows, head)), out
+            "(1,000 resamples, numpy seed 0; it covers the test-set sampling only, not the seed-to-seed spread), seeds above 0 / below 0; meets rule = CI excludes 0 and ≥ 7 of 10 seeds with the same sign (descriptive: none of these robustness comparisons is a pre-registered claim).**\n\n" + md(rows, head)), out
 
 
 def whitebox(src):
@@ -109,7 +109,7 @@ def whitebox(src):
     for p in sorted(glob.glob(os.path.join(src, "a3b_*_seed*.npz"))):
         f = os.path.basename(p)[4:].rsplit("_seed", 1)
         d = np.load(p)
-        res.setdefault(f[0], []).append({"seed": int(f[1][:-4]), "best": d["best"], "t1": float(d["t1"]), "t01": float(d["t01"])})
+        res.setdefault(f[0], []).append({"seed": int(f[1][:-4]), "best": d["best"], "t1": float(d["t1"]), "t01": float(d["t01"]), "sel": d["sel"]})
     return res
 
 

@@ -6,6 +6,8 @@ import json
 import os
 import re
 
+from baseline.audit_text import STATUS_512
+
 import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -46,7 +48,7 @@ def tables():
                     if d.get("cluster", {}).get("resolved"):
                         bh += pos; bl += (not pos)
             cnt.append([nm, rate, n, f"{hi} ({bh})", f"{lo} ({bl})", n - hi - lo])
-    out["cnt"] = "**ATT+bal-tuned against the existing ATT+bal, counts of tests (edit sets × two thresholds) resolved higher / lower for the tuned model (claim rule; in brackets also resolved under the cluster bootstrap). For the padded-benign FPR higher is worse.**\n\n" + md(cnt, ["padding", "rate", "tests", "tuned higher (cluster)", "tuned lower (cluster)", "not resolved"])
+    out["cnt"] = "**ATT+bal-tuned against the existing ATT+bal, counts of tests (edit sets × two thresholds) in which the tuned model is higher / lower by the descriptive rule (CI excludes 0 and ≥ 7 of 10 seeds on the same side; in brackets the same under the cluster bootstrap). For the padded-benign FPR higher is worse.**\n\n" + md(cnt, ["padding", "rate", "tests", "tuned higher (cluster)", "tuned lower (cluster)", "neither"])
     wbc = open(os.path.join(T, "attack_tables.md")).read()
     out["wbcmp"] = wbc[wbc.index("**White-box comparisons"):wbc.index("**Table 3b")].strip()
     return out
@@ -54,8 +56,8 @@ def tables():
 
 def answer():
     return """**Plainly.**
-1. **The gap to v2-PE at 1% FPR did not close.** The chosen candidate (lr 1e-3, padding probability 0.25, epoch 2) has April TPR@1e-2 0.795 ± 0.011 against 0.811 ± 0.023 for v2-PE: -1.64 points, CI [-2.91, -0.60], resolved (the tuned model is above v2-PE in 3 of 10 seeds). The existing ATT+bal had -1.65. Tuning changed nothing there (tuned − existing: +0.01 points, not resolved). No candidate of the grid reaches v2-PE's TPR@1e-2: the highest mean in the appendix is 0.799 (not used for selection).
-2. **On the primary metric nothing is resolved either.** Tuned − v2-PE in pAUC@1e-2: +0.84 points per-seed means (CI [-0.78, +2.39], above in 7 of 10 seeds: rule not met; cluster bootstrap CI [-4.00, +4.54]); as 10-seed ensembles -3.02 (resolved). Tuned − existing ATT+bal: +0.61 (CI [-0.52, +1.74], 7 of 10 seeds, not resolved). The validation gain that led to the choice (+0.43 points) is of the size of its own standard error (0.15 to 0.23 points); AUC is 0.24 points lower than the existing model (resolved).
+1. **The gap to v2-PE at 1% FPR did not close.** The chosen candidate (lr 1e-3, padding probability 0.25, epoch 2) has April TPR@1e-2 0.795 ± 0.011 against 0.811 ± 0.023 for v2-PE: -1.64 points, CI [-2.91, -0.60] (descriptive: the CI excludes 0 and the tuned model is above v2-PE in only 3 of 10 seeds). The existing ATT+bal had -1.65. Tuning changed nothing there (tuned − existing: +0.01 points, not resolved). No candidate of the grid reaches v2-PE's TPR@1e-2: the highest mean in the appendix is 0.799 (not used for selection).
+2. **On the primary metric nothing is resolved either.** Tuned − v2-PE in pAUC@1e-2: +0.84 points per-seed means (CI [-0.78, +2.39], above in 7 of 10 seeds: rule not met; cluster bootstrap CI [-4.00, +4.54]); as 10-seed ensembles -3.02 (the CI excludes 0; descriptive). Tuned − existing ATT+bal: +0.61 (CI [-0.52, +1.74], 7 of 10 seeds, claim rule not met). The validation gain that led to the choice (+0.43 points) is of the size of its own standard error (0.15 to 0.23 points); AUC is 0.24 points lower than the existing model (descriptive: the CI excludes 0).
 3. **What it cost in robustness: a little everywhere, clearly under the strongest attacks.** Against the existing ATT+bal the tuned model is lower after 20 white-box calls (46.5 against 53.3% flagged at 1% FPR: -6.9 points, 0 of 3 seeds above; 11.6 against 14.6% at 0.1% FPR), under LightGBM-chosen k = 50 prepend (31.5 against 36.5%) and under v2-PE-chosen k = 20 prepend (21.4 against 23.8%); under random padding the two are within about 2 points (66.0 against 67.6% at k = 50 prepend). It stays far above PE+bal (white-box after 20 calls 39.6%) and v2-PE (2.2%). Validation had already pointed this way (R 0.949 against 0.959).
 4. **Reading.** Training with fewer padded reports (p = 0.25) and the lower learning rate buys back nothing at 1% FPR and gives up some robustness: the 1-point gap to v2-PE at 1% FPR is not a matter of these two settings in this grid. Not tested: other recipe changes (a padding schedule, k distribution, other pooling)."""
 
@@ -65,7 +67,7 @@ LIMITS = """- **Selection on validation, one evaluation.** 16 candidates were co
 - **Budget asymmetry (EVAL_PROTOCOL §4.6).** ATT+bal-tuned had 16 candidates (2 tuned hyper-parameters and the epoch); v2-PE and the existing ATT+bal were not re-tuned.
 - **Statistics as in §5.11:** stratified bootstrap (test-set sampling only) + the 7-of-10 seed rule, and the cluster bootstrap over the 2,509 duplicate groups as sensitivity. The white-box comparison has 3 seeds and 500 reports.
 - **Reproduction.** The rerun of the cell (2e-3, 0.5) reproduced the existing ATT+bal exactly on validation (largest per-seed difference of validation pAUC@1e-2 0.0000), so the 4-epoch grid and the earlier runs are the same recipe.
-- **Compute.** Training and scoring ran on the second Kaggle account (the owner's); the scoring pipeline is that of §5.11 (edits built in memory from the store of original reports; only scores saved)."""
+- **Preliminary.** The training and the scoring of this section are to be re-run on the author's own Kaggle account; the scoring pipeline is that of §5.11 (edits built in memory from the store of original reports; only scores saved)."""
 
 
 def main():
@@ -76,6 +78,8 @@ def main():
     appendix = ap[ap.index("## Appendix"):].strip().replace("## Appendix", "**Appendix", 1)
     appendix = appendix.replace(" (NOT USED FOR SELECTION; the choice was made on validation numbers)", " (NOT USED FOR SELECTION; the choice was made on validation numbers).**", 1)
     rep = f"""### 5.12 Tuning the padded-training recipe of ATT+bal under EVAL_PROTOCOL §4 (follow-up for the review)
+
+{STATUS_512}
 
 **Question.** ATT+bal lost 1.65 points of TPR@1e-2 to v2-PE (§5.10). Is that a matter of the padded-training recipe? Grid written in `NOTES.md` section 16 before any training: learning rate in {{1e-3, 2e-3}} x padding probability in {{0.25, 0.5}}, 4 epochs, seeds 0-9 per cell, everything else as ATT+bal of §5.10; validation measures = clean pAUC@1e-2 (selection metric) and robustness R (share of validation malware still flagged at the validation 1% FPR threshold after 20 TRAIN-pool calls are prepended); rule: exclude collapsed cells (validation AUC < 0.6 in any seed), exclude mean R more than 2 points below the existing ATT+bal's (0.9586), then highest mean validation pAUC@1e-2 with ties within one SE broken by fewest epochs, then p = 0.5, then lower validation loss. April logits of all cells were stored and not opened until the choice was written down.
 
@@ -116,6 +120,8 @@ def main():
     txt = txt.replace("\n## 6. Differences from the paper", "\n" + rep + "\n## 6. Differences from the paper", 1)
     open(path, "w").write(txt)
     sec = f"""## ATT+bal tuned under EVAL_PROTOCOL §4 (REPORT 5.12)
+
+{STATUS_512}
 
 Grid (written before training, NOTES 16): lr {{1e-3, 2e-3}} x padding probability {{0.25, 0.5}} x epochs 1-4, 10 seeds each; chosen on validation numbers only: **lr 1e-3, p 0.25, epoch 2** (mean validation pAUC@1e-2 0.9596 against 0.9553 for the existing ATT+bal). Evaluated once on April:
 

@@ -1,0 +1,58 @@
+{
+ "ours|January": {
+  "reports": 75298,
+  "tokens_in_first_512": 28783947,
+  "id0_tokens": 53466,
+  "share_of_tokens": 0.0018574936925780192,
+  "reports_with_any": 24539,
+  "share_reports_with_any": 0.32589178995458046,
+  "mean_per_report": 0.7100587000982762,
+  "median_per_report": 0.0,
+  "p95_per_report": 4.0,
+  "max_per_report": 45
+ },
+ "ours|April": {
+  "reports": 17402,
+  "tokens_in_first_512": 6736560,
+  "id0_tokens": 11286,
+  "share_of_tokens": 0.0016753357796857743,
+  "reports_with_any": 3768,
+  "share_reports_with_any": 0.21652683599586253,
+  "mean_per_report": 0.6485461441213654,
+  "median_per_report": 0.0,
+  "p95_per_report": 4.0,
+  "max_per_report": 28
+ },
+ "released|January": {
+  "reports": 75298,
+  "tokens_in_first_512": 28851015,
+  "id0_tokens": 52853,
+  "share_of_tokens": 0.0018319286167228432,
+  "reports_with_any": 24415,
+  "share_reports_with_any": 0.32424499986719435,
+  "mean_per_report": 0.7019177136178916,
+  "median_per_report": 0.0,
+  "p95_per_report": 4.0,
+  "max_per_report": 45
+ },
+ "released|April": {
+  "reports": 17402,
+  "tokens_in_first_512": 6763012,
+  "id0_tokens": 10841,
+  "share_of_tokens": 0.0016029839958882227,
+  "reports_with_any": 3736,
+  "share_reports_with_any": 0.21468796690035627,
+  "mean_per_report": 0.6229743707619814,
+  "median_per_report": 0.0,
+  "p95_per_report": 4.0,
+  "max_per_report": 26
+ },
+ "sample_unknown_surfaces_1500_january_reports": {
+  "j": 3805,
+  "jj": 3,
+  "\u3a43\u505c\u6f72\u7267\u6d61\u4620\u6c69\u7365": 2,
+  "\u3a43\u555c\u6573\u7372\u745c\u6972\u6e7a\u6461\u5c6d\u7041\u4470\u7461\u5c61\u6f52\u6d61\u6e69": 1
+ },
+ "sentencepiece_unk_id": 0,
+ "sentencepiece_pad_id": -1
+}

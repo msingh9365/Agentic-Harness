@@ -27,7 +27,7 @@ RECIPE = dict(lr=2e-3, clip=0.5, dropout=0.3, batch=96, wd=1e-2, tok="bpe50k")  
 def run(a):
     import torch
     nb = C.setup_nebula(require_patched=True)
-    recipe = dict(RECIPE, lr=a.lr) if a.lr else RECIPE
+    recipe = dict(RECIPE, lr=a.lr) if getattr(a, "lr", None) else RECIPE
     out_dir = os.path.join(a.out, a.tag)
     os.makedirs(out_dir, exist_ok=True)
     res_path = os.path.join(out_dir, f"seed{a.seed}.json")
@@ -64,7 +64,7 @@ def run(a):
         log.append(rec)
         print(f"[{a.tag} seed {a.seed}] epoch {ep}: val TPR@1e-3 {mv['tpr@0.001']:.3f} @1e-2 {mv['tpr@0.01']:.3f} pAUC@1e-2 {mv['pauc@0.01']:.3f} AUC {mv['auc']:.4f} loss {rec['val_loss']:.4f} | {rec['seconds']:.0f}s", flush=True)
         np.save(os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_val_logits.npy"), zv.astype(np.float32))
-        if ep == a.epochs or a.every_epoch:                         # the April logits: stored, NOT evaluated here
+        if ep == a.epochs or getattr(a, "every_epoch", False):                         # the April logits: stored, NOT evaluated here
             zt = cv.predict_logits(model, x_test, dev, bs=512)
             np.save(os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_test_logits.npy"), zt.astype(np.float32))
             torch.save({k: v.detach().cpu() for k, v in model.state_dict().items()}, os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_model.pt"))
@@ -82,11 +82,11 @@ def run(a):
         pool_rows = inmem_pad.pool_rows_of(store, y_all, trn)
         print(f"[{a.tag} seed {a.seed}] call store {sp}: {len(store):,} reports; TRAIN pool {len(pool_rows):,} benign reports of the training slice", flush=True)
         where = {int(r): i for i, r in enumerate(trn)}
-        if a.val_robust:
+        if getattr(a, "val_robust", False):
             _, rob["tok"] = inmem_pad.val_robust_set(store, y_all, val, pool_rows)
             print(f"[{a.tag} seed {a.seed}] validation robustness set: {len(rob['tok']):,} malware reports, 20 TRAIN-pool calls prepended", flush=True)
         for ep in range(1, a.epochs + 1):
-            rows, tok = inmem_pad.epoch_edits(store, y_all, trn, a.seed, ep, pool_rows, stream=a.pad_stream, labels=a.pad_labels, p_pad=a.pad_prob)
+            rows, tok = inmem_pad.epoch_edits(store, y_all, trn, a.seed, ep, pool_rows, stream=a.pad_stream, labels=a.pad_labels, p_pad=getattr(a, "pad_prob", 0.5))
             if a.pad_mode == "replace":
                 pos = np.array([where[int(r)] for r in rows], dtype=np.int64)
                 xe, ye = xt.copy(), yt
@@ -119,7 +119,7 @@ def run(a):
         trainer.fit(xt, yt, epochs=a.epochs)
         hook.finish()
     assert len(log) == a.epochs, (len(log), a.epochs)
-    C.dump_json({"tag": a.tag, "pe_mode": a.pe_mode, "pooling": a.pooling, "aug_dir": a.aug_dir, "pad_store": bool(a.pad_store), "pad_mode": a.pad_mode, "pad_labels": a.pad_labels, "pad_stream": a.pad_stream, "edited_rows_per_epoch": edited, "reports_per_epoch": epoch_sizes, "pos_offset": 0, "recipe": recipe, "pad_prob": a.pad_prob, "seed": a.seed, "epochs": a.epochs, "batches_per_epoch": bpe, "n_train": int(len(xt)),
+    C.dump_json({"tag": a.tag, "pe_mode": a.pe_mode, "pooling": a.pooling, "aug_dir": a.aug_dir, "pad_store": bool(a.pad_store), "pad_mode": a.pad_mode, "pad_labels": a.pad_labels, "pad_stream": a.pad_stream, "edited_rows_per_epoch": edited, "reports_per_epoch": epoch_sizes, "pos_offset": 0, "recipe": recipe, "pad_prob": getattr(a, "pad_prob", 0.5), "seed": a.seed, "epochs": a.epochs, "batches_per_epoch": bpe, "n_train": int(len(xt)),
                  "n_val": int(len(xv)), "n_val_benign": int((yv == 0).sum()), "tokenizer": a.variant, "split_hash_asserted": True, "env": C.env_info(), "nebula": nb,
                  "train_seconds": round(time.time() - t0, 1), "per_epoch": log, "april": "logits of the last epoch stored in seed<k>_epoch<e>_test_logits.npy; not evaluated by this script"},
                 res_path)

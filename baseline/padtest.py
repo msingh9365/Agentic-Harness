@@ -16,8 +16,11 @@ import time
 
 import numpy as np
 
-KINDS = {"v2": ("released", "flatten"), "v2_pe": ("paper", "flatten"), "pebal": ("paper", "flatten"), "att": ("paper", "attn"), "attbal": ("paper", "attn")}
-TAGS = {"pebal": "pebal", "att": "att", "attbal": "attbal"}              # run tags of baseline/v2pe.py (the output folder name of the training kernel)
+KINDS = {"v2": ("released", "flatten"), "v2_pe": ("paper", "flatten"), "pebal": ("paper", "flatten"), "att": ("paper", "attn"), "attbal": ("paper", "attn"),
+         "released": ("released", "flatten"),                                 # the released checkpoint (authors' code: released encoding, flatten)
+         "attkeep": ("paper", "attn"), "pekeep": ("paper", "flatten"),         # balanced padding with the clean copies kept (REPORT 5.11)
+         "attaug": ("paper", "attn"), "peaug": ("paper", "flatten")}          # padding of the malware training reports only (REPORT 5.11)
+TAGS = {"pebal": "pebal", "att": "att", "attbal": "attbal", "attkeep": "attkeep", "pekeep": "pekeep", "attaug": "attaug", "peaug": "peaug"}              # run tags of baseline/v2pe.py (the output folder name of the training kernel)
 
 
 def thresholds(z_test, y_test, fpr=0.01):
@@ -28,13 +31,16 @@ def thresholds(z_test, y_test, fpr=0.01):
 
 
 def find_weights(kind, seed, models_root=None, search=None):
+    if kind == "released":
+        from baseline import common as C
+        return os.path.join(C.setup_nebula(require_patched=True)["nebula_root"], "nebula", "objects", "bpe_50000_torch.model")
     if kind in ("v2", "v2_pe") and models_root:
         p = os.path.join(models_root, "detection", "bpe50k", kind, f"seed{seed}.pt")
         if os.path.exists(p):
             return p
     for root in ([search] if search else []):                      # Kaggle mounts datasets and kernel outputs under paths that are not the slug: search the tree
         for dp, dn, fn in os.walk(root):
-            if kind in ("v2", "v2_pe") and os.path.basename(dp) == kind and f"seed{seed}.pt" in fn:
+            if os.path.basename(dp) == kind and f"seed{seed}.pt" in fn:                    # packaged weights: <root>/<kind>/seed<k>.pt (the review datasets)
                 return os.path.join(dp, f"seed{seed}.pt")
             if os.path.basename(dp) == TAGS.get(kind, "?") and f"seed{seed}_epoch2_model.pt" in fn:
                 return os.path.join(dp, f"seed{seed}_epoch2_model.pt")

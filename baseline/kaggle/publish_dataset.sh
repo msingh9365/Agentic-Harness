@@ -4,7 +4,7 @@
 set -euo pipefail
 DIR="$1"; SLUG="$2"; TITLE="$3"; MSG="${4:-update}"
 export KAGGLE_API_TOKEN="${KAGGLE_API_TOKEN:-$KAGGLE_ACCESS_TOKEN}"
-OWNER=msingh9365
+OWNER="${KAGGLE_OWNER:-msingh9365}"
 cat > "$DIR/dataset-metadata.json" <<JSON
 {"title": "$TITLE", "id": "$OWNER/$SLUG", "licenses": [{"name": "other"}],
  "subtitle": "Derived from dmitrijstrizna/quo-vadis-malware-emulation for reproducing Nebula"}

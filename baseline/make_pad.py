@@ -36,9 +36,10 @@ N_BEN_SUB = 2000
 
 
 # ----------------------------------------------------------------------------- pure functions (tested)
-def plan_train_row(row, seed, epoch, n_apis, pool_n_apis):
-    """None (not edited) or {"mode", "k", "draws": [(pool index, call index)] * k, "gaps": sorted gap positions (insert) or None}. numpy default_rng([7000, seed, epoch, row])."""
-    rng = np.random.default_rng([7000, int(seed), int(epoch), int(row)])
+def plan_train_row(row, seed, epoch, n_apis, pool_n_apis, stream=7000):
+    """None (not edited) or {"mode", "k", "draws": [(pool index, call index)] * k, "gaps": sorted gap positions (insert) or None}. numpy default_rng([stream, seed, epoch, row]);
+    stream 7000 is the stream of REPORT 5.10 (balanced and malware-only runs), 7100 the new stream of the 'keep' runs (clean copies)."""
+    rng = np.random.default_rng([int(stream), int(seed), int(epoch), int(row)])
     if rng.random() >= 0.5 or n_apis == 0:
         return None
     mode = "insert" if rng.random() < 0.5 else "prepend"
@@ -143,15 +144,20 @@ def load_row_map():
     return d["train"], d["test"]
 
 
-def make_tokenizer():
+def make_tokenizer(released=False):
+    """Our BPE-50k (baseline_models/tokenizers/bpe50k), or with released=True the tokenizer of the released checkpoint (authors' bpe_50000_sentencepiece.model + bpe_50000_vocab.json)."""
     from baseline import common as C
-    C.setup_nebula(require_patched=True)
+    nb = C.setup_nebula(require_patched=True)
     from nebula.constants import JSON_CLEANUP_SYMBOLS, SPEAKEASY_TOKEN_STOPWORDS
     from nebula.preprocessing import JSONTokenizerBPE
-    tdir = os.path.join(ROOT, "baseline_models", "tokenizers", "bpe50k")
-    vocab = json.load(open(os.path.join(tdir, "vocab.json")))
-    return JSONTokenizerBPE(vocab_size=len(vocab), seq_len=512, model_path=os.path.join(tdir, "tokenizer.model"), vocab=os.path.join(tdir, "vocab.json"),
-                            cleanup_symbols=JSON_CLEANUP_SYMBOLS, stopwords=SPEAKEASY_TOKEN_STOPWORDS)
+    if released:
+        objs = os.path.join(nb["nebula_root"], "nebula", "objects")
+        model, vocab_file = os.path.join(objs, "bpe_50000_sentencepiece.model"), os.path.join(objs, "bpe_50000_vocab.json")
+    else:
+        tdir = os.path.join(ROOT, "baseline_models", "tokenizers", "bpe50k")
+        model, vocab_file = os.path.join(tdir, "tokenizer.model"), os.path.join(tdir, "vocab.json")
+    vocab = json.load(open(vocab_file))
+    return JSONTokenizerBPE(vocab_size=len(vocab), seq_len=512, model_path=model, vocab=vocab_file, cleanup_symbols=JSON_CLEANUP_SYMBOLS, stopwords=SPEAKEASY_TOKEN_STOPWORDS)
 
 
 # ----------------------------------------------------------------------------- worker side (fork: the globals are set in the parent before the pool is created)

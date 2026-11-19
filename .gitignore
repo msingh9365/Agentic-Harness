@@ -52,3 +52,7 @@ results/_att_*/
 results/_attbal_*/
 results/_pebal_*/
 results/_padtest_*/
+results/callstore/
+results/_smk_raw/
+results/_nebula-*_raw/
+results/_review_smoke_raw/

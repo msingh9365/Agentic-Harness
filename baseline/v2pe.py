@@ -19,7 +19,7 @@ import time
 
 import numpy as np
 
-from baseline import common as C, cv, gap, pe
+from baseline import callstore as CS, common as C, cv, gap, inmem_pad, pe
 
 RECIPE = dict(lr=2e-3, clip=0.5, dropout=0.3, batch=96, wd=1e-2, tok="bpe50k")        # = gap.RECIPES["R8_lr2e-3"]
 
@@ -49,12 +49,12 @@ def run(a):
     model = pe.build_chunks(len(vocab), dropout=RECIPE["dropout"], pe_mode=a.pe_mode, pool_mode=a.pooling)
     trainer = cv.make_trainer(model, dev, "binary", RECIPE["batch"], RECIPE["lr"], RECIPE["wd"], clip_grad_norm=RECIPE["clip"])
     bpe = int(np.ceil(len(xt) / RECIPE["batch"]))
-    log, t0 = [], time.time()
+    log, t0, seen = [], time.time(), {"batches": 0}
 
     def on_epoch_end(ep):
         zv = cv.predict_logits(model, xv, dev, bs=512)
         mv = C.binary_metrics(yv, zv, decision=0.0)
-        rec = {"epoch": ep, "batches": ep * bpe, "seconds": round(time.time() - t0, 1), "val_loss": gap.bce_logits(yv, zv), "val": gap.compact(mv), "val_n_tied_at_top": mv["n_tied_at_top"]}
+        rec = {"epoch": ep, "batches": seen["batches"] or ep * bpe, "seconds": round(time.time() - t0, 1), "val_loss": gap.bce_logits(yv, zv), "val": gap.compact(mv), "val_n_tied_at_top": mv["n_tied_at_top"]}
         log.append(rec)
         print(f"[{a.tag} seed {a.seed}] epoch {ep}: val TPR@1e-3 {mv['tpr@0.001']:.3f} @1e-2 {mv['tpr@0.01']:.3f} pAUC@1e-2 {mv['pauc@0.01']:.3f} AUC {mv['auc']:.4f} loss {rec['val_loss']:.4f} | {rec['seconds']:.0f}s", flush=True)
         np.save(os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_val_logits.npy"), zv.astype(np.float32))
@@ -63,12 +63,33 @@ def run(a):
             np.save(os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_test_logits.npy"), zt.astype(np.float32))
             torch.save({k: v.detach().cpu() for k, v in model.state_dict().items()}, os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_model.pt"))
 
-    edited = {}
+    edited, epoch_sizes = {}, {}
     aug_dir = a.aug_dir
     if aug_dir and not os.path.exists(os.path.join(aug_dir, f"aug_s{a.seed}_e1_rows.npy")):
         aug_dir = C.find_dir_with(f"aug_s{a.seed}_e1_rows.npy")      # Kaggle mounts private datasets under a path that is not the slug: search /kaggle/input
         print(f"[{a.tag} seed {a.seed}] padding arrays found in {aug_dir}", flush=True)
-    if aug_dir:
+    if a.pad_store:
+        # padding built IN MEMORY from the store of the ORIGINAL reports (baseline/callstore.py, inmem_pad.py); nothing edited is written anywhere. pad_mode "replace": the padded report replaces the
+        # original (REPORT 5.10); "keep": a padded COPY is added to all the clean reports. pad_labels "malware": only malware training reports are eligible. One fit() per epoch (as below).
+        sp = a.pad_store if os.path.exists(a.pad_store) else os.path.join(C.find_dir_with("all.npz"), "all.npz")
+        store = CS.CallStore.load(sp)
+        pool_rows = inmem_pad.pool_rows_of(store, y_all, trn)
+        print(f"[{a.tag} seed {a.seed}] call store {sp}: {len(store):,} reports; TRAIN pool {len(pool_rows):,} benign reports of the training slice", flush=True)
+        where = {int(r): i for i, r in enumerate(trn)}
+        for ep in range(1, a.epochs + 1):
+            rows, tok = inmem_pad.epoch_edits(store, y_all, trn, a.seed, ep, pool_rows, stream=a.pad_stream, labels=a.pad_labels)
+            if a.pad_mode == "replace":
+                pos = np.array([where[int(r)] for r in rows], dtype=np.int64)
+                xe, ye = xt.copy(), yt
+                xe[pos] = tok.astype(xe.dtype)
+            else:
+                xe, ye = np.concatenate([xt, tok.astype(xt.dtype)]), np.concatenate([yt, y_all[rows]])
+            edited[ep], epoch_sizes[ep] = int(len(rows)), int(len(xe))
+            seen["batches"] += int(np.ceil(len(xe) / RECIPE["batch"]))
+            trainer.fit(xe, ye, epochs=1)
+            on_epoch_end(ep)
+            del xe, ye, tok
+    elif aug_dir:
         # balanced padding (REPORT 5.10): one array per (seed, epoch) of edited reports, overlaid over the original rows of that epoch only; the authors' ModelTrainer is called
         # once per epoch (checked: epoch-by-epoch fitting on unchanged data reproduces the single fit(epochs=2) exactly, tests/test_v2pe.py)
         where = {int(r): i for i, r in enumerate(trn)}
@@ -89,7 +110,7 @@ def run(a):
         trainer.fit(xt, yt, epochs=a.epochs)
         hook.finish()
     assert len(log) == a.epochs, (len(log), a.epochs)
-    C.dump_json({"tag": a.tag, "pe_mode": a.pe_mode, "pooling": a.pooling, "aug_dir": a.aug_dir, "edited_rows_per_epoch": edited, "pos_offset": 0, "recipe": RECIPE, "seed": a.seed, "epochs": a.epochs, "batches_per_epoch": bpe, "n_train": int(len(xt)),
+    C.dump_json({"tag": a.tag, "pe_mode": a.pe_mode, "pooling": a.pooling, "aug_dir": a.aug_dir, "pad_store": bool(a.pad_store), "pad_mode": a.pad_mode, "pad_labels": a.pad_labels, "pad_stream": a.pad_stream, "edited_rows_per_epoch": edited, "reports_per_epoch": epoch_sizes, "pos_offset": 0, "recipe": RECIPE, "seed": a.seed, "epochs": a.epochs, "batches_per_epoch": bpe, "n_train": int(len(xt)),
                  "n_val": int(len(xv)), "n_val_benign": int((yv == 0).sum()), "tokenizer": a.variant, "split_hash_asserted": True, "env": C.env_info(), "nebula": nb,
                  "train_seconds": round(time.time() - t0, 1), "per_epoch": log, "april": "logits of the last epoch stored in seed<k>_epoch<e>_test_logits.npy; not evaluated by this script"},
                 res_path)
@@ -111,7 +132,8 @@ def orchestrate(a):
                 s = jobs.pop(0)
                 log = open(os.path.join(a.out, "logs", f"{a.tag}_seed{s}.log"), "a")
                 cmd = [sys.executable, "-m", "baseline.v2pe", "--out", a.out, "--seed", str(s), "--epochs", str(a.epochs), "--device", a.device, "--pe-mode", a.pe_mode,
-                       "--tag", a.tag, "--variant", a.variant, "--pooling", a.pooling] + (["--aug-dir", a.aug_dir] if a.aug_dir else [])
+                       "--tag", a.tag, "--variant", a.variant, "--pooling", a.pooling] + (["--aug-dir", a.aug_dir] if a.aug_dir else []) + (
+                    ["--pad-store", a.pad_store, "--pad-mode", a.pad_mode, "--pad-labels", a.pad_labels, "--pad-stream", str(a.pad_stream)] if a.pad_store else [])
                 running[g] = (subprocess.Popen(cmd, env=dict(os.environ, CUDA_VISIBLE_DEVICES=str(g)), stdout=log, stderr=subprocess.STDOUT), f"seed{s}", log)
                 print(f"[{(time.time() - t0) / 60:.1f} min] GPU {g}: started {a.tag} seed {s}", flush=True)
         for g, (p, name, log) in list(running.items()):
@@ -162,6 +184,10 @@ def main():
     ap.add_argument("--pe-mode", default="paper", choices=["paper", "released"])
     ap.add_argument("--tag", default="v2_pe")
     ap.add_argument("--pooling", default="flatten", choices=["flatten", "attn"], help="flatten = the released pooling, attn = attention pooling (baseline/pe.py)")
+    ap.add_argument("--pad-store", default=None, help="call-token store of the ORIGINAL reports (baseline/callstore.py all.npz): padding is built in memory per epoch (nothing edited is written)")
+    ap.add_argument("--pad-mode", default="replace", choices=["replace", "keep"], help="replace: the padded report replaces the original (REPORT 5.10); keep: a padded copy is added to all clean reports")
+    ap.add_argument("--pad-labels", default="all", choices=["all", "malware"], help="which training reports can be padded")
+    ap.add_argument("--pad-stream", type=int, default=7000, help="random stream of the padding plan (7000 = REPORT 5.10, 7100 = the keep runs)")
     ap.add_argument("--aug-dir", default=None, help="folder with aug_s<seed>_e<epoch>_{rows,tok}.npy (balanced padding arrays of baseline/make_pad.py)")
     ap.add_argument("--variant", default="bpe50k")
     ap.add_argument("--device", default="cuda")

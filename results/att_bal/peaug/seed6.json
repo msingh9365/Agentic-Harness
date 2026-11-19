@@ -1,0 +1,103 @@
+{
+ "tag": "peaug",
+ "pe_mode": "paper",
+ "pooling": "flatten",
+ "aug_dir": null,
+ "pad_store": true,
+ "pad_mode": "replace",
+ "pad_labels": "malware",
+ "pad_stream": 7000,
+ "edited_rows_per_epoch": {
+  "1": 22855,
+  "2": 22706
+ },
+ "reports_per_epoch": {
+  "1": 67768,
+  "2": 67768
+ },
+ "pos_offset": 0,
+ "recipe": {
+  "lr": 0.002,
+  "clip": 0.5,
+  "dropout": 0.3,
+  "batch": 96,
+  "wd": 0.01,
+  "tok": "bpe50k"
+ },
+ "seed": 6,
+ "epochs": 2,
+ "batches_per_epoch": 706,
+ "n_train": 67768,
+ "n_val": 7530,
+ "n_val_benign": 2467,
+ "tokenizer": "bpe50k",
+ "split_hash_asserted": true,
+ "env": {
+  "python": "3.13.16",
+  "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+  "cpus": 4,
+  "torch": "2.11.0+cu130",
+  "cuda_available": true,
+  "gpu": "Tesla T4",
+  "gpu_count": 1,
+  "gpu_mem_gb": 14.6,
+  "numpy": "2.1.3",
+  "sklearn": "1.6.1",
+  "sentencepiece": "0.2.2",
+  "lightning": "2.6.6",
+  "torchmetrics": "1.9.0",
+  "pandas": "2.3.3"
+ },
+ "nebula": {
+  "nebula_root": "/tmp/nebula",
+  "nebula_commit": "1343ae170ef32b01a75d2dd5fb906b5541f073df",
+  "commit_is_pinned": true,
+  "patches_applied": true
+ },
+ "train_seconds": 123.7,
+ "per_epoch": [
+  {
+   "epoch": 1,
+   "batches": 706,
+   "seconds": 59.4,
+   "val_loss": 0.1395916276877157,
+   "val": {
+    "auc": 0.9970330463640898,
+    "f1@0.5": 0.9836685919139614,
+    "acc@0.5": 0.9782204515272245,
+    "pauc@0.01": 0.9382173747386098,
+    "pauc@0.001": 0.8626938195277806,
+    "tpr@0.0001": 0.8548291526762789,
+    "tpr@0.0003": 0.8548291526762789,
+    "tpr@0.001": 0.874382777009678,
+    "tpr@0.003": 0.9466719336361841,
+    "tpr@0.01": 0.9658305352557772,
+    "tpr@0.03": 0.9838040687339522,
+    "tpr@0.1": 0.9932846138652972
+   },
+   "val_n_tied_at_top": 1
+  },
+  {
+   "epoch": 2,
+   "batches": 1412,
+   "seconds": 116.6,
+   "val_loss": 0.12858837957970992,
+   "val": {
+    "auc": 0.9980361350510123,
+    "f1@0.5": 0.9879829178667197,
+    "acc@0.5": 0.9839309428950863,
+    "pauc@0.01": 0.9485018159115692,
+    "pauc@0.001": 0.7482714153510118,
+    "tpr@0.0001": 0.5453288564092436,
+    "tpr@0.0003": 0.5453288564092436,
+    "tpr@0.001": 0.9233655935216275,
+    "tpr@0.003": 0.9652380011850682,
+    "tpr@0.01": 0.9798538415958917,
+    "tpr@0.03": 0.99150701165317,
+    "tpr@0.1": 0.9948647047205215
+   },
+   "val_n_tied_at_top": 1
+  }
+ ],
+ "april": "logits of the last epoch stored in seed<k>_epoch<e>_test_logits.npy; not evaluated by this script"
+}

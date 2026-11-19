@@ -1,0 +1,232 @@
+### Test set (April), logit-ranked: per-seed mean ± std
+
+| model | n | TPR@1e-3 | TPR@1e-2 | AUC | F1 | **pAUC@1e-2** | pAUC@1e-3 | McClish pAUC@1e-2 | TPR@1e-3 literal f32 |
+|---|---|---|---|---|---|---|---|---|---|
+| released checkpoint (1 model) | 1 | 0.518 | 0.750 | 0.9586 | 0.885 | 0.659 | 0.372 | 0.829 | 0.517 |
+| baseline v2 (released code) | 10 | 0.527 ± 0.082 | 0.788 ± 0.026 | 0.9624 ± 0.0050 | 0.901 ± 0.016 | 0.690 ± 0.036 | 0.381 ± 0.110 | 0.844 ± 0.018 | 0.317 ± 0.280 |
+| **baseline v2-PE** (the baseline) | 10 | 0.543 ± 0.063 | 0.811 ± 0.023 | 0.9644 ± 0.0093 | 0.915 ± 0.012 | 0.705 ± 0.031 | 0.444 ± 0.076 | 0.852 ± 0.016 | 0.060 ± 0.191 |
+| v2-PE + attention pooling (ATT) | 10 | 0.495 ± 0.044 | 0.712 ± 0.077 | 0.9518 ± 0.0108 | 0.867 ± 0.037 | 0.613 ± 0.048 | 0.369 ± 0.057 | 0.806 ± 0.024 | 0.495 ± 0.044 |
+| **ATT+bal** (attention pooling + balanced padding) | 10 | 0.572 ± 0.061 | 0.795 ± 0.020 | 0.9713 ± 0.0066 | 0.913 ± 0.017 | 0.707 ± 0.017 | 0.457 ± 0.041 | 0.853 ± 0.008 | 0.511 ± 0.192 |
+| v2-PE + balanced padding (PE+bal, flatten) | 10 | 0.551 ± 0.053 | 0.787 ± 0.016 | 0.9553 ± 0.0110 | 0.898 ± 0.015 | 0.699 ± 0.022 | 0.437 ± 0.070 | 0.848 ± 0.011 | 0.000 ± 0.000 |
+
+
+10-seed ensembles (mean logit over the seeds):
+
+| model | TPR@1e-3 | TPR@1e-2 | AUC | F1 | **pAUC@1e-2** | pAUC@1e-3 |
+|---|---|---|---|---|---|---|
+| baseline v2 (released code) | 0.636 | 0.852 | 0.9722 | 0.920 | **0.762** | 0.431 |
+| **baseline v2-PE** (the baseline) | 0.606 | 0.851 | 0.9705 | 0.927 | **0.768** | 0.546 |
+| v2-PE + attention pooling (ATT) | 0.543 | 0.752 | 0.9604 | 0.864 | **0.661** | 0.445 |
+| **ATT+bal** (attention pooling + balanced padding) | 0.583 | 0.814 | 0.9780 | 0.926 | **0.734** | 0.503 |
+| v2-PE + balanced padding (PE+bal, flatten) | 0.592 | 0.805 | 0.9651 | 0.919 | **0.735** | 0.526 |
+
+
+**Validation slice** (7,530 reports; clean for all but the released checkpoint, which was trained on it): per-seed mean ± std
+
+| model | n | TPR@1e-3 | TPR@1e-2 | AUC | F1 | **pAUC@1e-2** | pAUC@1e-3 |
+|---|---|---|---|---|---|---|---|
+| released checkpoint (1 model) (in-sample) | 1 | 0.898 | 0.962 | 0.9986 | 0.984 | 0.941 | 0.890 |
+| baseline v2 (released code) | 10 | 0.896 ± 0.061 | 0.983 ± 0.005 | 0.9984 ± 0.0003 | 0.990 ± 0.002 | 0.947 ± 0.015 | 0.773 ± 0.112 |
+| **baseline v2-PE** (the baseline) | 10 | 0.916 ± 0.060 | 0.984 ± 0.004 | 0.9985 ± 0.0002 | 0.990 ± 0.002 | 0.962 ± 0.013 | 0.858 ± 0.098 |
+| v2-PE + attention pooling (ATT) | 10 | 0.949 ± 0.008 | 0.986 ± 0.002 | 0.9987 ± 0.0001 | 0.991 ± 0.000 | 0.969 ± 0.005 | 0.914 ± 0.045 |
+| **ATT+bal** (attention pooling + balanced padding) | 10 | 0.911 ± 0.024 | 0.981 ± 0.003 | 0.9984 ± 0.0002 | 0.990 ± 0.001 | 0.955 ± 0.007 | 0.876 ± 0.033 |
+| v2-PE + balanced padding (PE+bal, flatten) | 10 | 0.885 ± 0.032 | 0.980 ± 0.004 | 0.9977 ± 0.0003 | 0.987 ± 0.003 | 0.947 ± 0.009 | 0.815 ± 0.054 |
+
+
+### Differences (stratified bootstrap over the April test reports, 1000 resamples, numpy seed 0; 95% CI; points = x 100)
+
+| difference | statistic | metric | difference in points, 95% CI |
+|---|---|---|---|
+| att − v2_pe | per-seed means | **pAUC@1e-2** | -9.19 [-10.96, -7.44] **resolved** |
+| att − v2_pe | per-seed means | TPR@1e-3 | -4.76 [-10.31, -0.75] **resolved** |
+| att − v2_pe | per-seed means | TPR@1e-2 | -9.92 [-11.31, -8.62] **resolved** |
+| att − v2_pe | per-seed means | AUC | -1.26 [-1.39, -1.13] **resolved** |
+| att − v2_pe | per-seed means | pAUC@1e-3 | -7.46 [-14.96, -1.10] **resolved** |
+| att − v2_pe | 10-seed ensembles | **pAUC@1e-2** | -10.71 [-12.81, -8.78] **resolved** |
+| att − v2_pe | 10-seed ensembles | TPR@1e-3 | -6.29 [-13.19, -1.23] **resolved** |
+| att − v2_pe | 10-seed ensembles | TPR@1e-2 | -9.89 [-11.12, -8.18] **resolved** |
+| att − v2_pe | 10-seed ensembles | AUC | -1.00 [-1.13, -0.88] **resolved** |
+| att − v2_pe | 10-seed ensembles | pAUC@1e-3 | -10.10 [-21.31, -2.38] **resolved** |
+| att − v2 | per-seed means | **pAUC@1e-2** | -7.74 [-10.06, -5.44] **resolved** |
+| att − v2 | per-seed means | TPR@1e-3 | -3.15 [-11.02, +7.02] not resolved |
+| att − v2 | per-seed means | TPR@1e-2 | -7.64 [-9.13, -6.37] **resolved** |
+| att − v2 | per-seed means | AUC | -1.06 [-1.22, -0.91] **resolved** |
+| att − v2 | per-seed means | pAUC@1e-3 | -1.14 [-11.12, +8.24] not resolved |
+| att − v2 | 10-seed ensembles | **pAUC@1e-2** | -10.03 [-12.64, -7.29] **resolved** |
+| att − v2 | 10-seed ensembles | TPR@1e-3 | -9.29 [-13.67, +14.19] not resolved |
+| att − v2 | 10-seed ensembles | TPR@1e-2 | -9.95 [-11.21, -8.69] **resolved** |
+| att − v2 | 10-seed ensembles | AUC | -1.18 [-1.34, -1.03] **resolved** |
+| att − v2 | 10-seed ensembles | pAUC@1e-3 | +1.45 [-13.59, +14.28] not resolved |
+| att − released | per-seed means | **pAUC@1e-2** | -4.60 [-8.35, -1.06] **resolved** |
+| att − released | per-seed means | TPR@1e-3 | -2.32 [-11.92, +6.45] not resolved |
+| att − released | per-seed means | TPR@1e-2 | -3.79 [-5.90, -1.43] **resolved** |
+| att − released | per-seed means | AUC | -0.68 [-0.89, -0.48] **resolved** |
+| att − released | per-seed means | pAUC@1e-3 | -0.30 [-13.40, +14.19] not resolved |
+| att − released | 10-seed ensembles | **pAUC@1e-2** | +0.24 [-3.89, +3.91] not resolved |
+| att − released | 10-seed ensembles | TPR@1e-3 | +2.44 [-6.80, +12.97] not resolved |
+| att − released | 10-seed ensembles | TPR@1e-2 | +0.26 [-1.51, +2.29] not resolved |
+| att − released | 10-seed ensembles | AUC | +0.18 [-0.03, +0.38] not resolved |
+| att − released | 10-seed ensembles | pAUC@1e-3 | +7.31 [-8.17, +22.44] not resolved |
+| attbal − v2_pe | per-seed means | **pAUC@1e-2** | +0.23 [-1.70, +2.09] not resolved |
+| attbal − v2_pe | per-seed means | TPR@1e-3 | +2.91 [-2.20, +7.16] not resolved |
+| attbal − v2_pe | per-seed means | TPR@1e-2 | -1.65 [-2.95, -0.67] **resolved** |
+| attbal − v2_pe | per-seed means | AUC | +0.68 [+0.57, +0.79] **resolved** |
+| attbal − v2_pe | per-seed means | pAUC@1e-3 | +1.32 [-6.47, +9.05] not resolved |
+| attbal − v2_pe | 10-seed ensembles | **pAUC@1e-2** | -3.42 [-5.37, -1.55] **resolved** |
+| attbal − v2_pe | 10-seed ensembles | TPR@1e-3 | -2.29 [-7.12, +7.25] not resolved |
+| attbal − v2_pe | 10-seed ensembles | TPR@1e-2 | -3.75 [-4.73, -2.18] **resolved** |
+| attbal − v2_pe | 10-seed ensembles | AUC | +0.75 [+0.62, +0.87] **resolved** |
+| attbal − v2_pe | 10-seed ensembles | pAUC@1e-3 | -4.35 [-13.45, +3.91] not resolved |
+| attbal − v2 | per-seed means | **pAUC@1e-2** | +1.68 [-0.31, +3.65] not resolved |
+| attbal − v2 | per-seed means | TPR@1e-3 | +4.52 [-1.72, +13.82] not resolved |
+| attbal − v2 | per-seed means | TPR@1e-2 | +0.63 [-0.64, +1.34] not resolved |
+| attbal − v2 | per-seed means | AUC | +0.89 [+0.75, +1.02] **resolved** |
+| attbal − v2 | per-seed means | pAUC@1e-3 | +7.63 [-1.53, +15.74] not resolved |
+| attbal − v2 | 10-seed ensembles | **pAUC@1e-2** | -2.75 [-4.98, -0.48] **resolved** |
+| attbal − v2 | 10-seed ensembles | TPR@1e-3 | -5.29 [-8.98, +18.58] not resolved |
+| attbal − v2 | 10-seed ensembles | TPR@1e-2 | -3.80 [-4.87, -2.78] **resolved** |
+| attbal − v2 | 10-seed ensembles | AUC | +0.58 [+0.43, +0.72] **resolved** |
+| attbal − v2 | 10-seed ensembles | pAUC@1e-3 | +7.20 [-7.19, +19.12] not resolved |
+| attbal − released | per-seed means | **pAUC@1e-2** | +4.82 [+0.72, +8.60] **resolved** |
+| attbal − released | per-seed means | TPR@1e-3 | +5.35 [-6.20, +17.23] not resolved |
+| attbal − released | per-seed means | TPR@1e-2 | +4.48 [+2.75, +6.25] **resolved** |
+| attbal − released | per-seed means | AUC | +1.26 [+1.07, +1.44] **resolved** |
+| attbal − released | per-seed means | pAUC@1e-3 | +8.47 [-7.51, +25.08] not resolved |
+| attbal − released | 10-seed ensembles | **pAUC@1e-2** | +7.52 [+3.30, +11.28] **resolved** |
+| attbal − released | 10-seed ensembles | TPR@1e-3 | +6.44 [-3.20, +22.26] not resolved |
+| attbal − released | 10-seed ensembles | TPR@1e-2 | +6.40 [+4.82, +8.23] **resolved** |
+| attbal − released | 10-seed ensembles | AUC | +1.94 [+1.73, +2.13] **resolved** |
+| attbal − released | 10-seed ensembles | pAUC@1e-3 | +13.06 [-3.65, +30.04] not resolved |
+| pebal − v2_pe | per-seed means | **pAUC@1e-2** | -0.64 [-2.14, +0.76] not resolved |
+| pebal − v2_pe | per-seed means | TPR@1e-3 | +0.86 [-4.32, +4.11] not resolved |
+| pebal − v2_pe | per-seed means | TPR@1e-2 | -2.45 [-3.47, -1.59] **resolved** |
+| pebal − v2_pe | per-seed means | AUC | -0.91 [-1.03, -0.80] **resolved** |
+| pebal − v2_pe | per-seed means | pAUC@1e-3 | -0.68 [-5.04, +3.77] not resolved |
+| pebal − v2_pe | 10-seed ensembles | **pAUC@1e-2** | -3.34 [-4.72, -2.02] **resolved** |
+| pebal − v2_pe | 10-seed ensembles | TPR@1e-3 | -1.33 [-8.96, +3.30] not resolved |
+| pebal − v2_pe | 10-seed ensembles | TPR@1e-2 | -4.61 [-5.63, -0.96] **resolved** |
+| pebal − v2_pe | 10-seed ensembles | AUC | -0.54 [-0.67, -0.42] **resolved** |
+| pebal − v2_pe | 10-seed ensembles | pAUC@1e-3 | -1.98 [-8.39, +3.50] not resolved |
+| pebal − v2 | per-seed means | **pAUC@1e-2** | +0.81 [-0.86, +2.44] not resolved |
+| pebal − v2 | per-seed means | TPR@1e-3 | +2.47 [-3.63, +9.58] not resolved |
+| pebal − v2 | per-seed means | TPR@1e-2 | -0.17 [-1.25, +0.53] not resolved |
+| pebal − v2 | per-seed means | AUC | -0.71 [-0.84, -0.57] **resolved** |
+| pebal − v2 | per-seed means | pAUC@1e-3 | +5.63 [-1.50, +11.59] not resolved |
+| pebal − v2 | 10-seed ensembles | **pAUC@1e-2** | -2.67 [-4.75, -0.45] **resolved** |
+| pebal − v2 | 10-seed ensembles | TPR@1e-3 | -4.33 [-8.28, +18.76] not resolved |
+| pebal − v2 | 10-seed ensembles | TPR@1e-2 | -4.66 [-5.91, -0.93] **resolved** |
+| pebal − v2 | 10-seed ensembles | AUC | -0.71 [-0.85, -0.56] **resolved** |
+| pebal − v2 | 10-seed ensembles | pAUC@1e-3 | +9.57 [-4.86, +20.76] not resolved |
+| pebal − released | per-seed means | **pAUC@1e-2** | +3.95 [+0.32, +7.67] **resolved** |
+| pebal − released | per-seed means | TPR@1e-3 | +3.30 [-7.69, +14.20] not resolved |
+| pebal − released | per-seed means | TPR@1e-2 | +3.68 [+2.09, +5.38] **resolved** |
+| pebal − released | per-seed means | AUC | -0.33 [-0.52, -0.15] **resolved** |
+| pebal − released | per-seed means | pAUC@1e-3 | +6.47 [-6.46, +22.48] not resolved |
+| pebal − released | 10-seed ensembles | **pAUC@1e-2** | +7.60 [+3.87, +11.35] **resolved** |
+| pebal − released | 10-seed ensembles | TPR@1e-3 | +7.39 [-2.41, +19.11] not resolved |
+| pebal − released | 10-seed ensembles | TPR@1e-2 | +5.54 [+3.67, +9.31] **resolved** |
+| pebal − released | 10-seed ensembles | AUC | +0.64 [+0.46, +0.84] **resolved** |
+| pebal − released | 10-seed ensembles | pAUC@1e-3 | +15.43 [+1.33, +30.63] **resolved** |
+| attbal − att | per-seed means | **pAUC@1e-2** | +9.42 [+7.53, +11.36] **resolved** |
+| attbal − att | per-seed means | TPR@1e-3 | +7.67 [+3.31, +13.69] **resolved** |
+| attbal − att | per-seed means | TPR@1e-2 | +8.27 [+6.99, +9.51] **resolved** |
+| attbal − att | per-seed means | AUC | +1.94 [+1.81, +2.08] **resolved** |
+| attbal − att | per-seed means | pAUC@1e-3 | +8.78 [+1.95, +15.07] **resolved** |
+| attbal − att | 10-seed ensembles | **pAUC@1e-2** | +7.28 [+5.12, +9.39] **resolved** |
+| attbal − att | 10-seed ensembles | TPR@1e-3 | +4.00 [+0.64, +12.60] **resolved** |
+| attbal − att | 10-seed ensembles | TPR@1e-2 | +6.15 [+4.92, +7.37] **resolved** |
+| attbal − att | 10-seed ensembles | AUC | +1.76 [+1.63, +1.89] **resolved** |
+| attbal − att | 10-seed ensembles | pAUC@1e-3 | +5.75 [-2.64, +14.41] not resolved |
+| attbal − pebal | per-seed means | **pAUC@1e-2** | +0.87 [-0.55, +2.33] not resolved |
+| attbal − pebal | per-seed means | TPR@1e-3 | +2.05 [-2.07, +7.91] not resolved |
+| attbal − pebal | per-seed means | TPR@1e-2 | +0.80 [+0.03, +1.43] **resolved** |
+| attbal − pebal | per-seed means | AUC | +1.59 [+1.46, +1.72] **resolved** |
+| attbal − pebal | per-seed means | pAUC@1e-3 | +2.00 [-5.54, +9.31] not resolved |
+| attbal − pebal | 10-seed ensembles | **pAUC@1e-2** | -0.08 [-1.67, +1.54] not resolved |
+| attbal − pebal | 10-seed ensembles | TPR@1e-3 | -0.96 [-5.91, +7.59] not resolved |
+| attbal − pebal | 10-seed ensembles | TPR@1e-2 | +0.86 [-2.40, +1.93] not resolved |
+| attbal − pebal | 10-seed ensembles | AUC | +1.29 [+1.14, +1.45] **resolved** |
+| attbal − pebal | 10-seed ensembles | pAUC@1e-3 | -2.37 [-10.75, +6.33] not resolved |
+
+
+### Per-seed paired differences against v2-PE (the same seed index; points x 100) and the claim rule
+
+**v2-PE + attention pooling (ATT) − v2-PE**
+
+| metric | s0 | s1 | s2 | s3 | s4 | s5 | s6 | s7 | s8 | s9 | mean ± std | seeds > 0 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| **pAUC@1e-2** | +0.3 | -14.2 | +1.0 | -12.4 | -8.1 | -19.3 | -10.7 | -12.3 | -10.8 | -5.4 | -9.19 ± 6.34 | 2/10 |
+| TPR@1e-3 | -0.6 | -8.6 | -3.7 | -8.1 | -11.9 | -14.0 | -4.9 | -7.2 | +4.7 | +6.8 | -4.76 ± 6.75 | 2/10 |
+| TPR@1e-2 | +0.2 | -19.5 | +1.4 | -15.7 | -1.3 | -23.7 | -12.6 | -11.5 | -10.5 | -5.9 | -9.92 ± 8.49 | 2/10 |
+| AUC | -1.5 | -2.6 | +1.0 | -1.3 | +0.5 | -4.3 | -0.7 | -1.6 | -0.7 | -1.3 | -1.26 ± 1.51 | 2/10 |
+| pAUC@1e-3 | -10.9 | -13.0 | -13.5 | -9.3 | -13.1 | -9.0 | -2.7 | -8.1 | +9.0 | -4.1 | -7.46 ± 6.84 | 1/10 |
+
+****ATT+bal** (attention pooling + balanced padding) − v2-PE**
+
+| metric | s0 | s1 | s2 | s3 | s4 | s5 | s6 | s7 | s8 | s9 | mean ± std | seeds > 0 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| **pAUC@1e-2** | +2.7 | +4.8 | +7.7 | -1.6 | -1.1 | -5.7 | +2.4 | -3.8 | -2.3 | -0.8 | +0.23 ± 4.11 | 4/10 |
+| TPR@1e-3 | +4.4 | +12.2 | +17.1 | -8.6 | -4.7 | -7.0 | +7.9 | -0.1 | +7.2 | +0.7 | +2.91 ± 8.39 | 6/10 |
+| TPR@1e-2 | -0.3 | +0.1 | +4.7 | -1.7 | -0.2 | -8.5 | +0.6 | -6.3 | -4.9 | -0.0 | -1.65 ± 3.88 | 3/10 |
+| AUC | -0.0 | +0.9 | +2.7 | +1.4 | +0.8 | -2.0 | +1.0 | -0.0 | +0.8 | +1.2 | +0.68 ± 1.21 | 7/10 |
+| pAUC@1e-3 | -5.3 | +5.2 | +10.7 | -6.3 | -5.9 | -0.5 | +9.1 | -4.4 | +9.7 | +1.0 | +1.32 ± 6.87 | 5/10 |
+
+**v2-PE + balanced padding (PE+bal, flatten) − v2-PE**
+
+| metric | s0 | s1 | s2 | s3 | s4 | s5 | s6 | s7 | s8 | s9 | mean ± std | seeds > 0 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| **pAUC@1e-2** | -0.8 | +0.6 | +8.1 | -0.4 | -5.1 | -0.7 | +0.3 | -5.0 | -1.5 | -1.9 | -0.64 ± 3.65 | 3/10 |
+| TPR@1e-3 | -0.0 | +2.5 | +12.7 | +0.7 | -14.8 | -3.0 | +0.4 | -14.4 | +14.9 | +9.6 | +0.86 ± 10.07 | 6/10 |
+| TPR@1e-2 | -2.9 | -2.0 | +4.5 | -3.7 | -1.6 | -3.6 | -0.4 | -5.1 | -6.7 | -3.0 | -2.45 ± 3.03 | 1/10 |
+| AUC | -3.0 | -0.9 | +2.6 | +0.7 | -1.7 | -1.6 | +0.1 | -1.7 | -1.7 | -1.9 | -0.91 ± 1.62 | 3/10 |
+| pAUC@1e-3 | -1.5 | +5.5 | +12.2 | -2.9 | -14.7 | +6.3 | +0.6 | -22.6 | +8.2 | +2.1 | -0.68 ± 10.67 | 6/10 |
+
+**Claim rule of EVAL_PROTOCOL.md section 5 on the primary metric pAUC@1e-2** (the CI of the per-seed means excludes 0 AND the same sign in at least 7 of the 10 seeds):
+
+- att vs v2_pe: **RESOLVED, att worse** (CI excludes 0; negative in 8/10 seeds)
+- att vs v2: **RESOLVED, att worse** (CI excludes 0; negative in 9/10 seeds)
+- att vs released: **RESOLVED, att worse** (CI excludes 0; negative in 9/10 seeds)
+- attbal vs v2_pe: not resolved (CI contains 0; positive in 4/10, negative in 6/10 seeds)
+- attbal vs v2: not resolved (CI contains 0; positive in 6/10, negative in 4/10 seeds)
+- attbal vs released: **RESOLVED, attbal better** (CI excludes 0; positive in 10/10 seeds)
+- pebal vs v2_pe: not resolved (CI contains 0; positive in 3/10, negative in 7/10 seeds)
+- pebal vs v2: not resolved (CI contains 0; positive in 7/10, negative in 3/10 seeds)
+- pebal vs released: **RESOLVED, pebal better** (CI excludes 0; positive in 9/10 seeds)
+- attbal vs att: **RESOLVED, attbal better** (CI excludes 0; positive in 10/10 seeds)
+- attbal vs pebal: not resolved (CI contains 0; positive in 6/10, negative in 4/10 seeds)
+
+### Output scale (as in REPORT 5.7; April test, mean over the models)
+
+| model | mean abs(logit) | benign logit mean | benign logit p99 | malware above logit 16.6 |
+|---|---|---|---|---|
+| released checkpoint (1 model) | 16.6 | -16.4 | 2.5 | 42% |
+| baseline v2 (released code) | 17.7 | -16.4 | 3.8 | 49% |
+| **baseline v2-PE** (the baseline) | 28.5 | -22.8 | 5.6 | 68% |
+| v2-PE + attention pooling (ATT) | 9.4 | -8.7 | 3.7 | 12% |
+| **ATT+bal** (attention pooling + balanced padding) | 12.1 | -9.5 | 4.3 | 40% |
+| v2-PE + balanced padding (PE+bal, flatten) | 33.2 | -21.3 | 7.2 | 72% |
+
+
+### Random benign padding test (thresholds fixed at 1% FPR on the unedited April benign reports; per-seed mean ± std over 10 seeds)
+
+April malware reports (9,399) and 2,000 random benign April reports padded with k random calls (k = 5, 20, 50) of the EVAL pool (benign reports of the validation slice), prepended or inserted at random places. Cells: share of padded malware reports still flagged (TPR) / share of padded benign reports flagged (FPR).
+
+| model | unedited TPR / FPR | insert 5 | insert 20 | insert 50 | prepend 5 | prepend 20 | prepend 50 | mean of the 6 edits |
+|---|---|---|---|---|---|---|---|---|
+| baseline v2 (released code) | 0.788 ± 0.026 / 0.010 ± 0.001 | 0.713 ± 0.028 / 0.013 ± 0.005 | 0.529 ± 0.043 / 0.023 ± 0.017 | 0.416 ± 0.047 / 0.043 ± 0.041 | 0.517 ± 0.079 / 0.025 ± 0.016 | 0.208 ± 0.084 / 0.043 ± 0.047 | 0.106 ± 0.068 / 0.094 ± 0.095 | 0.415 ± 0.041 / 0.040 ± 0.034 |
+| **baseline v2-PE** (the baseline) | 0.811 ± 0.023 / 0.011 ± 0.001 | 0.738 ± 0.027 / 0.009 ± 0.002 | 0.557 ± 0.045 / 0.007 ± 0.003 | 0.414 ± 0.043 / 0.007 ± 0.005 | 0.544 ± 0.078 / 0.010 ± 0.002 | 0.225 ± 0.082 / 0.012 ± 0.012 | 0.083 ± 0.035 / 0.011 ± 0.019 | 0.427 ± 0.039 / 0.010 ± 0.006 |
+| v2-PE + attention pooling (ATT) | 0.712 ± 0.077 / 0.011 ± 0.003 | 0.576 ± 0.102 / 0.007 ± 0.004 | 0.404 ± 0.110 / 0.004 ± 0.002 | 0.268 ± 0.102 / 0.002 ± 0.002 | 0.511 ± 0.119 / 0.010 ± 0.008 | 0.332 ± 0.142 / 0.004 ± 0.003 | 0.022 ± 0.027 / 0.000 ± 0.000 | 0.352 ± 0.098 / 0.004 ± 0.003 |
+| **ATT+bal** (attention pooling + balanced padding) | 0.795 ± 0.020 / 0.012 ± 0.001 | 0.785 ± 0.025 / 0.012 ± 0.002 | 0.754 ± 0.040 / 0.012 ± 0.003 | 0.719 ± 0.043 / 0.012 ± 0.004 | 0.790 ± 0.029 / 0.013 ± 0.002 | 0.769 ± 0.028 / 0.014 ± 0.003 | 0.676 ± 0.052 / 0.016 ± 0.008 | 0.749 ± 0.035 / 0.013 ± 0.003 |
+| v2-PE + balanced padding (PE+bal, flatten) | 0.787 ± 0.016 / 0.011 ± 0.001 | 0.777 ± 0.019 / 0.013 ± 0.002 | 0.752 ± 0.019 / 0.015 ± 0.002 | 0.714 ± 0.020 / 0.017 ± 0.003 | 0.783 ± 0.020 / 0.018 ± 0.013 | 0.757 ± 0.023 / 0.025 ± 0.019 | 0.643 ± 0.081 / 0.025 ± 0.009 | 0.738 ± 0.026 / 0.019 ± 0.006 |
+
+
+Drop of the share of malware flagged against the unedited reports (points, mean over the 6 edits; per-seed mean ± std) and paired per-seed differences against v2-PE (same seed):
+
+| model | malware TPR change under padding (points) | padded benign FPR (mean of 6 edits) | change vs v2-PE (points), per seed | seeds > 0 |
+|---|---|---|---|---|
+| baseline v2 (released code) | -37.4 ± 2.8 | 4.02% ± 3.43 | +1.1 ± 3.9 | 6/10 |
+| **baseline v2-PE** (the baseline) | -38.4 ± 3.6 | 0.97% ± 0.63 |  |  |
+| v2-PE + attention pooling (ATT) | -36.0 ± 4.9 | 0.45% ± 0.25 | +2.5 ± 5.3 | 7/10 |
+| **ATT+bal** (attention pooling + balanced padding) | -4.6 ± 1.9 | 1.32% ± 0.27 | +33.9 ± 3.3 | 10/10 |
+| v2-PE + balanced padding (PE+bal, flatten) | -4.9 ± 1.8 | 1.88% ± 0.60 | +33.5 ± 3.7 | 10/10 |
+

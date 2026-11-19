@@ -108,3 +108,83 @@ def test_paper_mode_is_deterministic_in_eval_and_backpropagates_into_the_embeddi
     m.train()
     m(x).sum().backward()
     assert m.encoder.weight.grad is not None and m.encoder.weight.grad.abs().sum() > 0
+
+
+# ---------------------------------------------------------------------------- attention pooling (ATT+bal follow-up)
+def tokens_with_padding(n=6, seed=0):
+    """Random token ids with a zero-padded tail of different length per report (ids 3..V-1 are real tokens); one report has no real token at all."""
+    r = np.random.default_rng(seed)
+    x = np.zeros((n, 512), dtype=np.int64)
+    lens = r.integers(20, 512, n)
+    for i, k in enumerate(lens):
+        x[i, :k] = r.integers(3, V, k)
+    x[-1] = 0                                                 # a report without any real token
+    return torch.as_tensor(x)
+
+
+def test_attention_pooling_with_zero_query_is_the_masked_mean():
+    torch.manual_seed(0)
+    m = pe.build_chunks(V, pe_mode="paper", pool_mode="attn").eval()
+    assert float(m.att_query.abs().sum()) == 0.0              # initialised at 0
+    x = tokens_with_padding()
+    with torch.no_grad():
+        h, keep = m._encode(x)
+        want = (h * keep).sum(1) / keep.sum(1).clamp(min=1.0)           # mean over the real tokens
+        got = m.core(x)
+    assert torch.allclose(got[:-1], want[:-1], atol=1e-6)
+    assert torch.equal(got[-1], torch.zeros_like(got[-1]))              # no real token: output 0, finite
+    assert torch.isfinite(m(x)).all()
+    w = m.attention_weights(x)
+    for i in range(5):                                          # uniform over the real tokens
+        n_real = int((x[i] != 0).sum())
+        assert torch.allclose(w[i][x[i] != 0], torch.full((n_real,), 1.0 / n_real), atol=1e-6)
+
+
+def test_attention_pooling_gives_padding_zero_weight_and_ignores_padding_vectors():
+    torch.manual_seed(1)
+    m = pe.build_chunks(V, pe_mode="paper", pool_mode="attn").eval()
+    with torch.no_grad():
+        m.att_query.copy_(torch.randn(64))                    # a non-trivial query
+    x = tokens_with_padding()
+    with torch.no_grad():
+        w = m.attention_weights(x)
+        assert torch.equal(w[x == 0], torch.zeros_like(w[x == 0]))          # exactly 0 on every padding position
+        assert torch.allclose(w[:-1].sum(1), torch.ones(5), atol=1e-6) and float(w[-1].sum()) == 0.0
+        # the pooled vector does not depend on the padding vectors: replacing the hidden vectors at padding positions by anything gives the same output
+        h, keep = m._encode(x)
+        sc = (h @ m.att_query) / np.sqrt(64)
+        h2 = h.clone(); h2[(x == 0)] = 1e3 * torch.randn_like(h2[(x == 0)])
+        sc2 = (h2 @ m.att_query) / np.sqrt(64)
+        for hh, ss in ((h, sc), (h2, sc2)):
+            s_ = ss.masked_fill(keep.squeeze(-1) == 0, float("-inf"))
+            ww = torch.nan_to_num(torch.softmax(s_, 1), nan=0.0)
+            out = (ww.unsqueeze(-1) * hh).sum(1)
+            if hh is h:
+                ref = out
+        assert torch.allclose(out[:-1], ref[:-1], atol=1e-5)
+
+
+def test_attention_model_has_a_small_head_one_query_and_trains():
+    torch.manual_seed(2)
+    a, f = pe.build_chunks(V, pe_mode="paper", pool_mode="attn"), pe.build_chunks(V, pe_mode="paper")
+    assert a.classifier_head[0][0].in_features == 64 and f.classifier_head[0][0].in_features == 512 * 64
+    assert a.att_query.shape == (64,) and not hasattr(f, "att_query")
+    assert sum(p.numel() for p in f.parameters()) - sum(p.numel() for p in a.parameters()) == (512 * 64 - 64) * 64 - 64     # head layer 1 smaller, + 64 query values
+    x = torch.randint(3, V, (4, 512))
+    a.train(); a(x).sum().backward()
+    assert a.att_query.grad is not None and a.classifier_head[0][0].weight.grad is not None
+    # the default (flatten) model is the same class and the earlier behaviour: released mode still equals the released code (test b), paper mode unchanged (tests a, c)
+
+
+@pytest.mark.skipif(not (os.path.exists(os.path.join(ROOT, "results", "_v2pe_raw", "out", "v2_pe", "seed0_epoch2_model.pt")) and os.path.exists(os.path.join(ROOT, "results", "_pe_tokens", "variants", "bpe50k", "x_test.npy"))),
+                    reason="trained v2-PE seed 0 or the BPE-50k April tokens are not on this machine")
+def test_existing_v2pe_model_still_loads_and_reproduces_its_stored_logits():
+    """The class change must not alter the models of REPORT 5.9: seed 0 on 50 April reports against the stored (GPU) logits (CPU float32: close, not bit-identical)."""
+    sd = torch.load(os.path.join(ROOT, "results", "_v2pe_raw", "out", "v2_pe", "seed0_epoch2_model.pt"), map_location="cpu", weights_only=True)
+    m = pe.build_chunks(sd["encoder.weight"].shape[0], pe_mode="paper")
+    m.load_state_dict(sd); m.eval()
+    x = torch.as_tensor(np.load(os.path.join(ROOT, "results", "_pe_tokens", "variants", "bpe50k", "x_test.npy"), mmap_mode="r")[:50].astype(np.int64))
+    with torch.no_grad():
+        z = m(x).reshape(-1).numpy()
+    want = np.load(os.path.join(ROOT, "results", "v2_pe", "raw", "seed0_epoch2_test_logits.npy"))[:50]
+    assert np.abs(z - want).max() < 5e-3, np.abs(z - want).max()

@@ -1,0 +1,12 @@
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+WARNING:root: [!] Iniatialized TransformerEncoderChunksPE. Total trainable parameters: 3.3043e6
+[attbal seed 9] padding arrays found in /kaggle/input/datasets/msingh9365/nebula-v2pe-augb
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 10:20:20: Train Epoch: 1 [  0  / 706  (0 %)] | Loss: 0.695621 | Elapsed: 0.57s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.4570
+WARNING:root: [*] Thu Nov 19 10:21:02 2026:    1    | Tr.loss: 0.144159 | Elapsed:   42.56  s | FPR 0.0003 -> TPR: 0.21 & F1: 0.35 | AUC: 0.9856
+[attbal seed 9] epoch 1: val TPR@1e-3 0.922 @1e-2 0.979 pAUC@1e-2 0.954 AUC 0.9982 loss 0.0523 | 44s
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 10:21:04: Train Epoch: 1 [  0  / 706  (0 %)] | Loss: 0.116006 | Elapsed: 0.06s | FPR 0.0003 -> TPR: 0.96 & F1: 0.98 | AUC: 0.9892
+WARNING:root: [*] Thu Nov 19 10:21:45 2026:    1    | Tr.loss: 0.061332 | Elapsed:   41.37  s | FPR 0.0003 -> TPR: 0.50 & F1: 0.67 | AUC: 0.9971
+[attbal seed 9] epoch 2: val TPR@1e-3 0.893 @1e-2 0.983 pAUC@1e-2 0.955 AUC 0.9985 loss 0.0620 | 87s

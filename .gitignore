@@ -47,3 +47,8 @@ results/_gap_*_raw/
 results/_b3_*_raw/
 results/_pe_*/
 results/_v2pe_*/
+results/_pad_*/
+results/_att_*/
+results/_attbal_*/
+results/_pebal_*/
+results/_padtest_*/

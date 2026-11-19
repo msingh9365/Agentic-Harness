@@ -46,7 +46,7 @@ def run(a):
     xt, yt, xv, yv = x_all[trn], y_all[trn], x_all[val], y_all[val]
     dev = a.device
     C.set_seed(a.seed)
-    model = pe.build_chunks(len(vocab), dropout=RECIPE["dropout"], pe_mode=a.pe_mode)
+    model = pe.build_chunks(len(vocab), dropout=RECIPE["dropout"], pe_mode=a.pe_mode, pool_mode=a.pooling)
     trainer = cv.make_trainer(model, dev, "binary", RECIPE["batch"], RECIPE["lr"], RECIPE["wd"], clip_grad_norm=RECIPE["clip"])
     bpe = int(np.ceil(len(xt) / RECIPE["batch"]))
     log, t0 = [], time.time()
@@ -63,12 +63,33 @@ def run(a):
             np.save(os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_test_logits.npy"), zt.astype(np.float32))
             torch.save({k: v.detach().cpu() for k, v in model.state_dict().items()}, os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_model.pt"))
 
-    hook = gap.EpochHook(model, bpe, on_epoch_end)
-    trainer.model.forwardPass = hook
-    trainer.fit(xt, yt, epochs=a.epochs)
-    hook.finish()
+    edited = {}
+    aug_dir = a.aug_dir
+    if aug_dir and not os.path.exists(os.path.join(aug_dir, f"aug_s{a.seed}_e1_rows.npy")):
+        aug_dir = C.find_dir_with(f"aug_s{a.seed}_e1_rows.npy")      # Kaggle mounts private datasets under a path that is not the slug: search /kaggle/input
+        print(f"[{a.tag} seed {a.seed}] padding arrays found in {aug_dir}", flush=True)
+    if aug_dir:
+        # balanced padding (REPORT 5.10): one array per (seed, epoch) of edited reports, overlaid over the original rows of that epoch only; the authors' ModelTrainer is called
+        # once per epoch (checked: epoch-by-epoch fitting on unchanged data reproduces the single fit(epochs=2) exactly, tests/test_v2pe.py)
+        where = {int(r): i for i, r in enumerate(trn)}
+        for ep in range(1, a.epochs + 1):
+            rows = np.load(os.path.join(aug_dir, f"aug_s{a.seed}_e{ep}_rows.npy"))
+            tok = np.load(os.path.join(aug_dir, f"aug_s{a.seed}_e{ep}_tok.npy"))
+            pos = np.array([where[int(r)] for r in rows if int(r) in where], dtype=np.int64)
+            keep = np.array([int(r) in where for r in rows], dtype=bool)
+            assert keep.all() or a.limit, "an augmented row is outside the training slice"
+            xe = xt.copy()
+            xe[pos] = tok[keep].astype(xe.dtype)
+            edited[ep] = int(len(pos))
+            trainer.fit(xe, yt, epochs=1)
+            on_epoch_end(ep)
+    else:
+        hook = gap.EpochHook(model, bpe, on_epoch_end)
+        trainer.model.forwardPass = hook
+        trainer.fit(xt, yt, epochs=a.epochs)
+        hook.finish()
     assert len(log) == a.epochs, (len(log), a.epochs)
-    C.dump_json({"tag": a.tag, "pe_mode": a.pe_mode, "pos_offset": 0, "recipe": RECIPE, "seed": a.seed, "epochs": a.epochs, "batches_per_epoch": bpe, "n_train": int(len(xt)),
+    C.dump_json({"tag": a.tag, "pe_mode": a.pe_mode, "pooling": a.pooling, "aug_dir": a.aug_dir, "edited_rows_per_epoch": edited, "pos_offset": 0, "recipe": RECIPE, "seed": a.seed, "epochs": a.epochs, "batches_per_epoch": bpe, "n_train": int(len(xt)),
                  "n_val": int(len(xv)), "n_val_benign": int((yv == 0).sum()), "tokenizer": a.variant, "split_hash_asserted": True, "env": C.env_info(), "nebula": nb,
                  "train_seconds": round(time.time() - t0, 1), "per_epoch": log, "april": "logits of the last epoch stored in seed<k>_epoch<e>_test_logits.npy; not evaluated by this script"},
                 res_path)
@@ -90,7 +111,7 @@ def orchestrate(a):
                 s = jobs.pop(0)
                 log = open(os.path.join(a.out, "logs", f"{a.tag}_seed{s}.log"), "a")
                 cmd = [sys.executable, "-m", "baseline.v2pe", "--out", a.out, "--seed", str(s), "--epochs", str(a.epochs), "--device", a.device, "--pe-mode", a.pe_mode,
-                       "--tag", a.tag, "--variant", a.variant]
+                       "--tag", a.tag, "--variant", a.variant, "--pooling", a.pooling] + (["--aug-dir", a.aug_dir] if a.aug_dir else [])
                 running[g] = (subprocess.Popen(cmd, env=dict(os.environ, CUDA_VISIBLE_DEVICES=str(g)), stdout=log, stderr=subprocess.STDOUT), f"seed{s}", log)
                 print(f"[{(time.time() - t0) / 60:.1f} min] GPU {g}: started {a.tag} seed {s}", flush=True)
         for g, (p, name, log) in list(running.items()):
@@ -140,6 +161,8 @@ def main():
     ap.add_argument("--epochs", type=int, default=2)
     ap.add_argument("--pe-mode", default="paper", choices=["paper", "released"])
     ap.add_argument("--tag", default="v2_pe")
+    ap.add_argument("--pooling", default="flatten", choices=["flatten", "attn"], help="flatten = the released pooling, attn = attention pooling (baseline/pe.py)")
+    ap.add_argument("--aug-dir", default=None, help="folder with aug_s<seed>_e<epoch>_{rows,tok}.npy (balanced padding arrays of baseline/make_pad.py)")
     ap.add_argument("--variant", default="bpe50k")
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--gpus", type=int, default=0)

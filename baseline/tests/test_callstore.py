@@ -77,3 +77,37 @@ def test_build_fast_equals_build_tokens_for_prepend_and_insert():
             fi = CS.build_fast(s, r, added, gaps, cut)
             bi = CS.build_tokens(s, r, order, cut=cut)
             assert np.array_equal(fi[0], bi[0]) and fi[1] == bi[1]
+
+
+def test_padding_probability_nested_edits_and_default_is_the_old_rule():
+    from baseline import make_pad
+    pool_n = np.full(30, 6)
+    for r in range(300):
+        old = make_pad.plan_train_row(r, 1, 2, 20, pool_n)
+        p5 = make_pad.plan_train_row(r, 1, 2, 20, pool_n, p_pad=0.5)
+        p25 = make_pad.plan_train_row(r, 1, 2, 20, pool_n, p_pad=0.25)
+        assert (old is None) == (p5 is None)
+        if p25 is not None:                                    # edited at 0.25 -> edited at 0.5, with the same plan
+            assert p5 is not None and p5["mode"] == p25["mode"] and p5["k"] == p25["k"] and p5["draws"] == p25["draws"]
+    share = np.mean([make_pad.plan_train_row(r, 0, 1, 20, pool_n, p_pad=0.25) is not None for r in range(4000)])
+    assert abs(share - 0.25) < 0.03
+
+
+def test_validation_robust_set_is_malware_only_fixed_and_prepends_20_calls():
+    s = synthetic_store(80)
+    y = (np.arange(len(s)) % 3 == 0).astype(int)
+    trn, val = np.arange(50), np.arange(50, 80)
+    pool = IP.pool_rows_of(s, y, trn)
+    rows, tok = IP.val_robust_set(s, y, val, pool)
+    assert len(rows) == int(y[val].sum()) and (y[rows] == 1).all() and tok.shape == (len(rows), 512)
+    rows2, tok2 = IP.val_robust_set(s, y, val, pool)
+    assert np.array_equal(rows, rows2) and np.array_equal(tok, tok2)
+    r = int(rows[0])                                            # head, then the added calls (20 of them), then the original calls
+    assert np.array_equal(tok[0][:len(s.head(r))], s.head(r))
+    rng = np.random.default_rng([8200, r])
+    pool_n = np.array([s.n_calls(int(p)) for p in pool])
+    added = []
+    for _ in range(20):
+        pr = int(rng.integers(len(pool))); added.append(s.call(int(pool[pr]), int(rng.integers(pool_n[pr]))))
+    want, total = CS.build_fast(s, r, added, None)
+    assert np.array_equal(tok[0], want)

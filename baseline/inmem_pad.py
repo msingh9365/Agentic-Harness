@@ -26,7 +26,7 @@ def edit_row(store, row, plan, pool_rows):
     return CS.build_tokens(store, int(row), order)
 
 
-def epoch_edits(store, y, trn, seed, epoch, pool_rows, stream=7000, labels="all"):
+def epoch_edits(store, y, trn, seed, epoch, pool_rows, stream=7000, labels="all", p_pad=0.5):
     """(rows [m] int64, tokens [m, 512] uint16) of the edited training reports of this (seed, epoch)."""
     pool_n = np.array([store.n_calls(int(r)) for r in pool_rows], dtype=np.int64)
     rows, toks = [], []
@@ -34,11 +34,34 @@ def epoch_edits(store, y, trn, seed, epoch, pool_rows, stream=7000, labels="all"
         r = int(r)
         if labels == "malware" and y[r] == 0:
             continue
-        plan = plan_train_row(r, seed, epoch, store.n_calls(r), pool_n, stream)
+        plan = plan_train_row(r, seed, epoch, store.n_calls(r), pool_n, stream, p_pad)
         if plan is None:
             continue
         rows.append(r)
         toks.append(edit_row(store, r, plan, pool_rows)[0])
     if not rows:
         return np.zeros(0, dtype=np.int64), np.zeros((0, CS.SEQ), dtype=np.uint16)
+    return np.asarray(rows, dtype=np.int64), np.stack(toks)
+
+
+VAL_ROBUST_STREAM, VAL_ROBUST_K = 8200, 20
+
+
+def val_robust_set(store, y, val, pool_rows):
+    """The fixed padded validation set of the tuning of NOTES 16: every validation MALWARE report with 20 calls prepended, the calls drawn from the TRAIN pool (default_rng([8200, row]): per call a
+    uniform pool report, then a uniform call of it); the same draw for every cell, seed and epoch; reports without calls also receive the calls. In memory only.
+    Returns (rows int64, tokens uint16 [m, 512])."""
+    pool_n = np.array([store.n_calls(int(r)) for r in pool_rows], dtype=np.int64)
+    rows, toks = [], []
+    for r in val:
+        r = int(r)
+        if y[r] != 1:
+            continue
+        rng = np.random.default_rng([VAL_ROBUST_STREAM, r])
+        added = []
+        for _ in range(VAL_ROBUST_K):
+            pr = int(rng.integers(len(pool_rows)))
+            added.append(store.call(int(pool_rows[pr]), int(rng.integers(pool_n[pr]))))
+        rows.append(r)
+        toks.append(CS.build_fast(store, r, added, None)[0])
     return np.asarray(rows, dtype=np.int64), np.stack(toks)

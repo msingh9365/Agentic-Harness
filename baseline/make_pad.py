@@ -36,11 +36,11 @@ N_BEN_SUB = 2000
 
 
 # ----------------------------------------------------------------------------- pure functions (tested)
-def plan_train_row(row, seed, epoch, n_apis, pool_n_apis, stream=7000):
+def plan_train_row(row, seed, epoch, n_apis, pool_n_apis, stream=7000, p_pad=0.5):
     """None (not edited) or {"mode", "k", "draws": [(pool index, call index)] * k, "gaps": sorted gap positions (insert) or None}. numpy default_rng([stream, seed, epoch, row]);
     stream 7000 is the stream of REPORT 5.10 (balanced and malware-only runs), 7100 the new stream of the 'keep' runs (clean copies)."""
     rng = np.random.default_rng([int(stream), int(seed), int(epoch), int(row)])
-    if rng.random() >= 0.5 or n_apis == 0:
+    if rng.random() >= p_pad or n_apis == 0:                      # edited iff the first random number is below p_pad (0.5 = REPORT 5.10; the edits at a smaller p are a subset of those at 0.5)
         return None
     mode = "insert" if rng.random() < 0.5 else "prepend"
     k = int(rng.integers(1, 51))

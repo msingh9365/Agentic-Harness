@@ -3,7 +3,17 @@
 Trained models, tokenizers and a loader for the baseline reproduction of Nebula (Trizna et al., arXiv 2310.10664v2) with the
 authors' own code. The numbers and how they compare with the paper are in [`REPRODUCTION_REPORT.md`](../REPRODUCTION_REPORT.md).
 
-## Baseline v2: THE baseline from follow-up F on
+## Baseline v2-PE: the thesis baseline (v2 recipe + the positional encoding of the paper)
+
+```python
+m = load_baseline("bpe_v2_pe", seed=0)   # seeds 0 to 9; manifest keys detect/bpe50k/v2_pe/seed<k>; m.score_logit(report) (rank by logit)
+```
+
+Identical to baseline v2 below (recipe, data, tokenizer, 2 epochs) except `pe_mode="paper"` (`baseline/pe.py`): the sinusoidal encoding of Eq. 1-2 of the paper is added by **global token position** 0..511 (the chunk at index c gets positions 64c..64c+63; padding tokens get their position too), instead of the released code's vector of position 0 at every token. Same seed = same initial weights and data order as v2.
+April test (logit-ranked, 10 seeds): pAUC@1e-2 **0.705 ± 0.031**, TPR@1e-3 0.543 ± 0.063, TPR@1e-2 0.811 ± 0.023, AUC 0.9644 ± 0.0093, F1 0.915 ± 0.012 (v2: 0.690 / 0.527 / 0.788 / 0.9624 / 0.901). By the claim rule of `EVAL_PROTOCOL.md` v2-PE is not shown better than v2 (pAUC@1e-2 +1.45 points, positive in 6 of 10 seeds) but is better than the released checkpoint (+4.6, 9 of 10 seeds); REPORT §5.9.
+**Its logits are larger than v2's** (mean |logit| 28.5 against 17.7): the float32 sigmoid saturates for most malware reports, so the literal float32 TPR@1e-3 is useless (0.06): always rank by logit. v2 is kept as the reproduction of the released code. Logits: `results/logits/v2_pe.npz`.
+
+## Baseline v2: THE baseline from follow-up F on (reproduction of the released code)
 
 ```python
 m = load_baseline("bpe_v2", seed=0)      # seeds 0 to 9; manifest keys detect/bpe50k/v2/seed<k>

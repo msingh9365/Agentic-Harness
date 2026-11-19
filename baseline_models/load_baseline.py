@@ -5,7 +5,8 @@ Load any model of this baseline reproduction and score a Speakeasy report.
     list_baselines()                                   # keys in manifest.json
     m = load_baseline("detect/bpe50k/time/seed0/fold0")      # the authors' cleaning + tokenizer + our trained Nebula weights
     p = m.score(report)                                # report: list of entry points (or a path to the .json); -> P(malware)
-    m = load_baseline("bpe_v2", seed=0)                # THE baseline (follow-up F): lr 2e-3, 90% of January, 2 epochs; seeds 0 to 4
+    m = load_baseline("bpe_v2_pe", seed=0)             # THE thesis baseline: v2 recipe + the paper's positional encoding; seeds 0 to 9
+    m = load_baseline("bpe_v2", seed=0)                # baseline v2 = reproduction of the released code (follow-up F): lr 2e-3, 90% of January, 2 epochs; seeds 0 to 4
     m.score_logit(report)                              # the raw logit: rank by this (the float32 probability saturates at logit 16.6)
     m = load_baseline("ssl/ar_pretrained_v2/seed0")    # B3: AR encoder pre-trained on the v2 splits (tokenizer bpe8k_v2, fit on the 90% of January only)
     m = load_baseline("ssl/mlm_pretrained_v2/seed0")   # B3: per-position MLM encoder (m.next_token_logits(report) -> [512, V] masked-token logits)
@@ -88,6 +89,9 @@ class Baseline:
             return lm.build_fullattn(n, 0.3, causal=False)
         if arch == "fullattn_causal_lasttoken":
             return lm.build_fullattn(n, 0.3, causal=True, last_token=True)
+        if arch == "chunked_pe":                    # baseline v2-PE: Nebula with the paper's per-token sinusoidal positional encoding (baseline/pe.py)
+            from baseline import pe
+            return pe.build_chunks(n, pe_mode=entry.get("pe_mode", "paper"), **({"n_classes": entry["n_classes"]} if "n_classes" in entry else {}))
         if arch == "mlm_pretrained":
             return lm.build_chunked(n, 0.0, pooling=None, pretrain_layers=[])
         if arch == "ar_pretrained":
@@ -130,6 +134,8 @@ def load_baseline(key, root=None, nebula_root=None, seed=None):
     """key: a manifest key, or the alias "bpe_v2" (with seed=0..4) for the baseline v2 detection models of follow-up F."""
     if key == "bpe_v2":
         key = f"detect/bpe50k/v2/seed{0 if seed is None else seed}"
+    elif key == "bpe_v2_pe":                        # the thesis baseline: v2 recipe + the paper's positional encoding (seeds 0..9)
+        key = f"detect/bpe50k/v2_pe/seed{0 if seed is None else seed}"
     man, r = _manifest(root)
     if key not in man["models"]:
         raise KeyError(f"{key} not in manifest; available: {sorted(man['models'])[:8]} ...")

@@ -140,6 +140,34 @@ def add_b3(out, big, b3_raws, tokens_dir):
     print(f"added {n} B3 encoders to the manifest ({len(man['models'])} models in total)")
 
 
+def add_v2pe(out, big, raw_dir):
+    """Baseline v2-PE: the 10 models (paper positional encoding, recipe of v2) -> <big>/detection/bpe50k/v2_pe/seed<k>.pt and manifest entries detect/bpe50k/v2_pe/seed<k>
+    (arch chunked_pe, pe_mode paper). Validation and test metrics are computed from the stored epoch-2 logits (run AFTER the evaluation: the April logits are not looked at before)."""
+    import numpy as np
+    man = json.load(open(os.path.join(out, "manifest.json")))
+    lab = np.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results", "logits", "labels.npz"))
+    n = 0
+    for f in sorted(glob.glob(os.path.join(raw_dir, "seed*_epoch2_model.pt"))):
+        seed = os.path.basename(f)[4:].split("_")[0]
+        r = json.load(open(os.path.join(raw_dir, f"seed{seed}.json")))
+        rel = f"detection/bpe50k/v2_pe/seed{seed}.pt"
+        put(f, os.path.join(big, rel))
+        e = r["per_epoch"][1]
+        entry = {"arch": "chunked_pe", "pe_mode": "paper", "tokenizer": "bpe50k", "weights": rel, "seq_len": 512, "n_classes": 1, "epochs": 2, "batches_seen": e["batches"], "seed": int(seed),
+                 "recipe": V2_RECIPE | {"name": "baseline v2-PE (the v2 recipe with the paper's positional encoding: baseline/pe.py, pe_mode paper)"},
+                 "note": "THE thesis baseline from the v2-PE follow-up on (v2 = reproduction of the released code). load_baseline('bpe_v2_pe', seed=k). Rank by logit (model.score_logit)."}
+        for split, y in (("validation", lab["y_val"]), ("test", lab["y_test"])):
+            z = np.load(os.path.join(raw_dir, f"seed{seed}_epoch2_{'val' if split == 'validation' else 'test'}_logits.npy")).astype(np.float64)
+            m = C.binary_metrics(y.astype(int), z, decision=0.0)
+            entry[split] = {k: m[k] for k in ("auc", "tpr@0.001", "tpr@0.01", "f1@0.5", "acc@0.5", "pauc@0.01", "pauc@0.001")}
+        entry["validation"]["loss"] = e["val_loss"]
+        man["models"][f"detect/bpe50k/v2_pe/seed{seed}"] = entry
+        n += 1
+    for d in (out, big):
+        C.dump_json(man, os.path.join(d, "manifest.json"))
+    print(f"added {n} baseline-v2-PE models to the manifest ({len(man['models'])} models in total)")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--results", required=True)
@@ -148,11 +176,14 @@ def main():
     ap.add_argument("--big", required=True)
     ap.add_argument("--long-raw", nargs="*", default=None, help="only add the long pre-training encoders of these kernel outputs (contain ssl_long/)")
     ap.add_argument("--v2", default=None, help="only add the baseline-v2 models of this folder (gap/R8_lr2e-3 of the final kernel output)")
+    ap.add_argument("--v2pe", default=None, help="only add the baseline-v2-PE models of this folder (the kernel output of baseline.v2pe: seed<k>_epoch2_model.pt, logits, json)")
     ap.add_argument("--logits", default=None, help="with --v2: folder holding seed<k>_epoch2_{test,val}_logits.npy (default: --v2)")
     ap.add_argument("--b3-raw", nargs="*", default=None, help="only add the B3 pre-trained encoders of these kernel outputs (contain b3/seed*/), needs --tokens (folder with variants/bpe8k_v2)")
     a = ap.parse_args()
     if a.b3_raw is not None:
         return add_b3(a.out, a.big, a.b3_raw, a.tokens)
+    if a.v2pe:
+        return add_v2pe(a.out, a.big, a.v2pe)
     if a.v2:
         return add_v2(a.out, a.big, a.v2, a.logits)
     if a.long_raw is not None:

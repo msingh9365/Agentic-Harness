@@ -1,0 +1,11 @@
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+WARNING:root: [!] Iniatialized TransformerEncoderChunksPE. Total trainable parameters: 5.3973e6
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 08:50:45: Train Epoch: 1 [  0  / 706  (0 %)] | Loss: 0.714131 | Elapsed: 0.45s | FPR 0.0003 -> TPR: 0.09 & F1: 0.16 | AUC: 0.5137
+WARNING:root: [*] Thu Nov 19 08:51:27 2026:    1    | Tr.loss: 0.216007 | Elapsed:   42.80  s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.9766
+WARNING:root: [*] Started epoch: 2
+[v2_pe seed 2] epoch 1: val TPR@1e-3 0.913 @1e-2 0.980 pAUC@1e-2 0.946 AUC 0.9981 loss 0.0895 | 44s
+WARNING:root: [*] 08:51:28: Train Epoch: 2 [  0  / 706  (0 %)] | Loss: 0.041770 | Elapsed: 1.12s | FPR 0.0003 -> TPR: 0.97 & F1: 0.98 | AUC: 0.9990
+WARNING:root: [*] Thu Nov 19 08:52:10 2026:    2    | Tr.loss: 0.061870 | Elapsed:   42.89  s | FPR 0.0003 -> TPR: 0.00 & F1: 0.00 | AUC: 0.9980
+[v2_pe seed 2] epoch 2: val TPR@1e-3 0.923 @1e-2 0.984 pAUC@1e-2 0.953 AUC 0.9983 loss 0.1361 | 87s

@@ -27,9 +27,11 @@ def main():
     os.makedirs(merged)
     for f in ("released", "v2_pe", "pebal", "attbal"):
         for p in glob.glob(os.path.join(a.old_src, f"*_{f}.npz")) + glob.glob(os.path.join(a.old_src, f"a3b_{f}_seed*.npz")):
-            os.symlink(os.path.abspath(p), os.path.join(merged, os.path.basename(p)))
+            if not os.path.exists(os.path.join(merged, os.path.basename(p))):
+                os.symlink(os.path.abspath(p), os.path.join(merged, os.path.basename(p)))
     for p in glob.glob(os.path.join(a.old_src, "*_meta_*.npz")):
-        os.symlink(os.path.abspath(p), os.path.join(merged, os.path.basename(p)))
+        if not os.path.exists(os.path.join(merged, os.path.basename(p))):
+            os.symlink(os.path.abspath(p), os.path.join(merged, os.path.basename(p)))
     for p in glob.glob(os.path.join(a.tuned_src, "*tuned*.npz")):
         os.symlink(os.path.abspath(p), os.path.join(merged, os.path.basename(p)))
     g = os.path.join(ROOT, "results", "review", "april_hash_apis_group.npy")

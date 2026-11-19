@@ -1057,6 +1057,163 @@ Files: `baseline/pe.py`, `v2pe.py`, `make_pad.py`, `padtest.py`, `att_report.py`
 - **Edited reports exist in memory only.** The edits of the training runs and of every attack are built from the call-token store of the ORIGINAL reports (verified against full re-tokenisation: 0 of 1,500 edits and 0 of 3,000 unedited reports differ; the §5.10 arrays are reproduced exactly) and only scores, logits and AUCs are saved. Artefacts that predate this rule and contain edited tokens: `results/att_bal/pad/april_pad.npz` (tracked in git; pushed in commit 6f22129), the private Kaggle datasets `nebula-v2pe-padtest` and `nebula-v2pe-augb`, and local copies in `results/_pad_train` and `results/_pad_bundle`; they are not used by anything in this section and I have not deleted them (a history purge would need a force-push).
 
 
+### 5.12 Tuning the padded-training recipe of ATT+bal under EVAL_PROTOCOL §4 (follow-up for the review)
+
+**Question.** ATT+bal lost 1.65 points of TPR@1e-2 to v2-PE (§5.10). Is that a matter of the padded-training recipe? Grid written in `NOTES.md` section 16 before any training: learning rate in {1e-3, 2e-3} x padding probability in {0.25, 0.5}, 4 epochs, seeds 0-9 per cell, everything else as ATT+bal of §5.10; validation measures = clean pAUC@1e-2 (selection metric) and robustness R (share of validation malware still flagged at the validation 1% FPR threshold after 20 TRAIN-pool calls are prepended); rule: exclude collapsed cells (validation AUC < 0.6 in any seed), exclude mean R more than 2 points below the existing ATT+bal's (0.9586), then highest mean validation pAUC@1e-2 with ties within one SE broken by fewest epochs, then p = 0.5, then lower validation loss. April logits of all cells were stored and not opened until the choice was written down.
+
+**Validation (the only numbers used for selection).**
+
+Reference robustness (existing ATT+bal, epoch 2, mean of 10 seeds): R = 0.9586; rule 2 excludes mean R < 0.9386.
+
+Reproduction check of the cell (2e-3, 0.5): largest per-seed difference of the epoch-2 validation pAUC@1e-2 against the stored ATT+bal = 0.0000 (criterion 0.002): reproduces.
+
+| lr | p | epoch | mean val pAUC@1e-2 | SE | mean val robustness R | mean val loss | min val AUC | collapsed | R excluded | within 1 SE of best |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 0.001 | 0.25 | 1 | 0.9557 | 0.0024 | 0.9369 | 0.0588 | 0.9980 | no | yes |  |
+| 0.001 | 0.25 | 2 | 0.9596 | 0.0015 | 0.9490 | 0.0669 | 0.9983 | no | no | **best** |
+| 0.001 | 0.25 | 3 | 0.9569 | 0.0025 | 0.9521 | 0.0675 | 0.9981 | no | no |  |
+| 0.001 | 0.25 | 4 | 0.9526 | 0.0020 | 0.9512 | 0.0730 | 0.9983 | no | no |  |
+| 0.001 | 0.5 | 1 | 0.9514 | 0.0011 | 0.9458 | 0.0665 | 0.9978 | no | no |  |
+| 0.001 | 0.5 | 2 | 0.9548 | 0.0022 | 0.9574 | 0.0728 | 0.9981 | no | no |  |
+| 0.001 | 0.5 | 3 | 0.9546 | 0.0021 | 0.9594 | 0.0706 | 0.9981 | no | no |  |
+| 0.001 | 0.5 | 4 | 0.9508 | 0.0024 | 0.9594 | 0.0742 | 0.9980 | no | no |  |
+| 0.002 | 0.25 | 1 | 0.9574 | 0.0030 | 0.9429 | 0.0527 | 0.9981 | no | no |  |
+| 0.002 | 0.25 | 2 | 0.9547 | 0.0019 | 0.9528 | 0.0648 | 0.9981 | no | no |  |
+| 0.002 | 0.25 | 3 | 0.9462 | 0.0053 | 0.9535 | 0.0721 | 0.9981 | no | no |  |
+| 0.002 | 0.25 | 4 | 0.9484 | 0.0032 | 0.9554 | 0.0724 | 0.9979 | no | no |  |
+| 0.002 | 0.5 | 1 | 0.9501 | 0.0026 | 0.9525 | 0.0581 | 0.9978 | no | no |  |
+| 0.002 | 0.5 | 2 | 0.9553 | 0.0023 | 0.9586 | 0.0677 | 0.9980 | no | no |  |
+| 0.002 | 0.5 | 3 | 0.9526 | 0.0025 | 0.9597 | 0.0642 | 0.9978 | no | no |  |
+| 0.002 | 0.5 | 4 | 0.9480 | 0.0026 | 0.9593 | 0.0759 | 0.9976 | no | no |  |
+
+**Chosen (lr, p, epoch): (0.001, 0.25, 2)**
+
+**April, chosen candidate, evaluated once.**
+
+**Table A. Clean April data for the chosen candidate (chosen on validation numbers only; evaluated once).** Per-seed mean ± std and 10-seed ensemble.
+
+| model | n | pAUC@1e-2 | TPR@1e-2 | TPR@1e-3 | AUC | pAUC@1e-2 (ens.) | TPR@1e-2 (ens.) | TPR@1e-3 (ens.) | AUC (ens.) |
+|---|---|---|---|---|---|---|---|---|---|
+| v2-PE | 10 | 0.705 ± 0.031 | 0.811 ± 0.023 | 0.543 ± 0.063 | 0.9644 ± 0.0093 | 0.768 | 0.851 | 0.606 | 0.9705 |
+| ATT+bal (existing, lr 2e-3, p 0.5, epoch 2) | 10 | 0.707 ± 0.017 | 0.795 ± 0.020 | 0.572 ± 0.061 | 0.9713 ± 0.0066 | 0.734 | 0.814 | 0.583 | 0.9780 |
+| ATT+bal-tuned (lr 0.001, p 0.25, epoch 2) | 10 | 0.713 ± 0.012 | 0.795 ± 0.011 | 0.581 ± 0.045 | 0.9688 ± 0.0047 | 0.738 | 0.817 | 0.598 | 0.9738 |
+
+
+**Claim rule (CI of the per-seed means excludes 0 and the same sign in ≥ 7 of 10 seeds); points × 100. Stratified bootstrap (EVAL_PROTOCOL.md) and, for pAUC@1e-2, the cluster bootstrap over duplicate groups.**
+
+| difference | metric | per-seed means (CI) | seeds >0 / <0 | claim rule | 10-seed ensembles (CI) | cluster bootstrap CI (pAUC only) |
+|---|---|---|---|---|---|---|
+| tuned − v2_pe | pAUC@1e-2 | +0.84 [-0.78, +2.39] | 7/3 | not resolved | -3.02 [-4.54, -1.44] resolved | [-4.00, +4.54] not resolved |
+| tuned − v2_pe | TPR@1e-2 | -1.64 [-2.91, -0.60] | 3/7 | RESOLVED worse | -3.44 [-4.60, -1.98] resolved | — |
+| tuned − v2_pe | TPR@1e-3 | +3.84 [-2.43, +7.38] | 6/4 | not resolved | -0.79 [-6.78, +5.30] not resolved | — |
+| tuned − v2_pe | AUC | +0.44 [+0.31, +0.55] | 7/3 | RESOLVED better | +0.33 [+0.20, +0.45] resolved | — |
+| tuned − attbal | pAUC@1e-2 | +0.61 [-0.52, +1.74] | 7/3 | not resolved | +0.40 [-0.56, +1.42] not resolved | [-1.10, +2.25] not resolved |
+| tuned − attbal | TPR@1e-2 | +0.01 [-0.49, +0.62] | 3/7 | not resolved | +0.31 [-0.47, +0.93] not resolved | — |
+| tuned − attbal | TPR@1e-3 | +0.92 [-4.83, +4.72] | 4/6 | not resolved | +1.50 [-4.74, +5.99] not resolved | — |
+| tuned − attbal | AUC | -0.24 [-0.29, -0.20] | 3/7 | RESOLVED worse | -0.42 [-0.47, -0.37] resolved | — |
+| attbal − v2_pe | pAUC@1e-2 | +0.23 [-1.70, +2.09] | 4/6 | not resolved | -3.42 [-5.37, -1.55] resolved | [-4.78, +4.29] not resolved |
+| attbal − v2_pe | TPR@1e-2 | -1.65 [-2.95, -0.67] | 3/7 | RESOLVED worse | -3.75 [-4.73, -2.18] resolved | — |
+| attbal − v2_pe | TPR@1e-3 | +2.91 [-2.20, +7.16] | 6/4 | not resolved | -2.29 [-7.12, +7.25] not resolved | — |
+| attbal − v2_pe | AUC | +0.68 [+0.57, +0.79] | 7/3 | RESOLVED better | +0.75 [+0.62, +0.87] resolved | — |
+
+**Plainly.**
+1. **The gap to v2-PE at 1% FPR did not close.** The chosen candidate (lr 1e-3, padding probability 0.25, epoch 2) has April TPR@1e-2 0.795 ± 0.011 against 0.811 ± 0.023 for v2-PE: -1.64 points, CI [-2.91, -0.60], resolved (the tuned model is above v2-PE in 3 of 10 seeds). The existing ATT+bal had -1.65. Tuning changed nothing there (tuned − existing: +0.01 points, not resolved). No candidate of the grid reaches v2-PE's TPR@1e-2: the highest mean in the appendix is 0.799 (not used for selection).
+2. **On the primary metric nothing is resolved either.** Tuned − v2-PE in pAUC@1e-2: +0.84 points per-seed means (CI [-0.78, +2.39], above in 7 of 10 seeds: rule not met; cluster bootstrap CI [-4.00, +4.54]); as 10-seed ensembles -3.02 (resolved). Tuned − existing ATT+bal: +0.61 (CI [-0.52, +1.74], 7 of 10 seeds, not resolved). The validation gain that led to the choice (+0.43 points) is of the size of its own standard error (0.15 to 0.23 points); AUC is 0.24 points lower than the existing model (resolved).
+3. **What it cost in robustness: a little everywhere, clearly under the strongest attacks.** Against the existing ATT+bal the tuned model is lower after 20 white-box calls (46.5 against 53.3% flagged at 1% FPR: -6.9 points, 0 of 3 seeds above; 11.6 against 14.6% at 0.1% FPR), under LightGBM-chosen k = 50 prepend (31.5 against 36.5%) and under v2-PE-chosen k = 20 prepend (21.4 against 23.8%); under random padding the two are within about 2 points (66.0 against 67.6% at k = 50 prepend). It stays far above PE+bal (white-box after 20 calls 39.6%) and v2-PE (2.2%). Validation had already pointed this way (R 0.949 against 0.959).
+4. **Reading.** Training with fewer padded reports (p = 0.25) and the lower learning rate buys back nothing at 1% FPR and gives up some robustness: the 1-point gap to v2-PE at 1% FPR is not a matter of these two settings in this grid. Not tested: other recipe changes (a padding schedule, k distribution, other pooling).
+
+**Robustness of the chosen candidate** (attacks as in §5.11: random padding of REPORT 5.10 on all April reports, surrogate-chosen padding with the LightGBM and v2-PE-seed-0 rankings of §5.11, white-box greedy with seeds 0-2 and the same 500 reports).
+
+**Table 2 (1% FPR threshold). Malware flagged / padded benign flagged, in % (mean over the 10 seeds). Every April report is edited.**
+
+| model | random 20 prepend | random 50 prepend | random 50 insert | LightGBM 20 prepend | LightGBM 50 prepend | LightGBM 50 insert | v2-PE 20 prepend | v2-PE 50 prepend | v2-PE 50 insert |
+|---|---|---|---|---|---|---|---|---|---|
+| v2-PE | 22.5 / 1.2 | 8.3 / 1.1 | 41.4 / 0.7 | 10.2 / 0.1 | 3.3 / 0.0 | 21.7 / 0.1 | 2.7 / 0.0 | 3.1 / 0.0 | 7.7 / 0.0 |
+| PE+bal | 75.7 / 2.4 | 64.3 / 2.4 | 71.4 / 1.5 | 71.1 / 0.8 | 10.0 / 0.0 | 58.8 / 0.5 | 6.0 / 0.0 | 2.3 / 0.0 | 26.8 / 0.2 |
+| ATT+bal (existing) | 76.9 / 1.3 | 67.6 / 1.5 | 71.9 / 1.0 | 72.3 / 0.8 | 36.5 / 0.1 | 59.0 / 0.3 | 23.8 / 0.0 | 4.2 / 0.0 | 33.9 / 0.1 |
+| ATT+bal-tuned | 76.8 / 1.8 | 66.0 / 2.1 | 71.3 / 1.2 | 68.9 / 0.9 | 31.5 / 0.1 | 57.8 / 0.3 | 21.4 / 0.0 | 4.5 / 0.0 | 33.3 / 0.1 |
+
+**Table 2 (0.1% FPR threshold). Malware flagged / padded benign flagged, in % (mean over the 10 seeds). Every April report is edited.**
+
+| model | random 20 prepend | random 50 prepend | random 50 insert | LightGBM 20 prepend | LightGBM 50 prepend | LightGBM 50 insert | v2-PE 20 prepend | v2-PE 50 prepend | v2-PE 50 insert |
+|---|---|---|---|---|---|---|---|---|---|
+| v2-PE | 5.5 / 0.0 | 1.5 / 0.0 | 13.6 / 0.0 | 1.6 / 0.0 | 0.4 / 0.0 | 6.2 / 0.0 | 0.3 / 0.0 | 0.4 / 0.0 | 1.8 / 0.0 |
+| PE+bal | 47.8 / 0.1 | 21.1 / 0.1 | 42.6 / 0.1 | 37.2 / 0.1 | 0.5 / 0.0 | 30.6 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | 6.2 / 0.0 |
+| ATT+bal (existing) | 51.8 / 0.1 | 32.2 / 0.0 | 39.7 / 0.0 | 46.8 / 0.1 | 5.2 / 0.0 | 29.9 / 0.0 | 1.2 / 0.0 | 1.1 / 0.0 | 12.5 / 0.0 |
+| ATT+bal-tuned | 50.2 / 0.1 | 23.7 / 0.0 | 38.6 / 0.0 | 44.8 / 0.1 | 2.2 / 0.0 | 27.4 / 0.0 | 1.0 / 0.0 | 0.9 / 0.0 | 9.4 / 0.0 |
+
+**Table 2 (white-box greedy attack, 500 April malware, seeds 0-2). Share still flagged at the 1% / 0.1% FPR thresholds after k prepended calls, in %.**
+
+| model | seeds | k = 0 | k = 5 | k = 10 | k = 20 |
+|---|---|---|---|---|---|
+| v2-PE | 3 | 75.6 / 47.5 | 9.0 / 0.7 | 5.1 / 0.6 | 2.2 / 0.2 |
+| PE+bal | 3 | 76.9 / 51.5 | 62.8 / 26.9 | 57.8 / 18.8 | 39.6 / 3.5 |
+| ATT+bal (existing) | 3 | 77.7 / 58.3 | 65.5 / 34.5 | 62.5 / 31.7 | 53.3 / 14.6 |
+| ATT+bal-tuned | 3 | 77.1 / 54.1 | 63.8 / 31.8 | 60.3 / 25.9 | 46.5 / 11.6 |
+
+**White-box comparisons (points; seeds 0-2 paired; CI = bootstrap over the 500 reports).**
+
+| comparison | threshold | k | mean difference | 95% CI | seeds > 0 |
+|---|---|---|---|---|---|
+| ATT+bal-tuned − ATT+bal | 1% FPR | 5 | -1.7 | [-2.7, -0.9] | 1/3 |
+| ATT+bal-tuned − ATT+bal | 1% FPR | 10 | -2.2 | [-3.3, -1.1] | 1/3 |
+| ATT+bal-tuned − ATT+bal | 1% FPR | 20 | -6.9 | [-8.7, -5.1] | 0/3 |
+| ATT+bal-tuned − ATT+bal | 0.1% FPR | 5 | -2.7 | [-4.0, -1.3] | 1/3 |
+| ATT+bal-tuned − ATT+bal | 0.1% FPR | 10 | -5.8 | [-7.2, -4.4] | 1/3 |
+| ATT+bal-tuned − ATT+bal | 0.1% FPR | 20 | -3.0 | [-4.7, -1.3] | 1/3 |
+| ATT+bal-tuned − v2-PE | 1% FPR | 5 | +54.8 | [+50.9, +58.7] | 3/3 |
+| ATT+bal-tuned − v2-PE | 1% FPR | 10 | +55.1 | [+51.3, +59.3] | 3/3 |
+| ATT+bal-tuned − v2-PE | 1% FPR | 20 | +44.3 | [+40.5, +48.4] | 3/3 |
+| ATT+bal-tuned − v2-PE | 0.1% FPR | 5 | +31.1 | [+27.4, +34.8] | 3/3 |
+| ATT+bal-tuned − v2-PE | 0.1% FPR | 10 | +25.3 | [+22.1, +28.9] | 3/3 |
+| ATT+bal-tuned − v2-PE | 0.1% FPR | 20 | +11.4 | [+9.3, +13.7] | 3/3 |
+
+**ATT+bal-tuned against the existing ATT+bal, counts of tests (edit sets × two thresholds) resolved higher / lower for the tuned model (claim rule; in brackets also resolved under the cluster bootstrap). For the padded-benign FPR higher is worse.**
+
+| padding | rate | tests | tuned higher (cluster) | tuned lower (cluster) | not resolved |
+|---|---|---|---|---|---|
+| random padding | malware TPR | 12 | 2 (0) | 3 (2) | 7 |
+| random padding | malware TPR, fit subset | 12 | 0 (0) | 10 (3) | 2 |
+| random padding | padded-benign FPR | 12 | 6 (6) | 0 (0) | 6 |
+| surrogate padding | malware TPR | 24 | 0 (0) | 9 (5) | 15 |
+| surrogate padding | malware TPR, fit subset | 20 | 2 (0) | 10 (9) | 8 |
+| surrogate padding | padded-benign FPR | 24 | 3 (3) | 1 (1) | 20 |
+
+![Detection against the number of calls prepended, with the tuned candidate](results/tune/fig_detection_vs_k.png)
+
+**Appendix: April clean numbers of every candidate (NOT USED FOR SELECTION; the choice was made on validation numbers).**
+
+Per-seed mean ± std over 10 seeds and the 10-seed ensemble pAUC@1e-2; the last two columns count the seeds in which the candidate is above v2-PE (same seed index).
+
+| lr | p | epoch | pAUC@1e-2 | TPR@1e-2 | TPR@1e-3 | AUC | pAUC@1e-2 (ens.) | pAUC > v2-PE | TPR@1e-2 > v2-PE | note |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 0.001 | 0.25 | 1 | 0.705 ± 0.015 | 0.785 ± 0.012 | 0.585 ± 0.042 | 0.9718 ± 0.0039 | 0.733 | 4/10 | 1/10 |  |
+| 0.001 | 0.25 | 2 | 0.713 ± 0.012 | 0.795 ± 0.011 | 0.581 ± 0.045 | 0.9688 ± 0.0047 | 0.738 | 7/10 | 3/10 | **chosen** |
+| 0.001 | 0.25 | 3 | 0.698 ± 0.014 | 0.791 ± 0.028 | 0.550 ± 0.045 | 0.9661 ± 0.0032 | 0.730 | 4/10 | 2/10 |  |
+| 0.001 | 0.25 | 4 | 0.692 ± 0.018 | 0.796 ± 0.010 | 0.543 ± 0.046 | 0.9646 ± 0.0037 | 0.725 | 2/10 | 3/10 |  |
+| 0.001 | 0.5 | 1 | 0.706 ± 0.017 | 0.784 ± 0.012 | 0.594 ± 0.057 | 0.9741 ± 0.0034 | 0.724 | 2/10 | 0/10 |  |
+| 0.001 | 0.5 | 2 | 0.703 ± 0.014 | 0.790 ± 0.008 | 0.557 ± 0.042 | 0.9720 ± 0.0038 | 0.729 | 4/10 | 2/10 |  |
+| 0.001 | 0.5 | 3 | 0.688 ± 0.022 | 0.787 ± 0.009 | 0.540 ± 0.053 | 0.9678 ± 0.0043 | 0.720 | 4/10 | 1/10 |  |
+| 0.001 | 0.5 | 4 | 0.681 ± 0.025 | 0.786 ± 0.014 | 0.546 ± 0.043 | 0.9658 ± 0.0050 | 0.712 | 2/10 | 2/10 |  |
+| 0.002 | 0.25 | 1 | 0.712 ± 0.013 | 0.792 ± 0.013 | 0.606 ± 0.044 | 0.9690 ± 0.0074 | 0.741 | 6/10 | 2/10 |  |
+| 0.002 | 0.25 | 2 | 0.711 ± 0.022 | 0.799 ± 0.014 | 0.557 ± 0.072 | 0.9680 ± 0.0049 | 0.741 | 5/10 | 4/10 |  |
+| 0.002 | 0.25 | 3 | 0.695 ± 0.014 | 0.797 ± 0.017 | 0.529 ± 0.036 | 0.9656 ± 0.0046 | 0.732 | 4/10 | 4/10 |  |
+| 0.002 | 0.25 | 4 | 0.689 ± 0.017 | 0.794 ± 0.010 | 0.519 ± 0.043 | 0.9649 ± 0.0038 | 0.732 | 3/10 | 3/10 |  |
+| 0.002 | 0.5 | 1 | 0.709 ± 0.019 | 0.792 ± 0.013 | 0.590 ± 0.045 | 0.9718 ± 0.0044 | 0.739 | 6/10 | 3/10 |  |
+| 0.002 | 0.5 | 2 | 0.707 ± 0.017 | 0.795 ± 0.020 | 0.572 ± 0.061 | 0.9713 ± 0.0066 | 0.734 | 4/10 | 3/10 | the existing ATT+bal |
+| 0.002 | 0.5 | 3 | 0.692 ± 0.015 | 0.792 ± 0.011 | 0.520 ± 0.053 | 0.9658 ± 0.0063 | 0.720 | 3/10 | 1/10 |  |
+| 0.002 | 0.5 | 4 | 0.687 ± 0.011 | 0.788 ± 0.022 | 0.508 ± 0.038 | 0.9658 ± 0.0085 | 0.722 | 2/10 | 2/10 |  |
+
+**Limits and how this was done.**
+
+- **Selection on validation, one evaluation.** 16 candidates were compared on the validation slice (mean of 10 seeds; one-SE tie rule). The choice was written into NOTES.md (and committed) before any April logit of this section was opened; the April logits of all cells were produced by the training runs but not evaluated until then. April numbers of every candidate are in the appendix, marked not used for selection.
+- **The validation robustness measure is in distribution** (calls from the TRAIN pool, prepended; validation R is 0.94 to 0.96 for every candidate), so it is a weak guard; the April attacks (EVAL-pool calls; surrogate-chosen calls; white-box) are harder and show larger differences than R does.
+- **Budget asymmetry (EVAL_PROTOCOL §4.6).** ATT+bal-tuned had 16 candidates (2 tuned hyper-parameters and the epoch); v2-PE and the existing ATT+bal were not re-tuned.
+- **Statistics as in §5.11:** stratified bootstrap (test-set sampling only) + the 7-of-10 seed rule, and the cluster bootstrap over the 2,509 duplicate groups as sensitivity. The white-box comparison has 3 seeds and 500 reports.
+- **Reproduction.** The rerun of the cell (2e-3, 0.5) reproduced the existing ATT+bal exactly on validation (largest per-seed difference of validation pAUC@1e-2 0.0000), so the 4-epoch grid and the earlier runs are the same recipe.
+- **Compute.** Training and scoring ran on the second Kaggle account (the owner's); the scoring pipeline is that of §5.11 (edits built in memory from the store of original reports; only scores saved).
+
+
 ## 6. Differences from the paper, with likely causes
 
 ### 6.1 The data is not the paper's data

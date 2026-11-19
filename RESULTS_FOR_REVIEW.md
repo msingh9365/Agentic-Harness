@@ -193,6 +193,65 @@ Full tables (every model, every edit set, the malware TPR on the subset whose wh
 | ours: PE+bal (published April set) | 0.551 | 0.9553 | 0.8984 |
 | ours: PE+aug (published April set) | 0.587 | 0.9690 | 0.9114 |
 
+## ATT+bal tuned under EVAL_PROTOCOL §4 (REPORT 5.12)
+
+Grid (written before training, NOTES 16): lr {1e-3, 2e-3} x padding probability {0.25, 0.5} x epochs 1-4, 10 seeds each; chosen on validation numbers only: **lr 1e-3, p 0.25, epoch 2** (mean validation pAUC@1e-2 0.9596 against 0.9553 for the existing ATT+bal). Evaluated once on April:
+
+**Table A. Clean April data for the chosen candidate (chosen on validation numbers only; evaluated once).** Per-seed mean ± std and 10-seed ensemble.
+
+| model | n | pAUC@1e-2 | TPR@1e-2 | TPR@1e-3 | AUC | pAUC@1e-2 (ens.) | TPR@1e-2 (ens.) | TPR@1e-3 (ens.) | AUC (ens.) |
+|---|---|---|---|---|---|---|---|---|---|
+| v2-PE | 10 | 0.705 ± 0.031 | 0.811 ± 0.023 | 0.543 ± 0.063 | 0.9644 ± 0.0093 | 0.768 | 0.851 | 0.606 | 0.9705 |
+| ATT+bal (existing, lr 2e-3, p 0.5, epoch 2) | 10 | 0.707 ± 0.017 | 0.795 ± 0.020 | 0.572 ± 0.061 | 0.9713 ± 0.0066 | 0.734 | 0.814 | 0.583 | 0.9780 |
+| ATT+bal-tuned (lr 0.001, p 0.25, epoch 2) | 10 | 0.713 ± 0.012 | 0.795 ± 0.011 | 0.581 ± 0.045 | 0.9688 ± 0.0047 | 0.738 | 0.817 | 0.598 | 0.9738 |
+
+
+**Claim rule (CI of the per-seed means excludes 0 and the same sign in ≥ 7 of 10 seeds); points × 100. Stratified bootstrap (EVAL_PROTOCOL.md) and, for pAUC@1e-2, the cluster bootstrap over duplicate groups.**
+
+| difference | metric | per-seed means (CI) | seeds >0 / <0 | claim rule | 10-seed ensembles (CI) | cluster bootstrap CI (pAUC only) |
+|---|---|---|---|---|---|---|
+| tuned − v2_pe | pAUC@1e-2 | +0.84 [-0.78, +2.39] | 7/3 | not resolved | -3.02 [-4.54, -1.44] resolved | [-4.00, +4.54] not resolved |
+| tuned − v2_pe | TPR@1e-2 | -1.64 [-2.91, -0.60] | 3/7 | RESOLVED worse | -3.44 [-4.60, -1.98] resolved | — |
+| tuned − v2_pe | TPR@1e-3 | +3.84 [-2.43, +7.38] | 6/4 | not resolved | -0.79 [-6.78, +5.30] not resolved | — |
+| tuned − v2_pe | AUC | +0.44 [+0.31, +0.55] | 7/3 | RESOLVED better | +0.33 [+0.20, +0.45] resolved | — |
+| tuned − attbal | pAUC@1e-2 | +0.61 [-0.52, +1.74] | 7/3 | not resolved | +0.40 [-0.56, +1.42] not resolved | [-1.10, +2.25] not resolved |
+| tuned − attbal | TPR@1e-2 | +0.01 [-0.49, +0.62] | 3/7 | not resolved | +0.31 [-0.47, +0.93] not resolved | — |
+| tuned − attbal | TPR@1e-3 | +0.92 [-4.83, +4.72] | 4/6 | not resolved | +1.50 [-4.74, +5.99] not resolved | — |
+| tuned − attbal | AUC | -0.24 [-0.29, -0.20] | 3/7 | RESOLVED worse | -0.42 [-0.47, -0.37] resolved | — |
+| attbal − v2_pe | pAUC@1e-2 | +0.23 [-1.70, +2.09] | 4/6 | not resolved | -3.42 [-5.37, -1.55] resolved | [-4.78, +4.29] not resolved |
+| attbal − v2_pe | TPR@1e-2 | -1.65 [-2.95, -0.67] | 3/7 | RESOLVED worse | -3.75 [-4.73, -2.18] resolved | — |
+| attbal − v2_pe | TPR@1e-3 | +2.91 [-2.20, +7.16] | 6/4 | not resolved | -2.29 [-7.12, +7.25] not resolved | — |
+| attbal − v2_pe | AUC | +0.68 [+0.57, +0.79] | 7/3 | RESOLVED better | +0.75 [+0.62, +0.87] resolved | — |
+
+**Plainly.**
+1. **The gap to v2-PE at 1% FPR did not close.** The chosen candidate (lr 1e-3, padding probability 0.25, epoch 2) has April TPR@1e-2 0.795 ± 0.011 against 0.811 ± 0.023 for v2-PE: -1.64 points, CI [-2.91, -0.60], resolved (the tuned model is above v2-PE in 3 of 10 seeds). The existing ATT+bal had -1.65. Tuning changed nothing there (tuned − existing: +0.01 points, not resolved). No candidate of the grid reaches v2-PE's TPR@1e-2: the highest mean in the appendix is 0.799 (not used for selection).
+2. **On the primary metric nothing is resolved either.** Tuned − v2-PE in pAUC@1e-2: +0.84 points per-seed means (CI [-0.78, +2.39], above in 7 of 10 seeds: rule not met; cluster bootstrap CI [-4.00, +4.54]); as 10-seed ensembles -3.02 (resolved). Tuned − existing ATT+bal: +0.61 (CI [-0.52, +1.74], 7 of 10 seeds, not resolved). The validation gain that led to the choice (+0.43 points) is of the size of its own standard error (0.15 to 0.23 points); AUC is 0.24 points lower than the existing model (resolved).
+3. **What it cost in robustness: a little everywhere, clearly under the strongest attacks.** Against the existing ATT+bal the tuned model is lower after 20 white-box calls (46.5 against 53.3% flagged at 1% FPR: -6.9 points, 0 of 3 seeds above; 11.6 against 14.6% at 0.1% FPR), under LightGBM-chosen k = 50 prepend (31.5 against 36.5%) and under v2-PE-chosen k = 20 prepend (21.4 against 23.8%); under random padding the two are within about 2 points (66.0 against 67.6% at k = 50 prepend). It stays far above PE+bal (white-box after 20 calls 39.6%) and v2-PE (2.2%). Validation had already pointed this way (R 0.949 against 0.959).
+4. **Reading.** Training with fewer padded reports (p = 0.25) and the lower learning rate buys back nothing at 1% FPR and gives up some robustness: the 1-point gap to v2-PE at 1% FPR is not a matter of these two settings in this grid. Not tested: other recipe changes (a padding schedule, k distribution, other pooling).
+
+**Table 2 (1% FPR threshold). Malware flagged / padded benign flagged, in % (mean over the 10 seeds). Every April report is edited.**
+
+| model | random 20 prepend | random 50 prepend | random 50 insert | LightGBM 20 prepend | LightGBM 50 prepend | LightGBM 50 insert | v2-PE 20 prepend | v2-PE 50 prepend | v2-PE 50 insert |
+|---|---|---|---|---|---|---|---|---|---|
+| v2-PE | 22.5 / 1.2 | 8.3 / 1.1 | 41.4 / 0.7 | 10.2 / 0.1 | 3.3 / 0.0 | 21.7 / 0.1 | 2.7 / 0.0 | 3.1 / 0.0 | 7.7 / 0.0 |
+| PE+bal | 75.7 / 2.4 | 64.3 / 2.4 | 71.4 / 1.5 | 71.1 / 0.8 | 10.0 / 0.0 | 58.8 / 0.5 | 6.0 / 0.0 | 2.3 / 0.0 | 26.8 / 0.2 |
+| ATT+bal (existing) | 76.9 / 1.3 | 67.6 / 1.5 | 71.9 / 1.0 | 72.3 / 0.8 | 36.5 / 0.1 | 59.0 / 0.3 | 23.8 / 0.0 | 4.2 / 0.0 | 33.9 / 0.1 |
+| ATT+bal-tuned | 76.8 / 1.8 | 66.0 / 2.1 | 71.3 / 1.2 | 68.9 / 0.9 | 31.5 / 0.1 | 57.8 / 0.3 | 21.4 / 0.0 | 4.5 / 0.0 | 33.3 / 0.1 |
+
+**Table 2 (white-box greedy attack, 500 April malware, seeds 0-2). Share still flagged at the 1% / 0.1% FPR thresholds after k prepended calls, in %.**
+
+| model | seeds | k = 0 | k = 5 | k = 10 | k = 20 |
+|---|---|---|---|---|---|
+| v2-PE | 3 | 75.6 / 47.5 | 9.0 / 0.7 | 5.1 / 0.6 | 2.2 / 0.2 |
+| PE+bal | 3 | 76.9 / 51.5 | 62.8 / 26.9 | 57.8 / 18.8 | 39.6 / 3.5 |
+| ATT+bal (existing) | 3 | 77.7 / 58.3 | 65.5 / 34.5 | 62.5 / 31.7 | 53.3 / 14.6 |
+| ATT+bal-tuned | 3 | 77.1 / 54.1 | 63.8 / 31.8 | 60.3 / 25.9 | 46.5 / 11.6 |
+
+![Detection against the number of calls prepended, with the tuned candidate](results/tune/fig_detection_vs_k.png)
+
+The validation table of all 16 candidates, the April numbers of every candidate (appendix, not used for selection), the 0.1% FPR table, the white-box comparison and the counts are in REPORT 5.12 and `results/tune/`.
+
+
 ## What is shown and what is not
 
 1. **Shown: balanced padding buys robustness, not clean accuracy.** ATT+bal, PE+bal and both keep models still flag 64 to 77% of the malware when 20 to 50 random benign calls are prepended or inserted, where v2-PE falls to 8 to 22% (prepend) and the released checkpoint to 12 to 16%. On clean April data no model beats v2-PE on pAUC@1e-2 under the claim rule (ATT+bal +0.23 points, CI [-1.70, +2.09], positive in 4 of 10 seeds); as 10-seed ensembles ATT+bal is 3.4 points lower (resolved).

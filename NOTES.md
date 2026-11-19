@@ -521,6 +521,35 @@ The selection is computed by `baseline/tune_select.py` from the per-seed run fil
 
 **16.5 Procedure and what is looked at when.** (1) This section is committed locally before any training. (2) Smoke run (2 seeds, 1 epoch) for the new code. (3) The 4 cells x 10 seeds are trained on the second Kaggle account (every epoch: validation metrics, validation robustness, validation logits, April logits and the weights are stored; the April logits are not opened or printed). (4) `tune_select.py` -> the choice is written as 16.6 here and committed locally. (5) Only then are April numbers computed: the chosen candidate ONCE on April exactly as in §5.10 and §5.11: clean metrics (pAUC@1e-2 primary, TPR@1e-2, TPR@1e-3, AUC) with the claim rule against v2-PE and against the existing ATT+bal (stratified bootstrap and the cluster bootstrap over duplicate groups), the 10-seed ensemble, the random padding test (all April reports), surrogate padding (the existing LightGBM and v2-PE-seed-0 rankings of §5.11, not recomputed), white-box (seeds 0-2, 500 reports, the same list and candidates as §5.11). (6) The April clean numbers of every other candidate go into an appendix marked "not used for selection".
 
-**16.6 The choice.** (to be written after step 4)
+**16.6 The choice (recorded 2026-11-19 from VALIDATION numbers only; no April logit of this section had been opened).** `baseline/tune_select.py` (rule of 16.4, unchanged) over the 16 candidates:
+
+Reference robustness (existing ATT+bal, epoch 2, mean of 10 seeds): R = 0.9586; rule 2 excludes mean R < 0.9386.
+
+Reproduction check of the cell (2e-3, 0.5): largest per-seed difference of the epoch-2 validation pAUC@1e-2 against the stored ATT+bal = 0.0000 (criterion 0.002): reproduces.
+
+| lr | p | epoch | mean val pAUC@1e-2 | SE | mean val robustness R | mean val loss | min val AUC | collapsed | R excluded | within 1 SE of best |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 0.001 | 0.25 | 1 | 0.9557 | 0.0024 | 0.9369 | 0.0588 | 0.9980 | no | yes |  |
+| 0.001 | 0.25 | 2 | 0.9596 | 0.0015 | 0.9490 | 0.0669 | 0.9983 | no | no | **best** |
+| 0.001 | 0.25 | 3 | 0.9569 | 0.0025 | 0.9521 | 0.0675 | 0.9981 | no | no |  |
+| 0.001 | 0.25 | 4 | 0.9526 | 0.0020 | 0.9512 | 0.0730 | 0.9983 | no | no |  |
+| 0.001 | 0.5 | 1 | 0.9514 | 0.0011 | 0.9458 | 0.0665 | 0.9978 | no | no |  |
+| 0.001 | 0.5 | 2 | 0.9548 | 0.0022 | 0.9574 | 0.0728 | 0.9981 | no | no |  |
+| 0.001 | 0.5 | 3 | 0.9546 | 0.0021 | 0.9594 | 0.0706 | 0.9981 | no | no |  |
+| 0.001 | 0.5 | 4 | 0.9508 | 0.0024 | 0.9594 | 0.0742 | 0.9980 | no | no |  |
+| 0.002 | 0.25 | 1 | 0.9574 | 0.0030 | 0.9429 | 0.0527 | 0.9981 | no | no |  |
+| 0.002 | 0.25 | 2 | 0.9547 | 0.0019 | 0.9528 | 0.0648 | 0.9981 | no | no |  |
+| 0.002 | 0.25 | 3 | 0.9462 | 0.0053 | 0.9535 | 0.0721 | 0.9981 | no | no |  |
+| 0.002 | 0.25 | 4 | 0.9484 | 0.0032 | 0.9554 | 0.0724 | 0.9979 | no | no |  |
+| 0.002 | 0.5 | 1 | 0.9501 | 0.0026 | 0.9525 | 0.0581 | 0.9978 | no | no |  |
+| 0.002 | 0.5 | 2 | 0.9553 | 0.0023 | 0.9586 | 0.0677 | 0.9980 | no | no |  |
+| 0.002 | 0.5 | 3 | 0.9526 | 0.0025 | 0.9597 | 0.0642 | 0.9978 | no | no |  |
+| 0.002 | 0.5 | 4 | 0.9480 | 0.0026 | 0.9593 | 0.0759 | 0.9976 | no | no |  |
+
+**Chosen (lr, p, epoch): (0.001, 0.25, 2)**
+
+CHOSEN: lr=1e-3 p=0.25 epoch=2
+
+Facts behind the choice (validation only): no candidate collapsed (smallest validation AUC over all seeds and candidates 0.9976); rule 2 excluded one candidate, (1e-3, 0.25, epoch 1), whose mean R is 0.9369 < 0.9386; `best` = (1e-3, 0.25, 2) with mean validation pAUC@1e-2 0.9596 (SE 0.0015); the next highest, (2e-3, 0.25, 1) with 0.9574, is below best minus one SE (0.9581), so nothing is tied and the tie-break rules were not needed. The existing ATT+bal (2e-3, 0.5, 2) has validation pAUC@1e-2 0.9553 (SE 0.0023) and R 0.9586; the chosen candidate has +0.43 points of validation pAUC and R 0.9490 (0.96 points lower, inside the 2-point margin). The cell (2e-3, 0.5) reproduces the existing ATT+bal (largest per-seed difference of the epoch-2 validation pAUC@1e-2 0.0000), so the existing models and logits stand for that candidate. Validation runs files: `results/tune/tune_*/seed*.json`; table and selection: `results/tune/validation_table.md`, `selection.json`.
 
 **16.7 Compute.** Per cell 10 seeds x 4 epochs: about 6 min per seed with two seeds in parallel on the two T4 (70 s training + 12 s edit generation per epoch), about 0.55 h per cell, 4 cells = about 2.2 h of session time (two kernels run in parallel, so about 1.1 h of wall time); evaluation of the chosen candidate about 0.5 h. GPU on the second Kaggle account (first account: about 0.8 h of quota left). The weights of every epoch stay in the kernel output and reach the evaluation kernel as a kernel source (not downloaded).

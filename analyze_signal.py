@@ -144,6 +144,11 @@ def cmd_collect(a):
     meta = load_meta()
     files = [f for f in list_files(a.data_dir) if f[2].endswith(".json")]
     assert len(files) == len(meta)
+    # os.walk visits the sharded trainset folders in filesystem order, which differs between machines:
+    # take the files in meta.csv row order by (split, family, id) instead of trusting the listing order
+    by_key = {(f[0], f[1].replace("report_", ""), os.path.splitext(f[2])[0]): f for f in files}
+    assert len(by_key) == len(files)
+    files = [by_key[(m.split, m.family, m.id)] for _, m in meta.iterrows()]
     for (split, folder, name, _), (_, m) in zip(files, meta.iterrows()):
         assert split == m.split and os.path.splitext(name)[0] == m.id
     os.makedirs(WORK, exist_ok=True)

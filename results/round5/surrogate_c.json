@@ -1,0 +1,1418 @@
+{
+ "which": "c",
+ "info": {
+  "candidates": 1000,
+  "reports": 100
+ },
+ "n_candidates": 1000,
+ "ranked_calls": [
+  [
+   29416,
+   122
+  ],
+  [
+   42184,
+   109
+  ],
+  [
+   32726,
+   21
+  ],
+  [
+   46193,
+   156
+  ],
+  [
+   50856,
+   345
+  ],
+  [
+   50856,
+   328
+  ],
+  [
+   50856,
+   315
+  ],
+  [
+   50856,
+   271
+  ],
+  [
+   50856,
+   321
+  ],
+  [
+   50856,
+   379
+  ],
+  [
+   50856,
+   165
+  ],
+  [
+   50856,
+   255
+  ],
+  [
+   50856,
+   180
+  ],
+  [
+   36590,
+   228
+  ],
+  [
+   34085,
+   96
+  ],
+  [
+   28913,
+   60
+  ],
+  [
+   48586,
+   21
+  ],
+  [
+   45337,
+   156
+  ],
+  [
+   29838,
+   26
+  ],
+  [
+   34831,
+   38
+  ],
+  [
+   36274,
+   14
+  ],
+  [
+   30972,
+   12
+  ],
+  [
+   28875,
+   492
+  ],
+  [
+   41256,
+   41
+  ],
+  [
+   50415,
+   253
+  ],
+  [
+   46034,
+   63
+  ],
+  [
+   28571,
+   37
+  ],
+  [
+   44062,
+   22
+  ],
+  [
+   28603,
+   147
+  ],
+  [
+   46034,
+   57
+  ],
+  [
+   41430,
+   46
+  ],
+  [
+   34757,
+   67
+  ],
+  [
+   41797,
+   151
+  ],
+  [
+   38542,
+   22
+  ],
+  [
+   41537,
+   151
+  ],
+  [
+   43927,
+   127
+  ],
+  [
+   46358,
+   262
+  ],
+  [
+   41192,
+   318
+  ],
+  [
+   35464,
+   22
+  ],
+  [
+   45388,
+   264
+  ],
+  [
+   28466,
+   22
+  ],
+  [
+   35745,
+   31
+  ],
+  [
+   34860,
+   271
+  ],
+  [
+   40523,
+   23
+  ],
+  [
+   28603,
+   26
+  ],
+  [
+   35902,
+   151
+  ],
+  [
+   46461,
+   6
+  ],
+  [
+   39362,
+   54
+  ],
+  [
+   38542,
+   23
+  ],
+  [
+   41358,
+   151
+  ],
+  [
+   42144,
+   77
+  ],
+  [
+   41341,
+   125
+  ],
+  [
+   52588,
+   150
+  ],
+  [
+   28675,
+   8
+  ],
+  [
+   48080,
+   18
+  ],
+  [
+   31818,
+   21
+  ],
+  [
+   35728,
+   33
+  ],
+  [
+   49570,
+   15
+  ],
+  [
+   36614,
+   36
+  ],
+  [
+   33229,
+   8
+  ],
+  [
+   46625,
+   41
+  ],
+  [
+   47642,
+   136
+  ],
+  [
+   49570,
+   19
+  ],
+  [
+   39999,
+   151
+  ],
+  [
+   39543,
+   151
+  ],
+  [
+   51824,
+   383
+  ],
+  [
+   39751,
+   150
+  ],
+  [
+   34544,
+   151
+  ],
+  [
+   49207,
+   7
+  ],
+  [
+   45526,
+   0
+  ],
+  [
+   34238,
+   33
+  ],
+  [
+   44189,
+   151
+  ],
+  [
+   38513,
+   151
+  ],
+  [
+   47658,
+   63
+  ],
+  [
+   42739,
+   45
+  ],
+  [
+   48099,
+   151
+  ],
+  [
+   32724,
+   1
+  ],
+  [
+   48042,
+   151
+  ],
+  [
+   40248,
+   151
+  ],
+  [
+   35782,
+   15
+  ],
+  [
+   36091,
+   57
+  ],
+  [
+   51014,
+   262
+  ],
+  [
+   28518,
+   45
+  ],
+  [
+   35754,
+   442
+  ],
+  [
+   51362,
+   151
+  ],
+  [
+   51419,
+   151
+  ],
+  [
+   51980,
+   18
+  ],
+  [
+   44151,
+   228
+  ],
+  [
+   43353,
+   150
+  ],
+  [
+   38886,
+   150
+  ],
+  [
+   34725,
+   264
+  ],
+  [
+   44787,
+   151
+  ],
+  [
+   28513,
+   58
+  ],
+  [
+   40340,
+   83
+  ],
+  [
+   32727,
+   466
+  ],
+  [
+   36594,
+   322
+  ],
+  [
+   41771,
+   303
+  ],
+  [
+   42656,
+   87
+  ],
+  [
+   43423,
+   5
+  ],
+  [
+   33729,
+   27
+  ],
+  [
+   30823,
+   79
+  ],
+  [
+   42693,
+   47
+  ],
+  [
+   31559,
+   117
+  ],
+  [
+   43408,
+   151
+  ],
+  [
+   45337,
+   410
+  ],
+  [
+   51376,
+   20
+  ],
+  [
+   28571,
+   93
+  ],
+  [
+   31366,
+   151
+  ],
+  [
+   29079,
+   81
+  ],
+  [
+   49026,
+   27
+  ],
+  [
+   41430,
+   18
+  ],
+  [
+   36747,
+   427
+  ],
+  [
+   28675,
+   5
+  ],
+  [
+   40032,
+   13
+  ],
+  [
+   30577,
+   149
+  ],
+  [
+   41192,
+   282
+  ],
+  [
+   46499,
+   223
+  ],
+  [
+   39333,
+   151
+  ],
+  [
+   45337,
+   68
+  ],
+  [
+   37224,
+   151
+  ],
+  [
+   29117,
+   151
+  ],
+  [
+   40032,
+   5
+  ],
+  [
+   39504,
+   36
+  ],
+  [
+   39578,
+   76
+  ],
+  [
+   42897,
+   149
+  ],
+  [
+   31678,
+   152
+  ],
+  [
+   44590,
+   149
+  ],
+  [
+   39206,
+   7
+  ],
+  [
+   51414,
+   149
+  ],
+  [
+   44754,
+   10
+  ],
+  [
+   46970,
+   52
+  ],
+  [
+   36131,
+   56
+  ],
+  [
+   29601,
+   227
+  ],
+  [
+   37454,
+   359
+  ],
+  [
+   39653,
+   21
+  ],
+  [
+   43470,
+   36
+  ],
+  [
+   35790,
+   77
+  ],
+  [
+   38493,
+   151
+  ],
+  [
+   41423,
+   151
+  ],
+  [
+   47084,
+   152
+  ],
+  [
+   32131,
+   7
+  ],
+  [
+   29079,
+   37
+  ],
+  [
+   32648,
+   50
+  ],
+  [
+   28671,
+   28
+  ],
+  [
+   43237,
+   135
+  ],
+  [
+   31559,
+   272
+  ],
+  [
+   29511,
+   17
+  ],
+  [
+   33299,
+   154
+  ],
+  [
+   32918,
+   442
+  ],
+  [
+   52352,
+   8
+  ],
+  [
+   49025,
+   5
+  ],
+  [
+   47439,
+   51
+  ],
+  [
+   31152,
+   168
+  ],
+  [
+   28973,
+   7
+  ],
+  [
+   46325,
+   151
+  ],
+  [
+   37609,
+   151
+  ],
+  [
+   42317,
+   220
+  ],
+  [
+   31204,
+   14
+  ],
+  [
+   34956,
+   146
+  ],
+  [
+   29079,
+   110
+  ],
+  [
+   33729,
+   6
+  ],
+  [
+   44479,
+   151
+  ],
+  [
+   28513,
+   63
+  ],
+  [
+   29079,
+   162
+  ],
+  [
+   29041,
+   97
+  ],
+  [
+   45337,
+   401
+  ],
+  [
+   48243,
+   154
+  ],
+  [
+   49621,
+   69
+  ],
+  [
+   49026,
+   156
+  ],
+  [
+   34327,
+   152
+  ],
+  [
+   46461,
+   9
+  ],
+  [
+   38740,
+   47
+  ],
+  [
+   37763,
+   28
+  ],
+  [
+   28913,
+   124
+  ],
+  [
+   49937,
+   6
+  ],
+  [
+   34238,
+   29
+  ],
+  [
+   51288,
+   89
+  ],
+  [
+   36475,
+   12
+  ],
+  [
+   31650,
+   71
+  ],
+  [
+   32226,
+   10
+  ],
+  [
+   34152,
+   92
+  ],
+  [
+   31829,
+   260
+  ],
+  [
+   45875,
+   139
+  ],
+  [
+   45337,
+   147
+  ],
+  [
+   29079,
+   179
+  ],
+  [
+   28548,
+   17
+  ],
+  [
+   31307,
+   153
+  ],
+  [
+   44933,
+   151
+  ],
+  [
+   33726,
+   109
+  ],
+  [
+   30660,
+   150
+  ],
+  [
+   50834,
+   162
+  ],
+  [
+   37763,
+   398
+  ],
+  [
+   42728,
+   451
+  ],
+  [
+   49531,
+   53
+  ],
+  [
+   41341,
+   59
+  ],
+  [
+   50834,
+   108
+  ],
+  [
+   31650,
+   70
+  ],
+  [
+   47016,
+   151
+  ],
+  [
+   49531,
+   126
+  ],
+  [
+   34547,
+   43
+  ]
+ ],
+ "names": [
+  "kernel32.InitializeCriticalSectionAndSpinCount(0x41ddd8, 0xfa0)",
+  "KERNEL32.LeaveCriticalSection(0x46b400)",
+  "kernel32.InitializeCriticalSectionEx(0x80c470, 0xfa0, 0x0)",
+  "kernel32.GetLocaleInfoA(0xc000, 0x25, 0x1211e30, 0x100)",
+  "KERNEL32.VerifyVersionInfoW(0x12118fc, 0x2, 0x0)",
+  "KERNEL32.VerifyVersionInfoW(0x1211964, 0x2, 0x0)",
+  "KERNEL32.VerifyVersionInfoW(0x12119b4, 0x2, 0x0)",
+  "KERNEL32.VerifyVersionInfoW(0x1211abc, 0x2, 0x0)",
+  "KERNEL32.VerifyVersionInfoW(0x121198c, 0x2, 0x0)",
+  "KERNEL32.VerifyVersionInfoW(0x1211834, 0x2, 0x0)",
+  "KERNEL32.VerifyVersionInfoW(0x1211d34, 0x2, 0x0)",
+  "KERNEL32.VerifyVersionInfoW(0x1211b1c, 0x2, 0x0)",
+  "KERNEL32.VerifyVersionInfoW(0x1211cdc, 0x2, 0x0)",
+  "KERNEL32.VerSetConditionMask(0x0, 0x0, 0x80)",
+  "KERNEL32.GetStringTypeW(0x1, 0x169b718, 0x100, 0x169b9c0)",
+  "KERNEL32.LeaveCriticalSection(0x44ea20)",
+  "KERNEL32.GetStringTypeW(0x1, 0x127dab4, 0x1, 0x169b9c0)",
+  "user32.LoadStringW(0x400000, 0xffb6, Sep, 0x1000)",
+  "kernel32.EncodePointer(0x971a1c)",
+  "KERNEL32.EnterCriticalSection(0x483d40)",
+  "user32.GetClassInfoA(0x0, 0x502dc, 0x1211e90, 0x0)",
+  "kernel32.FlsSetValue(0x0, 0xa42748)",
+  "kernel32.EncodePointer(0x44819e)",
+  "KERNEL32.LeaveCriticalSection(0x58de50)",
+  "advapi32.RegOpenKeyExW(HKEY_CURRENT_USER, SOFTWARE\\Citrix\\ECRT\\d541a371b09697452f745ae87c18b67e3ab6f",
+  "user32.LoadStringA(0x400000, 0xffce, Mar, 0x1000)",
+  "kernel32.FlsAlloc(0x4acbc0)",
+  "msvcrt.fopen(0x408460, 0x406340, 0x61613733, 0x65306330)",
+  "KERNEL32.EnterCriticalSection(0x452868)",
+  "user32.LoadStringA(0x400000, 0xffb8, January, 0x1000)",
+  "user32.LoadStringW(0x400000, 0xffce, Externalexception%x, 0x1000)",
+  "USER32.CharNextW(0x4cb00a)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\cb2d42a375190e5f8f6017e762c24d2ab9908cd15d00d77",
+  "msvcrt.fopen(0x408460, 0x406340, 0x33646233, 0x37343732)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\c887b843c1a72b1dfbb94f626149a22948e3e02f7c5b8c7",
+  "KERNEL32.GetModuleFileNameA(0x0, C:\\Windows\\system32\\7208031bce403241ff902c56767ffe8e37cf8e5c6777a84",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\0a5a58a7f57284327fb0ab320ff5af49bbe80daed8b55d7",
+  "kernel32.WideCharToMultiByte(0xfde9, 0x0, 0x120f050, 0xffffffff, 0x120ec40, 0x410, 0x0, 0x0)",
+  "msvcrt.fopen(0x408460, 0x406340, 0x32356432, 0x37656663)",
+  "KERNEL32.CreateFileW(C:\\Windows\\system32\\0090953a8db7b44638d6b3b8e0a23fd8dd426119484b17d9fae91506cb8",
+  "msvcrt.fopen(0x408460, 0x406340, 0x66623465, 0x34383866)",
+  "kernel32.FlsAlloc(0x40aedb)",
+  "kernel32.WakeAllConditionVariable(0x57c7d48)",
+  "SDL.SDL_strlcpy(0x408580, 0x1211dcc, 0x104, 0x38383463)",
+  "kernel32.InitializeCriticalSectionEx(0x452940, 0xfa0, 0x0)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\9ccaacd6a4b0c587148d6451f45df595fc420808f1866ce",
+  "api-ms-win-core-profile-l1-1-0.QueryPerformanceCounter(0x1211fb4)",
+  "api-ms-win-crt-runtime-l1-1-0._set_invalid_parameter_handler(0x4c90c0)",
+  "SDL.SDL_strlcpy(0x408580, 0x1211dcc, 0x104, 0x66316538)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\c68b8178f32a1c2dfb148cd70bf60e2b7045eea5ce8235c",
+  "KERNEL32.EncodePointer(0x423d44)",
+  "user32.LoadStringA(0x400000, 0xffa1, Saturday, 0x400)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\1c98ca48e1066558479d70669c637b82f22a96ee1fbab98",
+  "msvcrt.__p__environ(0x4010d4, 0x0, 0x0, 0x42748c)",
+  "KERNEL32.WideCharToMultiByte(0x0, 0x0, 0x4748, 0xffffffff, 0x47a0, 0x7, 0x0, 0x0)",
+  "kernel32.EncodePointer(0x9e4a1a)",
+  "KERNEL32.LCMapStringW(0x0, 0x200, 0x169b958, 0x6, 0x0, 0x0)",
+  "core83t.?cleanup@SCOM_ResourceBundle@core@@QAEXXZ(0x0, 0x4398db, 0x1211f64, 0x4398e8)",
+  "KERNEL32.GetModuleFileNameA(0x0, C:\\Windows\\system32\\24310691407ce5387f9acd65073407b43b13bace65aab4e",
+  "msvcrt.__p__environ(0x4010d4, 0x0, 0x0, 0x42755c)",
+  "KERNEL32.InitializeCriticalSectionAndSpinCount(0x42db50, 0xfa0)",
+  "KERNEL32.HeapAlloc(0x46e0, 0x8, 0xcc)",
+  "core83t.??1Process@core@@UAE@XZ(0x0, 0x0, 0x0, 0x0)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\f7c160c894baa6bffc647852b082e0c49c807c6d82a740c",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\f31b658b9e0dc68a86c93c47ebe30a06ed4ccdc75d78e96",
+  "KERNEL32.lstrlenA(DBX_TGetFirstSymAttribute)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\f52d6545ebe79f59b09a585f73a9aec3a9986c712bbd179",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\5ecfecf969ae179093f7c6c8414f77c87e90e9f88331275",
+  "api-ms-win-crt-runtime-l1-1-0._register_thread_local_exe_atexit_callback(0x4a1bf6)",
+  "ProMicrophone.RHBinder__ShimExeMain(0x4000, 0x4010, 0x4020, 0x4030)",
+  "Qt5Core.??0QString@@QAE@PBD@Z(0x1211ed4, 0x1794618e, 0x47a0, 0x7)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\74af3e1e88b4dc24e2345e06fbc19ff0d7e667db23f60ec",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\682c59e58efaa1d6118295c174d367a91cf9e6ccd5cde94",
+  "KERNEL32.GetModuleFileNameA(0x0, C:\\Windows\\system32\\a7a27832f306d4b15833dfaf40ae0e63d0d0b171af63907",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\e5647f44e0c90e68f2aa1440621c7e1fd9818c675f57bb1",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\ac866d5e80b3fd716192f72ea3339ea9cb20d324415f62b",
+  "kernel32.GetModuleFileNameA(0x400000, C:\\Windows\\system32\\8c478e6a89929e3d963bf00f175d255453a7fd2e7c",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\abe53cff912cd2dc11ea4c44b4065903da03b3bafbfee1e",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\faa0e48f1eae7ad3ac37b1294e0ce3b00d069f49a64584b",
+  "user32.LoadStringA(0x400000, 0xffde, Undtagelseisafecall-metode, 0x400)",
+  "kernel32.InitializeCriticalSectionAndSpinCount(0xbd7ee0, 0xfa0)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\dbcef881bda464136c5dcf3b3f796b3b5ccf8be8164bd08",
+  "KERNEL32.GetModuleFileNameA(0x0, C:\\Windows\\system32\\3096c8e2d16473acf0b8b98e484eccc0500316764a33a91",
+  "KERNEL32.GetProcessAffinityMask(0xffffffff, 0x1211f48, 0x1211f44, 0x2)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\dfb692f0e386ffb5d5e33046fced3ad6e2776de875a5150",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\1034bfd2a9271329371068df410b8fe532814286babe19a",
+  "kernel32.InitializeCriticalSectionEx(0x431f80, 0xfa0, 0x0)",
+  "KERNEL32.HeapAlloc(0x46d0, 0x0, 0x110)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\ebfd642b1e65ae61b588f901cc91063c099950c64fc171d",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\6bf8089faa0787d4ea391e9ff915dc7f23eaba956671fcc",
+  "KERNEL32.CreateFileW(C:\\Windows\\system32\\9094ce413bcaa1f0ad056d9183df358ea46f652c69ea290515bc61b0e4c",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\7a93323e95fa928a4f58eb67222af01aadc5d174be92d03",
+  "kernel32.GetLocaleInfoA(0x0, 0x37, 0x1211e80, 0x100)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\fb98239f183519e87c40f82819bc19f1aec10e0c95120ff",
+  "kernel32.EncodePointer(0x4459e1)",
+  "KERNEL32.FindFirstFileW(C:\\Windows\\system32\\23f01de8cab152be117b62aac2d3a39ea6714fef791c8774386cdbf3",
+  "kernel32.EnterCriticalSection(0xbd36f0)",
+  "kernel32.InitializeCriticalSectionAndSpinCount(0x120ce60, 0xfa0)",
+  "ucrtbased._initterm_e(0x41930c, 0x419618)",
+  "KERNEL32.EnterCriticalSection(0x4ac1d8)",
+  "KERNEL32.GetProcAddress(0x77000000, SetThreadExecutionState)",
+  "kernel32.WideCharToMultiByte(0x4e4, 0x0, 0x441dc0, 0x1b, 0x188cec, 0x1b, 0x0, 0x0)",
+  "KERNEL32.GetProcAddress(0x77000000, GetComputerNameExW)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\eca2f8bc020ccfdc4e1fb4ec9018162eb9699557b4623b5",
+  "kernel32.WideCharToMultiByte(0x4e4, 0x0, 0x42f2e4, 0x10, 0x0, 0x0, 0x0, 0x0)",
+  "kernel32.InitializeCriticalSectionEx(0x6b4c50, 0xfa0, 0x0)",
+  "kernel32.InitializeCriticalSectionEx(0x78f8, 0xfa0, 0x0)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\be3362a6b1a949acaf1315299feeb3d7aafea4b357b6c38",
+  "user32.LoadStringW(0x400000, 0xff49, Elarchivoespecificadonosehaencontrado, 0x1000)",
+  "kernel32.InitializeCriticalSectionEx(0x4a0b68, 0xfa0, 0x0)",
+  "kernel32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\c73b639a642a1fa7fe94467cc49e8d4281111f3bcb63762",
+  "KERNEL32.GlobalLock(0x4ed5000)",
+  "msvcrt.atexit(0x401340, 0x0, 0x0, 0x0)",
+  "MSVCR120.??2@YAPAXI@Z()",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\b5fb8947936b7078b323e133e6d33ac7468e44781d0dd7f",
+  "kernel32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\c4c1f93d827093732bf520d2796ebfef3a8743e41ac52b3",
+  "KERNEL32.LCMapStringW(0x0, 0x200, 0x169b8f8, 0x7, 0x169b8d8, 0x7)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\f0e8a3dd752cb9e46e3bdc8980a7eb3aa64a459cb0ef5b6",
+  "kernel32.WideCharToMultiByte(0x4e4, 0x0, 0x423670, 0x13, 0x1326fc, 0x13, 0x0, 0x0)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\2aa5b0c0f56d62e78ee88fb96eeb128225d635459a5cc36",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\36bd9470c26dda2cb8a9a77d90a2be4cf8a8295f9050bb4",
+  "MSVCR120._initterm(0x40915c, 0x409170)",
+  "KERNEL32.GetModuleFileNameA(0x0, C:\\Windows\\system32\\f28a59f87b5b3fb995a15c96b49f32a458330e7e0c908f8",
+  "KERNEL32.InterlockedIncrement(0x478458)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\e73663e2932f3ccc581ef060832b9fbdb5413b91c8eadd4",
+  "KERNEL32.InitializeSListHead(0x428e78)",
+  "kernel32.GetLocaleInfoW(0xc000, 0x47, 0x4d13be4, 0x100)",
+  "msvcrt.atexit(0x40afd4, 0x0, 0x1212000, 0x41665a)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\101d16cbbe2d3fca8bdd36f531a5f630f51270d804d1d7f",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\7a367152238a878e0102a5d83068b95375f0dac8dbfe69c",
+  "KERNEL32.GetProcAddress(0x77000000, WaitCommEvent)",
+  "kernel32.FlsAlloc(0x45901c)",
+  "KERNEL32.InitializeSListHead(0x950a58)",
+  "user32.LoadStringA(0x3781000, 0xffcd, 0x3aeae5c, 0x1000)",
+  "util.??0CCmTextFormator@@QAE@PADI@Z(0x12112cc, 0x400, 0x0, 0x0)",
+  "KERNEL32.GetModuleFileNameA(0x0, C:\\Windows\\system32\\ed38c55298fc5b3e8fb38632b5a0d0d8372574bf6b5ac70",
+  "KERNEL32.CreateFileA(C:\\Windows\\system32\\9b9af364afe7a1c66019fc24a515bf40b1a8a5e408e955fc62c822f7c45",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\67f75f3a15f4567f9fb912769ee9af5dbe75b2c63cc6940",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\c72f1e582b6bfbef4b6cec27d7f3d0a171136c20450b483",
+  "kernel32.GetLocaleInfoW(0xc000, 0x19, 0x3aeb6ec, 0x100)",
+  "kernel32.MapViewOfFile(0x2e8, 0x6, 0x0, 0x0, 0x0)",
+  "kernel32.GetLocaleInfoW(0xffff, 0x3, 0x7161ac0, 0x4)",
+  "Qt5Core.?fromUtf8@QString@@SA?AV1@PBDH@Z(0x1211ce4, 0x418930, 0xffffffff, 0x0)",
+  "KERNEL32.LeaveCriticalSection(0x3909b8c)",
+  "KERNEL32.MultiByteToWideChar(0x4e4, 0x1, !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[",
+  "kernel32.WideCharToMultiByte(0x0, 0x0, 0x46c0, 0xcd, 0x0, 0x0, 0x0, 0x0)",
+  "VCRUNTIME140.memmove(0x3f75e80, 0x4758, 0xc)",
+  "KERNEL32.WideCharToMultiByte(0x0, 0x0, 0x1211d44, 0xffffffff, 0x5c8e60, 0x104, 0x0, 0x0)",
+  "KERNEL32.InitializeCriticalSection(0x715de0)",
+  "KERNEL32.lstrcpynW(0x4cf0a0, svchost.exemyarg1myarg2, 0x2004)",
+  "kernel32.VirtualAlloc(0x0, 0x210270e, 0x1000, PAGE_READWRITE)",
+  "USER32.CreateWindowExW(0x0, SELFEXTRACT, ZIP2SecureEXE, 0x80000000, 0x80000000, 0x0, 0x80000000, 0x0",
+  "KERNEL32.GetProcAddress(0x78000000, RegEnumKeyExA)",
+  "api-ms-win-crt-runtime-l1-1-0._get_initial_narrow_environment()",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\0a0e87ce1882951ea87337f3689694fdfda628a66048e48",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\2ef24605feafdae03aaf854fd3d758cedc889dd1c6dbc6e",
+  "KERNEL32.lstrlenA([1A618:1A62C][2022-03-04T13:35:49]e000:Error0x80004005:Failedtoseektostartoffile.)",
+  "user32.LoadStringA(0x400000, 0xffcf, Exceptioninsafecall-Methode, 0x1000)",
+  "KERNEL32.EnterCriticalSection(0x6b9c08)",
+  "kernel32.GetLocaleInfoW(0xc000, 0x2b, 0x7163bd4, 0x100)",
+  "KERNEL32.InitializeCriticalSection(0x4ac1c0)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\7770601c969e64810dff51ab7e16d32864effd4573f7bc5",
+  "user32.LoadStringA(0x400000, 0xffe8, Monday, 0x400)",
+  "kernel32.GetLocaleInfoW(0xc000, 0x40, 0x7163bd8, 0x100)",
+  "kernel32.InitializeCriticalSectionAndSpinCount(0x43c340, 0xfa0)",
+  "kernel32.WideCharToMultiByte(0x4e4, 0x0, 0x42f24c, 0x1b, 0x0, 0x0, 0x0, 0x0)",
+  "KERNEL32.GetModuleFileNameA(0x0, C:\\Windows\\system32\\ae023648a9c261112882a59194da2d3ba298e9594a4a4e2",
+  "USER32.SetWindowsHookExA(WH_KEYBOARD_LL, 0x593840, 0x400000, 0x0)",
+  "KERNEL32.InitializeSListHead(0x4a0960)",
+  "KERNEL32.InitializeSListHead(0x56fae8)",
+  "api-ms-win-crt-runtime-l1-1-0._initterm(0x401c60, 0x401ca8)",
+  "KERNEL32.LCMapStringW(0x0, 0x200, 0x121195c, 0x4, 0x1211954, 0x4)",
+  "KERNEL32.InitializeCriticalSectionAndSpinCount(0x10021ff0, 0xfa0)",
+  "KERNEL32.WideCharToMultiByte(0x4e4, 0x0, 0x1211938, 0x7, 0x1211c14, 0x100, 0x0, 0x0)",
+  "api-ms-win-crt-runtime-l1-1-0._initterm(0x77e48c, 0x77e594)",
+  "KERNEL32.WideCharToMultiByte(0xfde9, 0x0, 0x47b0, 0x7, 0x0, 0x0, 0x0, 0x0)",
+  "KERNEL32.GetProcAddress(0x77000000, GetPrivateProfileIntW)",
+  "kernel32.lstrcpynA(0x121192f, C:\\Windows\\system32\\229face39aa26e1c66fa2cbc66c039d38a009eee7e3b17f20d",
+  "KERNEL32.EncodePointer(0x4270ea)",
+  "jli.JLI_MemAlloc(0x4, 0x1211fb8, 0x5f, 0x0)",
+  "kernel32.InitializeCriticalSectionAndSpinCount(0x43d448, 0xfa0)",
+  "USER32.RegisterWindowMessageW(TOOLBAR_DELETE)",
+  "kernel32.GetLocaleInfoW(0xc000, 0x2d, 0x1211ccc, 0x100)",
+  "kernel32.GetLocaleInfoW(0xc000, 0x4a, 0x1211bf4, 0x100)",
+  "kernel32.GetLocaleInfoW(0xc000, 0xf, 0x7163e20, 0x2)",
+  "KERNEL32.FreeEnvironmentStringsW(0x47c0)",
+  "KERNEL32.WideCharToMultiByte(0x0, 0x0, 0x1211d44, 0xffffffff, 0x0, 0x0, 0x0, 0x0)",
+  "KERNEL32.InitializeSListHead(0x641108)",
+  "KERNEL32.LeaveCriticalSection(0x45e130)",
+  "KERNEL32.HeapAlloc(0x4630, 0x8, 0x44)",
+  "kernel32.GetLocaleInfoW(0xc000, 0x40, 0x75edbd8, 0x100)",
+  "KERNEL32.LeaveCriticalSection(0x10021ff0)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\e54e173a401c41ad66a142f08432ab4259d30ae2a8db8ca",
+  "KERNEL32.VirtualQuery(0x5050cc, 0x1211f54, 0x1c)",
+  "user32.LoadStringA(0x400000, 0xffde, Mar, 0x400)",
+  "kernel32.GetLocaleInfoW(0xc000, 0x32, 0x75edbd4, 0x100)",
+  "KERNEL32.EncodePointer(0x4279f4)",
+  "KERNEL32.GetModuleFileNameW(0x0, C:\\Windows\\system32\\a1322a81b8508d59fc287df523306c08abf9c1e74b468d6",
+  "USER32.LoadStringW(0x400000, 0xffa3, Stackoverflow, 0x1000)",
+  "KERNEL32.InitializeCriticalSectionAndSpinCount(0x4716e8, 0xfa0)"
+ ],
+ "drops": [
+  8.63723514676094,
+  8.22850750753656,
+  7.55679660052061,
+  6.921453163325786,
+  6.778871052507311,
+  6.732531467247754,
+  6.702105728704482,
+  6.686184891015291,
+  6.630102995187044,
+  6.629354296922684,
+  6.621948802918196,
+  6.606780484616756,
+  6.55657772436738,
+  6.521809110045433,
+  6.3506759514659645,
+  6.089343707654625,
+  5.779623447656632,
+  5.716003127843141,
+  5.310448411107063,
+  5.250882297158241,
+  5.238453509807587,
+  5.23651156052947,
+  5.008127547502518,
+  4.938493017554283,
+  4.9176357960700985,
+  4.857906334400177,
+  4.7933935761451725,
+  4.506390935778618,
+  4.4422694528102875,
+  4.414906000196933,
+  4.31104504480958,
+  4.234536049664021,
+  4.2167921203374865,
+  4.19786130130291,
+  4.154342256188393,
+  4.137546172738075,
+  4.136740622520446,
+  4.029369063824415,
+  3.990019276961684,
+  3.9871461403369906,
+  3.946564818620682,
+  3.943336909413338,
+  3.937199604511261,
+  3.8111216938495636,
+  3.7923227453231814,
+  3.7447702798247335,
+  3.6512787342071533,
+  3.6459397155046465,
+  3.6135550785064696,
+  3.5895387721061707,
+  3.570248775780201,
+  3.542421849966049,
+  3.4955849343538286,
+  3.4944659734517334,
+  3.424240095615387,
+  3.401205036342144,
+  3.3836481262743474,
+  3.3572018015384675,
+  3.3527452743053434,
+  3.3178373378515245,
+  3.28858114361763,
+  3.271995323896408,
+  3.2529307872056963,
+  3.249162172079086,
+  3.188588240146637,
+  3.1879394602775575,
+  3.1829828620702028,
+  3.168467074111104,
+  3.1663891845941543,
+  3.16448080599308,
+  3.142964415550232,
+  3.0748605711944403,
+  3.0182086497545244,
+  2.9916990846395493,
+  2.9826009422540665,
+  2.9815258495509624,
+  2.9783883595466616,
+  2.9146545767784118,
+  2.906720544099808,
+  2.8988280373811723,
+  2.887039153575897,
+  2.886235612630844,
+  2.8629601109027862,
+  2.85253009557724,
+  2.845442771166563,
+  2.8378758150339127,
+  2.8130030937679114,
+  2.806453714966774,
+  2.8045303428173067,
+  2.764960594177246,
+  2.762501525878906,
+  2.7575828009843826,
+  2.745292203426361,
+  2.700941257476807,
+  2.676756498515606,
+  2.655426186323166,
+  2.634503083229065,
+  2.593870732486248,
+  2.567600038051605,
+  2.5641777247190474,
+  2.5610196024179457,
+  2.5562573528289794,
+  2.5234630459547045,
+  2.4801995259523393,
+  2.474190845489502,
+  2.463549648821354,
+  2.460719991773367,
+  2.4499700009822845,
+  2.448406650274992,
+  2.440325186252594,
+  2.4162671959400175,
+  2.4037674732506273,
+  2.40258609354496,
+  2.371884121000767,
+  2.347787243127823,
+  2.342989541888237,
+  2.341193659603596,
+  2.338140059709549,
+  2.3160104393959045,
+  2.309097713828087,
+  2.2986780893057586,
+  2.291772382259369,
+  2.285624108314514,
+  2.2828965657949447,
+  2.2778058636188505,
+  2.2716769659519196,
+  2.265637066960335,
+  2.254150538444519,
+  2.2375750660896303,
+  2.2310272848606107,
+  2.2302599424123764,
+  2.2224618875980378,
+  2.207902010679245,
+  2.1987418925762174,
+  2.194452481865883,
+  2.190302345752716,
+  2.189907597899437,
+  2.1761568135023115,
+  2.1700538185425104,
+  2.167845209315419,
+  2.1657470878958702,
+  2.1615396726131437,
+  2.143471799194813,
+  2.127684563398361,
+  2.1125521731376646,
+  2.1061226153373718,
+  2.0954909950494764,
+  2.0894203293323517,
+  2.0791494953632355,
+  2.073006454706192,
+  2.05366317987442,
+  2.0479360795021058,
+  2.0426438173651693,
+  2.0414339013397695,
+  2.0398504489660265,
+  2.033963440656662,
+  2.0182543274760247,
+  2.01815096616745,
+  2.0142670035362245,
+  2.0039880871772766,
+  2.0005434584617614,
+  1.9983640658855437,
+  1.9810647869110107,
+  1.9728905367851257,
+  1.964790062904358,
+  1.9575596678256988,
+  1.9566256725788116,
+  1.9386402881145477,
+  1.931334834098816,
+  1.922886391878128,
+  1.9136421728134154,
+  1.897727015018463,
+  1.8940195858478546,
+  1.8938815212249756,
+  1.891950467824936,
+  1.8789562249183656,
+  1.878941445350647,
+  1.8707458785176276,
+  1.8704819059371949,
+  1.8665257155895234,
+  1.854625976085663,
+  1.8275709319114686,
+  1.8242473888397217,
+  1.8234935569763184,
+  1.8125817584991455,
+  1.8061219215393067,
+  1.798255237340927,
+  1.789880666732788,
+  1.784517685174942,
+  1.7836267471313476,
+  1.78274334192276,
+  1.7813243353366852,
+  1.7810275185108184,
+  1.7678597980737687,
+  1.7541092443466186,
+  1.7442702460289001,
+  1.7413966417312623,
+  1.7310823953151704,
+  1.7275413250923157,
+  1.7243073272705078
+ ],
+ "drops_5": [
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "median_drop": 0.7621375936269761,
+ "share_positive_drop": 0.962
+}

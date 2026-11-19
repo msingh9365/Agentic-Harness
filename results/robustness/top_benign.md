@@ -1,0 +1,67 @@
+# Item 3: the highest-scoring April benign reports for C (J) and for the released Nebula
+
+Ranking by logit. C (J): mean logit of the 10 seeds trained on all of January (10 epochs). "Shares sequence with malware": the report's API-name sequence (hash_apis) also occurs in a malware report of April (A) or January (J). Calls: the first 30 API names of Nebula's filtered report (dll prefix dropped, lower-case).
+
+
+## C (J) ensemble
+
+Threshold at 1% FPR on April: logit 2.73. The top-20 logits range from 8.22 to 15.11.
+
+| rank | row | logit | source | chunks | calls | seen in January | shares sequence with malware | other benign April reports with the same sequence | first 30 calls |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | 4073 | 15.11 | clean | 1 | 10 | yes | no | 47 | getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange |
+| 2 | 7932 | 14.98 | clean | 1 | 11 | yes | April+January | 66 | getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfow heapsetinformation interlockedcompareexchange _initterm_e _initterm interlockedexchange |
+| 3 | 7593 | 12.74 | clean | 1 | 10 | yes | April+January | 73 | getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange |
+| 4 | 4350 | 12.21 | clean | 1 | 1 | no | no | 0 | coinitialize |
+| 5 | 3741 | 12.16 | clean | 1 | 1 | yes | no | 1 | loadlibrarya |
+| 6 | 3458 | 11.81 | clean | 1 | 50 | no | no | 0 | getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter isprocessorfeaturepresent loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex loadlibraryexw getlasterror getprocaddress flsalloc getprocaddress flssetvalue loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex |
+| 7 | 6841 | 11.72 | clean | 1 | 27 | no | no | 4 | seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw |
+| 8 | 4296 | 11.72 | clean | 1 | 27 | no | no | 4 | seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw |
+| 9 | 4583 | 11.72 | clean | 1 | 27 | no | no | 4 | seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw |
+| 10 | 2470 | 11.72 | clean | 1 | 27 | no | no | 4 | seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw |
+| 11 | 7367 | 11.72 | clean | 1 | 27 | no | no | 4 | seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw |
+| 12 | 4229 | 11.60 | clean | 1 | 18 | no | no | 0 | __set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea __p___argv __p___argc malloc registerclassexa createwindowexa getmessagea unregisterclassa free exit |
+| 13 | 2937 | 11.05 | clean | 1 | 10 | yes | April+January | 73 | getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange |
+| 14 | 8928 | 10.99 | clean | 1 | 10 | yes | April+January | 73 | getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange |
+| 15 | 3808 | 10.48 | clean | 1 | 6 | no | no | 0 | getprocessheap getcurrentprocess openprocesstoken gettokeninformation heapalloc gettokeninformation |
+| 16 | 5105 | 10.33 | clean | 1 | 9 | yes | April+January | 45 | __set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea |
+| 17 | 8741 | 9.66 | clean | 1 | 9 | yes | April+January | 45 | __set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea |
+| 18 | 9787 | 8.47 | clean | 1 | 14 | no | no | 0 | __set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea __p___argv getversionexa getusernamea openscmanagera openservicea |
+| 19 | 2276 | 8.35 | clean | 1 | 13 | no | April | 34 | getmodulehandlew getsysteminfo getkeyboardtype getcommandlinew getstartupinfoa getacp getcurrentthreadid getversion getmodulehandlew getversion getprocaddress setdefaultdlldirectories getprocaddress |
+| 20 | 3384 | 8.22 | clean | 1 | 13 | no | April | 34 | getmodulehandlew getsysteminfo getkeyboardtype getcommandlinew getstartupinfoa getacp getcurrentthreadid getversion getmodulehandlew getversion getprocaddress setdefaultdlldirectories getprocaddress |
+
+
+## released Nebula
+
+Threshold at 1% FPR on April: logit 2.48. The top-20 logits range from 9.68 to 32.22.
+
+| rank | row | logit | source | chunks | calls | seen in January | shares sequence with malware | other benign April reports with the same sequence | first 30 calls |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | 3849 | 32.22 | clean | 1 | 47 | no | no | 0 | getcommandlinea getversionexa initializecriticalsection entercriticalsection getprocessheap getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getversionexa initializecriticalsection entercriticalsection heapalloc heapsize leavecriticalsection getprocessheap entercriticalsection heapsize leavecriticalsection initializecriticalsection entercriticalsection heapsize leavecriticalsection initializecriticalsection entercriticalsection heapsize leavecriticalsection initializecriticalsection entercriticalsection |
+| 2 | 8175 | 25.42 | clean | 1 | 1 | yes | January | 0 | getcommandlinea |
+| 3 | 3741 | 24.58 | clean | 1 | 1 | yes | no | 1 | loadlibrarya |
+| 4 | 2585 | 17.45 | clean | 1 | 5 | no | no | 0 | getprocessheap heapalloc getsysteminfo loadlibrarya getprocaddress |
+| 5 | 4364 | 17.13 | clean | 1 | 7 | yes | April | 11 | __set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm |
+| 6 | 2343 | 14.30 | clean | 3 | 234 | no | no | 0 | getversionexa getmodulehandlea heapcreate getmodulehandlea getprocaddress initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount getmodulehandlea getprocaddress getprocaddress getprocaddress getprocaddress flsalloc heapalloc flssetvalue getcurrentthreadid heapalloc getstartupinfoa |
+| 7 | 9154 | 13.82 | clean | 3 | 279 | no | no | 0 | loadlibrarya getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress |
+| 8 | 3951 | 13.55 | clean | 3 | 219 | no | April | 1 | getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter getstartupinfow getprocessheap encodepointer encodepointer getmodulehandlew getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress |
+| 9 | 6482 | 13.54 | clean | 1 | 4 | yes | April | 83 | __set_app_type setunhandledexceptionfilter __getmainargs __p__fmode |
+| 10 | 5200 | 13.19 | clean | 1 | 2 | no | no | 1 | getmodulehandlea loadlibrarya |
+| 11 | 5581 | 13.19 | clean | 1 | 2 | no | no | 1 | getmodulehandlea loadlibrarya |
+| 12 | 4141 | 12.51 | clean | 1 | 3 | no | no | 0 | memset rtlgetversion iogetcurrentprocess |
+| 13 | 5146 | 11.93 | clean | 2 | 142 | no | April | 0 | getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa heapcreate getmodulehandlew getprocaddress getprocaddress getprocaddress getprocaddress tlsalloc tlssetvalue tlsgetvalue getmodulehandlew getprocaddress encodepointer tlsgetvalue getmodulehandlew getprocaddress encodepointer tlsgetvalue getmodulehandlew getprocaddress encodepointer tlsgetvalue getmodulehandlew getprocaddress encodepointer |
+| 14 | 4229 | 10.88 | clean | 1 | 18 | no | no | 0 | __set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea __p___argv __p___argc malloc registerclassexa createwindowexa getmessagea unregisterclassa free exit |
+| 15 | 6554 | 10.52 | clean | 1 | 8 | no | no | 0 | getmodulehandlea getcommandlinea getmodulefilenamea createfilea setfilepointer messageboxa closehandle exitprocess |
+| 16 | 4350 | 10.27 | clean | 1 | 1 | no | no | 0 | coinitialize |
+| 17 | 4608 | 10.21 | clean | 1 | 48 | no | no | 0 | getversion heapcreate heapalloc heapalloc virtualalloc virtualalloc getstartupinfoa getstdhandle getfiletype getstdhandle getfiletype getstdhandle getfiletype sethandlecount getcommandlinea getenvironmentstringsw widechartomultibyte widechartomultibyte freeenvironmentstringsw getacp getcpinfo getcpinfo getstringtypew multibytetowidechar multibytetowidechar getstringtypew lcmapstringw multibytetowidechar multibytetowidechar lcmapstringw |
+| 18 | 4725 | 9.86 | clean | 3 | 219 | no | April | 1 | getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter getstartupinfow getprocessheap encodepointer encodepointer getmodulehandlew getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress |
+| 19 | 5967 | 9.85 | clean | 1 | 1 | yes | April | 0 | virtualalloc |
+| 20 | 4503 | 9.68 | clean | 3 | 188 | no | April | 9 | getmodulehandlea getkeyboardtype getcommandlinea getstartupinfoa getacp getcurrentthreadid getmodulefilenamea getmodulefilenamea regopenkeyexa regopenkeyexa regopenkeyexa lstrcpyna getthreadlocale getlocaleinfoa loadstringa virtualalloc loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa |
+
+
+## Comparison
+
+- Reports in both top-20 lists: 3 (3 shared API-name sequences). Spearman correlation of the two scores over all 8,003 April benign reports: 0.66.
+- Where the other model ranks them (1 = highest benign score): the released model's top 20 sit at ranks [4, 5, 12, 29, 33, 36, 41, 76, 78, 148, 177, 182, 200, 201, 1536, 1553, 2570, 2616, 2981, 3613] in C; C's top 20 sit at ranks [3, 14, 16, 32, 107, 135, 144, 195, 289, 376, 403, 443, 597, 674, 675, 676, 677, 678, 711, 718] in the released model.
+- Top-20 reports whose sequence also occurs in a malware report: C 8/20, released 8/20. Median calls: C 12, released 8. Sources: C {'clean': 20}, released {'clean': 20}. Chunks: C {1: 20}, released {1: 14, 2: 1, 3: 5}.
+- Overlap of each C seed's own top 20 with the ensemble top 20: [17, 18, 14, 16, 11, 10, 14, 16, 14, 16].

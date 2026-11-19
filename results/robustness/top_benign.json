@@ -1,0 +1,581 @@
+{
+ "lists": {
+  "C (J) ensemble": [
+   {
+    "rank": 1,
+    "row": 4073,
+    "logit": "15.11",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "seen in January": "yes",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 47,
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 2,
+    "row": 7932,
+    "logit": "14.98",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 11,
+    "seen in January": "yes",
+    "shares sequence with malware": "April+January",
+    "other benign April reports with the same sequence": 66,
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfow heapsetinformation interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 3,
+    "row": 7593,
+    "logit": "12.74",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "seen in January": "yes",
+    "shares sequence with malware": "April+January",
+    "other benign April reports with the same sequence": 73,
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 4,
+    "row": 4350,
+    "logit": "12.21",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 0,
+    "first 30 calls": "coinitialize"
+   },
+   {
+    "rank": 5,
+    "row": 3741,
+    "logit": "12.16",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "seen in January": "yes",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 1,
+    "first 30 calls": "loadlibrarya"
+   },
+   {
+    "rank": 6,
+    "row": 3458,
+    "logit": "11.81",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 50,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 0,
+    "first 30 calls": "getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter isprocessorfeaturepresent loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex loadlibraryexw getlasterror getprocaddress flsalloc getprocaddress flssetvalue loadlibraryexw getlasterror loadlibraryexw getprocaddress initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex initializecriticalsectionex"
+   },
+   {
+    "rank": 7,
+    "row": 6841,
+    "logit": "11.72",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 4,
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 8,
+    "row": 4296,
+    "logit": "11.72",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 4,
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 9,
+    "row": 4583,
+    "logit": "11.72",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 4,
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 10,
+    "row": 2470,
+    "logit": "11.72",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 4,
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 11,
+    "row": 7367,
+    "logit": "11.72",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 27,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 4,
+    "first 30 calls": "seterrormode getversion getmodulehandlew getprocaddress setdefaultdlldirectories getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw getmodulehandlew getsystemdirectoryw lstrlenw wsprintfw loadlibraryw"
+   },
+   {
+    "rank": 12,
+    "row": 4229,
+    "logit": "11.60",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 18,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 0,
+    "first 30 calls": "__set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea __p___argv __p___argc malloc registerclassexa createwindowexa getmessagea unregisterclassa free exit"
+   },
+   {
+    "rank": 13,
+    "row": 2937,
+    "logit": "11.05",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "seen in January": "yes",
+    "shares sequence with malware": "April+January",
+    "other benign April reports with the same sequence": 73,
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 14,
+    "row": 8928,
+    "logit": "10.99",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 10,
+    "seen in January": "yes",
+    "shares sequence with malware": "April+January",
+    "other benign April reports with the same sequence": 73,
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa interlockedcompareexchange _initterm_e _initterm interlockedexchange"
+   },
+   {
+    "rank": 15,
+    "row": 3808,
+    "logit": "10.48",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 6,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 0,
+    "first 30 calls": "getprocessheap getcurrentprocess openprocesstoken gettokeninformation heapalloc gettokeninformation"
+   },
+   {
+    "rank": 16,
+    "row": 5105,
+    "logit": "10.33",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 9,
+    "seen in January": "yes",
+    "shares sequence with malware": "April+January",
+    "other benign April reports with the same sequence": 45,
+    "first 30 calls": "__set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea"
+   },
+   {
+    "rank": 17,
+    "row": 8741,
+    "logit": "9.66",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 9,
+    "seen in January": "yes",
+    "shares sequence with malware": "April+January",
+    "other benign April reports with the same sequence": 45,
+    "first 30 calls": "__set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea"
+   },
+   {
+    "rank": 18,
+    "row": 9787,
+    "logit": "8.47",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 14,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 0,
+    "first 30 calls": "__set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea __p___argv getversionexa getusernamea openscmanagera openservicea"
+   },
+   {
+    "rank": 19,
+    "row": 2276,
+    "logit": "8.35",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 13,
+    "seen in January": "no",
+    "shares sequence with malware": "April",
+    "other benign April reports with the same sequence": 34,
+    "first 30 calls": "getmodulehandlew getsysteminfo getkeyboardtype getcommandlinew getstartupinfoa getacp getcurrentthreadid getversion getmodulehandlew getversion getprocaddress setdefaultdlldirectories getprocaddress"
+   },
+   {
+    "rank": 20,
+    "row": 3384,
+    "logit": "8.22",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 13,
+    "seen in January": "no",
+    "shares sequence with malware": "April",
+    "other benign April reports with the same sequence": 34,
+    "first 30 calls": "getmodulehandlew getsysteminfo getkeyboardtype getcommandlinew getstartupinfoa getacp getcurrentthreadid getversion getmodulehandlew getversion getprocaddress setdefaultdlldirectories getprocaddress"
+   }
+  ],
+  "released Nebula": [
+   {
+    "rank": 1,
+    "row": 3849,
+    "logit": "32.22",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 47,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 0,
+    "first 30 calls": "getcommandlinea getversionexa initializecriticalsection entercriticalsection getprocessheap getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getversionexa initializecriticalsection entercriticalsection heapalloc heapsize leavecriticalsection getprocessheap entercriticalsection heapsize leavecriticalsection initializecriticalsection entercriticalsection heapsize leavecriticalsection initializecriticalsection entercriticalsection heapsize leavecriticalsection initializecriticalsection entercriticalsection"
+   },
+   {
+    "rank": 2,
+    "row": 8175,
+    "logit": "25.42",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "seen in January": "yes",
+    "shares sequence with malware": "January",
+    "other benign April reports with the same sequence": 0,
+    "first 30 calls": "getcommandlinea"
+   },
+   {
+    "rank": 3,
+    "row": 3741,
+    "logit": "24.58",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "seen in January": "yes",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 1,
+    "first 30 calls": "loadlibrarya"
+   },
+   {
+    "rank": 4,
+    "row": 2585,
+    "logit": "17.45",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 5,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 0,
+    "first 30 calls": "getprocessheap heapalloc getsysteminfo loadlibrarya getprocaddress"
+   },
+   {
+    "rank": 5,
+    "row": 4364,
+    "logit": "17.13",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 7,
+    "seen in January": "yes",
+    "shares sequence with malware": "April",
+    "other benign April reports with the same sequence": 11,
+    "first 30 calls": "__set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm"
+   },
+   {
+    "rank": 6,
+    "row": 2343,
+    "logit": "14.30",
+    "source": "clean",
+    "chunks": 3,
+    "calls": 234,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 0,
+    "first 30 calls": "getversionexa getmodulehandlea heapcreate getmodulehandlea getprocaddress initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount initializecriticalsectionandspincount getmodulehandlea getprocaddress getprocaddress getprocaddress getprocaddress flsalloc heapalloc flssetvalue getcurrentthreadid heapalloc getstartupinfoa"
+   },
+   {
+    "rank": 7,
+    "row": 9154,
+    "logit": "13.82",
+    "source": "clean",
+    "chunks": 3,
+    "calls": 279,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 0,
+    "first 30 calls": "loadlibrarya getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress"
+   },
+   {
+    "rank": 8,
+    "row": 3951,
+    "logit": "13.55",
+    "source": "clean",
+    "chunks": 3,
+    "calls": 219,
+    "seen in January": "no",
+    "shares sequence with malware": "April",
+    "other benign April reports with the same sequence": 1,
+    "first 30 calls": "getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter getstartupinfow getprocessheap encodepointer encodepointer getmodulehandlew getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress"
+   },
+   {
+    "rank": 9,
+    "row": 6482,
+    "logit": "13.54",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 4,
+    "seen in January": "yes",
+    "shares sequence with malware": "April",
+    "other benign April reports with the same sequence": 83,
+    "first 30 calls": "__set_app_type setunhandledexceptionfilter __getmainargs __p__fmode"
+   },
+   {
+    "rank": 10,
+    "row": 5200,
+    "logit": "13.19",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 2,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 1,
+    "first 30 calls": "getmodulehandlea loadlibrarya"
+   },
+   {
+    "rank": 11,
+    "row": 5581,
+    "logit": "13.19",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 2,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 1,
+    "first 30 calls": "getmodulehandlea loadlibrarya"
+   },
+   {
+    "rank": 12,
+    "row": 4141,
+    "logit": "12.51",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 3,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 0,
+    "first 30 calls": "memset rtlgetversion iogetcurrentprocess"
+   },
+   {
+    "rank": 13,
+    "row": 5146,
+    "logit": "11.93",
+    "source": "clean",
+    "chunks": 2,
+    "calls": 142,
+    "seen in January": "no",
+    "shares sequence with malware": "April",
+    "other benign April reports with the same sequence": 0,
+    "first 30 calls": "getsystemtimeasfiletime getcurrentprocessid getcurrentthreadid gettickcount queryperformancecounter getstartupinfoa heapcreate getmodulehandlew getprocaddress getprocaddress getprocaddress getprocaddress tlsalloc tlssetvalue tlsgetvalue getmodulehandlew getprocaddress encodepointer tlsgetvalue getmodulehandlew getprocaddress encodepointer tlsgetvalue getmodulehandlew getprocaddress encodepointer tlsgetvalue getmodulehandlew getprocaddress encodepointer"
+   },
+   {
+    "rank": 14,
+    "row": 4229,
+    "logit": "10.88",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 18,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 0,
+    "first 30 calls": "__set_app_type __p__fmode __p__commode _controlfp _initterm __getmainargs _initterm getstartupinfoa getmodulehandlea __p___argv __p___argc malloc registerclassexa createwindowexa getmessagea unregisterclassa free exit"
+   },
+   {
+    "rank": 15,
+    "row": 6554,
+    "logit": "10.52",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 8,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 0,
+    "first 30 calls": "getmodulehandlea getcommandlinea getmodulefilenamea createfilea setfilepointer messageboxa closehandle exitprocess"
+   },
+   {
+    "rank": 16,
+    "row": 4350,
+    "logit": "10.27",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 0,
+    "first 30 calls": "coinitialize"
+   },
+   {
+    "rank": 17,
+    "row": 4608,
+    "logit": "10.21",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 48,
+    "seen in January": "no",
+    "shares sequence with malware": "no",
+    "other benign April reports with the same sequence": 0,
+    "first 30 calls": "getversion heapcreate heapalloc heapalloc virtualalloc virtualalloc getstartupinfoa getstdhandle getfiletype getstdhandle getfiletype getstdhandle getfiletype sethandlecount getcommandlinea getenvironmentstringsw widechartomultibyte widechartomultibyte freeenvironmentstringsw getacp getcpinfo getcpinfo getstringtypew multibytetowidechar multibytetowidechar getstringtypew lcmapstringw multibytetowidechar multibytetowidechar lcmapstringw"
+   },
+   {
+    "rank": 18,
+    "row": 4725,
+    "logit": "9.86",
+    "source": "clean",
+    "chunks": 3,
+    "calls": 219,
+    "seen in January": "no",
+    "shares sequence with malware": "April",
+    "other benign April reports with the same sequence": 1,
+    "first 30 calls": "getsystemtimeasfiletime getcurrentthreadid getcurrentprocessid queryperformancecounter getstartupinfow getprocessheap encodepointer encodepointer getmodulehandlew getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress getprocaddress"
+   },
+   {
+    "rank": 19,
+    "row": 5967,
+    "logit": "9.85",
+    "source": "clean",
+    "chunks": 1,
+    "calls": 1,
+    "seen in January": "yes",
+    "shares sequence with malware": "April",
+    "other benign April reports with the same sequence": 0,
+    "first 30 calls": "virtualalloc"
+   },
+   {
+    "rank": 20,
+    "row": 4503,
+    "logit": "9.68",
+    "source": "clean",
+    "chunks": 3,
+    "calls": 188,
+    "seen in January": "no",
+    "shares sequence with malware": "April",
+    "other benign April reports with the same sequence": 9,
+    "first 30 calls": "getmodulehandlea getkeyboardtype getcommandlinea getstartupinfoa getacp getcurrentthreadid getmodulefilenamea getmodulefilenamea regopenkeyexa regopenkeyexa regopenkeyexa lstrcpyna getthreadlocale getlocaleinfoa loadstringa virtualalloc loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa loadstringa"
+   }
+  ]
+ },
+ "summary": {
+  "overlap_reports": [
+   3741,
+   4229,
+   4350
+  ],
+  "n_overlap": 3,
+  "n_overlap_sequences": 3,
+  "spearman_all_benign": 0.6557613127381021,
+  "share_with_malware": {
+   "C (J) ensemble": 8,
+   "released Nebula": 8
+  },
+  "median_calls": {
+   "C (J) ensemble": 12.0,
+   "released Nebula": 7.5
+  },
+  "sources": {
+   "C (J) ensemble": {
+    "clean": 20
+   },
+   "released Nebula": {
+    "clean": 20
+   }
+  },
+  "chunks": {
+   "C (J) ensemble": {
+    "1": 20
+   },
+   "released Nebula": {
+    "1": 14,
+    "2": 1,
+    "3": 5
+   }
+  },
+  "rank_of_released_top20_in_C": [
+   4,
+   5,
+   12,
+   29,
+   33,
+   36,
+   41,
+   76,
+   78,
+   148,
+   177,
+   182,
+   200,
+   201,
+   1536,
+   1553,
+   2570,
+   2616,
+   2981,
+   3613
+  ],
+  "rank_of_C_top20_in_released": [
+   3,
+   14,
+   16,
+   32,
+   107,
+   135,
+   144,
+   195,
+   289,
+   376,
+   403,
+   443,
+   597,
+   674,
+   675,
+   676,
+   677,
+   678,
+   711,
+   718
+  ],
+  "n_benign": 8003,
+  "per_seed_C_top20_overlap_with_ensemble_top20": [
+   17,
+   18,
+   14,
+   16,
+   11,
+   10,
+   14,
+   16,
+   14,
+   16
+  ]
+ }
+}

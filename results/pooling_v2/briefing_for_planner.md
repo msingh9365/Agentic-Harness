@@ -189,3 +189,13 @@ Nothing is running. Round 3 (section 0b) is done and written up but not committe
 - Code: `hier_nebula/pooling_variants.py` (flags `fixed_pe`, `masked_mean`), `scripts/kaggle/train_pooling_v2.py`, `launch_pooling_v2.py`, `scripts/pooling_v2/{evaluate_v2,perturb_check,graded_edits,recipe_study,followups}.py`.
 - Kaggle outputs (outside the repo): `../pooling_v2_full_output` (regime S, 36 runs), `../pooling_v2_all_output` (regime J, 20 runs), `../pooling_v2_recipe_merged` (recipe study).
 - Rounds 1 and 2 are committed and pushed on `nebula-length-study`.
+
+## 10. Round 5: final-quality runs of ATT+bal and the examiner's tests (`results/round5`, not committed)
+
+ATT+bal (attention pooling, fixed position encoding, 512 tokens, trained with balanced padding: benign and malware reports padded alike) with 10 seeds, 4 epochs saved (epoch 2 primary), regime S runs for a second low-FPR test set, and a whole-report version (G3). Five-line summary (numbers and intervals in `results/round5/README.md`):
+1. ATT+bal beats the released Nebula on AUC (0.9752 against 0.9586, +0.0166 [+0.0043, +0.0342]) but not significantly at a fixed FPR (TPR 76.5% against 75.0% at 1%, 57.0% against 51.7% at 0.1%); it clearly beats the retrained A and C (e.g. +17.4 points at 0.1% FPR over A, seed-paired).
+2. On the January validation side (regime S, 2,103 benign reports) ATT+bal reaches 46.0% [22.1, 80.0] at 0.1% FPR against 36.0% for A and 20.0% for ATT without padding: same ordering as April, intervals of 20-60 points.
+3. Unseen padding (block of calls, other benign source, rare API names, surrogate-chosen calls, white-box greedy calls): costs ATT+bal 4-18 points at 20 calls, but rare names and window-filling padding at 50 calls break it (10.7% / 7.0% TPR at 1%); the released model and C fall much further, and the white-box attack leaves ATT+bal 54.0% (78.2% before), the released model 1.6%.
+4. Rotating the 512 window leaves ATT+bal, C and F unchanged (|change| at most 1.2 points) while the released model and A lose 38-51 points: they use token positions, ATT+bal does not. Rotating the whole call list costs ATT+bal 7-11 points, C 18-26, F and G3 about 0-4.
+5. The whole-report ATT+bal (G3, 5 seeds) is unaffected by both rotations but not more accurate (AUC 0.9578, TPR 76.1% / 55.0% at 1% / 0.1% FPR): reading more of the report does not pay. Recommendation: ATT+bal at 512 tokens. Kaggle quota used this round 2.52 h (26.84 of 30 h used, resets 2026-11-21 00:00 UTC).
+

@@ -64,6 +64,8 @@ def parse():
     ap.add_argument("--clip", type=float, default=0.5)
     ap.add_argument("--lr-step", type=int, default=1000)
     ap.add_argument("--no-amp", action="store_true")
+    ap.add_argument("--skip-best", action="store_true", help="do not write best_auc.pt / best_tpr.pt (round 5: smaller outputs; the epoch checkpoints are kept)")
+    ap.add_argument("--epoch-fp32", action="store_true", help="save the epoch checkpoints in fp32 (round 5: the epoch-2 weights are scored on the CPU, so they must equal the trained ones)")
     ap.add_argument("--data", default=None)
     ap.add_argument("--code", default=None)
     ap.add_argument("--out", default="/kaggle/working")
@@ -217,7 +219,7 @@ def main():
         if use_aug:                                                   # edited malware reports of this seed and epoch, for this epoch only
             rr = np.load(os.path.join(aug_dir, f"{apre}_s{a.seed}_e{ep}_rows.npy")); tt = np.load(os.path.join(aug_dir, f"{apre}_s{a.seed}_e{ep}_tok.npy"))
             keep = np.isin(rr, train_idx)                              # (only differs from "all" when --limit is used for debugging)
-            assert keep.all() or a.limit, "augmentation row outside the training set"
+            assert keep.all() or a.limit or not a.include_val, "augmentation row outside the training set"   # regime S (no --include-val): the validation-side rows of the files are dropped
             ar = torch.from_numpy(rr[keep]).to(dev); at = torch.from_numpy(tt[keep].astype(np.int32)).to(dev)
             assert bal or (yg[ar] == 1).all(), "augmentation touches a benign report"
             orig_rows = Xg[ar].clone(); Xg[ar] = at
@@ -252,11 +254,15 @@ def main():
                "peak_gpu_mem_gb": round(torch.cuda.max_memory_allocated() / 2**30, 3) if use_cuda else 0}
         state["history"].append(rec); state["april"].append(zt); state["janval"].append(zv); state["epoch"] = ep
         sd = {k: v.detach().cpu() for k, v in model.state_dict().items()}
-        save(os.path.join(ck, "epochs", f"epoch_{ep:02d}.pt"), {k: v.half() if v.is_floating_point() else v for k, v in sd.items()})
+        save(os.path.join(ck, "epochs", f"epoch_{ep:02d}.pt"), sd if a.epoch_fp32 else {k: v.half() if v.is_floating_point() else v for k, v in sd.items()})
         if vauc > state["best_auc"][0]:
-            state["best_auc"] = (vauc, ep); save(os.path.join(ck, "best_auc.pt"), sd)
+            state["best_auc"] = (vauc, ep)
+            if not a.skip_best:
+                save(os.path.join(ck, "best_auc.pt"), sd)
         if vtpr > state["best_tpr"][0]:
-            state["best_tpr"] = (vtpr, ep); save(os.path.join(ck, "best_tpr.pt"), sd)
+            state["best_tpr"] = (vtpr, ep)
+            if not a.skip_best:
+                save(os.path.join(ck, "best_tpr.pt"), sd)
         np.savez(os.path.join(a.out, "scores", f"{run}_epochs.npz.tmp.npz"), april=np.stack(state["april"]),
                  janval=np.stack(state["janval"]), epochs=np.arange(1, ep + 1))
         os.replace(os.path.join(a.out, "scores", f"{run}_epochs.npz.tmp.npz"), os.path.join(a.out, "scores", f"{run}_epochs.npz"))

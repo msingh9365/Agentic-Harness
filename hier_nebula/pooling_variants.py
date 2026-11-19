@@ -55,7 +55,7 @@ VARIANTS = {
 # v4 (results/pooling_v4): M = Mx, MM = MMx, ATT = ATTx; Caug = Cm and ATTaug = ATTx trained on augmented data.
 V2_TO_INTERNAL = {"A": "A", "B": "Bm", "C": "Cm", "B0": "B", "C0": "C", "F": "Cm",
                   "M": "Mx", "MM": "MMx", "ATT": "ATTx", "Caug": "Cm", "ATTaug": "ATTx",
-                  "Cbal": "Cm", "MMbal": "MMx", "ATTbal": "ATTx"}
+                  "Cbal": "Cm", "MMbal": "MMx", "ATTbal": "ATTx", "ATTbalW": "ATTx"}
 V2_MAXLEN = {"F": 4096}
 
 

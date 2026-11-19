@@ -1,0 +1,134 @@
+{
+ "count": [
+  {
+   "model": "ATT+bal",
+   "benign reports in April": 8003,
+   "allowed above 0.1% threshold (floor)": 8,
+   "benign above the 0.1% threshold (mean over seeds)": "8.0",
+   "allowed above 1% threshold": 80,
+   "benign above the 1% threshold": "80.0"
+  },
+  {
+   "model": "MM+bal",
+   "benign reports in April": 8003,
+   "allowed above 0.1% threshold (floor)": 8,
+   "benign above the 0.1% threshold (mean over seeds)": "8.0",
+   "allowed above 1% threshold": 80,
+   "benign above the 1% threshold": "79.8"
+  },
+  {
+   "model": "C+bal",
+   "benign reports in April": 8003,
+   "allowed above 0.1% threshold (floor)": 8,
+   "benign above the 0.1% threshold (mean over seeds)": "8.0",
+   "allowed above 1% threshold": 80,
+   "benign above the 1% threshold": "75.9"
+  },
+  {
+   "model": "C (J, 2 epochs)",
+   "benign reports in April": 8003,
+   "allowed above 0.1% threshold (floor)": 8,
+   "benign above the 0.1% threshold (mean over seeds)": "6.7",
+   "allowed above 1% threshold": 80,
+   "benign above the 1% threshold": "79.9"
+  },
+  {
+   "model": "C (J)",
+   "benign reports in April": 8003,
+   "allowed above 0.1% threshold (floor)": 8,
+   "benign above the 0.1% threshold (mean over seeds)": "6.8",
+   "allowed above 1% threshold": 80,
+   "benign above the 1% threshold": "79.9"
+  },
+  {
+   "model": "A (J)",
+   "benign reports in April": 8003,
+   "allowed above 0.1% threshold (floor)": 8,
+   "benign above the 0.1% threshold (mean over seeds)": "8.0",
+   "allowed above 1% threshold": 80,
+   "benign above the 1% threshold": "80.0"
+  },
+  {
+   "model": "released Nebula",
+   "benign reports in April": 8003,
+   "allowed above 0.1% threshold (floor)": 8,
+   "benign above the 0.1% threshold (mean over seeds)": "8.0",
+   "allowed above 1% threshold": 80,
+   "benign above the 1% threshold": "80.0"
+  }
+ ],
+ "tpr_k": [
+  {
+   "model": "ATT+bal",
+   "TPR with 4 benign above the threshold (0.050% FPR)": "47.5%",
+   "TPR with 8 benign above the threshold (0.100% FPR)": "59.4%",
+   "TPR with 12 benign above the threshold (0.150% FPR)": "63.9%"
+  },
+  {
+   "model": "MM+bal",
+   "TPR with 4 benign above the threshold (0.050% FPR)": "27.0%",
+   "TPR with 8 benign above the threshold (0.100% FPR)": "36.3%",
+   "TPR with 12 benign above the threshold (0.150% FPR)": "47.0%"
+  },
+  {
+   "model": "C+bal",
+   "TPR with 4 benign above the threshold (0.050% FPR)": "12.3%",
+   "TPR with 8 benign above the threshold (0.100% FPR)": "29.5%",
+   "TPR with 12 benign above the threshold (0.150% FPR)": "45.6%"
+  },
+  {
+   "model": "C (J, 2 epochs)",
+   "TPR with 4 benign above the threshold (0.050% FPR)": "9.1%",
+   "TPR with 8 benign above the threshold (0.100% FPR)": "15.2%",
+   "TPR with 12 benign above the threshold (0.150% FPR)": "20.2%"
+  },
+  {
+   "model": "C (J)",
+   "TPR with 4 benign above the threshold (0.050% FPR)": "12.4%",
+   "TPR with 8 benign above the threshold (0.100% FPR)": "20.4%",
+   "TPR with 12 benign above the threshold (0.150% FPR)": "27.1%"
+  },
+  {
+   "model": "A (J)",
+   "TPR with 4 benign above the threshold (0.050% FPR)": "33.3%",
+   "TPR with 8 benign above the threshold (0.100% FPR)": "39.6%",
+   "TPR with 12 benign above the threshold (0.150% FPR)": "44.2%"
+  },
+  {
+   "model": "released Nebula",
+   "TPR with 4 benign above the threshold (0.050% FPR)": "41.5%",
+   "TPR with 8 benign above the threshold (0.100% FPR)": "51.8%",
+   "TPR with 12 benign above the threshold (0.150% FPR)": "55.8%"
+  }
+ ],
+ "pauc": [
+  {
+   "model": "ATT+bal",
+   "standardised partial AUC to 1% FPR": "0.8418 [0.7774, 0.8900]"
+  },
+  {
+   "model": "MM+bal",
+   "standardised partial AUC to 1% FPR": "0.8138 [0.7431, 0.8748]"
+  },
+  {
+   "model": "C+bal",
+   "standardised partial AUC to 1% FPR": "0.8091 [0.7453, 0.8664]"
+  },
+  {
+   "model": "C (J, 2 epochs)",
+   "standardised partial AUC to 1% FPR": "0.7371 [0.6492, 0.8244]"
+  },
+  {
+   "model": "C (J)",
+   "standardised partial AUC to 1% FPR": "0.7607 [0.6820, 0.8342]"
+  },
+  {
+   "model": "A (J)",
+   "standardised partial AUC to 1% FPR": "0.7942 [0.7369, 0.8488]"
+  },
+  {
+   "model": "released Nebula",
+   "standardised partial AUC to 1% FPR": "0.8286 [0.7732, 0.8794]"
+  }
+ ]
+}

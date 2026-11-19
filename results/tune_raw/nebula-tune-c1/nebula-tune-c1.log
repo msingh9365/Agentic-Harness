@@ -1,0 +1,76 @@
+[{"stream_name":"stderr","time":0.737390516,"data":"/kaggle/src/script.py:18: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.\n"}
+,{"stream_name":"stderr","time":0.737437259,"data":"  tarfile.open(fileobj=io.BytesIO(base64.b64decode(PAYLOAD)), mode=\"r:gz\").extractall(CODE)\n"}
+,{"stream_name":"stdout","time":13.784331502,"data":"$ pip install -q lightning torchmetrics tensorboard sentencepiece orjson nltk speakeasy-emulator lief lxml scikit-learn matplotlib   [exit 0, 13s]\n"}
+,{"stream_name":"stdout","time":30.462521799,"data":"$ rm -rf /tmp/nebula \u0026\u0026 git clone -q https://github.com/dtrizna/nebula /tmp/nebula \u0026\u0026 git -C /tmp/nebula checkout -q 1343ae170ef32b01a75d2dd5fb906b5541f   [exit 0, 17s]\n"}
+,{"stream_name":"stdout","time":30.499326229,"data":"$ bash /tmp/kcode/patches/apply_patches.sh /tmp/nebula   [exit 0, 0s]\n"}
+,{"stream_name":"stdout","time":34.490146449,"data":"$ pip install -q -e /tmp/nebula --no-deps   [exit 0, 4s]\n"}
+,{"stream_name":"stdout","time":34.492548809,"data":"nebula commit: 1343ae170ef32b01a75d2dd5fb906b5541f073df\n"}
+,{"stream_name":"stdout","time":34.492850232,"data":"RUN: /usr/bin/python3 -m baseline.v2pe --plan --seeds 0 1 2 3 4 5 6 7 8 9 --epochs 4 --pe-mode paper --pooling attn --tag tune_lr1e-3_p0.25 --lr 1e-3 --pad-store all.npz --pad-mode replace --pad-labels all --pad-stream 7000 --pad-prob 0.25 --val-robust --every-epoch --out /kaggle/working/out\n"}
+,{"stream_name":"stdout","time":39.691914323,"data":"[0.0 min] GPU 0: started tune_lr1e-3_p0.25 seed 0\n"}
+,{"stream_name":"stdout","time":39.692740506,"data":"[0.0 min] GPU 1: started tune_lr1e-3_p0.25 seed 1\n"}
+,{"stream_name":"stdout","time":309.701063876,"data":"[4.5 min] GPU 0: tune_lr1e-3_p0.25 seed0 exited with 0\n"}
+,{"stream_name":"stdout","time":309.701388563,"data":"[tune_lr1e-3_p0.25 seed 0] epoch 3: val TPR@1e-3 0.942 @1e-2 0.983 pAUC@1e-2 0.963 AUC 0.9984 loss 0.0644 | 171s\n"}
+,{"stream_name":"stdout","time":309.70141333,"data":"WARNING:root: [*] Started epoch: 1\n"}
+,{"stream_name":"stdout","time":309.70141987,"data":"[tune_lr1e-3_p0.25 seed 0] epoch 4: val TPR@1e-3 0.900 @1e-2 0.985 pAUC@1e-2 0.958 AUC 0.9984 loss 0.0707 | 229s\n"}
+,{"stream_name":"stdout","time":309.701425027,"data":"\n"}
+,{"stream_name":"stdout","time":309.701429395,"data":"[4.5 min] GPU 1: tune_lr1e-3_p0.25 seed1 exited with 0\n"}
+,{"stream_name":"stdout","time":309.701434002,"data":"[tune_lr1e-3_p0.25 seed 1] epoch 3: val TPR@1e-3 0.875 @1e-2 0.985 pAUC@1e-2 0.959 AUC 0.9986 loss 0.0549 | 172s\n"}
+,{"stream_name":"stdout","time":309.701438705,"data":"WARNING:root: [*] Started epoch: 1\n"}
+,{"stream_name":"stdout","time":309.701443147,"data":"[tune_lr1e-3_p0.25 seed 1] epoch 4: val TPR@1e-3 0.871 @1e-2 0.986 pAUC@1e-2 0.952 AUC 0.9984 loss 0.0627 | 229s\n"}
+,{"stream_name":"stdout","time":309.701447858,"data":"\n"}
+,{"stream_name":"stdout","time":314.702790543,"data":"[4.6 min] GPU 0: started tune_lr1e-3_p0.25 seed 2\n"}
+,{"stream_name":"stdout","time":314.703700835,"data":"[4.6 min] GPU 1: started tune_lr1e-3_p0.25 seed 3\n"}
+,{"stream_name":"stdout","time":559.711422249,"data":"[8.7 min] GPU 0: tune_lr1e-3_p0.25 seed2 exited with 0\n"}
+,{"stream_name":"stdout","time":559.711528285,"data":"[tune_lr1e-3_p0.25 seed 2] epoch 3: val TPR@1e-3 0.917 @1e-2 0.986 pAUC@1e-2 0.964 AUC 0.9986 loss 0.0520 | 171s\n"}
+,{"stream_name":"stdout","time":559.711540468,"data":"WARNING:root: [*] Started epoch: 1\n"}
+,{"stream_name":"stdout","time":559.711546398,"data":"[tune_lr1e-3_p0.25 seed 2] epoch 4: val TPR@1e-3 0.916 @1e-2 0.982 pAUC@1e-2 0.961 AUC 0.9984 loss 0.0788 | 228s\n"}
+,{"stream_name":"stdout","time":559.711552024,"data":"\n"}
+,{"stream_name":"stdout","time":559.711611149,"data":"[8.7 min] GPU 1: tune_lr1e-3_p0.25 seed3 exited with 0\n"}
+,{"stream_name":"stdout","time":559.711790417,"data":"[tune_lr1e-3_p0.25 seed 3] epoch 3: val TPR@1e-3 0.885 @1e-2 0.979 pAUC@1e-2 0.945 AUC 0.9983 loss 0.0847 | 170s\n"}
+,{"stream_name":"stdout","time":559.711802922,"data":"WARNING:root: [*] Started epoch: 1\n"}
+,{"stream_name":"stdout","time":559.711805787,"data":"[tune_lr1e-3_p0.25 seed 3] epoch 4: val TPR@1e-3 0.881 @1e-2 0.981 pAUC@1e-2 0.952 AUC 0.9985 loss 0.0646 | 227s\n"}
+,{"stream_name":"stdout","time":559.711808527,"data":"\n"}
+,{"stream_name":"stdout","time":564.713192809,"data":"[8.8 min] GPU 0: started tune_lr1e-3_p0.25 seed 4\n"}
+,{"stream_name":"stdout","time":564.714062666,"data":"[8.8 min] GPU 1: started tune_lr1e-3_p0.25 seed 5\n"}
+,{"stream_name":"stdout","time":809.721595793,"data":"[12.8 min] GPU 0: tune_lr1e-3_p0.25 seed4 exited with 0\n"}
+,{"stream_name":"stdout","time":809.721869238,"data":"[tune_lr1e-3_p0.25 seed 4] epoch 3: val TPR@1e-3 0.912 @1e-2 0.972 pAUC@1e-2 0.943 AUC 0.9983 loss 0.0703 | 171s\n"}
+,{"stream_name":"stdout","time":809.721896739,"data":"WARNING:root: [*] Started epoch: 1\n"}
+,{"stream_name":"stdout","time":809.721901401,"data":"[tune_lr1e-3_p0.25 seed 4] epoch 4: val TPR@1e-3 0.874 @1e-2 0.976 pAUC@1e-2 0.951 AUC 0.9985 loss 0.0791 | 227s\n"}
+,{"stream_name":"stdout","time":809.721904871,"data":"\n"}
+,{"stream_name":"stdout","time":809.721921001,"data":"[12.8 min] GPU 1: tune_lr1e-3_p0.25 seed5 exited with 0\n"}
+,{"stream_name":"stdout","time":809.721925974,"data":"[tune_lr1e-3_p0.25 seed 5] epoch 3: val TPR@1e-3 0.950 @1e-2 0.980 pAUC@1e-2 0.961 AUC 0.9986 loss 0.0776 | 171s\n"}
+,{"stream_name":"stdout","time":809.721931508,"data":"WARNING:root: [*] Started epoch: 1\n"}
+,{"stream_name":"stdout","time":809.721936176,"data":"[tune_lr1e-3_p0.25 seed 5] epoch 4: val TPR@1e-3 0.890 @1e-2 0.981 pAUC@1e-2 0.940 AUC 0.9983 loss 0.0663 | 228s\n"}
+,{"stream_name":"stdout","time":809.721941243,"data":"\n"}
+,{"stream_name":"stdout","time":814.722909402,"data":"[12.9 min] GPU 0: started tune_lr1e-3_p0.25 seed 6\n"}
+,{"stream_name":"stdout","time":814.723698356,"data":"[12.9 min] GPU 1: started tune_lr1e-3_p0.25 seed 7\n"}
+,{"stream_name":"stdout","time":1059.731319883,"data":"[17.0 min] GPU 0: tune_lr1e-3_p0.25 seed6 exited with 0\n"}
+,{"stream_name":"stdout","time":1059.731523698,"data":"[tune_lr1e-3_p0.25 seed 6] epoch 3: val TPR@1e-3 0.932 @1e-2 0.981 pAUC@1e-2 0.961 AUC 0.9981 loss 0.0736 | 170s\n"}
+,{"stream_name":"stdout","time":1059.731536992,"data":"WARNING:root: [*] Started epoch: 1\n"}
+,{"stream_name":"stdout","time":1059.731542085,"data":"[tune_lr1e-3_p0.25 seed 6] epoch 4: val TPR@1e-3 0.883 @1e-2 0.985 pAUC@1e-2 0.955 AUC 0.9983 loss 0.0966 | 227s\n"}
+,{"stream_name":"stdout","time":1059.731547019,"data":"\n"}
+,{"stream_name":"stdout","time":1059.731559027,"data":"[17.0 min] GPU 1: tune_lr1e-3_p0.25 seed7 exited with 0\n"}
+,{"stream_name":"stdout","time":1059.73175601,"data":"[tune_lr1e-3_p0.25 seed 7] epoch 3: val TPR@1e-3 0.878 @1e-2 0.984 pAUC@1e-2 0.950 AUC 0.9986 loss 0.0553 | 169s\n"}
+,{"stream_name":"stdout","time":1059.73176609,"data":"WARNING:root: [*] Started epoch: 1\n"}
+,{"stream_name":"stdout","time":1059.731770887,"data":"[tune_lr1e-3_p0.25 seed 7] epoch 4: val TPR@1e-3 0.874 @1e-2 0.979 pAUC@1e-2 0.944 AUC 0.9984 loss 0.0838 | 225s\n"}
+,{"stream_name":"stdout","time":1059.731775598,"data":"\n"}
+,{"stream_name":"stdout","time":1064.733072884,"data":"[17.1 min] GPU 0: started tune_lr1e-3_p0.25 seed 8\n"}
+,{"stream_name":"stdout","time":1064.73379827,"data":"[17.1 min] GPU 1: started tune_lr1e-3_p0.25 seed 9\n"}
+,{"stream_name":"stdout","time":1304.741113628,"data":"[21.1 min] GPU 1: tune_lr1e-3_p0.25 seed9 exited with 0\n"}
+,{"stream_name":"stdout","time":1304.741303539,"data":"[tune_lr1e-3_p0.25 seed 9] epoch 3: val TPR@1e-3 0.935 @1e-2 0.982 pAUC@1e-2 0.960 AUC 0.9984 loss 0.0793 | 168s\n"}
+,{"stream_name":"stdout","time":1304.741317766,"data":"WARNING:root: [*] Started epoch: 1\n"}
+,{"stream_name":"stdout","time":1304.74132296,"data":"[tune_lr1e-3_p0.25 seed 9] epoch 4: val TPR@1e-3 0.900 @1e-2 0.982 pAUC@1e-2 0.958 AUC 0.9985 loss 0.0737 | 224s\n"}
+,{"stream_name":"stdout","time":1304.741328156,"data":"\n"}
+,{"stream_name":"stdout","time":1309.741849098,"data":"[21.2 min] GPU 0: tune_lr1e-3_p0.25 seed8 exited with 0\n"}
+,{"stream_name":"stdout","time":1309.741893533,"data":"[tune_lr1e-3_p0.25 seed 8] epoch 3: val TPR@1e-3 0.892 @1e-2 0.985 pAUC@1e-2 0.962 AUC 0.9984 loss 0.0631 | 170s\n"}
+,{"stream_name":"stdout","time":1309.741900619,"data":"WARNING:root: [*] Started epoch: 1\n"}
+,{"stream_name":"stdout","time":1309.741922246,"data":"[tune_lr1e-3_p0.25 seed 8] epoch 4: val TPR@1e-3 0.874 @1e-2 0.987 pAUC@1e-2 0.954 AUC 0.9985 loss 0.0541 | 227s\n"}
+,{"stream_name":"stdout","time":1309.741927036,"data":"\n"}
+,{"stream_name":"stdout","time":1315.0925346,"data":"job exit code: 0\n"}
+,{"stream_name":"stderr","time":1317.084783167,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1317.084812849,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1317.27585422,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1317.275883406,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1318.021911315,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1318.885110323,"data":"[NbConvertApp] Writing 502234 bytes to __results__.html\n"}
+]

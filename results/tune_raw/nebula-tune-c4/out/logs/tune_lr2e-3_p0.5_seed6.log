@@ -1,0 +1,21 @@
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+WARNING:root: [!] Iniatialized TransformerEncoderChunksPE. Total trainable parameters: 3.3043e6
+[tune_lr2e-3_p0.5 seed 6] call store /kaggle/input/datasets/manishsinghxdev/nebula-tune-inputs/all.npz: 92,700 reports; TRAIN pool 22,201 benign reports of the training slice
+[tune_lr2e-3_p0.5 seed 6] validation robustness set: 5,063 malware reports, 20 TRAIN-pool calls prepended
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 16:03:36: Train Epoch: 1 [  0  / 706  (0 %)] | Loss: 0.692892 | Elapsed: 0.59s | FPR 0.0003 -> TPR: 0.08 & F1: 0.15 | AUC: 0.6354
+WARNING:root: [*] Thu Nov 19 16:04:18 2026:    1    | Tr.loss: 0.145595 | Elapsed:   41.89  s | FPR 0.0003 -> TPR: 0.29 & F1: 0.45 | AUC: 0.9853
+[tune_lr2e-3_p0.5 seed 6] epoch 1: val TPR@1e-3 0.848 @1e-2 0.973 pAUC@1e-2 0.937 AUC 0.9980 loss 0.0633 | 64s
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 16:04:42: Train Epoch: 1 [  0  / 706  (0 %)] | Loss: 0.043191 | Elapsed: 0.10s | FPR 0.0003 -> TPR: 1.00 & F1: 1.00 | AUC: 1.0000
+WARNING:root: [*] Thu Nov 19 16:05:23 2026:    1    | Tr.loss: 0.063359 | Elapsed:   41.52  s | FPR 0.0003 -> TPR: 0.58 & F1: 0.73 | AUC: 0.9969
+[tune_lr2e-3_p0.5 seed 6] epoch 2: val TPR@1e-3 0.941 @1e-2 0.982 pAUC@1e-2 0.965 AUC 0.9986 loss 0.0616 | 129s
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 16:05:47: Train Epoch: 1 [  0  / 706  (0 %)] | Loss: 0.052786 | Elapsed: 0.10s | FPR 0.0003 -> TPR: 0.97 & F1: 0.98 | AUC: 0.9981
+WARNING:root: [*] Thu Nov 19 16:06:28 2026:    1    | Tr.loss: 0.050405 | Elapsed:   41.43  s | FPR 0.0003 -> TPR: 0.72 & F1: 0.84 | AUC: 0.9980
+[tune_lr2e-3_p0.5 seed 6] epoch 3: val TPR@1e-3 0.943 @1e-2 0.981 pAUC@1e-2 0.956 AUC 0.9984 loss 0.0678 | 194s
+WARNING:root: [*] Started epoch: 1
+WARNING:root: [*] 16:06:52: Train Epoch: 1 [  0  / 706  (0 %)] | Loss: 0.052666 | Elapsed: 0.09s | FPR 0.0003 -> TPR: 0.99 & F1: 0.99 | AUC: 0.9979
+WARNING:root: [*] Thu Nov 19 16:07:33 2026:    1    | Tr.loss: 0.045057 | Elapsed:   41.36  s | FPR 0.0003 -> TPR: 0.78 & F1: 0.88 | AUC: 0.9985
+[tune_lr2e-3_p0.5 seed 6] epoch 4: val TPR@1e-3 0.872 @1e-2 0.977 pAUC@1e-2 0.948 AUC 0.9982 loss 0.0872 | 259s

@@ -42,6 +42,16 @@
 | ATT+bal-2L (A) | random 50 insert | 73.8 ± 1.8 | 1.0 ± 0.3 | 38.0 ± 6.8 | 0.0 ± 0.0 | 17.0% | 56.4 | 15.1 |
 | ATT+bal-2L (A) | random 100 insert | 65.7 ± 2.8 | 0.6 ± 0.2 | 29.5 ± 8.2 | 0.0 ± 0.0 | 0.0% | n/a | n/a |
 | ATT+bal-2L (A) | random 200 insert | 56.0 ± 3.3 | 0.5 ± 0.2 | 20.1 ± 7.1 | 0.0 ± 0.0 | 0.0% | n/a | n/a |
+| ATT+bal-2L, round 2 (A2) | random 5 prepend | 78.6 ± 3.4 | 1.1 ± 0.2 | 50.4 ± 7.8 | 0.1 ± 0.0 | 30.3% | 75.3 | 49.9 |
+| ATT+bal-2L, round 2 (A2) | random 20 prepend | 76.7 ± 3.1 | 1.3 ± 0.3 | 49.7 ± 8.9 | 0.1 ± 0.0 | 27.5% | 74.3 | 39.9 |
+| ATT+bal-2L, round 2 (A2) | random 50 prepend | 67.9 ± 4.7 | 1.1 ± 0.5 | 37.6 ± 6.1 | 0.0 ± 0.0 | 17.1% | 54.1 | 11.8 |
+| ATT+bal-2L, round 2 (A2) | random 100 prepend | 9.2 ± 1.8 | 0.3 ± 0.2 | 4.0 ± 1.3 | 0.0 ± 0.0 | 0.0% | n/a | n/a |
+| ATT+bal-2L, round 2 (A2) | random 200 prepend | 7.8 ± 1.2 | 0.3 ± 0.3 | 3.6 ± 1.6 | 0.0 | 0.0% | n/a | n/a |
+| ATT+bal-2L, round 2 (A2) | random 5 insert | 78.2 ± 3.1 | 1.1 ± 0.1 | 50.1 ± 7.4 | 0.1 ± 0.0 | 30.3% | 74.9 | 49.2 |
+| ATT+bal-2L, round 2 (A2) | random 20 insert | 75.0 ± 4.4 | 1.0 ± 0.3 | 43.7 ± 6.7 | 0.1 ± 0.0 | 27.6% | 72.0 | 37.4 |
+| ATT+bal-2L, round 2 (A2) | random 50 insert | 71.0 ± 4.6 | 0.8 ± 0.3 | 40.7 ± 6.5 | 0.0 ± 0.0 | 17.0% | 51.4 | 10.5 |
+| ATT+bal-2L, round 2 (A2) | random 100 insert | 60.7 ± 4.2 | 0.5 ± 0.2 | 34.5 ± 6.5 | 0.0 ± 0.0 | 0.0% | n/a | n/a |
+| ATT+bal-2L, round 2 (A2) | random 200 insert | 51.2 ± 4.9 | 0.4 ± 0.2 | 26.3 ± 6.0 | 0.0 ± 0.0 | 0.0% | n/a | n/a |
 
 **Random padding with calls of the EVAL pool, all April reports: A − B, points (× 100). Mean of the per-seed differences (seed i of A against seed i of B), their standard deviation over the seeds, 95% CI of the stratified bootstrap over the April reports (1,000 resamples, numpy seed 0; it covers the test-set sampling only, not the seed-to-seed spread), seeds above 0 / below 0; meets rule = CI excludes 0 and ≥ 7 of 10 seeds with the same sign (descriptive: none of these robustness comparisons is a pre-registered claim).**
 
@@ -255,6 +265,214 @@
 | B (2L, no padding) − ATT+bal | random 200 insert | 1% FPR | padded-benign FPR | -0.95 | 0.45 | [-1.07, -0.81] | 0/10 | **yes** | [-1.18, -0.75] | yes |
 | B (2L, no padding) − ATT+bal | random 200 insert | 0.1% FPR | malware TPR | -24.82 | 2.37 | [-25.63, -24.06] | 0/10 | **yes** | [-38.35, -12.82] | yes |
 | B (2L, no padding) − ATT+bal | random 200 insert | 0.1% FPR | padded-benign FPR | -0.01 | 0.01 | [-0.02, -0.00] | 0/7 | **yes** | [-0.03, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 5 prepend | 1% FPR | malware TPR | -0.44 | 1.06 | [-0.55, -0.33] | 4/6 | no | [-1.48, +0.51] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 5 prepend | 1% FPR | padded-benign FPR | -0.03 | 0.10 | [-0.07, +0.02] | 3/5 | no | [-0.09, +0.04] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 5 prepend | 1% FPR | malware TPR, fit subset | +0.69 | 1.04 | [+0.53, +0.85] | 8/2 | **yes** | [+0.25, +1.47] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 5 prepend | 0.1% FPR | malware TPR | -1.69 | 4.52 | [-1.87, -1.49] | 3/7 | **yes** | [-3.48, +0.20] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 5 prepend | 0.1% FPR | padded-benign FPR | -0.01 | 0.02 | [-0.02, +0.01] | 3/4 | no | [-0.02, +0.01] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 5 prepend | 0.1% FPR | malware TPR, fit subset | -0.40 | 4.91 | [-0.77, +0.00] | 3/7 | no | [-2.99, +2.15] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 20 prepend | 1% FPR | malware TPR | -0.24 | 1.01 | [-0.35, -0.14] | 4/6 | no | [-0.79, +0.27] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 20 prepend | 1% FPR | padded-benign FPR | -0.04 | 0.21 | [-0.09, +0.02] | 4/6 | no | [-0.13, +0.05] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 20 prepend | 1% FPR | malware TPR, fit subset | +0.89 | 1.07 | [+0.73, +1.07] | 7/3 | **yes** | [+0.46, +1.68] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 20 prepend | 0.1% FPR | malware TPR | -2.08 | 5.14 | [-2.29, -1.88] | 4/6 | no | [-3.69, -0.42] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 20 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.02 | [-0.01, +0.02] | 6/4 | no | [-0.01, +0.02] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 20 prepend | 0.1% FPR | malware TPR, fit subset | -2.03 | 6.19 | [-2.50, -1.55] | 4/6 | no | [-4.90, +0.46] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 50 prepend | 1% FPR | malware TPR | +0.25 | 1.87 | [+0.12, +0.38] | 6/4 | no | [-0.56, +1.07] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 50 prepend | 1% FPR | padded-benign FPR | -0.39 | 0.42 | [-0.45, -0.33] | 2/8 | **yes** | [-0.60, -0.25] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 50 prepend | 1% FPR | malware TPR, fit subset | -0.81 | 3.95 | [-1.15, -0.48] | 3/7 | **yes** | [-1.83, -0.14] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 50 prepend | 0.1% FPR | malware TPR | +5.42 | 2.83 | [+5.14, +5.70] | 10/0 | **yes** | [+2.84, +8.03] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 50 prepend | 0.1% FPR | padded-benign FPR | +0.02 | 0.02 | [+0.00, +0.03] | 9/0 | **yes** | [+0.01, +0.03] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 50 prepend | 0.1% FPR | malware TPR, fit subset | +2.38 | 4.96 | [+2.09, +2.66] | 8/2 | **yes** | [+0.95, +3.39] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 100 prepend | 1% FPR | malware TPR | +1.32 | 1.52 | [+1.22, +1.44] | 8/2 | **yes** | [+0.44, +2.90] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 100 prepend | 1% FPR | padded-benign FPR | -0.65 | 0.53 | [-0.74, -0.57] | 0/10 | **yes** | [-0.73, -0.57] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 100 prepend | 0.1% FPR | malware TPR | +1.76 | 0.92 | [+1.56, +1.94] | 10/0 | **yes** | [+0.54, +3.51] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 100 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 1/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 200 prepend | 1% FPR | malware TPR | -0.17 | 1.37 | [-0.26, -0.09] | 2/8 | **yes** | [-0.65, +0.58] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 200 prepend | 1% FPR | padded-benign FPR | -0.60 | 0.52 | [-0.67, -0.53] | 0/9 | **yes** | [-0.66, -0.53] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 200 prepend | 0.1% FPR | malware TPR | +1.38 | 1.34 | [+1.21, +1.54] | 9/1 | **yes** | [+0.29, +2.99] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 200 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 5 insert | 1% FPR | malware TPR | -0.28 | 1.33 | [-0.40, -0.15] | 5/5 | no | [-1.47, +1.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 5 insert | 1% FPR | padded-benign FPR | -0.02 | 0.10 | [-0.07, +0.01] | 4/6 | no | [-0.08, +0.03] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 5 insert | 1% FPR | malware TPR, fit subset | +0.52 | 0.88 | [+0.38, +0.68] | 8/2 | **yes** | [+0.16, +1.22] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 5 insert | 0.1% FPR | malware TPR | -2.73 | 4.50 | [-2.95, -2.51] | 4/6 | no | [-5.06, -0.56] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 5 insert | 0.1% FPR | padded-benign FPR | +0.01 | 0.01 | [-0.01, +0.03] | 4/1 | no | [-0.01, +0.03] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 5 insert | 0.1% FPR | malware TPR, fit subset | -2.19 | 4.96 | [-2.58, -1.79] | 4/6 | no | [-6.20, +1.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 20 insert | 1% FPR | malware TPR | -0.40 | 0.85 | [-0.51, -0.29] | 3/7 | **yes** | [-0.96, +0.11] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 20 insert | 1% FPR | padded-benign FPR | -0.08 | 0.22 | [-0.13, -0.04] | 3/7 | **yes** | [-0.14, -0.04] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 20 insert | 1% FPR | malware TPR, fit subset | +0.47 | 1.01 | [+0.31, +0.63] | 6/3 | no | [+0.20, +0.98] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 20 insert | 0.1% FPR | malware TPR | -1.86 | 4.39 | [-2.07, -1.64] | 3/7 | **yes** | [-4.36, +0.12] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 20 insert | 0.1% FPR | padded-benign FPR | +0.00 | 0.03 | [-0.01, +0.02] | 4/3 | no | [-0.01, +0.02] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 20 insert | 0.1% FPR | malware TPR, fit subset | -2.68 | 6.09 | [-3.22, -2.14] | 5/5 | no | [-9.15, +2.40] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 50 insert | 1% FPR | malware TPR | -0.85 | 1.26 | [-0.98, -0.73] | 2/8 | **yes** | [-1.77, -0.06] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 50 insert | 1% FPR | padded-benign FPR | -0.20 | 0.25 | [-0.24, -0.15] | 2/8 | **yes** | [-0.27, -0.14] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 50 insert | 1% FPR | malware TPR, fit subset | -0.47 | 3.09 | [-0.75, -0.21] | 3/6 | no | [-1.59, +0.23] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 50 insert | 0.1% FPR | malware TPR | +0.99 | 4.55 | [+0.76, +1.21] | 6/4 | no | [-1.18, +3.69] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 50 insert | 0.1% FPR | padded-benign FPR | +0.01 | 0.03 | [+0.00, +0.03] | 5/3 | no | [+0.00, +0.03] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 50 insert | 0.1% FPR | malware TPR, fit subset | +0.39 | 1.56 | [+0.14, +0.64] | 6/4 | no | [+0.08, +0.86] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 100 insert | 1% FPR | malware TPR | -0.96 | 2.34 | [-1.11, -0.80] | 3/7 | **yes** | [-1.90, +0.01] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 100 insert | 1% FPR | padded-benign FPR | -0.37 | 0.29 | [-0.43, -0.32] | 0/10 | **yes** | [-0.48, -0.29] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 100 insert | 0.1% FPR | malware TPR | +1.04 | 4.92 | [+0.85, +1.24] | 6/4 | no | [-0.98, +2.80] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 100 insert | 0.1% FPR | padded-benign FPR | +0.02 | 0.03 | [+0.00, +0.04] | 6/2 | no | [+0.00, +0.04] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 200 insert | 1% FPR | malware TPR | -1.80 | 2.28 | [-1.95, -1.64] | 3/7 | **yes** | [-2.56, -1.03] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 200 insert | 1% FPR | padded-benign FPR | -0.50 | 0.33 | [-0.57, -0.43] | 0/10 | **yes** | [-0.60, -0.41] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 200 insert | 0.1% FPR | malware TPR | +1.17 | 5.01 | [+0.97, +1.39] | 7/3 | **yes** | [-0.74, +2.99] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | random 200 insert | 0.1% FPR | padded-benign FPR | +0.01 | 0.02 | [-0.00, +0.02] | 4/2 | no | [+0.00, +0.02] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 5 prepend | 1% FPR | malware TPR | +24.19 | 6.39 | [+23.55, +24.82] | 10/0 | **yes** | [+14.24, +34.44] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 5 prepend | 1% FPR | padded-benign FPR | +0.15 | 0.26 | [+0.01, +0.30] | 8/2 | **yes** | [-0.16, +0.46] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 5 prepend | 1% FPR | malware TPR, fit subset | +29.05 | 6.47 | [+27.89, +30.29] | 10/0 | **yes** | [+13.91, +45.00] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 5 prepend | 0.1% FPR | malware TPR | +30.08 | 7.98 | [+29.36, +30.84] | 10/0 | **yes** | [+18.47, +38.98] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 5 prepend | 0.1% FPR | padded-benign FPR | +0.08 | 0.03 | [+0.03, +0.13] | 10/0 | **yes** | [+0.03, +0.14] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 5 prepend | 0.1% FPR | malware TPR, fit subset | +35.61 | 9.61 | [+34.20, +36.97] | 10/0 | **yes** | [+13.85, +54.57] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 20 prepend | 1% FPR | malware TPR | +54.15 | 8.14 | [+53.39, +54.94] | 10/0 | **yes** | [+42.26, +64.12] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 20 prepend | 1% FPR | padded-benign FPR | +0.06 | 1.53 | [-0.12, +0.26] | 8/2 | no | [-0.26, +0.41] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 20 prepend | 1% FPR | malware TPR, fit subset | +64.26 | 5.92 | [+62.79, +65.80] | 10/0 | **yes** | [+40.44, +77.09] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 20 prepend | 0.1% FPR | malware TPR | +44.19 | 8.55 | [+43.40, +44.97] | 10/0 | **yes** | [+31.86, +53.38] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 20 prepend | 0.1% FPR | padded-benign FPR | +0.07 | 0.04 | [+0.02, +0.13] | 10/0 | **yes** | [+0.01, +0.15] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 20 prepend | 0.1% FPR | malware TPR, fit subset | +39.12 | 9.32 | [+37.76, +40.60] | 10/0 | **yes** | [+18.52, +57.24] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 50 prepend | 1% FPR | malware TPR | +59.59 | 7.10 | [+58.68, +60.47] | 10/0 | **yes** | [+45.48, +69.78] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 50 prepend | 1% FPR | padded-benign FPR | +0.04 | 2.12 | [-0.13, +0.23] | 8/2 | no | [-0.25, +0.39] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 50 prepend | 1% FPR | malware TPR, fit subset | +51.59 | 8.90 | [+49.42, +53.63] | 10/0 | **yes** | [+26.19, +68.81] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 50 prepend | 0.1% FPR | malware TPR | +36.07 | 6.60 | [+35.31, +36.96] | 10/0 | **yes** | [+23.83, +47.20] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 50 prepend | 0.1% FPR | padded-benign FPR | +0.02 | 0.04 | [+0.00, +0.05] | 8/1 | **yes** | [-0.00, +0.07] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 50 prepend | 0.1% FPR | malware TPR, fit subset | +11.80 | 8.59 | [+10.65, +12.97] | 10/0 | **yes** | [+4.77, +21.94] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 100 prepend | 1% FPR | malware TPR | +2.60 | 5.78 | [+2.35, +2.88] | 8/2 | **yes** | [+0.85, +4.95] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 100 prepend | 1% FPR | padded-benign FPR | -1.14 | 2.91 | [-1.26, -1.03] | 6/4 | no | [-1.24, -1.03] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 100 prepend | 0.1% FPR | malware TPR | +2.64 | 2.42 | [+2.39, +2.91] | 8/2 | **yes** | [+0.98, +4.89] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 100 prepend | 0.1% FPR | padded-benign FPR | -0.02 | 0.07 | [-0.04, -0.01] | 1/3 | no | [-0.04, -0.02] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 200 prepend | 1% FPR | malware TPR | +1.16 | 5.55 | [+0.94, +1.39] | 7/3 | **yes** | [-0.18, +3.00] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 200 prepend | 1% FPR | padded-benign FPR | -1.13 | 2.81 | [-1.24, -1.02] | 6/4 | no | [-1.23, -1.03] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 200 prepend | 0.1% FPR | malware TPR | +2.25 | 2.54 | [+2.03, +2.47] | 8/2 | **yes** | [+0.78, +4.24] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 200 prepend | 0.1% FPR | padded-benign FPR | -0.03 | 0.07 | [-0.04, -0.01] | 0/2 | no | [-0.04, -0.02] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 5 insert | 1% FPR | malware TPR | +4.46 | 3.92 | [+4.06, +4.85] | 9/1 | **yes** | [+0.14, +7.70] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 5 insert | 1% FPR | padded-benign FPR | +0.17 | 0.24 | [+0.04, +0.31] | 8/2 | **yes** | [+0.02, +0.34] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 5 insert | 1% FPR | malware TPR, fit subset | +9.47 | 3.96 | [+8.66, +10.30] | 10/0 | **yes** | [+6.25, +13.15] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 5 insert | 0.1% FPR | malware TPR | +10.06 | 7.71 | [+9.41, +10.67] | 9/1 | **yes** | [+2.89, +15.43] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 5 insert | 0.1% FPR | padded-benign FPR | +0.04 | 0.03 | [+0.00, +0.08] | 9/1 | **yes** | [+0.00, +0.08] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 5 insert | 0.1% FPR | malware TPR, fit subset | +17.70 | 12.17 | [+16.68, +18.61] | 9/1 | **yes** | [+6.92, +24.41] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 20 insert | 1% FPR | malware TPR | +19.36 | 5.19 | [+18.68, +20.00] | 10/0 | **yes** | [+9.85, +29.73] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 20 insert | 1% FPR | padded-benign FPR | +0.33 | 0.54 | [+0.18, +0.49] | 8/2 | **yes** | [+0.10, +0.57] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 20 insert | 1% FPR | malware TPR, fit subset | +37.85 | 4.97 | [+36.31, +39.25] | 10/0 | **yes** | [+22.31, +56.40] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 20 insert | 0.1% FPR | malware TPR | +20.32 | 7.31 | [+19.61, +21.06] | 10/0 | **yes** | [+10.63, +28.54] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 20 insert | 0.1% FPR | padded-benign FPR | +0.05 | 0.02 | [+0.01, +0.10] | 9/0 | **yes** | [+0.01, +0.11] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 20 insert | 0.1% FPR | malware TPR, fit subset | +30.18 | 7.90 | [+28.86, +31.55] | 10/0 | **yes** | [+11.83, +46.20] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 50 insert | 1% FPR | malware TPR | +29.62 | 5.37 | [+28.82, +30.32] | 10/0 | **yes** | [+18.48, +39.60] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 50 insert | 1% FPR | padded-benign FPR | +0.14 | 0.76 | [+0.01, +0.28] | 8/2 | **yes** | [-0.04, +0.35] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 50 insert | 1% FPR | malware TPR, fit subset | +46.06 | 6.45 | [+44.04, +48.14] | 10/0 | **yes** | [+19.14, +67.38] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 50 insert | 0.1% FPR | malware TPR | +27.16 | 7.07 | [+26.42, +27.96] | 10/0 | **yes** | [+15.92, +37.27] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 50 insert | 0.1% FPR | padded-benign FPR | +0.04 | 0.03 | [+0.01, +0.07] | 8/0 | **yes** | [+0.01, +0.08] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 50 insert | 0.1% FPR | malware TPR, fit subset | +10.23 | 5.21 | [+9.17, +11.35] | 10/0 | **yes** | [+3.89, +18.49] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 100 insert | 1% FPR | malware TPR | +32.64 | 5.51 | [+31.90, +33.34] | 10/0 | **yes** | [+21.04, +43.20] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 100 insert | 1% FPR | padded-benign FPR | -0.37 | 1.39 | [-0.48, -0.26] | 7/3 | **yes** | [-0.52, -0.21] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 100 insert | 0.1% FPR | malware TPR | +26.66 | 6.48 | [+25.91, +27.44] | 10/0 | **yes** | [+15.52, +37.33] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 100 insert | 0.1% FPR | padded-benign FPR | +0.03 | 0.04 | [+0.01, +0.07] | 8/1 | **yes** | [+0.01, +0.08] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 200 insert | 1% FPR | malware TPR | +34.15 | 7.62 | [+33.29, +35.00] | 10/0 | **yes** | [+20.86, +45.41] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 200 insert | 1% FPR | padded-benign FPR | -0.41 | 1.64 | [-0.53, -0.30] | 8/2 | **yes** | [-0.59, -0.24] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 200 insert | 0.1% FPR | malware TPR | +22.25 | 5.74 | [+21.51, +22.97] | 10/0 | **yes** | [+11.87, +34.27] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | random 200 insert | 0.1% FPR | padded-benign FPR | +0.01 | 0.02 | [-0.00, +0.03] | 6/2 | no | [-0.00, +0.04] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 5 prepend | 1% FPR | malware TPR | -1.18 | 2.79 | [-1.34, -1.00] | 3/7 | **yes** | [-2.15, -0.43] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 5 prepend | 1% FPR | padded-benign FPR | -0.04 | 0.16 | [-0.11, +0.03] | 4/6 | no | [-0.14, +0.05] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 5 prepend | 1% FPR | malware TPR, fit subset | -0.87 | 3.51 | [-1.18, -0.53] | 5/5 | no | [-2.54, +0.57] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 5 prepend | 0.1% FPR | malware TPR | +5.01 | 11.19 | [+4.63, +5.40] | 7/3 | **yes** | [-0.53, +11.80] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 5 prepend | 0.1% FPR | padded-benign FPR | +0.01 | 0.05 | [-0.01, +0.04] | 6/2 | no | [-0.02, +0.05] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 5 prepend | 0.1% FPR | malware TPR, fit subset | +1.20 | 14.96 | [+0.61, +1.78] | 4/6 | no | [-4.96, +5.99] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 20 prepend | 1% FPR | malware TPR | -1.28 | 2.17 | [-1.45, -1.12] | 4/6 | no | [-2.77, -0.30] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 20 prepend | 1% FPR | padded-benign FPR | -0.10 | 0.27 | [-0.18, -0.01] | 3/7 | **yes** | [-0.25, +0.01] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 20 prepend | 1% FPR | malware TPR, fit subset | -1.08 | 3.34 | [-1.44, -0.75] | 5/5 | no | [-2.69, +0.35] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 20 prepend | 0.1% FPR | malware TPR | +4.44 | 13.10 | [+4.02, +4.81] | 7/3 | **yes** | [-2.23, +11.29] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 20 prepend | 0.1% FPR | padded-benign FPR | +0.03 | 0.06 | [+0.00, +0.07] | 6/3 | no | [-0.01, +0.09] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 20 prepend | 0.1% FPR | malware TPR, fit subset | -4.55 | 12.48 | [-5.31, -3.75] | 4/6 | no | [-16.81, +4.49] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 50 prepend | 1% FPR | malware TPR | -3.12 | 4.24 | [-3.32, -2.93] | 3/7 | **yes** | [-4.28, -2.10] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 50 prepend | 1% FPR | padded-benign FPR | -0.33 | 0.41 | [-0.43, -0.25] | 2/7 | **yes** | [-0.52, -0.20] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 50 prepend | 1% FPR | malware TPR, fit subset | -6.84 | 8.07 | [-7.53, -6.16] | 1/9 | **yes** | [-9.62, -3.49] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 50 prepend | 0.1% FPR | malware TPR | -1.22 | 10.92 | [-1.55, -0.90] | 7/3 | **yes** | [-6.20, +3.03] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 50 prepend | 0.1% FPR | padded-benign FPR | -0.02 | 0.04 | [-0.04, -0.00] | 4/5 | no | [-0.05, -0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 50 prepend | 0.1% FPR | malware TPR, fit subset | -10.55 | 9.88 | [-11.56, -9.57] | 2/8 | **yes** | [-22.27, +1.64] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 100 prepend | 1% FPR | malware TPR | -5.50 | 11.07 | [-5.69, -5.30] | 2/8 | **yes** | [-7.72, -3.63] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 100 prepend | 1% FPR | padded-benign FPR | -0.21 | 0.16 | [-0.28, -0.15] | 1/9 | **yes** | [-0.29, -0.13] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 100 prepend | 0.1% FPR | malware TPR | -0.37 | 1.89 | [-0.48, -0.24] | 4/6 | no | [-1.02, +0.28] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 100 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 1/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 200 prepend | 1% FPR | malware TPR | -2.86 | 3.42 | [-3.03, -2.71] | 2/8 | **yes** | [-4.87, -1.59] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 200 prepend | 1% FPR | padded-benign FPR | -0.09 | 0.20 | [-0.14, -0.04] | 2/8 | **yes** | [-0.14, -0.04] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 200 prepend | 0.1% FPR | malware TPR | +0.62 | 1.74 | [+0.50, +0.73] | 5/4 | no | [+0.04, +1.46] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 200 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 5 insert | 1% FPR | malware TPR | -1.28 | 2.47 | [-1.44, -1.12] | 2/8 | **yes** | [-2.90, -0.21] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 5 insert | 1% FPR | padded-benign FPR | -0.05 | 0.16 | [-0.12, +0.02] | 3/7 | no | [-0.15, +0.04] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 5 insert | 1% FPR | malware TPR, fit subset | -0.56 | 2.94 | [-0.87, -0.25] | 4/6 | no | [-1.92, +0.87] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 5 insert | 0.1% FPR | malware TPR | +3.57 | 10.25 | [+3.18, +3.93] | 7/3 | **yes** | [-2.58, +9.95] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 5 insert | 0.1% FPR | padded-benign FPR | +0.00 | 0.03 | [-0.02, +0.03] | 6/3 | no | [-0.02, +0.04] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 5 insert | 0.1% FPR | malware TPR, fit subset | +1.61 | 15.34 | [+1.03, +2.16] | 4/6 | no | [-4.98, +6.70] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 20 insert | 1% FPR | malware TPR | -2.14 | 3.58 | [-2.31, -1.98] | 1/9 | **yes** | [-3.40, -1.09] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 20 insert | 1% FPR | padded-benign FPR | -0.09 | 0.17 | [-0.17, -0.02] | 3/6 | no | [-0.19, -0.01] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 20 insert | 1% FPR | malware TPR, fit subset | -1.57 | 3.27 | [-1.90, -1.22] | 3/7 | **yes** | [-2.95, -0.40] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 20 insert | 0.1% FPR | malware TPR | +2.76 | 10.45 | [+2.33, +3.18] | 6/4 | no | [-5.16, +10.84] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 20 insert | 0.1% FPR | padded-benign FPR | +0.00 | 0.04 | [-0.02, +0.03] | 6/3 | no | [-0.03, +0.04] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 20 insert | 0.1% FPR | malware TPR, fit subset | -1.84 | 13.78 | [-2.48, -1.22] | 4/6 | no | [-11.18, +5.01] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 50 insert | 1% FPR | malware TPR | -2.73 | 3.88 | [-2.90, -2.55] | 2/8 | **yes** | [-3.97, -1.59] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 50 insert | 1% FPR | padded-benign FPR | -0.26 | 0.23 | [-0.34, -0.17] | 1/9 | **yes** | [-0.39, -0.15] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 50 insert | 1% FPR | malware TPR, fit subset | -4.99 | 4.15 | [-5.64, -4.35] | 0/10 | **yes** | [-7.77, -2.07] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 50 insert | 0.1% FPR | malware TPR | +2.69 | 10.50 | [+2.24, +3.11] | 6/4 | no | [-5.65, +10.21] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 50 insert | 0.1% FPR | padded-benign FPR | -0.00 | 0.03 | [-0.03, +0.03] | 4/3 | no | [-0.03, +0.04] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 50 insert | 0.1% FPR | malware TPR, fit subset | -4.58 | 9.01 | [-5.27, -3.88] | 3/7 | **yes** | [-11.78, +3.40] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 100 insert | 1% FPR | malware TPR | -5.04 | 3.58 | [-5.29, -4.79] | 1/9 | **yes** | [-8.89, -2.04] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 100 insert | 1% FPR | padded-benign FPR | -0.12 | 0.16 | [-0.17, -0.06] | 3/7 | **yes** | [-0.19, -0.06] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 100 insert | 0.1% FPR | malware TPR | +5.01 | 12.51 | [+4.63, +5.39] | 6/4 | no | [-1.28, +12.26] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 100 insert | 0.1% FPR | padded-benign FPR | +0.01 | 0.04 | [-0.00, +0.03] | 6/3 | no | [-0.01, +0.04] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 200 insert | 1% FPR | malware TPR | -4.76 | 4.50 | [-5.03, -4.51] | 2/8 | **yes** | [-7.61, -2.07] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 200 insert | 1% FPR | padded-benign FPR | -0.08 | 0.19 | [-0.14, -0.03] | 3/7 | **yes** | [-0.15, -0.02] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 200 insert | 0.1% FPR | malware TPR | +6.19 | 9.88 | [+5.81, +6.55] | 7/3 | **yes** | [+1.51, +12.23] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | random 200 insert | 0.1% FPR | padded-benign FPR | +0.01 | 0.02 | [-0.00, +0.03] | 6/1 | no | [-0.00, +0.03] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 5 prepend | 1% FPR | malware TPR | +16.83 | 5.54 | [+16.21, +17.47] | 10/0 | **yes** | [+7.24, +26.49] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 5 prepend | 1% FPR | padded-benign FPR | +0.59 | 0.24 | [+0.46, +0.74] | 10/0 | **yes** | [+0.41, +0.85] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 5 prepend | 1% FPR | malware TPR, fit subset | +30.82 | 3.70 | [+29.50, +32.17] | 10/0 | **yes** | [+14.35, +45.88] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 5 prepend | 0.1% FPR | malware TPR | +24.58 | 14.01 | [+23.92, +25.24] | 10/0 | **yes** | [+14.44, +33.31] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 5 prepend | 0.1% FPR | padded-benign FPR | +0.08 | 0.03 | [+0.04, +0.13] | 10/0 | **yes** | [+0.04, +0.15] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 5 prepend | 0.1% FPR | malware TPR, fit subset | +33.69 | 11.11 | [+32.51, +34.91] | 10/0 | **yes** | [+11.39, +48.62] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 20 prepend | 1% FPR | malware TPR | +26.11 | 6.25 | [+25.33, +26.83] | 10/0 | **yes** | [+14.35, +38.45] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 20 prepend | 1% FPR | padded-benign FPR | +1.07 | 0.26 | [+0.93, +1.24] | 10/0 | **yes** | [+0.78, +1.43] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 20 prepend | 1% FPR | malware TPR, fit subset | +52.02 | 4.72 | [+50.46, +53.47] | 10/0 | **yes** | [+31.29, +68.15] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 20 prepend | 0.1% FPR | malware TPR | +31.70 | 13.85 | [+31.06, +32.33] | 10/0 | **yes** | [+21.93, +40.40] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 20 prepend | 0.1% FPR | padded-benign FPR | +0.08 | 0.03 | [+0.04, +0.15] | 10/0 | **yes** | [+0.03, +0.17] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 20 prepend | 0.1% FPR | malware TPR, fit subset | +35.18 | 11.10 | [+33.90, +36.51] | 10/0 | **yes** | [+15.65, +53.56] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 50 prepend | 1% FPR | malware TPR | +39.64 | 9.57 | [+38.80, +40.44] | 10/0 | **yes** | [+25.33, +53.22] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 50 prepend | 1% FPR | padded-benign FPR | +1.12 | 0.49 | [+0.97, +1.27] | 10/0 | **yes** | [+0.80, +1.52] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 50 prepend | 1% FPR | malware TPR, fit subset | +51.29 | 7.94 | [+49.22, +53.21] | 10/0 | **yes** | [+27.05, +69.97] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 50 prepend | 0.1% FPR | malware TPR | +35.41 | 7.15 | [+34.64, +36.29] | 10/0 | **yes** | [+23.95, +45.72] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 50 prepend | 0.1% FPR | padded-benign FPR | +0.03 | 0.03 | [+0.01, +0.06] | 10/0 | **yes** | [+0.01, +0.07] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 50 prepend | 0.1% FPR | malware TPR, fit subset | +11.61 | 8.77 | [+10.49, +12.73] | 10/0 | **yes** | [+4.79, +21.24] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 100 prepend | 1% FPR | malware TPR | -3.31 | 12.05 | [-3.86, -2.72] | 5/5 | no | [-10.11, +3.13] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 100 prepend | 1% FPR | padded-benign FPR | +0.31 | 0.21 | [+0.26, +0.38] | 10/0 | **yes** | [+0.26, +0.37] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 100 prepend | 0.1% FPR | malware TPR | +3.96 | 1.28 | [+3.62, +4.29] | 10/0 | **yes** | [+1.67, +7.05] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 100 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 1/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 200 prepend | 1% FPR | malware TPR | +2.97 | 6.53 | [+2.45, +3.50] | 8/2 | **yes** | [-1.81, +8.60] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 200 prepend | 1% FPR | padded-benign FPR | +0.31 | 0.27 | [+0.25, +0.37] | 10/0 | **yes** | [+0.25, +0.38] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 200 prepend | 0.1% FPR | malware TPR | +3.61 | 1.56 | [+3.29, +3.92] | 10/0 | **yes** | [+1.49, +6.48] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 200 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 5 insert | 1% FPR | malware TPR | +13.97 | 4.76 | [+13.37, +14.54] | 10/0 | **yes** | [+5.77, +21.86] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 5 insert | 1% FPR | padded-benign FPR | +0.57 | 0.23 | [+0.44, +0.70] | 10/0 | **yes** | [+0.40, +0.78] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 5 insert | 1% FPR | malware TPR, fit subset | +24.54 | 3.86 | [+23.30, +25.73] | 10/0 | **yes** | [+12.10, +35.39] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 5 insert | 0.1% FPR | malware TPR | +23.78 | 13.22 | [+23.17, +24.40] | 10/0 | **yes** | [+14.86, +31.56] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 5 insert | 0.1% FPR | padded-benign FPR | +0.06 | 0.02 | [+0.03, +0.11] | 10/0 | **yes** | [+0.02, +0.12] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 5 insert | 0.1% FPR | malware TPR, fit subset | +31.70 | 10.24 | [+30.44, +32.97] | 10/0 | **yes** | [+10.62, +46.57] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 20 insert | 1% FPR | malware TPR | +25.93 | 6.03 | [+25.23, +26.65] | 10/0 | **yes** | [+14.56, +37.78] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 20 insert | 1% FPR | padded-benign FPR | +0.84 | 0.28 | [+0.71, +0.98] | 10/0 | **yes** | [+0.61, +1.13] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 20 insert | 1% FPR | malware TPR, fit subset | +49.35 | 2.96 | [+47.84, +50.88] | 10/0 | **yes** | [+28.53, +65.64] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 20 insert | 0.1% FPR | malware TPR | +27.97 | 10.56 | [+27.32, +28.59] | 10/0 | **yes** | [+19.01, +37.02] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 20 insert | 0.1% FPR | padded-benign FPR | +0.07 | 0.02 | [+0.03, +0.12] | 10/0 | **yes** | [+0.03, +0.14] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 20 insert | 0.1% FPR | malware TPR, fit subset | +33.45 | 7.08 | [+32.08, +34.90] | 10/0 | **yes** | [+13.54, +52.08] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 50 insert | 1% FPR | malware TPR | +37.66 | 6.61 | [+36.84, +38.49] | 10/0 | **yes** | [+23.30, +51.09] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 50 insert | 1% FPR | padded-benign FPR | +0.75 | 0.27 | [+0.61, +0.89] | 10/0 | **yes** | [+0.53, +1.04] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 50 insert | 1% FPR | malware TPR, fit subset | +49.99 | 4.95 | [+47.88, +52.19] | 10/0 | **yes** | [+23.09, +70.16] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 50 insert | 0.1% FPR | malware TPR | +34.35 | 7.77 | [+33.65, +35.09] | 10/0 | **yes** | [+23.60, +45.32] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 50 insert | 0.1% FPR | padded-benign FPR | +0.04 | 0.03 | [+0.02, +0.08] | 9/0 | **yes** | [+0.01, +0.09] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 50 insert | 0.1% FPR | malware TPR, fit subset | +10.51 | 5.19 | [+9.43, +11.67] | 10/0 | **yes** | [+4.08, +19.00] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 100 insert | 1% FPR | malware TPR | +40.67 | 6.58 | [+39.89, +41.41] | 10/0 | **yes** | [+29.51, +52.82] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 100 insert | 1% FPR | padded-benign FPR | +0.43 | 0.18 | [+0.34, +0.54] | 10/0 | **yes** | [+0.31, +0.60] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 100 insert | 0.1% FPR | malware TPR | +32.41 | 6.98 | [+31.65, +33.22] | 10/0 | **yes** | [+21.37, +43.68] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 100 insert | 0.1% FPR | padded-benign FPR | +0.04 | 0.03 | [+0.02, +0.07] | 8/0 | **yes** | [+0.01, +0.08] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 200 insert | 1% FPR | malware TPR | +43.25 | 5.81 | [+42.45, +44.09] | 10/0 | **yes** | [+30.97, +54.27] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 200 insert | 1% FPR | padded-benign FPR | +0.45 | 0.24 | [+0.35, +0.54] | 10/0 | **yes** | [+0.33, +0.61] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 200 insert | 0.1% FPR | malware TPR | +25.99 | 6.02 | [+25.23, +26.78] | 10/0 | **yes** | [+14.86, +38.85] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | random 200 insert | 0.1% FPR | padded-benign FPR | +0.02 | 0.02 | [+0.00, +0.04] | 8/0 | **yes** | [+0.00, +0.04] | yes |
 
 **Surrogate-chosen padding (ranks 1..k of the LightGBM or v2-PE ranking)** Thresholds: 1% and 0.1% FPR of each model's and seed's unedited April benign scores. Seeds 0-9, mean ± std.
 
@@ -308,6 +526,18 @@
 | ATT+bal-2L (A) | v2pe 20 insert | 53.7 ± 3.2 | 0.2 ± 0.0 | 23.9 ± 8.2 | 0.0 ± 0.0 | 14.9% | 2.1 | 0.0 |
 | ATT+bal-2L (A) | v2pe 50 insert | 36.1 ± 4.7 | 0.1 ± 0.0 | 12.8 ± 5.1 | 0.0 ± 0.0 | 0.0% | n/a | n/a |
 | ATT+bal-2L (A) | v2pe 100 insert | 18.2 ± 5.3 | 0.0 ± 0.0 | 4.7 ± 3.4 | 0.0 ± 0.0 | 0.0% | n/a | n/a |
+| ATT+bal-2L, round 2 (A2) | lgbm 20 prepend | 71.6 ± 4.7 | 0.7 ± 0.5 | 48.2 ± 8.2 | 0.1 ± 0.0 | 23.9% | 60.7 | 27.9 |
+| ATT+bal-2L, round 2 (A2) | lgbm 50 prepend | 37.1 ± 9.5 | 0.0 ± 0.0 | 11.3 ± 5.7 | 0.0 | 15.4% | 10.7 | 0.9 |
+| ATT+bal-2L, round 2 (A2) | lgbm 100 prepend | 6.0 ± 1.5 | 0.0 ± 0.0 | 3.0 ± 1.5 | 0.0 | 0.0% | n/a | n/a |
+| ATT+bal-2L, round 2 (A2) | lgbm 20 insert | 69.0 ± 6.4 | 0.5 ± 0.4 | 39.3 ± 5.9 | 0.0 ± 0.0 | 23.9% | 51.9 | 21.0 |
+| ATT+bal-2L, round 2 (A2) | lgbm 50 insert | 57.9 ± 5.4 | 0.2 ± 0.1 | 33.2 ± 6.1 | 0.0 ± 0.0 | 15.4% | 3.6 | 0.0 |
+| ATT+bal-2L, round 2 (A2) | lgbm 100 insert | 44.4 ± 4.4 | 0.2 ± 0.3 | 24.0 ± 4.9 | 0.0 ± 0.0 | 0.0% | n/a | n/a |
+| ATT+bal-2L, round 2 (A2) | v2pe 20 prepend | 25.0 ± 5.2 | 0.0 ± 0.0 | 6.4 ± 4.6 | 0.0 | 14.9% | 4.0 | 0.2 |
+| ATT+bal-2L, round 2 (A2) | v2pe 50 prepend | 5.1 ± 0.2 | 0.0 | 2.2 ± 1.2 | 0.0 | 0.0% | n/a | n/a |
+| ATT+bal-2L, round 2 (A2) | v2pe 100 prepend | 5.2 ± 1.9 | 0.0 ± 0.0 | 1.4 ± 1.4 | 0.0 | 0.0% | n/a | n/a |
+| ATT+bal-2L, round 2 (A2) | v2pe 20 insert | 50.4 ± 4.3 | 0.1 ± 0.0 | 27.2 ± 5.1 | 0.0 ± 0.0 | 14.9% | 0.7 | 0.0 |
+| ATT+bal-2L, round 2 (A2) | v2pe 50 insert | 31.9 ± 3.7 | 0.1 ± 0.0 | 16.1 ± 4.4 | 0.0 ± 0.0 | 0.0% | n/a | n/a |
+| ATT+bal-2L, round 2 (A2) | v2pe 100 insert | 18.5 ± 2.2 | 0.0 ± 0.0 | 8.0 ± 3.2 | 0.0 ± 0.0 | 0.0% | n/a | n/a |
 
 **Surrogate-chosen padding (ranks 1..k of the LightGBM or v2-PE ranking): A − B, points (× 100). Mean of the per-seed differences (seed i of A against seed i of B), their standard deviation over the seeds, 95% CI of the stratified bootstrap over the April reports (1,000 resamples, numpy seed 0; it covers the test-set sampling only, not the seed-to-seed spread), seeds above 0 / below 0; meets rule = CI excludes 0 and ≥ 7 of 10 seeds with the same sign (descriptive: none of these robustness comparisons is a pre-registered claim).**
 
@@ -553,6 +783,246 @@
 | B (2L, no padding) − ATT+bal | v2pe 100 insert | 1% FPR | padded-benign FPR | -0.03 | 0.02 | [-0.07, -0.01] | 0/9 | **yes** | [-0.08, -0.00] | yes |
 | B (2L, no padding) − ATT+bal | v2pe 100 insert | 0.1% FPR | malware TPR | -5.96 | 1.44 | [-6.31, -5.59] | 0/10 | **yes** | [-10.90, -2.66] | yes |
 | B (2L, no padding) − ATT+bal | v2pe 100 insert | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 20 prepend | 1% FPR | malware TPR | -0.72 | 1.53 | [-0.88, -0.58] | 3/7 | **yes** | [-2.53, +0.85] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 20 prepend | 1% FPR | padded-benign FPR | -0.12 | 0.14 | [-0.16, -0.08] | 2/8 | **yes** | [-0.18, -0.06] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 20 prepend | 1% FPR | malware TPR, fit subset | -0.91 | 1.81 | [-1.16, -0.68] | 3/7 | **yes** | [-2.50, -0.06] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 20 prepend | 0.1% FPR | malware TPR | +1.34 | 5.07 | [+1.12, +1.55] | 8/2 | **yes** | [-0.79, +3.90] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 20 prepend | 0.1% FPR | padded-benign FPR | +0.01 | 0.03 | [-0.00, +0.02] | 6/3 | no | [-0.01, +0.03] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 20 prepend | 0.1% FPR | malware TPR, fit subset | +1.42 | 4.68 | [+1.07, +1.80] | 7/2 | **yes** | [+0.22, +3.35] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 50 prepend | 1% FPR | malware TPR | +0.53 | 6.63 | [+0.39, +0.65] | 4/6 | no | [-1.40, +2.55] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 50 prepend | 1% FPR | padded-benign FPR | -0.03 | 0.04 | [-0.05, -0.02] | 1/5 | no | [-0.06, -0.02] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 50 prepend | 1% FPR | malware TPR, fit subset | -4.19 | 11.02 | [-4.48, -3.89] | 3/7 | **yes** | [-7.04, -0.69] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 50 prepend | 0.1% FPR | malware TPR | +6.05 | 2.51 | [+5.82, +6.28] | 10/0 | **yes** | [+2.92, +10.05] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 50 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 50 prepend | 0.1% FPR | malware TPR, fit subset | +0.77 | 1.10 | [+0.58, +0.97] | 6/0 | no | [+0.14, +2.10] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 100 prepend | 1% FPR | malware TPR | +0.99 | 2.69 | [+0.92, +1.07] | 4/4 | no | [+0.39, +1.82] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 100 prepend | 1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 1/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 100 prepend | 0.1% FPR | malware TPR | +1.52 | 1.19 | [+1.37, +1.67] | 9/1 | **yes** | [+0.51, +2.98] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 100 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 20 insert | 1% FPR | malware TPR | -0.66 | 1.59 | [-0.78, -0.54] | 2/8 | **yes** | [-1.38, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 20 insert | 1% FPR | padded-benign FPR | -0.08 | 0.23 | [-0.12, -0.05] | 1/9 | **yes** | [-0.14, -0.04] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 20 insert | 1% FPR | malware TPR, fit subset | +0.29 | 4.43 | [+0.10, +0.49] | 3/7 | **yes** | [-0.53, +1.07] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 20 insert | 0.1% FPR | malware TPR | +0.22 | 5.37 | [+0.01, +0.43] | 7/3 | **yes** | [-2.57, +3.09] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 20 insert | 0.1% FPR | padded-benign FPR | +0.01 | 0.01 | [+0.00, +0.03] | 7/1 | **yes** | [+0.00, +0.03] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 20 insert | 0.1% FPR | malware TPR, fit subset | +4.48 | 3.00 | [+4.01, +4.96] | 10/0 | **yes** | [+0.49, +10.29] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 50 insert | 1% FPR | malware TPR | -1.13 | 1.47 | [-1.26, -1.01] | 2/8 | **yes** | [-1.84, -0.62] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 50 insert | 1% FPR | padded-benign FPR | -0.08 | 0.09 | [-0.11, -0.06] | 0/9 | **yes** | [-0.13, -0.05] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 50 insert | 1% FPR | malware TPR, fit subset | -0.68 | 1.13 | [-0.87, -0.49] | 2/7 | **yes** | [-1.51, -0.18] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 50 insert | 0.1% FPR | malware TPR | +3.34 | 6.29 | [+3.06, +3.64] | 8/2 | **yes** | [-0.87, +8.27] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 50 insert | 0.1% FPR | padded-benign FPR | +0.01 | 0.01 | [+0.00, +0.01] | 4/1 | no | [+0.00, +0.02] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 50 insert | 0.1% FPR | malware TPR, fit subset | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 100 insert | 1% FPR | malware TPR | -1.96 | 2.56 | [-2.09, -1.82] | 3/7 | **yes** | [-2.71, -1.19] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 100 insert | 1% FPR | padded-benign FPR | -0.12 | 0.15 | [-0.15, -0.09] | 0/8 | **yes** | [-0.17, -0.08] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 100 insert | 0.1% FPR | malware TPR | +1.69 | 5.65 | [+1.45, +1.93] | 8/2 | **yes** | [-0.89, +4.35] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | lgbm 100 insert | 0.1% FPR | padded-benign FPR | +0.01 | 0.01 | [-0.00, +0.02] | 4/0 | no | [-0.00, +0.02] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 20 prepend | 1% FPR | malware TPR | +1.25 | 3.89 | [+1.13, +1.38] | 6/4 | no | [+0.13, +2.32] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 20 prepend | 1% FPR | padded-benign FPR | -0.01 | 0.01 | [-0.02, -0.00] | 0/4 | no | [-0.02, -0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 20 prepend | 1% FPR | malware TPR, fit subset | -1.26 | 2.52 | [-1.54, -1.02] | 3/7 | **yes** | [-3.11, -0.42] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 20 prepend | 0.1% FPR | malware TPR | +5.20 | 4.15 | [+4.95, +5.43] | 10/0 | **yes** | [+1.52, +9.69] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 20 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 20 prepend | 0.1% FPR | malware TPR, fit subset | +0.16 | 0.44 | [+0.10, +0.24] | 4/0 | no | [+0.02, +0.52] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 50 prepend | 1% FPR | malware TPR | +0.88 | 1.28 | [+0.79, +0.97] | 4/3 | no | [+0.26, +1.88] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 50 prepend | 1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 50 prepend | 0.1% FPR | malware TPR | +1.10 | 1.08 | [+0.99, +1.22] | 9/1 | **yes** | [+0.43, +1.98] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 50 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 100 prepend | 1% FPR | malware TPR | +1.02 | 2.62 | [+0.95, +1.10] | 2/4 | no | [+0.31, +1.98] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 100 prepend | 1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 1/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 100 prepend | 0.1% FPR | malware TPR | +0.27 | 1.58 | [+0.21, +0.33] | 5/5 | no | [-0.05, +0.73] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 100 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 20 insert | 1% FPR | malware TPR | -1.58 | 1.61 | [-1.70, -1.45] | 2/8 | **yes** | [-2.16, -1.00] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 20 insert | 1% FPR | padded-benign FPR | -0.04 | 0.05 | [-0.07, -0.03] | 0/8 | **yes** | [-0.08, -0.02] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 20 insert | 1% FPR | malware TPR, fit subset | -0.79 | 1.05 | [-0.99, -0.59] | 0/7 | **yes** | [-2.17, -0.10] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 20 insert | 0.1% FPR | malware TPR | +3.19 | 5.68 | [+2.91, +3.45] | 7/3 | **yes** | [+1.03, +5.06] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 20 insert | 0.1% FPR | padded-benign FPR | +0.01 | 0.02 | [+0.00, +0.03] | 5/0 | no | [+0.00, +0.03] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 20 insert | 0.1% FPR | malware TPR, fit subset | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 50 insert | 1% FPR | malware TPR | -2.04 | 2.53 | [-2.18, -1.89] | 4/6 | no | [-2.98, -1.13] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 50 insert | 1% FPR | padded-benign FPR | -0.05 | 0.03 | [-0.07, -0.03] | 0/10 | **yes** | [-0.08, -0.02] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 50 insert | 0.1% FPR | malware TPR | +3.59 | 4.64 | [+3.34, +3.85] | 9/1 | **yes** | [+1.48, +6.23] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 50 insert | 0.1% FPR | padded-benign FPR | +0.00 | 0.01 | [+0.00, +0.01] | 3/0 | no | [+0.00, +0.01] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 100 insert | 1% FPR | malware TPR | -1.92 | 2.04 | [-2.06, -1.78] | 2/8 | **yes** | [-3.40, -0.82] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 100 insert | 1% FPR | padded-benign FPR | -0.02 | 0.01 | [-0.03, -0.00] | 0/7 | **yes** | [-0.04, -0.00] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 100 insert | 0.1% FPR | malware TPR | +2.07 | 3.63 | [+1.82, +2.32] | 7/3 | **yes** | [-0.14, +5.47] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | v2pe 100 insert | 0.1% FPR | padded-benign FPR | +0.00 | 0.01 | [+0.00, +0.01] | 1/0 | no | [+0.00, +0.01] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 20 prepend | 1% FPR | malware TPR | +61.38 | 8.43 | [+60.48, +62.17] | 10/0 | **yes** | [+47.31, +71.57] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 20 prepend | 1% FPR | padded-benign FPR | +0.53 | 0.63 | [+0.41, +0.65] | 9/1 | **yes** | [+0.35, +0.76] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 20 prepend | 1% FPR | malware TPR, fit subset | +59.78 | 9.11 | [+58.08, +61.54] | 10/0 | **yes** | [+32.89, +75.12] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 20 prepend | 0.1% FPR | malware TPR | +46.53 | 8.83 | [+45.70, +47.40] | 10/0 | **yes** | [+32.70, +57.37] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 20 prepend | 0.1% FPR | padded-benign FPR | +0.08 | 0.03 | [+0.03, +0.15] | 10/0 | **yes** | [+0.03, +0.17] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 20 prepend | 0.1% FPR | malware TPR, fit subset | +27.86 | 3.23 | [+26.31, +29.45] | 10/0 | **yes** | [+7.96, +50.72] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 50 prepend | 1% FPR | malware TPR | +33.76 | 10.64 | [+33.00, +34.56] | 10/0 | **yes** | [+21.10, +45.63] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 50 prepend | 1% FPR | padded-benign FPR | +0.04 | 0.03 | [+0.02, +0.07] | 9/0 | **yes** | [+0.01, +0.09] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 50 prepend | 1% FPR | malware TPR, fit subset | +10.74 | 12.92 | [+9.72, +11.78] | 10/0 | **yes** | [+5.80, +17.13] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 50 prepend | 0.1% FPR | malware TPR | +10.84 | 6.44 | [+10.39, +11.29] | 9/1 | **yes** | [+4.63, +19.09] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 50 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 50 prepend | 0.1% FPR | malware TPR, fit subset | +0.87 | 1.26 | [+0.64, +1.12] | 9/0 | **yes** | [+0.16, +2.42] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 100 prepend | 1% FPR | malware TPR | +2.83 | 2.63 | [+2.62, +3.04] | 8/2 | **yes** | [+1.19, +5.25] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 100 prepend | 1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 1/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 100 prepend | 0.1% FPR | malware TPR | +2.26 | 2.67 | [+2.04, +2.48] | 9/1 | **yes** | [+0.86, +4.34] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 100 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 20 insert | 1% FPR | malware TPR | +28.68 | 10.85 | [+28.02, +29.38] | 10/0 | **yes** | [+17.12, +38.84] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 20 insert | 1% FPR | padded-benign FPR | +0.25 | 0.41 | [+0.17, +0.34] | 9/1 | **yes** | [+0.11, +0.43] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 20 insert | 1% FPR | malware TPR, fit subset | +42.83 | 14.92 | [+41.48, +44.32] | 10/0 | **yes** | [+24.09, +53.25] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 20 insert | 0.1% FPR | malware TPR | +25.50 | 7.88 | [+24.76, +26.29] | 10/0 | **yes** | [+14.76, +35.93] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 20 insert | 0.1% FPR | padded-benign FPR | +0.03 | 0.02 | [+0.01, +0.06] | 10/0 | **yes** | [+0.01, +0.07] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 20 insert | 0.1% FPR | malware TPR, fit subset | +20.59 | 3.13 | [+19.18, +22.01] | 10/0 | **yes** | [+2.83, +42.62] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 50 insert | 1% FPR | malware TPR | +36.22 | 9.02 | [+35.42, +37.00] | 10/0 | **yes** | [+21.12, +49.05] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 50 insert | 1% FPR | padded-benign FPR | +0.15 | 0.16 | [+0.08, +0.23] | 8/2 | **yes** | [+0.07, +0.27] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 50 insert | 1% FPR | malware TPR, fit subset | +3.63 | 2.39 | [+2.94, +4.34] | 10/0 | **yes** | [+0.94, +9.38] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 50 insert | 0.1% FPR | malware TPR | +26.98 | 7.49 | [+26.25, +27.73] | 10/0 | **yes** | [+15.20, +38.73] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 50 insert | 0.1% FPR | padded-benign FPR | +0.02 | 0.02 | [+0.00, +0.04] | 7/0 | **yes** | [+0.00, +0.05] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 50 insert | 0.1% FPR | malware TPR, fit subset | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 100 insert | 1% FPR | malware TPR | +32.02 | 7.54 | [+31.19, +32.83] | 10/0 | **yes** | [+17.88, +45.29] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 100 insert | 1% FPR | padded-benign FPR | +0.19 | 0.29 | [+0.13, +0.26] | 8/2 | **yes** | [+0.10, +0.29] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 100 insert | 0.1% FPR | malware TPR | +20.88 | 5.71 | [+20.21, +21.54] | 10/0 | **yes** | [+10.54, +32.63] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | lgbm 100 insert | 0.1% FPR | padded-benign FPR | +0.01 | 0.01 | [+0.00, +0.03] | 5/0 | no | [+0.00, +0.03] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 20 prepend | 1% FPR | malware TPR | +22.33 | 6.53 | [+21.63, +23.03] | 10/0 | **yes** | [+8.90, +34.78] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 20 prepend | 1% FPR | padded-benign FPR | +0.02 | 0.02 | [+0.00, +0.05] | 8/0 | **yes** | [+0.00, +0.07] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 20 prepend | 1% FPR | malware TPR, fit subset | +4.04 | 3.12 | [+3.32, +4.74] | 10/0 | **yes** | [+1.11, +10.37] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 20 prepend | 0.1% FPR | malware TPR | +6.03 | 4.81 | [+5.73, +6.32] | 10/0 | **yes** | [+2.21, +10.59] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 20 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 20 prepend | 0.1% FPR | malware TPR, fit subset | +0.17 | 0.47 | [+0.10, +0.26] | 4/0 | no | [+0.02, +0.55] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 50 prepend | 1% FPR | malware TPR | +1.99 | 3.35 | [+1.75, +2.24] | 6/4 | no | [+0.31, +4.29] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 50 prepend | 1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 50 prepend | 0.1% FPR | malware TPR | +1.78 | 1.70 | [+1.61, +1.98] | 8/1 | **yes** | [+0.71, +3.32] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 50 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 100 prepend | 1% FPR | malware TPR | +2.13 | 3.11 | [+1.91, +2.37] | 7/3 | **yes** | [+0.44, +4.43] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 100 prepend | 1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 1/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 100 prepend | 0.1% FPR | malware TPR | +0.95 | 1.62 | [+0.84, +1.06] | 6/1 | no | [+0.35, +1.83] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 100 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 20 insert | 1% FPR | malware TPR | +33.08 | 7.16 | [+32.27, +33.89] | 10/0 | **yes** | [+19.92, +44.36] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 20 insert | 1% FPR | padded-benign FPR | +0.04 | 0.08 | [-0.01, +0.11] | 6/4 | no | [-0.01, +0.12] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 20 insert | 1% FPR | malware TPR, fit subset | +0.67 | 0.78 | [+0.44, +0.90] | 8/1 | **yes** | [+0.05, +2.15] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 20 insert | 0.1% FPR | malware TPR | +21.89 | 5.66 | [+21.20, +22.57] | 10/0 | **yes** | [+12.35, +31.74] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 20 insert | 0.1% FPR | padded-benign FPR | +0.01 | 0.02 | [+0.00, +0.03] | 6/1 | no | [+0.00, +0.04] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 20 insert | 0.1% FPR | malware TPR, fit subset | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 50 insert | 1% FPR | malware TPR | +24.25 | 5.38 | [+23.54, +24.99] | 10/0 | **yes** | [+14.22, +34.88] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 50 insert | 1% FPR | padded-benign FPR | +0.05 | 0.07 | [+0.00, +0.10] | 8/2 | **yes** | [-0.00, +0.11] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 50 insert | 0.1% FPR | malware TPR | +14.30 | 4.15 | [+13.72, +14.89] | 10/0 | **yes** | [+6.80, +23.98] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 50 insert | 0.1% FPR | padded-benign FPR | +0.00 | 0.01 | [+0.00, +0.01] | 3/0 | no | [+0.00, +0.01] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 100 insert | 1% FPR | malware TPR | +13.92 | 4.01 | [+13.32, +14.52] | 10/0 | **yes** | [+6.08, +24.13] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 100 insert | 1% FPR | padded-benign FPR | +0.01 | 0.03 | [-0.01, +0.03] | 6/2 | no | [-0.01, +0.04] | no |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 100 insert | 0.1% FPR | malware TPR | +7.04 | 3.03 | [+6.63, +7.42] | 10/0 | **yes** | [+2.45, +14.69] | yes |
+| ATT+bal-2L, round 2 (A2) − v2-PE | v2pe 100 insert | 0.1% FPR | padded-benign FPR | +0.00 | 0.01 | [+0.00, +0.01] | 1/0 | no | [+0.00, +0.01] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 20 prepend | 1% FPR | malware TPR | -3.00 | 3.66 | [-3.18, -2.83] | 3/7 | **yes** | [-4.97, -1.56] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 20 prepend | 1% FPR | padded-benign FPR | -0.17 | 0.19 | [-0.23, -0.10] | 2/8 | **yes** | [-0.27, -0.09] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 20 prepend | 1% FPR | malware TPR, fit subset | -5.75 | 8.25 | [-6.22, -5.37] | 1/9 | **yes** | [-8.88, -2.46] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 20 prepend | 0.1% FPR | malware TPR | +5.34 | 13.49 | [+4.97, +5.72] | 7/3 | **yes** | [-1.92, +12.20] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 20 prepend | 0.1% FPR | padded-benign FPR | +0.02 | 0.05 | [-0.00, +0.05] | 6/3 | no | [-0.01, +0.06] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 20 prepend | 0.1% FPR | malware TPR, fit subset | -5.92 | 15.53 | [-6.71, -5.09] | 3/7 | **yes** | [-19.92, +4.94] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 50 prepend | 1% FPR | malware TPR | -5.01 | 9.59 | [-5.33, -4.70] | 3/7 | **yes** | [-10.76, +0.90] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 50 prepend | 1% FPR | padded-benign FPR | -0.01 | 0.02 | [-0.04, +0.01] | 3/6 | no | [-0.04, +0.01] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 50 prepend | 1% FPR | malware TPR, fit subset | -14.50 | 18.36 | [-15.46, -13.52] | 3/7 | **yes** | [-26.67, -0.84] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 50 prepend | 0.1% FPR | malware TPR | -3.76 | 9.53 | [-3.99, -3.54] | 3/7 | **yes** | [-7.84, -0.97] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 50 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 50 prepend | 0.1% FPR | malware TPR, fit subset | -0.26 | 1.68 | [-0.44, -0.08] | 3/5 | no | [-1.03, +0.24] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 100 prepend | 1% FPR | malware TPR | -3.15 | 8.91 | [-3.28, -3.02] | 2/7 | **yes** | [-4.57, -1.67] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 100 prepend | 1% FPR | padded-benign FPR | -0.00 | 0.01 | [-0.01, +0.00] | 1/1 | no | [-0.01, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 100 prepend | 0.1% FPR | malware TPR | -0.40 | 2.33 | [-0.48, -0.32] | 5/5 | no | [-1.18, +0.18] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 100 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 20 insert | 1% FPR | malware TPR | -4.44 | 4.98 | [-4.66, -4.23] | 0/10 | **yes** | [-8.23, -1.86] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 20 insert | 1% FPR | padded-benign FPR | -0.05 | 0.44 | [-0.11, +0.01] | 2/7 | no | [-0.13, +0.03] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 20 insert | 1% FPR | malware TPR, fit subset | -9.46 | 8.81 | [-10.06, -8.84] | 0/10 | **yes** | [-18.73, -2.19] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 20 insert | 0.1% FPR | malware TPR | +3.11 | 11.55 | [+2.69, +3.49] | 5/5 | no | [-5.61, +10.55] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 20 insert | 0.1% FPR | padded-benign FPR | -0.00 | 0.03 | [-0.02, +0.02] | 4/5 | no | [-0.03, +0.03] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 20 insert | 0.1% FPR | malware TPR, fit subset | -1.19 | 11.78 | [-1.59, -0.80] | 4/6 | no | [-5.51, +3.21] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 50 insert | 1% FPR | malware TPR | -2.24 | 5.88 | [-2.43, -2.07] | 3/7 | **yes** | [-3.29, -1.26] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 50 insert | 1% FPR | padded-benign FPR | -0.00 | 0.11 | [-0.04, +0.03] | 5/5 | no | [-0.04, +0.03] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 50 insert | 1% FPR | malware TPR, fit subset | -3.43 | 2.85 | [-3.96, -2.95] | 0/10 | **yes** | [-6.11, -1.81] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 50 insert | 0.1% FPR | malware TPR | +5.60 | 13.14 | [+5.26, +5.94] | 6/4 | no | [+1.50, +10.72] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 50 insert | 0.1% FPR | padded-benign FPR | -0.00 | 0.03 | [-0.02, +0.01] | 4/4 | no | [-0.02, +0.02] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 50 insert | 0.1% FPR | malware TPR, fit subset | -0.28 | 0.47 | [-0.42, -0.16] | 0/5 | no | [-1.02, -0.02] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 100 insert | 1% FPR | malware TPR | -2.79 | 5.73 | [-3.04, -2.54] | 2/8 | **yes** | [-6.56, +1.12] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 100 insert | 1% FPR | padded-benign FPR | +0.08 | 0.28 | [+0.05, +0.11] | 5/4 | no | [+0.03, +0.13] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 100 insert | 0.1% FPR | malware TPR | +6.98 | 9.36 | [+6.53, +7.41] | 8/2 | **yes** | [-0.22, +15.79] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | lgbm 100 insert | 0.1% FPR | padded-benign FPR | +0.00 | 0.02 | [-0.01, +0.01] | 4/2 | no | [-0.01, +0.01] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 20 prepend | 1% FPR | malware TPR | -5.18 | 8.36 | [-5.42, -4.96] | 3/7 | **yes** | [-8.94, -2.18] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 20 prepend | 1% FPR | padded-benign FPR | -0.03 | 0.04 | [-0.04, -0.01] | 2/7 | **yes** | [-0.05, -0.01] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 20 prepend | 1% FPR | malware TPR, fit subset | -5.56 | 12.81 | [-6.00, -5.15] | 3/7 | **yes** | [-8.28, -1.38] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 20 prepend | 0.1% FPR | malware TPR | -4.96 | 9.89 | [-5.19, -4.75] | 3/7 | **yes** | [-8.76, -1.07] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 20 prepend | 0.1% FPR | padded-benign FPR | -0.01 | 0.01 | [-0.02, +0.00] | 0/3 | no | [-0.03, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 20 prepend | 0.1% FPR | malware TPR, fit subset | -0.34 | 0.80 | [-0.46, -0.23] | 2/4 | no | [-1.10, -0.06] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 50 prepend | 1% FPR | malware TPR | -5.74 | 14.35 | [-5.88, -5.60] | 3/6 | no | [-8.07, -3.29] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 50 prepend | 1% FPR | padded-benign FPR | -0.01 | 0.05 | [-0.02, -0.01] | 0/1 | no | [-0.03, -0.01] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 50 prepend | 0.1% FPR | malware TPR | +0.02 | 3.07 | [-0.14, +0.19] | 7/3 | no | [-0.95, +1.22] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 50 prepend | 0.1% FPR | padded-benign FPR | -0.00 | 0.01 | [-0.01, +0.00] | 0/1 | no | [-0.01, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 100 prepend | 1% FPR | malware TPR | -4.04 | 12.10 | [-4.19, -3.89] | 3/5 | no | [-6.49, -1.60] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 100 prepend | 1% FPR | padded-benign FPR | -0.01 | 0.04 | [-0.02, -0.00] | 1/1 | no | [-0.02, -0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 100 prepend | 0.1% FPR | malware TPR | +0.69 | 2.05 | [+0.59, +0.79] | 7/1 | **yes** | [+0.18, +1.46] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 100 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 20 insert | 1% FPR | malware TPR | -3.31 | 4.47 | [-3.55, -3.11] | 3/7 | **yes** | [-5.19, -1.59] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 20 insert | 1% FPR | padded-benign FPR | -0.02 | 0.04 | [-0.05, +0.01] | 3/6 | no | [-0.05, +0.01] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 20 insert | 1% FPR | malware TPR, fit subset | -1.46 | 1.93 | [-1.74, -1.18] | 2/8 | **yes** | [-3.25, -0.54] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 20 insert | 0.1% FPR | malware TPR | +3.27 | 11.57 | [+2.92, +3.61] | 5/5 | no | [-1.30, +8.74] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 20 insert | 0.1% FPR | padded-benign FPR | +0.00 | 0.03 | [-0.01, +0.02] | 4/3 | no | [-0.01, +0.03] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 20 insert | 0.1% FPR | malware TPR, fit subset | -0.01 | 0.02 | [-0.03, +0.00] | 0/1 | no | [-0.03, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 50 insert | 1% FPR | malware TPR | -4.18 | 4.16 | [-4.44, -3.92] | 2/8 | **yes** | [-7.81, -0.81] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 50 insert | 1% FPR | padded-benign FPR | -0.03 | 0.05 | [-0.06, -0.01] | 1/8 | **yes** | [-0.06, -0.01] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 50 insert | 0.1% FPR | malware TPR | +3.27 | 6.46 | [+2.91, +3.63] | 7/3 | **yes** | [+0.10, +7.56] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 50 insert | 0.1% FPR | padded-benign FPR | -0.00 | 0.01 | [-0.02, +0.01] | 2/6 | no | [-0.02, +0.01] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 100 insert | 1% FPR | malware TPR | +0.28 | 4.04 | [+0.05, +0.48] | 4/6 | no | [-1.38, +2.34] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 100 insert | 1% FPR | padded-benign FPR | -0.01 | 0.02 | [-0.03, +0.00] | 2/5 | no | [-0.03, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 100 insert | 0.1% FPR | malware TPR | +3.32 | 3.78 | [+3.08, +3.54] | 8/2 | **yes** | [+1.54, +5.28] | yes |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | v2pe 100 insert | 0.1% FPR | padded-benign FPR | +0.00 | 0.01 | [-0.00, +0.00] | 1/1 | no | [-0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 20 prepend | 1% FPR | malware TPR | +26.48 | 9.16 | [+25.73, +27.27] | 10/0 | **yes** | [+13.33, +39.69] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 20 prepend | 1% FPR | padded-benign FPR | +0.54 | 0.46 | [+0.44, +0.64] | 10/0 | **yes** | [+0.33, +0.86] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 20 prepend | 1% FPR | malware TPR, fit subset | +50.45 | 9.86 | [+48.83, +52.15] | 10/0 | **yes** | [+25.35, +67.31] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 20 prepend | 0.1% FPR | malware TPR | +35.87 | 12.31 | [+35.18, +36.56] | 10/0 | **yes** | [+23.74, +45.75] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 20 prepend | 0.1% FPR | padded-benign FPR | +0.08 | 0.04 | [+0.03, +0.14] | 10/0 | **yes** | [+0.02, +0.16] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 20 prepend | 0.1% FPR | malware TPR, fit subset | +27.53 | 3.73 | [+25.97, +29.12] | 10/0 | **yes** | [+7.77, +50.40] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 50 prepend | 1% FPR | malware TPR | +27.94 | 17.51 | [+27.24, +28.70] | 10/0 | **yes** | [+17.00, +38.01] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 50 prepend | 1% FPR | padded-benign FPR | +0.04 | 0.03 | [+0.01, +0.07] | 9/0 | **yes** | [+0.01, +0.09] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 50 prepend | 1% FPR | malware TPR, fit subset | +10.74 | 12.92 | [+9.72, +11.78] | 10/0 | **yes** | [+5.80, +17.13] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 50 prepend | 0.1% FPR | malware TPR | +11.28 | 5.73 | [+10.79, +11.75] | 10/0 | **yes** | [+4.98, +19.62] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 50 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 50 prepend | 0.1% FPR | malware TPR, fit subset | +0.87 | 1.26 | [+0.64, +1.12] | 9/0 | **yes** | [+0.16, +2.42] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 100 prepend | 1% FPR | malware TPR | -1.96 | 10.75 | [-2.46, -1.46] | 6/4 | no | [-8.56, +4.07] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 100 prepend | 1% FPR | padded-benign FPR | +0.00 | 0.01 | [-0.00, +0.00] | 1/1 | no | [-0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 100 prepend | 0.1% FPR | malware TPR | +2.97 | 1.48 | [+2.69, +3.26] | 10/0 | **yes** | [+1.19, +5.58] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 100 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 20 insert | 1% FPR | malware TPR | +32.63 | 5.21 | [+31.92, +33.41] | 10/0 | **yes** | [+19.04, +45.98] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 20 insert | 1% FPR | padded-benign FPR | +0.43 | 0.36 | [+0.34, +0.52] | 10/0 | **yes** | [+0.28, +0.61] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 20 insert | 1% FPR | malware TPR, fit subset | +47.35 | 10.86 | [+45.85, +48.90] | 10/0 | **yes** | [+25.25, +61.93] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 20 insert | 0.1% FPR | malware TPR | +31.89 | 7.33 | [+31.19, +32.60] | 10/0 | **yes** | [+21.35, +42.81] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 20 insert | 0.1% FPR | padded-benign FPR | +0.04 | 0.02 | [+0.01, +0.07] | 10/0 | **yes** | [+0.01, +0.08] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 20 insert | 0.1% FPR | malware TPR, fit subset | +20.97 | 2.36 | [+19.55, +22.43] | 10/0 | **yes** | [+2.96, +43.51] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 50 insert | 1% FPR | malware TPR | +42.41 | 6.80 | [+41.62, +43.21] | 10/0 | **yes** | [+28.71, +55.03] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 50 insert | 1% FPR | padded-benign FPR | +0.22 | 0.10 | [+0.14, +0.31] | 10/0 | **yes** | [+0.13, +0.36] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 50 insert | 1% FPR | malware TPR, fit subset | +3.63 | 2.38 | [+2.94, +4.35] | 10/0 | **yes** | [+0.94, +9.39] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 50 insert | 0.1% FPR | malware TPR | +31.83 | 6.26 | [+31.01, +32.60] | 10/0 | **yes** | [+19.91, +43.46] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 50 insert | 0.1% FPR | padded-benign FPR | +0.02 | 0.02 | [+0.00, +0.04] | 7/0 | **yes** | [+0.00, +0.05] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 50 insert | 0.1% FPR | malware TPR, fit subset | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 100 insert | 1% FPR | malware TPR | +35.80 | 5.59 | [+34.97, +36.65] | 10/0 | **yes** | [+22.99, +48.47] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 100 insert | 1% FPR | padded-benign FPR | +0.22 | 0.27 | [+0.16, +0.29] | 10/0 | **yes** | [+0.14, +0.33] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 100 insert | 0.1% FPR | malware TPR | +23.66 | 4.89 | [+22.97, +24.41] | 10/0 | **yes** | [+12.74, +36.43] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | lgbm 100 insert | 0.1% FPR | padded-benign FPR | +0.01 | 0.01 | [+0.00, +0.03] | 5/0 | no | [+0.00, +0.03] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 20 prepend | 1% FPR | malware TPR | +14.75 | 15.18 | [+14.00, +15.49] | 8/2 | **yes** | [+0.84, +27.80] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 20 prepend | 1% FPR | padded-benign FPR | +0.01 | 0.02 | [-0.01, +0.05] | 7/1 | no | [-0.01, +0.06] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 20 prepend | 1% FPR | malware TPR, fit subset | +4.04 | 3.12 | [+3.32, +4.74] | 10/0 | **yes** | [+1.11, +10.37] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 20 prepend | 0.1% FPR | malware TPR | +6.37 | 4.61 | [+6.04, +6.69] | 10/0 | **yes** | [+2.46, +10.98] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 20 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 20 prepend | 0.1% FPR | malware TPR, fit subset | +0.17 | 0.47 | [+0.10, +0.26] | 4/0 | no | [+0.02, +0.55] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 50 prepend | 1% FPR | malware TPR | -1.71 | 9.36 | [-2.20, -1.23] | 5/5 | no | [-7.72, +3.77] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 50 prepend | 1% FPR | padded-benign FPR | -0.00 | 0.00 | [-0.00, +0.00] | 0/1 | no | [-0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 50 prepend | 0.1% FPR | malware TPR | +2.21 | 1.24 | [+1.99, +2.45] | 10/0 | **yes** | [+0.88, +4.21] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 50 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 100 prepend | 1% FPR | malware TPR | +3.40 | 3.57 | [+2.98, +3.86] | 9/1 | **yes** | [-0.75, +8.14] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 100 prepend | 1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 1/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 100 prepend | 0.1% FPR | malware TPR | +1.38 | 1.42 | [+1.22, +1.54] | 8/0 | **yes** | [+0.51, +2.64] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 100 prepend | 0.1% FPR | padded-benign FPR | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 20 insert | 1% FPR | malware TPR | +35.99 | 4.81 | [+35.20, +36.77] | 10/0 | **yes** | [+23.09, +47.80] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 20 insert | 1% FPR | padded-benign FPR | +0.13 | 0.05 | [+0.07, +0.21] | 10/0 | **yes** | [+0.07, +0.23] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 20 insert | 1% FPR | malware TPR, fit subset | +0.68 | 0.77 | [+0.46, +0.91] | 8/0 | **yes** | [+0.06, +2.17] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 20 insert | 0.1% FPR | malware TPR | +25.53 | 5.11 | [+24.83, +26.25] | 10/0 | **yes** | [+15.54, +35.57] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 20 insert | 0.1% FPR | padded-benign FPR | +0.02 | 0.02 | [+0.00, +0.04] | 6/0 | no | [+0.00, +0.05] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 20 insert | 0.1% FPR | malware TPR, fit subset | +0.00 | 0.00 | [+0.00, +0.00] | 0/0 | no | [+0.00, +0.00] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 50 insert | 1% FPR | malware TPR | +28.33 | 4.25 | [+27.55, +29.19] | 10/0 | **yes** | [+18.31, +37.92] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 50 insert | 1% FPR | padded-benign FPR | +0.08 | 0.04 | [+0.03, +0.13] | 9/0 | **yes** | [+0.03, +0.15] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 50 insert | 0.1% FPR | malware TPR | +16.06 | 4.43 | [+15.44, +16.71] | 10/0 | **yes** | [+8.24, +26.27] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 50 insert | 0.1% FPR | padded-benign FPR | +0.00 | 0.01 | [+0.00, +0.01] | 3/0 | no | [+0.00, +0.01] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 100 insert | 1% FPR | malware TPR | +17.97 | 2.06 | [+17.25, +18.68] | 10/0 | **yes** | [+9.44, +28.72] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 100 insert | 1% FPR | padded-benign FPR | +0.02 | 0.01 | [+0.00, +0.04] | 7/0 | **yes** | [+0.00, +0.04] | no |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 100 insert | 0.1% FPR | malware TPR | +8.03 | 3.20 | [+7.59, +8.43] | 10/0 | **yes** | [+3.14, +16.12] | yes |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | v2pe 100 insert | 0.1% FPR | padded-benign FPR | +0.00 | 0.01 | [+0.00, +0.01] | 1/0 | no | [+0.00, +0.01] | no |
 
 **White-box greedy attack: share of the 500 malware reports still flagged after k prepended calls (mean over seeds 0-2; range in brackets).**
 
@@ -566,6 +1036,8 @@
 | B (2L, no padding) | 0.1% FPR | 3 | 38.9 (29–44) | 19.8 (13–24) | 18.9 (11–24) | 14.7 (6–20) | 9.0 (1–13) | 2.4 (0–7) | 0.2 (0–1) | 0.0 (0–0) | 0.0 (0–0) |
 | ATT+bal-2L (A) | 1% FPR | 3 | 78.7 (78–80) | 71.0 (70–72) | 70.5 (70–72) | 68.5 (67–71) | 67.6 (65–70) | 61.5 (58–63) | 39.2 (28–45) | 9.3 (5–17) | 4.4 (4–5) |
 | ATT+bal-2L (A) | 0.1% FPR | 3 | 42.5 (38–49) | 32.9 (27–39) | 27.0 (23–33) | 24.1 (20–29) | 21.3 (18–25) | 11.7 (8–15) | 2.0 (1–4) | 0.8 (0–2) | 0.3 (0–1) |
+| ATT+bal-2L, round 2 (A2) | 1% FPR | 3 | 77.0 (76–79) | 71.5 (70–74) | 68.9 (63–73) | 65.2 (60–68) | 63.5 (60–66) | 58.2 (52–63) | 25.3 (16–34) | 9.8 (4–16) | 6.2 (4–10) |
+| ATT+bal-2L, round 2 (A2) | 0.1% FPR | 3 | 56.1 (55–57) | 44.7 (40–53) | 40.8 (36–49) | 34.7 (33–37) | 33.1 (30–36) | 25.8 (23–27) | 10.6 (7–13) | 3.9 (2–7) | 2.5 (1–5) |
 
 **White-box: padded-benign FPR. The call list that the attack chose for malware report i after k steps (the final list if it stopped earlier) is prepended to one random benign April report (numpy seed 32, the same 500 benign reports for every model); share of those 500 flagged (mean over seeds).**
 
@@ -579,6 +1051,8 @@
 | B (2L, no padding) | 0.1% FPR | 0.1 | 0.0 | 0.0 | 0.0 |
 | ATT+bal-2L (A) | 1% FPR | 0.8 | 1.0 | 2.1 | 0.8 |
 | ATT+bal-2L (A) | 0.1% FPR | 0.1 | 0.1 | 0.1 | 0.0 |
+| ATT+bal-2L, round 2 (A2) | 1% FPR | 1.0 | 1.3 | 2.1 | 2.8 |
+| ATT+bal-2L, round 2 (A2) | 0.1% FPR | 0.1 | 0.1 | 0.1 | 1.1 |
 
 **White-box comparisons (points; share of the same 500 malware reports still flagged after k steps; seeds paired; CI = bootstrap over the 500 reports, and over their hash_apis groups).** A positive difference means that the first model is flagged MORE often (is harder to evade).
 
@@ -616,4 +1090,36 @@
 | B (2L, no padding) − ATT+bal | 0.1% FPR | 10 | -22.7 | [-26.0, -19.7] | [-30.9, -14.9] | 0/3 |
 | B (2L, no padding) − ATT+bal | 0.1% FPR | 20 | -12.2 | [-14.5, -9.9] | [-18.3, -7.1] | 0/3 |
 | B (2L, no padding) − ATT+bal | 0.1% FPR | 50 | -0.3 | [-0.6, -0.1] | [-0.8, -0.1] | 0/3 |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | 1% FPR | 5 | -0.3 | [-0.9, +0.3] | [-1.2, +0.5] | 1/3 |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | 1% FPR | 10 | +1.1 | [+0.3, +1.9] | [-0.2, +3.0] | 2/3 |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | 1% FPR | 20 | +4.9 | [+3.3, +6.3] | [+1.3, +9.4] | 2/3 |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | 1% FPR | 50 | +4.4 | [+3.1, +5.7] | [+1.5, +8.6] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | 0.1% FPR | 5 | +0.2 | [-1.3, +1.5] | [-4.2, +3.9] | 2/3 |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | 0.1% FPR | 10 | +1.3 | [-0.4, +2.9] | [-3.5, +5.5] | 2/3 |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | 0.1% FPR | 20 | +11.2 | [+9.1, +13.6] | [+5.2, +18.2] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − ATT+bal | 0.1% FPR | 50 | +2.2 | [+1.4, +3.1] | [+0.7, +4.4] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − v2-PE | 1% FPR | 5 | +56.2 | [+52.4, +59.9] | [+42.6, +67.4] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − v2-PE | 1% FPR | 10 | +58.4 | [+54.6, +62.3] | [+44.9, +69.7] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − v2-PE | 1% FPR | 20 | +56.0 | [+51.9, +59.9] | [+42.1, +67.5] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − v2-PE | 1% FPR | 50 | +5.1 | [+3.8, +6.5] | [+2.1, +9.3] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − v2-PE | 0.1% FPR | 5 | +33.9 | [+29.8, +37.5] | [+22.3, +46.2] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − v2-PE | 0.1% FPR | 10 | +32.5 | [+28.5, +35.9] | [+20.9, +44.7] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − v2-PE | 0.1% FPR | 20 | +25.6 | [+22.2, +28.9] | [+14.7, +37.3] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − v2-PE | 0.1% FPR | 50 | +2.5 | [+1.6, +3.5] | [+0.9, +4.7] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | 1% FPR | 5 | -3.3 | [-4.8, -2.0] | [-7.9, +0.4] | 0/3 |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | 1% FPR | 10 | -4.1 | [-5.3, -2.9] | [-8.6, -0.5] | 0/3 |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | 1% FPR | 20 | -3.3 | [-4.7, -2.0] | [-7.0, -0.1] | 0/3 |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | 1% FPR | 50 | +1.8 | [+0.9, +2.7] | [-0.4, +5.1] | 2/3 |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | 0.1% FPR | 5 | +10.5 | [+7.7, +13.1] | [+1.1, +20.9] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | 0.1% FPR | 10 | +11.8 | [+8.9, +14.5] | [+1.9, +22.0] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | 0.1% FPR | 20 | +14.1 | [+11.4, +16.7] | [+4.0, +23.7] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − ATT+bal-2L (A) | 0.1% FPR | 50 | +2.2 | [+1.4, +3.1] | [+0.7, +4.1] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | 1% FPR | 5 | +25.3 | [+22.5, +28.3] | [+13.7, +36.8] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | 1% FPR | 10 | +29.8 | [+26.5, +32.7] | [+18.0, +42.2] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | 1% FPR | 20 | +41.5 | [+37.6, +45.0] | [+27.7, +55.2] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | 1% FPR | 50 | +4.6 | [+3.1, +6.4] | [+2.0, +8.3] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | 0.1% FPR | 5 | +19.9 | [+16.7, +23.0] | [+12.4, +29.1] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | 0.1% FPR | 10 | +24.1 | [+21.0, +27.4] | [+16.4, +32.5] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | 0.1% FPR | 20 | +23.4 | [+20.3, +26.7] | [+14.3, +33.2] | 3/3 |
+| ATT+bal-2L, round 2 (A2) − B (2L, no padding) | 0.1% FPR | 50 | +2.5 | [+1.6, +3.6] | [+0.8, +4.8] | 3/3 |
 

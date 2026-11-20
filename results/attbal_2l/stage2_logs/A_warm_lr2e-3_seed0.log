@@ -1,0 +1,7 @@
+[A_warm_lr2e-3 seed 0] data loaded in 3s: train 67,768, validation 7,530 (hash b18269395891ee1e51d69e4a7293f0af asserted), April 17,402; TRAIN pool 22,201 benign reports
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+[A_warm_lr2e-3 seed 0] parameters {'level1': 3300096, 'level2': 67777, 'total': 3367873}; init warm (/kaggle/input/datasets/manishsinghxdev/nebula-review-models/attbal/seed0.pt)
+[A_warm_lr2e-3 seed 0] epoch 1: val pAUC@1e-2 0.8922 TPR@1e-3 0.753 @1e-2 0.976 AUC 0.9967 val loss 0.0680 train loss 0.0484 | edit 11s train 109s eval 4s | peak 1.71 GB, micro 96, mean chunks 2.86
+[A_warm_lr2e-3 seed 0] epoch 2: val pAUC@1e-2 0.4990 TPR@1e-3 0.057 @1e-2 0.918 AUC 0.9930 val loss 0.0745 train loss 0.0369 | edit 11s train 108s eval 4s | peak 1.68 GB, micro 96, mean chunks 2.86
+[A_warm_lr2e-3 seed 0] epoch 3: val pAUC@1e-2 0.9002 TPR@1e-3 0.701 @1e-2 0.984 AUC 0.9973 val loss 0.0523 train loss 0.0423 | edit 11s train 108s eval 4s | peak 1.7 GB, micro 96, mean chunks 2.86

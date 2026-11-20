@@ -1,0 +1,7 @@
+[B_lr2e-3 seed 2] data loaded in 3s: train 67,768, validation 7,530 (hash b18269395891ee1e51d69e4a7293f0af asserted), April 17,402; TRAIN pool 22,201 benign reports
+/tmp/nebula/nebula/models/attention.py:48: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer_encoder = TransformerEncoder(encoder_layers, nLayers)
+[B_lr2e-3 seed 2] parameters {'level1': 3300096, 'level2': 67777, 'total': 3367873}; init scratch
+[B_lr2e-3 seed 2] epoch 1: val pAUC@1e-2 0.9489 TPR@1e-3 0.955 @1e-2 0.985 AUC 0.9985 val loss 0.0438 train loss 0.0965 | edit 0s train 105s eval 4s | peak 1.64 GB, micro 96, mean chunks 2.76
+[B_lr2e-3 seed 2] epoch 2: val pAUC@1e-2 0.9754 TPR@1e-3 0.967 @1e-2 0.989 AUC 0.9989 val loss 0.0414 train loss 0.0301 | edit 0s train 105s eval 4s | peak 1.67 GB, micro 96, mean chunks 2.76
+[B_lr2e-3 seed 2] epoch 3: val pAUC@1e-2 0.9585 TPR@1e-3 0.946 @1e-2 0.986 AUC 0.9985 val loss 0.0491 train loss 0.0196 | edit 0s train 105s eval 4s | peak 1.66 GB, micro 96, mean chunks 2.76

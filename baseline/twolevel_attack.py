@@ -117,43 +117,60 @@ def run_scores(a):
         tots[j] = tot
         for s in a.seeds:
             res[f"seed{s}"][j] = scorers[s](tok, tot)
+            if j == 0:
+                check_unedited(a.family, s, res[f"seed{s}"][0], log=lambda m: print(m, flush=True))
         print(f"[{a.family}] set {j} {spec[0]} scored for {len(a.seeds)} seeds ({time.time() - t0:.0f}s)", flush=True)
         del tok
     os.makedirs(a.out, exist_ok=True)
     np.savez_compressed(os.path.join(a.out, f"scores_{a.family}.npz"), names=np.array([s[0] for s in specs]), tot=tots, **res)
-    check_scores(a, res, tots, specs, y_test)
+    check_scores(a, res, specs)
 
 
-def check_scores(a, res, tots, specs, y_test):
-    """Reference checks against stored scores of earlier runs (files from the dataset; skipped, with a message, if absent): A and B unedited = the April logits of the training run; ATT+bal and
-    v2-PE on the REPORT 5.10 random edits (k = 5, 20, 50) = a3pad_<family>.npz. Prints and asserts."""
-    names = [s[0] for s in specs]
-    out = {}
+def reference_unedited(family, seed):
+    """April logits of the same model from the earlier run (A and B: the training run's; ATT+bal and v2-PE: row 0 of a3pad_<family>.npz), or None if the file is not there."""
     try:
         ref_dir = C.find_dir_with("ranking.json")
     except Exception:
-        ref_dir = None
-    for s in a.seeds:
-        if FAMILIES[a.family] == "2l":
-            p = os.path.join(ref_dir or "", "logits", f"{a.family}_seed{s}.npy")
-            if os.path.exists(p):
-                d = float(np.abs(np.load(p).astype(np.float64) - res[f"seed{s}"][0]).max())
-                out[f"seed{s}_unedited_vs_training_run"] = d
-                assert d < 2e-3, f"{a.family} seed {s}: unedited scores differ from the training run's April logits by {d}"
-        else:
-            p = os.path.join(ref_dir or "", "ref", f"a3pad_{a.family}.npz")
-            if os.path.exists(p):
+        return None
+    p = os.path.join(ref_dir, "logits", f"{family}_seed{seed}.npy") if FAMILIES[family] == "2l" else os.path.join(ref_dir, "ref", f"a3pad_{family}.npz")
+    if not os.path.exists(p):
+        return None
+    return np.load(p).astype(np.float64) if FAMILIES[family] == "2l" else np.load(p)[f"seed{seed}"][0].astype(np.float64)
+
+
+def check_unedited(family, seed, z0, log=print):
+    """Fail fast: the unedited scores of this scoring path must equal the earlier run's April logits (tolerance 2e-3: different batch composition)."""
+    ref = reference_unedited(family, seed)
+    if ref is None:
+        log(f"[{family} seed {seed}] no reference logits found: unedited check skipped")
+        return None
+    d = float(np.abs(ref - np.asarray(z0, dtype=np.float64)).max())
+    assert d < 2e-3, f"{family} seed {seed}: unedited scores differ from the earlier run's April logits by {d}"
+    log(f"[{family} seed {seed}] unedited scores = earlier April logits (max difference {d:.2e})")
+    return d
+
+
+def check_scores(a, res, specs):
+    """ATT+bal and v2-PE on the REPORT 5.10 random edits (k = 5, 20, 50) must equal a3pad_<family>.npz (same edits, same model). Prints, writes checks_<family>.json and asserts."""
+    names = [s[0] for s in specs]
+    out = {}
+    if FAMILIES[a.family] == "one":
+        try:
+            p = os.path.join(C.find_dir_with("ranking.json"), "ref", f"a3pad_{a.family}.npz")
+        except Exception:
+            p = ""
+        if os.path.exists(p):
+            for s in a.seeds:
                 old = np.load(p)[f"seed{s}"]
-                d0 = float(np.abs(old[0] - res[f"seed{s}"][0]).max())
                 dm = max(float(np.abs(old[1 + i] - res[f"seed{s}"][names.index(f"random_{k}_{m}")]).max()) for i, (m, k) in enumerate(OLD_RANDOM))
-                out[f"seed{s}_unedited_vs_a3pad"], out[f"seed{s}_random_vs_a3pad"] = d0, dm
-                assert d0 < 2e-3 and dm < 2e-3, f"{a.family} seed {s}: scores differ from a3pad ({d0}, {dm})"
-    print(f"[{a.family}] reference checks: {json.dumps(out)}", flush=True)
+                out[f"seed{s}_random_5_20_50_vs_a3pad"] = dm
+                assert dm < 2e-3, f"{a.family} seed {s}: random-edit scores differ from a3pad by {dm}"
+    print(f"[{a.family}] reference checks of the edits: {json.dumps(out)}", flush=True)
     json.dump(out, open(os.path.join(a.out, f"checks_{a.family}.json"), "w"), indent=1)
 
 
 # ----------------------------------------------------------------------------- mode wb
-def greedy(store, ntr, y_test, pool, scorer, cut, n_wb=N_WB, steps=WB_STEPS, n_cand=WB_CAND, group=40, log=print, label=""):
+def greedy(store, ntr, y_test, pool, scorer, cut, n_wb=N_WB, steps=WB_STEPS, n_cand=WB_CAND, group=40, log=print, label="", check=None):
     """The white-box greedy attack (see the module doc). `scorer(tok, tot)` -> logits. Returns the dict that is saved, and the picked call lists (as arrays) for the padded-benign scoring."""
     n_test = len(y_test)
     tok0 = np.zeros((n_test, cut), dtype=np.uint16)
@@ -162,6 +179,8 @@ def greedy(store, ntr, y_test, pool, scorer, cut, n_wb=N_WB, steps=WB_STEPS, n_c
         tok0[t], tot0[t] = CS.build_fast(store, ntr + t, [], None, cut=cut)
     z0 = scorer(tok0, tot0)
     del tok0
+    if check:
+        check(z0)
     t1, t01 = padtest.thresholds(z0, y_test, 0.01), padtest.thresholds(z0, y_test, 0.001)
     mal = np.where(y_test == 1)[0]
     sel = np.sort(np.random.default_rng(WB_SEED).choice(mal, n_wb, replace=False))
@@ -219,7 +238,8 @@ def run_wb(a):
     store, y_test, ntr, ranking, pool, pool_n = inputs(a)
     cut = cut_of(a.family)
     scorer = load_scorer(a.family, a.seed, a.search, a.device)
-    out = greedy(store, ntr, y_test, pool, scorer, cut, n_wb=a.n_wb, steps=a.steps, label=f"{a.family} seed {a.seed}", log=lambda s: print(s, flush=True))
+    out = greedy(store, ntr, y_test, pool, scorer, cut, n_wb=a.n_wb, steps=a.steps, label=f"{a.family} seed {a.seed}", log=lambda s: print(s, flush=True),
+                 check=lambda z0: check_unedited(a.family, a.seed, z0, log=lambda m: print(m, flush=True)))
     os.makedirs(a.out, exist_ok=True)
     np.savez_compressed(os.path.join(a.out, f"wb_{a.family}_seed{a.seed}.npz"), **out)
 

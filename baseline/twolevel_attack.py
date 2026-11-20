@@ -30,7 +30,7 @@ import numpy as np
 
 from baseline import callstore as CS, common as C, make_pad, padtest
 
-FAMILIES = {"a2l": "2l", "b2l": "2l", "attbal": "one", "v2_pe": "one"}
+FAMILIES = {"a2l": "2l", "b2l": "2l", "a2r2": "2l", "attbal": "one", "v2_pe": "one"}      # a2r2 = A2 of round 2 (NOTES 20)
 CUT_2L, CUT_1 = 4096, 512
 RANDOM_KS, SURR_KS, SURR, MODES = (5, 20, 50, 100, 200), (20, 50, 100), ("lgbm", "v2pe"), ("prepend", "insert")
 N_WB, WB_SEED, WB_STEPS, WB_CAND, WB_CAND_SEED, WB_BEN_SEED, WB_BEN_K = 500, 31, 50, 200, 41, 32, (5, 10, 20, 50)
@@ -82,7 +82,7 @@ def build_set(store, ntr, n_test, pool, pool_n, ranking, spec, cut, rep_arrays=N
 
 # ----------------------------------------------------------------------------- models
 def find_weights(family, seed, search):
-    if family in ("a2l", "b2l"):
+    if family in ("a2l", "b2l", "a2r2"):
         for dp, dn, fn in os.walk(search):
             if os.path.basename(dp) == family and f"seed{seed}.pt" in fn:
                 return os.path.join(dp, f"seed{seed}.pt")

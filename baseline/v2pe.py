@@ -52,6 +52,9 @@ def run(a):
     bpe = int(np.ceil(len(xt) / RECIPE["batch"]))
     log, t0, seen = [], time.time(), {"batches": 0}
     rob = {"tok": None}                                             # fixed padded validation set (NOTES 16.3), filled in the in-memory padding branch
+    loss_log = bool(getattr(a, "loss_log", False))
+    ll = {"consumed": 0, "batch_losses": [], "epochs": []}
+    sub_idx = np.random.default_rng(11).choice(len(xt), min(2000, len(xt)), replace=False)      # fixed subset of 2,000 training reports (positions in the 90% slice), UNEDITED tokens
 
     def on_epoch_end(ep):
         zv = cv.predict_logits(model, xv, dev, bs=512)
@@ -61,10 +64,18 @@ def run(a):
             thr = padtest.thresholds(zv, yv, 0.01)
             zr = cv.predict_logits(model, rob["tok"], dev, bs=512)
             rec["val_robust_tpr"], rec["val_robust_thr"], rec["val_robust_n"] = float((zr > thr).mean()), float(thr), int(len(zr))
+        if loss_log:
+            all_l = trainer.train_losses                               # the authors' trainer stores the BCE of every training batch (loss.item()); read only
+            new = [float(v) for v in all_l[ll["consumed"]:]]
+            ll["consumed"] = len(all_l)
+            ll["batch_losses"].extend(new)
+            zs = cv.predict_logits(model, xt[sub_idx], dev, bs=512)    # eval mode: no dropout, no randomness
+            ll["epochs"].append({"epoch": ep, "step_end": len(ll["batch_losses"]), "n_batches": len(new), "train_epoch_mean_loss": float(np.mean(new)), "val_loss": rec["val_loss"], "val_pauc@1e-2": rec["val"]["pauc@0.01"],
+                                 "val_auc": rec["val"]["auc"], "train_subset_clean_loss": gap.bce_logits(yt[sub_idx], zs)})
         log.append(rec)
         print(f"[{a.tag} seed {a.seed}] epoch {ep}: val TPR@1e-3 {mv['tpr@0.001']:.3f} @1e-2 {mv['tpr@0.01']:.3f} pAUC@1e-2 {mv['pauc@0.01']:.3f} AUC {mv['auc']:.4f} loss {rec['val_loss']:.4f} | {rec['seconds']:.0f}s", flush=True)
         np.save(os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_val_logits.npy"), zv.astype(np.float32))
-        if ep == a.epochs or getattr(a, "every_epoch", False):                         # the April logits: stored, NOT evaluated here
+        if (ep == a.epochs or getattr(a, "every_epoch", False)) and not loss_log:        # the April logits: stored, NOT evaluated here (not at all in loss-log mode)
             zt = cv.predict_logits(model, x_test, dev, bs=512)
             np.save(os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_test_logits.npy"), zt.astype(np.float32))
             torch.save({k: v.detach().cpu() for k, v in model.state_dict().items()}, os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_model.pt"))
@@ -95,6 +106,7 @@ def run(a):
                 xe, ye = np.concatenate([xt, tok.astype(xt.dtype)]), np.concatenate([yt, y_all[rows]])
             edited[ep], epoch_sizes[ep] = int(len(rows)), int(len(xe))
             seen["batches"] += int(np.ceil(len(xe) / RECIPE["batch"]))
+            ll["consumed"] = 0                                          # train_losses restarts at every fit() call
             trainer.fit(xe, ye, epochs=1)
             on_epoch_end(ep)
             del xe, ye, tok
@@ -111,6 +123,7 @@ def run(a):
             xe = xt.copy()
             xe[pos] = tok[keep].astype(xe.dtype)
             edited[ep] = int(len(pos))
+            ll["consumed"] = 0
             trainer.fit(xe, yt, epochs=1)
             on_epoch_end(ep)
     else:
@@ -119,6 +132,16 @@ def run(a):
         trainer.fit(xt, yt, epochs=a.epochs)
         hook.finish()
     assert len(log) == a.epochs, (len(log), a.epochs)
+    if loss_log:
+        bl = np.array(ll["batch_losses"])
+        steps = np.arange(10, len(bl) + 1, 10)
+        C.dump_json({"model": a.tag, "seed": a.seed, "epochs": a.epochs, "steps_per_epoch": bpe, "recipe": recipe, "pe_mode": a.pe_mode, "pooling": a.pooling, "split_hash_asserted": True, "n_train": int(len(xt)), "n_val": int(len(xv)),
+                     "padding": ({"mode": a.pad_mode, "p": getattr(a, "pad_prob", 0.5), "k": "U{1..50}", "insert_prepend": "50/50", "pool": "TRAIN pool only", "stream": a.pad_stream} if a.pad_store else None),
+                     "train_loss_note": ("mean BCE of the last 10 training batches (dropout on) on the PADDED training mix of that epoch (about half of the reports are edited)" if a.pad_store else
+                                         "mean BCE of the last 10 training batches (dropout on); no padding"),
+                     "train_loss_every": 10, "train_loss_step": steps.tolist(), "train_loss_mean_last_10": [float(bl[g - 10:g].mean()) for g in steps],
+                     "per_epoch": ll["epochs"], "train_subset": {"numpy_seed": 11, "n": int(len(sub_idx)), "positions_checksum": int(sub_idx.sum()), "tokens": "unedited", "mode": "eval (no dropout)"},
+                     "note": "April logits and weights are not produced in this mode"}, os.path.join(a.out, "loss_curves", a.tag, f"seed{a.seed}.json"))
     C.dump_json({"tag": a.tag, "pe_mode": a.pe_mode, "pooling": a.pooling, "aug_dir": a.aug_dir, "pad_store": bool(a.pad_store), "pad_mode": a.pad_mode, "pad_labels": a.pad_labels, "pad_stream": a.pad_stream, "edited_rows_per_epoch": edited, "reports_per_epoch": epoch_sizes, "pos_offset": 0, "recipe": recipe, "pad_prob": getattr(a, "pad_prob", 0.5), "seed": a.seed, "epochs": a.epochs, "batches_per_epoch": bpe, "n_train": int(len(xt)),
                  "n_val": int(len(xv)), "n_val_benign": int((yv == 0).sum()), "tokenizer": a.variant, "split_hash_asserted": True, "env": C.env_info(), "nebula": nb,
                  "train_seconds": round(time.time() - t0, 1), "per_epoch": log, "april": "logits of the last epoch stored in seed<k>_epoch<e>_test_logits.npy; not evaluated by this script"},
@@ -143,7 +166,7 @@ def orchestrate(a):
                 cmd = [sys.executable, "-m", "baseline.v2pe", "--out", a.out, "--seed", str(s), "--epochs", str(a.epochs), "--device", a.device, "--pe-mode", a.pe_mode,
                        "--tag", a.tag, "--variant", a.variant, "--pooling", a.pooling] + (["--aug-dir", a.aug_dir] if a.aug_dir else []) + (
                     ["--pad-store", a.pad_store, "--pad-mode", a.pad_mode, "--pad-labels", a.pad_labels, "--pad-stream", str(a.pad_stream), "--pad-prob", str(a.pad_prob)] if a.pad_store else []) + (
-                    ["--lr", str(a.lr)] if a.lr else []) + (["--val-robust"] if a.val_robust else []) + (["--every-epoch"] if a.every_epoch else []) + (["--limit", str(a.limit)] if a.limit else [])
+                    ["--lr", str(a.lr)] if a.lr else []) + (["--val-robust"] if a.val_robust else []) + (["--every-epoch"] if a.every_epoch else []) + (["--limit", str(a.limit)] if a.limit else []) + (["--loss-log"] if getattr(a, "loss_log", False) else [])
                 running[g] = (subprocess.Popen(cmd, env=dict(os.environ, CUDA_VISIBLE_DEVICES=str(g)), stdout=log, stderr=subprocess.STDOUT), f"seed{s}", log)
                 print(f"[{(time.time() - t0) / 60:.1f} min] GPU {g}: started {a.tag} seed {s}", flush=True)
         for g, (p, name, log) in list(running.items()):
@@ -202,6 +225,7 @@ def main():
     ap.add_argument("--pad-prob", type=float, default=0.5, help="share of the training reports edited per epoch (0.5 = REPORT 5.10)")
     ap.add_argument("--val-robust", action="store_true", help="after every epoch: share of validation malware still flagged at the validation 1%% FPR threshold after 20 TRAIN-pool calls are prepended (NOTES 16.3)")
     ap.add_argument("--every-epoch", action="store_true", help="store the April logits and the weights after EVERY epoch (the April logits are not evaluated by this script)")
+    ap.add_argument("--loss-log", action="store_true", help="loss-curve logging (REPORT loss curves): per-batch training losses, clean training-subset loss and validation metrics after every epoch -> <out>/loss_curves/<tag>/seed<k>.json; no April logits, no weights")
     ap.add_argument("--aug-dir", default=None, help="folder with aug_s<seed>_e<epoch>_{rows,tok}.npy (balanced padding arrays of baseline/make_pad.py)")
     ap.add_argument("--variant", default="bpe50k")
     ap.add_argument("--device", default="cuda")

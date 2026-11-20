@@ -1,0 +1,76 @@
+{
+ "tolerance": 0.002,
+ "passed": true,
+ "rows": [
+  {
+   "model": "v2_pe",
+   "seed": 0,
+   "epoch2_val_pauc_new": 0.96322285693973,
+   "epoch2_val_pauc_stored": 0.96322285693973,
+   "abs_diff": 0.0
+  },
+  {
+   "model": "v2_pe",
+   "seed": 1,
+   "epoch2_val_pauc_new": 0.9724414413253165,
+   "epoch2_val_pauc_stored": 0.9724414413253165,
+   "abs_diff": 0.0
+  },
+  {
+   "model": "v2_pe",
+   "seed": 2,
+   "epoch2_val_pauc_new": 0.9530338488990885,
+   "epoch2_val_pauc_stored": 0.9530338488990885,
+   "abs_diff": 0.0
+  },
+  {
+   "model": "v2_pe",
+   "seed": 3,
+   "epoch2_val_pauc_new": 0.975133824552431,
+   "epoch2_val_pauc_stored": 0.975133824552431,
+   "abs_diff": 0.0
+  },
+  {
+   "model": "v2_pe",
+   "seed": 4,
+   "epoch2_val_pauc_new": 0.9717312971276149,
+   "epoch2_val_pauc_stored": 0.9717312971276149,
+   "abs_diff": 0.0
+  },
+  {
+   "model": "attbal",
+   "seed": 0,
+   "epoch2_val_pauc_new": 0.9521127430372444,
+   "epoch2_val_pauc_stored": 0.9521127430372444,
+   "abs_diff": 0.0
+  },
+  {
+   "model": "attbal",
+   "seed": 1,
+   "epoch2_val_pauc_new": 0.9526729323214966,
+   "epoch2_val_pauc_stored": 0.9526729323214966,
+   "abs_diff": 0.0
+  },
+  {
+   "model": "attbal",
+   "seed": 2,
+   "epoch2_val_pauc_new": 0.964539003329031,
+   "epoch2_val_pauc_stored": 0.964539003329031,
+   "abs_diff": 0.0
+  },
+  {
+   "model": "attbal",
+   "seed": 3,
+   "epoch2_val_pauc_new": 0.9561838984450564,
+   "epoch2_val_pauc_stored": 0.9561838984450564,
+   "abs_diff": 0.0
+  },
+  {
+   "model": "attbal",
+   "seed": 4,
+   "epoch2_val_pauc_new": 0.9393741812225544,
+   "epoch2_val_pauc_stored": 0.9393741812225544,
+   "abs_diff": 0.0
+  }
+ ]
+}

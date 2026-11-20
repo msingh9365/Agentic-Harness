@@ -22,9 +22,11 @@ from baseline.v2pe_report import BOOT, COLS, md, metrics_of, ms
 ROOT = AR.ROOT
 SEEDS = list(range(10))
 PRIMARY = "pauc@0.01"
-LAB = {"a2l": "**ATT+bal-2L (A)**", "b2l": "B: 2L without padding", "attbal": "ATT+bal", "v2_pe": "v2-PE"}
+LAB = {"a2r2": "**A2: ATT+bal-2L, round 2**", "b2r2": "B2: 2L without padding, round 2", "a2l": "A: ATT+bal-2L (19.12)", "b2l": "B: 2L without padding (19.12)", "attbal": "ATT+bal", "v2_pe": "v2-PE"}
 CLUSTER_HASH = "d91b96b425798fc031fc1b3c8cdcdf3f998bd9b3"
-PAIRS = [("a2l", "attbal"), ("a2l", "v2_pe"), ("a2l", "b2l"), ("b2l", "v2_pe"), ("b2l", "attbal")]
+PAIRS1 = [("a2l", "attbal"), ("a2l", "v2_pe"), ("a2l", "b2l"), ("b2l", "v2_pe"), ("b2l", "attbal")]                                   # round 1 only (19.13)
+PAIRS2 = [("a2r2", "attbal"), ("a2r2", "v2_pe"), ("a2r2", "b2r2"), ("a2r2", "a2l"), ("b2r2", "v2_pe"), ("b2r2", "attbal"), ("b2r2", "b2l"), ("a2l", "attbal")]   # with round 2 (NOTES 20)
+PAIRS = PAIRS1
 
 
 def april_meta():
@@ -37,11 +39,15 @@ def april_meta():
     return a.family.values, h, pd.factorize(h)[0]
 
 
-def load(a_dir, b_dir, epoch_a=1, epoch_b=1):
+def load(a_dir, b_dir, epoch_a=1, epoch_b=1, new_a=None, new_b=None, epoch_new_a=1, epoch_new_b=1, ema_new_a=False, ema_new_b=False):
     test, val = {}, {}
-    for k, d, e in (("a2l", a_dir, epoch_a), ("b2l", b_dir, epoch_b)):
-        test[k] = np.stack([np.load(os.path.join(d, f"seed{s}_epoch{e}_test_logits.npy")).astype(np.float64) for s in SEEDS])
-        val[k] = np.stack([np.load(os.path.join(d, f"seed{s}_epoch{e}_val_logits.npy")).astype(np.float64) for s in SEEDS])
+    items = [("a2l", a_dir, epoch_a, ""), ("b2l", b_dir, epoch_b, "")]
+    if new_a:
+        items.append(("a2r2", new_a, epoch_new_a, "_ema" if ema_new_a else ""))
+        items.append(("b2r2", new_b, epoch_new_b, "_ema" if ema_new_b else ""))
+    for k, d, e, suf in items:
+        test[k] = np.stack([np.load(os.path.join(d, f"seed{s}_epoch{e}_test_logits{suf}.npy")).astype(np.float64) for s in SEEDS])
+        val[k] = np.stack([np.load(os.path.join(d, f"seed{s}_epoch{e}_val_logits{suf}.npy")).astype(np.float64) for s in SEEDS])
     test["v2_pe"], val["v2_pe"] = AR.load_family("v2_pe", os.path.join(ROOT, "results", "att_bal"))
     # ATT+bal (REPORT 5.10, lr 2e-3, epoch 2): the April logits are row 0 (unedited) of the scoring file of the attack run (the .npy logits are not in the repository); no validation logits are kept for it
     z = np.load(os.path.join(ROOT, "results", "review", "attack", "a3pad_attbal.npz"))
@@ -77,13 +83,21 @@ def main():
     ap.add_argument("--boot", type=int, default=1000)
     ap.add_argument("--epoch-a", type=int, default=1)
     ap.add_argument("--epoch-b", type=int, default=1)
+    ap.add_argument("--new-a-dir", default=None, help="round 2 (NOTES 20): the chosen A2 cell folder; adds A2 and B2 and the round-2 pairs")
+    ap.add_argument("--new-b-dir", default=None)
+    ap.add_argument("--epoch-new-a", type=int, default=1)
+    ap.add_argument("--epoch-new-b", type=int, default=1)
+    ap.add_argument("--ema-new-a", action="store_true")
+    ap.add_argument("--ema-new-b", action="store_true")
     a = ap.parse_args()
+    global PAIRS
+    PAIRS = PAIRS2 if a.new_a_dir else PAIRS1
     lab = np.load(os.path.join(ROOT, "results", "logits", "labels.npz"))
     y_test, y_val = lab["y_test"].astype(int), lab["y_val"].astype(int)
-    test, val = load(a.a_dir, a.b_dir, a.epoch_a, a.epoch_b)
+    test, val = load(a.a_dir, a.b_dir, a.epoch_a, a.epoch_b, a.new_a_dir, a.new_b_dir, a.epoch_new_a, a.epoch_new_b, a.ema_new_a, a.ema_new_b)
     fam, hsh, groups = april_meta()
     assert len(fam) == len(y_test) and len(set(groups)) == 2509
-    fams = list(LAB)
+    fams = [f for f in LAB if f in test]
     T = {f: metrics_of(y_test, test[f]) for f in fams}
     V = {f: metrics_of(y_val, val[f]) for f in fams if val[f] is not None}
     ens = {f: C.binary_metrics(y_test, test[f].mean(0), decision=0.0) for f in fams}

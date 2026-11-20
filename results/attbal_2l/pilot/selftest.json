@@ -1,0 +1,33 @@
+{
+ "checks": {
+  "e_validation_hash": "b18269395891ee1e51d69e4a7293f0af asserted in load_data; 67,768 / 7,530; first 512 tokens of all 92,700 rows equal the stored BPE-50k rows",
+  "a_K1": {
+   "max_abs_diff_chunk_vector_vs_ATTbal_core": 0.0,
+   "max_abs_diff_logit_when_masked_chunks_change": 0.0,
+   "n_reports": 64
+  },
+  "b_chunk2": {
+   "chunk2_vs_same_tokens_as_first_chunk_of_own_report": 0.0,
+   "logit_alone_vs_in_batch": 1.9371509552001953e-07,
+   "logit_when_masked_chunks_change": 0.0,
+   "n_reports": 32
+  },
+  "c_cut": {
+   "edited_reports": 34019,
+   "with >= 4096 tokens": 90,
+   "all fill 8 chunks": true
+  },
+  "d_edits": {
+   "compared": 201,
+   "first_512_differs_from_ATTbal_edit": 0,
+   "build_fast_differs_from_build_tokens": 0
+  }
+ },
+ "params": {
+  "level1": 3300096,
+  "level2": 67777,
+  "total": 3367873,
+  "attbal_full": 3304321,
+  "attbal_head_removed": 4225
+ }
+}

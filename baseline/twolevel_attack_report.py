@@ -150,7 +150,9 @@ def figure(path, Zr, names_r, Zs, names_s, wb, y, boot):
                 ax.set_ylim(0, None)
     axes[0, 0].set_ylabel("malware flagged at 1% FPR (%)")
     axes[1, 0].set_ylabel("padded benign flagged (%)")
-    axes[0, 4].legend(loc="lower left", fontsize=8.5, frameon=False)
+    axes[0, 4].legend(loc="upper right", fontsize=8.5, frameon=False)
+    top = max(float(np.nanmax(l.get_ydata())) for ax in axes[1] for l in ax.get_lines() if len(l.get_ydata()))
+    axes[1, 0].set_ylim(0, top * 1.08)          # shared row: show the largest padded-benign FPR (white-box lists) in every panel
     fig.suptitle("Detection of April malware when calls are added (thresholds fixed at 1% FPR of each model's unedited April benign scores; mean over 10 seeds, white-box over seeds 0-2)", fontsize=11, x=0.01, ha="left")
     fig.tight_layout(rect=(0, 0, 1, 0.95))
     fig.savefig(path)

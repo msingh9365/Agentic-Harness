@@ -448,6 +448,42 @@ def pilot(a):
         raise SystemExit(f"pilot runs failed: {bad}")
 
 
+def orchestrate(a):
+    """Stage 2: --cells tag:padding:init:lr ... x --seeds, one subprocess per (cell, seed), one per GPU at a time; finished units (seed<k>.json present) are skipped."""
+    try:
+        import torch
+        n_gpu = max(1, torch.cuda.device_count())
+    except Exception:
+        n_gpu = 1
+    jobs = []
+    for c in a.cells:
+        tag, pad, init, lr = c.split(":")
+        for s in a.seeds:
+            if not os.path.exists(os.path.join(a.out, tag, f"seed{s}.json")):
+                jobs.append((tag, pad, init, lr, s))
+    os.makedirs(os.path.join(a.out, "logs"), exist_ok=True)
+    running, failed, t0 = {}, [], time.time()
+    while jobs or running:
+        for g in range(n_gpu):
+            if g not in running and jobs:
+                tag, pad, init, lr, s = jobs.pop(0)
+                log = open(os.path.join(a.out, "logs", f"{tag}_seed{s}.log"), "a")
+                cmd = [sys.executable, "-m", "baseline.twolevel", "--out", a.out, "--seed", str(s), "--epochs", str(a.epochs), "--lr", lr, "--padding", pad, "--init", init, "--tag", tag, "--device", "cuda", "--search", a.search]
+                running[g] = (subprocess.Popen(cmd, env=dict(os.environ, CUDA_VISIBLE_DEVICES=str(g)), stdout=log, stderr=subprocess.STDOUT), f"{tag} seed {s}", log)
+                print(f"[{(time.time() - t0) / 60:.1f} min] GPU {g}: started {tag} seed {s}", flush=True)
+        for g, (p, name, log) in list(running.items()):
+            if p.poll() is not None:
+                log.close()
+                print(f"[{(time.time() - t0) / 60:.1f} min] GPU {g}: {name} exited with {p.returncode}", flush=True)
+                if p.returncode:
+                    failed.append(name)
+                    print("".join(open(log.name).readlines()[-6:])[-900:], flush=True)
+                del running[g]
+        time.sleep(5)
+    if failed:
+        raise SystemExit(f"runs failed: {failed}")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tokens", default=None)
@@ -455,6 +491,9 @@ def main():
     ap.add_argument("--search", default="/kaggle/input", help="where the stored ATT+bal weights (attbal/seed<k>.pt) are searched")
     ap.add_argument("--out", required=True)
     ap.add_argument("--pilot", action="store_true")
+    ap.add_argument("--plan", action="store_true", help="Stage 2: run --cells x --seeds on the available GPUs")
+    ap.add_argument("--cells", nargs="*", default=[], help="tag:padding:init:lr, e.g. A_scratch_lr2e-3:balanced:scratch:2e-3")
+    ap.add_argument("--seeds", type=int, nargs="*", default=list(range(10)))
     ap.add_argument("--selftest", action="store_true")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--epochs", type=int, default=3)
@@ -473,6 +512,8 @@ def main():
     a = ap.parse_args()
     if a.selftest:
         return selftest(a)
+    if a.plan:
+        return orchestrate(a)
     return pilot(a) if a.pilot else run(a)
 
 

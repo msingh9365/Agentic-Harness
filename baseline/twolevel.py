@@ -245,11 +245,25 @@ def run(a):
     counts = param_counts(model)
     log(f"parameters {counts}; init {a.init}" + (f" ({warm_path})" if warm_path else ""))
     params = [p for p in model.parameters() if p.requires_grad]
-    opt = torch.optim.AdamW(params, lr=a.lr, weight_decay=WD)
+    l1_ids = {id(p) for p in model.level1.parameters()}
+    p1 = [p for p in params if id(p) in l1_ids]
+    p2 = [p for p in params if id(p) not in l1_ids]
+    opt = torch.optim.AdamW([{"params": p1, "lr": a.lr * a.l1_mult, "base_mult": a.l1_mult}, {"params": p2, "lr": a.lr, "base_mult": 1.0}], lr=a.lr, weight_decay=WD)
+    ema_model = None
+    if a.ema:
+        import copy
+        ema_model = copy.deepcopy(model).to(dev)
+        for q in ema_model.parameters():
+            q.requires_grad_(False)
+    gstep = 0
     sub_idx = np.random.default_rng(11).choice(len(Xtr), min(2000, len(Xtr)), replace=False)       # fixed subset of 2,000 training reports (positions in the 90% slice), UNEDITED tokens
     micro = a.micro or BATCH
     bpe = int(np.ceil(len(Xtr) / BATCH))
+    total_steps = a.epochs * bpe
     batch_losses, per_epoch, timing = [], [], []
+    if a.freeze1_steps:
+        for q in p1:
+            q.requires_grad_(False)
     for ep in range(1, a.epochs + 1):
         t0 = time.time()
         if a.padding == "balanced":
@@ -264,12 +278,28 @@ def run(a):
         nch_e = n_real_chunks(te_)
         perm = np.random.default_rng([EPOCH_STREAM, a.seed, ep]).permutation(len(Xe))
         model.train()
+        if a.freeze1_steps and gstep < a.freeze1_steps:
+            model.level1.eval()                                                          # frozen level 1 gives plain features (no dropout) until it is released
         if str(dev).startswith("cuda"):
             torch.cuda.reset_peak_memory_stats()
         t1, new = time.time(), []
         for s in range(0, len(perm), BATCH):
             idx = perm[s:s + BATCH]
-            l, micro = train_step(model, opt, params, Xe[idx], nch_e[idx], ytr[idx], micro, dev, log)
+            if a.freeze1_steps and gstep == a.freeze1_steps:
+                for q in p1:
+                    q.requires_grad_(True)
+                model.level1.train()
+                log(f"level 1 released at step {gstep}")
+            f = (1.0 - gstep / total_steps) if a.sched == "linear" else 1.0
+            for g_ in opt.param_groups:
+                g_["lr"] = a.lr * g_["base_mult"] * f
+            l, micro = train_step(model, opt, [q for q in params if q.requires_grad], Xe[idx], nch_e[idx], ytr[idx], micro, dev, log)
+            gstep += 1
+            if ema_model is not None:
+                d_ = min(a.ema, (1 + gstep) / (10 + gstep))
+                with torch.no_grad():
+                    for qe, qm in zip(ema_model.parameters(), model.parameters()):
+                        qe.mul_(d_).add_(qm.detach(), alpha=1 - d_)
             new.append(l)
         if str(dev).startswith("cuda"):
             torch.cuda.synchronize()
@@ -287,12 +317,21 @@ def run(a):
                "mean_chunks_train_epoch": float(nch_e.mean()), "mean_chunks_val": float(n_real_chunks(tv).mean()), "peak_gpu_mem_allocated_gb": peak, "peak_gpu_mem_reserved_gb": reserved,
                "seconds_edit": round(t_edit, 1), "seconds_train": round(t_train, 1), "seconds_val_eval": round(t_eval_val, 1)}
         np.save(os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_val_logits.npy"), zv.astype(np.float32))
+        if ema_model is not None:
+            zve = predict(ema_model, Xv, tv, dev)
+            mve = C.binary_metrics(yv, zve, decision=0.0)
+            rec["ema"] = {"val_pauc@1e-2": mve["pauc@0.01"], "val_auc": mve["auc"], "val_loss": gap.bce_logits(yv, zve), "val": gap.compact(mve), "decay": a.ema}
+            np.save(os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_val_logits_ema.npy"), zve.astype(np.float32))
+            log(f"epoch {ep} EMA: val pAUC@1e-2 {mve['pauc@0.01']:.4f} AUC {mve['auc']:.4f} val loss {rec['ema']['val_loss']:.4f}")
         if not a.no_april:                                                                   # stored, NOT evaluated here
             t3 = time.time()
             zt = predict(model, Xte, tte, dev)
             rec["seconds_april_score"] = round(time.time() - t3, 1)
             np.save(os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_test_logits.npy"), zt.astype(np.float32))
             torch.save({k: v.detach().cpu() for k, v in model.state_dict().items()}, os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_model.pt"))
+            if ema_model is not None:
+                np.save(os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_test_logits_ema.npy"), predict(ema_model, Xte, tte, dev).astype(np.float32))
+                torch.save({k: v.detach().cpu() for k, v in ema_model.state_dict().items()}, os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_model_ema.pt"))
         rec["seconds_epoch_total"] = round(time.time() - t0, 1)
         per_epoch.append(rec)
         log(f"epoch {ep}: val pAUC@1e-2 {mv['pauc@0.01']:.4f} TPR@1e-3 {mv['tpr@0.001']:.3f} @1e-2 {mv['tpr@0.01']:.3f} AUC {mv['auc']:.4f} val loss {rec['val_loss']:.4f} train loss {rec['train_epoch_mean_loss']:.4f} | "
@@ -300,7 +339,7 @@ def run(a):
         del Xe
     bl = np.array(batch_losses)
     steps = np.arange(10, len(bl) + 1, 10)
-    res = {"model": a.tag, "seed": a.seed, "epochs": a.epochs, "steps_per_epoch": bpe, "recipe": {"lr": a.lr, "wd": WD, "clip": CLIP, "dropout_level1": DROP1, "dropout_level2": DROP2, "batch": BATCH, "micro_batch_used": micro, "precision": "fp32"},
+    res = {"model": a.tag, "seed": a.seed, "epochs": a.epochs, "steps_per_epoch": bpe, "recipe": {"lr": a.lr, "sched": a.sched, "level1_lr_mult": a.l1_mult, "freeze_level1_steps": a.freeze1_steps, "ema": a.ema, "wd": WD, "clip": CLIP, "dropout_level1": DROP1, "dropout_level2": DROP2, "batch": BATCH, "micro_batch_used": micro, "precision": "fp32"},
            "init": a.init, "padding": ({"mode": "replace", "p": a.pad_prob, "k": "U{1..50}", "insert_prepend": "50/50", "pool": "TRAIN pool only", "stream": PAD_STREAM, "applied": "whole call list before chunking, cut at 4,096 tokens"} if a.padding == "balanced" else None),
            "params": counts, "split_hash_asserted": VAL_HASH, "n_train": int(len(Xtr)), "n_val": int(len(Xv)), "n_val_benign": int((yv == 0).sum()), "tokenizer": a.variant,
            "train_loss_note": ("mean BCE of the last 10 training batches (dropout on) on the PADDED training mix of that epoch" if a.padding == "balanced" else "mean BCE of the last 10 training batches (dropout on); no padding"),
@@ -457,18 +496,20 @@ def orchestrate(a):
         n_gpu = 1
     jobs = []
     for c in a.cells:
-        tag, pad, init, lr = c.split(":")
+        f_ = c.split(":")
+        tag, pad, init, lr = f_[:4]
+        extra = [x for kv in (f_[4].split(",") if len(f_) > 4 else []) for x in ("--" + kv.split("=")[0].replace("_", "-"), kv.split("=")[1])]          # e.g. sched=linear,l1_mult=0.25,freeze1_steps=706,ema=0.999
         for s in a.seeds:
             if not os.path.exists(os.path.join(a.out, tag, f"seed{s}.json")):
-                jobs.append((tag, pad, init, lr, s))
+                jobs.append((tag, pad, init, lr, s, extra))
     os.makedirs(os.path.join(a.out, "logs"), exist_ok=True)
     running, failed, t0 = {}, [], time.time()
     while jobs or running:
         for g in range(n_gpu):
             if g not in running and jobs:
-                tag, pad, init, lr, s = jobs.pop(0)
+                tag, pad, init, lr, s, extra = jobs.pop(0)
                 log = open(os.path.join(a.out, "logs", f"{tag}_seed{s}.log"), "a")
-                cmd = [sys.executable, "-m", "baseline.twolevel", "--out", a.out, "--seed", str(s), "--epochs", str(a.epochs), "--lr", lr, "--padding", pad, "--init", init, "--tag", tag, "--device", "cuda", "--search", a.search]
+                cmd = [sys.executable, "-m", "baseline.twolevel", "--out", a.out, "--seed", str(s), "--epochs", str(a.epochs), "--lr", lr, "--padding", pad, "--init", init, "--tag", tag, "--device", "cuda", "--search", a.search] + extra
                 running[g] = (subprocess.Popen(cmd, env=dict(os.environ, CUDA_VISIBLE_DEVICES=str(g)), stdout=log, stderr=subprocess.STDOUT), f"{tag} seed {s}", log)
                 print(f"[{(time.time() - t0) / 60:.1f} min] GPU {g}: started {tag} seed {s}", flush=True)
         for g, (p, name, log) in list(running.items()):
@@ -477,7 +518,11 @@ def orchestrate(a):
                 print(f"[{(time.time() - t0) / 60:.1f} min] GPU {g}: {name} exited with {p.returncode}", flush=True)
                 if p.returncode:
                     failed.append(name)
-                    print("".join(open(log.name).readlines()[-6:])[-900:], flush=True)
+                    print("".join(open(log.name).readlines()[-12:])[-1500:], flush=True)
+                    for q, _, lg in running.values():                                    # fail fast: a broken unit means a broken recipe, do not burn the rest of the session
+                        if q.poll() is None:
+                            q.terminate()
+                    raise SystemExit(f"run failed: {failed}")
                 del running[g]
         time.sleep(5)
     if failed:
@@ -498,6 +543,10 @@ def main():
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--epochs", type=int, default=3)
     ap.add_argument("--lr", type=float, default=2e-3)
+    ap.add_argument("--sched", default="const", choices=["const", "linear"], help="learning rate: constant, or linear decay to 0 over all steps of the run (NOTES 20)")
+    ap.add_argument("--l1-mult", type=float, default=1.0, help="learning rate of level 1 = this x lr")
+    ap.add_argument("--freeze1-steps", type=int, default=0, help="level 1 frozen (no gradient, no dropout) for this many first steps")
+    ap.add_argument("--ema", type=float, default=0.0, help="exponential moving average of the weights with this decay (0 = off); evaluated next to the raw weights")
     ap.add_argument("--padding", default="balanced", choices=["balanced", "none"])
     ap.add_argument("--pad-prob", type=float, default=0.5)
     ap.add_argument("--init", default="scratch", choices=["scratch", "warm"])

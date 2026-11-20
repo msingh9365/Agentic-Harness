@@ -18,9 +18,9 @@ from baseline import twolevel_attack as TA
 from baseline.twolevel_eval import april_meta
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FAMS = ["v2_pe", "attbal", "b2l", "a2l"]
-LABEL = {"a2l": "ATT+bal-2L (A)", "b2l": "B (2L, no padding)", "attbal": "ATT+bal", "v2_pe": "v2-PE"}
-PAIRS = [("a2l", "attbal"), ("a2l", "v2_pe"), ("a2l", "b2l"), ("b2l", "attbal")]
+FAMS = ["v2_pe", "attbal", "b2l", "a2l", "a2r2"]          # a2r2 = A2 of round 2 (NOTES 20); a family without score files is skipped
+LABEL = {"a2r2": "ATT+bal-2L, round 2 (A2)", "a2l": "ATT+bal-2L (A)", "b2l": "B (2L, no padding)", "attbal": "ATT+bal", "v2_pe": "v2-PE"}
+PAIRS = [("a2l", "attbal"), ("a2l", "v2_pe"), ("a2l", "b2l"), ("b2l", "attbal"), ("a2r2", "attbal"), ("a2r2", "v2_pe"), ("a2r2", "a2l"), ("a2r2", "b2l")]
 WB_KS = (1, 2, 5, 10, 20, 30, 40, 50)
 
 
@@ -104,9 +104,9 @@ def figure(path, Zr, names_r, Zs, names_s, wb, y, boot):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    col = {"v2_pe": "#eb6834", "attbal": "#eda100", "b2l": "#6250d6", "a2l": "#1baf7a"}
-    mk = {"v2_pe": "s", "attbal": "D", "b2l": "v", "a2l": "o"}
-    ls = {"v2_pe": "--", "attbal": ":", "b2l": "-.", "a2l": "-"}
+    col = {"v2_pe": "#eb6834", "attbal": "#eda100", "b2l": "#6250d6", "a2l": "#1baf7a", "a2r2": "#0b6b4a"}
+    mk = {"v2_pe": "s", "attbal": "D", "b2l": "v", "a2l": "o", "a2r2": "^"}
+    ls = {"v2_pe": "--", "attbal": ":", "b2l": "-.", "a2l": "-", "a2r2": "-"}
     ink, mute, bg = "#0b0b0b", "#52514e", "#fcfcfb"
     plt.rcParams.update({"font.size": 9.5, "axes.edgecolor": mute, "axes.labelcolor": ink, "text.color": ink, "xtick.color": mute, "ytick.color": mute, "figure.facecolor": bg, "axes.facecolor": bg})
     panels = [("Random calls, prepended", "random", "prepend", TA.RANDOM_KS), ("Random calls, inserted", "random", "insert", TA.RANDOM_KS), ("LightGBM-chosen calls, prepended", "lgbm", "prepend", TA.SURR_KS),

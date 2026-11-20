@@ -1,0 +1,1337 @@
+{
+ "definition": "April coinminer reports detected by v2-PE in >= 8/10 seeds and by ATT+bal in <= 2/10 seeds at the 1% FPR threshold of each model and seed",
+ "step1": {
+  "cluster_size": 266,
+  "groups_in_cluster": {
+   "d91b96b425798fc031fc1b3c8cdcdf3f998bd9b3": 265,
+   "4b3ad5f645fb8624941fd9b46454c1537e3be507": 1
+  },
+  "n_tokens_full_of_cluster": {
+   "939": 265,
+   "2042": 1
+  },
+  "main_group_hash": "d91b96b425798fc031fc1b3c8cdcdf3f998bd9b3",
+  "april_reports_with_main_hash": 265,
+  "april_families_with_main_hash": {
+   "coinminer": 265
+  },
+  "january_reports_with_main_hash": 0,
+  "calls": 175,
+  "tokens_full": 935,
+  "distinct_names": 4,
+  "nearest_january": [
+   {
+    "row": 73398,
+    "family": "trojan",
+    "label": 1,
+    "calls": 166,
+    "norm_distance": 0.05142857142857143,
+    "edits": 9
+   },
+   {
+    "row": 1166,
+    "family": "backdoor",
+    "label": 1,
+    "calls": 171,
+    "norm_distance": 0.05714285714285714,
+    "edits": 10
+   },
+   {
+    "row": 70887,
+    "family": "trojan",
+    "label": 1,
+    "calls": 170,
+    "norm_distance": 0.06285714285714286,
+    "edits": 11
+   },
+   {
+    "row": 17773,
+    "family": "clean",
+    "label": 0,
+    "calls": 170,
+    "norm_distance": 0.06285714285714286,
+    "edits": 11
+   },
+   {
+    "row": 28810,
+    "family": "clean",
+    "label": 0,
+    "calls": 170,
+    "norm_distance": 0.06285714285714286,
+    "edits": 11
+   }
+  ],
+  "january_within_distance": {
+   "0.02": {
+    "n": 0,
+    "by_family_label": {}
+   },
+   "0.05": {
+    "n": 0,
+    "by_family_label": {}
+   },
+   "0.1": {
+    "n": 116,
+    "by_family_label": {
+     "backdoor|1": 30,
+     "clean|0": 45,
+     "coinminer|1": 1,
+     "dropper|1": 1,
+     "keylogger|1": 1,
+     "ransomware|1": 8,
+     "rat|1": 2,
+     "trojan|1": 28
+    }
+   },
+   "0.2": {
+    "n": 5078,
+    "by_family_label": {
+     "backdoor|1": 370,
+     "clean|0": 130,
+     "coinminer|1": 121,
+     "dropper|1": 1,
+     "keylogger|1": 2,
+     "ransomware|1": 4360,
+     "rat|1": 5,
+     "trojan|1": 89
+    }
+   }
+  },
+  "april_coinminer_reports": 1684,
+  "april_coinminer_hash_groups": 110,
+  "reference_detected_groups_min_norm_distance": {
+   "n_groups": 38,
+   "median": 0.0050730140550499835,
+   "q25_q75": [
+    0.0,
+    0.035101795206097686
+   ],
+   "share_with_a_january_coinminer_within_0.1": 0.8157894736842105
+  }
+ },
+ "step2": {
+  "cluster_window": {
+   "calls_in_window": 99,
+   "distinct_names": 2,
+   "top_name_share": 0.98989898989899,
+   "longest_run_same_name": 98
+  },
+  "cluster_top_names": [
+   [
+    "kernel32.getprocaddress",
+    98
+   ],
+   [
+    "kernel32.loadlibrarya",
+    1
+   ]
+  ],
+  "detected_coinminers_groups": 38,
+  "detected_window_stats_median": {
+   "calls_in_window": 99.5,
+   "distinct_names": 17.0,
+   "top_name_share": 0.35599078341013823,
+   "longest_run_same_name": 32.0
+  },
+  "detected_window_stats_q25_q75": {
+   "calls_in_window": [
+    81.5,
+    101.75
+   ],
+   "distinct_names": [
+    3.0,
+    28.75
+   ],
+   "top_name_share": [
+    0.2716672544524775,
+    0.9565983995659839
+   ],
+   "longest_run_same_name": [
+    14.0,
+    68.75
+   ]
+  },
+  "detected_share_of_groups_with_top_name_share_ge_0.9": 0.2894736842105263,
+  "detected_top_names_all_windows": [
+   [
+    "kernel32.getprocaddress",
+    1493
+   ],
+   [
+    "kernel32.initializecriticalsectionex",
+    274
+   ],
+   [
+    "kernel32.initializecriticalsectionandspincount",
+    174
+   ],
+   [
+    "kernel32.heapalloc",
+    93
+   ],
+   [
+    "kernel32.entercriticalsection",
+    79
+   ],
+   [
+    "kernel32.leavecriticalsection",
+    73
+   ],
+   [
+    "kernel32.encodepointer",
+    72
+   ],
+   [
+    "kernel32.tlsgetvalue",
+    69
+   ]
+  ],
+  "example_cluster_first60": [
+   "kernel32.loadlibrarya",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress"
+  ],
+  "example_detected_first60": [
+   "kernel32.loadlibrarya",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress"
+  ],
+  "example_odd_cluster_member_first60": [
+   "kernel32.loadlibrarya",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress",
+   "kernel32.getprocaddress"
+  ],
+  "example_detected_hash": "525962a0b5c71fb638f5904ec1ebd7e273be30e1",
+  "example_detected_window": {
+   "calls_in_window": 102,
+   "distinct_names": 2,
+   "top_name_share": 0.9901960784313726,
+   "longest_run_same_name": 101
+  },
+  "cluster_full_sequence": {
+   "calls": 175,
+   "counts": {
+    "kernel32.loadlibrarya": 9,
+    "kernel32.getprocaddress": 163,
+    "kernel32.virtualprotect": 2,
+    "kernel32.createfilea": 1
+   },
+   "calls_inside_window": 99,
+   "calls_outside_window": 76,
+   "non_getprocaddress_positions": [
+    [
+     0,
+     "kernel32.loadlibrarya"
+    ],
+    [
+     120,
+     "kernel32.loadlibrarya"
+    ],
+    [
+     127,
+     "kernel32.loadlibrarya"
+    ],
+    [
+     131,
+     "kernel32.loadlibrarya"
+    ],
+    [
+     137,
+     "kernel32.loadlibrarya"
+    ],
+    [
+     145,
+     "kernel32.loadlibrarya"
+    ],
+    [
+     147,
+     "kernel32.loadlibrarya"
+    ],
+    [
+     149,
+     "kernel32.loadlibrarya"
+    ],
+    [
+     151,
+     "kernel32.loadlibrarya"
+    ],
+    [
+     172,
+     "kernel32.virtualprotect"
+    ],
+    [
+     173,
+     "kernel32.virtualprotect"
+    ],
+    [
+     174,
+     "kernel32.createfilea"
+    ]
+   ]
+  }
+ },
+ "step3": {
+  "v2_pe": {
+   "logit_percentiles_5_25_50_75_95": [
+    2.5101351737976074,
+    4.689121723175049,
+    19.984107971191406,
+    23.66851234436035,
+    29.774824142456055
+   ],
+   "threshold_mean": 5.564403069019318,
+   "threshold_min_max": [
+    1.056527853012085,
+    15.774590492248535
+   ],
+   "margin_percentiles_5_25_50_75_95": [
+    -1.394911766052246,
+    0.8096227645874023,
+    9.179954767227173,
+    19.86492085456848,
+    23.706674933433533
+   ],
+   "share_flagged": 0.8003759398496241,
+   "share_within_2_below": 0.19924812030075187,
+   "share_more_than_10_below": 0.0,
+   "median_margin_per_seed": [
+    0.8096227645874023,
+    -0.8804216384887695,
+    21.300522804260254,
+    2.420706033706665,
+    -1.394911766052246,
+    9.179954767227173,
+    19.06544017791748,
+    6.289151191711426,
+    23.706674933433533,
+    19.86492085456848
+   ],
+   "benign_logit_p50_p99_april": [
+    -16.104503631591797,
+    7.895618915557861
+   ],
+   "benign_share_at_or_above_cluster_median_per_seed": [
+    0.007872047982006747,
+    0.010870923403723604,
+    0.0006247657128576784,
+    0.007247282269149069,
+    0.011745595401724353,
+    0.0017493439960014994,
+    0.002998875421716856,
+    0.0069973759840059975,
+    0.001124578283143821,
+    0.0012495314257153568
+   ],
+   "benign_share_at_or_above_cluster_median_mean": 0.005248031988004498
+  },
+  "attbal": {
+   "logit_percentiles_5_25_50_75_95": [
+    -3.0052762031555176,
+    -0.7168591022491455,
+    1.549391508102417,
+    2.6866862773895264,
+    5.007359027862549
+   ],
+   "threshold_mean": 4.32173981666565,
+   "threshold_min_max": [
+    2.5738911628723145,
+    5.528263568878174
+   ],
+   "margin_percentiles_5_25_50_75_95": [
+    -8.483402252197266,
+    -4.842323064804077,
+    -2.7607067078351974,
+    -1.3960468769073486,
+    0.1360635757446289
+   ],
+   "share_flagged": 0.1,
+   "share_within_2_below": 0.20037593984962407,
+   "share_more_than_10_below": 0.0,
+   "median_margin_per_seed": [
+    -1.3960468769073486,
+    -1.0186805725097656,
+    0.1360635757446289,
+    -2.278165817260742,
+    -8.483402252197266,
+    -4.842323064804077,
+    -5.030943989753723,
+    -2.7607067078351974,
+    -3.5554620027542114,
+    -3.89829683303833
+   ],
+   "benign_logit_p50_p99_april": [
+    -9.536380290985107,
+    4.386106376648005
+   ],
+   "benign_share_at_or_above_cluster_median_per_seed": [
+    0.013744845682868925,
+    0.012245407972010496,
+    0.009746345120579782,
+    0.017493439960014994,
+    0.05572910158690491,
+    0.13619892540297387,
+    0.03523678620517306,
+    0.04298388104460827,
+    0.01911783081344496,
+    0.0301137073597401
+   ],
+   "benign_share_at_or_above_cluster_median_mean": 0.037261027114831945
+  }
+ },
+ "step4": {
+  "rows": {
+   "cluster_1": 85185,
+   "cluster_2": 85186,
+   "cluster_3": 85200,
+   "detected_coinminer": 86018
+  },
+  "cluster_reports_have_identical_tokens": {
+   "cluster_2": true,
+   "cluster_3": true
+  },
+  "attention": {
+   "cluster_1": {
+    "seed0": {
+     "weight_on_report_header": 0.020924048498272896,
+     "weight_by_api_name": {
+      "kernel32.getprocaddress": 0.9705465690931305,
+      "kernel32.loadlibrarya": 0.0085294668097049
+     },
+     "max_weight": 0.004757533315569162,
+     "n_tokens_with_weight": 511,
+     "effective_tokens_1_over_sum_w2": 492.802978515625,
+     "top_tokens": [
+      {
+       "pos": 331,
+       "piece": "\u2581writeconsolew",
+       "weight": 0.004757533315569162,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 356,
+       "piece": "\u2581interlockedincrement",
+       "weight": 0.0036193036939948797,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 351,
+       "piece": "\u2581interlockeddecrement",
+       "weight": 0.0030422150157392025,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 379,
+       "piece": "\u2581getprocaddress",
+       "weight": 0.0030295841861516237,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 352,
+       "piece": "\u25810xfeee0042",
+       "weight": 0.0030182155314832926,
+       "call": "kernel32.getprocaddress"
+      }
+     ]
+    },
+    "seed1": {
+     "weight_on_report_header": 0.017726179212331772,
+     "weight_by_api_name": {
+      "kernel32.getprocaddress": 0.9738226376939565,
+      "kernel32.loadlibrarya": 0.00845122488681227
+     },
+     "max_weight": 0.0067595201544463634,
+     "n_tokens_with_weight": 511,
+     "effective_tokens_1_over_sum_w2": 450.646484375,
+     "top_tokens": [
+      {
+       "pos": 331,
+       "piece": "\u2581writeconsolew",
+       "weight": 0.0067595201544463634,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 151,
+       "piece": "\u2581createdirectorya",
+       "weight": 0.005342360120266676,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 136,
+       "piece": "\u2581createfilew",
+       "weight": 0.00506831519305706,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 316,
+       "piece": "\u2581setendoffile",
+       "weight": 0.00444915983825922,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 167,
+       "piece": "\u25810xfeee001d",
+       "weight": 0.004411298781633377,
+       "call": "kernel32.getprocaddress"
+      }
+     ]
+    },
+    "seed2": {
+     "weight_on_report_header": 0.026805248111486435,
+     "weight_by_api_name": {
+      "kernel32.getprocaddress": 0.96544104302302,
+      "kernel32.loadlibrarya": 0.007753650890663266
+     },
+     "max_weight": 0.0053924573585391045,
+     "n_tokens_with_weight": 511,
+     "effective_tokens_1_over_sum_w2": 434.8001708984375,
+     "top_tokens": [
+      {
+       "pos": 187,
+       "piece": "\u25810xfeee0021",
+       "weight": 0.0053924573585391045,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 3,
+       "piece": "\u2581drive",
+       "weight": 0.005309424363076687,
+       "call": "header"
+      },
+      {
+       "pos": 151,
+       "piece": "\u2581createdirectorya",
+       "weight": 0.005088216159492731,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 45,
+       "piece": "\u2581writefile",
+       "weight": 0.0048958780243992805,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 142,
+       "piece": "\u25810xfeee0018",
+       "weight": 0.004850767552852631,
+       "call": "kernel32.getprocaddress"
+      }
+     ]
+    }
+   },
+   "cluster_2": {
+    "seed0": {
+     "weight_on_report_header": 0.020924048498272896,
+     "weight_by_api_name": {
+      "kernel32.getprocaddress": 0.9705465690931305,
+      "kernel32.loadlibrarya": 0.0085294668097049
+     },
+     "max_weight": 0.004757533315569162,
+     "n_tokens_with_weight": 511,
+     "effective_tokens_1_over_sum_w2": 492.802978515625,
+     "top_tokens": [
+      {
+       "pos": 331,
+       "piece": "\u2581writeconsolew",
+       "weight": 0.004757533315569162,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 356,
+       "piece": "\u2581interlockedincrement",
+       "weight": 0.0036193036939948797,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 351,
+       "piece": "\u2581interlockeddecrement",
+       "weight": 0.0030422150157392025,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 379,
+       "piece": "\u2581getprocaddress",
+       "weight": 0.0030295841861516237,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 352,
+       "piece": "\u25810xfeee0042",
+       "weight": 0.0030182155314832926,
+       "call": "kernel32.getprocaddress"
+      }
+     ]
+    },
+    "seed1": {
+     "weight_on_report_header": 0.017726179212331772,
+     "weight_by_api_name": {
+      "kernel32.getprocaddress": 0.9738226376939565,
+      "kernel32.loadlibrarya": 0.00845122488681227
+     },
+     "max_weight": 0.0067595201544463634,
+     "n_tokens_with_weight": 511,
+     "effective_tokens_1_over_sum_w2": 450.646484375,
+     "top_tokens": [
+      {
+       "pos": 331,
+       "piece": "\u2581writeconsolew",
+       "weight": 0.0067595201544463634,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 151,
+       "piece": "\u2581createdirectorya",
+       "weight": 0.005342360120266676,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 136,
+       "piece": "\u2581createfilew",
+       "weight": 0.00506831519305706,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 316,
+       "piece": "\u2581setendoffile",
+       "weight": 0.00444915983825922,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 167,
+       "piece": "\u25810xfeee001d",
+       "weight": 0.004411298781633377,
+       "call": "kernel32.getprocaddress"
+      }
+     ]
+    },
+    "seed2": {
+     "weight_on_report_header": 0.026805248111486435,
+     "weight_by_api_name": {
+      "kernel32.getprocaddress": 0.96544104302302,
+      "kernel32.loadlibrarya": 0.007753650890663266
+     },
+     "max_weight": 0.0053924573585391045,
+     "n_tokens_with_weight": 511,
+     "effective_tokens_1_over_sum_w2": 434.8001708984375,
+     "top_tokens": [
+      {
+       "pos": 187,
+       "piece": "\u25810xfeee0021",
+       "weight": 0.0053924573585391045,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 3,
+       "piece": "\u2581drive",
+       "weight": 0.005309424363076687,
+       "call": "header"
+      },
+      {
+       "pos": 151,
+       "piece": "\u2581createdirectorya",
+       "weight": 0.005088216159492731,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 45,
+       "piece": "\u2581writefile",
+       "weight": 0.0048958780243992805,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 142,
+       "piece": "\u25810xfeee0018",
+       "weight": 0.004850767552852631,
+       "call": "kernel32.getprocaddress"
+      }
+     ]
+    }
+   },
+   "cluster_3": {
+    "seed0": {
+     "weight_on_report_header": 0.020924048498272896,
+     "weight_by_api_name": {
+      "kernel32.getprocaddress": 0.9705465690931305,
+      "kernel32.loadlibrarya": 0.0085294668097049
+     },
+     "max_weight": 0.004757533315569162,
+     "n_tokens_with_weight": 511,
+     "effective_tokens_1_over_sum_w2": 492.802978515625,
+     "top_tokens": [
+      {
+       "pos": 331,
+       "piece": "\u2581writeconsolew",
+       "weight": 0.004757533315569162,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 356,
+       "piece": "\u2581interlockedincrement",
+       "weight": 0.0036193036939948797,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 351,
+       "piece": "\u2581interlockeddecrement",
+       "weight": 0.0030422150157392025,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 379,
+       "piece": "\u2581getprocaddress",
+       "weight": 0.0030295841861516237,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 352,
+       "piece": "\u25810xfeee0042",
+       "weight": 0.0030182155314832926,
+       "call": "kernel32.getprocaddress"
+      }
+     ]
+    },
+    "seed1": {
+     "weight_on_report_header": 0.017726179212331772,
+     "weight_by_api_name": {
+      "kernel32.getprocaddress": 0.9738226376939565,
+      "kernel32.loadlibrarya": 0.00845122488681227
+     },
+     "max_weight": 0.0067595201544463634,
+     "n_tokens_with_weight": 511,
+     "effective_tokens_1_over_sum_w2": 450.646484375,
+     "top_tokens": [
+      {
+       "pos": 331,
+       "piece": "\u2581writeconsolew",
+       "weight": 0.0067595201544463634,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 151,
+       "piece": "\u2581createdirectorya",
+       "weight": 0.005342360120266676,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 136,
+       "piece": "\u2581createfilew",
+       "weight": 0.00506831519305706,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 316,
+       "piece": "\u2581setendoffile",
+       "weight": 0.00444915983825922,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 167,
+       "piece": "\u25810xfeee001d",
+       "weight": 0.004411298781633377,
+       "call": "kernel32.getprocaddress"
+      }
+     ]
+    },
+    "seed2": {
+     "weight_on_report_header": 0.026805248111486435,
+     "weight_by_api_name": {
+      "kernel32.getprocaddress": 0.96544104302302,
+      "kernel32.loadlibrarya": 0.007753650890663266
+     },
+     "max_weight": 0.0053924573585391045,
+     "n_tokens_with_weight": 511,
+     "effective_tokens_1_over_sum_w2": 434.8001708984375,
+     "top_tokens": [
+      {
+       "pos": 187,
+       "piece": "\u25810xfeee0021",
+       "weight": 0.0053924573585391045,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 3,
+       "piece": "\u2581drive",
+       "weight": 0.005309424363076687,
+       "call": "header"
+      },
+      {
+       "pos": 151,
+       "piece": "\u2581createdirectorya",
+       "weight": 0.005088216159492731,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 45,
+       "piece": "\u2581writefile",
+       "weight": 0.0048958780243992805,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 142,
+       "piece": "\u25810xfeee0018",
+       "weight": 0.004850767552852631,
+       "call": "kernel32.getprocaddress"
+      }
+     ]
+    }
+   },
+   "detected_coinminer": {
+    "seed0": {
+     "weight_on_report_header": 0.001449172617867589,
+     "weight_by_api_name": {
+      "kernel32.getprocaddress": 0.9906906760297716,
+      "kernel32.loadlibrarya": 0.007860064972192049
+     },
+     "max_weight": 0.00426440266892314,
+     "n_tokens_with_weight": 511,
+     "effective_tokens_1_over_sum_w2": 460.54742431640625,
+     "top_tokens": [
+      {
+       "pos": 301,
+       "piece": "\u2581loadresource",
+       "weight": 0.00426440266892314,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 129,
+       "piece": "\u2581getprofilestringa",
+       "weight": 0.00398704968392849,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 189,
+       "piece": "\u2581lcmapstringa",
+       "weight": 0.003983672708272934,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 286,
+       "piece": "\u2581createfilea",
+       "weight": 0.0038777582813054323,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 174,
+       "piece": "\u2581isbadwriteptr",
+       "weight": 0.003806989872828126,
+       "call": "kernel32.getprocaddress"
+      }
+     ]
+    },
+    "seed1": {
+     "weight_on_report_header": 0.001354050706140697,
+     "weight_by_api_name": {
+      "kernel32.getprocaddress": 0.9917945424094796,
+      "kernel32.loadlibrarya": 0.006851427722722292
+     },
+     "max_weight": 0.006341233849525452,
+     "n_tokens_with_weight": 511,
+     "effective_tokens_1_over_sum_w2": 449.48309326171875,
+     "top_tokens": [
+      {
+       "pos": 296,
+       "piece": "\u2581findresourcea",
+       "weight": 0.006341233849525452,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 306,
+       "piece": "\u2581lockresource",
+       "weight": 0.006328660994768143,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 286,
+       "piece": "\u2581createfilea",
+       "weight": 0.005859121214598417,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 301,
+       "piece": "\u2581loadresource",
+       "weight": 0.0047218515537679195,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 274,
+       "piece": "\u2581writefile",
+       "weight": 0.004444073885679245,
+       "call": "kernel32.getprocaddress"
+      }
+     ]
+    },
+    "seed2": {
+     "weight_on_report_header": 0.0011123311705887318,
+     "weight_by_api_name": {
+      "kernel32.getprocaddress": 0.9888650859356858,
+      "kernel32.loadlibrarya": 0.010022462694905698
+     },
+     "max_weight": 0.00748877739533782,
+     "n_tokens_with_weight": 511,
+     "effective_tokens_1_over_sum_w2": 375.0549621582031,
+     "top_tokens": [
+      {
+       "pos": 24,
+       "piece": "\u2581flushfilebuffers",
+       "weight": 0.00748877739533782,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 281,
+       "piece": "ects",
+       "weight": 0.007079809904098511,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 49,
+       "piece": "\u2581filetimetolocalfiletime",
+       "weight": 0.007009739056229591,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 29,
+       "piece": "\u2581setfilepointer",
+       "weight": 0.0064535243436694145,
+       "call": "kernel32.getprocaddress"
+      },
+      {
+       "pos": 54,
+       "piece": "\u2581filetimetosystemtime",
+       "weight": 0.006066940259188414,
+       "call": "kernel32.getprocaddress"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "step5": {
+  "pool_reports": 22201,
+  "pool_calls": 3706146,
+  "cluster": {
+   "calls": 99,
+   "share_names_in_pool": 1.0,
+   "mean_log10_pool_freq": -1.0282874152787687,
+   "mean_draw_probability": 0.08314055166036223,
+   "median_draw_rank": 1.0
+  },
+  "detected_coinminer_groups_mean": {
+   "calls": 84.47368421052632,
+   "share_names_in_pool": 1.0,
+   "mean_log10_pool_freq": -1.7065964111783436,
+   "mean_draw_probability": 0.053440115789727224,
+   "median_draw_rank": 31.68421052631579
+  },
+  "detected_coinminer_groups_q25_q75": {
+   "calls": [
+    81.5,
+    101.75
+   ],
+   "share_names_in_pool": [
+    1.0,
+    1.0
+   ],
+   "mean_log10_pool_freq": [
+    -1.811512428193466,
+    -1.0677019156598049
+   ],
+   "mean_draw_probability": [
+    0.021832134686338087,
+    0.08315648257094482
+   ],
+   "median_draw_rank": [
+    1.0,
+    14.0
+   ]
+  },
+  "getprocaddress": {
+   "pool_call_share": 0.09763781567158984,
+   "padding_draw_probability": 0.0839450626447828,
+   "padding_draw_rank_of_2401_names": 2
+  },
+  "loadlibrarya": {
+   "pool_call_share": 0.0016480732275522875,
+   "padding_draw_probability": 0.0042984751871437184
+  },
+  "january_windows_with_90pct_getprocaddress": {
+   "n": 9668,
+   "by_label": {
+    "0": 630,
+    "1": 9038
+   },
+   "by_family": {
+    "backdoor": 1854,
+    "clean": 630,
+    "coinminer": 1103,
+    "dropper": 1369,
+    "keylogger": 31,
+    "ransomware": 4364,
+    "rat": 77,
+    "trojan": 240
+   },
+   "share_benign": 0.06516342573438147
+  }
+ },
+ "step5b": {
+  "cluster_resolved_names_in_window": 98,
+  "cluster_distinct_resolved_names": 98,
+  "cluster_first_25_resolved_names": [
+   "sethandleinformation",
+   "waitforsingleobject",
+   "setevent",
+   "gettickcount",
+   "getprocessheap",
+   "writefile",
+   "getsystemtimes",
+   "getdrivetypea",
+   "getprocesstimes",
+   "openprocess",
+   "globalalloc",
+   "widechartomultibyte",
+   "terminatethread",
+   "initializecriticalsectionandspincount",
+   "sleep",
+   "createeventa",
+   "leavecriticalsection",
+   "getcomputernameexa",
+   "createprocessa",
+   "terminateprocess",
+   "filetimetosystemtime",
+   "readfile",
+   "getmodulefilenamew",
+   "createfilew",
+   "multibytetowidechar"
+  ],
+  "similarity_with_january_benign_getprocaddress_windows": {
+   "n_windows": 630,
+   "jaccard_median": 0.25078616352201255,
+   "jaccard_q25_q75": [
+    0.2222222222222222,
+    0.27697477253928865
+   ],
+   "share_of_cluster_resolved_names_found_median": 0.3979591836734694,
+   "n_resolved_names_median": 99.0
+  },
+  "similarity_with_january_coinminer_getprocaddress_windows": {
+   "n_windows": 1103,
+   "jaccard_median": 0.3356643356643357,
+   "jaccard_q25_q75": [
+    0.22981366459627328,
+    0.3356643356643357
+   ],
+   "share_of_cluster_resolved_names_found_median": 0.4897959183673469,
+   "n_resolved_names_median": 93.0
+  },
+  "similarity_with_detected_april_coinminer_getprocaddress_groups": {
+   "n_windows": 11,
+   "jaccard_median": 0.2838709677419355,
+   "jaccard_q25_q75": [
+    0.22161414937130736,
+    0.30268796260225944
+   ],
+   "share_of_cluster_resolved_names_found_median": 0.4489795918367347,
+   "n_resolved_names_median": 100.0
+  }
+ },
+ "step6": {
+  "n_reports": 1684,
+  "n_groups": 110,
+  "cluster_share_of_reports": 0.15795724465558195,
+  "models": {
+   "v2_pe": {
+    "report_level_tpr_per_seed": [
+     0.8355106888361045,
+     0.7054631828978623,
+     0.8093824228028503,
+     0.8669833729216152,
+     0.684085510688836,
+     0.8479809976247031,
+     0.8283847980997625,
+     0.8675771971496437,
+     0.8628266033254157,
+     0.8657957244655582
+    ],
+    "group_level_tpr_per_seed": [
+     0.43643620739278816,
+     0.40541462796211775,
+     0.4091531406619039,
+     0.45465705220454206,
+     0.41656542161291144,
+     0.48058269766917616,
+     0.4247328097802996,
+     0.4731419006893905,
+     0.4934173827830544,
+     0.44619056919260447
+    ],
+    "report_level_tpr_without_cluster_per_seed": [
+     0.8053596614950634,
+     0.8370944992947814,
+     0.7736248236953456,
+     0.842031029619182,
+     0.811706629055007,
+     0.8194640338504936,
+     0.7961918194640338,
+     0.8427362482369535,
+     0.8370944992947814,
+     0.840620592383639
+    ]
+   },
+   "attbal": {
+    "report_level_tpr_per_seed": [
+     0.7298099762470309,
+     0.7226840855106889,
+     0.8895486935866983,
+     0.7298099762470309,
+     0.7149643705463183,
+     0.6609263657957245,
+     0.6977434679334917,
+     0.7024940617577197,
+     0.7446555819477435,
+     0.6912114014251781
+    ],
+    "group_level_tpr_per_seed": [
+     0.43520801639186985,
+     0.41387192823759994,
+     0.44569011005578174,
+     0.4417507161163878,
+     0.43046972438085057,
+     0.3245789989446706,
+     0.3824072817729534,
+     0.39986366377478993,
+     0.4461616161616162,
+     0.38492194674012853
+    ],
+    "report_level_tpr_without_cluster_per_seed": [
+     0.8667136812411848,
+     0.8582510578279267,
+     0.8688293370944993,
+     0.8667136812411848,
+     0.849083215796897,
+     0.7849083215796897,
+     0.8286318758815233,
+     0.8342736248236954,
+     0.8843441466854725,
+     0.8208744710860366
+    ]
+   }
+  },
+  "gap_v2pe_minus_attbal_report_level_tpr_per_seed": {
+   "mean": 0.08901425178147267,
+   "std": 0.09555894970077666,
+   "per_seed": [
+    0.10570071258907354,
+    -0.017220902612826605,
+    -0.08016627078384797,
+    0.13717339667458428,
+    -0.030878859857482288,
+    0.18705463182897863,
+    0.13064133016627077,
+    0.16508313539192399,
+    0.11817102137767221,
+    0.17458432304038007
+   ]
+  },
+  "gap_v2pe_minus_attbal_group_level_tpr_per_seed": {
+   "mean": 0.033536780737213986,
+   "std": 0.0557832979348956,
+   "per_seed": [
+    0.0012281910009183106,
+    -0.008457300275482194,
+    -0.03653696939387785,
+    0.01290633608815428,
+    -0.013904302767939136,
+    0.15600369872450554,
+    0.04232552800734618,
+    0.07327823691460056,
+    0.04725576662143821,
+    0.06126862245247594
+   ]
+  },
+  "gap_v2pe_minus_attbal_report_level_tpr_without_cluster_per_seed": {
+   "mean": -0.025669957686882926,
+   "std": 0.03892028794206385,
+   "per_seed": [
+    -0.06135401974612131,
+    -0.021156558533145242,
+    -0.0952045133991537,
+    -0.024682651622002783,
+    -0.03737658674189004,
+    0.034555712270803896,
+    -0.03244005641748948,
+    0.008462623413258097,
+    -0.04724964739069104,
+    0.019746121297602337
+   ]
+  }
+ }
+}

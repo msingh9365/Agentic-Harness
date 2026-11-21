@@ -34,7 +34,7 @@ def run(a):
     if os.path.exists(res_path) and not a.force:
         print(f"[{a.tag} seed {a.seed}] already done", flush=True)
         return
-    tokens = a.tokens or C.find_dir_with("labels.npz")
+    tokens = a.tokens or C.find_dir_with(getattr(a, "tokens_find", None) or "labels.npz")          # --tokens-find all.npz: the dataset of the OLD tokenizer (nebula-tune-inputs) when two datasets with labels.npz are attached
     lab = np.load(os.path.join(tokens, "labels.npz"))
     x_all, x_test, vocab = gap.load(tokens, a.variant)
     y_all, y_test = lab["y_train"], lab["y_test"]
@@ -44,6 +44,11 @@ def run(a):
         trn, val = groupsplit.val_slice(os.path.join(sd, "split.npz"), os.path.join(sd, "split_hash.json"))
     else:
         trn, val = gap.val_slice(lab["ym_train"])                   # asserts the stored hash (67,768 / 7,530)
+    pool_trn = trn                                                  # the reports whose benign members serve as padding calls (the TRAIN pool): always the training part of the split
+    if getattr(a, "full_january", False):                           # Step 5 of NOTES 22.2/22.3/22.7: ALL 75,298 January reports are training rows; the padding pool stays the group-split training part (the attack eval pool of Stage E = the benign validation reports)
+        assert a.split_dir, "--full-january needs the group split (its training part is the padding pool)"
+        trn = np.arange(len(x_all))
+        assert len(trn) == len(pool_trn) + len(val) and not (set(pool_trn.tolist()) & set(val.tolist()))
     if a.limit:                                                     # smoke test on CPU only
         r = np.random.default_rng(0)
         trn, val = r.permutation(trn)[:a.limit], r.permutation(val)[:max(40, a.limit // 4)]
@@ -105,7 +110,9 @@ def run(a):
         # original (REPORT 5.10); "keep": a padded COPY is added to all the clean reports. pad_labels "malware": only malware training reports are eligible. One fit() per epoch (as below).
         sp = a.pad_store if os.path.exists(a.pad_store) else os.path.join(C.find_dir_with(os.path.basename(a.pad_store)), os.path.basename(a.pad_store))
         store = CS.CallStore.load(sp)
-        pool_rows = inmem_pad.pool_rows_of(store, y_all, trn)
+        pool_rows = inmem_pad.pool_rows_of(store, y_all, pool_trn)
+        if getattr(a, "full_january", False) and not a.limit:
+            assert len(pool_rows) == 21507 and not (set(pool_rows.tolist()) & set(val.tolist())), (len(pool_rows), "the padding pool must be the 21,507 benign reports of the group-split training part")
         print(f"[{a.tag} seed {a.seed}] call store {sp}: {len(store):,} reports; TRAIN pool {len(pool_rows):,} benign reports of the training slice", flush=True)
         where = {int(r): i for i, r in enumerate(trn)}
         if getattr(a, "val_robust", False):
@@ -182,7 +189,7 @@ def orchestrate(a):
                 cmd = [sys.executable, "-m", "baseline.v2pe", "--out", a.out, "--seed", str(s), "--epochs", str(a.epochs), "--device", a.device, "--pe-mode", a.pe_mode,
                        "--tag", a.tag, "--variant", a.variant, "--pooling", a.pooling] + (["--aug-dir", a.aug_dir] if a.aug_dir else []) + (
                     ["--pad-store", a.pad_store, "--pad-mode", a.pad_mode, "--pad-labels", a.pad_labels, "--pad-stream", str(a.pad_stream), "--pad-prob", str(a.pad_prob)] if a.pad_store else []) + (
-                    ["--lr", str(a.lr)] if a.lr else []) + (["--val-robust"] + (["--val-robust-k"] + [str(k) for k in a.val_robust_k] if a.val_robust_k else []) if a.val_robust else []) + (["--split-dir", a.split_dir] if a.split_dir else []) + (["--every-epoch"] if a.every_epoch else []) + (["--april-epoch", str(a.april_epoch)] if getattr(a, "april_epoch", 0) else []) + (["--april-every"] if getattr(a, "april_every", False) else []) + (["--limit", str(a.limit)] if a.limit else []) + (["--loss-log"] if getattr(a, "loss_log", False) else [])
+                    ["--lr", str(a.lr)] if a.lr else []) + (["--val-robust"] + (["--val-robust-k"] + [str(k) for k in a.val_robust_k] if a.val_robust_k else []) if a.val_robust else []) + (["--split-dir", a.split_dir] if a.split_dir else []) + (["--every-epoch"] if a.every_epoch else []) + (["--april-epoch", str(a.april_epoch)] if getattr(a, "april_epoch", 0) else []) + (["--april-every"] if getattr(a, "april_every", False) else []) + (["--tokens-find", a.tokens_find] if getattr(a, "tokens_find", None) else []) + (["--full-january"] if getattr(a, "full_january", False) else []) + (["--limit", str(a.limit)] if a.limit else []) + (["--loss-log"] if getattr(a, "loss_log", False) else [])
                 running[g] = (subprocess.Popen(cmd, env=dict(os.environ, CUDA_VISIBLE_DEVICES=str(g)), stdout=log, stderr=subprocess.STDOUT), f"seed{s}", log)
                 print(f"[{(time.time() - t0) / 60:.1f} min] GPU {g}: started {a.tag} seed {s}", flush=True)
         for g, (p, name, log) in list(running.items()):
@@ -244,6 +251,8 @@ def main():
     ap.add_argument("--split-dir", default=None, help="folder (or a name searched under /kaggle/input) with split.npz and split_hash.json of the group-split validation slice (baseline/groupsplit.py); default: the old random slice")
     ap.add_argument("--april-epoch", type=int, default=0, help="store the April logits and the weights after this epoch ONLY (also in --loss-log mode); the April logits are not evaluated by this script")
     ap.add_argument("--april-every", action="store_true", help="store the April logits (logits only, no weights) after EVERY epoch, also in --loss-log mode (Stage D, NOTES 21); not evaluated by this script")
+    ap.add_argument("--tokens-find", default=None, help="name of a file that identifies the tokens dataset under /kaggle/input (default labels.npz; all.npz = the old-tokenizer dataset)")
+    ap.add_argument("--full-january", action="store_true", help="Step 5 (NOTES 22.2/22.3/22.7): train on ALL 75,298 January reports (needs --split-dir: its training part stays the padding pool); no validation-based choice")
     ap.add_argument("--every-epoch", action="store_true", help="store the April logits and the weights after EVERY epoch (the April logits are not evaluated by this script)")
     ap.add_argument("--loss-log", action="store_true", help="loss-curve logging (REPORT loss curves): per-batch training losses, clean training-subset loss and validation metrics after every epoch -> <out>/loss_curves/<tag>/seed<k>.json; no April logits, no weights")
     ap.add_argument("--aug-dir", default=None, help="folder with aug_s<seed>_e<epoch>_{rows,tok}.npy (balanced padding arrays of baseline/make_pad.py)")

@@ -158,7 +158,7 @@ def figure(curves, chosen, old, path, title, epochs):
     plt.close(fig)
 
 
-def chosen_cell_report(runs, out, name, chosen, cands, epochs):
+def chosen_cell_report(runs, out, name, chosen, cands, epochs, label="chosen"):
     """Per-epoch training and validation loss of the CHOSEN cell (the cell of the chosen candidate, ALL its epochs), mean +- SD over the seeds: table (markdown lines) and figure with the batch-level training curve."""
     import matplotlib
     matplotlib.use("Agg")
@@ -166,13 +166,13 @@ def chosen_cell_report(runs, out, name, chosen, cands, epochs):
     cell = chosen[:-1]
     tag = cands[chosen][0]
     seeds = cands[chosen][1]["seeds"]
-    L = ["", f"Loss per epoch of the chosen {name} cell {tuple(cell)} (all epochs, mean ± SD over the {len(seeds)} seeds; the chosen epoch is {chosen[-1]}):", "",
+    L = ["", f"Loss per epoch of the {label} {name} cell {tuple(cell)} (all epochs, mean ± SD over the {len(seeds)} seeds; the {label} epoch is {chosen[-1]}):", "",
          "| epoch | training loss (mean of the epoch's batches, dropout on" + (", padded mix" if name == "attbal" else "") + ") | training loss, 2,000 unedited training reports (eval mode) | validation loss | val pAUC@1e-2 |" + (" R20 | R100 |" if name == "attbal" else ""), "|" + "---|" * (5 + (2 if name == "attbal" else 0))]
     tr, tc, vl, pa = [], [], [], []
     for e in epochs:
         c = cands[cell + (e,)][1]
         tr.append(c["train_loss"]), tc.append(c["train_clean_loss"]), vl.append(c["loss"]), pa.append(c["pauc"])
-        L.append(f"| {e}{' (chosen)' if e == chosen[-1] else ''} | {c['train_loss'].mean():.4f} ± {c['train_loss'].std(ddof=1):.4f} | {c['train_clean_loss'].mean():.4f} ± {c['train_clean_loss'].std(ddof=1):.4f} | {c['loss'].mean():.4f} ± {c['loss'].std(ddof=1):.4f} | {c['pauc'].mean():.4f} ± {c['pauc'].std(ddof=1):.4f} |"
+        L.append(f"| {e}{' (' + label + ')' if e == chosen[-1] else ''} | {c['train_loss'].mean():.4f} ± {c['train_loss'].std(ddof=1):.4f} | {c['train_clean_loss'].mean():.4f} ± {c['train_clean_loss'].std(ddof=1):.4f} | {c['loss'].mean():.4f} ± {c['loss'].std(ddof=1):.4f} | {c['pauc'].mean():.4f} ± {c['pauc'].std(ddof=1):.4f} |"
                  + (f" {c['r20'].mean():.4f} | {c['r100'].mean():.4f} |" if name == "attbal" else ""))
     fig, ax = plt.subplots(1, 2, figsize=(11, 4), dpi=200)
     for arr, lab, col in ((tr, "training loss (epoch mean, dropout on)", "#1baf7a"), (tc, "training loss on 2,000 unedited reports (eval)", "#6250d6"), (vl, "validation loss", "#eb6834")):
@@ -201,7 +201,7 @@ def chosen_cell_report(runs, out, name, chosen, cands, epochs):
     for a_ in ax:
         a_.spines[["top", "right"]].set_visible(False)
     fig.tight_layout()
-    fig.savefig(os.path.join(out, f"fig_loss_chosen_cell_{name}.png"))
+    fig.savefig(os.path.join(out, f"fig_loss_{label}_cell_{name}.png"))
     plt.close(fig)
     return L + [""]
 
@@ -247,6 +247,13 @@ def main():
         if chosen:
             figure(curves, chosen, old, os.path.join(a.out, f"fig_loss_curves_{name}.png"), f"{name}: loss per epoch, all candidates", EPOCHS_OF[name])
             text += chosen_cell_report(a.runs, a.out, name, chosen, cands, EPOCHS_OF[name])
+            if best is not None and best[:-1] != chosen[:-1]:                 # the cell of the pAUC-best candidate (among the candidates that passed the rules), for comparison
+                text += chosen_cell_report(a.runs, a.out, name, best, cands, EPOCHS_OF[name], label="pAUC-best")
+            if with_robust:
+                top = max(rows, key=lambda k: rows[k]["mean_pauc"])           # the highest mean validation pAUC@1e-2 over ALL candidates, whatever the rules say
+                text += ["", f"Highest mean validation pAUC@1e-2 over all {len(rows)} candidates (before any exclusion): {tuple(top)} = {rows[top]['mean_pauc']:.4f} (SE {rows[top]['se_pauc']:.4f}), R20 {rows[top]['mean_r20']:.4f}, R100 {rows[top]['mean_r100']:.4f}; excluded by the R20 rule: {'yes' if rows[top]['robust_excluded'] else 'no'}.", ""]
+                if top[:-1] != chosen[:-1] and top[:-1] != best[:-1]:
+                    text += chosen_cell_report(a.runs, a.out, name, top, cands, EPOCHS_OF[name], label="pAUC-top")
     open(os.path.join(a.out, "validation_tables.md"), "w").write("\n".join(text) + "\n")
     json.dump(result, open(os.path.join(a.out, "selection.json"), "w"), indent=1)
     print("\n".join(text))

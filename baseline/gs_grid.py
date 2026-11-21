@@ -30,14 +30,17 @@ def jobs_of(family, seeds, epochs, split_dir, variant, store):
     return out
 
 
-def final_jobs(family, seeds, split_dir, variant, store):
+def final_jobs(family, seeds, split_dir, variant, store, stage_d=False):
     """Stage C (NOTES 21.10): the approved settings, seeds 0-9. ATT+bal lr 1e-3, p 0.5, epoch 3; v2-PE lr 2e-3, epoch 1. The runs continue past the chosen epoch (ATT+bal to 6, v2-PE to 4) only so that the
     loss curves can be shown; the April logits and the weights are stored ONLY after the chosen epoch (--april-epoch), so no April logit of another epoch exists. Epoch k of a run = a k-epoch run (constant lr)."""
     if family == "v2pe":
         tag, extra, epochs, ae = "gsf_v2pe", ["--pooling", "flatten", "--lr", "0.002"], 4, 1
     else:
         tag, extra, epochs, ae = "gsf_attbal", ["--pooling", "attn", "--pad-store", store, "--pad-mode", "replace", "--pad-labels", "all", "--pad-stream", "7000", "--pad-prob", "0.5", "--val-robust", "--val-robust-k", "20", "100", "--lr", "0.001"], 6, 3
-    base = ["--epochs", str(epochs), "--variant", variant, "--split-dir", split_dir, "--loss-log", "--pe-mode", "paper", "--april-epoch", str(ae)]
+    base = ["--epochs", str(epochs), "--variant", variant, "--split-dir", split_dir, "--loss-log", "--pe-mode", "paper"] + (["--april-every"] if stage_d else ["--april-epoch", str(ae)])
+    if stage_d:                                              # Stage D (NOTES 21.13): the same runs as Stage C (same seeds, settings, epochs) in new tags; the April logits of every epoch are stored
+        tag = tag.replace("gsf_", "gsd_")
+        extra = [x for x in extra]
     return [(tag, s, base + extra + ["--tag", tag, "--seed", str(s)]) for s in seeds]
 
 
@@ -54,10 +57,11 @@ def main():
     ap.add_argument("--gpus", type=int, default=0)
     ap.add_argument("--limit", type=int, default=0, help="smoke test only")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--stage-d", action="store_true", help="Stage D: the Stage C runs again (tags gsd_*) with the April logits of every epoch stored (logits only)")
     ap.add_argument("--final", action="store_true", help="Stage C: the approved settings with seeds 0-9 (default seeds then 0-9), April logits after the chosen epoch only")
     a = ap.parse_args()
-    if a.final:
-        jobs = final_jobs(a.family, a.seeds if a.seeds != [0, 1, 2, 3, 4] else list(range(10)), a.split_dir, a.variant, a.pad_store)
+    if a.final or a.stage_d:
+        jobs = final_jobs(a.family, a.seeds if a.seeds != [0, 1, 2, 3, 4] else list(range(10)), a.split_dir, a.variant, a.pad_store, stage_d=a.stage_d)
     else:
         jobs = jobs_of(a.family, a.seeds, a.epochs, a.split_dir, a.variant, a.pad_store)
     extra = ["--device", a.device, "--out", a.out] + (["--limit", str(a.limit)] if a.limit else [])

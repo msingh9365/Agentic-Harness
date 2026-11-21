@@ -86,10 +86,14 @@ def run(a):
         ae = getattr(a, "april_epoch", 0)
         # the April logits: stored, NOT evaluated here. Default: after the last epoch (or every epoch with --every-epoch), never in loss-log mode. --april-epoch K (Stage C of NOTES 21): store them (and the weights)
         # ONLY after epoch K, also in loss-log mode, so that the loss curves can run past the chosen epoch without any April logit of the other epochs existing.
-        if ((ep == ae) if ae else ((ep == a.epochs or getattr(a, "every_epoch", False)) and not loss_log)):
+        # --april-every (Stage D of NOTES 21): the April logits of EVERY epoch are stored (logits only, no weights) so that a per-seed early-stopping epoch chosen on the VALIDATION logits can be scored afterwards;
+        # nothing is evaluated here, and the epoch is chosen by a script that never opens a test logit (baseline/gs_early.py).
+        every = getattr(a, "april_every", False)
+        if every or ((ep == ae) if ae else ((ep == a.epochs or getattr(a, "every_epoch", False)) and not loss_log)):
             zt = cv.predict_logits(model, x_test, dev, bs=512)
             np.save(os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_test_logits.npy"), zt.astype(np.float32))
-            torch.save({k: v.detach().cpu() for k, v in model.state_dict().items()}, os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_model.pt"))
+            if not every:
+                torch.save({k: v.detach().cpu() for k, v in model.state_dict().items()}, os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_model.pt"))
 
     edited, epoch_sizes = {}, {}
     aug_dir = a.aug_dir
@@ -178,7 +182,7 @@ def orchestrate(a):
                 cmd = [sys.executable, "-m", "baseline.v2pe", "--out", a.out, "--seed", str(s), "--epochs", str(a.epochs), "--device", a.device, "--pe-mode", a.pe_mode,
                        "--tag", a.tag, "--variant", a.variant, "--pooling", a.pooling] + (["--aug-dir", a.aug_dir] if a.aug_dir else []) + (
                     ["--pad-store", a.pad_store, "--pad-mode", a.pad_mode, "--pad-labels", a.pad_labels, "--pad-stream", str(a.pad_stream), "--pad-prob", str(a.pad_prob)] if a.pad_store else []) + (
-                    ["--lr", str(a.lr)] if a.lr else []) + (["--val-robust"] + (["--val-robust-k"] + [str(k) for k in a.val_robust_k] if a.val_robust_k else []) if a.val_robust else []) + (["--split-dir", a.split_dir] if a.split_dir else []) + (["--every-epoch"] if a.every_epoch else []) + (["--april-epoch", str(a.april_epoch)] if getattr(a, "april_epoch", 0) else []) + (["--limit", str(a.limit)] if a.limit else []) + (["--loss-log"] if getattr(a, "loss_log", False) else [])
+                    ["--lr", str(a.lr)] if a.lr else []) + (["--val-robust"] + (["--val-robust-k"] + [str(k) for k in a.val_robust_k] if a.val_robust_k else []) if a.val_robust else []) + (["--split-dir", a.split_dir] if a.split_dir else []) + (["--every-epoch"] if a.every_epoch else []) + (["--april-epoch", str(a.april_epoch)] if getattr(a, "april_epoch", 0) else []) + (["--april-every"] if getattr(a, "april_every", False) else []) + (["--limit", str(a.limit)] if a.limit else []) + (["--loss-log"] if getattr(a, "loss_log", False) else [])
                 running[g] = (subprocess.Popen(cmd, env=dict(os.environ, CUDA_VISIBLE_DEVICES=str(g)), stdout=log, stderr=subprocess.STDOUT), f"seed{s}", log)
                 print(f"[{(time.time() - t0) / 60:.1f} min] GPU {g}: started {a.tag} seed {s}", flush=True)
         for g, (p, name, log) in list(running.items()):
@@ -239,6 +243,7 @@ def main():
     ap.add_argument("--val-robust-k", type=int, nargs="*", default=None, help="numbers of prepended calls for --val-robust (default: 20; NOTES 21 uses 20 100)")
     ap.add_argument("--split-dir", default=None, help="folder (or a name searched under /kaggle/input) with split.npz and split_hash.json of the group-split validation slice (baseline/groupsplit.py); default: the old random slice")
     ap.add_argument("--april-epoch", type=int, default=0, help="store the April logits and the weights after this epoch ONLY (also in --loss-log mode); the April logits are not evaluated by this script")
+    ap.add_argument("--april-every", action="store_true", help="store the April logits (logits only, no weights) after EVERY epoch, also in --loss-log mode (Stage D, NOTES 21); not evaluated by this script")
     ap.add_argument("--every-epoch", action="store_true", help="store the April logits and the weights after EVERY epoch (the April logits are not evaluated by this script)")
     ap.add_argument("--loss-log", action="store_true", help="loss-curve logging (REPORT loss curves): per-batch training losses, clean training-subset loss and validation metrics after every epoch -> <out>/loss_curves/<tag>/seed<k>.json; no April logits, no weights")
     ap.add_argument("--aug-dir", default=None, help="folder with aug_s<seed>_e<epoch>_{rows,tok}.npy (balanced padding arrays of baseline/make_pad.py)")

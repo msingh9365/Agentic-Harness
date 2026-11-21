@@ -64,3 +64,24 @@ def test_choose_fold_rule():
     folds[3]["groups"] = 800
     assert choose_fold(folds, 0.33)[0] == 4                      # tie on share -> more groups
     assert choose_fold(folds[:2], 0.33)[0] is None               # no candidate
+
+
+def test_stage_b_selection_rule():
+    from baseline.gs_select import select
+
+    def r(p, se=0.004, loss=0.07, auc=0.99, r20=0.95, r100=0.8):
+        return {"mean_pauc": p, "se_pauc": se, "mean_loss": loss, "min_auc": auc, "mean_r20": r20, "mean_r100": r100}
+    # v2-PE style (no robustness): the best is epoch 3, epoch 2 is within one SE and has fewer epochs, epoch 1 is not within one SE
+    rows = {(1e-3, 1): r(0.90), (1e-3, 2): r(0.938), (1e-3, 3): r(0.94), (1e-3, 4): r(0.92)}
+    _, chosen, best = select(rows, False)
+    assert best == (1e-3, 3) and chosen == (1e-3, 2)
+    # the same pAUC and the same epoch: the lower validation loss wins, then the lower learning rate
+    rows = {(2e-3, 2): r(0.94, loss=0.08), (1e-3, 2): r(0.94, loss=0.07)}
+    assert select(rows, False)[1] == (1e-3, 2)
+    # collapse guard
+    rows = {(1e-3, 1): r(0.99, auc=0.55), (1e-3, 2): r(0.90)}
+    assert select(rows, False)[1] == (1e-3, 2)
+    # ATT+bal: R20 or R100 more than 0.02 below the best R excludes the candidate before the tie rule, even if its pAUC is the highest
+    rows = {(1e-3, 0.5, 1): r(0.96, r100=0.70), (1e-3, 0.5, 2): r(0.94, r100=0.81), (2e-3, 0.25, 2): r(0.945, r20=0.91, r100=0.80)}
+    rows, chosen, best = select(rows, True)
+    assert rows[(1e-3, 0.5, 1)]["robust_excluded"] and rows[(2e-3, 0.25, 2)]["robust_excluded"] and best == chosen == (1e-3, 0.5, 2)

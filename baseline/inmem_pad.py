@@ -47,10 +47,11 @@ def epoch_edits(store, y, trn, seed, epoch, pool_rows, stream=7000, labels="all"
 VAL_ROBUST_STREAM, VAL_ROBUST_K = 8200, 20
 
 
-def val_robust_set(store, y, val, pool_rows):
+def val_robust_set(store, y, val, pool_rows, k=VAL_ROBUST_K):
     """The fixed padded validation set of the tuning of NOTES 16: every validation MALWARE report with 20 calls prepended, the calls drawn from the TRAIN pool (default_rng([8200, row]): per call a
     uniform pool report, then a uniform call of it); the same draw for every cell, seed and epoch; reports without calls also receive the calls. In memory only.
-    Returns (rows int64, tokens uint16 [m, 512])."""
+    Returns (rows int64, tokens uint16 [m, 512]).
+    k = number of prepended calls (20 in NOTES 16; 20 and 100 in NOTES 21 Stage B). The calls are drawn one after the other from the same stream, so the first 20 calls of the 100-call edit are the 20 calls of the 20-call edit."""
     pool_n = np.array([store.n_calls(int(r)) for r in pool_rows], dtype=np.int64)
     rows, toks = [], []
     for r in val:
@@ -59,7 +60,7 @@ def val_robust_set(store, y, val, pool_rows):
             continue
         rng = np.random.default_rng([VAL_ROBUST_STREAM, r])
         added = []
-        for _ in range(VAL_ROBUST_K):
+        for _ in range(k):
             pr = int(rng.integers(len(pool_rows)))
             added.append(store.call(int(pool_rows[pr]), int(rng.integers(pool_n[pr]))))
         rows.append(r)

@@ -38,7 +38,12 @@ def run(a):
     lab = np.load(os.path.join(tokens, "labels.npz"))
     x_all, x_test, vocab = gap.load(tokens, a.variant)
     y_all, y_test = lab["y_train"], lab["y_test"]
-    trn, val = gap.val_slice(lab["ym_train"])                       # asserts the stored hash (67,768 / 7,530)
+    if a.split_dir:                                                 # group-split validation slice (NOTES 21): asserts ITS stored hash (66,580 / 8,718); tokens and store are those of the refit tokenizer
+        from baseline import groupsplit
+        sd = a.split_dir if os.path.exists(os.path.join(a.split_dir, "split.npz")) else C.find_dir_with("split.npz")
+        trn, val = groupsplit.val_slice(os.path.join(sd, "split.npz"), os.path.join(sd, "split_hash.json"))
+    else:
+        trn, val = gap.val_slice(lab["ym_train"])                   # asserts the stored hash (67,768 / 7,530)
     if a.limit:                                                     # smoke test on CPU only
         r = np.random.default_rng(0)
         trn, val = r.permutation(trn)[:a.limit], r.permutation(val)[:max(40, a.limit // 4)]
@@ -51,7 +56,7 @@ def run(a):
     trainer = cv.make_trainer(model, dev, "binary", RECIPE["batch"], recipe["lr"], recipe["wd"], clip_grad_norm=recipe["clip"])
     bpe = int(np.ceil(len(xt) / RECIPE["batch"]))
     log, t0, seen = [], time.time(), {"batches": 0}
-    rob = {"tok": None}                                             # fixed padded validation set (NOTES 16.3), filled in the in-memory padding branch
+    rob = {}                                                        # fixed padded validation sets (NOTES 16.3; k prepended calls), filled in the in-memory padding branch: {k: tokens}
     loss_log = bool(getattr(a, "loss_log", False))
     ll = {"consumed": 0, "batch_losses": [], "epochs": []}
     sub_idx = np.random.default_rng(11).choice(len(xt), min(2000, len(xt)), replace=False)      # fixed subset of 2,000 training reports (positions in the 90% slice), UNEDITED tokens
@@ -60,10 +65,12 @@ def run(a):
         zv = cv.predict_logits(model, xv, dev, bs=512)
         mv = C.binary_metrics(yv, zv, decision=0.0)
         rec = {"epoch": ep, "batches": seen["batches"] or ep * bpe, "seconds": round(time.time() - t0, 1), "val_loss": gap.bce_logits(yv, zv), "val": gap.compact(mv), "val_n_tied_at_top": mv["n_tied_at_top"]}
-        if rob["tok"] is not None:
+        if rob:
             thr = padtest.thresholds(zv, yv, 0.01)
-            zr = cv.predict_logits(model, rob["tok"], dev, bs=512)
-            rec["val_robust_tpr"], rec["val_robust_thr"], rec["val_robust_n"] = float((zr > thr).mean()), float(thr), int(len(zr))
+            for k_, tok_ in rob.items():
+                zr = cv.predict_logits(model, tok_, dev, bs=512)
+                suffix = "" if k_ == 20 else str(k_)                     # keys of NOTES 16: val_robust_tpr (20 calls); NOTES 21 adds val_robust100_tpr
+                rec[f"val_robust{suffix}_tpr"], rec["val_robust_thr"], rec[f"val_robust{suffix}_n"] = float((zr > thr).mean()), float(thr), int(len(zr))
         if loss_log:
             all_l = trainer.train_losses                               # the authors' trainer stores the BCE of every training batch (loss.item()); read only
             new = [float(v) for v in all_l[ll["consumed"]:]]
@@ -71,7 +78,8 @@ def run(a):
             ll["batch_losses"].extend(new)
             zs = cv.predict_logits(model, xt[sub_idx], dev, bs=512)    # eval mode: no dropout, no randomness
             ll["epochs"].append({"epoch": ep, "step_end": len(ll["batch_losses"]), "n_batches": len(new), "train_epoch_mean_loss": float(np.mean(new)), "val_loss": rec["val_loss"], "val_pauc@1e-2": rec["val"]["pauc@0.01"],
-                                 "val_auc": rec["val"]["auc"], "train_subset_clean_loss": gap.bce_logits(yt[sub_idx], zs)})
+                                 "val_auc": rec["val"]["auc"], "train_subset_clean_loss": gap.bce_logits(yt[sub_idx], zs),
+                                 **{k_: v_ for k_, v_ in rec.items() if k_.startswith("val_robust") and k_.endswith("_tpr")}})
         log.append(rec)
         print(f"[{a.tag} seed {a.seed}] epoch {ep}: val TPR@1e-3 {mv['tpr@0.001']:.3f} @1e-2 {mv['tpr@0.01']:.3f} pAUC@1e-2 {mv['pauc@0.01']:.3f} AUC {mv['auc']:.4f} loss {rec['val_loss']:.4f} | {rec['seconds']:.0f}s", flush=True)
         np.save(os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_val_logits.npy"), zv.astype(np.float32))
@@ -88,14 +96,15 @@ def run(a):
     if a.pad_store:
         # padding built IN MEMORY from the store of the ORIGINAL reports (baseline/callstore.py, inmem_pad.py); nothing edited is written anywhere. pad_mode "replace": the padded report replaces the
         # original (REPORT 5.10); "keep": a padded COPY is added to all the clean reports. pad_labels "malware": only malware training reports are eligible. One fit() per epoch (as below).
-        sp = a.pad_store if os.path.exists(a.pad_store) else os.path.join(C.find_dir_with("all.npz"), "all.npz")
+        sp = a.pad_store if os.path.exists(a.pad_store) else os.path.join(C.find_dir_with(os.path.basename(a.pad_store)), os.path.basename(a.pad_store))
         store = CS.CallStore.load(sp)
         pool_rows = inmem_pad.pool_rows_of(store, y_all, trn)
         print(f"[{a.tag} seed {a.seed}] call store {sp}: {len(store):,} reports; TRAIN pool {len(pool_rows):,} benign reports of the training slice", flush=True)
         where = {int(r): i for i, r in enumerate(trn)}
         if getattr(a, "val_robust", False):
-            _, rob["tok"] = inmem_pad.val_robust_set(store, y_all, val, pool_rows)
-            print(f"[{a.tag} seed {a.seed}] validation robustness set: {len(rob['tok']):,} malware reports, 20 TRAIN-pool calls prepended", flush=True)
+            for k_ in (a.val_robust_k or [20]):
+                _, rob[k_] = inmem_pad.val_robust_set(store, y_all, val, pool_rows, k=k_)
+                print(f"[{a.tag} seed {a.seed}] validation robustness set: {len(rob[k_]):,} malware reports, {k_} TRAIN-pool calls prepended", flush=True)
         for ep in range(1, a.epochs + 1):
             rows, tok = inmem_pad.epoch_edits(store, y_all, trn, a.seed, ep, pool_rows, stream=a.pad_stream, labels=a.pad_labels, p_pad=getattr(a, "pad_prob", 0.5))
             if a.pad_mode == "replace":
@@ -166,7 +175,7 @@ def orchestrate(a):
                 cmd = [sys.executable, "-m", "baseline.v2pe", "--out", a.out, "--seed", str(s), "--epochs", str(a.epochs), "--device", a.device, "--pe-mode", a.pe_mode,
                        "--tag", a.tag, "--variant", a.variant, "--pooling", a.pooling] + (["--aug-dir", a.aug_dir] if a.aug_dir else []) + (
                     ["--pad-store", a.pad_store, "--pad-mode", a.pad_mode, "--pad-labels", a.pad_labels, "--pad-stream", str(a.pad_stream), "--pad-prob", str(a.pad_prob)] if a.pad_store else []) + (
-                    ["--lr", str(a.lr)] if a.lr else []) + (["--val-robust"] if a.val_robust else []) + (["--every-epoch"] if a.every_epoch else []) + (["--limit", str(a.limit)] if a.limit else []) + (["--loss-log"] if getattr(a, "loss_log", False) else [])
+                    ["--lr", str(a.lr)] if a.lr else []) + (["--val-robust"] + (["--val-robust-k"] + [str(k) for k in a.val_robust_k] if a.val_robust_k else []) if a.val_robust else []) + (["--split-dir", a.split_dir] if a.split_dir else []) + (["--every-epoch"] if a.every_epoch else []) + (["--limit", str(a.limit)] if a.limit else []) + (["--loss-log"] if getattr(a, "loss_log", False) else [])
                 running[g] = (subprocess.Popen(cmd, env=dict(os.environ, CUDA_VISIBLE_DEVICES=str(g)), stdout=log, stderr=subprocess.STDOUT), f"seed{s}", log)
                 print(f"[{(time.time() - t0) / 60:.1f} min] GPU {g}: started {a.tag} seed {s}", flush=True)
         for g, (p, name, log) in list(running.items()):
@@ -224,6 +233,8 @@ def main():
     ap.add_argument("--lr", type=float, default=None, help="learning rate (default: the v2 recipe, 2e-3)")
     ap.add_argument("--pad-prob", type=float, default=0.5, help="share of the training reports edited per epoch (0.5 = REPORT 5.10)")
     ap.add_argument("--val-robust", action="store_true", help="after every epoch: share of validation malware still flagged at the validation 1%% FPR threshold after 20 TRAIN-pool calls are prepended (NOTES 16.3)")
+    ap.add_argument("--val-robust-k", type=int, nargs="*", default=None, help="numbers of prepended calls for --val-robust (default: 20; NOTES 21 uses 20 100)")
+    ap.add_argument("--split-dir", default=None, help="folder (or a name searched under /kaggle/input) with split.npz and split_hash.json of the group-split validation slice (baseline/groupsplit.py); default: the old random slice")
     ap.add_argument("--every-epoch", action="store_true", help="store the April logits and the weights after EVERY epoch (the April logits are not evaluated by this script)")
     ap.add_argument("--loss-log", action="store_true", help="loss-curve logging (REPORT loss curves): per-batch training losses, clean training-subset loss and validation metrics after every epoch -> <out>/loss_curves/<tag>/seed<k>.json; no April logits, no weights")
     ap.add_argument("--aug-dir", default=None, help="folder with aug_s<seed>_e<epoch>_{rows,tok}.npy (balanced padding arrays of baseline/make_pad.py)")

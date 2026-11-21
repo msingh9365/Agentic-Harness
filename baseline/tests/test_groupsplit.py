@@ -81,7 +81,11 @@ def test_stage_b_selection_rule():
     # collapse guard
     rows = {(1e-3, 1): r(0.99, auc=0.55), (1e-3, 2): r(0.90)}
     assert select(rows, False)[1] == (1e-3, 2)
-    # ATT+bal: R20 or R100 more than 0.02 below the best R excludes the candidate before the tie rule, even if its pAUC is the highest
-    rows = {(1e-3, 0.5, 1): r(0.96, r100=0.70), (1e-3, 0.5, 2): r(0.94, r100=0.81), (2e-3, 0.25, 2): r(0.945, r20=0.91, r100=0.80)}
+    # ATT+bal, amended rule (NOTES 21.7): only R20 more than 0.02 below the best R20 excludes a candidate (before the tie rule, even if its pAUC is the highest); R100 takes no part
+    rows = {(1e-3, 0.5, 1): r(0.96, r20=0.90), (1e-3, 0.5, 2): r(0.94, r20=0.95, r100=0.05), (2e-3, 0.25, 2): r(0.945, r20=0.945, r100=0.20), (2e-3, 0.5, 2): r(0.90, r20=0.95, r100=0.70)}
     rows, chosen, best = select(rows, True)
-    assert rows[(1e-3, 0.5, 1)]["robust_excluded"] and rows[(2e-3, 0.25, 2)]["robust_excluded"] and best == chosen == (1e-3, 0.5, 2)
+    assert rows[(1e-3, 0.5, 1)]["robust_excluded"] and not rows[(2e-3, 0.25, 2)]["robust_excluded"] and not rows[(1e-3, 0.5, 2)]["robust_excluded"]
+    assert best == chosen == (2e-3, 0.25, 2)                           # the highest pAUC among the candidates that pass R20; its R100 (0.20) and the other (0.70) play no role
+    # the first plan's rule (R20 and R100) is still available through robust_keys
+    rows = {(1e-3, 0.5, 2): r(0.94, r20=0.95, r100=0.05), (2e-3, 0.25, 2): r(0.945, r20=0.945, r100=0.20)}
+    assert select(rows, True, ("mean_r20", "mean_r100"))[0][(1e-3, 0.5, 2)]["robust_excluded"]

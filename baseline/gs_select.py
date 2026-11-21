@@ -38,13 +38,15 @@ def tag_ab(lr, p):
     return f"gs_attbal_lr{lr:.0e}_p{p:g}".replace("e-0", "e-")
 
 
-def select(rows, with_robust):
-    """rows: {key: {mean_pauc, se_pauc, mean_loss, min_auc, [mean_r20, mean_r100]}} where key = (lr, epoch) or (lr, p, epoch). Adds the rule flags; returns (rows, chosen key or None, best key or None). Pure function (unit-tested)."""
+def select(rows, with_robust, robust_keys=("mean_r20",)):
+    """rows: {key: {mean_pauc, se_pauc, mean_loss, min_auc, [mean_r20, mean_r100]}} where key = (lr, epoch) or (lr, p, epoch). Adds the rule flags; returns (rows, chosen key or None, best key or None). Pure function (unit-tested).
+    robust_keys: the robustness measures of rule 2. NOTES 21.7 (amendment of 2026-11-21, made after the Stage B validation results were seen): R20 ONLY; the first plan (21.5) used ("mean_r20", "mean_r100").
+    R100 is reported for every candidate but takes no part in the selection."""
     for r in rows.values():
         r["collapsed"] = bool(r["min_auc"] < 0.6)
     ok = [k for k in rows if not rows[k]["collapsed"]]
     if with_robust and ok:
-        best_r = {m: max(rows[k][m] for k in ok) for m in ("mean_r20", "mean_r100")}
+        best_r = {m: max(rows[k][m] for k in ok) for m in robust_keys}
         for k in rows:
             rows[k]["robust_excluded"] = bool(any(rows[k][m] < best_r[m] - ROBUST_MARGIN for m in best_r))
     else:

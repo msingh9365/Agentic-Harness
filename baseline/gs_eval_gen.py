@@ -16,7 +16,7 @@ import os
 import numpy as np
 
 from baseline import att_report as AR, common as C, gap_final, padtest
-from baseline.twolevel_eval import april_meta, cluster_bootstrap
+from baseline.twolevel_eval import CLUSTER_HASH, april_meta, cluster_bootstrap
 from baseline.v2pe_report import BOOT, COLS, md, metrics_of, ms
 
 ROOT = AR.ROOT
@@ -107,9 +107,22 @@ def main():
         drows.append([g, int(mk.sum())] + [f"{100 * (flag[f'{k}_{m}'][:, mk].mean() - flag[f'old_{m}'][:, mk].mean()):+.1f}" for m in ("v2pe", "attbal") for k in [x for x in ("gs", "tk", "full") if f"{x}_{m}" in Z]])
     hdr = ["malware family", "n"] + [f"{NAME[m]} {k} − old (points)" for m in ("v2pe", "attbal") for k in [x for x in ("gs", "tk", "full") if f"{x}_{m}" in Z]]
     L += ["", "### Change of the detection rate against the old-split models, per family (points; thresholds on the April benign scores)", "", md(drows, hdr)]
+    cm, coin = hsh == CLUSTER_HASH, fam == "coinminer"
+    rest = coin & ~cm
+    crow, cout = [], {}
+    for k in Z:
+        sh = flag[k][:, cm].mean(1)
+        margin = np.array([np.median(Z[k][s][cm]) - thr[k][s] for s in SEEDS])
+        cout[k] = {"cluster_share_flagged_per_seed": sh.tolist(), "seeds_flagging": int((sh > 0.5).sum()), "median_margin_per_seed": margin.tolist(), "other_coinminer_tpr": [float(flag[k][:, rest].mean(1).mean()), float(flag[k][:, rest].mean(1).std(ddof=1))],
+                   "all_coinminer_tpr": [float(flag[k][:, coin].mean(1).mean()), float(flag[k][:, coin].mean(1).std(ddof=1))]}
+        crow.append([lab(k), f"{int((sh > 0.5).sum())}/10", f"{np.median(margin):+.1f} (IQR {np.percentile(margin, 25):+.1f} to {np.percentile(margin, 75):+.1f})", f"{100 * cout[k]['other_coinminer_tpr'][0]:.1f} ± {100 * cout[k]['other_coinminer_tpr'][1]:.1f}",
+                     f"{100 * cout[k]['all_coinminer_tpr'][0]:.1f} ± {100 * cout[k]['all_coinminer_tpr'][1]:.1f}"])
+    L += ["", f"### The coinminer cluster (hash_apis d91b96b4…, {int(cm.sum())} April reports with the same first 512 tokens of the OLD tokenizer; one input counted {int(cm.sum())} times)", "",
+          "Seeds that flag it = seeds in which more than half of the cluster is above the 1% threshold (threshold on the April benign scores). Margin = median cluster logit minus the threshold (positive = flagged).", "",
+          md(crow, ["model", "seeds flagging the cluster", "median margin (logit)", f"TPR of the other {int(rest.sum())} coinminer reports (%)", f"TPR of all {int(coin.sum())} coinminer reports (%)"])]
     os.makedirs(a.out, exist_ok=True)
     open(os.path.join(a.out, "tables.md"), "w").write("\n".join(L) + "\n")
-    json.dump({"test": {k: {c: v.round(6).tolist() for c, v in m_.items()} for k, m_ in T.items()}, "ensemble": {k: {c: v for c, v in m_.items() if c != "roc_on_grid"} for k, m_ in ens.items()}, "pairs": cl}, open(os.path.join(a.out, "results.json"), "w"), indent=1)
+    json.dump({"test": {k: {c: v.round(6).tolist() for c, v in m_.items()} for k, m_ in T.items()}, "ensemble": {k: {c: v for c, v in m_.items() if c != "roc_on_grid"} for k, m_ in ens.items()}, "pairs": cl, "coinminer_cluster": cout}, open(os.path.join(a.out, "results.json"), "w"), indent=1)
     json.dump(bs, open(os.path.join(a.out, "bootstrap_stratified.json"), "w"), indent=1)
     print("\n".join(L))
 

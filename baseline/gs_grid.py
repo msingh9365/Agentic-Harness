@@ -30,7 +30,7 @@ def jobs_of(family, seeds, epochs, split_dir, variant, store):
     return out
 
 
-def final_jobs(family, seeds, split_dir, variant, store, stage_d=False, tok_old=False, full=False):
+def final_jobs(family, seeds, split_dir, variant, store, stage_d=False, tok_old=False, full=False, full_loss=False):
     """Stage C (NOTES 21.10): the approved settings, seeds 0-9. ATT+bal lr 1e-3, p 0.5, epoch 3; v2-PE lr 2e-3, epoch 1. The runs continue past the chosen epoch (ATT+bal to 6, v2-PE to 4) only so that the
     loss curves can be shown; the April logits and the weights are stored ONLY after the chosen epoch (--april-epoch), so no April logit of another epoch exists. Epoch k of a run = a k-epoch run (constant lr)."""
     if family == "v2pe":
@@ -38,16 +38,16 @@ def final_jobs(family, seeds, split_dir, variant, store, stage_d=False, tok_old=
     else:
         tag, extra, epochs, ae = "gsf_attbal", ["--pooling", "attn", "--pad-store", store, "--pad-mode", "replace", "--pad-labels", "all", "--pad-stream", "7000", "--pad-prob", "0.5", "--val-robust", "--val-robust-k", "20", "100", "--lr", "0.001"], 6, 3
     base = ["--epochs", str(epochs), "--variant", variant, "--split-dir", split_dir, "--loss-log", "--pe-mode", "paper"] + (["--april-every"] if stage_d else ["--april-epoch", str(ae)])
-    if tok_old or full:                                      # Step 3b / Step 5 (NOTES 22.7): the OLD tokenizer (fit on all of January): its tokens and call store (nebula-tune-inputs) and the split (nebula-groupsplit); exactly the chosen number of epochs
-        tag = tag.replace("gsf_", "gstk_" if tok_old else "gsx_")
+    if tok_old or full or full_loss:                         # Step 3b / Step 5 / Stage G loss-curve re-runs (NOTES 22.7): the OLD tokenizer (fit on all of January): its tokens and call store (nebula-tune-inputs) and the split (nebula-groupsplit); exactly the chosen number of epochs
+        tag = tag.replace("gsf_", "gstk_" if tok_old else ("gsy_" if full_loss else "gsx_"))
         i = base.index("--variant")
         base[i + 1] = "bpe50k"
-        base = [x for x in base if x != "--loss-log"] if full else base
+        base = [x for x in base if x != "--loss-log"] if (full and not full_loss) else base
         base = [x for x in base if x not in ("--epochs", str(epochs))] if False else base
         base[base.index("--epochs") + 1] = str(ae)
-        base += ["--tokens-find", "all.npz"] + (["--full-january"] if full else [])
+        base += ["--tokens-find", "all.npz"] + (["--full-january"] if (full or full_loss) else [])
         extra = [("all.npz" if x == "all_gs.npz" else x) for x in extra]
-        if full and "--val-robust" in extra:
+        if (full or full_loss) and "--val-robust" in extra:
             j = extra.index("--val-robust")
             extra = extra[:j] + extra[j + 4:]                # no validation measures in Step 5 (in-sample): drop "--val-robust --val-robust-k 20 100"
     if stage_d:                                              # Stage D (NOTES 21.13): the same runs as Stage C (same seeds, settings, epochs) in new tags; the April logits of every epoch are stored
@@ -71,11 +71,12 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--tok-old", action="store_true", help="Step 3b: the Stage C runs with the OLD tokenizer (tags gstk_*), exactly the chosen epochs")
     ap.add_argument("--full-january", action="store_true", help="Step 5: train on all 75,298 January reports with the old tokenizer (tags gsx_*), exactly the chosen epochs; the padding pool stays the group-split training part")
+    ap.add_argument("--full-loss", action="store_true", help="Stage G: the Step-5 runs again with --loss-log (tags gsy_*), exactly the chosen epochs, April logits after the last epoch (determinism check against Step 5)")
     ap.add_argument("--stage-d", action="store_true", help="Stage D: the Stage C runs again (tags gsd_*) with the April logits of every epoch stored (logits only)")
     ap.add_argument("--final", action="store_true", help="Stage C: the approved settings with seeds 0-9 (default seeds then 0-9), April logits after the chosen epoch only")
     a = ap.parse_args()
-    if a.final or a.stage_d or a.tok_old or a.full_january:
-        jobs = final_jobs(a.family, a.seeds if a.seeds != [0, 1, 2, 3, 4] else list(range(10)), a.split_dir, a.variant, a.pad_store, stage_d=a.stage_d, tok_old=a.tok_old, full=a.full_january)
+    if a.final or a.stage_d or a.tok_old or a.full_january or a.full_loss:
+        jobs = final_jobs(a.family, a.seeds if a.seeds != [0, 1, 2, 3, 4] else list(range(10)), a.split_dir, a.variant, a.pad_store, stage_d=a.stage_d, tok_old=a.tok_old, full=a.full_january, full_loss=a.full_loss)
     else:
         jobs = jobs_of(a.family, a.seeds, a.epochs, a.split_dir, a.variant, a.pad_store)
     extra = ["--device", a.device, "--out", a.out] + (["--limit", str(a.limit)] if a.limit else [])

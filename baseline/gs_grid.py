@@ -2,10 +2,10 @@
 Kaggle job: the grid of Stage B (NOTES 21) on the group-split validation slice, 5 seeds, 4 epochs, every run in --loss-log mode (no April logit and no weights are produced).   (OURS; training = baseline/v2pe.py)
 
     python -m baseline.gs_grid --family v2pe   --out /kaggle/working/out      # 3 learning rates x seeds 0-4                     = 15 runs, flatten pooling, paper PE, no padding
-    python -m baseline.gs_grid --family attbal --out /kaggle/working/out      # 2 learning rates x 2 padding probabilities x seeds 0-4 = 20 runs, attention pooling, balanced padding
+    python -m baseline.gs_grid --family attbal --out /kaggle/working/out      # 2 learning rates x 2 padding probabilities x seeds 0-4 = 20 runs of 6 epochs, attention pooling, balanced padding
     python -m baseline.gs_grid --family attbal --dry-run                      # prints the 20 commands
 
-All runs of the family go into one queue that the two GPUs of the kernel work off (the epochs 1 to 4 of a cell are the four epochs of ONE run: constant learning rate, no scheduler, so
+All runs of the family go into one queue that the two GPUs of the kernel work off (the epochs 1 to 4 (v2-PE) or 1 to 6 (ATT+bal) of a cell are the epochs of ONE run: constant learning rate, no scheduler, so
 epoch k of a 4-epoch run is the state of a k-epoch run). The commands are those of NOTES 21 Stage B. Output: <out>/<tag>/seed<k>.json (+ per-epoch validation logits) and <out>/loss_curves/<tag>/seed<k>.json.
 """
 import argparse
@@ -18,6 +18,7 @@ from baseline.gs_select import AB_LRS, AB_PS, V2_LRS, tag_ab, tag_v2
 
 
 def jobs_of(family, seeds, epochs, split_dir, variant, store):
+    epochs = epochs or (6 if family == "attbal" else 4)          # owner's instruction (NOTES 21.5.1): ATT+bal 6 epochs, v2-PE 4
     base = ["--epochs", str(epochs), "--variant", variant, "--split-dir", split_dir, "--loss-log", "--pe-mode", "paper"]
     out = []
     for lr, p in ([(lr, None) for lr in V2_LRS] if family == "v2pe" else [(lr, p) for lr in AB_LRS for p in AB_PS]):
@@ -34,7 +35,7 @@ def main():
     ap.add_argument("--family", required=True, choices=["v2pe", "attbal"])
     ap.add_argument("--out", default="/kaggle/working/out")
     ap.add_argument("--seeds", type=int, nargs="*", default=[0, 1, 2, 3, 4])
-    ap.add_argument("--epochs", type=int, default=4)
+    ap.add_argument("--epochs", type=int, default=0, help="default: 6 for attbal, 4 for v2pe")
     ap.add_argument("--split-dir", default="split")
     ap.add_argument("--variant", default="bpe50k_gs")
     ap.add_argument("--pad-store", default="all_gs.npz")

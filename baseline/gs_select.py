@@ -7,7 +7,7 @@ Input per candidate cell: `<runs>/<tag>/seed<k>.json` (per-epoch validation metr
 `<runs>/<tag>/seed<k>_epoch<e>_val_logits.npy` (for the per-family numbers) and `<runs>/loss_curves/<tag>/seed<k>.json` (per-epoch training loss and validation loss, written with --loss-log).
 This script never opens an April logit (none is produced in Stage B).
 
-Candidates: v2-PE (lr in {1e-3, 2e-3, 3e-3}) x epoch 1..4 = 12; ATT+bal (lr in {1e-3, 2e-3}) x (padding probability p in {0.25, 0.5}) x epoch 1..4 = 16; 5 seeds (0-4). Rule (NOTES 21, Stage B):
+Candidates: v2-PE (lr in {1e-3, 2e-3, 3e-3}) x epoch 1..4 = 12; ATT+bal (lr in {1e-3, 2e-3}) x (padding probability p in {0.25, 0.5}) x epoch 1..6 = 24; 5 seeds (0-4). Rule (NOTES 21, Stage B):
  1. exclude a candidate in which any seed has validation AUC < 0.6 at that epoch (collapse guard);
  2. ATT+bal only: for each of the two robustness measures R20 and R100, best R = the highest mean R over the candidates that passed rule 1; exclude a candidate whose mean R is more than 0.02 below the best
     (either of the two);
@@ -23,7 +23,8 @@ import os
 import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-V2_LRS, AB_LRS, AB_PS, EPOCHS = [1e-3, 2e-3, 3e-3], [1e-3, 2e-3], [0.25, 0.5], [1, 2, 3, 4]
+V2_LRS, AB_LRS, AB_PS = [1e-3, 2e-3, 3e-3], [1e-3, 2e-3], [0.25, 0.5]
+EPOCHS_OF = {"v2pe": [1, 2, 3, 4], "attbal": [1, 2, 3, 4, 5, 6]}          # owner's instruction before any Stage B training: ATT+bal is run for 6 epochs (24 candidates), v2-PE for 4 (12)
 OLD_V2, OLD_AB = (2e-3, 2), (2e-3, 0.5, 2)
 ROBUST_MARGIN = 0.02
 FAMILIES = ["backdoor", "coinminer", "dropper", "keylogger", "ransomware", "rat", "trojan"]
@@ -63,7 +64,7 @@ def select(rows, with_robust):
     return rows, chosen, best
 
 
-def load_cell(runs, tag):
+def load_cell(runs, tag, epochs):
     fs = sorted(glob.glob(os.path.join(runs, tag, "seed*.json")), key=lambda f: int(os.path.basename(f)[4:-5]))
     recs = [json.load(open(f)) for f in fs]
     cur = {}
@@ -71,7 +72,7 @@ def load_cell(runs, tag):
         f = os.path.join(runs, "loss_curves", tag, f"seed{r['seed']}.json")
         cur[r["seed"]] = json.load(open(f)) if os.path.exists(f) else None
     out = {}
-    for e in EPOCHS:
+    for e in epochs:
         rows = [r["per_epoch"][e - 1] for r in recs]
         c = {"seeds": [r["seed"] for r in recs], "pauc": np.array([x["val"]["pauc@0.01"] for x in rows]), "auc": np.array([x["val"]["auc"] for x in rows]), "loss": np.array([x["val_loss"] for x in rows]),
              "tpr01": np.array([x["val"]["tpr@0.01"] for x in rows]), "tpr001": np.array([x["val"]["tpr@0.001"] for x in rows])}
@@ -131,7 +132,7 @@ def md_table(rows, keys, with_robust, best, chosen, old):
     return "\n".join(L)
 
 
-def figure(curves, chosen, old, path, title):
+def figure(curves, chosen, old, path, title, epochs):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -140,19 +141,67 @@ def figure(curves, chosen, old, path, title):
     for i, (k, c) in enumerate(sorted(curves.items())):
         lab = ",".join(f"{x:g}" for x in k)
         ls, lw = ("-", 2.2) if k == chosen[:-1] else (("--", 1.6) if k == old[:-1] else ("-", 0.9))
-        ax[0].plot(EPOCHS, c["train"], ls, lw=lw, color=cm(i % 20), label=lab)
-        ax[1].plot(EPOCHS, c["val"], ls, lw=lw, color=cm(i % 20), label=lab)
+        ax[0].plot(epochs, c["train"], ls, lw=lw, color=cm(i % 20), label=lab)
+        ax[1].plot(epochs, c["val"], ls, lw=lw, color=cm(i % 20), label=lab)
     ax[0].set_title("training loss (mean of the epoch's batches)")
     ax[1].set_title("validation loss (group-split slice)")
     for a in ax:
         a.set_xlabel("epoch")
-        a.set_xticks(EPOCHS)
+        a.set_xticks(epochs)
         a.spines[["top", "right"]].set_visible(False)
     ax[1].legend(fontsize=6.5, frameon=False, title="lr[,p]", title_fontsize=7, ncol=2)
     fig.suptitle(title + " (thick = chosen, dashed = old setting)", fontsize=9)
     fig.tight_layout()
     fig.savefig(path)
     plt.close(fig)
+
+
+def chosen_cell_report(runs, out, name, chosen, cands, epochs):
+    """Per-epoch training and validation loss of the CHOSEN cell (the cell of the chosen candidate, ALL its epochs), mean +- SD over the seeds: table (markdown lines) and figure with the batch-level training curve."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    cell = chosen[:-1]
+    tag = cands[chosen][0]
+    seeds = cands[chosen][1]["seeds"]
+    L = ["", f"Loss per epoch of the chosen {name} cell {tuple(cell)} (all epochs, mean ± SD over the {len(seeds)} seeds; the chosen epoch is {chosen[-1]}):", "",
+         "| epoch | training loss (mean of the epoch's batches, dropout on" + (", padded mix" if name == "attbal" else "") + ") | training loss, 2,000 unedited training reports (eval mode) | validation loss | val pAUC@1e-2 |" + (" R20 | R100 |" if name == "attbal" else ""), "|" + "---|" * (5 + (2 if name == "attbal" else 0))]
+    tr, tc, vl, pa = [], [], [], []
+    for e in epochs:
+        c = cands[cell + (e,)][1]
+        tr.append(c["train_loss"]), tc.append(c["train_clean_loss"]), vl.append(c["loss"]), pa.append(c["pauc"])
+        L.append(f"| {e}{' (chosen)' if e == chosen[-1] else ''} | {c['train_loss'].mean():.4f} ± {c['train_loss'].std(ddof=1):.4f} | {c['train_clean_loss'].mean():.4f} ± {c['train_clean_loss'].std(ddof=1):.4f} | {c['loss'].mean():.4f} ± {c['loss'].std(ddof=1):.4f} | {c['pauc'].mean():.4f} ± {c['pauc'].std(ddof=1):.4f} |"
+                 + (f" {c['r20'].mean():.4f} | {c['r100'].mean():.4f} |" if name == "attbal" else ""))
+    fig, ax = plt.subplots(1, 2, figsize=(11, 4), dpi=200)
+    for arr, lab, col in ((tr, "training loss (epoch mean, dropout on)", "#1baf7a"), (tc, "training loss on 2,000 unedited reports (eval)", "#6250d6"), (vl, "validation loss", "#eb6834")):
+        m, sd = np.array([x.mean() for x in arr]), np.array([x.std(ddof=1) for x in arr])
+        ax[0].plot(epochs, m, "-o", ms=3, color=col, label=lab)
+        ax[0].fill_between(epochs, m - sd, m + sd, color=col, alpha=0.18, lw=0)
+    ax[0].axvline(chosen[-1], color="#888", ls=":", lw=1)
+    ax[0].set_xlabel("epoch")
+    ax[0].set_xticks(epochs)
+    ax[0].set_ylabel("binary cross-entropy")
+    ax[0].set_title(f"{name} {tuple(cell)}: per epoch (dotted = chosen epoch)", fontsize=9)
+    ax[0].legend(fontsize=7, frameon=False)
+    fs = [os.path.join(runs, "loss_curves", tag, f"seed{s}.json") for s in seeds]
+    if all(os.path.exists(f) for f in fs):
+        cur = [json.load(open(f)) for f in fs]
+        st = np.array(cur[0]["train_loss_step"])
+        ax[1].plot(st, np.mean([c["train_loss_mean_last_10"] for c in cur], axis=0), color="#1baf7a", lw=0.9, label="training loss, mean of the last 10 batches")
+        spe = cur[0]["steps_per_epoch"]
+        ax[1].plot([e * spe for e in epochs], [x.mean() for x in vl], "o-", color="#eb6834", ms=3, label="validation loss (end of epoch)")
+        for e in epochs:
+            ax[1].axvline(e * spe, color="#ccc", lw=0.6)
+        ax[1].set_xlabel("training step")
+        ax[1].set_yscale("log")
+        ax[1].set_title("batch-level training loss, mean over seeds", fontsize=9)
+        ax[1].legend(fontsize=7, frameon=False)
+    for a_ in ax:
+        a_.spines[["top", "right"]].set_visible(False)
+    fig.tight_layout()
+    fig.savefig(os.path.join(out, f"fig_loss_chosen_cell_{name}.png"))
+    plt.close(fig)
+    return L + [""]
 
 
 def main():
@@ -166,8 +215,8 @@ def main():
     for name, cells, with_robust, old in [("v2pe", [(tag_v2(lr), (lr,)) for lr in V2_LRS], False, OLD_V2), ("attbal", [(tag_ab(lr, p), (lr, p)) for lr in AB_LRS for p in AB_PS], True, OLD_AB)]:
         cands, rows, curves = {}, {}, {}
         for tag, key in cells:
-            cell = load_cell(a.runs, tag)
-            for e in EPOCHS:
+            cell = load_cell(a.runs, tag, EPOCHS_OF[name])
+            for e in EPOCHS_OF[name]:
                 cands[key + (e,)] = (tag, cell[e])
                 rows[key + (e,)] = row_of(cell[e], with_robust)
         rows, chosen, best = select(rows, with_robust)
@@ -194,7 +243,8 @@ def main():
         text += [f"### {name}", "", md_table(rows, keys, with_robust, best, chosen, old), "", f"**Chosen: {tuple(chosen) if chosen else None}**; best by mean validation pAUC@1e-2: {tuple(best) if best else None}; old setting {old}.", "",
                  "Per-family validation numbers (descriptive only; 5 seeds, mean ± SD; the rat reports of this slice come from a single group):", "", "\n".join(ft), ""]
         if chosen:
-            figure(curves, chosen, old, os.path.join(a.out, f"fig_loss_curves_{name}.png"), f"{name}: loss per epoch, all candidates")
+            figure(curves, chosen, old, os.path.join(a.out, f"fig_loss_curves_{name}.png"), f"{name}: loss per epoch, all candidates", EPOCHS_OF[name])
+            text += chosen_cell_report(a.runs, a.out, name, chosen, cands, EPOCHS_OF[name])
     open(os.path.join(a.out, "validation_tables.md"), "w").write("\n".join(text) + "\n")
     json.dump(result, open(os.path.join(a.out, "selection.json"), "w"), indent=1)
     print("\n".join(text))

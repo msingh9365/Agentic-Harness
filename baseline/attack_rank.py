@@ -98,11 +98,17 @@ def main():
     ap.add_argument("--v2pe-model", default=None)
     ap.add_argument("--out", required=True)
     ap.add_argument("--which", nargs="*", default=["lgbm", "v2pe"])
+    ap.add_argument("--split-dir", default=None, help="group split (NOTES 23): the LightGBM is fitted on its TRAINING part (66,580 reports), the EVAL pool = the benign reports of its validation slice")
     a = ap.parse_args()
     store = CS.CallStore.load(a.store)
     lab = np.load(os.path.join(a.tokens, "labels.npz"))
     y = lab["y_train"]
-    trn, val = gap.val_slice(lab["ym_train"])
+    if a.split_dir:
+        from baseline import groupsplit as G
+        trn, val = G.val_slice(os.path.join(a.split_dir, "split.npz"), os.path.join(a.split_dir, "split_hash.json"))
+        assert (len(trn), len(val)) == (66580, 8718)
+    else:
+        trn, val = gap.val_slice(lab["ym_train"])
     pool = eval_pool(store, y, val)
     reps = representatives(store, pool)
     names = sorted(reps)

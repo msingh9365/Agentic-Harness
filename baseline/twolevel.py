@@ -123,15 +123,28 @@ def val_hash(trn, val):
 def load_data(a):
     """Everything in memory: X [n_reports, 4096] uint16 (first 4,096 tokens of the ORIGINAL reports: January rows 0.., then April), total token counts, labels, slices. Asserts the validation hash and that
     the first 512 tokens of every row equal the stored BPE-50k rows x_train / x_test."""
-    tokens = a.tokens or C.find_dir_with("labels.npz")
+    tokens = a.tokens or C.find_dir_with(getattr(a, "tokens_find", None) or "labels.npz")          # --tokens-find all.npz: the dataset of the OLD tokenizer (NOTES 23)
     lab = np.load(os.path.join(tokens, "labels.npz"))
     y_all, y_test = lab["y_train"], lab["y_test"]
     ntr, nte = len(y_all), len(y_test)
     sp = a.store if a.store and os.path.exists(a.store) else os.path.join(C.find_dir_with("all.npz"), "all.npz")
     store = CS.CallStore.load(sp)
     assert len(store) == ntr + nte, (len(store), ntr, nte)
-    trn, val = gap.val_slice(lab["ym_train"])
-    assert val_hash(trn, val) == VAL_HASH and (len(trn), len(val)) == (67768, 7530), "validation slice differs from the one of NOTES 19.2"
+    if getattr(a, "split_dir", None):                                                    # group-split validation slice (NOTES 21 / 23): asserts ITS stored hash (66,580 / 8,718)
+        from baseline import groupsplit as G
+        sd = a.split_dir if os.path.exists(os.path.join(a.split_dir, "split.npz")) else C.find_dir_with("split.npz")
+        trn, val = G.val_slice(os.path.join(sd, "split.npz"), os.path.join(sd, "split_hash.json"))
+        assert (len(trn), len(val)) == (66580, 8718), (len(trn), len(val))
+        split_hash = json.load(open(os.path.join(sd, "split_hash.json")))["sha256"]
+    else:
+        trn, val = gap.val_slice(lab["ym_train"])
+        assert val_hash(trn, val) == VAL_HASH and (len(trn), len(val)) == (67768, 7530), "validation slice differs from the one of NOTES 19.2"
+        split_hash = VAL_HASH
+    pool_trn = trn                                                                       # the TRAIN pool of the padding = the benign reports of the training part of the split (always)
+    if getattr(a, "full_january", False):                                                # Stage G (NOTES 23): ALL January reports are training rows; the pool stays the group-split training part
+        assert getattr(a, "split_dir", None), "--full-january needs the group split"
+        trn = np.arange(ntr)
+        assert len(trn) == len(pool_trn) + len(val) and not (set(pool_trn.tolist()) & set(val.tolist()))
     n = len(store)
     X = np.zeros((n, CUT), dtype=np.uint16)
     tot = np.zeros(n, dtype=np.int64)
@@ -142,11 +155,11 @@ def load_data(a):
         tot[r] = len(t)
     x_tr, x_te, vocab = gap.load(tokens, a.variant)
     assert np.array_equal(X[:ntr, :CHUNK], x_tr.astype(np.uint16)) and np.array_equal(X[ntr:, :CHUNK], x_te.astype(np.uint16)), "call store != stored BPE-50k rows"
-    return {"store": store, "X": X, "tot": tot, "y_all": y_all, "y_test": y_test, "ntr": ntr, "nte": nte, "trn": trn, "val": val, "vocab_size": len(vocab), "tokens": tokens}
+    return {"store": store, "X": X, "tot": tot, "y_all": y_all, "y_test": y_test, "ntr": ntr, "nte": nte, "trn": trn, "val": val, "pool_trn": pool_trn, "split_hash": split_hash, "vocab_size": len(vocab), "tokens": tokens}
 
 
 def train_pool_rows(D):
-    return inmem_pad.pool_rows_of(D["store"], D["y_all"], D["trn"])
+    return inmem_pad.pool_rows_of(D["store"], D["y_all"], D["pool_trn"])
 
 
 def epoch_edits(D, seed, epoch, pool_rows, p_pad=0.5):
@@ -236,12 +249,45 @@ def run(a):
     Xv, tv, yv = X[val], tot[val], y_all[val]
     Xte, tte, yte = X[ntr:], tot[ntr:], D["y_test"]
     pool_rows = train_pool_rows(D)
-    log(f"data loaded in {time.time() - t_load:.0f}s: train {len(trn):,}, validation {len(val):,} (hash {VAL_HASH} asserted), April {len(Xte):,}; TRAIN pool {len(pool_rows):,} benign reports")
-    warm_path = None
+    log(f"data loaded in {time.time() - t_load:.0f}s: train {len(trn):,}, validation {len(val):,} (hash {D['split_hash']} asserted), April {len(Xte):,}; TRAIN pool {len(pool_rows):,} benign reports")
+    if getattr(a, "split_dir", None) and not a.limit:                                    # NOTES 23 automatic check (d)
+        assert len(pool_rows) == 21507 and not (set(pool_rows.tolist()) & set(val.tolist())), (len(pool_rows), "the padding pool must be the 21,507 benign reports of the group-split training part")
+        if getattr(a, "full_january", False):
+            assert len(trn) == 75298
+        else:
+            assert len(trn) == 66580
+        assert a.variant == "bpe50k", a.variant                                          # NOTES 23 automatic check (b): the old tokenizer
+    warm_path, warm_info = None, None
     if a.init == "warm":
         from baseline import padtest
-        warm_path = padtest.find_weights("attbal", a.seed, None, a.search)
+        warm_path = os.path.join(a.warm_dir, f"seed{a.seed}.pt") if getattr(a, "warm_dir", None) else padtest.find_weights("attbal", a.seed, None, a.search)
+        if not os.path.exists(warm_path):
+            warm_path = os.path.join(C.find_dir_with(f"seed{a.seed}.pt"), f"seed{a.seed}.pt")
+        sd_ = torch.load(warm_path, map_location="cpu", weights_only=True)
+        warm_info = {"path": warm_path, "sha256": hashlib.sha256(open(warm_path, "rb").read()).hexdigest(), "head_keys_skipped": [k for k in sd_ if k.startswith("classifier_head")], "keys_in_file": len(sd_)}
+        del sd_
     model = make_model(D["vocab_size"], a.seed, a.init, warm_path).to(dev)
+    if warm_info:
+        warm_info["level1_keys_loaded"] = len(model.level1.state_dict())
+        assert warm_info["level1_keys_loaded"] + len(warm_info["head_keys_skipped"]) == warm_info["keys_in_file"], warm_info          # NOTES 23 automatic check (c): all non-head keys were loaded (strict)
+        log(f"warm start from {warm_path} sha256 {warm_info['sha256'][:12]}: {warm_info['level1_keys_loaded']} level-1 keys loaded, head skipped {warm_info['head_keys_skipped']}")
+    rob = None
+    if getattr(a, "val_robust", False):                                                  # R20 on the validation slice (NOTES 16.3 / 23): 20 TRAIN-pool calls prepended to every validation malware report, default_rng([8200, row])
+        pool_n_ = np.array([store.n_calls(int(r)) for r in pool_rows], dtype=np.int64)
+        rt, rtot = [], []
+        for r in val:
+            r = int(r)
+            if y_all[r] != 1:
+                continue
+            rng_ = np.random.default_rng([8200, r])
+            added_ = []
+            for _ in range(20):
+                pr_ = int(rng_.integers(len(pool_rows)))
+                added_.append(store.call(int(pool_rows[pr_]), int(rng_.integers(pool_n_[pr_]))))
+            t_, tt_ = CS.build_fast(store, r, added_, None, cut=CUT)
+            rt.append(t_), rtot.append(tt_)
+        rob = (np.stack(rt), np.asarray(rtot, dtype=np.int64))
+        log(f"validation robustness set: {len(rt):,} malware reports with 20 pool calls prepended")
     counts = param_counts(model)
     log(f"parameters {counts}; init {a.init}" + (f" ({warm_path})" if warm_path else ""))
     params = [p for p in model.parameters() if p.requires_grad]
@@ -317,13 +363,18 @@ def run(a):
                "mean_chunks_train_epoch": float(nch_e.mean()), "mean_chunks_val": float(n_real_chunks(tv).mean()), "peak_gpu_mem_allocated_gb": peak, "peak_gpu_mem_reserved_gb": reserved,
                "seconds_edit": round(t_edit, 1), "seconds_train": round(t_train, 1), "seconds_val_eval": round(t_eval_val, 1)}
         np.save(os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_val_logits.npy"), zv.astype(np.float32))
+        if rob is not None:
+            from baseline import padtest as _pt
+            thr_ = _pt.thresholds(zv, yv, 0.01)
+            zr_ = predict(model, rob[0], rob[1], dev)
+            rec["val_robust_tpr"], rec["val_robust_thr"], rec["val_robust_n"] = float((zr_ > thr_).mean()), float(thr_), int(len(zr_))
         if ema_model is not None:
             zve = predict(ema_model, Xv, tv, dev)
             mve = C.binary_metrics(yv, zve, decision=0.0)
             rec["ema"] = {"val_pauc@1e-2": mve["pauc@0.01"], "val_auc": mve["auc"], "val_loss": gap.bce_logits(yv, zve), "val": gap.compact(mve), "decay": a.ema}
             np.save(os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_val_logits_ema.npy"), zve.astype(np.float32))
             log(f"epoch {ep} EMA: val pAUC@1e-2 {mve['pauc@0.01']:.4f} AUC {mve['auc']:.4f} val loss {rec['ema']['val_loss']:.4f}")
-        if not a.no_april:                                                                   # stored, NOT evaluated here
+        if not a.no_april and (not getattr(a, "april_epoch", 0) or ep == a.april_epoch):     # stored, NOT evaluated here (--april-epoch K: only after epoch K)
             t3 = time.time()
             zt = predict(model, Xte, tte, dev)
             rec["seconds_april_score"] = round(time.time() - t3, 1)
@@ -341,7 +392,7 @@ def run(a):
     steps = np.arange(10, len(bl) + 1, 10)
     res = {"model": a.tag, "seed": a.seed, "epochs": a.epochs, "steps_per_epoch": bpe, "recipe": {"lr": a.lr, "sched": a.sched, "level1_lr_mult": a.l1_mult, "freeze_level1_steps": a.freeze1_steps, "ema": a.ema, "wd": WD, "clip": CLIP, "dropout_level1": DROP1, "dropout_level2": DROP2, "batch": BATCH, "micro_batch_used": micro, "precision": "fp32"},
            "init": a.init, "padding": ({"mode": "replace", "p": a.pad_prob, "k": "U{1..50}", "insert_prepend": "50/50", "pool": "TRAIN pool only", "stream": PAD_STREAM, "applied": "whole call list before chunking, cut at 4,096 tokens"} if a.padding == "balanced" else None),
-           "params": counts, "split_hash_asserted": VAL_HASH, "n_train": int(len(Xtr)), "n_val": int(len(Xv)), "n_val_benign": int((yv == 0).sum()), "tokenizer": a.variant,
+           "params": counts, "split_hash_asserted": D["split_hash"], "full_january": bool(getattr(a, "full_january", False)), "warm_start": warm_info, "april_epoch": getattr(a, "april_epoch", 0), "n_train": int(len(Xtr)), "n_val": int(len(Xv)), "n_val_benign": int((yv == 0).sum()), "tokenizer": a.variant,
            "train_loss_note": ("mean BCE of the last 10 training batches (dropout on) on the PADDED training mix of that epoch" if a.padding == "balanced" else "mean BCE of the last 10 training batches (dropout on); no padding"),
            "train_loss_every": 10, "train_loss_step": steps.tolist(), "train_loss_mean_last_10": [float(bl[g - 10:g].mean()) for g in steps], "per_epoch": per_epoch,
            "train_subset": {"numpy_seed": 11, "n": int(len(sub_idx)), "tokens": "unedited", "mode": "eval (no dropout)"}, "env": C.env_info(), "nebula": nb,
@@ -509,7 +560,7 @@ def orchestrate(a):
             if g not in running and jobs:
                 tag, pad, init, lr, s, extra = jobs.pop(0)
                 log = open(os.path.join(a.out, "logs", f"{tag}_seed{s}.log"), "a")
-                cmd = [sys.executable, "-m", "baseline.twolevel", "--out", a.out, "--seed", str(s), "--epochs", str(a.epochs), "--lr", lr, "--padding", pad, "--init", init, "--tag", tag, "--device", "cuda", "--search", a.search] + extra
+                cmd = [sys.executable, "-m", "baseline.twolevel", "--out", a.out, "--seed", str(s), "--epochs", str(a.epochs), "--lr", lr, "--padding", pad, "--init", init, "--tag", tag, "--device", "cuda", "--search", a.search] + (["--split-dir", a.split_dir] if getattr(a, "split_dir", None) else []) + (["--tokens-find", a.tokens_find] if getattr(a, "tokens_find", None) else []) + (["--full-january"] if getattr(a, "full_january", False) else []) + (["--warm-dir", a.warm_dir] if getattr(a, "warm_dir", None) else []) + (["--val-robust"] if getattr(a, "val_robust", False) else []) + (["--no-april"] if a.no_april else []) + (["--april-epoch", str(a.april_epoch)] if getattr(a, "april_epoch", 0) else []) + extra
                 running[g] = (subprocess.Popen(cmd, env=dict(os.environ, CUDA_VISIBLE_DEVICES=str(g)), stdout=log, stderr=subprocess.STDOUT), f"{tag} seed {s}", log)
                 print(f"[{(time.time() - t0) / 60:.1f} min] GPU {g}: started {tag} seed {s}", flush=True)
         for g, (p, name, log) in list(running.items()):
@@ -554,6 +605,12 @@ def main():
     ap.add_argument("--variant", default="bpe50k")
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--micro", type=int, default=0, help="reports per forward pass (default 96 = the whole batch; halved automatically on a CUDA OOM)")
+    ap.add_argument("--split-dir", default=None, help="folder (or a name searched under /kaggle/input) with split.npz and split_hash.json of the group split (NOTES 21/23); default: the old random slice")
+    ap.add_argument("--tokens-find", default=None, help="file name that identifies the tokens dataset (default labels.npz; all.npz = the old-tokenizer dataset)")
+    ap.add_argument("--full-january", action="store_true", help="Stage G: train on ALL 75,298 January reports; the padding pool stays the group-split training part")
+    ap.add_argument("--warm-dir", default=None, help="folder with seed<k>.pt: ATT+bal weights for --init warm (strict load of every non-head key)")
+    ap.add_argument("--val-robust", action="store_true", help="R20 on the validation slice after every epoch (descriptive)")
+    ap.add_argument("--april-epoch", type=int, default=0, help="store the April logits and the weights only after this epoch (0 = after every epoch, as before)")
     ap.add_argument("--no-april", action="store_true", help="do not score April and do not store weights (pilot)")
     ap.add_argument("--throughput", action="store_true", help="after training: scoring speed on 1,000 validation malware reports with k = 0, 100, 200 prepended calls")
     ap.add_argument("--limit", type=int, default=0)

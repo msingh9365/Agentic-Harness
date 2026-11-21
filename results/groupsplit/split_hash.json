@@ -1,0 +1,13 @@
+{
+ "sha256": "c3a2c99bbf5dc6ddc60697e7b9468bf8",
+ "n_train": 66580,
+ "n_val": 8718,
+ "seed": 2026,
+ "folds": 10,
+ "fold": 9,
+ "keys": [
+  "hash_apis",
+  "first512_tokens_old_bpe50k",
+  "filtered_call_name_sequence"
+ ]
+}

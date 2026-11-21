@@ -37,6 +37,7 @@ VARIANTS = {
     "bpe50k": dict(kind="bpe", vocab=50000, seq=512),
     "ws50k": dict(kind="whitespace", vocab=50000, seq=512),
     "bpe8k": dict(kind="bpe", vocab=8192, seq=512),          # self-supervised experiments (paper Sec. 4.5)
+    "bpe50k_gs": dict(kind="bpe", vocab=50000, seq=512),     # NOTES 21: the same as bpe50k, but fit on the TRAINING part of the group split only (baseline/gs_tokens.py)
     "bpe8k_v2": dict(kind="bpe", vocab=8192, seq=512),       # B3: the same, but the tokenizer is fit on the 90% of January that is not the validation slice (--fit-gap-split)
     # released tokenizers (their files, no training): sanity check E
     "released_bpe50k": dict(kind="bpe", released=True, seq=512),

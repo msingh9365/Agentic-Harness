@@ -1,0 +1,275 @@
+{
+ "fold_rule": {
+  "january_benign_share": 0.3276049828680709,
+  "candidates": [
+   4,
+   9
+  ],
+  "chosen_fold": 9,
+  "per_fold": {
+   "0": {
+    "families_ge_300": false,
+    "benign_share": 0.1921,
+    "benign_within_5pt": false
+   },
+   "1": {
+    "families_ge_300": false,
+    "benign_share": 0.2448,
+    "benign_within_5pt": false
+   },
+   "2": {
+    "families_ge_300": false,
+    "benign_share": 0.1545,
+    "benign_within_5pt": false
+   },
+   "3": {
+    "families_ge_300": false,
+    "benign_share": 0.3391,
+    "benign_within_5pt": true
+   },
+   "4": {
+    "families_ge_300": true,
+    "benign_share": 0.2972,
+    "benign_within_5pt": true
+   },
+   "5": {
+    "families_ge_300": false,
+    "benign_share": 0.341,
+    "benign_within_5pt": true
+   },
+   "6": {
+    "families_ge_300": false,
+    "benign_share": 0.4023,
+    "benign_within_5pt": false
+   },
+   "7": {
+    "families_ge_300": false,
+    "benign_share": 0.4264,
+    "benign_within_5pt": false
+   },
+   "8": {
+    "families_ge_300": false,
+    "benign_share": 0.4967,
+    "benign_within_5pt": false
+   },
+   "9": {
+    "families_ge_300": true,
+    "benign_share": 0.3626,
+    "benign_within_5pt": true
+   }
+  }
+ },
+ "folds_all_ten": [
+  {
+   "fold": 0,
+   "n": 6891,
+   "share": 0.0915,
+   "benign": 1324,
+   "groups": 58,
+   "largest_group_share": 0.517,
+   "families": {
+    "backdoor": 1900,
+    "clean": 1309,
+    "coinminer": 629,
+    "dropper": 743,
+    "keylogger": 192,
+    "ransomware": 273,
+    "rat": 166,
+    "trojan": 1664,
+    "windows_syswow64": 15
+   }
+  },
+  {
+   "fold": 1,
+   "n": 5824,
+   "share": 0.0773,
+   "benign": 1426,
+   "groups": 194,
+   "largest_group_share": 0.271,
+   "families": {
+    "backdoor": 1576,
+    "clean": 1411,
+    "coinminer": 638,
+    "dropper": 752,
+    "keylogger": 233,
+    "ransomware": 430,
+    "rat": 32,
+    "trojan": 737,
+    "windows_syswow64": 15
+   }
+  },
+  {
+   "fold": 2,
+   "n": 9010,
+   "share": 0.1197,
+   "benign": 1392,
+   "groups": 77,
+   "largest_group_share": 0.479,
+   "families": {
+    "backdoor": 901,
+    "clean": 1378,
+    "coinminer": 635,
+    "dropper": 746,
+    "keylogger": 254,
+    "ransomware": 4321,
+    "rat": 29,
+    "trojan": 732,
+    "windows_syswow64": 14
+   }
+  },
+  {
+   "fold": 3,
+   "n": 6547,
+   "share": 0.0869,
+   "benign": 2220,
+   "groups": 835,
+   "largest_group_share": 0.196,
+   "families": {
+    "backdoor": 914,
+    "clean": 2205,
+    "coinminer": 663,
+    "dropper": 1281,
+    "keylogger": 233,
+    "ransomware": 430,
+    "rat": 47,
+    "trojan": 759,
+    "windows_syswow64": 15
+   }
+  },
+  {
+   "fold": 4,
+   "n": 7467,
+   "share": 0.0992,
+   "benign": 2219,
+   "groups": 834,
+   "largest_group_share": 0.307,
+   "families": {
+    "backdoor": 913,
+    "clean": 2204,
+    "coinminer": 662,
+    "dropper": 757,
+    "keylogger": 1063,
+    "ransomware": 430,
+    "rat": 665,
+    "trojan": 758,
+    "windows_syswow64": 15
+   }
+  },
+  {
+   "fold": 5,
+   "n": 7467,
+   "share": 0.0992,
+   "benign": 2546,
+   "groups": 980,
+   "largest_group_share": 0.147,
+   "families": {
+    "backdoor": 932,
+    "clean": 2531,
+    "coinminer": 683,
+    "dropper": 777,
+    "keylogger": 1097,
+    "ransomware": 602,
+    "rat": 46,
+    "trojan": 784,
+    "windows_syswow64": 15
+   }
+  },
+  {
+   "fold": 6,
+   "n": 7467,
+   "share": 0.0992,
+   "benign": 3004,
+   "groups": 1087,
+   "largest_group_share": 0.125,
+   "families": {
+    "backdoor": 949,
+    "clean": 2978,
+    "coinminer": 931,
+    "dropper": 786,
+    "keylogger": 233,
+    "ransomware": 707,
+    "rat": 46,
+    "trojan": 811,
+    "windows_syswow64": 26
+   }
+  },
+  {
+   "fold": 7,
+   "n": 7467,
+   "share": 0.0992,
+   "benign": 3184,
+   "groups": 1094,
+   "largest_group_share": 0.104,
+   "families": {
+    "backdoor": 969,
+    "clean": 3120,
+    "coinminer": 684,
+    "dropper": 790,
+    "keylogger": 233,
+    "ransomware": 718,
+    "rat": 78,
+    "trojan": 811,
+    "windows_syswow64": 64
+   }
+  },
+  {
+   "fold": 8,
+   "n": 8440,
+   "share": 0.1121,
+   "benign": 4192,
+   "groups": 332,
+   "largest_group_share": 0.494,
+   "families": {
+    "backdoor": 968,
+    "clean": 4178,
+    "coinminer": 683,
+    "dropper": 790,
+    "keylogger": 232,
+    "ransomware": 718,
+    "rat": 46,
+    "trojan": 811,
+    "windows_syswow64": 14
+   }
+  },
+  {
+   "fold": 9,
+   "n": 8718,
+   "share": 0.1158,
+   "benign": 3161,
+   "groups": 1204,
+   "largest_group_share": 0.121,
+   "families": {
+    "backdoor": 1039,
+    "clean": 3119,
+    "coinminer": 683,
+    "dropper": 821,
+    "keylogger": 608,
+    "ransomware": 998,
+    "rat": 542,
+    "trojan": 866,
+    "windows_syswow64": 42
+   }
+  }
+ ],
+ "n_groups_hash_apis": 6771,
+ "n_groups_strict": 6695,
+ "n_train": 66580,
+ "n_val": 8718,
+ "share_val": 0.11577996759542086,
+ "acceptance": {
+  "share_in_8_12_percent": true,
+  "families_ge_20": {
+   "backdoor": true,
+   "clean": true,
+   "coinminer": true,
+   "dropper": true,
+   "keylogger": true,
+   "ransomware": true,
+   "rat": true,
+   "trojan": true,
+   "windows_syswow64": true
+  },
+  "windows_syswow64_present": true
+ },
+ "accepted": true
+}

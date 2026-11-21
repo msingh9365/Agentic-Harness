@@ -1,0 +1,23 @@
+{
+ "labels_equal_old": true,
+ "n_calls_equal_old_store_rows": 92700,
+ "first512_store_vs_x_rows_differing": 0,
+ "full_tokenisation_vs_pieces_differing_of_3000": 0,
+ "minutes_total": 66.0,
+ "tokenizer_info": {
+  "name": "bpe50k_gs",
+  "kind": "bpe",
+  "vocab": 50000,
+  "seq": 512,
+  "trained_on_train": true,
+  "vocab_entries": 50001,
+  "seq_len": 512,
+  "tokenizer_train_fraction": 1.0,
+  "tokenizer_fit_reports": 66580,
+  "train_tokens_median": 1063.0,
+  "share_train_longer_than_seq": 0.6654492815214216,
+  "share_test_longer_than_seq": 0.6340650499942535,
+  "minutes_total": 16.5,
+  "minutes_encoding": 8.5
+ }
+}

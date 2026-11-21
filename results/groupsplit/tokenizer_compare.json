@@ -1,0 +1,18 @@
+{
+ "vocab_old": 50001,
+ "vocab_new": 50001,
+ "pieces_in_both": 41799,
+ "pieces_only_old": 8202,
+ "pieces_only_new": 8202,
+ "pieces_same_id_in_both": 102,
+ "reports": 92700,
+ "reports_identical_first512": 0.4779503775620281,
+ "token_positions_same_piece": 0.7228804019560228,
+ "reports_differing_in_more_than_10_percent_of_positions": 0.3876051779935275,
+ "total_tokens_median_old": 1061.0,
+ "total_tokens_median_new": 1061.0,
+ "total_tokens_mean_change_percent": 0.2843110795925252,
+ "reports_with_same_total_tokens": 0.47508090614886733,
+ "new_first512_sequences_shared_train_val": 0,
+ "new_val_reports_with_first512_in_train": 0.0
+}

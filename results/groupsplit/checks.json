@@ -1,0 +1,187 @@
+{
+ "groups_shared_train_val": 0,
+ "val_share_hash_in_train": 0.0,
+ "old_val_share_hash_in_old_train": 0.9424966799468791,
+ "april_share_hash_in_new_train": 0.32565222388231235,
+ "april_share_hash_in_old_train": 0.35674060452821515,
+ "first512_shared_train_val": 0,
+ "old_val_first512_in_old_train": 0.2796812749003984,
+ "near_dup_val_vs_train": {
+  "0": 0.0,
+  "0.01": 0.1672401927047488,
+  "0.05": 0.5660701995870613,
+  "0.1": 0.6205551732048635
+ },
+ "n_distinct_val": 1213,
+ "n_distinct_train": 5558,
+ "near_dup_april_vs_new_train": {
+  "0": 0.3273761636593495,
+  "0.01": 0.4322491667624411,
+  "0.05": 0.6335478680611424,
+  "0.1": 0.7468681760717159
+ },
+ "n_distinct_april": 2509,
+ "near_dup_oldval_vs_oldtrain": {
+  "0": 0.9428950863213812,
+  "0.01": 0.947144754316069,
+  "0.05": 0.9614873837981408,
+  "0.1": 0.9698539176626826
+ },
+ "n_distinct_oldval": 1579,
+ "n_distinct_oldtrain": 6345,
+ "family_counts": {
+  "backdoor": {
+   "train": 10022,
+   "val": 1039,
+   "old_train": 9955,
+   "old_val": 1106,
+   "april": 1940
+  },
+  "clean": {
+   "train": 21314,
+   "val": 3119,
+   "old_train": 21989,
+   "old_val": 2444,
+   "april": 7944
+  },
+  "coinminer": {
+   "train": 6208,
+   "val": 683,
+   "old_train": 6202,
+   "old_val": 689,
+   "april": 1684
+  },
+  "dropper": {
+   "train": 7422,
+   "val": 821,
+   "old_train": 7419,
+   "old_val": 824,
+   "april": 252
+  },
+  "keylogger": {
+   "train": 3770,
+   "val": 608,
+   "old_train": 3940,
+   "old_val": 438,
+   "april": 1041
+  },
+  "ransomware": {
+   "train": 8629,
+   "val": 998,
+   "old_train": 8664,
+   "old_val": 963,
+   "april": 2139
+  },
+  "rat": {
+   "train": 1155,
+   "val": 542,
+   "old_train": 1527,
+   "old_val": 170,
+   "april": 1258
+  },
+  "trojan": {
+   "train": 7867,
+   "val": 866,
+   "old_train": 7860,
+   "old_val": 873,
+   "april": 1085
+  },
+  "windows_syswow64": {
+   "train": 193,
+   "val": 42,
+   "old_train": 212,
+   "old_val": 23,
+   "april": 59
+  }
+ },
+ "largest_groups": [
+  {
+   "size": 4320,
+   "side": "train",
+   "family_mix": {
+    "ransomware": 4320
+   }
+  },
+  {
+   "size": 4173,
+   "side": "train",
+   "family_mix": {
+    "clean": 4173
+   }
+  },
+  {
+   "size": 3564,
+   "side": "train",
+   "family_mix": {
+    "backdoor": 1900,
+    "trojan": 1664
+   }
+  },
+  {
+   "size": 2292,
+   "side": "train",
+   "family_mix": {
+    "clean": 4,
+    "coinminer": 558,
+    "keylogger": 1063,
+    "ransomware": 1,
+    "rat": 665,
+    "trojan": 1
+   }
+  },
+  {
+   "size": 1576,
+   "side": "train",
+   "family_mix": {
+    "backdoor": 1576
+   }
+  },
+  {
+   "size": 1286,
+   "side": "train",
+   "family_mix": {
+    "coinminer": 8,
+    "dropper": 1277,
+    "rat": 1
+   }
+  },
+  {
+   "size": 1098,
+   "side": "train",
+   "family_mix": {
+    "clean": 3,
+    "keylogger": 1095
+   }
+  },
+  {
+   "size": 1056,
+   "side": "val",
+   "family_mix": {
+    "backdoor": 11,
+    "coinminer": 5,
+    "dropper": 2,
+    "ransomware": 2,
+    "rat": 542,
+    "trojan": 494
+   }
+  },
+  {
+   "size": 931,
+   "side": "train",
+   "family_mix": {
+    "coinminer": 931
+   }
+  },
+  {
+   "size": 777,
+   "side": "train",
+   "family_mix": {
+    "clean": 777
+   }
+  }
+ ],
+ "groups_train": 5491,
+ "groups_val": 1204,
+ "largest_group_share_of_train": 0.06488434965455092,
+ "rows_whose_name_sequence_differs_from_first_of_same_hash_apis": 0
+}

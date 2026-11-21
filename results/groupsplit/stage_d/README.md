@@ -22,7 +22,7 @@ Steps 1 to 4 (Step 0 and Step 5 come later). All April scores are 10 seeds each,
 
 ## What this does not show
 
-* Which of split, tokenizer, seeds or (ATT+bal) learning rate causes the remaining ~7 points: nothing was varied alone. **Guess, not tested:** the loss of whole groups (keylogger, rat, trojan) from training; Step 0 looks at this descriptively.
+* Which of split, tokenizer, seeds or (ATT+bal) learning rate causes the remaining ~7 points: nothing was varied alone. The guess that the loss of whole groups (keylogger, rat, trojan) from training causes the drop is not supported by the descriptive check of Step 0 (`step0_README.md`): the split removed a close neighbour from only 1.6% of April reports.
 * The ATT+bal "2 epochs is better than 3" result is an April observation. Validation could not have found it (validation pAUC is flat, epoch 3 is the peak by 0.004), and per-seed early stopping on validation recovered only 3.0 of the 5.1 points. It is not a validated recipe.
 * The ranking of the conditions rests on 10 seeds; the cluster intervals are 2 to 3 times wider than the stratified ones, so several stratified "differences" are not resolved by the cluster rule.
 * The validation-threshold false-positive rates rest on 3,161 benign validation reports (the threshold is the benign logit at rank 31), so single seeds can be far off (0.04% to 12.1%).

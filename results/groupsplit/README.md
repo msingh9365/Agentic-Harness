@@ -87,6 +87,10 @@ BPE-50k refit on the 66,580 training reports only (no validation, no April), sam
 
 Kernel checks (all passed): labels and the number of calls of every report equal the old ones; the first 512 tokens of the new store equal the rows of the new `x_train` / `x_test` for all reports (differing: 0); full re-tokenisation equals the concatenation of the pieces for 3,000 random reports (differing: 0); kernel time 66.0 min.
 
+## What came after Stage A
+
+Stage B (choices on this slice) is in `stage_b/` (tables, loss curves, per-family numbers; NOTES 21.5 to 21.8), Stage C (both models retrained, one April evaluation each, old-split models next to them) in `stage_c/README.md`. Short version: on this slice no setting stands out (validation pAUC 0.41 to 0.49 for every candidate), and the models trained on the new training part score 7 to 12 points lower on April than the old-split models.
+
 ## Files
 
 `split.npz`, `split_hash.json`, `split_summary.json` (all ten folds), `checks.json`, `tokenizer_compare.json`, `checks_gs_tokens.json`, `fig_family_composition.png`; code `baseline/groupsplit.py`, `gs_tokens.py`, `gs_compare.py`, `gs_report.py`; plan and amendment in NOTES.md section 21.

@@ -1,0 +1,77 @@
+{
+ "tag": "gsx_v2pe",
+ "pe_mode": "paper",
+ "pooling": "flatten",
+ "aug_dir": null,
+ "pad_store": false,
+ "pad_mode": "replace",
+ "pad_labels": "all",
+ "pad_stream": 7000,
+ "edited_rows_per_epoch": {},
+ "reports_per_epoch": {},
+ "pos_offset": 0,
+ "recipe": {
+  "lr": 0.002,
+  "clip": 0.5,
+  "dropout": 0.3,
+  "batch": 96,
+  "wd": 0.01,
+  "tok": "bpe50k"
+ },
+ "pad_prob": 0.5,
+ "seed": 9,
+ "epochs": 1,
+ "batches_per_epoch": 785,
+ "n_train": 75298,
+ "n_val": 8718,
+ "n_val_benign": 3161,
+ "tokenizer": "bpe50k",
+ "split_hash_asserted": true,
+ "env": {
+  "python": "3.13.16",
+  "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+  "cpus": 4,
+  "torch": "2.11.0+cu130",
+  "cuda_available": true,
+  "gpu": "Tesla T4",
+  "gpu_count": 1,
+  "gpu_mem_gb": 14.6,
+  "numpy": "2.1.3",
+  "sklearn": "1.6.1",
+  "sentencepiece": "0.2.2",
+  "lightning": "2.6.6",
+  "torchmetrics": "1.9.0",
+  "pandas": "2.3.3"
+ },
+ "nebula": {
+  "nebula_root": "/tmp/nebula",
+  "nebula_commit": "1343ae170ef32b01a75d2dd5fb906b5541f073df",
+  "commit_is_pinned": true,
+  "patches_applied": true
+ },
+ "train_seconds": 57.2,
+ "per_epoch": [
+  {
+   "epoch": 1,
+   "batches": 785,
+   "seconds": 50.2,
+   "val_loss": 0.04292172524981687,
+   "val": {
+    "auc": 0.9993287477618995,
+    "f1@0.5": 0.99197836863452,
+    "acc@0.5": 0.9897912365221381,
+    "pauc@0.01": 0.9822571028716969,
+    "pauc@0.001": 0.9530909625629573,
+    "tpr@0.0001": 0.8851898506388339,
+    "tpr@0.0003": 0.8851898506388339,
+    "tpr@0.001": 0.9731869713874393,
+    "tpr@0.003": 0.9832643512686702,
+    "tpr@0.01": 0.9899226201187691,
+    "tpr@0.03": 0.9947813568472197,
+    "tpr@0.1": 0.9985603743026813
+   },
+   "val_n_tied_at_top": 1
+  }
+ ],
+ "april": "logits of the last epoch stored in seed<k>_epoch<e>_test_logits.npy; not evaluated by this script"
+}

@@ -1,0 +1,127 @@
+{
+ "tag": "gsx_attbal",
+ "pe_mode": "paper",
+ "pooling": "attn",
+ "aug_dir": null,
+ "pad_store": true,
+ "pad_mode": "replace",
+ "pad_labels": "all",
+ "pad_stream": 7000,
+ "edited_rows_per_epoch": {
+  "1": 37699,
+  "2": 37647,
+  "3": 37618
+ },
+ "reports_per_epoch": {
+  "1": 75298,
+  "2": 75298,
+  "3": 75298
+ },
+ "pos_offset": 0,
+ "recipe": {
+  "lr": 0.001,
+  "clip": 0.5,
+  "dropout": 0.3,
+  "batch": 96,
+  "wd": 0.01,
+  "tok": "bpe50k"
+ },
+ "pad_prob": 0.5,
+ "seed": 5,
+ "epochs": 3,
+ "batches_per_epoch": 785,
+ "n_train": 75298,
+ "n_val": 8718,
+ "n_val_benign": 3161,
+ "tokenizer": "bpe50k",
+ "split_hash_asserted": true,
+ "env": {
+  "python": "3.13.16",
+  "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+  "cpus": 4,
+  "torch": "2.11.0+cu130",
+  "cuda_available": true,
+  "gpu": "Tesla T4",
+  "gpu_count": 1,
+  "gpu_mem_gb": 14.6,
+  "numpy": "2.1.3",
+  "sklearn": "1.6.1",
+  "sentencepiece": "0.2.2",
+  "lightning": "2.6.6",
+  "torchmetrics": "1.9.0",
+  "pandas": "2.3.3"
+ },
+ "nebula": {
+  "nebula_root": "/tmp/nebula",
+  "nebula_commit": "1343ae170ef32b01a75d2dd5fb906b5541f073df",
+  "commit_is_pinned": true,
+  "patches_applied": true
+ },
+ "train_seconds": 222.9,
+ "per_epoch": [
+  {
+   "epoch": 1,
+   "batches": 785,
+   "seconds": 72.9,
+   "val_loss": 0.035634060010136984,
+   "val": {
+    "auc": 0.9988649455412393,
+    "f1@0.5": 0.990909909099091,
+    "acc@0.5": 0.988414774030741,
+    "pauc@0.01": 0.974790667049155,
+    "pauc@0.001": 0.9169236118824228,
+    "tpr@0.0001": 0.7914342271009538,
+    "tpr@0.0003": 0.7914342271009538,
+    "tpr@0.001": 0.9616699658088896,
+    "tpr@0.003": 0.9780457081158899,
+    "tpr@0.01": 0.9857836962389779,
+    "tpr@0.03": 0.9951412632715494,
+    "tpr@0.1": 0.9969407953931978
+   },
+   "val_n_tied_at_top": 61
+  },
+  {
+   "epoch": 2,
+   "batches": 1570,
+   "seconds": 144.2,
+   "val_loss": 0.015920486608672988,
+   "val": {
+    "auc": 0.9998002354250279,
+    "f1@0.5": 0.996218941303565,
+    "acc@0.5": 0.9951823812801102,
+    "pauc@0.01": 0.9894267667565559,
+    "pauc@0.001": 0.9463409238368665,
+    "tpr@0.0001": 0.840921360446284,
+    "tpr@0.0003": 0.840921360446284,
+    "tpr@0.001": 0.9859636494511427,
+    "tpr@0.003": 0.9906424329674285,
+    "tpr@0.01": 0.9971207486053626,
+    "tpr@0.03": 0.9987403275148461,
+    "tpr@0.1": 0.9998200467878352
+   },
+   "val_n_tied_at_top": 35
+  },
+  {
+   "epoch": 3,
+   "batches": 2355,
+   "seconds": 215.7,
+   "val_loss": 0.009714748768782906,
+   "val": {
+    "auc": 0.9999399966195439,
+    "f1@0.5": 0.9978440531800216,
+    "acc@0.5": 0.9972470750172058,
+    "pauc@0.01": 0.9954023405986573,
+    "pauc@0.001": 0.9680977944753661,
+    "tpr@0.0001": 0.8932877451862515,
+    "tpr@0.0003": 0.8932877451862515,
+    "tpr@0.001": 0.9928018715134065,
+    "tpr@0.003": 0.997840561454022,
+    "tpr@0.01": 0.9998200467878352,
+    "tpr@0.03": 0.9998200467878352,
+    "tpr@0.1": 1.0
+   },
+   "val_n_tied_at_top": 5
+  }
+ ],
+ "april": "logits of the last epoch stored in seed<k>_epoch<e>_test_logits.npy; not evaluated by this script"
+}

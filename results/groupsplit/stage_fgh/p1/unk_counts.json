@@ -1,0 +1,175 @@
+{
+ "id_check": {
+  "sentencepiece_unk_id": 0,
+  "sentencepiece_unk_piece": "<unk>",
+  "sentencepiece_bos_id": 1,
+  "sentencepiece_eos_id": 2,
+  "sentencepiece_pad_id": -1,
+  "pieces": 50000,
+  "unseen_character_encoding": [
+   435,
+   49966,
+   0,
+   49966,
+   434
+  ],
+  "vocab_json_entries": 50001,
+  "vocab_json_pad": 0,
+  "vocab_json_unk": 1
+ },
+ "cells": {
+  "January training (group split)|all|first 512 tokens": {
+   "reports": 66580,
+   "share_affected": 0.32835686392310004,
+   "median_all": 0.0,
+   "median_affected": 1.0,
+   "mean": 0.6899969960949234,
+   "max": 20
+  },
+  "January training (group split)|all|whole report": {
+   "reports": 66580,
+   "share_affected": 0.6667918293781917,
+   "median_all": 4.0,
+   "median_affected": 4.0,
+   "mean": 2.650165214779213,
+   "max": 244
+  },
+  "January training (group split)|malware|first 512 tokens": {
+   "reports": 45073,
+   "share_affected": 0.41931977015064453,
+   "median_all": 0.0,
+   "median_affected": 1.0,
+   "mean": 0.7970181705233732,
+   "max": 10
+  },
+  "January training (group split)|malware|whole report": {
+   "reports": 45073,
+   "share_affected": 0.6988219111219577,
+   "median_all": 4.0,
+   "median_affected": 4.0,
+   "mean": 2.799369911033213,
+   "max": 98
+  },
+  "January training (group split)|benign|first 512 tokens": {
+   "reports": 21507,
+   "share_affected": 0.13772260194355326,
+   "median_all": 0.0,
+   "median_affected": 4.0,
+   "mean": 0.4657088389826568,
+   "max": 20
+  },
+  "January training (group split)|benign|whole report": {
+   "reports": 21507,
+   "share_affected": 0.5996652252754917,
+   "median_all": 2.0,
+   "median_affected": 4.0,
+   "mean": 2.337471520900172,
+   "max": 244
+  },
+  "January validation (group split)|all|first 512 tokens": {
+   "reports": 8718,
+   "share_affected": 0.3070658407891718,
+   "median_all": 0.0,
+   "median_affected": 4.0,
+   "mean": 0.8632713925212204,
+   "max": 45
+  },
+  "January validation (group split)|all|whole report": {
+   "reports": 8718,
+   "share_affected": 0.6018582243633861,
+   "median_all": 4.0,
+   "median_affected": 4.0,
+   "mean": 3.057352603808213,
+   "max": 104
+  },
+  "January validation (group split)|malware|first 512 tokens": {
+   "reports": 5557,
+   "share_affected": 0.416591686161598,
+   "median_all": 0.0,
+   "median_affected": 4.0,
+   "mean": 1.1650170955551558,
+   "max": 45
+  },
+  "January validation (group split)|malware|whole report": {
+   "reports": 5557,
+   "share_affected": 0.6161597984524024,
+   "median_all": 4.0,
+   "median_affected": 4.0,
+   "mean": 3.4378261651970488,
+   "max": 45
+  },
+  "January validation (group split)|benign|first 512 tokens": {
+   "reports": 3161,
+   "share_affected": 0.11452072129073078,
+   "median_all": 0.0,
+   "median_affected": 3.0,
+   "mean": 0.3328060740272066,
+   "max": 11
+  },
+  "January validation (group split)|benign|whole report": {
+   "reports": 3161,
+   "share_affected": 0.5767162290414426,
+   "median_all": 2.0,
+   "median_affected": 4.0,
+   "mean": 2.3884846567541915,
+   "max": 104
+  },
+  "April|all|first 512 tokens": {
+   "reports": 17402,
+   "share_affected": 0.21652683599586253,
+   "median_all": 0.0,
+   "median_affected": 2.0,
+   "mean": 0.6485461441213654,
+   "max": 28
+  },
+  "April|all|whole report": {
+   "reports": 17402,
+   "share_affected": 0.6399264452361797,
+   "median_all": 4.0,
+   "median_affected": 4.0,
+   "mean": 2.629295483277784,
+   "max": 104
+  },
+  "April|malware|first 512 tokens": {
+   "reports": 9399,
+   "share_affected": 0.30364932439621234,
+   "median_all": 0.0,
+   "median_affected": 2.0,
+   "mean": 0.8627513565272902,
+   "max": 28
+  },
+  "April|malware|whole report": {
+   "reports": 9399,
+   "share_affected": 0.6734759016916694,
+   "median_all": 4.0,
+   "median_affected": 4.0,
+   "mean": 2.9482923715288862,
+   "max": 93
+  },
+  "April|benign|first 512 tokens": {
+   "reports": 8003,
+   "share_affected": 0.1142071723103836,
+   "median_all": 0.0,
+   "median_affected": 4.0,
+   "mean": 0.39697613394976883,
+   "max": 21
+  },
+  "April|benign|whole report": {
+   "reports": 8003,
+   "share_affected": 0.6005248031988004,
+   "median_all": 2.0,
+   "median_affected": 4.0,
+   "mean": 2.2546545045607895,
+   "max": 104
+  }
+ },
+ "fix_planned": true,
+ "triggers": [
+  "January training (group split) / first 512 tokens: share 32.836%, median 0",
+  "January training (group split) / whole report: share 66.679%, median 4",
+  "January validation (group split) / first 512 tokens: share 30.707%, median 0",
+  "January validation (group split) / whole report: share 60.186%, median 4",
+  "April / first 512 tokens: share 21.653%, median 0",
+  "April / whole report: share 63.993%, median 4"
+ ]
+}

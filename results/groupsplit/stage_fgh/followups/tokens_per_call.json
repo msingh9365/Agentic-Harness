@@ -1,0 +1,137 @@
+{
+ "tokenizer": "bpe50k_fix (store given by --store)",
+ "eval_pool_reports": 3161,
+ "tokens_per_call_all_pool_calls": {
+  "calls": 579163,
+  "q25_median_q75": [
+   4.0,
+   5.0,
+   6.0
+  ],
+  "mean": 5.528830398350723,
+  "min": 3,
+  "max": 121
+ },
+ "tokens_per_call_attack_sampler": {
+  "q25_median_q75": [
+   4.0,
+   5.0,
+   7.0
+  ],
+  "mean": 6.173316393319845
+ },
+ "report_head_tokens": {
+  "head_tokens_q25_median_q75": [
+   1.0,
+   1.0,
+   15.0
+  ],
+  "malware_reports": 9399
+ },
+ "calls_to_push_original_out_of_window": {
+  "512": {
+   "reports": 9399,
+   "censored_above_kmax": 0,
+   "q25_median_q75": [
+    78.0,
+    82.0,
+    86.0
+   ],
+   "mean": 82.00787317799767,
+   "share_head_alone_beyond_window": 0.0
+  },
+  "4096": {
+   "reports": 9399,
+   "censored_above_kmax": 0,
+   "q25_median_q75": [
+    652.0,
+    663.0,
+    674.0
+   ],
+   "mean": 662.5909139270135,
+   "share_head_alone_beyond_window": 0.0
+  }
+ },
+ "april_benign_above_threshold": {
+  "M1": {
+   "0.001": {
+    "n_benign": 8003,
+    "rank_k": 8,
+    "benign_strictly_above": [
+     7,
+     8.0,
+     8
+    ]
+   },
+   "0.01": {
+    "n_benign": 8003,
+    "rank_k": 80,
+    "benign_strictly_above": [
+     80,
+     80.0,
+     80
+    ]
+   }
+  },
+  "M2": {
+   "0.001": {
+    "n_benign": 8003,
+    "rank_k": 8,
+    "benign_strictly_above": [
+     8,
+     8.0,
+     8
+    ]
+   },
+   "0.01": {
+    "n_benign": 8003,
+    "rank_k": 80,
+    "benign_strictly_above": [
+     79,
+     80.0,
+     80
+    ]
+   }
+  },
+  "M3": {
+   "0.001": {
+    "n_benign": 8003,
+    "rank_k": 8,
+    "benign_strictly_above": [
+     8,
+     8.0,
+     8
+    ]
+   },
+   "0.01": {
+    "n_benign": 8003,
+    "rank_k": 80,
+    "benign_strictly_above": [
+     80,
+     80.0,
+     80
+    ]
+   }
+  },
+  "M4": {
+   "0.001": {
+    "n_benign": 8003,
+    "rank_k": 8,
+    "benign_strictly_above": [
+     8,
+     8.0,
+     8
+    ]
+   },
+   "0.01": {
+    "n_benign": 8003,
+    "rank_k": 80,
+    "benign_strictly_above": [
+     77,
+     80.0,
+     80
+    ]
+   }
+  }
+ }
+}

@@ -30,10 +30,10 @@ def jobs_of(family, seeds, epochs, split_dir, variant, store):
     return out
 
 
-def final_jobs(family, seeds, split_dir, variant, store, stage_d=False, tok_old=False, full=False, full_loss=False, fix=False):
+def final_jobs(family, seeds, split_dir, variant, store, stage_d=False, tok_old=False, full=False, full_loss=False, fix=False, p3=None):
     """Stage C (NOTES 21.10): the approved settings, seeds 0-9. ATT+bal lr 1e-3, p 0.5, epoch 3; v2-PE lr 2e-3, epoch 1. The runs continue past the chosen epoch (ATT+bal to 6, v2-PE to 4) only so that the
     loss curves can be shown; the April logits and the weights are stored ONLY after the chosen epoch (--april-epoch), so no April logit of another epoch exists. Epoch k of a run = a k-epoch run (constant lr)."""
-    full_loss = full_loss or fix                             # NOTES 25 (Stage I): the Step-5 loss-log runs (gsy_*) with the corrected tokenizer, tags gsz_*
+    full_loss = full_loss or fix or bool(p3)                             # NOTES 25 (Stage I): the Step-5 loss-log runs (gsy_*) with the corrected tokenizer, tags gsz_*
     if family == "v2pe":
         tag, extra, epochs, ae = "gsf_v2pe", ["--pooling", "flatten", "--lr", "0.002"], 4, 1
     else:
@@ -57,6 +57,9 @@ def final_jobs(family, seeds, split_dir, variant, store, stage_d=False, tok_old=
     if fix:
         tag = tag.replace("gsy_", "gsz_")
         base[base.index("--variant") + 1] = "bpe50k_fix"
+    if p3:                                                   # NOTES 27 Part 2 (P3): the Step-5 settings with the role-normalised (gsr_) or control (gsa_) tokenizer, unknown pieces -> id 50,000
+        tag = tag.replace("gsy_", "gsr_" if p3 == "role" else "gsa_")
+        base[base.index("--variant") + 1] = "bpe50k_" + p3
     return [(tag, s, base + extra + ["--tag", tag, "--seed", str(s)]) for s in seeds]
 
 
@@ -77,11 +80,12 @@ def main():
     ap.add_argument("--full-january", action="store_true", help="Step 5: train on all 75,298 January reports with the old tokenizer (tags gsx_*), exactly the chosen epochs; the padding pool stays the group-split training part")
     ap.add_argument("--full-loss", action="store_true", help="Stage G: the Step-5 runs again with --loss-log (tags gsy_*), exactly the chosen epochs, April logits after the last epoch (determinism check against Step 5)")
     ap.add_argument("--fix", action="store_true", help="NOTES 25 Stage I: the Step-5 settings with the corrected tokenizer bpe50k_fix (tags gsz_*), all of January, loss logs, April logits after the last epoch")
+    ap.add_argument("--p3", choices=["role", "addr"], default=None, help="NOTES 27 P3: the Step-5 settings with the role-normalised (bpe50k_role, tags gsr_*) or control (bpe50k_addr, tags gsa_*) tokenizer, all of January, loss logs, April logits after the last epoch")
     ap.add_argument("--stage-d", action="store_true", help="Stage D: the Stage C runs again (tags gsd_*) with the April logits of every epoch stored (logits only)")
     ap.add_argument("--final", action="store_true", help="Stage C: the approved settings with seeds 0-9 (default seeds then 0-9), April logits after the chosen epoch only")
     a = ap.parse_args()
-    if a.final or a.stage_d or a.tok_old or a.full_january or a.full_loss or a.fix:
-        jobs = final_jobs(a.family, a.seeds if a.seeds != [0, 1, 2, 3, 4] else list(range(10)), a.split_dir, a.variant, a.pad_store, stage_d=a.stage_d, tok_old=a.tok_old, full=a.full_january, full_loss=a.full_loss, fix=a.fix)
+    if a.final or a.stage_d or a.tok_old or a.full_january or a.full_loss or a.fix or a.p3:
+        jobs = final_jobs(a.family, a.seeds if a.seeds != [0, 1, 2, 3, 4] else list(range(10)), a.split_dir, a.variant, a.pad_store, stage_d=a.stage_d, tok_old=a.tok_old, full=a.full_january, full_loss=a.full_loss, fix=a.fix, p3=a.p3)
     else:
         jobs = jobs_of(a.family, a.seeds, a.epochs, a.split_dir, a.variant, a.pad_store)
     extra = ["--device", a.device, "--out", a.out] + (["--limit", str(a.limit)] if a.limit else [])

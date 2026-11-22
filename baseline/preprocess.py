@@ -41,6 +41,8 @@ VARIANTS = {
     "bpe50k_all": dict(kind="bpe", vocab=50000, seq=512),    # NOTES 22.7: re-fit on ALL 75,298 January reports with the same settings as bpe50k (reproduction check of the old tokenizer, baseline/gs_tokrepro.py)
     "bpe50k_fix": dict(kind="bpe", vocab=50000, seq=512,     # NOTES 25: the old bpe50k + full character coverage and byte fallback, id 0 = padding only (pad_id 0, unk_id 1, no bos/eos); fit on ALL 75,298 January reports (baseline/gs_tokens_fix.py)
                        spm_extra="--character_coverage=1.0 --byte_fallback=true --pad_id=0 --unk_id=1 --bos_id=-1 --eos_id=-1"),
+    "bpe50k_role": dict(kind="bpe", vocab=50000, seq=512, norm="role", unkfix=True),     # NOTES 27 / 24 P3: hex literals of > 4 digits -> addr<L>x<T>; unknown pieces -> id 50,000 (baseline/gs_tokens_p3.py)
+    "bpe50k_addr": dict(kind="bpe", vocab=50000, seq=512, norm="addr", unkfix=True),     # the length-matched control of P3: every such literal -> the single word `addr`
     "bpe8k_v2": dict(kind="bpe", vocab=8192, seq=512),       # B3: the same, but the tokenizer is fit on the 90% of January that is not the validation slice (--fit-gap-split)
     # released tokenizers (their files, no training): sanity check E
     "released_bpe50k": dict(kind="bpe", released=True, seq=512),
@@ -116,7 +118,51 @@ def legacy_whitespace_class():
     return LegacyWhitespaceTokenizer
 
 
+HEX_RE = None
+
+
+def _hex_norm(mode):
+    """NOTES 24 P3: the hexadecimal literals 0x[0-9a-f]+ of MORE than 4 hex digits (applied to the lower-cased text, before the authors' cleaning). role: addr<L>x<T> (L digits, T the leading digit); addr: the single word `addr`."""
+    import re
+    global HEX_RE
+    HEX_RE = HEX_RE or re.compile(r"0x[0-9a-f]{5,}")
+    if mode == "role":
+        return lambda t: HEX_RE.sub(lambda m: "addr%dx%s" % (len(m.group()) - 2, m.group()[2]), t)
+    return lambda t: HEX_RE.sub("addr", t)
+
+
+class _UnkProxy:
+    """SentencePiece encoder whose unknown pieces (id 0 = the padding id) get the dedicated id 50,000 (NOTES 24 P1 fix); everything else is delegated."""
+    def __init__(self, sp):
+        self._sp = sp
+
+    def encode_as_ids(self, x):
+        r = self._sp.encode_as_ids(x)
+        if r and isinstance(r[0], list):
+            return [[50000 if t == 0 else t for t in row] for row in r]
+        return [50000 if t == 0 else t for t in r]
+
+    def __getattr__(self, k):
+        return getattr(self._sp, k)
+
+
 def build_tokenizer(spec, nebula_root, model_path=None, vocab_file=None):
+    tok = _build_tokenizer(spec, nebula_root, model_path, vocab_file)
+    if spec.get("norm"):                                              # normalised text for the fit, the encoding and the call-token store (all call tok.clear_json_event)
+        f, orig = _hex_norm(spec["norm"]), tok.clear_json_event
+
+        def clear(text):
+            if isinstance(text, bytes):
+                text = text.decode("utf-8")
+            text = " ".join(text) if isinstance(text, list) and text and isinstance(text[0], str) else str(text)
+            return orig(f(text.lower()))
+        tok.clear_json_event = clear
+    if spec.get("unkfix") and model_path is not None:                 # a loaded model: proxy its encoder (a freshly trained tokenizer is re-built from its model file by run_variant)
+        tok.tokenizer = _UnkProxy(tok.tokenizer)
+    return tok
+
+
+def _build_tokenizer(spec, nebula_root, model_path=None, vocab_file=None):
     """spec: a VARIANTS entry. model_path: the trained BPE .model / whitespace vocab .json to load (None = untrained)."""
     from nebula.preprocessing import JSONTokenizerBPE, JSONTokenizerNaive
     if spec.get("legacy"):
@@ -189,8 +235,8 @@ def run_variant(name, events_train, events_test, out_dir, nebula_root, seq_lens=
         print(f"[{name}] tokenizer trained in {(time.time() - t0) / 60:.1f} min", flush=True)
         # as in their wrapper: the test set is encoded with the tokenizer loaded from the files written by train
         model_file = prefix + ".model" if spec["kind"] == "bpe" else prefix + "_vocab.json"
-        tok_train = tok
         tok_test = build_tokenizer(spec, nebula_root, model_path=model_file)
+        tok_train = tok_test if (spec.get("norm") or spec.get("unkfix")) else tok
         trained = True
     t1 = time.time()
     enc_train = tok_train.encode(events_train, pad=False)

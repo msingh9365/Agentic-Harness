@@ -65,3 +65,63 @@ The padded-benign false-positive rate stays at or below the clean rate in nearly
 ## Where things are
 
 `NOTES.md` sections 23 (plan, 23.1 to 23.3 results) and 24 (P1, P2 results, P3 and P4 plans); code in `baseline/` (`twolevel.py`, `gs_select_f.py`, `gs_eval_g.py`, `gs_fig_g.py`, `gs_attack.py`, `gs_attack_report.py`, `gs_unk.py`, `gs_unk_strings.py`, `gs_seen_unseen.py`); results in `results/groupsplit/stage_fgh/`; progress log `STATE.md`. Model weights and the downloaded Kaggle outputs are not in the repository (weights are in the Kaggle datasets above).
+
+
+---
+
+# STATUS of the corrected-tokenizer job (NOTES 25: Stages I and J) and the paper figures
+
+Written 2026-11-22. **Stage I (four models retrained with the corrected tokenizer `bpe50k_fix`) is complete and evaluated. Stage J (attacks) is complete EXCEPT the M1 white-box attack, which is PENDING** (three queued Kaggle copies, none started). The partial Stage J report and the paper figures were made on the owner's instruction; nothing was cancelled.
+
+## What ran
+
+| part | what | kernel(s), owner | GPU / CPU time | result |
+|---|---|---|---|---|
+| tokenizer | `bpe50k_fix` fit on all January, re-tokenised, call store rebuilt, CPU checks | `nebula-fix-tok`, manishsinghxdev, CPU | 58 min (estimate 2 h) | all checks passed (NOTES 25.1) |
+| Stage I | M1 to M4 retrained (final settings, 10 seeds), one April evaluation each | `nebula-fix-i-attbal` 20 min, `nebula-fix-i-2l` 27 min (v2; v1 failed at launch), `nebula-fix-i-v2pe` 6 min of runtime after about 1 h in the queue; manishsinghxdev | about 0.9 h of quota (estimate 0.95 h) | NOTES 25.1, `stage_i/` |
+| Stage J | attack scores and white-box attacks | msingh9365: `nebula-fix-j-scores` 35 min (M2, M3, M4), `-wb-m2` 67 min, `-wb-m3` 25 min, `-wb-m4` 100 min; manishsinghxdev: `nebula-fix-j-m1-b` (M1 scores) | about 3.5 h of quota so far (estimate 3.8 h, limit 11.4 h) | NOTES 25.2-partial, `stage_j_partial/` |
+| P2 | seen / unseen for the fixed models | local, stored logits | none | `stage_i/p2/` |
+| paper figures | `baseline/paper_figs.py`, sets A and B | local; F12 from the CPU kernel `msingh9365/nebula-paper-attn` | none | `results/paper/` (README there) |
+
+GPU: Kaggle T4 (two per kernel). Tokens were never printed or committed; all datasets and kernels are private.
+
+## Headline: corrected tokenizer (April pAUC@1e-2, 10 seeds; current tokenizer in brackets)
+
+| model | corrected | current | fixed - current (cluster 95% CI) |
+|---|---|---|---|
+| M1 v2-PE | 0.686 ± 0.026 | 0.674 ± 0.053 | +1.28 [-0.98, +3.79] not resolved |
+| M2 two-level, no padding | 0.620 ± 0.080 | 0.562 ± 0.146 | **+5.80 [+3.12, +8.94] resolved** |
+| M3 ATT+bal | 0.705 ± 0.025 | 0.710 ± 0.015 | -0.50 [-1.18, +0.20] not resolved |
+| M4 ATT+bal-2L | 0.661 ± 0.035 | 0.663 ± 0.036 | -0.16 [-2.13, +1.60] not resolved |
+
+Under the corrected tokenizer: M3 - M1 +1.84 not resolved; M4 - M3 -4.39 not resolved; M4 - M2 +4.10 not resolved (it was resolved better, +10.05, under the current tokenizer); M2 - M1 -6.64 resolved worse (-11.16 before). The letter `j` was the only thing the old tokenizer could not encode (NOTES 24.1); adding it leaves M1, M3, M4 unchanged and helps the no-padding two-level model M2. Length is not a confounder (-0.4% tokens per report, NOTES 25.1).
+
+## Headline: attacks, partial (detection % at 1% clean FPR; `stage_j_partial/report_table.md`)
+
+| row | M1 | M2 | M3 | M4 |
+|---|---|---|---|---|
+| unedited | 79.1 ± 2.0 | 77.2 ± 4.9 | 79.0 ± 1.9 | 77.9 ± 1.7 |
+| random 20 prepend | 25.4 ± 7.8 | 54.2 ± 8.0 | 76.2 ± 2.3 | 74.4 ± 3.0 |
+| random 50 prepend | 7.4 ± 4.0 | 28.5 ± 12.0 | 65.1 ± 5.8 | 67.2 ± 4.9 |
+| random 100 prepend | 5.7 ± 5.1 | 17.1 ± 13.6 | 6.5 ± 1.3 | 25.9 ± 15.4 |
+| random 200 insert | 18.9 ± 5.9 | 12.4 ± 4.7 | 44.3 ± 4.0 | 37.5 ± 7.8 |
+| LightGBM 50 prepend | 1.9 ± 2.6 | 17.2 ± 15.2 | 35.1 ± 13.3 | 48.5 ± 7.7 |
+| white-box 20 steps | **pending** | 19.6 ± 13.3 | 48.7 ± 6.3 | 50.2 ± 5.4 |
+| white-box 50 steps | **pending** | 13.8 ± 13.6 | 2.5 ± 1.3 | 10.6 ± 8.5 |
+| padded-benign FPR (%), random 50 prepend | 1.07 ± 1.96 | 0.05 ± 0.08 | 0.84 ± 0.52 | 0.49 ± 0.14 |
+
+All pre-report checks passed (`stage_j_partial/checks.json`): 10 seeds everywhere, unedited scores equal the stored logits (max 3.8e-5), white-box step 0 equals clean detection and never increases.
+
+## PENDING
+
+- **M1 white-box attack (Stage J).** Queued copies: `msingh9365/nebula-fix-j-wb-m1` (since 10:40 UTC), `manishsinghxdev/nebula-fix-j-wb-m1-b` (since 11:09), `manishsinghxdev/nebula-fix-j-wb-m1-c` (since 14:10). When the first completes: checks for M1, the final report into `stage_j/`, a diff of the M2/M3/M4 numbers against `stage_j_partial/` (must be identical), update `results/paper/specs/B.json` (`attack_results`) and rerun `paper_figs` for F7, F8, T5, commit and push (steps in `STATE.md`).
+- P3 and P4 are pre-registered (NOTES 24) and not run.
+
+## Deviations and anything unusual (all recorded in NOTES 25.1 / 25.2-partial and `STATE.md`)
+
+- **Duplicate kernels on two accounts, on the owner's explicit instruction** ("Do it. These are last jobs"; later "launch an exact copy ... where only 1 job is in queue"): the two M1 Stage J jobs ran on both accounts, the M1 white-box also as a third copy. For the M1 scores the `manishsinghxdev` copy finished first and was used; the `msingh9365` twin stayed queued and was ignored.
+- Stage J was started for M2, M3, M4 before the M1 retraining had finished (queue workaround; same jobs, different order).
+- The first `nebula-fix-i-2l` launch failed at data loading (the launcher did not pass `--variant` to its workers); fixed and relaunched; not treated as a stop because nothing was trained or scored.
+- Queue waits were long: the M1 retrain about 1 h, the Stage J scores about 2 h, the M1 white-box more than 4 h so far.
+- The owner asked for one push (`9cdf83c`, before the partial report); this partial report and the figures are pushed with step 6 of the owner's instruction.
+- Smaller points: F12's attention weights are close to uniform (1/512 = 0.00195), and in SET A the white gaps are old-tokenizer unknown tokens masked as padding; F13 shows the EARLIER models of REPORT 5.10/5.11 and is SET A only; the Nebula paper numbers used are TPR 0.5213 at 1e-3 and F1 0.9136 only.

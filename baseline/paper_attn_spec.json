@@ -1,0 +1,26 @@
+[
+ {
+  "set": "A",
+  "rows": {
+   "detected": 1,
+   "missed": 0
+  },
+  "stored_logit": {
+   "detected": 8.908018112182617,
+   "missed": -9.615455627441406
+  },
+  "threshold_seed0": 3.781623363494873
+ },
+ {
+  "set": "B",
+  "rows": {
+   "detected": 1,
+   "missed": 0
+  },
+  "stored_logit": {
+   "detected": 9.973039627075195,
+   "missed": -10.09773063659668
+  },
+  "threshold_seed0": 4.803037643432617
+ }
+]

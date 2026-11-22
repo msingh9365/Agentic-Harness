@@ -1,0 +1,1 @@
+pAUC at 1% FPR on the April test set for each seed (dots) and box plots per model: the current tokenizer (left of each pair, circles) against the corrected tokenizer with byte fallback and full character coverage (right, squares). Same settings, same 10 seeds; pairs are matched by seed index only.

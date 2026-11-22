@@ -1,0 +1,1 @@
+Cumulative distribution of the report length in tokens (old BPE-50k (bpe50k)), malware and benign, January (solid) and April (dashed). Dotted lines: the 512-token window of the one-chunk models and the 4,096-token window (8 chunks) of the two-level models.

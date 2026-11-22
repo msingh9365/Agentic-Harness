@@ -1,0 +1,1 @@
+Distribution of the model output (logit) on the April benign (grey) and malware (colour) reports for M1 and M3, seed 0; vertical lines: the thresholds at 1% (dashed) and 0.1% (dotted) false-positive rate on the benign reports. Log-scale counts.

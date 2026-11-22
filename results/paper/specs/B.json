@@ -1,0 +1,81 @@
+{
+ "set": "B",
+ "title": "corrected tokenizer (bpe50k_fix, NOTES 25)",
+ "tokenizer": "corrected BPE-50k (bpe50k_fix)",
+ "models": {
+  "M1": {
+   "logits": {
+    "file": "results/groupsplit/stage_fgh/stage_i/logits_fixed_models.npz",
+    "key": "f1_test"
+   },
+   "eval_key": "f1",
+   "p2": "M1 v2-PE (fixed tokenizer)"
+  },
+  "M2": {
+   "logits": {
+    "file": "results/groupsplit/stage_fgh/stage_i/logits_fixed_models.npz",
+    "key": "f2_test"
+   },
+   "eval_key": "f2",
+   "p2": "M2 two-level, no padding (fixed tokenizer)"
+  },
+  "M3": {
+   "logits": {
+    "file": "results/groupsplit/stage_fgh/stage_i/logits_fixed_models.npz",
+    "key": "f3_test"
+   },
+   "eval_key": "f3",
+   "p2": "M3 ATT+bal (fixed tokenizer)"
+  },
+  "M4": {
+   "logits": {
+    "file": "results/groupsplit/stage_fgh/stage_i/logits_fixed_models.npz",
+    "key": "f4_test"
+   },
+   "eval_key": "f4",
+   "p2": "M4 ATT+bal-2L (fixed tokenizer)"
+  }
+ },
+ "compare": {
+  "M1": [
+   "c1",
+   "f1"
+  ],
+  "M2": [
+   "c2",
+   "f2"
+  ],
+  "M3": [
+   "c3",
+   "f3"
+  ],
+  "M4": [
+   "c4",
+   "f4"
+  ]
+ },
+ "attack_results": "results/groupsplit/stage_fgh/stage_j_partial/results.json",
+ "eval_results": "results/groupsplit/stage_fgh/stage_i/results.json",
+ "p2": "results/groupsplit/stage_fgh/stage_i/p2/seen_unseen.json",
+ "data_dir": "results/paper/B/data",
+ "raw": {
+  "stores": {
+   "file": "/tmp/fix_tok/out/all.npz",
+   "labels": "/tmp/fix_tok/out/labels.npz"
+  },
+  "loss": {
+   "M1": "/tmp/fix_i_all/loss_curves/gsz_v2pe/seed*.json",
+   "M2": "/tmp/fix_i_all/zm2/seed*.json",
+   "M3": "/tmp/fix_i_all/loss_curves/gsz_attbal/seed*.json",
+   "M4": "/tmp/fix_i_all/zm4/seed*.json"
+  },
+  "weights": {
+   "M1": "/tmp/hf_ds/m1/seed0.pt",
+   "M2": "/tmp/hf_ds/m2/seed0.pt",
+   "M3": "/tmp/hf_ds/m3/seed0.pt",
+   "M4": "/tmp/hf_ds/m4/seed0.pt"
+  },
+  "tokenizer_model": "/tmp/fix_tok/out/variants/bpe50k_fix/tokenizer.model",
+  "attn_raw": "/tmp/attn_out/out/attn_m3_seed0.json"
+ }
+}

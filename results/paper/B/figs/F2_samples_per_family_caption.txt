@@ -1,0 +1,1 @@
+Number of emulation reports per family in the January 2022 training set (75,298 reports) and the April 2022 test set (17,402 reports) of the Speakeasy data; `clean` and `windows_syswow64` are benign. Log-scale y-axis.

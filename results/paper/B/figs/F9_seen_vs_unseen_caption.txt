@@ -1,0 +1,1 @@
+pAUC at 1% FPR on the April reports whose API sequence was seen (solid) or not seen (hatched) in the model's own training set, mean over 10 seeds; error bars: 95% cluster-bootstrap interval of the seed mean (reports with the same API sequence resampled together). The subsets differ in families and size.

@@ -1,0 +1,368 @@
+[
+ {
+  "kind": "figure",
+  "id": "F2_samples_per_family",
+  "title": "Samples per family, January vs April",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F2_samples_per_family.pdf",
+   "results/paper/B/figs/F2_samples_per_family.png",
+   "results/paper/B/figs/F2_samples_per_family_caption.txt"
+  ],
+  "sources": [
+   "results/hier/data/meta.csv",
+   "results/misses/reports.csv",
+   "results/padding/row_map.npz"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F3_report_length_cdf",
+  "title": "Report length CDF",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F3_report_length_cdf.pdf",
+   "results/paper/B/figs/F3_report_length_cdf.png",
+   "results/paper/B/figs/F3_report_length_cdf_caption.txt"
+  ],
+  "sources": [
+   "results/paper/B/data/lengths.npz"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F4_loss_curves",
+  "title": "Training and validation loss M1-M4",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F4_loss_curves.pdf",
+   "results/paper/B/figs/F4_loss_curves.png",
+   "results/paper/B/figs/F4_loss_curves_caption.txt"
+  ],
+  "sources": [
+   "results/paper/B/data/loss.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F5_roc_logfpr",
+  "title": "ROC on log-FPR axis",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F5_roc_logfpr.pdf",
+   "results/paper/B/figs/F5_roc_logfpr.png",
+   "results/paper/B/figs/F5_roc_logfpr_caption.txt"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_i/logits_fixed_models.npz",
+   "results/groupsplit/stage_fgh/stage_i/logits_fixed_models.npz",
+   "results/groupsplit/stage_fgh/stage_i/logits_fixed_models.npz",
+   "results/groupsplit/stage_fgh/stage_i/logits_fixed_models.npz"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F6_per_family_detection",
+  "title": "Per-family detection heatmap",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F6_per_family_detection.pdf",
+   "results/paper/B/figs/F6_per_family_detection.png",
+   "results/paper/B/figs/F6_per_family_detection_caption.txt"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_i/logits_fixed_models.npz",
+   "results/groupsplit/stage_fgh/stage_i/logits_fixed_models.npz",
+   "results/groupsplit/stage_fgh/stage_i/logits_fixed_models.npz",
+   "results/groupsplit/stage_fgh/stage_i/logits_fixed_models.npz",
+   "results/hier/data/meta.csv"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F7_robustness_heatmap",
+  "title": "Robustness heatmap",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F7_robustness_heatmap.pdf",
+   "results/paper/B/figs/F7_robustness_heatmap.png",
+   "results/paper/B/figs/F7_robustness_heatmap_caption.txt"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_j_partial/results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F8_detection_vs_added_calls",
+  "title": "Detection vs number of added calls",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F8_detection_vs_added_calls.pdf",
+   "results/paper/B/figs/F8_detection_vs_added_calls.png",
+   "results/paper/B/figs/F8_detection_vs_added_calls_caption.txt"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_j_partial/results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F10_logit_distributions",
+  "title": "Logit distributions M1 and M3",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F10_logit_distributions.pdf",
+   "results/paper/B/figs/F10_logit_distributions.png",
+   "results/paper/B/figs/F10_logit_distributions_caption.txt"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_i/logits_fixed_models.npz",
+   "results/groupsplit/stage_fgh/stage_i/logits_fixed_models.npz"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F11_pauc_per_seed",
+  "title": "pAUC per seed",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F11_pauc_per_seed.pdf",
+   "results/paper/B/figs/F11_pauc_per_seed.png",
+   "results/paper/B/figs/F11_pauc_per_seed_caption.txt"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_i/results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F13",
+  "title": "Padded-benign false alarms, malware-only vs balanced padding (earlier models)",
+  "set": "B",
+  "files": [],
+  "sources": [],
+  "status": "skipped",
+  "reason": "SET A only (earlier models of REPORT 5.10/5.11, old tokenizer)"
+ },
+ {
+  "kind": "figure",
+  "id": "F_AB_tokenizer_comparison",
+  "title": "Current vs corrected tokenizer per model",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F_AB_tokenizer_comparison.pdf",
+   "results/paper/B/figs/F_AB_tokenizer_comparison.png",
+   "results/paper/B/figs/F_AB_tokenizer_comparison_caption.txt"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_i/results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "table",
+  "id": "T1_dataset",
+  "title": "Dataset per family and split",
+  "set": "B",
+  "files": [
+   "results/paper/B/tables/T1_dataset.md",
+   "results/paper/B/tables/T1_dataset.tex"
+  ],
+  "sources": [
+   "results/hier/data/meta.csv",
+   "results/misses/reports.csv"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "table",
+  "id": "T2_hyperparameters",
+  "title": "Hyper-parameters per model",
+  "set": "B",
+  "files": [
+   "results/paper/B/tables/T2_hyperparameters.md",
+   "results/paper/B/tables/T2_hyperparameters.tex"
+  ],
+  "sources": [
+   "baseline/v2pe.py",
+   "baseline/twolevel.py",
+   "NOTES.md sections 21-23"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "table",
+  "id": "T3_parameter_counts",
+  "title": "Parameter counts",
+  "set": "B",
+  "files": [
+   "results/paper/B/tables/T3_parameter_counts.md",
+   "results/paper/B/tables/T3_parameter_counts.tex"
+  ],
+  "sources": [
+   "results/paper/B/data/params.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "table",
+  "id": "T4_clean_results",
+  "title": "Clean April results with the Nebula paper row",
+  "set": "B",
+  "files": [
+   "results/paper/B/tables/T4_clean_results.md",
+   "results/paper/B/tables/T4_clean_results.tex"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_i/results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "table",
+  "id": "T5a_attack_detection_1pct",
+  "title": "Attack results: detection at 1% FPR",
+  "set": "B",
+  "files": [
+   "results/paper/B/tables/T5a_attack_detection_1pct.md",
+   "results/paper/B/tables/T5a_attack_detection_1pct.tex"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_j_partial/results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "table",
+  "id": "T5b_attack_detection_0.1pct",
+  "title": "Attack results: detection at 0.1% FPR",
+  "set": "B",
+  "files": [
+   "results/paper/B/tables/T5b_attack_detection_0.1pct.md",
+   "results/paper/B/tables/T5b_attack_detection_0.1pct.tex"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_j_partial/results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "table",
+  "id": "T5c_attack_padded_benign_fpr_1pct",
+  "title": "Attack results: padded-benign FPR",
+  "set": "B",
+  "files": [
+   "results/paper/B/tables/T5c_attack_padded_benign_fpr_1pct.md",
+   "results/paper/B/tables/T5c_attack_padded_benign_fpr_1pct.tex"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_j_partial/results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "table",
+  "id": "T6_seen_unseen",
+  "title": "Seen vs unseen April reports",
+  "set": "B",
+  "files": [
+   "results/paper/B/tables/T6_seen_unseen.md",
+   "results/paper/B/tables/T6_seen_unseen.tex"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_i/p2/seen_unseen.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "table",
+  "id": "T7_pairwise_differences",
+  "title": "Pairwise differences",
+  "set": "B",
+  "files": [
+   "results/paper/B/tables/T7_pairwise_differences.md",
+   "results/paper/B/tables/T7_pairwise_differences.tex"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_i/results.json",
+   "results/paper/B/data/pairs_extra.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "table",
+  "id": "T8_current_vs_corrected_tokenizer",
+  "title": "Current vs corrected tokenizer per model",
+  "set": "B",
+  "files": [
+   "results/paper/B/tables/T8_current_vs_corrected_tokenizer.md",
+   "results/paper/B/tables/T8_current_vs_corrected_tokenizer.tex"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_i/results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F9_seen_vs_unseen",
+  "title": "Seen vs unseen pAUC",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F9_seen_vs_unseen.pdf",
+   "results/paper/B/figs/F9_seen_vs_unseen.png",
+   "results/paper/B/figs/F9_seen_vs_unseen_caption.txt"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_i/p2/seen_unseen.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F12_attention_weights_M3",
+  "title": "Attention-pooling weights of M3",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F12_attention_weights_M3.pdf",
+   "results/paper/B/figs/F12_attention_weights_M3.png",
+   "results/paper/B/figs/F12_attention_weights_M3_caption.txt"
+  ],
+  "sources": [
+   "results/paper/B/data/attn_m3_seed0.json"
+  ],
+  "status": "made",
+  "reason": ""
+ }
+]

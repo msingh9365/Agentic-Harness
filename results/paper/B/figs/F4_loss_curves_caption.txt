@@ -1,0 +1,1 @@
+Training loss (mean over the epoch, solid) and loss on the 8,718-report validation slice (dashed) of the final models M1 to M4 after each epoch, mean ± std over 10 seeds, one shared y-axis. The final models are trained on ALL of January, so the validation slice is part of their training data and its loss is in-sample; the one-epoch models show a single point.

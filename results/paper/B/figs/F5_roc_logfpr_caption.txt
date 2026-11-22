@@ -1,0 +1,1 @@
+ROC curves of M1 to M4 on the April test set (17,402 reports) on a log false-positive-rate axis, mean over 10 seeds with a ± std band. The star marks the TPR of 0.5213 at an FPR of 1e-3 reported by the Nebula paper.

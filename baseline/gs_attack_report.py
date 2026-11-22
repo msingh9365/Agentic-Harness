@@ -30,6 +30,32 @@ def ms(v, d=1):
     return f"{v.mean():.{d}f} ± {v.std(ddof=1) if len(v) > 1 else 0:.{d}f}"
 
 
+REPORT_SETS = ["unedited", "random_20_prepend", "random_50_prepend", "random_100_prepend", "random_200_insert", "lgbm_50_prepend"]
+
+
+def write_report_table(out_dir, names, S, R, wb, mal, ben):
+    """report_table.md (NOTES 25 partial report): detection % at the 1% clean-FPR threshold, mean +- std over the seeds; "pending" for anything not computed yet."""
+    mods = [(f, lab) for f, lab in MODELS]
+    head = ["row"] + [lab for _, lab in mods]
+    rows = []
+    for nm in REPORT_SETS:
+        r = [nm.replace("_", " ")]
+        for f, _ in mods:
+            r.append(ms([(S[f]["Z"][s][names.index(nm)][mal] > R[f]["t1"][s]).mean() for s in S[f]["seeds"]]) if f in S and nm in names else "pending")
+        rows.append(r)
+    for k in (20, 50):
+        r = [f"white-box {k} steps"]
+        for f, _ in mods:
+            r.append(ms([(x["best"][k] > float(x["t1"])).mean() for x in wb[f]]) if f in wb else "pending")
+        rows.append(r)
+    r = ["padded-benign FPR (%), random 50 prepend"]
+    for f, _ in mods:
+        r.append(ms([(S[f]["Z"][s][names.index("random_50_prepend")][ben] > R[f]["t1"][s]).mean() for s in S[f]["seeds"]], 2) if f in S else "pending")
+    rows.append(r)
+    txt = ["### Detection of April malware (%) at the 1% clean-FPR threshold, mean ± std over 10 seeds; last row: padded-benign false-positive rate (%)", "", md(rows, head), ""]
+    open(os.path.join(out_dir, "report_table.md"), "w").write("\n".join(txt))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--scores", required=True)
@@ -85,6 +111,9 @@ def main():
     for f, lab in MODELS:
         fs = sorted(glob.glob(os.path.join(a.scores, f"wb_{f}_seed*.npz")))
         if not fs:
+            if f in S:                                                  # scores exist, white-box not done yet (NOTES 25 partial report): "pending", never 0 or blank
+                for tk in ("1%", "0.1%"):
+                    wrows.append([lab, tk, "pending"] + ["pending"] * 9)
             continue
         runs = [np.load(p) for p in fs]
         wb[f] = runs
@@ -99,9 +128,17 @@ def main():
     if wrows:
         L += ["**White-box greedy attack (500 April malware, 200 candidates per step, prepend, up to 50 steps): share still flagged after k steps (%) and padded-benign FPR after k steps (%)**", "",
               md(wrows, ["model", "threshold", "seeds", "k = 0", "k = 5", "k = 10", "k = 20", "k = 50", "FPR k = 5", "FPR k = 10", "FPR k = 20", "FPR k = 50"]), ""]
+    for f, runs in wb.items():
+        for key in ("t1", "t01"):
+            out[f"wb|{f}|{key}"] = {"flagged_share_by_step_per_seed": [[float(x) for x in (r["best"] > float(r[key])).mean(1)] for r in runs],
+                                    "padded_benign_fpr_per_seed": {k: [float((r[f"ben_k{k}"] > float(r[key])).mean()) for r in runs] for k in (5, 10, 20, 50) if f"ben_k{k}" in runs[0].files}}
+    for f, _ in MODELS:
+        if f in S and f not in wb:
+            out[f"wb|{f}"] = "pending"
     os.makedirs(a.out, exist_ok=True)
     open(os.path.join(a.out, "tables.md"), "w").write("\n".join(L) + "\n")
     json.dump(out, open(os.path.join(a.out, "results.json"), "w"))
+    write_report_table(a.out, names, S, R, wb, mal, ben)
     # figure: detection and padded-benign FPR vs k (1% threshold)
     import matplotlib
     matplotlib.use("Agg")
@@ -129,6 +166,9 @@ def main():
             vb = 100 * np.array([[0.01] + [(r[f"ben_k{k}"] > float(r["t1"])).mean() for k in kb[1:]] for r in wb[f]])
             ax[1, 4].plot(kb, vb.mean(0), "-o", ms=3, color=COL[f])
     ax[0, 4].set_title("white-box greedy, prepend (500 reports)", fontsize=8.5)
+    pend = [lab for f, lab in MODELS if f in S and f not in wb]
+    if pend:
+        ax[0, 4].text(0.97, 0.97, "white-box pending:\n" + "\n".join(pend), transform=ax[0, 4].transAxes, fontsize=6.5, va="top", ha="right")
     for i in range(2):
         for pi in range(5):
             ax[i, pi].set_xlabel("padded calls k" if pi < 4 else "greedy steps k")

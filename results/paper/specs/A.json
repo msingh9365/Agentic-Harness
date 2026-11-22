@@ -1,0 +1,64 @@
+{
+ "set": "A",
+ "title": "reproduction (the paper's tokenizer)",
+ "tokenizer": "old BPE-50k (bpe50k)",
+ "models": {
+  "M1": {
+   "logits": {
+    "file": "results/groupsplit/stage_d/step5/logits_final_models.npz",
+    "key": "v2pe_test"
+   },
+   "eval_key": "m1",
+   "p2": "M1 v2-PE (final)"
+  },
+  "M2": {
+   "logits": {
+    "file": "results/groupsplit/stage_fgh/stage_g/logits_final_m2_m4.npz",
+    "key": "m2_test"
+   },
+   "eval_key": "m2",
+   "p2": "M2 two-level, no padding (final)"
+  },
+  "M3": {
+   "logits": {
+    "file": "results/groupsplit/stage_d/step5/logits_final_models.npz",
+    "key": "attbal_test"
+   },
+   "eval_key": "m3",
+   "p2": "M3 ATT+bal (final)"
+  },
+  "M4": {
+   "logits": {
+    "file": "results/groupsplit/stage_fgh/stage_g/logits_final_m2_m4.npz",
+    "key": "m4_test"
+   },
+   "eval_key": "m4",
+   "p2": "M4 ATT+bal-2L (final)"
+  }
+ },
+ "attack_results": "results/paper/A/data/attack_results.json",
+ "eval_results": "results/groupsplit/stage_fgh/stage_g/results.json",
+ "p2": "results/groupsplit/stage_fgh/p2/seen_unseen.json",
+ "data_dir": "results/paper/A/data",
+ "raw": {
+  "stores": {
+   "file": "/tmp/claude-0/-home-user-Agentic-Harness/54c01c38-e780-50e3-b919-6fcb8ba37586/scratchpad/tune_inputs/all.npz",
+   "labels": "/tmp/claude-0/-home-user-Agentic-Harness/54c01c38-e780-50e3-b919-6fcb8ba37586/scratchpad/tune_inputs/labels.npz"
+  },
+  "loss": {
+   "M1": "/tmp/g_v2pe/out/loss_curves/gsy_v2pe/seed*.json",
+   "M2": "/tmp/g_2l/out/gm2/seed*.json",
+   "M3": "/tmp/g_attbal/out/loss_curves/gsy_attbal/seed*.json",
+   "M4": "/tmp/g_2l/out/gm4/seed*.json"
+  },
+  "weights": {
+   "M1": "/tmp/h_ds/m1/seed0.pt",
+   "M2": "/tmp/h_ds/m2/seed0.pt",
+   "M3": "/tmp/h_ds/m3/seed0.pt",
+   "M4": "/tmp/h_ds/m4/seed0.pt"
+  },
+  "attack_scores": "/tmp/h_all",
+  "tokenizer_model": "baseline_models/tokenizers/bpe50k/tokenizer.model",
+  "attn_raw": "/tmp/attn_out/out/attn_m3_seed0.json"
+ }
+}

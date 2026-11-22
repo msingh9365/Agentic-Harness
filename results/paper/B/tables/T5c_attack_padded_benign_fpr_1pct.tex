@@ -1,0 +1,29 @@
+\begin{table}[t]
+\centering
+\small
+\caption{False-positive rate (\%) on the same edit applied to the April benign reports, 1\% threshold, mean $\pm$ std over 10 seeds (unedited: 1\% by construction).}
+\label{tab:T5c_attack_padded_benign_fpr_1pct}
+\begin{tabular}{lrrrr}
+\toprule
+edit & M1 v2-PE & M2 two-level & M3 ATT+bal & M4 ATT+bal-2L \\
+\midrule
+unedited & 1.00 $\pm$ 0.00 & 1.00 $\pm$ 0.00 & 1.00 $\pm$ 0.00 & 1.00 $\pm$ 0.01 \\
+random 5 prepend & 0.91 $\pm$ 0.40 & 0.49 $\pm$ 0.12 & 1.03 $\pm$ 0.10 & 1.03 $\pm$ 0.31 \\
+random 20 prepend & 1.29 $\pm$ 1.38 & 0.22 $\pm$ 0.15 & 1.12 $\pm$ 0.22 & 0.94 $\pm$ 0.25 \\
+random 50 prepend & 1.07 $\pm$ 1.96 & 0.05 $\pm$ 0.08 & 0.84 $\pm$ 0.52 & 0.49 $\pm$ 0.14 \\
+random 100 prepend & 1.39 $\pm$ 3.34 & 0.03 $\pm$ 0.05 & 0.30 $\pm$ 0.37 & 0.04 $\pm$ 0.05 \\
+random 200 prepend & 1.43 $\pm$ 3.27 & 0.01 $\pm$ 0.02 & 0.29 $\pm$ 0.35 & 0.00 $\pm$ 0.01 \\
+random 5 insert & 0.87 $\pm$ 0.19 & 0.46 $\pm$ 0.06 & 1.08 $\pm$ 0.09 & 0.87 $\pm$ 0.15 \\
+random 20 insert & 0.69 $\pm$ 0.29 & 0.21 $\pm$ 0.11 & 0.95 $\pm$ 0.25 & 0.73 $\pm$ 0.26 \\
+random 50 insert & 0.55 $\pm$ 0.59 & 0.07 $\pm$ 0.06 & 0.68 $\pm$ 0.35 & 0.45 $\pm$ 0.18 \\
+random 100 insert & 0.71 $\pm$ 1.45 & 0.02 $\pm$ 0.02 & 0.50 $\pm$ 0.31 & 0.09 $\pm$ 0.05 \\
+random 200 insert & 0.84 $\pm$ 1.81 & 0.00 $\pm$ 0.01 & 0.44 $\pm$ 0.37 & 0.02 $\pm$ 0.02 \\
+lgbm 20 prepend & 0.00 $\pm$ 0.00 & 0.08 $\pm$ 0.08 & 0.67 $\pm$ 0.21 & 0.51 $\pm$ 0.16 \\
+lgbm 50 prepend & 0.00 $\pm$ 0.00 & 0.04 $\pm$ 0.08 & 0.06 $\pm$ 0.06 & 0.06 $\pm$ 0.05 \\
+lgbm 100 prepend & 0.00 $\pm$ 0.00 & 0.01 $\pm$ 0.02 & 0.00 $\pm$ 0.00 & 0.02 $\pm$ 0.03 \\
+lgbm 20 insert & 0.15 $\pm$ 0.11 & 0.04 $\pm$ 0.04 & 0.39 $\pm$ 0.11 & 0.23 $\pm$ 0.07 \\
+lgbm 50 insert & 0.07 $\pm$ 0.09 & 0.01 $\pm$ 0.01 & 0.16 $\pm$ 0.06 & 0.04 $\pm$ 0.02 \\
+lgbm 100 insert & 0.02 $\pm$ 0.04 & 0.02 $\pm$ 0.03 & 0.08 $\pm$ 0.04 & 0.03 $\pm$ 0.01 \\
+\bottomrule
+\end{tabular}
+\end{table}

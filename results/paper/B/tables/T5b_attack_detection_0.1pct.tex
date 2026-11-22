@@ -1,0 +1,33 @@
+\begin{table}[t]
+\centering
+\small
+\caption{Detection (\%) of April malware after each edit at the 0.1\% false-positive-rate threshold of the unedited April benign scores, mean $\pm$ std over 10 seeds (white-box: 500 malware reports; pending = not computed yet).}
+\label{tab:T5b_attack_detection_0.1pct}
+\begin{tabular}{lrrrr}
+\toprule
+edit & M1 v2-PE & M2 two-level & M3 ATT+bal & M4 ATT+bal-2L \\
+\midrule
+unedited & 53.6 $\pm$ 6.0 & 38.1 $\pm$ 16.5 & 56.7 $\pm$ 4.7 & 45.3 $\pm$ 14.9 \\
+random 5 prepend & 24.7 $\pm$ 8.7 & 26.5 $\pm$ 10.7 & 50.8 $\pm$ 5.2 & 46.3 $\pm$ 13.2 \\
+random 20 prepend & 7.2 $\pm$ 4.6 & 17.4 $\pm$ 10.5 & 50.5 $\pm$ 7.3 & 44.2 $\pm$ 13.9 \\
+random 50 prepend & 1.3 $\pm$ 1.7 & 1.1 $\pm$ 1.8 & 28.1 $\pm$ 8.8 & 38.1 $\pm$ 13.0 \\
+random 100 prepend & 1.0 $\pm$ 1.8 & 0.1 $\pm$ 0.4 & 1.9 $\pm$ 0.9 & 5.2 $\pm$ 3.4 \\
+random 200 prepend & 1.0 $\pm$ 1.7 & 0.0 $\pm$ 0.0 & 1.9 $\pm$ 0.9 & 0.3 $\pm$ 0.7 \\
+random 5 insert & 41.6 $\pm$ 7.2 & 27.6 $\pm$ 12.4 & 51.5 $\pm$ 4.9 & 44.4 $\pm$ 13.1 \\
+random 20 insert & 26.8 $\pm$ 7.9 & 19.9 $\pm$ 9.5 & 43.8 $\pm$ 4.4 & 40.4 $\pm$ 11.9 \\
+random 50 insert & 16.2 $\pm$ 5.7 & 10.4 $\pm$ 5.8 & 36.1 $\pm$ 4.5 & 34.8 $\pm$ 11.8 \\
+random 100 insert & 9.4 $\pm$ 3.8 & 3.3 $\pm$ 2.7 & 29.4 $\pm$ 3.1 & 21.5 $\pm$ 10.5 \\
+random 200 insert & 4.5 $\pm$ 2.6 & 0.4 $\pm$ 0.5 & 21.6 $\pm$ 2.8 & 10.6 $\pm$ 8.2 \\
+lgbm 20 prepend & 1.2 $\pm$ 1.7 & 8.0 $\pm$ 8.3 & 44.9 $\pm$ 7.0 & 45.7 $\pm$ 13.9 \\
+lgbm 50 prepend & 0.3 $\pm$ 1.0 & 0.1 $\pm$ 0.3 & 3.7 $\pm$ 2.9 & 21.6 $\pm$ 10.5 \\
+lgbm 100 prepend & 0.2 $\pm$ 0.7 & 0.0 $\pm$ 0.0 & 1.2 $\pm$ 0.9 & 3.9 $\pm$ 3.2 \\
+lgbm 20 insert & 16.3 $\pm$ 7.1 & 10.2 $\pm$ 5.1 & 38.4 $\pm$ 4.1 & 33.3 $\pm$ 11.1 \\
+lgbm 50 insert & 7.7 $\pm$ 4.0 & 2.9 $\pm$ 2.2 & 26.5 $\pm$ 3.4 & 21.5 $\pm$ 9.3 \\
+lgbm 100 insert & 3.6 $\pm$ 2.6 & 0.5 $\pm$ 0.9 & 18.2 $\pm$ 2.1 & 10.6 $\pm$ 7.8 \\
+white-box 5 steps & pending & 11.7 $\pm$ 9.3 & 34.7 $\pm$ 3.2 & 30.8 $\pm$ 12.6 \\
+white-box 10 steps & pending & 6.3 $\pm$ 6.3 & 31.3 $\pm$ 4.1 & 27.0 $\pm$ 11.3 \\
+white-box 20 steps & pending & 1.7 $\pm$ 4.5 & 17.0 $\pm$ 7.7 & 17.4 $\pm$ 9.0 \\
+white-box 50 steps & pending & 0.2 $\pm$ 0.7 & 0.4 $\pm$ 0.6 & 1.5 $\pm$ 1.4 \\
+\bottomrule
+\end{tabular}
+\end{table}

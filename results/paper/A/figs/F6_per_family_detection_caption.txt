@@ -1,0 +1,1 @@
+Detection rate (%) at a 1% false-positive rate per malware family on the April test set; the threshold of each model and seed is set on the April benign reports (the 1% FPR on clean reports is true by construction), mean over 10 seeds.

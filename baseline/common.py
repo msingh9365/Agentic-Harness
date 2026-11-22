@@ -73,8 +73,9 @@ def set_seed(seed):
         pass
 
 
-def find_data_root(name="windows_emulation_trainset", search="/kaggle/input"):
+def find_data_root(name="windows_emulation_trainset", search=None):
     """Folder that contains windows_emulation_trainset / windows_emulation_testset."""
+    search = search or INPUT_ROOT
     env = os.environ.get("NEBULA_DATA")
     if env:
         return env
@@ -86,7 +87,11 @@ def find_data_root(name="windows_emulation_trainset", search="/kaggle/input"):
     raise FileNotFoundError(f"{name} not found under {search}; set NEBULA_DATA")
 
 
-def find_dir_with(filename, search="/kaggle/input"):
+INPUT_ROOT = os.environ.get("NEBULA_INPUT", "/kaggle/input")      # where the datasets are mounted; NEBULA_INPUT overrides (Google Colab: /kaggle is read-only, the notebook uses /content/input)
+
+
+def find_dir_with(filename, search=None):
+    search = search or INPUT_ROOT
     for dp, dn, fn in os.walk(search):
         if filename in fn:
             return dp

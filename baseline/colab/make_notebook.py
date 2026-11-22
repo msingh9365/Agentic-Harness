@@ -56,27 +56,29 @@ def sh(cmd, check=True):
         raise SystemExit("setup step failed: " + cmd[:100])
 os.makedirs(CODE, exist_ok=True)
 tarfile.open(fileobj=io.BytesIO(base64.b64decode(PAYLOAD)), mode="r:gz").extractall(CODE)
-sh("pip install -q lightning torchmetrics tensorboard sentencepiece orjson nltk speakeasy-emulator lief lxml scikit-learn matplotlib")
+sh("pip install -q lightning torchmetrics tensorboard sentencepiece orjson nltk scikit-learn matplotlib")
+sh("pip install -q speakeasy-emulator lief lxml", check=False)      # only the preprocessing needs these; a failure here is not fatal
 sh(f"rm -rf {NEB} && git clone -q https://github.com/dtrizna/nebula {NEB} && git -C {NEB} checkout -q {PINNED}")
 sh(f"bash {CODE}/patches/apply_patches.sh {NEB}")
 sh(f"pip install -q -e {NEB} --no-deps")
 print("nebula commit:", subprocess.check_output(["git", "-C", NEB, "rev-parse", "HEAD"], text=True).strip())'''),
-("code", '''# 4. the three private datasets (M1 weights and stored logits, the corrected-tokenizer call store, the group split), placed where the code looks for them
+("code", '''# 4. the three private datasets (M1 weights and stored logits, the corrected-tokenizer call store, the group split); on Colab /kaggle is read-only, so they go to /content/input (the code reads NEBULA_INPUT)
+INPUT = "/content/input"
 for slug in ("gs-fix-models", "gs-fix-inputs", "nebula-groupsplit"):
-    d = f"/kaggle/input/{slug}"
+    d = f"{INPUT}/{slug}"
     if os.path.exists(d) and os.listdir(d):
         print("already there:", slug)
         continue
     os.makedirs(d, exist_ok=True)
     sh(f"kaggle datasets download -d msingh9365/{slug} -p {d} --unzip")
-for dp, dn, fn in os.walk("/kaggle/input"):
+for dp, dn, fn in os.walk(INPUT):
     if dp.count(os.sep) <= 4:
         print(dp, len(fn), "files")'''),
 ("code", '''# 5. THE JOB: white-box attack on M1, seeds 0-9 (the command of the Kaggle kernels nebula-fix-j-wb-m1*). Takes the longest; finished seeds are skipped after a reconnect.
 OUT = "/content/out"
 os.makedirs(OUT, exist_ok=True)
 jobs = " ".join(f"m1:{s}" for s in range(10))
-env = dict(os.environ, PYTHONPATH=CODE, NEBULA_ROOT=NEB, PYTHONUNBUFFERED="1", TQDM_DISABLE="1")
+env = dict(os.environ, PYTHONPATH=CODE, NEBULA_ROOT=NEB, NEBULA_INPUT=INPUT, PYTHONUNBUFFERED="1", TQDM_DISABLE="1")
 cmd = f"python -m baseline.gs_attack --mode wb --plan --jobs {jobs} --out {OUT}"
 print("RUN:", cmd, flush=True)
 rc = subprocess.call(cmd, shell=True, env=env, cwd=CODE)
@@ -85,11 +87,11 @@ assert rc == 0, f"the attack job failed (exit {rc}); read the output above"'''),
 import sys, glob, numpy as np
 sys.path.insert(0, CODE)
 from baseline import padtest
-y = np.load(glob.glob("/kaggle/input/gs-fix-inputs/**/labels.npz", recursive=True)[0])["y_test"].astype(int)
+y = np.load(glob.glob(f"{INPUT}/gs-fix-inputs/**/labels.npz", recursive=True)[0])["y_test"].astype(int)
 bad = []
 for s in range(10):
     z = np.load(f"{OUT}/wb_m1_seed{s}.npz")
-    z0 = np.load(glob.glob(f"/kaggle/input/gs-fix-models/**/m1/seed{s}_april.npy", recursive=True)[0]).astype(np.float64)
+    z0 = np.load(glob.glob(f"{INPUT}/gs-fix-models/**/m1/seed{s}_april.npy", recursive=True)[0]).astype(np.float64)
     best, sel = z["best"].astype(np.float64), z["sel"]
     d0, dt1, dt01 = float(np.abs(best[0] - z0[sel]).max()), abs(float(z["t1"]) - padtest.thresholds(z0, y, 0.01)), abs(float(z["t01"]) - padtest.thresholds(z0, y, 0.001))
     ok = best.shape == (51, 500) and d0 <= 1e-4 and dt1 <= 1e-4 and dt01 <= 1e-4

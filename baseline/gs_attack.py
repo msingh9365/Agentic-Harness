@@ -152,7 +152,7 @@ def main():
     ap.add_argument("--ranking", default="ranking_gs.json")
     ap.add_argument("--split-dir", default="split")
     ap.add_argument("--tokens", default=None)
-    ap.add_argument("--search", default="/kaggle/input")
+    ap.add_argument("--search", default=os.environ.get("NEBULA_INPUT", "/kaggle/input"))
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--max-sets", type=int, default=0, help="smoke test only: the first N edit sets")

@@ -22,6 +22,13 @@ from baseline import padtest
 
 TOL = 1e-4
 KEY = {"m1": "f1_test", "m2": "f2_test", "m3": "f3_test", "m4": "f4_test"}
+for _i, _x in enumerate(__import__("sys").argv):                       # --keys fam=npz_key ... : the stored-logit key of further families (NOTES 26: the 2 x 2 cells and the malware-only padding models)
+    if _x == "--keys":
+        for _spec in __import__("sys").argv[_i + 1:]:
+            if _spec.startswith("--"):
+                break
+            _f, _k = _spec.split("=")
+            KEY[_f] = _k
 
 
 def main():
@@ -30,6 +37,7 @@ def main():
     ap.add_argument("--logits", required=True, help="npz with the stored April logits [10, 17402] under f1_test .. f4_test")
     ap.add_argument("--out", required=True, help="checks.json")
     ap.add_argument("--models", nargs="*", default=["m1", "m2", "m3", "m4"])
+    ap.add_argument("--keys", nargs="*", default=[], help="fam=key of the stored logits of further families in --logits")
     a = ap.parse_args()
     y = np.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results", "logits", "labels.npz"))["y_test"].astype(int)
     stored = np.load(a.logits)

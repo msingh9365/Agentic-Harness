@@ -42,7 +42,14 @@ os.environ["KAGGLE_API_TOKEN"] = userdata.get("KAGGLE_API_TOKEN")
 subprocess.run("pip install -q kaggle", shell=True, check=True)
 who = subprocess.run("kaggle config view", shell=True, capture_output=True, text=True).stdout
 print([l for l in who.splitlines() if "username" in l])           # must say msingh9365
-assert "msingh9365" in who, "The secret must be the Kaggle token of the account msingh9365."'''),
+assert "msingh9365" in who, "The secret must be the Kaggle token of the account msingh9365."
+# the token must be able to READ the three private datasets and CREATE a dataset; test the read access now, so a permission problem shows up here with a clear message
+for slug in ("gs-fix-models", "gs-fix-inputs", "nebula-groupsplit"):
+    r = subprocess.run(f"kaggle datasets status msingh9365/{slug}", shell=True, capture_output=True, text=True)
+    out = (r.stdout + r.stderr).strip()
+    print(slug, "->", out[:200])
+    assert "ready" in out.lower(), (f"Cannot read msingh9365/{slug}: the secret is not the msingh9365 token, or the token has no read access (create a new API token for msingh9365 at kaggle.com/settings and put it in the secret KAGGLE_API_TOKEN), "
+                                    "or the 'Notebook access' switch of the secret is off.")'''),
 ("code", '''# 3. our code (embedded), the authors' repository at the pinned commit, the dependencies
 import base64, io, subprocess, tarfile, time
 PAYLOAD = "__PAYLOAD__"
@@ -70,7 +77,9 @@ for slug in ("gs-fix-models", "gs-fix-inputs", "nebula-groupsplit"):
         print("already there:", slug)
         continue
     os.makedirs(d, exist_ok=True)
-    sh(f"kaggle datasets download -d msingh9365/{slug} -p {d} --unzip")
+    r = subprocess.run(f"kaggle datasets download -d msingh9365/{slug} -p {d} --unzip", shell=True, capture_output=True, text=True)
+    print(slug, "download exit", r.returncode, (r.stdout + r.stderr).strip()[-300:])
+    assert r.returncode == 0, "download failed (see the line above): 401/403 = token without access to msingh9365's private datasets; 404 = wrong dataset name"
 for dp, dn, fn in os.walk(INPUT):
     if dp.count(os.sep) <= 4:
         print(dp, len(fn), "files")'''),
@@ -111,7 +120,10 @@ os.makedirs(UP)
 for s in range(10):
     shutil.copy(f"{OUT}/wb_m1_seed{s}.npz", UP)
 json.dump({"title": "gs fix wb m1 colab", "id": "msingh9365/gs-fix-wb-m1-colab", "licenses": [{"name": "other"}]}, open(f"{UP}/dataset-metadata.json", "w"))
-sh(f"kaggle datasets create -p {UP} --dir-mode zip")
+r = subprocess.run(f"kaggle datasets create -p {UP} --dir-mode zip", shell=True, capture_output=True, text=True)
+print((r.stdout + r.stderr).strip()[-400:])
+if r.returncode:
+    print("UPLOAD FAILED (a token without write access gives 401/403): the scores are NOT lost, download /content/wb_m1_scores.zip below and give it to Claude Code")
 shutil.make_archive("/content/wb_m1_scores", "zip", UP)
 try:
     from google.colab import files

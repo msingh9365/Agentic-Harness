@@ -1,0 +1,23 @@
+{
+ "bpe50k_role": {
+  "share_calls_with_hex_literal_gt4_digits_sample5000reports": 0.6228531504760237,
+  "calls_in_sample": 1096374,
+  "median_total_tokens_old": 1061.0,
+  "median_total_tokens_new": 1047.0,
+  "median_total_tokens_change_pct": -1.3195098963242224,
+  "mean_total_tokens_old": 1135.9012081984897,
+  "mean_total_tokens_new": 1118.6282955771305,
+  "quartiles_new_over_old_ratio": [
+   0.9723090665475659,
+   0.9950782997762864,
+   0.9989462592202318
+  ],
+  "median_calls_in_512_old": 83.0,
+  "median_calls_in_512_new": 84.0
+ },
+ "control_rule": {
+  "median_total_token_change_pct_role": -1.3195098963242224,
+  "threshold_pct": 10.0,
+  "control_triggered": false
+ }
+}

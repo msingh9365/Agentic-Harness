@@ -1,0 +1,58 @@
+{
+ "variant": "bpe50k_addr",
+ "tokenizer_info": {
+  "name": "bpe50k_addr",
+  "kind": "bpe",
+  "vocab": 50000,
+  "seq": 512,
+  "norm": "addr",
+  "unkfix": true,
+  "trained_on_train": true,
+  "vocab_entries": 50001,
+  "seq_len": 512,
+  "tokenizer_train_fraction": 1.0,
+  "tokenizer_fit_reports": 75298,
+  "train_tokens_median": 1058.0,
+  "share_train_longer_than_seq": 0.6644532391298573,
+  "share_test_longer_than_seq": 0.6322836455579819,
+  "minutes_total": 15.3,
+  "minutes_encoding": 6.7
+ },
+ "rows_equal_old_store": true,
+ "ids": {
+  "store_id0": 0,
+  "store_unknown_id50000_jan": 203102,
+  "store_unknown_id50000_apr": 45755,
+  "max_id": 50000,
+  "x_train_id0_not_right_padding_rows": 0,
+  "x_test_id0_not_right_padding_rows": 0
+ },
+ "first512_store_vs_x_rows_differing": 0,
+ "full_tokenisation_vs_pieces_differing_of_3000": 0,
+ "edit_check": {
+  "january": [
+   0,
+   600
+  ],
+  "april": [
+   0,
+   600
+  ]
+ },
+ "length": {
+  "share_calls_with_hex_literal_gt4_digits_sample5000reports": 0.6228531504760237,
+  "calls_in_sample": 1096374,
+  "median_total_tokens_old": 1061.0,
+  "median_total_tokens_new": 1047.0,
+  "median_total_tokens_change_pct": -1.3195098963242224,
+  "mean_total_tokens_old": 1135.9012081984897,
+  "mean_total_tokens_new": 1118.617464940669,
+  "quartiles_new_over_old_ratio": [
+   0.9722966934763181,
+   0.9950760966875559,
+   0.9989462592202318
+  ],
+  "median_calls_in_512_old": 83.0,
+  "median_calls_in_512_new": 84.0
+ }
+}

@@ -89,6 +89,7 @@ def main():
     ap.add_argument("--boot", type=int, default=1000)
     ap.add_argument("--procs", type=int, default=4)
     ap.add_argument("--fixed-logits", default=None, help="NOTES 25: logits_fixed_models.npz (keys f1_test..f4_test) of the four models with the corrected tokenizer: added to the group `jan` (all of January)")
+    ap.add_argument("--p3-logits", default=None, help="NOTES 27 P3: logits_p3.npz (keys r1_test, r3_test and, if the control was built, a1_test, a3_test): added to the group `jan` (all of January)")
     ap.add_argument("--groups", nargs="*", default=["jan", "gs", "old"])
     a = ap.parse_args()
     y = np.load(os.path.join(ROOT, "results", "logits", "labels.npz"))["y_test"].astype(int)
@@ -105,6 +106,12 @@ def main():
         zf = np.load(a.fixed_logits)
         for k, nm in FIX.items():
             models[nm] = ("jan", zf[f"{k}_test"].astype(np.float64))
+    P3 = {"r1": "M1 v2-PE + address roles", "r3": "M3 ATT+bal + address roles", "a1": "M1 v2-PE + address control", "a3": "M3 ATT+bal + address control"}
+    if a.p3_logits:
+        zp = np.load(a.p3_logits)
+        for k, nm in P3.items():
+            if f"{k}_test" in zp.files:
+                models[nm] = ("jan", zp[f"{k}_test"].astype(np.float64))
     masks = {g: np.array([h in s for h in hap]) for g, s in sets.items()}                  # seen
     tasks, meta = [], {}
     pair_defs = {"jan": [("M2 two-level, no padding (final)", "M1 v2-PE (final)"), ("M4 ATT+bal-2L (final)", "M3 ATT+bal (final)"), ("M4 ATT+bal-2L (final)", "M2 two-level, no padding (final)"), ("M3 ATT+bal (final)", "M1 v2-PE (final)")],
@@ -113,6 +120,9 @@ def main():
     if a.fixed_logits:
         cur = {"f1": "M1 v2-PE (final)", "f2": "M2 two-level, no padding (final)", "f3": "M3 ATT+bal (final)", "f4": "M4 ATT+bal-2L (final)"}
         pair_defs["jan"] = pair_defs["jan"] + [(FIX[k], cur[k]) for k in FIX] + [(FIX["f3"], FIX["f1"]), (FIX["f4"], FIX["f3"]), (FIX["f4"], FIX["f2"])]
+    if a.p3_logits:
+        have = [k for k in P3 if P3[k] in models]
+        pair_defs["jan"] = pair_defs["jan"] + [(P3["r1"], "M1 v2-PE (final)"), (P3["r3"], "M3 ATT+bal (final)")] + ([(P3["r1"], P3["a1"]), (P3["r3"], P3["a3"]), (P3["a1"], "M1 v2-PE (final)"), (P3["a3"], "M3 ATT+bal (final)")] if "a1" in have else [])
     for g in a.groups:
         names = [n for n, (gg, _) in models.items() if gg == g]
         pairs = [(p, q) for p, q in pair_defs[g] if p in names and q in names]

@@ -162,3 +162,5 @@ Final: items 0, 1a, 1b, 5 and the clean part of item 4. NOT run to completion: i
 
 ## Night run (NOTES 27) - progress log (final summary is written at the end)
 - Item 2 DONE (NOTES 26.2): results from the queue-rule copy `manishsinghxdev/nebula-fup-k-b`; original `msingh9365/nebula-fup-k` deleted at 19:30 UTC after the copy finished first. Checks passed, k = 20/50/100 identical to Stage J.
+- Part 3 (items e, f) DONE (NOTES 27.2): eight CPU kernels, owners in STATE.md (m1-dd-a/-dd-b/-mw-a on manishsinghxdev, the other five on msingh9365 because of the 5-CPU-session cap: deviation, same code/weights/seeds). Dedupe exact: no effect; dedupe by name: clean pAUC -22.9 (M1) / -15.1 (M3); multi-window max: recovers M3 under random 100 prepend (6.5 -> 68.3%) at a clean pAUC cost of -21.1 (M1) / -11.0 (M3).
+- P3 (item d): tokenizer rebuild done (NOTES 27.1, control not triggered/discarded); training NOT started (both accounts' GPU sessions held by queued kernels; P3 training kernels are built and waiting).

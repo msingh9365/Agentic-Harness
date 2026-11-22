@@ -1,0 +1,170 @@
+{
+ "January|all": {
+  "reports": 75298,
+  "tokens_old": {
+   "median": 1063.0,
+   "mean": 1154.264044197721,
+   "p90": 2354.0
+  },
+  "tokens_new": {
+   "median": 1059.0,
+   "mean": 1149.20324577014,
+   "p90": 2346.0
+  },
+  "share_longer_than_512_old": 0.6654625620866425,
+  "share_longer_than_512_new": 0.6654227203909798,
+  "calls_in_512_old": {
+   "median": 83.0,
+   "mean": 66.4685383409918,
+   "p90": 105.0
+  },
+  "calls_in_512_new": {
+   "median": 83.0,
+   "mean": 66.7015989800526,
+   "p90": 105.0
+  },
+  "share_fewer_than_3_calls_in_512_old": 6.6402826104279e-05,
+  "share_fewer_than_3_calls_in_512_new": 0.0001726473478711254,
+  "median_ratio_new_over_old_tokens": 0.9965209826578664
+ },
+ "January|malware": {
+  "reports": 50630,
+  "tokens_old": {
+   "median": 950.0,
+   "mean": 1237.8601619593126,
+   "p90": 2459.0
+  },
+  "tokens_new": {
+   "median": 942.0,
+   "mean": 1232.34706695635,
+   "p90": 2442.0
+  },
+  "share_longer_than_512_old": 0.7004147738494964,
+  "share_longer_than_512_new": 0.700454276120877,
+  "calls_in_512_old": {
+   "median": 85.0,
+   "mean": 69.74993087102509,
+   "p90": 106.0
+  },
+  "calls_in_512_new": {
+   "median": 86.0,
+   "mean": 70.06247284218843,
+   "p90": 106.0
+  },
+  "share_fewer_than_3_calls_in_512_old": 7.900454276120877e-05,
+  "share_fewer_than_3_calls_in_512_new": 0.00011850681414181315,
+  "median_ratio_new_over_old_tokens": 0.9964173757277206
+ },
+ "January|benign": {
+  "reports": 24668,
+  "tokens_old": {
+   "median": 1102.0,
+   "mean": 982.6866385600779,
+   "p90": 2188.0
+  },
+  "tokens_new": {
+   "median": 1094.5,
+   "mean": 978.554159234636,
+   "p90": 2182.0
+  },
+  "share_longer_than_512_old": 0.593724663531701,
+  "share_longer_than_512_new": 0.5935219717853089,
+  "calls_in_512_old": {
+   "median": 80.0,
+   "mean": 59.73362250689152,
+   "p90": 96.0
+  },
+  "calls_in_512_new": {
+   "median": 80.0,
+   "mean": 59.80355115939679,
+   "p90": 96.0
+  },
+  "share_fewer_than_3_calls_in_512_old": 4.0538349278417384e-05,
+  "share_fewer_than_3_calls_in_512_new": 0.00028376844494892167,
+  "median_ratio_new_over_old_tokens": 0.9971741434122219
+ },
+ "April|all": {
+  "reports": 17402,
+  "tokens_old": {
+   "median": 1014.5,
+   "mean": 1056.4456958970234,
+   "p90": 2256.0
+  },
+  "tokens_new": {
+   "median": 1007.0,
+   "mean": 1051.5168371451557,
+   "p90": 2248.0
+  },
+  "share_longer_than_512_old": 0.6336627973796115,
+  "share_longer_than_512_new": 0.633605332720377,
+  "calls_in_512_old": {
+   "median": 80.0,
+   "mean": 66.5590162050339,
+   "p90": 103.0
+  },
+  "calls_in_512_new": {
+   "median": 80.0,
+   "mean": 66.74646592345708,
+   "p90": 104.0
+  },
+  "share_fewer_than_3_calls_in_512_old": 0.0,
+  "share_fewer_than_3_calls_in_512_new": 0.0,
+  "median_ratio_new_over_old_tokens": 0.9964285714285714
+ },
+ "April|malware": {
+  "reports": 9399,
+  "tokens_old": {
+   "median": 1009.0,
+   "mean": 1141.0829875518673,
+   "p90": 2341.0
+  },
+  "tokens_new": {
+   "median": 1002.0,
+   "mean": 1135.5559102032132,
+   "p90": 2333.0
+  },
+  "share_longer_than_512_old": 0.6958187041174593,
+  "share_longer_than_512_new": 0.6958187041174593,
+  "calls_in_512_old": {
+   "median": 95.0,
+   "mean": 73.01106500691563,
+   "p90": 106.0
+  },
+  "calls_in_512_new": {
+   "median": 95.0,
+   "mean": 73.31897010320247,
+   "p90": 106.0
+  },
+  "share_fewer_than_3_calls_in_512_old": 0.0,
+  "share_fewer_than_3_calls_in_512_new": 0.0,
+  "median_ratio_new_over_old_tokens": 0.9961408586589484
+ },
+ "April|benign": {
+  "reports": 8003,
+  "tokens_old": {
+   "median": 1018.0,
+   "mean": 957.0447332250407,
+   "p90": 2247.0
+  },
+  "tokens_new": {
+   "median": 1010.0,
+   "mean": 952.8184430838436,
+   "p90": 2239.0
+  },
+  "share_longer_than_512_old": 0.5606647507184805,
+  "share_longer_than_512_new": 0.560539797575909,
+  "calls_in_512_old": {
+   "median": 79.0,
+   "mean": 58.981506934899414,
+   "p90": 98.0
+  },
+  "calls_in_512_new": {
+   "median": 79.0,
+   "mean": 59.02748969136574,
+   "p90": 98.0
+  },
+  "share_fewer_than_3_calls_in_512_old": 0.0,
+  "share_fewer_than_3_calls_in_512_new": 0.0,
+  "median_ratio_new_over_old_tokens": 0.996781979082864
+ }
+}

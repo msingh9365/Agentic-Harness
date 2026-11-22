@@ -1,0 +1,17 @@
+{
+ "name": "bpe50k_fix",
+ "kind": "bpe",
+ "vocab": 50000,
+ "seq": 512,
+ "spm_extra": "--character_coverage=1.0 --byte_fallback=true --pad_id=0 --unk_id=1 --bos_id=-1 --eos_id=-1",
+ "trained_on_train": true,
+ "vocab_entries": 50001,
+ "seq_len": 512,
+ "tokenizer_train_fraction": 1.0,
+ "tokenizer_fit_reports": 75298,
+ "train_tokens_median": 1059.0,
+ "share_train_longer_than_seq": 0.6654227203909798,
+ "share_test_longer_than_seq": 0.633605332720377,
+ "minutes_total": 14.0,
+ "minutes_encoding": 6.8
+}

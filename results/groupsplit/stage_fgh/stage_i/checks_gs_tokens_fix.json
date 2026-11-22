@@ -1,0 +1,55 @@
+{
+ "limit": null,
+ "labels_equal_old": true,
+ "tokenizer_info": {
+  "name": "bpe50k_fix",
+  "kind": "bpe",
+  "vocab": 50000,
+  "seq": 512,
+  "spm_extra": "--character_coverage=1.0 --byte_fallback=true --pad_id=0 --unk_id=1 --bos_id=-1 --eos_id=-1",
+  "trained_on_train": true,
+  "vocab_entries": 50001,
+  "seq_len": 512,
+  "tokenizer_train_fraction": 1.0,
+  "tokenizer_fit_reports": 75298,
+  "train_tokens_median": 1059.0,
+  "share_train_longer_than_seq": 0.6654227203909798,
+  "share_test_longer_than_seq": 0.633605332720377,
+  "minutes_total": 14.0,
+  "minutes_encoding": 6.8
+ },
+ "special_ids": {
+  "unk": 1,
+  "pad": 0,
+  "bos": -1,
+  "eos": -1,
+  "pieces": 50000
+ },
+ "vocab_entries": 50001,
+ "rows_equal_old_store": {
+  "n_calls": true,
+  "api_name_ids_and_vocabulary": true
+ },
+ "unknown_and_id0": {
+  "january_store_unk1": 0,
+  "april_store_unk1": 0,
+  "store_id0": 0,
+  "x_train_unk1": 0,
+  "x_test_unk1": 0,
+  "x_train_id0_not_right_padding_rows": 0,
+  "x_test_id0_not_right_padding_rows": 0
+ },
+ "first512_store_vs_x_rows_differing": 0,
+ "full_tokenisation_vs_pieces_differing_of_3000": 0,
+ "edit_check": {
+  "january": [
+   0,
+   600
+  ],
+  "april": [
+   0,
+   600
+  ]
+ },
+ "minutes_total": 57.8
+}

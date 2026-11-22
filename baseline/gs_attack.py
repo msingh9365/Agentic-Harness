@@ -23,6 +23,13 @@ from baseline import callstore as CS, common as C, groupsplit as G, padtest
 from baseline import twolevel_attack as TA
 
 FAM = {"m1": ("one", "v2_pe"), "m2": ("2l", None), "m3": ("one", "attbal"), "m4": ("2l", None)}
+for _i, _x in enumerate(sys.argv):                                           # NOTES 26: further one-chunk families, --extra-families name:kind ... (kind = padtest kind: v2_pe = flatten head, attbal = attention head)
+    if _x == "--extra-families":
+        for _spec in sys.argv[_i + 1:]:
+            if _spec.startswith("--"):
+                break
+            _n, _k = _spec.split(":")
+            FAM[_n] = ("one", _k)
 TA.SURR = ("lgbm",)                                                       # only the LightGBM surrogate (NOTES 23)
 TA.FAMILIES.update({k: v[0] for k, v in FAM.items()})
 
@@ -121,6 +128,8 @@ def orchestrate(a):
                     print(f"{':'.join(j)}: already done", flush=True)
                     continue
                 cmd = [sys.executable, "-m", "baseline.gs_attack", "--mode", a.mode, "--family", j[0], "--out", a.out, "--device", a.device, "--store", a.store, "--ranking", a.ranking, "--split-dir", a.split_dir, "--search", a.search] + (["--max-sets", str(a.max_sets)] if a.max_sets else [])
+                cmd += (["--ks"] + [str(x) for x in a.ks] if a.ks else []) + (["--surr-ks"] + [str(x) for x in a.surr_ks] if a.surr_ks else []) + (["--no-surrogate"] if a.no_surrogate else [])
+                cmd += (["--extra-families"] + a.extra_families if a.extra_families else [])
                 cmd += (["--seeds"] + [str(x) for x in a.seeds]) if a.mode == "scores" else ["--seed", j[1], "--steps", str(a.steps), "--n-wb", str(a.n_wb)]
                 running[g] = (subprocess.Popen(cmd, env=dict(os.environ, CUDA_VISIBLE_DEVICES=str(g))), ":".join(j))
                 print(f"GPU {g}: started {':'.join(j)}", flush=True)
@@ -156,7 +165,17 @@ def main():
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--max-sets", type=int, default=0, help="smoke test only: the first N edit sets")
+    ap.add_argument("--ks", type=int, nargs="*", default=None, help="NOTES 26: the random-padding sizes k of the edit sets (default of twolevel_attack: 5 20 50 100 200)")
+    ap.add_argument("--no-surrogate", action="store_true", help="NOTES 26: no LightGBM-ranked edit sets")
+    ap.add_argument("--surr-ks", type=int, nargs="*", default=None, help="the k of the LightGBM sets (default 20 50 100)")
+    ap.add_argument("--extra-families", nargs="*", default=[], help="name:kind of further one-chunk families (kind v2_pe or attbal)")
     a = ap.parse_args()
+    if a.ks:
+        TA.RANDOM_KS = list(a.ks)
+    if a.surr_ks:
+        TA.SURR_KS = list(a.surr_ks)
+    if a.no_surrogate:
+        TA.SURR = ()
     if a.plan:
         return orchestrate(a)
     return run_scores(a) if a.mode == "scores" else run_wb(a)

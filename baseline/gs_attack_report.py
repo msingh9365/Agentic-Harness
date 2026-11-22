@@ -33,25 +33,26 @@ def ms(v, d=1):
 REPORT_SETS = ["unedited", "random_20_prepend", "random_50_prepend", "random_100_prepend", "random_200_insert", "lgbm_50_prepend"]
 
 
-def write_report_table(out_dir, names, S, R, wb, mal, ben):
+def write_report_table(out_dir, names, S, R, wb, mal, ben, sets=None, fpr_set="random_50_prepend", with_wb=True):
     """report_table.md (NOTES 25 partial report): detection % at the 1% clean-FPR threshold, mean +- std over the seeds; "pending" for anything not computed yet."""
     mods = [(f, lab) for f, lab in MODELS]
     head = ["row"] + [lab for _, lab in mods]
     rows = []
-    for nm in REPORT_SETS:
+    for nm in (sets or REPORT_SETS):
         r = [nm.replace("_", " ")]
         for f, _ in mods:
             r.append(ms([(S[f]["Z"][s][names.index(nm)][mal] > R[f]["t1"][s]).mean() for s in S[f]["seeds"]]) if f in S and nm in names else "pending")
         rows.append(r)
-    for k in (20, 50):
+    for k in ((20, 50) if with_wb else ()):
         r = [f"white-box {k} steps"]
         for f, _ in mods:
             r.append(ms([(x["best"][k] > float(x["t1"])).mean() for x in wb[f]]) if f in wb else "pending")
         rows.append(r)
-    r = ["padded-benign FPR (%), random 50 prepend"]
-    for f, _ in mods:
-        r.append(ms([(S[f]["Z"][s][names.index("random_50_prepend")][ben] > R[f]["t1"][s]).mean() for s in S[f]["seeds"]], 2) if f in S else "pending")
-    rows.append(r)
+    for nm in ([fpr_set] if fpr_set else []) + ([x for x in (sets or []) if x != "unedited" and x != fpr_set] if sets else []):        # padded-benign FPR rows (default: the random 50 prepend row of the Stage J report table)
+        r = [f"padded-benign FPR (%), {nm.replace('_', ' ')}"]
+        for f, _ in mods:
+            r.append(ms([(S[f]["Z"][s][names.index(nm)][ben] > R[f]["t1"][s]).mean() for s in S[f]["seeds"]], 2) if f in S and nm in names else "pending")
+        rows.append(r)
     txt = ["### Detection of April malware (%) at the 1% clean-FPR threshold, mean ± std over 10 seeds; last row: padded-benign false-positive rate (%)", "", md(rows, head), ""]
     open(os.path.join(out_dir, "report_table.md"), "w").write("\n".join(txt))
 
@@ -60,9 +61,15 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--scores", required=True)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--report-sets", nargs="*", default=None, help="NOTES 26: the edit sets of report_table.md (default: the rows of the Stage J table); with this option there are no white-box rows and every set gets a padded-benign FPR row")
+    ap.add_argument("--models", nargs="*", default=None, help="NOTES 26: model keys (name=label) to report instead of m1..m4, e.g. x_fn='M1-type flatten, no padding'")
     ap.add_argument("--suffix", default="", help="appended to the model names, e.g. ' (fixed tokenizer)' (NOTES 25)")
     a = ap.parse_args()
     global MODELS
+    if a.models:
+        MODELS = [tuple(x.split("=", 1)) for x in a.models]
+        for k, _ in MODELS:
+            COL.setdefault(k, ["#0072B2", "#E69F00", "#009E73", "#D55E00", "#CC79A7", "#56B4E9"][len(COL) % 6])
     MODELS = [(k, n + a.suffix) for k, n in MODELS]
     y = np.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results", "logits", "labels.npz"))["y_test"].astype(int)
     fam, _, _ = april_meta()
@@ -138,7 +145,7 @@ def main():
     os.makedirs(a.out, exist_ok=True)
     open(os.path.join(a.out, "tables.md"), "w").write("\n".join(L) + "\n")
     json.dump(out, open(os.path.join(a.out, "results.json"), "w"))
-    write_report_table(a.out, names, S, R, wb, mal, ben)
+    write_report_table(a.out, names, S, R, wb, mal, ben, sets=a.report_sets, fpr_set=("random_50_prepend" if not a.report_sets else None), with_wb=not a.report_sets)
     # figure: detection and padded-benign FPR vs k (1% threshold)
     import matplotlib
     matplotlib.use("Agg")

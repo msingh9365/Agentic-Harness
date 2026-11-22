@@ -23,6 +23,16 @@ PRIMARY = "pauc@0.01"
 NAME = {"m1": "M1 v2-PE (all January)", "m2": "M2 two-level, no padding (all January)", "m3": "M3 ATT+bal (all January)", "m4": "M4 ATT+bal-2L (all January)", "old1": "v2-PE, old split (reference)", "old3": "ATT+bal, old split (reference)"}
 
 
+def load_npz(runs, tag, epoch, n_epochs, npz, key, expect_train=75298):
+    """Step 5 models: the run JSONs (settings) are checked here, the April logits come from the committed npz (verified bit-identical to the Stage G loss-log reruns)."""
+    for s in SEEDS:
+        r = json.load(open(os.path.join(runs, tag, f"seed{s}.json")))
+        assert r["epochs"] == n_epochs and r["n_train"] == expect_train and r["tokenizer"] == "bpe50k" and r["split_hash_asserted"], (tag, s, r["epochs"], r["n_train"])
+    z = np.load(npz)[key].astype(np.float64)
+    assert z.shape[0] == len(SEEDS)
+    return z.reshape(len(SEEDS), -1)
+
+
 def load(runs, tag, epoch, n_epochs, expect_train=75298):
     for s in SEEDS:
         have = sorted(int(f.split("_epoch")[1].split("_")[0]) for f in os.listdir(os.path.join(runs, tag)) if f.startswith(f"seed{s}_epoch") and f.endswith("_test_logits.npy"))
@@ -45,7 +55,8 @@ def main():
     y = np.load(os.path.join(ROOT, "results", "logits", "labels.npz"))["y_test"].astype(int)
     fam, hsh, groups = april_meta()
     assert len(set(groups)) == 2509 and len(y) == len(fam)
-    test = {"m1": load(a.step5, "gsx_v2pe", 1, 1), "m3": load(a.step5, "gsx_attbal", 3, 3), "m2": load(a.g_runs, "gm2", e2, e2), "m4": load(a.g_runs, "gm4", e4, e4),
+    test = {"m1": load_npz(a.step5, "gsx_v2pe", 1, 1, os.path.join(os.path.dirname(a.step5.rstrip("/")), "logits_final_models.npz"), "v2pe_test"),
+            "m3": load_npz(a.step5, "gsx_attbal", 3, 3, os.path.join(os.path.dirname(a.step5.rstrip("/")), "logits_final_models.npz"), "attbal_test"), "m2": load(a.g_runs, "gm2", e2, e2), "m4": load(a.g_runs, "gm4", e4, e4),
             "old1": AR.load_family("v2_pe", os.path.join(ROOT, "results", "att_bal"))[0],
             "old3": np.stack([np.load(os.path.join(ROOT, "results", "review", "attack", "a3pad_attbal.npz"))[f"seed{s}"][0].astype(np.float64) for s in SEEDS])}
     from sklearn.metrics import roc_auc_score

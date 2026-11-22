@@ -39,6 +39,8 @@ VARIANTS = {
     "bpe8k": dict(kind="bpe", vocab=8192, seq=512),          # self-supervised experiments (paper Sec. 4.5)
     "bpe50k_gs": dict(kind="bpe", vocab=50000, seq=512),     # NOTES 21: the same as bpe50k, but fit on the TRAINING part of the group split only (baseline/gs_tokens.py)
     "bpe50k_all": dict(kind="bpe", vocab=50000, seq=512),    # NOTES 22.7: re-fit on ALL 75,298 January reports with the same settings as bpe50k (reproduction check of the old tokenizer, baseline/gs_tokrepro.py)
+    "bpe50k_fix": dict(kind="bpe", vocab=50000, seq=512,     # NOTES 25: the old bpe50k + full character coverage and byte fallback, id 0 = padding only (pad_id 0, unk_id 1, no bos/eos); fit on ALL 75,298 January reports (baseline/gs_tokens_fix.py)
+                       spm_extra="--character_coverage=1.0 --byte_fallback=true --pad_id=0 --unk_id=1 --bos_id=-1 --eos_id=-1"),
     "bpe8k_v2": dict(kind="bpe", vocab=8192, seq=512),       # B3: the same, but the tokenizer is fit on the 90% of January that is not the validation slice (--fit-gap-split)
     # released tokenizers (their files, no training): sanity check E
     "released_bpe50k": dict(kind="bpe", released=True, seq=512),
@@ -134,7 +136,16 @@ def build_tokenizer(spec, nebula_root, model_path=None, vocab_file=None):
     common = _tok_common()
     if spec["kind"] == "bpe":
         if model_path is None:
-            return JSONTokenizerBPE(vocab_size=spec["vocab"], seq_len=spec["seq"], **common)
+            tok = JSONTokenizerBPE(vocab_size=spec["vocab"], seq_len=spec["seq"], **common)
+            if spec.get("spm_extra"):                                  # the authors' train() unchanged; only its SentencePiece call gets the extra flags appended (NOTES 25)
+                import sentencepiece as spm
+
+                class _ExtraTrainer:
+                    def Train(self, cmd, _extra=spec["spm_extra"]):
+                        print(f"[spm] extra flags: {_extra}", flush=True)
+                        return spm.SentencePieceTrainer.Train(cmd + " " + _extra)
+                tok.tokenizer = _ExtraTrainer()
+            return tok
         return JSONTokenizerBPE(vocab_size=spec["vocab"], seq_len=spec["seq"], model_path=model_path, vocab=vocab_file, **common)
     tok = JSONTokenizerNaive(vocab_size=spec["vocab"], seq_len=spec["seq"], counter_dump=model_path is None,
                              type=spec["kind"], **common)

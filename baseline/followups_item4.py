@@ -32,8 +32,8 @@ def load(runs, tag, epochs):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--train-runs", required=True)
-    ap.add_argument("--attack", required=True)
-    ap.add_argument("--fixj", required=True)
+    ap.add_argument("--attack", default=None, help="attack scores dir of y_fm and y_am (omit: only the clean comparison)")
+    ap.add_argument("--fixj", default=None)
     ap.add_argument("--ref", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--boot", type=int, default=1000)
@@ -47,19 +47,20 @@ def main():
             raise SystemExit(f"STOP: {k} has a collapsed seed (April AUC < 0.6)")
     ref = np.load(a.ref)
     Z = {"m1": ref["f1_test"].astype(np.float64), "y_fm": Z["y_fm"], "m3": ref["f3_test"].astype(np.float64), "y_am": Z["y_am"]}
-    # combined scores directory
+    os.makedirs(a.out, exist_ok=True)
     comb = os.path.join(a.out, "combined")
-    os.makedirs(comb, exist_ok=True)
-    ref_names = [str(n) for n in np.load(os.path.join(a.attack, "scores_y_fm.npz"))["names"]]
-    for fam in ("y_fm", "y_am"):
-        d = np.load(os.path.join(a.attack, f"scores_{fam}.npz"))
-        assert [str(n) for n in d["names"]] == ref_names
-        np.savez_compressed(os.path.join(comb, f"scores_{fam}.npz"), **{k: d[k] for k in d.files})
-    for fam in ("m1", "m3"):
-        d = np.load(os.path.join(a.fixj, f"scores_{fam}.npz"))
-        names = [str(n) for n in d["names"]]
-        sel = [names.index(n) for n in ref_names]
-        np.savez_compressed(os.path.join(comb, f"scores_{fam}.npz"), names=np.array(ref_names), tot=d["tot"][sel], **{f"seed{s}": d[f"seed{s}"][sel] for s in SEEDS})
+    if a.attack and a.fixj:                                          # the combined scores directory needs the attack scores of the new models
+        os.makedirs(comb, exist_ok=True)
+        ref_names = [str(n) for n in np.load(os.path.join(a.attack, "scores_y_fm.npz"))["names"]]
+        for fam in ("y_fm", "y_am"):
+            d = np.load(os.path.join(a.attack, f"scores_{fam}.npz"))
+            assert [str(n) for n in d["names"]] == ref_names
+            np.savez_compressed(os.path.join(comb, f"scores_{fam}.npz"), **{k: d[k] for k in d.files})
+        for fam in ("m1", "m3"):
+            d = np.load(os.path.join(a.fixj, f"scores_{fam}.npz"))
+            names = [str(n) for n in d["names"]]
+            sel = [names.index(n) for n in ref_names]
+            np.savez_compressed(os.path.join(comb, f"scores_{fam}.npz"), names=np.array(ref_names), tot=d["tot"][sel], **{f"seed{s}": d[f"seed{s}"][sel] for s in SEEDS})
     lab = {"m1": "M1 Nebula (final, no padding)", "y_fm": "M1 settings + malware-only padding", "m3": "M3 ATT+bal (final, balanced padding)", "y_am": "M3 settings + malware-only padding"}
     T = {k: metrics_of(y, Z[k]) for k in Z}
     ens = {k: C.binary_metrics(y, Z[k].mean(0), decision=0.0) for k in Z}

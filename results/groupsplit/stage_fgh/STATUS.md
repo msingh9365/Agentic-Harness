@@ -153,3 +153,6 @@ All pre-report checks passed (`stage_j_partial/checks.json`): 10 seeds everywher
 
 # MTP follow-ups - a run failure to report (item 4)
 `msingh9365/nebula-fup-malpad` (malware-only padding training) failed within seconds at data loading: the copy of `gs-fix-inputs` on that account held only the call store and the labels (published for the attack jobs) and lacked the token arrays of `variants/bpe50k_fix`. No training ran and no April logit existed, so nothing was produced or affected. The full dataset was published to the account as a new version and the kernel relaunched unchanged. Recorded here because the instruction was to stop after a failed run: this was a missing input file found before any computation, fixed at once.
+
+# MTP follow-ups - item 4 partial (clean part done)
+Malware-only padding models trained (msingh9365, `nebula-fup-malpad` v2, `failed: []`, checks passed, NOTES 26.5-partial). Clean April pAUC@1e-2: 0.702 ± 0.038 (M1 settings + malware-only padding; final M1 0.686 ± 0.026, +1.55, not resolved) and 0.703 ± 0.028 (M3 settings; final M3 0.705 ± 0.025, -0.19, not resolved). PENDING: the padded-benign false-positive rates at random 5/20/50 insert and prepend (`msingh9365/nebula-fup-atk4`, queued).

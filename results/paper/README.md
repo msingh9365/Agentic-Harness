@@ -33,6 +33,7 @@ Sets: **A** = reproduction (the paper's tokenizer): final M1, M3 (Step 5), M2, M
 | T5a_attack_detection_1pct | Attack results: detection at 1% FPR | made | `results/paper/A/tables/T5a_attack_detection_1pct.md`<br>`results/paper/A/tables/T5a_attack_detection_1pct.tex` | `results/paper/A/data/attack_results.json` |
 | T5b_attack_detection_0.1pct | Attack results: detection at 0.1% FPR | made | `results/paper/A/tables/T5b_attack_detection_0.1pct.md`<br>`results/paper/A/tables/T5b_attack_detection_0.1pct.tex` | `results/paper/A/data/attack_results.json` |
 | T5c_attack_padded_benign_fpr_1pct | Attack results: padded-benign FPR | made | `results/paper/A/tables/T5c_attack_padded_benign_fpr_1pct.md`<br>`results/paper/A/tables/T5c_attack_padded_benign_fpr_1pct.tex` | `results/paper/A/data/attack_results.json` |
+| F14 | Padded-benign false alarms, malware-only vs balanced padding (final settings) | skipped: SET B only (item 4 of NOTES 26, corrected tokenizer) | - | - |
 
 ## SET B
 
@@ -61,6 +62,7 @@ Sets: **A** = reproduction (the paper's tokenizer): final M1, M3 (Step 5), M2, M
 | T5b_attack_detection_0.1pct | Attack results: detection at 0.1% FPR | made | `results/paper/B/tables/T5b_attack_detection_0.1pct.md`<br>`results/paper/B/tables/T5b_attack_detection_0.1pct.tex` | `results/groupsplit/stage_fgh/stage_j/results.json` |
 | T5c_attack_padded_benign_fpr_1pct | Attack results: padded-benign FPR | made | `results/paper/B/tables/T5c_attack_padded_benign_fpr_1pct.md`<br>`results/paper/B/tables/T5c_attack_padded_benign_fpr_1pct.tex` | `results/groupsplit/stage_fgh/stage_j/results.json` |
 | F8_detection_vs_added_calls | Detection vs number of added calls | made | `results/paper/B/figs/F8_detection_vs_added_calls.pdf`<br>`results/paper/B/figs/F8_detection_vs_added_calls.png`<br>`results/paper/B/figs/F8_detection_vs_added_calls_caption.txt` | `results/groupsplit/stage_fgh/stage_j/results.json` |
+| F14_padded_benign_false_alarms_final_settings | Padded-benign false alarms: malware-only vs balanced padding (final settings) | made | `results/paper/B/figs/F14_padded_benign_false_alarms_final_settings.pdf`<br>`results/paper/B/figs/F14_padded_benign_false_alarms_final_settings.png`<br>`results/paper/B/figs/F14_padded_benign_false_alarms_final_settings_caption.txt` | `results/groupsplit/stage_fgh/followups/item4/attack/results.json` |
 
 ## Notes
 

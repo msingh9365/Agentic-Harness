@@ -364,5 +364,21 @@
   ],
   "status": "made",
   "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F14_padded_benign_false_alarms_final_settings",
+  "title": "Padded-benign false alarms: malware-only vs balanced padding (final settings)",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F14_padded_benign_false_alarms_final_settings.pdf",
+   "results/paper/B/figs/F14_padded_benign_false_alarms_final_settings.png",
+   "results/paper/B/figs/F14_padded_benign_false_alarms_final_settings_caption.txt"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/followups/item4/attack/results.json"
+  ],
+  "status": "made",
+  "reason": ""
  }
 ]

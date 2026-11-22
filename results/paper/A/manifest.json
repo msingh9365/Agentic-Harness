@@ -359,5 +359,15 @@
   ],
   "status": "made",
   "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F14",
+  "title": "Padded-benign false alarms, malware-only vs balanced padding (final settings)",
+  "set": "A",
+  "files": [],
+  "sources": [],
+  "status": "skipped",
+  "reason": "SET B only (item 4 of NOTES 26, corrected tokenizer)"
  }
 ]

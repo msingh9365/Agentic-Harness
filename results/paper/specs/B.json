@@ -75,5 +75,6 @@
   "attn_raw": "/tmp/attn_out/out/attn_m3_seed0.json"
  },
  "p2_suffix": "fixed tokenizer",
- "attack_results_extra": "results/groupsplit/stage_fgh/stage_k/results.json"
+ "attack_results_extra": "results/groupsplit/stage_fgh/stage_k/results.json",
+ "item4_results": "results/groupsplit/stage_fgh/followups/item4/attack/results.json"
 }

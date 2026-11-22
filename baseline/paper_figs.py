@@ -450,6 +450,27 @@ def f13(C):
     C.save_fig(fig, "F13_padded_benign_false_alarms_earlier_models", "Padded-benign false alarms: malware-only vs balanced padding (earlier models)", cap, ["results/review/attack_aggregates.json"])
 
 
+def f14(C):
+    """SET B only (NOTES 26 item 4): padded-benign false alarms of the final-settings models trained with malware-only padding, next to the balanced-padding M3 and the no-padding M1"""
+    plt = style()
+    R = json.load(open(p(C.spec["item4_results"])))
+    sets = ["random_5_insert", "random_20_insert", "random_50_insert", "random_5_prepend", "random_20_prepend", "random_50_prepend"]
+    models = [("y_am", "attention, malware-only padding", "#CC79A7", ""), ("m3", "M3 ATT+bal (balanced padding)", "#009E73", ""), ("y_fm", "flatten, malware-only padding", "#CC79A7", "///"), ("m1", "M1 Nebula (no padding)", "#0072B2", "///")]
+    fig, ax = plt.subplots(figsize=(SC, 3.1))
+    for i, (k, lab, col, h) in enumerate(models):
+        v = [100 * np.array(R[f"{k}|{s}|t1"]["padded_benign_fpr"]) for s in sets]
+        ax.bar(np.arange(len(sets)) + (i - 1.5) * 0.2, [x.mean() for x in v], 0.19, yerr=[x.std(ddof=1) for x in v], color=col, hatch=h, edgecolor="k", lw=0.4, capsize=1, error_kw={"lw": 0.6}, label=lab)
+    ax.axhline(1.0, color="k", ls=":", lw=0.6)
+    ax.set_xticks(range(len(sets)))
+    ax.set_xticklabels([f"{s.split('_')[2]}\n{s.split('_')[1]}" for s in sets], fontsize=7)
+    ax.tick_params(axis="y", labelsize=7)
+    ax.set_xlabel("padding: mode and number of added calls k", fontsize=8)
+    ax.set_ylabel("padded-benign false alarms (%)\nat 1% FPR", fontsize=8)
+    ax.legend(ncol=2, fontsize=6.5, loc="lower center", bbox_to_anchor=(0.5, 1.0), columnspacing=0.8, handlelength=1.4)
+    cap = "Corrected-tokenizer models with the final M1 (flatten) and M3 (attention) settings (10 seeds): false-positive rate on padded April benign reports at the 1% threshold of the unedited benign reports, for models trained with padding of malware reports only (pink; solid = attention head, hatched = flatten head), the balanced-padding M3 (green) and the no-padding M1 (blue, hatched). Bars: mean ± std over seeds; the dotted line is the clean 1%."
+    C.save_fig(fig, "F14_padded_benign_false_alarms_final_settings", "Padded-benign false alarms: malware-only vs balanced padding (final settings)", cap, [C.spec["item4_results"]])
+
+
 def f_ab(C):
     """SET B only: per-seed pAUC of the current (SET A) and the corrected tokenizer per model, paired side by side"""
     plt = style()
@@ -682,7 +703,7 @@ def pairs_extra(C):
 
 
 # --------------------------------------------------------------------------------------------- driver and README
-ITEMS = [("F2", f2), ("F3", f3), ("F4", f4), ("F5", f5), ("F6", f6), ("F7", f7), ("F8", f8), ("F9", f9), ("F10", f10), ("F11", f11), ("F12", f12), ("F13", f13), ("F_AB", f_ab),
+ITEMS = [("F2", f2), ("F3", f3), ("F4", f4), ("F5", f5), ("F6", f6), ("F7", f7), ("F8", f8), ("F9", f9), ("F10", f10), ("F11", f11), ("F12", f12), ("F13", f13), ("F14", f14), ("F_AB", f_ab),
          ("T1", t1), ("T2", t2), ("T3", t3), ("T4", t4), ("T5", t5), ("T6", t6), ("T7", t7), ("T8", t8)]
 
 
@@ -693,6 +714,9 @@ def run_items(C, only):
             continue
         if id_ == "F13" and C.set != "A":
             C.note("figure", id_, "Padded-benign false alarms, malware-only vs balanced padding (earlier models)", [], [], "skipped", "SET A only (earlier models of REPORT 5.10/5.11, old tokenizer)")
+            continue
+        if id_ == "F14" and "item4_results" not in C.spec:
+            C.note("figure", id_, "Padded-benign false alarms, malware-only vs balanced padding (final settings)", [], [], "skipped", "SET B only (item 4 of NOTES 26, corrected tokenizer)")
             continue
         if id_ in ("F_AB", "T8") and "compare" not in C.spec:
             C.note("figure" if id_.startswith("F") else "table", id_, "Current vs corrected tokenizer", [], [], "skipped", "only for SET B (needs the corrected-tokenizer models)")

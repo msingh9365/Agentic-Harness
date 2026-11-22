@@ -256,7 +256,7 @@ def run(a):
             assert len(trn) == 75298
         else:
             assert len(trn) == 66580
-        assert a.variant == "bpe50k", a.variant                                          # NOTES 23 automatic check (b): the old tokenizer
+        assert a.variant in ("bpe50k", "bpe50k_fix"), a.variant                          # NOTES 23 / 25 automatic check (b): the old tokenizer, or the corrected one (NOTES 25)
     warm_path, warm_info = None, None
     if a.init == "warm":
         from baseline import padtest

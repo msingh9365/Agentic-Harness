@@ -88,6 +88,8 @@ def main():
     ap.add_argument("--out", default=os.path.join(SG, "stage_fgh", "p2"))
     ap.add_argument("--boot", type=int, default=1000)
     ap.add_argument("--procs", type=int, default=4)
+    ap.add_argument("--fixed-logits", default=None, help="NOTES 25: logits_fixed_models.npz (keys f1_test..f4_test) of the four models with the corrected tokenizer: added to the group `jan` (all of January)")
+    ap.add_argument("--groups", nargs="*", default=["jan", "gs", "old"])
     a = ap.parse_args()
     y = np.load(os.path.join(ROOT, "results", "logits", "labels.npz"))["y_test"].astype(int)
     fam, hsh, groups = april_meta()
@@ -98,12 +100,20 @@ def main():
     sets = {"jan": set(hj), "gs": set(hj[trn]), "old": set(hj[otrn])}
     hap = jt["test"]["hash_apis"]
     models, missing = load_models()
+    FIX = {"f1": "M1 v2-PE (fixed tokenizer)", "f2": "M2 two-level, no padding (fixed tokenizer)", "f3": "M3 ATT+bal (fixed tokenizer)", "f4": "M4 ATT+bal-2L (fixed tokenizer)"}
+    if a.fixed_logits:
+        zf = np.load(a.fixed_logits)
+        for k, nm in FIX.items():
+            models[nm] = ("jan", zf[f"{k}_test"].astype(np.float64))
     masks = {g: np.array([h in s for h in hap]) for g, s in sets.items()}                  # seen
     tasks, meta = [], {}
     pair_defs = {"jan": [("M2 two-level, no padding (final)", "M1 v2-PE (final)"), ("M4 ATT+bal-2L (final)", "M3 ATT+bal (final)"), ("M4 ATT+bal-2L (final)", "M2 two-level, no padding (final)"), ("M3 ATT+bal (final)", "M1 v2-PE (final)")],
                  "gs": [("Stage C ATT+bal (group-split part)", "Stage C v2-PE (group-split part)")],
                  "old": [("old-split ATT+bal", "old-split v2-PE"), ("2L A (old split)", "old-split ATT+bal"), ("2L A (old split)", "2L B, no padding (old split)"), ("2L B, no padding (old split)", "old-split v2-PE")]}
-    for g in ("jan", "gs", "old"):
+    if a.fixed_logits:
+        cur = {"f1": "M1 v2-PE (final)", "f2": "M2 two-level, no padding (final)", "f3": "M3 ATT+bal (final)", "f4": "M4 ATT+bal-2L (final)"}
+        pair_defs["jan"] = pair_defs["jan"] + [(FIX[k], cur[k]) for k in FIX] + [(FIX["f3"], FIX["f1"]), (FIX["f4"], FIX["f3"]), (FIX["f4"], FIX["f2"])]
+    for g in a.groups:
         names = [n for n, (gg, _) in models.items() if gg == g]
         pairs = [(p, q) for p, q in pair_defs[g] if p in names and q in names]
         for sname, sel in (("seen", masks[g]), ("unseen", ~masks[g])):
@@ -118,7 +128,7 @@ def main():
         L += ["Not available: " + "; ".join(missing), ""]
     out = {"missing": missing, "subsets": {}, "models": {}, "pairs": {}}
     rows = []
-    for g in ("jan", "gs", "old"):
+    for g in a.groups:
         for sname in ("seen", "unseen"):
             m = meta[(g, sname)]
             out["subsets"][f"{g}|{sname}"] = {k: v for k, v in m.items() if k not in ("sel", "pairs", "names")}
@@ -132,7 +142,7 @@ def main():
                              f"{tp.mean():.3f} ± {tp.std(ddof=1):.3f}", f"[{cs['tpr01'][0]:.3f}, {cs['tpr01'][1]:.3f}] | [{cc['tpr01'][0]:.3f}, {cc['tpr01'][1]:.3f}]"])
     L += [ "| model | training set of the model | April subset | reports / malware / benign / groups | pAUC@1e-2 | 95% CI (stratified \\| cluster) | TPR@1e-2 | 95% CI (stratified \\| cluster) |", "|---|---|---|---|---|---|---|---|"] + ["| " + " | ".join(r) + " |" for r in rows]
     prow = []
-    for g in ("jan", "gs", "old"):
+    for g in a.groups:
         for sname in ("seen", "unseen"):
             m = meta[(g, sname)]
             for p, q in m["pairs"]:

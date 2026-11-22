@@ -34,7 +34,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--scores", required=True)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--suffix", default="", help="appended to the model names, e.g. ' (fixed tokenizer)' (NOTES 25)")
     a = ap.parse_args()
+    global MODELS
+    MODELS = [(k, n + a.suffix) for k, n in MODELS]
     y = np.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results", "logits", "labels.npz"))["y_test"].astype(int)
     fam, _, _ = april_meta()
     mal, ben = y == 1, y == 0
@@ -52,7 +55,7 @@ def main():
         t01 = {s: padtest.thresholds(Z[s][0], y, 0.001) for s in seeds}
         R[f] = {"t1": t1, "t01": t01}
     names = S[next(iter(S))]["names"]
-    L = [f"### Attacks on the four final models (April, all reports edited; seeds present: " + ", ".join(f"{f}: {len(S[f]['seeds'])}" for f in S) + ")", ""]
+    L = [f"### Attacks on the four final models{a.suffix} (April, all reports edited; seeds present: " + ", ".join(f"{f}: {len(S[f]['seeds'])}" for f in S) + ")", ""]
     out = {}
     for thr_key, thr_lab in (("t1", "1% FPR"), ("t01", "0.1% FPR")):
         det, fpr = [], []

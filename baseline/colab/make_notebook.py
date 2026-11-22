@@ -34,7 +34,8 @@ CELLS = [
 import subprocess, torch
 print(subprocess.run(["nvidia-smi", "--query-gpu=name,memory.total", "--format=csv,noheader"], capture_output=True, text=True).stdout.strip())
 assert torch.cuda.is_available(), "No GPU: Runtime > Change runtime type > T4 GPU, then run all again."
-print("torch", torch.__version__, "| cuda", torch.version.cuda)'''),
+print("torch", torch.__version__, "| cuda", torch.version.cuda)
+print("NOTEBOOK VERSION: v4 (data folder chosen automatically; if you do not see this line you are running an old copy: upload colab/nebula_m1_whitebox.ipynb again)")'''),
 ("code", '''# 2. token from the Colab secret (never printed) and the Kaggle CLI
 import os, subprocess
 from google.colab import userdata
@@ -70,7 +71,17 @@ sh(f"bash {CODE}/patches/apply_patches.sh {NEB}")
 sh(f"pip install -q -e {NEB} --no-deps")
 print("nebula commit:", subprocess.check_output(["git", "-C", NEB, "rev-parse", "HEAD"], text=True).strip())'''),
 ("code", '''# 4. the three private datasets (M1 weights and stored logits, the corrected-tokenizer call store, the group split); on Colab /kaggle is read-only, so they go to /content/input (the code reads NEBULA_INPUT)
-INPUT = "/content/input"
+INPUT = None
+for cand in ("/content/input", "/tmp/nebula_input", os.path.expanduser("~/nebula_input")):
+    try:
+        os.makedirs(cand, exist_ok=True)
+        open(os.path.join(cand, ".write_test"), "w").close()
+        INPUT = cand
+        break
+    except OSError as e:
+        print("not writable:", cand, "->", e)
+assert INPUT, "no writable folder found for the datasets"
+print("data folder:", INPUT)
 for slug in ("gs-fix-models", "gs-fix-inputs", "nebula-groupsplit"):
     d = f"{INPUT}/{slug}"
     if os.path.exists(d) and os.listdir(d):

@@ -1,4 +1,4 @@
-**Detection (%) of April malware after each edit at the 1% false-positive-rate threshold of the unedited April benign scores, mean ± std over 10 seeds (white-box: 500 malware reports; pending = not computed yet).**
+**Detection (%) of April malware after each edit at the 1% false-positive-rate threshold of the unedited April benign scores, mean ± std over 10 seeds (white-box: 500 malware reports).**
 
 | edit | M1 Nebula | M2 two-level | M3 ATT+bal | M4 ATT+bal-2L |
 |---|---|---|---|---|
@@ -19,7 +19,7 @@
 | lgbm 20 insert | 43.8 ± 7.4 | 41.3 ± 8.7 | 70.6 ± 1.7 | 62.5 ± 2.4 |
 | lgbm 50 insert | 25.4 ± 6.8 | 25.3 ± 6.8 | 54.7 ± 2.9 | 47.5 ± 5.8 |
 | lgbm 100 insert | 13.9 ± 4.9 | 13.4 ± 4.7 | 36.8 ± 3.4 | 36.6 ± 6.5 |
-| white-box 5 steps | pending | 44.1 ± 8.8 | 66.2 ± 2.6 | 61.3 ± 3.6 |
-| white-box 10 steps | pending | 35.9 ± 10.2 | 63.1 ± 3.1 | 58.3 ± 3.9 |
-| white-box 20 steps | pending | 19.6 ± 13.3 | 48.7 ± 6.3 | 50.2 ± 5.4 |
-| white-box 50 steps | pending | 13.8 ± 13.6 | 2.5 ± 1.3 | 10.6 ± 8.5 |
+| white-box 5 steps | 12.5 ± 7.0 | 44.1 ± 8.8 | 66.2 ± 2.6 | 61.3 ± 3.6 |
+| white-box 10 steps | 5.9 ± 3.6 | 35.9 ± 10.2 | 63.1 ± 3.1 | 58.3 ± 3.9 |
+| white-box 20 steps | 1.6 ± 1.6 | 19.6 ± 13.3 | 48.7 ± 6.3 | 50.2 ± 5.4 |
+| white-box 50 steps | 0.6 ± 1.2 | 13.8 ± 13.6 | 2.5 ± 1.3 | 10.6 ± 8.5 |

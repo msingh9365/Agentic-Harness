@@ -1,1 +1,1 @@
-Detection of April malware at a 1% false-positive rate against the number of calls added by the attacker (random padding prepended and inserted, LightGBM-ranked padding, and the white-box greedy search), mean over 10 seeds with ± std bands. A model whose white-box result is pending is named in the last panel.
+Detection of April malware at a 1% false-positive rate against the number of calls added by the attacker (random padding prepended and inserted, LightGBM-ranked padding, and the white-box greedy search), mean over 10 seeds with ± std bands.

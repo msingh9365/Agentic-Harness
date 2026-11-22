@@ -90,38 +90,6 @@
  },
  {
   "kind": "figure",
-  "id": "F7_robustness_heatmap",
-  "title": "Robustness heatmap",
-  "set": "A",
-  "files": [
-   "results/paper/A/figs/F7_robustness_heatmap.pdf",
-   "results/paper/A/figs/F7_robustness_heatmap.png",
-   "results/paper/A/figs/F7_robustness_heatmap_caption.txt"
-  ],
-  "sources": [
-   "results/paper/A/data/attack_results.json"
-  ],
-  "status": "made",
-  "reason": ""
- },
- {
-  "kind": "figure",
-  "id": "F8_detection_vs_added_calls",
-  "title": "Detection vs number of added calls",
-  "set": "A",
-  "files": [
-   "results/paper/A/figs/F8_detection_vs_added_calls.pdf",
-   "results/paper/A/figs/F8_detection_vs_added_calls.png",
-   "results/paper/A/figs/F8_detection_vs_added_calls_caption.txt"
-  ],
-  "sources": [
-   "results/paper/A/data/attack_results.json"
-  ],
-  "status": "made",
-  "reason": ""
- },
- {
-  "kind": "figure",
   "id": "F9_seen_vs_unseen",
   "title": "Seen vs unseen pAUC",
   "set": "A",
@@ -276,6 +244,79 @@
  },
  {
   "kind": "table",
+  "id": "T6_seen_unseen",
+  "title": "Seen vs unseen April reports",
+  "set": "A",
+  "files": [
+   "results/paper/A/tables/T6_seen_unseen.md",
+   "results/paper/A/tables/T6_seen_unseen.tex"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/p2/seen_unseen.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "table",
+  "id": "T7_pairwise_differences",
+  "title": "Pairwise differences",
+  "set": "A",
+  "files": [
+   "results/paper/A/tables/T7_pairwise_differences.md",
+   "results/paper/A/tables/T7_pairwise_differences.tex"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_g/results.json",
+   "results/paper/A/data/pairs_extra.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "table",
+  "id": "T8",
+  "title": "Current vs corrected tokenizer",
+  "set": "A",
+  "files": [],
+  "sources": [],
+  "status": "skipped",
+  "reason": "only for SET B (needs the corrected-tokenizer models)"
+ },
+ {
+  "kind": "figure",
+  "id": "F7_robustness_heatmap",
+  "title": "Robustness heatmap",
+  "set": "A",
+  "files": [
+   "results/paper/A/figs/F7_robustness_heatmap.pdf",
+   "results/paper/A/figs/F7_robustness_heatmap.png",
+   "results/paper/A/figs/F7_robustness_heatmap_caption.txt"
+  ],
+  "sources": [
+   "results/paper/A/data/attack_results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F8_detection_vs_added_calls",
+  "title": "Detection vs number of added calls",
+  "set": "A",
+  "files": [
+   "results/paper/A/figs/F8_detection_vs_added_calls.pdf",
+   "results/paper/A/figs/F8_detection_vs_added_calls.png",
+   "results/paper/A/figs/F8_detection_vs_added_calls_caption.txt"
+  ],
+  "sources": [
+   "results/paper/A/data/attack_results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "table",
   "id": "T5a_attack_detection_1pct",
   "title": "Attack results: detection at 1% FPR",
   "set": "A",
@@ -318,46 +359,5 @@
   ],
   "status": "made",
   "reason": ""
- },
- {
-  "kind": "table",
-  "id": "T6_seen_unseen",
-  "title": "Seen vs unseen April reports",
-  "set": "A",
-  "files": [
-   "results/paper/A/tables/T6_seen_unseen.md",
-   "results/paper/A/tables/T6_seen_unseen.tex"
-  ],
-  "sources": [
-   "results/groupsplit/stage_fgh/p2/seen_unseen.json"
-  ],
-  "status": "made",
-  "reason": ""
- },
- {
-  "kind": "table",
-  "id": "T7_pairwise_differences",
-  "title": "Pairwise differences",
-  "set": "A",
-  "files": [
-   "results/paper/A/tables/T7_pairwise_differences.md",
-   "results/paper/A/tables/T7_pairwise_differences.tex"
-  ],
-  "sources": [
-   "results/groupsplit/stage_fgh/stage_g/results.json",
-   "results/paper/A/data/pairs_extra.json"
-  ],
-  "status": "made",
-  "reason": ""
- },
- {
-  "kind": "table",
-  "id": "T8",
-  "title": "Current vs corrected tokenizer",
-  "set": "A",
-  "files": [],
-  "sources": [],
-  "status": "skipped",
-  "reason": "only for SET B (needs the corrected-tokenizer models)"
  }
 ]

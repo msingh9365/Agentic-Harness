@@ -125,3 +125,15 @@ All pre-report checks passed (`stage_j_partial/checks.json`): 10 seeds everywher
 - Queue waits were long: the M1 retrain about 1 h, the Stage J scores about 2 h, the M1 white-box more than 4 h so far.
 - The owner asked for one push (`9cdf83c`, before the partial report); this partial report and the figures are pushed with step 6 of the owner's instruction.
 - Smaller points: F12's attention weights are close to uniform (1/512 = 0.00195), and in SET A the white gaps are old-tokenizer unknown tokens masked as padding; F13 shows the EARLIER models of REPORT 5.10/5.11 and is SET A only; the Nebula paper numbers used are TPR 0.5213 at 1e-3 and F1 0.9136 only.
+
+
+---
+
+# UPDATE 2026-11-22 (final): the M1 white-box attack is done - nothing is pending
+
+- The M1 white-box attack (corrected tokenizer) finished on the first Kaggle copy, `msingh9365/nebula-fix-j-wb-m1` (about 6 min of runtime after a queue wait of about 6 h). The copies `manishsinghxdev/nebula-fix-j-wb-m1-b` and `-c` were still queued and were left untouched; the Colab notebook (`colab/nebula_m1_whitebox.ipynb`) was prepared but not needed.
+- Checks (`stage_j/checks.json`) passed for all four models; the **M2, M3 and M4 numbers are identical to the partial report** (108 result entries and every table cell compared; only the M1 white-box lines changed from "pending" to numbers). Final report: `stage_j/` (NOTES 25.2).
+- **M1 white-box detection at the 1% threshold:** 75.2 ± 2.6 (unedited, the 500 attacked reports) -> 1.6 ± 1.6 after 20 steps -> 0.6 ± 1.2 after 50 steps (M2 19.6 / 13.8, M3 48.7 / 2.5, M4 50.2 / 10.6 at 20 / 50 steps). M1 is the weakest against the white-box search; the padding-trained M3 and M4 hold up at 20 steps and fail by 50.
+- The attack table in the section above is complete with these two rows: white-box 20 steps M1 1.6 ± 1.6, white-box 50 steps M1 0.6 ± 1.2 (replace the two "pending" cells).
+- The paper figures and tables for SET B (F7, F8, T5) were regenerated from the complete attack file; no "pending" remains. P3 and P4 are still pre-registered and not run.
+- Stage J quota: about 3.6 h (estimate 3.8 h, limit 11.4 h). Duplicate-kernel deviations stand as listed above (done on the owner's instruction).

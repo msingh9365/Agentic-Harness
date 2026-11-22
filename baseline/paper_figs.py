@@ -297,7 +297,7 @@ def f7(C):
     for sp in ax.spines.values():
         sp.set_visible(False)
     fig.colorbar(im, ax=ax, label="malware detected (%)", pad=0.01)
-    cap = "Robustness to API-call padding: share of April malware still detected at a 1% false-positive rate (threshold on the unedited April benign reports) after the edit, mean over 10 seeds. Random padding takes calls from benign reports (EVAL pool), the LightGBM edit uses calls ranked by a LightGBM surrogate, the white-box attack is a greedy search with 200 candidates per step on 500 malware reports. Grey cells marked pending: not computed yet."
+    cap = "Robustness to API-call padding: share of April malware still detected at a 1% false-positive rate (threshold on the unedited April benign reports) after the edit, mean over 10 seeds. Random padding takes calls from benign reports (EVAL pool), the LightGBM edit uses calls ranked by a LightGBM surrogate, the white-box attack is a greedy search with 200 candidates per step on 500 malware reports." + (" Grey cells marked pending: not computed yet." if pend.any() else "")
     C.save_fig(fig, "F7_robustness_heatmap", "Robustness heatmap", cap, [C.spec["attack_results"]])
 
 
@@ -334,7 +334,7 @@ def f8(C):
         a.text(0.97, 0.97, "pending: " + ", ".join(pend), transform=a.transAxes, fontsize=6.5, va="top", ha="right")
     ax[0].set_ylabel("malware detected (%)")
     ax[0].legend(fontsize=6.5)
-    cap = "Detection of April malware at a 1% false-positive rate against the number of calls added by the attacker (random padding prepended and inserted, LightGBM-ranked padding, and the white-box greedy search), mean over 10 seeds with ± std bands. A model whose white-box result is pending is named in the last panel."
+    cap = "Detection of April malware at a 1% false-positive rate against the number of calls added by the attacker (random padding prepended and inserted, LightGBM-ranked padding, and the white-box greedy search), mean over 10 seeds with ± std bands." + (" A model whose white-box result is pending is named in the last panel." if pend else "")
     C.save_fig(fig, "F8_detection_vs_added_calls", "Detection vs number of added calls", cap, [C.spec["attack_results"]])
 
 
@@ -531,7 +531,7 @@ def t5(C):
                 r.append(ms(v) if v is not None else "pending")
             rows.append(r)
         C.save_table(f"{tid}_attack_detection_{lab.replace('%', 'pct')}", f"Attack results: detection at {lab} FPR", ["edit"] + [NAME[m] for m in MODELS], rows,
-                     f"Detection (%) of April malware after each edit at the {lab} false-positive-rate threshold of the unedited April benign scores, mean ± std over 10 seeds (white-box: 500 malware reports; pending = not computed yet).", [C.spec["attack_results"]])
+                     f"Detection (%) of April malware after each edit at the {lab} false-positive-rate threshold of the unedited April benign scores, mean ± std over 10 seeds (white-box: 500 malware reports)." + (" Pending = not computed yet." if any("pending" in str(c) for r in rows for c in r) else ""), [C.spec["attack_results"]])
     rows = []
     for nm in names:
         rows.append([nm.replace("_", " ")] + [ms(A[f"{C_ATTACK[m]}|{nm}|t1"]["padded_benign_fpr"], 2) if f"{C_ATTACK[m]}|{nm}|t1" in A else "pending" for m in MODELS])

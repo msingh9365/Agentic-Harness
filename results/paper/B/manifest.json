@@ -90,38 +90,6 @@
  },
  {
   "kind": "figure",
-  "id": "F7_robustness_heatmap",
-  "title": "Robustness heatmap",
-  "set": "B",
-  "files": [
-   "results/paper/B/figs/F7_robustness_heatmap.pdf",
-   "results/paper/B/figs/F7_robustness_heatmap.png",
-   "results/paper/B/figs/F7_robustness_heatmap_caption.txt"
-  ],
-  "sources": [
-   "results/groupsplit/stage_fgh/stage_j_partial/results.json"
-  ],
-  "status": "made",
-  "reason": ""
- },
- {
-  "kind": "figure",
-  "id": "F8_detection_vs_added_calls",
-  "title": "Detection vs number of added calls",
-  "set": "B",
-  "files": [
-   "results/paper/B/figs/F8_detection_vs_added_calls.pdf",
-   "results/paper/B/figs/F8_detection_vs_added_calls.png",
-   "results/paper/B/figs/F8_detection_vs_added_calls_caption.txt"
-  ],
-  "sources": [
-   "results/groupsplit/stage_fgh/stage_j_partial/results.json"
-  ],
-  "status": "made",
-  "reason": ""
- },
- {
-  "kind": "figure",
   "id": "F9_seen_vs_unseen",
   "title": "Seen vs unseen pAUC",
   "set": "B",
@@ -276,51 +244,6 @@
  },
  {
   "kind": "table",
-  "id": "T5a_attack_detection_1pct",
-  "title": "Attack results: detection at 1% FPR",
-  "set": "B",
-  "files": [
-   "results/paper/B/tables/T5a_attack_detection_1pct.md",
-   "results/paper/B/tables/T5a_attack_detection_1pct.tex"
-  ],
-  "sources": [
-   "results/groupsplit/stage_fgh/stage_j_partial/results.json"
-  ],
-  "status": "made",
-  "reason": ""
- },
- {
-  "kind": "table",
-  "id": "T5b_attack_detection_0.1pct",
-  "title": "Attack results: detection at 0.1% FPR",
-  "set": "B",
-  "files": [
-   "results/paper/B/tables/T5b_attack_detection_0.1pct.md",
-   "results/paper/B/tables/T5b_attack_detection_0.1pct.tex"
-  ],
-  "sources": [
-   "results/groupsplit/stage_fgh/stage_j_partial/results.json"
-  ],
-  "status": "made",
-  "reason": ""
- },
- {
-  "kind": "table",
-  "id": "T5c_attack_padded_benign_fpr_1pct",
-  "title": "Attack results: padded-benign FPR",
-  "set": "B",
-  "files": [
-   "results/paper/B/tables/T5c_attack_padded_benign_fpr_1pct.md",
-   "results/paper/B/tables/T5c_attack_padded_benign_fpr_1pct.tex"
-  ],
-  "sources": [
-   "results/groupsplit/stage_fgh/stage_j_partial/results.json"
-  ],
-  "status": "made",
-  "reason": ""
- },
- {
-  "kind": "table",
   "id": "T6_seen_unseen",
   "title": "Seen vs unseen April reports",
   "set": "B",
@@ -361,6 +284,83 @@
   ],
   "sources": [
    "results/groupsplit/stage_fgh/stage_i/results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F7_robustness_heatmap",
+  "title": "Robustness heatmap",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F7_robustness_heatmap.pdf",
+   "results/paper/B/figs/F7_robustness_heatmap.png",
+   "results/paper/B/figs/F7_robustness_heatmap_caption.txt"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_j/results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F8_detection_vs_added_calls",
+  "title": "Detection vs number of added calls",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F8_detection_vs_added_calls.pdf",
+   "results/paper/B/figs/F8_detection_vs_added_calls.png",
+   "results/paper/B/figs/F8_detection_vs_added_calls_caption.txt"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_j/results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "table",
+  "id": "T5a_attack_detection_1pct",
+  "title": "Attack results: detection at 1% FPR",
+  "set": "B",
+  "files": [
+   "results/paper/B/tables/T5a_attack_detection_1pct.md",
+   "results/paper/B/tables/T5a_attack_detection_1pct.tex"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_j/results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "table",
+  "id": "T5b_attack_detection_0.1pct",
+  "title": "Attack results: detection at 0.1% FPR",
+  "set": "B",
+  "files": [
+   "results/paper/B/tables/T5b_attack_detection_0.1pct.md",
+   "results/paper/B/tables/T5b_attack_detection_0.1pct.tex"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_j/results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "table",
+  "id": "T5c_attack_padded_benign_fpr_1pct",
+  "title": "Attack results: padded-benign FPR",
+  "set": "B",
+  "files": [
+   "results/paper/B/tables/T5c_attack_padded_benign_fpr_1pct.md",
+   "results/paper/B/tables/T5c_attack_padded_benign_fpr_1pct.tex"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_j/results.json"
   ],
   "status": "made",
   "reason": ""

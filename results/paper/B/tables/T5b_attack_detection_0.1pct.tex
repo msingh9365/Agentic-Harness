@@ -1,7 +1,7 @@
 \begin{table}[t]
 \centering
 \small
-\caption{Detection (\%) of April malware after each edit at the 0.1\% false-positive-rate threshold of the unedited April benign scores, mean $\pm$ std over 10 seeds (white-box: 500 malware reports; pending = not computed yet).}
+\caption{Detection (\%) of April malware after each edit at the 0.1\% false-positive-rate threshold of the unedited April benign scores, mean $\pm$ std over 10 seeds (white-box: 500 malware reports).}
 \label{tab:T5b_attack_detection_0.1pct}
 \begin{tabular}{lrrrr}
 \toprule
@@ -24,10 +24,10 @@ lgbm 100 prepend & 0.2 $\pm$ 0.7 & 0.0 $\pm$ 0.0 & 1.2 $\pm$ 0.9 & 3.9 $\pm$ 3.2
 lgbm 20 insert & 16.3 $\pm$ 7.1 & 10.2 $\pm$ 5.1 & 38.4 $\pm$ 4.1 & 33.3 $\pm$ 11.1 \\
 lgbm 50 insert & 7.7 $\pm$ 4.0 & 2.9 $\pm$ 2.2 & 26.5 $\pm$ 3.4 & 21.5 $\pm$ 9.3 \\
 lgbm 100 insert & 3.6 $\pm$ 2.6 & 0.5 $\pm$ 0.9 & 18.2 $\pm$ 2.1 & 10.6 $\pm$ 7.8 \\
-white-box 5 steps & pending & 11.7 $\pm$ 9.3 & 34.7 $\pm$ 3.2 & 30.8 $\pm$ 12.6 \\
-white-box 10 steps & pending & 6.3 $\pm$ 6.3 & 31.3 $\pm$ 4.1 & 27.0 $\pm$ 11.3 \\
-white-box 20 steps & pending & 1.7 $\pm$ 4.5 & 17.0 $\pm$ 7.7 & 17.4 $\pm$ 9.0 \\
-white-box 50 steps & pending & 0.2 $\pm$ 0.7 & 0.4 $\pm$ 0.6 & 1.5 $\pm$ 1.4 \\
+white-box 5 steps & 1.8 $\pm$ 2.0 & 11.7 $\pm$ 9.3 & 34.7 $\pm$ 3.2 & 30.8 $\pm$ 12.6 \\
+white-box 10 steps & 0.5 $\pm$ 0.6 & 6.3 $\pm$ 6.3 & 31.3 $\pm$ 4.1 & 27.0 $\pm$ 11.3 \\
+white-box 20 steps & 0.1 $\pm$ 0.3 & 1.7 $\pm$ 4.5 & 17.0 $\pm$ 7.7 & 17.4 $\pm$ 9.0 \\
+white-box 50 steps & 0.1 $\pm$ 0.3 & 0.2 $\pm$ 0.7 & 0.4 $\pm$ 0.6 & 1.5 $\pm$ 1.4 \\
 \bottomrule
 \end{tabular}
 \end{table}

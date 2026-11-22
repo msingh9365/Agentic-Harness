@@ -50,7 +50,7 @@
    "f4"
   ]
  },
- "attack_results": "results/groupsplit/stage_fgh/stage_j_partial/results.json",
+ "attack_results": "results/groupsplit/stage_fgh/stage_j/results.json",
  "eval_results": "results/groupsplit/stage_fgh/stage_i/results.json",
  "p2": "results/groupsplit/stage_fgh/stage_i/p2/seen_unseen.json",
  "data_dir": "results/paper/B/data",

@@ -57,10 +57,10 @@ Sets: **A** = reproduction (the paper's tokenizer): final M1, M3 (Step 5), M2, M
 | T7_pairwise_differences | Pairwise differences | made | `results/paper/B/tables/T7_pairwise_differences.md`<br>`results/paper/B/tables/T7_pairwise_differences.tex` | `results/groupsplit/stage_fgh/stage_i/results.json`<br>`results/paper/B/data/pairs_extra.json` |
 | T8_current_vs_corrected_tokenizer | Current vs corrected tokenizer per model | made | `results/paper/B/tables/T8_current_vs_corrected_tokenizer.md`<br>`results/paper/B/tables/T8_current_vs_corrected_tokenizer.tex` | `results/groupsplit/stage_fgh/stage_i/results.json` |
 | F7_robustness_heatmap | Robustness heatmap | made | `results/paper/B/figs/F7_robustness_heatmap.pdf`<br>`results/paper/B/figs/F7_robustness_heatmap.png`<br>`results/paper/B/figs/F7_robustness_heatmap_caption.txt` | `results/groupsplit/stage_fgh/stage_j/results.json` |
-| F8_detection_vs_added_calls | Detection vs number of added calls | made | `results/paper/B/figs/F8_detection_vs_added_calls.pdf`<br>`results/paper/B/figs/F8_detection_vs_added_calls.png`<br>`results/paper/B/figs/F8_detection_vs_added_calls_caption.txt` | `results/groupsplit/stage_fgh/stage_j/results.json` |
 | T5a_attack_detection_1pct | Attack results: detection at 1% FPR | made | `results/paper/B/tables/T5a_attack_detection_1pct.md`<br>`results/paper/B/tables/T5a_attack_detection_1pct.tex` | `results/groupsplit/stage_fgh/stage_j/results.json` |
 | T5b_attack_detection_0.1pct | Attack results: detection at 0.1% FPR | made | `results/paper/B/tables/T5b_attack_detection_0.1pct.md`<br>`results/paper/B/tables/T5b_attack_detection_0.1pct.tex` | `results/groupsplit/stage_fgh/stage_j/results.json` |
 | T5c_attack_padded_benign_fpr_1pct | Attack results: padded-benign FPR | made | `results/paper/B/tables/T5c_attack_padded_benign_fpr_1pct.md`<br>`results/paper/B/tables/T5c_attack_padded_benign_fpr_1pct.tex` | `results/groupsplit/stage_fgh/stage_j/results.json` |
+| F8_detection_vs_added_calls | Detection vs number of added calls | made | `results/paper/B/figs/F8_detection_vs_added_calls.pdf`<br>`results/paper/B/figs/F8_detection_vs_added_calls.png`<br>`results/paper/B/figs/F8_detection_vs_added_calls_caption.txt` | `results/groupsplit/stage_fgh/stage_j/results.json` |
 
 ## Notes
 

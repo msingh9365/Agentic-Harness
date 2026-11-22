@@ -74,5 +74,6 @@
   "tokenizer_model": "/tmp/fix_tok/out/variants/bpe50k_fix/tokenizer.model",
   "attn_raw": "/tmp/attn_out/out/attn_m3_seed0.json"
  },
- "p2_suffix": "fixed tokenizer"
+ "p2_suffix": "fixed tokenizer",
+ "attack_results_extra": "results/groupsplit/stage_fgh/stage_k/results.json"
 }

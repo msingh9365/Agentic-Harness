@@ -159,3 +159,6 @@ Malware-only padding models trained (msingh9365, `nebula-fup-malpad` v2, `failed
 
 # MTP follow-ups - state at the report cut-off (owner's deadline 11:50 pm IST = 18:20 UTC, 2026-11-22)
 Final: items 0, 1a, 1b, 5 and the clean part of item 4. NOT run to completion: item 2 (kernel `msingh9365/nebula-fup-k` queued), the padded-benign false alarms of item 4 (`msingh9365/nebula-fup-atk4` queued), item 3 (grid `manishsinghxdev/nebula-fup-grid` running; final training and attack scores not started). The kernels keep running; their results, if any, arrive as later commits and are not part of the cut-off snapshot. One launch failure and its fix are recorded above (item 4, a missing input file, no training affected). See `followups/RESULTS_SO_FAR.md`.
+
+## Night run (NOTES 27) - progress log (final summary is written at the end)
+- Item 2 DONE (NOTES 26.2): results from the queue-rule copy `manishsinghxdev/nebula-fup-k-b`; original `msingh9365/nebula-fup-k` deleted at 19:30 UTC after the copy finished first. Checks passed, k = 20/50/100 identical to Stage J.

@@ -303,21 +303,28 @@ def f7(C):
 
 def f8(C):
     plt = style()
-    A = C.json("attack_results")
+    A = dict(C.json("attack_results"))
+    extra = C.spec.get("attack_results_extra")                      # NOTES 26 item 2 (stage_k): random padding k = 60 and 75 (held-out pool), only the keys the main file does not have
+    if extra:
+        A.update({k: v for k, v in json.load(open(p(extra))).items() if k not in A})
     fig, ax = plt.subplots(1, 4, figsize=(DC, 2.2), sharey=True)
-    panels = [("random", ["prepend"], "random, prepend", [5, 20, 50, 100, 200]), ("random", ["insert"], "random, insert", [5, 20, 50, 100, 200]),
+    ksr = [5, 20, 50] + ([60, 75] if extra else []) + [100, 200]
+    panels = [("random", ["prepend"], "random, prepend", ksr), ("random", ["insert"], "random, insert", ksr),
               ("lgbm", ["prepend", "insert"], "LightGBM (solid: prepend, dashed: insert)", [20, 50, 100])]
     for a, (kind, modes, title, ks) in zip(ax[:3], panels):
         for m in MODELS:
             for mode, ls in zip(modes, ("-", "--")):
-                v = [attack_value(A, m, "unedited")] + [attack_value(A, m, f"{kind}_{k}_{mode}") for k in ks]
+                kk = [k for k in ks if attack_value(A, m, f"{kind}_{k}_{mode}") is not None]
+                v = [attack_value(A, m, "unedited")] + [attack_value(A, m, f"{kind}_{k}_{mode}") for k in kk]
                 if any(x is None for x in v):
                     continue
                 v = 100 * np.array(v).T
-                a.plot([0] + ks, v.mean(0), ls=ls, marker="o", color=COL[m], label=NAME[m] if mode == modes[0] else None)
-                a.fill_between([0] + ks, v.mean(0) - v.std(0, ddof=1), v.mean(0) + v.std(0, ddof=1), color=COL[m], alpha=0.15, lw=0)
+                a.plot([0] + kk, v.mean(0), ls=ls, marker="o", ms=3, color=COL[m], label=NAME[m] if mode == modes[0] else None)
+                a.fill_between([0] + kk, v.mean(0) - v.std(0, ddof=1), v.mean(0) + v.std(0, ddof=1), color=COL[m], alpha=0.15, lw=0)
         a.set_title(title, fontsize=7.5)
         a.set_xlabel("added calls k")
+        if kind == "random":
+            a.axvline(50, color="0.5", lw=0.7, ls=":")                  # the padded training of M3 and M4 drew k from 1 to 50
     a = ax[3]
     pend = []
     for m in MODELS:
@@ -334,7 +341,7 @@ def f8(C):
         a.text(0.97, 0.97, "pending: " + ", ".join(pend), transform=a.transAxes, fontsize=6.5, va="top", ha="right")
     ax[0].set_ylabel("malware detected (%)")
     ax[0].legend(fontsize=6.5)
-    cap = "Detection of April malware at a 1% false-positive rate against the number of calls added by the attacker (random padding prepended and inserted, LightGBM-ranked padding, and the white-box greedy search), mean over 10 seeds with ± std bands." + (" A model whose white-box result is pending is named in the last panel." if pend else "")
+    cap = "Detection of April malware at a 1% false-positive rate against the number of calls added by the attacker (random padding prepended and inserted, LightGBM-ranked padding, and the white-box greedy search), mean over 10 seeds with ± std bands. The dotted vertical line marks k = 50, the largest padding size seen in the training of M3 and M4 (M1 and M2 were trained without padding)." + (" A model whose white-box result is pending is named in the last panel." if pend else "")
     C.save_fig(fig, "F8_detection_vs_added_calls", "Detection vs number of added calls", cap, [C.spec["attack_results"]])
 
 

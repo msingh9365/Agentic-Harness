@@ -305,22 +305,6 @@
   "reason": ""
  },
  {
-  "kind": "figure",
-  "id": "F8_detection_vs_added_calls",
-  "title": "Detection vs number of added calls",
-  "set": "B",
-  "files": [
-   "results/paper/B/figs/F8_detection_vs_added_calls.pdf",
-   "results/paper/B/figs/F8_detection_vs_added_calls.png",
-   "results/paper/B/figs/F8_detection_vs_added_calls_caption.txt"
-  ],
-  "sources": [
-   "results/groupsplit/stage_fgh/stage_j/results.json"
-  ],
-  "status": "made",
-  "reason": ""
- },
- {
   "kind": "table",
   "id": "T5a_attack_detection_1pct",
   "title": "Attack results: detection at 1% FPR",
@@ -358,6 +342,22 @@
   "files": [
    "results/paper/B/tables/T5c_attack_padded_benign_fpr_1pct.md",
    "results/paper/B/tables/T5c_attack_padded_benign_fpr_1pct.tex"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_j/results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F8_detection_vs_added_calls",
+  "title": "Detection vs number of added calls",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F8_detection_vs_added_calls.pdf",
+   "results/paper/B/figs/F8_detection_vs_added_calls.png",
+   "results/paper/B/figs/F8_detection_vs_added_calls_caption.txt"
   ],
   "sources": [
    "results/groupsplit/stage_fgh/stage_j/results.json"

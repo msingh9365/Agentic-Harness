@@ -156,3 +156,6 @@ All pre-report checks passed (`stage_j_partial/checks.json`): 10 seeds everywher
 
 # MTP follow-ups - item 4 partial (clean part done)
 Malware-only padding models trained (msingh9365, `nebula-fup-malpad` v2, `failed: []`, checks passed, NOTES 26.5-partial). Clean April pAUC@1e-2: 0.702 ± 0.038 (M1 settings + malware-only padding; final M1 0.686 ± 0.026, +1.55, not resolved) and 0.703 ± 0.028 (M3 settings; final M3 0.705 ± 0.025, -0.19, not resolved). PENDING: the padded-benign false-positive rates at random 5/20/50 insert and prepend (`msingh9365/nebula-fup-atk4`, queued).
+
+# MTP follow-ups - state at the report cut-off (owner's deadline 11:50 pm IST = 18:20 UTC, 2026-11-22)
+Final: items 0, 1a, 1b, 5 and the clean part of item 4. NOT run to completion: item 2 (kernel `msingh9365/nebula-fup-k` queued), the padded-benign false alarms of item 4 (`msingh9365/nebula-fup-atk4` queued), item 3 (grid `manishsinghxdev/nebula-fup-grid` running; final training and attack scores not started). The kernels keep running; their results, if any, arrive as later commits and are not part of the cut-off snapshot. One launch failure and its fix are recorded above (item 4, a missing input file, no training affected). See `followups/RESULTS_SO_FAR.md`.

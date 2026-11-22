@@ -1,4 +1,4 @@
-# MTP follow-ups: results so far (2026-11-22; updated as kernels finish; every number is from stored scores or logits, corrected tokenizer, 10 seeds)
+# MTP follow-ups: results at the report cut-off (2026-11-22, about 23:40 IST; later results, if any, come as separate commits; every number is from stored scores or logits, corrected tokenizer, 10 seeds)
 
 | item | status | where |
 |---|---|---|
@@ -20,3 +20,6 @@
 
 ## Not finished (do not cite as results)
 Items 2, 3 and the padded-benign false alarms of item 4 are waiting for Kaggle GPU kernels (queue times of hours on this account pair). Their pre-registered design is NOTES 26; if they do not finish, the report should say they were designed and pre-registered but not run.
+
+## Report cut-off (owner's deadline 11:50 pm IST)
+At the cut-off the following were **not run to completion** and must not be cited as results: item 2 (random padding at k = 20, 50, 60, 75, 100 from the held-out pool; kernel `msingh9365/nebula-fup-k` still in the Kaggle queue), the padded-benign false alarms of item 4 (kernel `msingh9365/nebula-fup-atk4` queued; the training and the clean comparison are done), and item 3 (the 2 x 2 at a matched budget; the budget grid on `manishsinghxdev/nebula-fup-grid` was still running; the final training and the attack scores had not started). Their designs, the budget-selection rule and the checks are pre-registered in NOTES 26 (commit `0e630f4`, before any of these runs). Suggested wording for the report: "designed and pre-registered; the GPU jobs were still queued or running at the deadline".

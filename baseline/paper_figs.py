@@ -27,7 +27,7 @@ SC, DC = 3.5, 7.16                                                  # single / d
 MODELS = ["M1", "M2", "M3", "M4"]
 # Okabe-Ito colour-blind-safe palette, ONE fixed colour per model in every figure
 COL = {"M1": "#0072B2", "M2": "#E69F00", "M3": "#009E73", "M4": "#D55E00"}
-NAME = {"M1": "M1 v2-PE", "M2": "M2 two-level", "M3": "M3 ATT+bal", "M4": "M4 ATT+bal-2L"}
+NAME = {"M1": "M1 Nebula (ours)", "M2": "M2 two-level", "M3": "M3 ATT+bal", "M4": "M4 ATT+bal-2L"}
 LONG = {"M1": "M1 (v2-PE, flatten pooling, no padding)", "M2": "M2 (two-level, attention pooling, no padding)", "M3": "M3 (ATT+bal, attention pooling, balanced padding)", "M4": "M4 (two-level, attention pooling, balanced padding)"}
 SEEDS = list(range(10))
 PAPER = {"tpr@1e-3": 0.5213, "f1": 0.9136}                          # Nebula paper, Table 7 (the only numbers we use from it; NOTES.md section 1)
@@ -417,18 +417,20 @@ def f13(C):
     plt = style()
     R = json.load(open(p("results", "review", "attack_aggregates.json")))["random"]
     sets = ["random_5_insert", "random_20_insert", "random_50_insert", "random_5_prepend", "random_20_prepend", "random_50_prepend"]
-    models = [("attaug", "ATT, padding of malware only", "#CC79A7", ""), ("attbal", "ATT, balanced padding", "#009E73", ""), ("peaug", "PE, padding of malware only", "#CC79A7", "///"), ("pebal", "PE, balanced padding", "#009E73", "///")]
-    fig, ax = plt.subplots(figsize=(DC, 2.5))
+    models = [("attaug", "ATT, malware-only padding", "#CC79A7", ""), ("attbal", "ATT, balanced padding", "#009E73", ""), ("peaug", "PE, malware-only padding", "#CC79A7", "///"), ("pebal", "PE, balanced padding", "#009E73", "///")]
+    fig, ax = plt.subplots(figsize=(SC, 3.1))                         # single column: 3.5 in wide
     for i, (k, lab, col, h) in enumerate(models):
         mu = [100 * R[f"{k}|{s}"]["1e-2"]["fpr"][0] for s in sets]
         sd = [100 * R[f"{k}|{s}"]["1e-2"]["fpr"][1] for s in sets]
-        ax.bar(np.arange(len(sets)) + (i - 1.5) * 0.2, mu, 0.19, yerr=sd, color=col, hatch=h, edgecolor="k", lw=0.4, capsize=1.5, label=lab)
+        ax.bar(np.arange(len(sets)) + (i - 1.5) * 0.2, mu, 0.19, yerr=sd, color=col, hatch=h, edgecolor="k", lw=0.4, capsize=1, error_kw={"lw": 0.6}, label=lab)
     ax.axhline(1.0, color="k", ls=":", lw=0.6)
     ax.set_xticks(range(len(sets)))
-    ax.set_xticklabels([s.replace("random_", "random ").replace("_", " ") for s in sets], rotation=15, ha="right")
-    ax.set_ylabel("padded-benign false alarms (%) at 1% FPR")
-    ax.legend(ncol=2)
-    cap = "EARLIER models (REPORT 5.10 and 5.11, old random validation split, 10 seeds each; not M1 to M4): false-positive rate on padded April benign reports at the 1% threshold of the unedited benign reports, for models trained with padding of malware reports only (pink) and with balanced padding of malware and benign reports (green); attention pooling (solid) and flatten pooling (hatched). Bars: mean ± std over seeds; the dotted line is the clean 1%."
+    ax.set_xticklabels([f"{s.split('_')[2]}\n{s.split('_')[1]}" for s in sets], fontsize=7)      # e.g. "insert / 20"
+    ax.tick_params(axis="y", labelsize=7)
+    ax.set_xlabel("padding: mode and number of added calls k", fontsize=8)
+    ax.set_ylabel("padded-benign false alarms (%)\nat 1% FPR", fontsize=8)
+    ax.legend(ncol=2, fontsize=6.5, loc="lower center", bbox_to_anchor=(0.5, 1.0), columnspacing=0.8, handlelength=1.4)
+    cap = "EARLIER models (REPORT 5.10 and 5.11, old random validation split, 10 seeds each; not M1 to M4): false-positive rate on padded April benign reports at the 1% threshold of the unedited benign reports, for models trained with padding of malware reports only (pink) and with balanced padding of malware and benign reports (green); attention pooling (ATT, solid) and flatten pooling (PE, hatched). Bars: mean ± std over seeds; the dotted line is the clean 1%."
     C.save_fig(fig, "F13_padded_benign_false_alarms_earlier_models", "Padded-benign false alarms: malware-only vs balanced padding (earlier models)", cap, ["results/review/attack_aggregates.json"])
 
 
@@ -469,7 +471,7 @@ def t1(C):
 
 def t2(C):
     tok = C.spec["tokenizer"]
-    H = ["setting", "M1 v2-PE", "M2 two-level", "M3 ATT+bal", "M4 ATT+bal-2L"]
+    H = ["setting"] + [NAME[m] for m in MODELS]
     rows = [["tokenizer", tok, tok, tok, tok], ["input window", "first 512 tokens", "first 4,096 tokens (up to 8 chunks of 512)", "first 512 tokens", "first 4,096 tokens (up to 8 chunks of 512)"],
             ["encoder (level 1)", "2 layers, 8 heads, d 64, hidden 256, chunks of 64 tokens", "same (from scratch)", "same", "same (from scratch)"],
             ["level 2", "-", "2 layers, 4 heads, hidden 128, dropout 0.1, chunk-position embedding", "-", "same as M2"], ["pooling", "flatten", "attention pooling per chunk, level 2 over chunks", "attention pooling", "attention pooling per chunk, level 2 over chunks"],
@@ -641,6 +643,9 @@ def pairs_extra(C):
             need.append((ka, kb, a, b))
     if not need:
         return
+    cache = os.path.join(C.data, "pairs_extra.json")
+    if os.path.exists(cache) and all(f"{ka}-{kb}" in json.load(open(cache)) for ka, kb, _, _ in need):
+        return                                                    # already bootstrapped (same stored logits, same seed): reuse
     from baseline import gap_final
     from baseline.twolevel_eval import cluster_bootstrap
     from baseline.v2pe_report import metrics_of
@@ -707,6 +712,7 @@ def write_readme():
             L.append(f"| {m['id']} | {m['title']} | {m['status']}{': ' + m['reason'] if m['reason'] else ''} | {files} | {src} |")
         L.append("")
     L += ["## Notes", "", "- F12 needs the authors' model code, so the attention weights were produced by a CPU-only Kaggle kernel (`baseline/paper_attn.py`, owner msingh9365, no GPU) from the stored M3 seed-0 weights; the logit it computed equals the stored logit (asserted).",
+          "- Display names: M1 is labelled \"M1 Nebula (ours)\" in every figure and table (internally it is the v2-PE model; the spec files keep the internal names as lookup keys). F13 is drawn at single-column width (3.5 in).",
           "- F12, SET A: the thin white gaps (weight exactly 0) in the detected report are tokens with id 0, i.e. letters the old tokenizer cannot encode (the letter `j`, NOTES 24.1), which attention pooling treats as padding; SET B has none.",
           "- F13 shows the EARLIER models of REPORT 5.10/5.11 (old split, old tokenizer), labelled as such; it exists for SET A only.",
           "- Nebula paper numbers used: TPR 0.5213 at FPR 1e-3 and F1 0.9136 (Table 7) only."]

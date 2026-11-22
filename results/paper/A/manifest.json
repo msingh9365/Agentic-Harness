@@ -122,6 +122,22 @@
  },
  {
   "kind": "figure",
+  "id": "F9_seen_vs_unseen",
+  "title": "Seen vs unseen pAUC",
+  "set": "A",
+  "files": [
+   "results/paper/A/figs/F9_seen_vs_unseen.pdf",
+   "results/paper/A/figs/F9_seen_vs_unseen.png",
+   "results/paper/A/figs/F9_seen_vs_unseen_caption.txt"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/p2/seen_unseen.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
   "id": "F10_logit_distributions",
   "title": "Logit distributions M1 and M3",
   "set": "A",
@@ -149,6 +165,22 @@
   ],
   "sources": [
    "results/groupsplit/stage_fgh/stage_g/results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F12_attention_weights_M3",
+  "title": "Attention-pooling weights of M3",
+  "set": "A",
+  "files": [
+   "results/paper/A/figs/F12_attention_weights_M3.pdf",
+   "results/paper/A/figs/F12_attention_weights_M3.png",
+   "results/paper/A/figs/F12_attention_weights_M3_caption.txt"
+  ],
+  "sources": [
+   "results/paper/A/data/attn_m3_seed0.json"
   ],
   "status": "made",
   "reason": ""
@@ -327,37 +359,5 @@
   "sources": [],
   "status": "skipped",
   "reason": "only for SET B (needs the corrected-tokenizer models)"
- },
- {
-  "kind": "figure",
-  "id": "F9_seen_vs_unseen",
-  "title": "Seen vs unseen pAUC",
-  "set": "A",
-  "files": [
-   "results/paper/A/figs/F9_seen_vs_unseen.pdf",
-   "results/paper/A/figs/F9_seen_vs_unseen.png",
-   "results/paper/A/figs/F9_seen_vs_unseen_caption.txt"
-  ],
-  "sources": [
-   "results/groupsplit/stage_fgh/p2/seen_unseen.json"
-  ],
-  "status": "made",
-  "reason": ""
- },
- {
-  "kind": "figure",
-  "id": "F12_attention_weights_M3",
-  "title": "Attention-pooling weights of M3",
-  "set": "A",
-  "files": [
-   "results/paper/A/figs/F12_attention_weights_M3.pdf",
-   "results/paper/A/figs/F12_attention_weights_M3.png",
-   "results/paper/A/figs/F12_attention_weights_M3_caption.txt"
-  ],
-  "sources": [
-   "results/paper/A/data/attn_m3_seed0.json"
-  ],
-  "status": "made",
-  "reason": ""
  }
 ]

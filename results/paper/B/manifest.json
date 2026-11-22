@@ -90,6 +90,38 @@
  },
  {
   "kind": "figure",
+  "id": "F7_robustness_heatmap",
+  "title": "Robustness heatmap",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F7_robustness_heatmap.pdf",
+   "results/paper/B/figs/F7_robustness_heatmap.png",
+   "results/paper/B/figs/F7_robustness_heatmap_caption.txt"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_j/results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
+  "id": "F8_detection_vs_added_calls",
+  "title": "Detection vs number of added calls",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F8_detection_vs_added_calls.pdf",
+   "results/paper/B/figs/F8_detection_vs_added_calls.png",
+   "results/paper/B/figs/F8_detection_vs_added_calls_caption.txt"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_j/results.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "figure",
   "id": "F9_seen_vs_unseen",
   "title": "Seen vs unseen pAUC",
   "set": "B",
@@ -162,6 +194,22 @@
   "sources": [],
   "status": "skipped",
   "reason": "SET A only (earlier models of REPORT 5.10/5.11, old tokenizer)"
+ },
+ {
+  "kind": "figure",
+  "id": "F14_padded_benign_false_alarms_final_settings",
+  "title": "Padded-benign false alarms: malware-only vs balanced padding (final settings)",
+  "set": "B",
+  "files": [
+   "results/paper/B/figs/F14_padded_benign_false_alarms_final_settings.pdf",
+   "results/paper/B/figs/F14_padded_benign_false_alarms_final_settings.png",
+   "results/paper/B/figs/F14_padded_benign_false_alarms_final_settings_caption.txt"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/followups/item4/attack/results.json"
+  ],
+  "status": "made",
+  "reason": ""
  },
  {
   "kind": "figure",
@@ -244,68 +292,6 @@
  },
  {
   "kind": "table",
-  "id": "T6_seen_unseen",
-  "title": "Seen vs unseen April reports",
-  "set": "B",
-  "files": [
-   "results/paper/B/tables/T6_seen_unseen.md",
-   "results/paper/B/tables/T6_seen_unseen.tex"
-  ],
-  "sources": [
-   "results/groupsplit/stage_fgh/stage_i/p2/seen_unseen.json"
-  ],
-  "status": "made",
-  "reason": ""
- },
- {
-  "kind": "table",
-  "id": "T7_pairwise_differences",
-  "title": "Pairwise differences",
-  "set": "B",
-  "files": [
-   "results/paper/B/tables/T7_pairwise_differences.md",
-   "results/paper/B/tables/T7_pairwise_differences.tex"
-  ],
-  "sources": [
-   "results/groupsplit/stage_fgh/stage_i/results.json",
-   "results/paper/B/data/pairs_extra.json"
-  ],
-  "status": "made",
-  "reason": ""
- },
- {
-  "kind": "table",
-  "id": "T8_current_vs_corrected_tokenizer",
-  "title": "Current vs corrected tokenizer per model",
-  "set": "B",
-  "files": [
-   "results/paper/B/tables/T8_current_vs_corrected_tokenizer.md",
-   "results/paper/B/tables/T8_current_vs_corrected_tokenizer.tex"
-  ],
-  "sources": [
-   "results/groupsplit/stage_fgh/stage_i/results.json"
-  ],
-  "status": "made",
-  "reason": ""
- },
- {
-  "kind": "figure",
-  "id": "F7_robustness_heatmap",
-  "title": "Robustness heatmap",
-  "set": "B",
-  "files": [
-   "results/paper/B/figs/F7_robustness_heatmap.pdf",
-   "results/paper/B/figs/F7_robustness_heatmap.png",
-   "results/paper/B/figs/F7_robustness_heatmap_caption.txt"
-  ],
-  "sources": [
-   "results/groupsplit/stage_fgh/stage_j/results.json"
-  ],
-  "status": "made",
-  "reason": ""
- },
- {
-  "kind": "table",
   "id": "T5a_attack_detection_1pct",
   "title": "Attack results: detection at 1% FPR",
   "set": "B",
@@ -350,33 +336,47 @@
   "reason": ""
  },
  {
-  "kind": "figure",
-  "id": "F8_detection_vs_added_calls",
-  "title": "Detection vs number of added calls",
+  "kind": "table",
+  "id": "T6_seen_unseen",
+  "title": "Seen vs unseen April reports",
   "set": "B",
   "files": [
-   "results/paper/B/figs/F8_detection_vs_added_calls.pdf",
-   "results/paper/B/figs/F8_detection_vs_added_calls.png",
-   "results/paper/B/figs/F8_detection_vs_added_calls_caption.txt"
+   "results/paper/B/tables/T6_seen_unseen.md",
+   "results/paper/B/tables/T6_seen_unseen.tex"
   ],
   "sources": [
-   "results/groupsplit/stage_fgh/stage_j/results.json"
+   "results/groupsplit/stage_fgh/stage_i/p2/seen_unseen.json"
   ],
   "status": "made",
   "reason": ""
  },
  {
-  "kind": "figure",
-  "id": "F14_padded_benign_false_alarms_final_settings",
-  "title": "Padded-benign false alarms: malware-only vs balanced padding (final settings)",
+  "kind": "table",
+  "id": "T7_pairwise_differences",
+  "title": "Pairwise differences",
   "set": "B",
   "files": [
-   "results/paper/B/figs/F14_padded_benign_false_alarms_final_settings.pdf",
-   "results/paper/B/figs/F14_padded_benign_false_alarms_final_settings.png",
-   "results/paper/B/figs/F14_padded_benign_false_alarms_final_settings_caption.txt"
+   "results/paper/B/tables/T7_pairwise_differences.md",
+   "results/paper/B/tables/T7_pairwise_differences.tex"
   ],
   "sources": [
-   "results/groupsplit/stage_fgh/followups/item4/attack/results.json"
+   "results/groupsplit/stage_fgh/stage_i/results.json",
+   "results/paper/B/data/pairs_extra.json"
+  ],
+  "status": "made",
+  "reason": ""
+ },
+ {
+  "kind": "table",
+  "id": "T8_current_vs_corrected_tokenizer",
+  "title": "Current vs corrected tokenizer per model",
+  "set": "B",
+  "files": [
+   "results/paper/B/tables/T8_current_vs_corrected_tokenizer.md",
+   "results/paper/B/tables/T8_current_vs_corrected_tokenizer.tex"
+  ],
+  "sources": [
+   "results/groupsplit/stage_fgh/stage_i/results.json"
   ],
   "status": "made",
   "reason": ""

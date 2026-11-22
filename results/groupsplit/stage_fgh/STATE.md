@@ -13,3 +13,4 @@ Stage F launched 2026-11-21T20:16:31Z on manishsinghxdev (kernel manishsinghxdev
 - 2026-11-22 01:21 UTC: h-wb-m2 COMPLETE (65 min; all 10 seeds, unedited = stored logits, max diff 0.0); output /tmp/h_wbm2/out. nebula-fgh-h-wb-m1m3 launched 01:20 UTC on msingh9365. h-wb-m4 RUNNING (launched 00:49).
 - 2026-11-22 02:15 UTC: h-wb-m1m3 COMPLETE; output /tmp/h_wbm1m3/out. h-wb-m4 still RUNNING (since 00:49).
 - 2026-11-22 02:40 UTC: Stage H COMPLETE (all four kernels on msingh9365, about 3.8 h quota); report in results/groupsplit/stage_fgh/stage_h; NOTES 23.3. NEXT: P1 (gs_unk), P2 (gs_seen_unseen), then STATUS.md (what ran, chosen settings, headline tables, kernel owners, GPU used, anything unusual). No push.
+- 2026-11-22 03:10 UTC: P1 and P2 done (NOTES 24.1); STATUS.md written. All of F, G, H, P1, P2 finished; nothing pushed.

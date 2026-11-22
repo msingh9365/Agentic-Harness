@@ -1,6 +1,6 @@
 **Training settings of the four final models (all trained on the 75,298 January reports; settings chosen on a held-out validation slice, never on April).**
 
-| setting | M1 Nebula (ours) | M2 two-level | M3 ATT+bal | M4 ATT+bal-2L |
+| setting | M1 Nebula | M2 two-level | M3 ATT+bal | M4 ATT+bal-2L |
 |---|---|---|---|---|
 | tokenizer | corrected BPE-50k (bpe50k_fix) | corrected BPE-50k (bpe50k_fix) | corrected BPE-50k (bpe50k_fix) | corrected BPE-50k (bpe50k_fix) |
 | input window | first 512 tokens | first 4,096 tokens (up to 8 chunks of 512) | first 512 tokens | first 4,096 tokens (up to 8 chunks of 512) |

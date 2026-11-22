@@ -1,6 +1,6 @@
 **False-positive rate (%) on the same edit applied to the April benign reports, 1% threshold, mean ± std over 10 seeds (unedited: 1% by construction).**
 
-| edit | M1 Nebula (ours) | M2 two-level | M3 ATT+bal | M4 ATT+bal-2L |
+| edit | M1 Nebula | M2 two-level | M3 ATT+bal | M4 ATT+bal-2L |
 |---|---|---|---|---|
 | unedited | 1.00 ± 0.00 | 1.00 ± 0.00 | 1.00 ± 0.00 | 1.00 ± 0.01 |
 | random 5 prepend | 0.98 ± 0.30 | 0.50 ± 0.08 | 1.05 ± 0.09 | 0.95 ± 0.18 |

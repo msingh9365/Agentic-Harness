@@ -8,32 +8,28 @@
     "file": "results/groupsplit/stage_fgh/stage_i/logits_fixed_models.npz",
     "key": "f1_test"
    },
-   "eval_key": "f1",
-   "p2": "M1 v2-PE (fixed tokenizer)"
+   "eval_key": "f1"
   },
   "M2": {
    "logits": {
     "file": "results/groupsplit/stage_fgh/stage_i/logits_fixed_models.npz",
     "key": "f2_test"
    },
-   "eval_key": "f2",
-   "p2": "M2 two-level, no padding (fixed tokenizer)"
+   "eval_key": "f2"
   },
   "M3": {
    "logits": {
     "file": "results/groupsplit/stage_fgh/stage_i/logits_fixed_models.npz",
     "key": "f3_test"
    },
-   "eval_key": "f3",
-   "p2": "M3 ATT+bal (fixed tokenizer)"
+   "eval_key": "f3"
   },
   "M4": {
    "logits": {
     "file": "results/groupsplit/stage_fgh/stage_i/logits_fixed_models.npz",
     "key": "f4_test"
    },
-   "eval_key": "f4",
-   "p2": "M4 ATT+bal-2L (fixed tokenizer)"
+   "eval_key": "f4"
   }
  },
  "compare": {
@@ -77,5 +73,6 @@
   },
   "tokenizer_model": "/tmp/fix_tok/out/variants/bpe50k_fix/tokenizer.model",
   "attn_raw": "/tmp/attn_out/out/attn_m3_seed0.json"
- }
+ },
+ "p2_suffix": "fixed tokenizer"
 }

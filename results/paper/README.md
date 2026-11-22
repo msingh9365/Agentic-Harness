@@ -65,7 +65,7 @@ Sets: **A** = reproduction (the paper's tokenizer): final M1, M3 (Step 5), M2, M
 ## Notes
 
 - F12 needs the authors' model code, so the attention weights were produced by a CPU-only Kaggle kernel (`baseline/paper_attn.py`, owner msingh9365, no GPU) from the stored M3 seed-0 weights; the logit it computed equals the stored logit (asserted).
-- Display names: M1 is labelled "M1 Nebula (ours)" in every figure and table (internally it is the v2-PE model; the spec files keep the internal names as lookup keys). F13 is drawn at single-column width (3.5 in).
+- Display names: M1 is labelled "M1 Nebula" in every figure and table (the spec files look results up by the model's internal key, not by its display label). F13 is drawn at single-column width (3.5 in).
 - F12, SET A: the thin white gaps (weight exactly 0) in the detected report are tokens with id 0, i.e. letters the old tokenizer cannot encode (the letter `j`, NOTES 24.1), which attention pooling treats as padding; SET B has none.
 - F13 shows the EARLIER models of REPORT 5.10/5.11 (old split, old tokenizer), labelled as such; it exists for SET A only.
 - Nebula paper numbers used: TPR 0.5213 at FPR 1e-3 and F1 0.9136 (Table 7) only.

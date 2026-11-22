@@ -8,32 +8,28 @@
     "file": "results/groupsplit/stage_d/step5/logits_final_models.npz",
     "key": "v2pe_test"
    },
-   "eval_key": "m1",
-   "p2": "M1 v2-PE (final)"
+   "eval_key": "m1"
   },
   "M2": {
    "logits": {
     "file": "results/groupsplit/stage_fgh/stage_g/logits_final_m2_m4.npz",
     "key": "m2_test"
    },
-   "eval_key": "m2",
-   "p2": "M2 two-level, no padding (final)"
+   "eval_key": "m2"
   },
   "M3": {
    "logits": {
     "file": "results/groupsplit/stage_d/step5/logits_final_models.npz",
     "key": "attbal_test"
    },
-   "eval_key": "m3",
-   "p2": "M3 ATT+bal (final)"
+   "eval_key": "m3"
   },
   "M4": {
    "logits": {
     "file": "results/groupsplit/stage_fgh/stage_g/logits_final_m2_m4.npz",
     "key": "m4_test"
    },
-   "eval_key": "m4",
-   "p2": "M4 ATT+bal-2L (final)"
+   "eval_key": "m4"
   }
  },
  "attack_results": "results/paper/A/data/attack_results.json",
@@ -60,5 +56,6 @@
   "attack_scores": "/tmp/h_all",
   "tokenizer_model": "baseline_models/tokenizers/bpe50k/tokenizer.model",
   "attn_raw": "/tmp/attn_out/out/attn_m3_seed0.json"
- }
+ },
+ "p2_suffix": "final"
 }

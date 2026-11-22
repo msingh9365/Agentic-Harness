@@ -27,8 +27,8 @@ SC, DC = 3.5, 7.16                                                  # single / d
 MODELS = ["M1", "M2", "M3", "M4"]
 # Okabe-Ito colour-blind-safe palette, ONE fixed colour per model in every figure
 COL = {"M1": "#0072B2", "M2": "#E69F00", "M3": "#009E73", "M4": "#D55E00"}
-NAME = {"M1": "M1 Nebula (ours)", "M2": "M2 two-level", "M3": "M3 ATT+bal", "M4": "M4 ATT+bal-2L"}
-LONG = {"M1": "M1 (v2-PE, flatten pooling, no padding)", "M2": "M2 (two-level, attention pooling, no padding)", "M3": "M3 (ATT+bal, attention pooling, balanced padding)", "M4": "M4 (two-level, attention pooling, balanced padding)"}
+NAME = {"M1": "M1 Nebula", "M2": "M2 two-level", "M3": "M3 ATT+bal", "M4": "M4 ATT+bal-2L"}
+LONG = {"M1": "M1 (Nebula, flatten pooling, no padding)", "M2": "M2 (two-level, attention pooling, no padding)", "M3": "M3 (ATT+bal, attention pooling, balanced padding)", "M4": "M4 (two-level, attention pooling, balanced padding)"}
 SEEDS = list(range(10))
 PAPER = {"tpr@1e-3": 0.5213, "f1": 0.9136}                          # Nebula paper, Table 7 (the only numbers we use from it; NOTES.md section 1)
 ATTACK_COLS = [("unedited", "unedited"), ("random_20_prepend", "random 20\nprepend"), ("random_50_prepend", "random 50\nprepend"), ("random_100_prepend", "random 100\nprepend"),
@@ -338,12 +338,21 @@ def f8(C):
     C.save_fig(fig, "F8_detection_vs_added_calls", "Detection vs number of added calls", cap, [C.spec["attack_results"]])
 
 
+def p2_name(C, m):
+    """key of model m in the seen/unseen file: '<m> ...(<p2_suffix>)' (the spec stores only the suffix, e.g. 'final' or 'fixed tokenizer')"""
+    P = C.json("p2")
+    suf = f"({C.spec['p2_suffix']})"
+    hit = sorted({k.rsplit("|", 1)[0] for k in P["models"] if k.startswith(m + " ") and k.rsplit("|", 1)[0].endswith(suf)})
+    assert len(hit) == 1, (m, hit)
+    return hit[0]
+
+
 def f9(C):
     plt = style()
     P = C.json("p2")
     fig, ax = plt.subplots(figsize=(SC, 2.6))
     for i, m in enumerate(MODELS):
-        nm = C.spec["models"][m]["p2"]
+        nm = p2_name(C, m)
         for j, sname in enumerate(("seen", "unseen")):
             r = P["models"][f"{nm}|{sname}"]
             mu = float(np.mean(r["pauc_per_seed"]))
@@ -534,7 +543,7 @@ def t6(C):
     P = C.json("p2")
     rows = []
     for m in MODELS:
-        nm = C.spec["models"][m]["p2"]
+        nm = p2_name(C, m)
         r = [NAME[m]]
         for sname in ("seen", "unseen"):
             x = P["models"][f"{nm}|{sname}"]
@@ -712,7 +721,7 @@ def write_readme():
             L.append(f"| {m['id']} | {m['title']} | {m['status']}{': ' + m['reason'] if m['reason'] else ''} | {files} | {src} |")
         L.append("")
     L += ["## Notes", "", "- F12 needs the authors' model code, so the attention weights were produced by a CPU-only Kaggle kernel (`baseline/paper_attn.py`, owner msingh9365, no GPU) from the stored M3 seed-0 weights; the logit it computed equals the stored logit (asserted).",
-          "- Display names: M1 is labelled \"M1 Nebula (ours)\" in every figure and table (internally it is the v2-PE model; the spec files keep the internal names as lookup keys). F13 is drawn at single-column width (3.5 in).",
+          "- Display names: M1 is labelled \"M1 Nebula\" in every figure and table (the spec files look results up by the model's internal key, not by its display label). F13 is drawn at single-column width (3.5 in).",
           "- F12, SET A: the thin white gaps (weight exactly 0) in the detected report are tokens with id 0, i.e. letters the old tokenizer cannot encode (the letter `j`, NOTES 24.1), which attention pooling treats as padding; SET B has none.",
           "- F13 shows the EARLIER models of REPORT 5.10/5.11 (old split, old tokenizer), labelled as such; it exists for SET A only.",
           "- Nebula paper numbers used: TPR 0.5213 at FPR 1e-3 and F1 0.9136 (Table 7) only."]

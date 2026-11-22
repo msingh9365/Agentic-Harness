@@ -1,6 +1,6 @@
 **Detection (%) of April malware after each edit at the 1% false-positive-rate threshold of the unedited April benign scores, mean ± std over 10 seeds (white-box: 500 malware reports; pending = not computed yet).**
 
-| edit | M1 Nebula (ours) | M2 two-level | M3 ATT+bal | M4 ATT+bal-2L |
+| edit | M1 Nebula | M2 two-level | M3 ATT+bal | M4 ATT+bal-2L |
 |---|---|---|---|---|
 | unedited | 78.0 ± 3.8 | 75.1 ± 6.8 | 79.0 ± 0.8 | 77.8 ± 2.1 |
 | random 5 prepend | 51.2 ± 7.9 | 63.6 ± 6.6 | 79.1 ± 1.4 | 77.0 ± 1.8 |

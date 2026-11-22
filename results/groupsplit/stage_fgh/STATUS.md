@@ -12,7 +12,7 @@
 | P3 (NOTES 27.1, 27.3) | address-role tokenizer + store, M1 and M3 retrained, April evaluation | CPU `nebula-p3-tok-role`, `nebula-p3-tok-addr` (control, discarded), smoke kernels `nebula-p3-tok-smoke`, `nebula-p3-train-smoke`; GPU `nebula-p3-train` - all **manishsinghxdev** | done, negative result |
 | e, f (NOTES 27.2) | dedupe (exact, name), multi-window max on final M1, M3 | CPU kernels: **manishsinghxdev** `nebula-var-m1-dd-a`, `-m1-dd-b`, `-m1-mw-a`, smoke `nebula-var-smoke`; **msingh9365** `nebula-var-m1-mw-b`, `-m3-dd-a`, `-m3-dd-b`, `-m3-mw-a`, `-m3-mw-b` | done |
 
-GPU used tonight (runtimes, not re-priced as quota): item 2 about 1 h on two T4, item 3 final 28 min plus attack scoring about 10 min, P3 training 28 min, item 4 attack scoring about 30 min; the CPU kernels (P3 tokenizer 48-78 min each, the eight variant kernels 57-82 min each) used no GPU. April openings used: 24 item 2, 25 item 3, 26 item 4, 27 P3, 28 dedupe, 29 multi-window. **Not run:** P4 (window shift), the control model of P3 (the length rule did not trigger), white-box attacks for the new models and cells.
+GPU used tonight (kernel runtimes from the logs, not re-priced as quota): item 2 scoring 28 min, item 3 final 29 min plus attack scoring 8 min, P3 training 27 min, item 4 attack scoring 4 min; the CPU kernels (P3 tokenizer 63 min (role) and 48 min (control), the eight variant kernels 57-82 min each) used no GPU. April openings used: 24 item 2, 25 item 3, 26 item 4, 27 P3, 28 dedupe, 29 multi-window. **Not run:** P4 (window shift), the control model of P3 (the length rule did not trigger), white-box attacks for the new models and cells.
 
 ## Deviations (every one)
 

@@ -1,0 +1,6 @@
+Diagnostic (NOT pre-registered; CPU; April used only to understand the P3 result, nothing chosen on it): logistic regression (liblinear, C = 0.5) on log(1+count) bag-of-token features of the first 512 tokens, trained on all 75,298 January reports, April AUC. Script baseline/p3_bow_diag.py.
+corrected tokenizer (bpe50k_fix)             Jan in-sample AUC 0.9997   April AUC 0.9495
+old tokenizer (bpe50k, Step 5)               Jan in-sample AUC 0.9997   April AUC 0.9470
+address roles (bpe50k_role)                  Jan in-sample AUC 0.9968   April AUC 0.8317
+role tokens removed from the role features   Jan in-sample AUC 0.9954   April AUC 0.7999
+address control, single word 'addr'          Jan in-sample AUC 0.9954   April AUC 0.7977

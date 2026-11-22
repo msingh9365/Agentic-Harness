@@ -1,0 +1,1 @@
+STOP: r1 has a collapsed seed (April AUC 0.500 < 0.6): seeds [9]

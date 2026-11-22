@@ -39,6 +39,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--runs", required=True)
     ap.add_argument("--control", action="store_true")
+    ap.add_argument("--allow-collapsed", action="store_true", help="the STOP rule (a seed with April AUC < 0.6) is reported and written to <out>/STOP.txt but the descriptive tables are still produced with ALL seeds (no seed is excluded)")
     ap.add_argument("--out", required=True)
     ap.add_argument("--boot", type=int, default=1000)
     a = ap.parse_args()
@@ -55,7 +56,12 @@ def main():
     for k in [k for k in test if k[0] in "ra"]:
         aucs = [roc_auc_score(y, test[k][s]) for s in SEEDS]
         if min(aucs) < 0.6:
-            raise SystemExit(f"STOP: {k} has a collapsed seed (April AUC {min(aucs):.3f} < 0.6)")
+            msg = f"STOP: {k} has a collapsed seed (April AUC {min(aucs):.3f} < 0.6): seeds {[s for s in SEEDS if aucs[s] < 0.6]}"
+            if not a.allow_collapsed:
+                raise SystemExit(msg)
+            os.makedirs(a.out, exist_ok=True)
+            open(os.path.join(a.out, "STOP.txt"), "a").write(msg + "\n")
+            print(msg + " -- continuing because of --allow-collapsed (all seeds kept)", flush=True)
     order = ["c1", "r1"] + (["a1"] if a.control else []) + ["c3", "r3"] + (["a3"] if a.control else [])
     lab = lambda k: ("**" + NAME[k] + "**") if k.startswith("r") else NAME[k]
     pairs = [("r1", "c1"), ("r3", "c3"), ("r3", "r1")] + ([("r1", "a1"), ("r3", "a3"), ("a1", "c1"), ("a3", "c3"), ("a3", "a1")] if a.control else [])

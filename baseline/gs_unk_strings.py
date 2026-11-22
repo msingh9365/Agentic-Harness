@@ -91,7 +91,8 @@ def main():
         y = {"January": lab["y_train"].astype(int), "April": lab["y_test"].astype(int)}
     else:
         y = {"January": (np.asarray(ym_tr) != 0).astype(int), "April": (np.asarray(ym_te) != 0).astype(int)}     # smoke test: placeholder classes
-    vd = os.path.join(old_dir, "variants", "bpe50k")
+    vd = C.find_dir_with("tokenizer.model")                    # the OLD tokenizer (bpe50k; dataset gs-old-tokenizer: tokenizer.model, vocab.json, info.json copied from baseline_models/tokenizers/bpe50k)
+    assert json.load(open(os.path.join(vd, "vocab.json"))) == json.load(open(os.path.join(old_dir, "variants", "bpe50k", "vocab.json"))), "tokenizer vocabulary differs from the old one"
     tok = P.build_tokenizer(P.VARIANTS["bpe50k"], info["nebula_root"], model_path=os.path.join(vd, "tokenizer.model"), vocab_file=os.path.join(vd, "vocab.json"))
     cache = {}
     res, md = {}, ["### P1 (second part): the strings that become the unknown id 0 (old tokenizer; cleaned words, counts only; no report text is stored)", ""]

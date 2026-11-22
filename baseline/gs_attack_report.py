@@ -130,7 +130,7 @@ def main():
         for pi in range(5):
             ax[i, pi].set_xlabel("padded calls k" if pi < 4 else "greedy steps k")
             ax[i, pi].spines[["top", "right"]].set_visible(False)
-    ax[0, 0].set_ylabel("malware still detected (%)\\n(threshold 1% FPR)")
+    ax[0, 0].set_ylabel("malware still detected (%)\n(threshold 1% FPR)")
     ax[1, 0].set_ylabel("padded-benign FPR (%)")
     ax[0, 0].legend(fontsize=7, frameon=False)
     fig.tight_layout()

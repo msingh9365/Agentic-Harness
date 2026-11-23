@@ -74,6 +74,7 @@ def main():
     import torch
     ap = argparse.ArgumentParser()
     ap.add_argument("--search", required=True)
+    ap.add_argument("--family", default="r1", choices=["r1", "m3"], help="weights folder: r1 (the windowed models, report logit = max over windows) or m3 (the final M3: writes scores_m3_first.npz = first window only = the plain M3, and scores_m3_mw.npz = max over windows = the test-time multi-window baseline)")
     ap.add_argument("--out", required=True)
     ap.add_argument("--seeds", type=int, nargs="*", default=list(range(10)))
     ap.add_argument("--store", default="all.npz")
@@ -101,15 +102,16 @@ def main():
     n_test = a.limit_test or 17402
     models = {}
     for s in a.seeds:
-        p = os.path.join(a.search, "r1", f"seed{s}.pt")
+        p = os.path.join(a.search, a.family, f"seed{s}.pt")
         if not os.path.exists(p):
             for dp, dn, fn in os.walk(a.search):
-                if os.path.basename(dp) == "r1" and f"seed{s}.pt" in fn:
+                if os.path.basename(dp) == a.family and f"seed{s}.pt" in fn:
                     p = os.path.join(dp, f"seed{s}.pt")
         m = pe.build_chunks(len(vocab), pe_mode="paper", pool_mode="attn")
         m.load_state_dict(torch.load(p, map_location="cpu", weights_only=True))
         models[s] = m.to(a.device).eval()
     res = {s: np.zeros((len(SETS), n_test), dtype=np.float32) for s in a.seeds}
+    first = {s: np.zeros((len(SETS), n_test), dtype=np.float32) for s in a.seeds}
     tot = np.zeros((len(SETS), n_test), dtype=np.int64)
     t0 = time.time()
     for j, spec in enumerate(SETS):
@@ -122,22 +124,29 @@ def main():
                 tot[j, t] = total
             W, counts = np.concatenate(Ws), np.asarray(counts)
             for s in a.seeds:
-                res[s][j, c0:c0 + len(counts)] = report_max(score_windows(models[s], W, a.device, bs=2048), counts)
+                z = score_windows(models[s], W, a.device, bs=2048)
+                res[s][j, c0:c0 + len(counts)] = report_max(z, counts)
+                first[s][j, c0:c0 + len(counts)] = z[np.concatenate([[0], np.cumsum(counts)[:-1]])]
         print(f"set {j} {spec[0]} scored for {len(a.seeds)} seeds ({time.time() - t0:.0f}s)", flush=True)
     chk = {}
     for s in a.seeds:
-        pth = os.path.join(a.search, "r1", f"seed{s}_april.npy")
+        pth = os.path.join(a.search, a.family, f"seed{s}_april.npy")
         if not os.path.exists(pth):
             for dp, dn, fn in os.walk(a.search):
-                if os.path.basename(dp) == "r1" and f"seed{s}_april.npy" in fn:
+                if os.path.basename(dp) == a.family and f"seed{s}_april.npy" in fn:
                     pth = os.path.join(dp, f"seed{s}_april.npy")
         ref = np.load(pth).astype(np.float64).reshape(-1)[:n_test]
-        d = float(np.abs(ref - res[s][0].astype(np.float64)).max())
+        d = float(np.abs(ref - (first if a.family == "m3" else res)[s][0].astype(np.float64)).max())      # r1: the report logit (max); m3: the plain first-window logit
         chk[f"seed{s}"] = d
         assert d < 2e-3, f"seed {s}: unedited scores differ from the stored April logits by {d}"
     os.makedirs(a.out, exist_ok=True)
-    np.savez_compressed(os.path.join(a.out, "scores_r1.npz"), names=np.array([s[0] for s in SETS]), tot=tot, **{f"seed{s}": res[s] for s in a.seeds})
-    json.dump({"unedited_vs_stored_april_logits_max_abs_diff": chk, "n_sets": len(SETS)}, open(os.path.join(a.out, "checks_r1.json"), "w"), indent=1)
+    names = np.array([s[0] for s in SETS])
+    if a.family == "m3":
+        np.savez_compressed(os.path.join(a.out, "scores_m3_first.npz"), names=names, tot=tot, **{f"seed{s}": first[s] for s in a.seeds})
+        np.savez_compressed(os.path.join(a.out, "scores_m3_mw64.npz"), names=names, tot=tot, **{f"seed{s}": res[s] for s in a.seeds})
+    else:
+        np.savez_compressed(os.path.join(a.out, "scores_r1.npz"), names=names, tot=tot, **{f"seed{s}": res[s] for s in a.seeds})
+    json.dump({"family": a.family, "unedited_vs_stored_april_logits_max_abs_diff": chk, "n_sets": len(SETS)}, open(os.path.join(a.out, f"checks_{a.family}.json"), "w"), indent=1)
     print("done", json.dumps(chk), flush=True)
 
 

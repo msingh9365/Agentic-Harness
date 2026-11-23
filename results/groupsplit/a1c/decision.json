@@ -1,0 +1,10 @@
+{
+ "delta_pauc_rule_minus_without": 0.004532817038591874,
+ "cluster_ci95": [
+  -0.00866058475307027,
+  0.023110636381692466
+ ],
+ "threshold": -0.02,
+ "gpu_training_planned_later": true,
+ "rule": "GPU training of a Transformer with the rule is planned for later ONLY if the rule loses at most 2 validation pAUC points (delta >= -0.02); nothing is trained tonight"
+}

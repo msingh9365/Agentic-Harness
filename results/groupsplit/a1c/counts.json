@@ -1,0 +1,19 @@
+{
+ "reports": 75298,
+ "reports_with_replacement": 44491,
+ "share_reports_with_replacement": 0.5908656272410954,
+ "replacements_total": 103966,
+ "replacements_per_report_mean": 1.3807272437514941,
+ "replacements_per_report_median": 1.0,
+ "placeholder_words_in_rule_text": 103966,
+ "words_total_without_rule": 83438327,
+ "words_total_with_rule": 83425720,
+ "words_removed_by_the_rule": 12607,
+ "share_words_removed": 0.00015109363350485072,
+ "reports_where_placeholder_words_already_occur_without_rule": 0,
+ "distinct_components": 44446,
+ "components_kept": 35,
+ "min_df": 50,
+ "vocabulary_min_df5_without_rule": 34055,
+ "vocabulary_min_df5_with_rule": 33840
+}

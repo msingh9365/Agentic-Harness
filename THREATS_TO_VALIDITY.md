@@ -10,7 +10,7 @@ An outline for the thesis chapter. Each threat has: what it is, the evidence in 
 
 ## 2. Emulator realism
 - *Threat.* Reports come from one emulator (Speakeasy). Real samples may detect or evade emulation, stall, or behave differently on real Windows; emulation depth, timeouts and API coverage shape what a report contains. A detector may learn emulator artefacts (for example the hash-named files and environment strings seen in the A1c pilot, `NOTES.md` 30.2a).
-- *Evidence here.* P1 (`NOTES` 24.1): the unknown-token analysis shows the corpus text is dominated by few patterns; P3 (`NOTES` 27.3) shows that long hexadecimal literals carry detection signal that does not survive a coarse normalisation, i.e. low-level string content matters. The reports are capped in length (the corpus has reports with exactly 500 calls at the cap).
+- *Evidence here.* P1 (`NOTES` 24.1) found that the old tokenizer has no piece for the letter `j`, so 64% of April reports and about two thirds of January reports contain an unknown token; P3 (`NOTES` 27.3) shows that long hexadecimal literals carry detection signal that does not survive a coarse normalisation, i.e. low-level string content matters. Report length varies strongly (the audit spot check shows two of the first three April reports with 501 calls and a third with 143); whether the emulator caps the number of calls was not examined.
 - *Not known.* How many samples the emulator fails on or truncates, and whether failure correlates with the label.
 - *Say.* Results are about emulated behaviour; do not generalise to deployment on endpoints.
 

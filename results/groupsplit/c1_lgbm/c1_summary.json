@@ -1,0 +1,84 @@
+{
+ "n_features": 2856,
+ "n_train": 75298,
+ "settings": {
+  "n_estimators": 300,
+  "num_leaves": 31,
+  "learning_rate": 0.05,
+  "random_state": 0,
+  "bagging": false,
+  "feature_fraction": 1.0
+ },
+ "determinism_second_fit_max_abs_logit_diff": 0.0,
+ "top_features_by_gain": [
+  [
+   "kernel32.flssetvalue",
+   196268.9007472992
+  ],
+  [
+   "kernel32.getprocaddress",
+   112708.0532925129
+  ],
+  [
+   "kernel32.loadlibraryexw",
+   54043.69523000717
+  ],
+  [
+   "kernel32.getsystemtimeasfiletime",
+   22655.12112569809
+  ],
+  [
+   "kernel32.tlsgetvalue",
+   21582.174247026443
+  ],
+  [
+   "kernel32.initializecriticalsection",
+   21009.489426136017
+  ],
+  [
+   "kernel32.getmodulehandlea",
+   17691.547721624374
+  ],
+  [
+   "kernel32.heapcreate",
+   15088.615088224411
+  ],
+  [
+   "kernel32.heapalloc",
+   14691.087802886963
+  ],
+  [
+   "kernel32.flsgetvalue",
+   10058.184175729752
+  ],
+  [
+   "user32.registerclassexa",
+   9944.87009525299
+  ],
+  [
+   "kernel32.closehandle",
+   9890.614188194275
+  ],
+  [
+   "kernel32.getversionexa",
+   9447.348069190979
+  ],
+  [
+   "kernel32.loadlibrarya",
+   9220.30217552185
+  ],
+  [
+   "kernel32.virtualalloc",
+   8932.72144126892
+  ]
+ ],
+ "sets": [
+  "unedited",
+  "random_20_prepend",
+  "random_50_prepend",
+  "random_100_prepend",
+  "random_200_insert",
+  "lgbm_50_prepend"
+ ],
+ "note": "single deterministic model; scores replicated 10x only for the evaluation tools"
+}

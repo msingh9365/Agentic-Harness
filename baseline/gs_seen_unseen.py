@@ -91,6 +91,7 @@ def main():
     ap.add_argument("--fixed-logits", default=None, help="NOTES 25: logits_fixed_models.npz (keys f1_test..f4_test) of the four models with the corrected tokenizer: added to the group `jan` (all of January)")
     ap.add_argument("--p3-logits", default=None, help="NOTES 27 P3: logits_p3.npz (keys r1_test, r3_test and, if the control was built, a1_test, a3_test): added to the group `jan` (all of January)")
     ap.add_argument("--m3e2-logits", default=None, help="NOTES 29: logits_m3e2.npz (key g3_test): M3 trained for 2 epochs (corrected tokenizer), added to the group `jan`; compared with the fixed-tokenizer M3 and M1 (needs --fixed-logits)")
+    ap.add_argument("--c1-logits", default=None, help="NOTES 30.1: logits_c1.npz (key c1_test, one deterministic model): the LightGBM bag of API names, replicated 10x, added to the group `jan`; compared with the fixed-tokenizer M1 and M3 (needs --fixed-logits)")
     ap.add_argument("--groups", nargs="*", default=["jan", "gs", "old"])
     a = ap.parse_args()
     y = np.load(os.path.join(ROOT, "results", "logits", "labels.npz"))["y_test"].astype(int)
@@ -113,6 +114,9 @@ def main():
         for k, nm in P3.items():
             if f"{k}_test" in zp.files:
                 models[nm] = ("jan", zp[f"{k}_test"].astype(np.float64))
+    C1 = "LightGBM bag of API names (single model)"
+    if a.c1_logits:
+        models[C1] = ("jan", np.tile(np.load(a.c1_logits)["c1_test"].astype(np.float64).reshape(1, -1), (10, 1)))
     G3 = "M3 ATT+bal, 2 epochs (corrected tokenizer)"
     if a.m3e2_logits:
         models[G3] = ("jan", np.load(a.m3e2_logits)["g3_test"].astype(np.float64))
@@ -124,6 +128,9 @@ def main():
     if a.fixed_logits:
         cur = {"f1": "M1 v2-PE (final)", "f2": "M2 two-level, no padding (final)", "f3": "M3 ATT+bal (final)", "f4": "M4 ATT+bal-2L (final)"}
         pair_defs["jan"] = pair_defs["jan"] + [(FIX[k], cur[k]) for k in FIX] + [(FIX["f3"], FIX["f1"]), (FIX["f4"], FIX["f3"]), (FIX["f4"], FIX["f2"])]
+    if a.c1_logits:
+        assert a.fixed_logits, "--c1-logits needs --fixed-logits"
+        pair_defs["jan"] = pair_defs["jan"] + [(C1, FIX["f3"]), (C1, FIX["f1"])]
     if a.m3e2_logits:
         assert a.fixed_logits, "--m3e2-logits needs --fixed-logits"
         pair_defs["jan"] = pair_defs["jan"] + [(G3, FIX["f3"]), (G3, FIX["f1"])]

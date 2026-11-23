@@ -296,6 +296,268 @@
    "benign": 12.147129368567883
   }
  },
+ "m2": {
+  "n_seeds": 3,
+  "variants": {
+   "clean": {
+    "pauc": [
+     0.6515452093272237,
+     0.6701992152453417,
+     0.7103081104666609
+    ],
+    "pauc_mean": 0.6773508450130755,
+    "pauc_sd": 0.030027137623021415,
+    "auc_mean": 0.9705886239569407,
+    "tpr1_mean": 0.7895875447742667,
+    "abs_change_malware": 0.0,
+    "abs_change_benign": 0.0,
+    "abs_change_malware_over_sd": 0.0,
+    "abs_change_benign_over_sd": 0.0,
+    "mean_signed_change_malware": 0.0,
+    "mean_signed_change_benign": 0.0,
+    "by_stratum_abs_change": {
+     "m<2": {
+      "malware": 0.0,
+      "benign": 0.0,
+      "n": 170
+     },
+     "2<=m<10": {
+      "malware": 0.0,
+      "benign": 0.0,
+      "n": 2098
+     },
+     "m>=10": {
+      "malware": 0.0,
+      "benign": 0.0,
+      "n": 15134
+     }
+    }
+   },
+   "a": {
+    "pauc": [
+     0.6039665915791206,
+     0.6075239473249453,
+     0.6529007229268491
+    ],
+    "pauc_mean": 0.6214637539436383,
+    "pauc_sd": 0.02728325418849637,
+    "auc_mean": 0.9675347123415093,
+    "tpr1_mean": 0.7651877859346738,
+    "abs_change_malware": 0.8540421778851224,
+    "abs_change_benign": 0.4963536674282544,
+    "abs_change_malware_over_sd": 0.23361352830717821,
+    "abs_change_benign_over_sd": 0.2662978447559586,
+    "mean_signed_change_malware": -0.31075865340095393,
+    "mean_signed_change_benign": -0.0365970090731871,
+    "by_stratum_abs_change": {
+     "m<2": {
+      "malware": 0.0,
+      "benign": 0.0,
+      "n": 170
+     },
+     "2<=m<10": {
+      "malware": 0.57445649610186,
+      "benign": 0.4159066416992763,
+      "n": 2098
+     },
+     "m>=10": {
+      "malware": 0.8929051530431535,
+      "benign": 0.5176714631485133,
+      "n": 15134
+     }
+    },
+    "share_reports_changed": 0.9873003103091599,
+    "pauc_drop_mean": 0.05588709106943709,
+    "pauc_drop_ci": [
+     0.011742414589830765,
+     0.1030701638655172
+    ],
+    "pauc_drop_seeds_down": 3,
+    "pauc_drop_seeds_up": 0,
+    "pauc_drop_resolved": true,
+    "auc_drop_mean": 0.0030539116154313373,
+    "auc_drop_ci": [
+     -0.002528917057608185,
+     0.010147325252960429
+    ],
+    "tpr1_drop_mean": 0.02439975883959289,
+    "tpr1_drop_ci": [
+     -0.0028375036139634767,
+     0.0595834346458091
+    ],
+    "verdict": "order-sensitive"
+   },
+   "b": {
+    "pauc": [
+     0.6260861029119612,
+     0.6714321819710203,
+     0.6868684217883663
+    ],
+    "pauc_mean": 0.6614622355571159,
+    "pauc_sd": 0.031593867215336906,
+    "auc_mean": 0.969823953443426,
+    "tpr1_mean": 0.7785580026243926,
+    "abs_change_malware": 0.3904219739174487,
+    "abs_change_benign": 0.2561768263129143,
+    "abs_change_malware_over_sd": 0.10663438983433211,
+    "abs_change_benign_over_sd": 0.1358640376936897,
+    "mean_signed_change_malware": -0.10465937896246572,
+    "mean_signed_change_benign": 0.057891149738360285,
+    "by_stratum_abs_change": {
+     "m<2": {
+      "malware": 0.0,
+      "benign": 0.0,
+      "n": 170
+     },
+     "2<=m<10": {
+      "malware": 0.45059090024852727,
+      "benign": 0.35489236885727127,
+      "n": 2098
+     },
+     "m>=10": {
+      "malware": 0.3862472392020495,
+      "benign": 0.2439447582877133,
+      "n": 15134
+     }
+    },
+    "share_reports_changed": 0.9866681990575796,
+    "pauc_drop_mean": 0.01588860945595949,
+    "pauc_drop_ci": [
+     -0.007447026721942659,
+     0.041987098791702274
+    ],
+    "pauc_drop_seeds_down": 2,
+    "pauc_drop_seeds_up": 1,
+    "pauc_drop_resolved": false,
+    "auc_drop_mean": 0.0007646705135146981,
+    "auc_drop_ci": [
+     -0.0007517699815834083,
+     0.0021816712341134496
+    ],
+    "tpr1_drop_mean": 0.011029542149874172,
+    "tpr1_drop_ci": [
+     -0.0024861686984416235,
+     0.03675627387743868
+    ],
+    "verdict": "in between / inconclusive"
+   },
+   "c": {
+    "pauc": [
+     0.5872804480956092,
+     0.5961330438951125,
+     0.6648582693820917
+    ],
+    "pauc_mean": 0.6160905871242711,
+    "pauc_sd": 0.04246536515440738,
+    "auc_mean": 0.9690760824959462,
+    "tpr1_mean": 0.7419938291307586,
+    "abs_change_malware": 0.8138186819887401,
+    "abs_change_benign": 0.43922099725143243,
+    "abs_change_malware_over_sd": 0.2232274174706398,
+    "abs_change_benign_over_sd": 0.23708988920119523,
+    "mean_signed_change_malware": -0.362473067867488,
+    "mean_signed_change_benign": 0.11348801944490179,
+    "by_stratum_abs_change": {
+     "m<2": {
+      "malware": 0.0,
+      "benign": 0.0,
+      "n": 170
+     },
+     "2<=m<10": {
+      "malware": 0.6079878505297728,
+      "benign": 0.36720043251128226,
+      "n": 2098
+     },
+     "m>=10": {
+      "malware": 0.8437796759023092,
+      "benign": 0.4582230885595917,
+      "n": 15134
+     }
+    },
+    "share_reports_changed": 0.990231007930123,
+    "pauc_drop_mean": 0.06126025788880429,
+    "pauc_drop_ci": [
+     0.0110084478039747,
+     0.11880758997045855
+    ],
+    "pauc_drop_seeds_down": 3,
+    "pauc_drop_seeds_up": 0,
+    "pauc_drop_resolved": true,
+    "auc_drop_mean": 0.0015125414609944432,
+    "auc_drop_ci": [
+     -0.002286172852463006,
+     0.005508864017115862
+    ],
+    "tpr1_drop_mean": 0.04759371564350812,
+    "tpr1_drop_ci": [
+     0.005389710139363515,
+     0.10290415757926367
+    ],
+    "verdict": "order-sensitive"
+   },
+   "d": {
+    "pauc": [
+     0.6093374762100131,
+     0.6274398616637498,
+     0.6509596219217559
+    ],
+    "pauc_mean": 0.6292456532651729,
+    "pauc_sd": 0.020869748821996298,
+    "auc_mean": 0.9677817337631628,
+    "tpr1_mean": 0.7654005745292052,
+    "abs_change_malware": 0.8584379086777397,
+    "abs_change_benign": 0.486727986487365,
+    "abs_change_malware_over_sd": 0.2348429522967956,
+    "abs_change_benign_over_sd": 0.2604061606339129,
+    "mean_signed_change_malware": -0.3049738279549399,
+    "mean_signed_change_benign": -0.05264169609755913,
+    "by_stratum_abs_change": {
+     "m<2": {
+      "malware": 0.0,
+      "benign": 0.0,
+      "n": 170
+     },
+     "2<=m<10": {
+      "malware": 0.601941101893635,
+      "benign": 0.40993033152182085,
+      "n": 2098
+     },
+     "m>=10": {
+      "malware": 0.8946380516878603,
+      "benign": 0.5072862143961753,
+      "n": 15134
+     }
+    },
+    "share_reports_changed": 0.9873577749683944,
+    "pauc_drop_mean": 0.048105191747902475,
+    "pauc_drop_ci": [
+     0.004499989958073356,
+     0.09461188557498508
+    ],
+    "pauc_drop_seeds_down": 3,
+    "pauc_drop_seeds_up": 0,
+    "pauc_drop_resolved": true,
+    "auc_drop_mean": 0.002806890193777889,
+    "auc_drop_ci": [
+     -0.0028861003562420688,
+     0.010023659378720198
+    ],
+    "tpr1_drop_mean": 0.024186970245061556,
+    "tpr1_drop_ci": [
+     -0.006506878099472321,
+     0.05982497122427877
+    ],
+    "verdict": "in between / inconclusive"
+   }
+  },
+  "share_m_ge_2": 0.990231007930123,
+  "mean_m": 193.99017354327088,
+  "median_m": 175.0,
+  "clean_logit_sd": {
+   "malware": 3.6428044189421613,
+   "benign": 1.8610455635718177
+  }
+ },
  "m3": {
   "n_seeds": 10,
   "variants": {
@@ -591,6 +853,268 @@
   "clean_logit_sd": {
    "malware": 9.523719114669406,
    "benign": 5.968499299065412
+  }
+ },
+ "m4": {
+  "n_seeds": 3,
+  "variants": {
+   "clean": {
+    "pauc": [
+     0.6772353707076837,
+     0.6398330490945139,
+     0.7208268285311723
+    ],
+    "pauc_mean": 0.6792984161111232,
+    "pauc_sd": 0.04053628244068526,
+    "auc_mean": 0.9704263381992119,
+    "tpr1_mean": 0.7710394722842855,
+    "abs_change_malware": 0.0,
+    "abs_change_benign": 0.0,
+    "abs_change_malware_over_sd": 0.0,
+    "abs_change_benign_over_sd": 0.0,
+    "mean_signed_change_malware": 0.0,
+    "mean_signed_change_benign": 0.0,
+    "by_stratum_abs_change": {
+     "m<2": {
+      "malware": 0.0,
+      "benign": 0.0,
+      "n": 170
+     },
+     "2<=m<10": {
+      "malware": 0.0,
+      "benign": 0.0,
+      "n": 2098
+     },
+     "m>=10": {
+      "malware": 0.0,
+      "benign": 0.0,
+      "n": 15134
+     }
+    }
+   },
+   "a": {
+    "pauc": [
+     0.6857600891420158,
+     0.6461942927376273,
+     0.7054489235118594
+    ],
+    "pauc_mean": 0.6791344351305009,
+    "pauc_sd": 0.030177844279502,
+    "auc_mean": 0.9556975723776243,
+    "tpr1_mean": 0.7811469305245239,
+    "abs_change_malware": 0.5333152627580675,
+    "abs_change_benign": 1.0263787793005115,
+    "abs_change_malware_over_sd": 0.162113501008754,
+    "abs_change_benign_over_sd": 0.5051199891081976,
+    "mean_signed_change_malware": 0.17069451012219097,
+    "mean_signed_change_benign": 0.7669944783880686,
+    "by_stratum_abs_change": {
+     "m<2": {
+      "malware": 0.0,
+      "benign": 0.0,
+      "n": 170
+     },
+     "2<=m<10": {
+      "malware": 0.38081194041360455,
+      "benign": 0.4622426730748299,
+      "n": 2098
+     },
+     "m>=10": {
+      "malware": 0.555005704474934,
+      "benign": 1.1363663750076838,
+      "n": 15134
+     }
+    },
+    "share_reports_changed": 0.9873003103091599,
+    "pauc_drop_mean": 0.0001639809806224616,
+    "pauc_drop_ci": [
+     -0.033617373236777395,
+     0.03550523762163656
+    ],
+    "pauc_drop_seeds_down": 1,
+    "pauc_drop_seeds_up": 2,
+    "pauc_drop_resolved": false,
+    "auc_drop_mean": 0.014728765821587553,
+    "auc_drop_ci": [
+     0.006079873155226576,
+     0.029821867608942156
+    ],
+    "tpr1_drop_mean": -0.010107458240238398,
+    "tpr1_drop_ci": [
+     -0.03875621973342296,
+     0.02598191271478426
+    ],
+    "verdict": "in between / inconclusive"
+   },
+   "b": {
+    "pauc": [
+     0.6709327682297881,
+     0.6517329381628714,
+     0.7147240521053142
+    ],
+    "pauc_mean": 0.6791299194993247,
+    "pauc_sd": 0.032285679110546854,
+    "auc_mean": 0.9676746902608261,
+    "tpr1_mean": 0.7767847643366315,
+    "abs_change_malware": 0.2084379411627943,
+    "abs_change_benign": 0.39011439351178234,
+    "abs_change_malware_over_sd": 0.06365348872840638,
+    "abs_change_benign_over_sd": 0.19492627513630423,
+    "mean_signed_change_malware": 0.045049657655494936,
+    "mean_signed_change_benign": 0.18385627548841407,
+    "by_stratum_abs_change": {
+     "m<2": {
+      "malware": 0.0,
+      "benign": 0.0,
+      "n": 170
+     },
+     "2<=m<10": {
+      "malware": 0.2832191835413305,
+      "benign": 0.36107848715247387,
+      "n": 2098
+     },
+     "m>=10": {
+      "malware": 0.20123012268031154,
+      "benign": 0.40120428657556384,
+      "n": 15134
+     }
+    },
+    "share_reports_changed": 0.9866681990575796,
+    "pauc_drop_mean": 0.00016849661179874076,
+    "pauc_drop_ci": [
+     -0.012646153626055031,
+     0.013422490788181501
+    ],
+    "pauc_drop_seeds_down": 2,
+    "pauc_drop_seeds_up": 1,
+    "pauc_drop_resolved": false,
+    "auc_drop_mean": 0.0027516479383857817,
+    "auc_drop_ci": [
+     0.0006164901319321125,
+     0.00640918384045015
+    ],
+    "tpr1_drop_mean": -0.005745292052345974,
+    "tpr1_drop_ci": [
+     -0.02154258994699336,
+     0.020886134294051423
+    ],
+    "verdict": "bag-of-calls-like"
+   },
+   "c": {
+    "pauc": [
+     0.643287679770368,
+     0.5972120493117027,
+     0.6688190407158865
+    ],
+    "pauc_mean": 0.6364395899326524,
+    "pauc_sd": 0.03629135648207134,
+    "auc_mean": 0.956976535171797,
+    "tpr1_mean": 0.7333404262864844,
+    "abs_change_malware": 0.7964734276235114,
+    "abs_change_benign": 0.9345551206238791,
+    "abs_change_malware_over_sd": 0.24146024109030262,
+    "abs_change_benign_over_sd": 0.461251845729374,
+    "mean_signed_change_malware": -0.3132955211418478,
+    "mean_signed_change_benign": 0.6173630727235387,
+    "by_stratum_abs_change": {
+     "m<2": {
+      "malware": 0.0,
+      "benign": 0.0,
+      "n": 170
+     },
+     "2<=m<10": {
+      "malware": 0.4369300292751401,
+      "benign": 0.4656182334415805,
+      "n": 2098
+     },
+     "m>=10": {
+      "malware": 0.8442489880005797,
+      "benign": 1.0272919333182886,
+      "n": 15134
+     }
+    },
+    "share_reports_changed": 0.990231007930123,
+    "pauc_drop_mean": 0.04285882617847089,
+    "pauc_drop_ci": [
+     -0.033913064852383386,
+     0.13517182541559952
+    ],
+    "pauc_drop_seeds_down": 3,
+    "pauc_drop_seeds_up": 0,
+    "pauc_drop_resolved": false,
+    "auc_drop_mean": 0.01344980302741483,
+    "auc_drop_ci": [
+     0.005525545292531758,
+     0.02483737496326292
+    ],
+    "tpr1_drop_mean": 0.03769904599780105,
+    "tpr1_drop_ci": [
+     -0.00081798949722856,
+     0.11070042013924869
+    ],
+    "verdict": "in between / inconclusive"
+   },
+   "d": {
+    "pauc": [
+     0.6983043131354734,
+     0.6567069214136729,
+     0.7183266084772418
+    ],
+    "pauc_mean": 0.6911126143421294,
+    "pauc_sd": 0.03143305357587264,
+    "auc_mean": 0.9560134959497647,
+    "tpr1_mean": 0.7847288718658013,
+    "abs_change_malware": 0.531873595155399,
+    "abs_change_benign": 1.0225765528157742,
+    "abs_change_malware_over_sd": 0.16169827110197535,
+    "abs_change_benign_over_sd": 0.5034019514944915,
+    "mean_signed_change_malware": 0.17111342019301512,
+    "mean_signed_change_benign": 0.7522717107779707,
+    "by_stratum_abs_change": {
+     "m<2": {
+      "malware": 0.0,
+      "benign": 0.0,
+      "n": 170
+     },
+     "2<=m<10": {
+      "malware": 0.38847220287520867,
+      "benign": 0.4529796309644092,
+      "n": 2098
+     },
+     "m>=10": {
+      "malware": 0.5524911565246821,
+      "benign": 1.1334077091320989,
+      "n": 15134
+     }
+    },
+    "share_reports_changed": 0.9873577749683944,
+    "pauc_drop_mean": -0.011814198231006082,
+    "pauc_drop_ci": [
+     -0.04822933783192004,
+     0.026322677671300827
+    ],
+    "pauc_drop_seeds_down": 1,
+    "pauc_drop_seeds_up": 2,
+    "pauc_drop_resolved": false,
+    "auc_drop_mean": 0.014412842249447166,
+    "auc_drop_ci": [
+     0.005831406156629112,
+     0.02974819017869181
+    ],
+    "tpr1_drop_mean": -0.013689399581515826,
+    "tpr1_drop_ci": [
+     -0.03965205658799051,
+     0.021221254750609597
+    ],
+    "verdict": "in between / inconclusive"
+   }
+  },
+  "share_m_ge_2": 0.990231007930123,
+  "mean_m": 193.99017354327088,
+  "median_m": 175.0,
+  "clean_logit_sd": {
+   "malware": 3.2983753837619467,
+   "benign": 2.0269735067559846
   }
  }
 }

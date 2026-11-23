@@ -67,7 +67,7 @@ def payload():
             for dp, dn, fn in os.walk(os.path.join(ROOT, base)):
                 dn[:] = [d for d in dn if d not in ("__pycache__", "jobs", "results") and not d.startswith(".")]
                 for f in fn:
-                    if f.endswith((".py", ".patch", ".sh", "ssl_split_hashes.json", "gap_split_hash.json", "b3_split_hashes.json")):
+                    if f.endswith((".py", ".patch", ".sh", "ssl_split_hashes.json", "gap_split_hash.json", "b3_split_hashes.json", "b1_split_data.npz")):
                         full = os.path.join(dp, f)
                         tar.add(full, arcname=os.path.relpath(full, ROOT))
     return base64.b64encode(buf.getvalue()).decode()

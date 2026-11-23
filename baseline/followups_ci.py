@@ -41,7 +41,7 @@ def one_draw(Z, wbs, y, cnt, idx):
             t = thr_of(z0, idx_b, f)
             det[:, ti] += (Z[s][:, idx_m] > t).mean(1)
             fpr[:, ti] += (Z[s][:, idx_b] > t).mean(1)
-            if wbs is not None:
+            if wbs is not None and s < len(wbs):                  # R1 (NOTES 30.3): the white-box ran for seeds 0-2 only; the white-box means are over the seeds present
                 w = wbs[s]
                 cm = cnt[w["sel"]].astype(np.float64)
                 cb = cnt[w["ben_ids"]].astype(np.float64)
@@ -54,7 +54,8 @@ def one_draw(Z, wbs, y, cnt, idx):
                     wdx[si, ti] += ((w["best"][k] > tx) * cm).sum() / cm.sum()
                 for ki, k in enumerate(WB_KS):
                     wfx[ki, ti] += ((w[f"ben_k{k}"] > tx) * cb).sum() / cb.sum()
-    return det / S, fpr / S, wd / S, wf / S, wdx / S, wfx / S
+    nw = max(1, min(S, len(wbs))) if wbs is not None else S
+    return det / S, fpr / S, wd / nw, wf / nw, wdx / nw, wfx / nw
 
 
 def run_model(args):

@@ -1,0 +1,1 @@
+epoch-2 in-sample validation logits of gsz_attbal_2ep vs Stage I gsz_attbal (all 10 seeds): max abs difference 0.000e+00 (tolerance 2e-3)

@@ -19,7 +19,9 @@ from baseline.r1 import CUT, report_max, score_windows, windows_from
 def main():
     import torch
     ap = argparse.ArgumentParser()
-    ap.add_argument("--seed", type=int, required=True)
+    ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--plan", action="store_true", help="run --seeds on the available GPUs, one process per GPU")
+    ap.add_argument("--seeds", type=int, nargs="*", default=[0, 1, 2])
     ap.add_argument("--search", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--store", default="all.npz")
@@ -31,6 +33,35 @@ def main():
     ap.add_argument("--n-wb", type=int, default=TA.N_WB)
     ap.add_argument("--group", type=int, default=8)
     a = ap.parse_args()
+    if a.plan:
+        import subprocess
+        import sys
+        import time
+        n_gpu = max(1, torch.cuda.device_count())
+        jobs = [s for s in a.seeds if not os.path.exists(os.path.join(a.out, f"wb_r1_seed{s}.npz"))]
+        running, t0 = {}, time.time()
+        os.makedirs(os.path.join(a.out, "logs"), exist_ok=True)
+        while jobs or running:
+            for g in range(n_gpu):
+                if g not in running and jobs:
+                    s_ = jobs.pop(0)
+                    log = open(os.path.join(a.out, "logs", f"wb_r1_seed{s_}.log"), "a")
+                    cmd = [sys.executable, "-m", "baseline.r1_wb", "--seed", str(s_), "--search", a.search, "--out", a.out, "--store", a.store, "--ranking", a.ranking, "--split-dir", a.split_dir, "--device", a.device, "--steps", str(a.steps), "--n-wb", str(a.n_wb), "--group", str(a.group)]
+                    running[g] = (subprocess.Popen(cmd, env=dict(os.environ, CUDA_VISIBLE_DEVICES=str(g)), stdout=log, stderr=subprocess.STDOUT), s_, log)
+                    print(f"[{(time.time() - t0) / 60:.1f} min] GPU {g}: started white-box seed {s_}", flush=True)
+            for g, (p_, s_, log) in list(running.items()):
+                if p_.poll() is not None:
+                    log.close()
+                    print(f"[{(time.time() - t0) / 60:.1f} min] GPU {g}: seed {s_} exited with {p_.returncode}", flush=True)
+                    print("".join(open(log.name).readlines()[-3:])[-500:], flush=True)
+                    if p_.returncode:
+                        for q, _, _ in running.values():
+                            if q.poll() is None:
+                                q.terminate()
+                        raise SystemExit(f"white-box seed {s_} failed")
+                    del running[g]
+            time.sleep(10)
+        return
     C.setup_nebula(require_patched=True)
     store, y_test, ntr, ranking, pool, pool_n = GA.inputs(a)
     tokens = a.tokens or C.find_dir_with("all.npz")

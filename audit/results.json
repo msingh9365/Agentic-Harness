@@ -1,0 +1,1489 @@
+{
+ "inputs_sha256_16": {
+  "April labels": "54308b0250636142",
+  "Stage I logits (fixed tokenizer)": "6958ca2c89f4047e",
+  "Step 5 logits (M1, M3, current tokenizer)": "3864e4aa379a1651",
+  "Stage G logits (M2, M4, current tokenizer)": "03728738424183e5",
+  "stage_i/tables.md": "70339d1f578f8f2c",
+  "stage_j/report_table.md": "1e512c657e472705",
+  "group split": "84020227c4dbbf16",
+  "Stage J scores m1": "998cbd4147e5403a",
+  "Stage J scores m3": "f8bddd09b0f0d232",
+  "call-token store": "0a8b75e67515078e",
+  "January labels": "035e3e7eb3cc5aee",
+  "tokenizer": "8bcdc5f4160f3e38",
+  "model input rows x_test": "2afa48f35afa4ff5"
+ },
+ "n_april": 17402,
+ "n_benign": 8003,
+ "n_malware": 9399,
+ "part1_max_abs_diff_per_metric": {
+  "TPR@1e-3 (per-seed mean)": 0.0004515373975955139,
+  "TPR@1e-3 (per-seed std)": 0.0004668564042019374,
+  "TPR@1e-3 (ensemble)": 0.0004039791467177478,
+  "TPR@1e-2 (per-seed mean)": 0.00038206192148104723,
+  "TPR@1e-2 (per-seed std)": 0.000493728998077203,
+  "TPR@1e-2 (ensemble)": 0.0004939887222045192,
+  "AUC (per-seed mean)": 4.425530818519263e-05,
+  "AUC (per-seed std)": 4.7595255247032814e-05,
+  "AUC (ensemble)": 4.518659662644531e-05,
+  "F1 (per-seed mean)": 0.0003875393883240319,
+  "F1 (per-seed std)": 0.00041742840694451895,
+  "F1 (ensemble)": 0.0004229186629840509,
+  "pAUC@1e-2 (per-seed mean)": 0.0004937850800895704,
+  "pAUC@1e-2 (per-seed std)": 0.0004943843045389362,
+  "pAUC@1e-2 (ensemble)": 0.00044788250155736176,
+  "pAUC@1e-3 (per-seed mean)": 0.00038038196044609673,
+  "pAUC@1e-3 (per-seed std)": 0.0004420004934002353,
+  "pAUC@1e-3 (ensemble)": 0.00040281473870640294
+ },
+ "part1_mcclish_note": {
+  "sklearn_mcclish_vs_reported_normalised_note": "roc_auc_score(max_fpr=0.01) is the McClish form (0.5 = chance); the reports use the normalised partial AUC (chance 0.005). The converted value is compared.",
+  "max_abs_diff_converted_vs_direct": 4.440892098500626e-16,
+  "max_abs_diff_tpr_threshold_rule_vs_roc_rule": 0.0,
+  "examples": [
+   {
+    "set": "A",
+    "model": 1,
+    "seed0_sklearn_mcclish_pauc@1e-2": 0.8527851816422263,
+    "seed0_converted_to_normalised": 0.7070425114680302,
+    "seed0_direct_normalised": 0.7070425114680304
+   },
+   {
+    "set": "A",
+    "model": 2,
+    "seed0_sklearn_mcclish_pauc@1e-2": 0.8180865061517839,
+    "seed0_converted_to_normalised": 0.63799214724205,
+    "seed0_direct_normalised": 0.6379921472420499
+   },
+   {
+    "set": "A",
+    "model": 3,
+    "seed0_sklearn_mcclish_pauc@1e-2": 0.8557604263422942,
+    "seed0_converted_to_normalised": 0.7129632484211654,
+    "seed0_direct_normalised": 0.7129632484211653
+   },
+   {
+    "set": "A",
+    "model": 4,
+    "seed0_sklearn_mcclish_pauc@1e-2": 0.8496792519513472,
+    "seed0_converted_to_normalised": 0.7008617113831809,
+    "seed0_direct_normalised": 0.7008617113831809
+   },
+   {
+    "set": "B",
+    "model": 1,
+    "seed0_sklearn_mcclish_pauc@1e-2": 0.8339306082672311,
+    "seed0_converted_to_normalised": 0.6695219104517898,
+    "seed0_direct_normalised": 0.66952191045179
+   },
+   {
+    "set": "B",
+    "model": 2,
+    "seed0_sklearn_mcclish_pauc@1e-2": 0.8248970901141828,
+    "seed0_converted_to_normalised": 0.6515452093272237,
+    "seed0_direct_normalised": 0.6515452093272236
+   },
+   {
+    "set": "B",
+    "model": 3,
+    "seed0_sklearn_mcclish_pauc@1e-2": 0.8415650514688096,
+    "seed0_converted_to_normalised": 0.684714452422931,
+    "seed0_direct_normalised": 0.6847144524229312
+   },
+   {
+    "set": "B",
+    "model": 4,
+    "seed0_sklearn_mcclish_pauc@1e-2": 0.8378067189485847,
+    "seed0_converted_to_normalised": 0.6772353707076836,
+    "seed0_direct_normalised": 0.6772353707076836
+   }
+  ]
+ },
+ "part2": {
+  "n_benign": 8003,
+  "floor(0.01 n)": 80,
+  "floor(0.001 n)": 8,
+  "model_seeds_checked": 80,
+  "all_exactly_80_and_8": false,
+  "exceptions": [
+   {
+    "set": "A",
+    "model": 1,
+    "seed": 0,
+    "fpr": 0.01,
+    "benign_above": 79,
+    "expected": 80,
+    "benign_equal_to_threshold": 3,
+    "malware_equal_to_threshold": 0,
+    "explained_by_ties": true
+   },
+   {
+    "set": "A",
+    "model": 1,
+    "seed": 5,
+    "fpr": 0.001,
+    "benign_above": 6,
+    "expected": 8,
+    "benign_equal_to_threshold": 3,
+    "malware_equal_to_threshold": 0,
+    "explained_by_ties": true
+   },
+   {
+    "set": "A",
+    "model": 1,
+    "seed": 7,
+    "fpr": 0.001,
+    "benign_above": 7,
+    "expected": 8,
+    "benign_equal_to_threshold": 3,
+    "malware_equal_to_threshold": 0,
+    "explained_by_ties": true
+   },
+   {
+    "set": "A",
+    "model": 2,
+    "seed": 7,
+    "fpr": 0.01,
+    "benign_above": 79,
+    "expected": 80,
+    "benign_equal_to_threshold": 2,
+    "malware_equal_to_threshold": 0,
+    "explained_by_ties": true
+   },
+   {
+    "set": "A",
+    "model": 3,
+    "seed": 6,
+    "fpr": 0.01,
+    "benign_above": 79,
+    "expected": 80,
+    "benign_equal_to_threshold": 2,
+    "malware_equal_to_threshold": 0,
+    "explained_by_ties": true
+   },
+   {
+    "set": "A",
+    "model": 4,
+    "seed": 0,
+    "fpr": 0.01,
+    "benign_above": 79,
+    "expected": 80,
+    "benign_equal_to_threshold": 5,
+    "malware_equal_to_threshold": 0,
+    "explained_by_ties": true
+   },
+   {
+    "set": "A",
+    "model": 4,
+    "seed": 8,
+    "fpr": 0.01,
+    "benign_above": 79,
+    "expected": 80,
+    "benign_equal_to_threshold": 3,
+    "malware_equal_to_threshold": 0,
+    "explained_by_ties": true
+   },
+   {
+    "set": "B",
+    "model": 1,
+    "seed": 5,
+    "fpr": 0.001,
+    "benign_above": 7,
+    "expected": 8,
+    "benign_equal_to_threshold": 3,
+    "malware_equal_to_threshold": 0,
+    "explained_by_ties": true
+   },
+   {
+    "set": "B",
+    "model": 2,
+    "seed": 9,
+    "fpr": 0.01,
+    "benign_above": 79,
+    "expected": 80,
+    "benign_equal_to_threshold": 2,
+    "malware_equal_to_threshold": 0,
+    "explained_by_ties": true
+   },
+   {
+    "set": "B",
+    "model": 4,
+    "seed": 2,
+    "fpr": 0.01,
+    "benign_above": 77,
+    "expected": 80,
+    "benign_equal_to_threshold": 6,
+    "malware_equal_to_threshold": 6,
+    "explained_by_ties": true
+   }
+  ]
+ },
+ "part3_links": {
+  "M1_row0_vs_stage_I_logits_max_abs_diff": 3.814697265625e-05,
+  "M3_row0_vs_stage_I_logits_max_abs_diff": 0.0,
+  "M1_threshold_recomputed_vs_stored_in_wb_files_max_abs_diff": 1.430511474609375e-06,
+  "M3_threshold_recomputed_vs_stored_in_wb_files_max_abs_diff": 0.0
+ },
+ "part4_checks": {
+  "april_reports": 17402,
+  "unedited_total_tokens_differing_from_stored_Stage_J": 0,
+  "random20prepend_total_tokens_differing_from_stored_Stage_J": 0,
+  "store_first512_differing_from_x_test_rows": 0
+ },
+ "part4_spot_check": [
+  {
+   "april_row": 0,
+   "store_row": 75298,
+   "n_calls_original": 501,
+   "header_tokens": 1,
+   "added_call_tokens": 119,
+   "original_calls_start_at_token": 120,
+   "total_tokens_edited": 2351,
+   "total_tokens_unedited": 2232,
+   "first_position_where_model_input_differs_from_unedited": 2
+  },
+  {
+   "april_row": 1,
+   "store_row": 75299,
+   "n_calls_original": 501,
+   "header_tokens": 1,
+   "added_call_tokens": 117,
+   "original_calls_start_at_token": 118,
+   "total_tokens_edited": 2356,
+   "total_tokens_unedited": 2239,
+   "first_position_where_model_input_differs_from_unedited": 3
+  },
+  {
+   "april_row": 2,
+   "store_row": 75300,
+   "n_calls_original": 143,
+   "header_tokens": 1,
+   "added_call_tokens": 108,
+   "original_calls_start_at_token": 109,
+   "total_tokens_edited": 823,
+   "total_tokens_unedited": 715,
+   "first_position_where_model_input_differs_from_unedited": 2
+  }
+ ],
+ "comparisons": [
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M1 TPR@1e-3 per-seed mean",
+   "recomputed": "0.5407",
+   "reported": "0.541",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M1 TPR@1e-3 per-seed std",
+   "recomputed": "0.0945",
+   "reported": "0.095",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M1 TPR@1e-3 ensemble",
+   "recomputed": "0.6222",
+   "reported": "0.622",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M1 TPR@1e-2 per-seed mean",
+   "recomputed": "0.7802",
+   "reported": "0.780",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M1 TPR@1e-2 per-seed std",
+   "recomputed": "0.0376",
+   "reported": "0.038",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M1 TPR@1e-2 ensemble",
+   "recomputed": "0.8435",
+   "reported": "0.843",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M1 AUC per-seed mean",
+   "recomputed": "0.96671",
+   "reported": "0.9667",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M1 AUC per-seed std",
+   "recomputed": "0.00710",
+   "reported": "0.0071",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M1 AUC ensemble",
+   "recomputed": "0.97383",
+   "reported": "0.9738",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M1 F1 per-seed mean",
+   "recomputed": "0.8991",
+   "reported": "0.899",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M1 F1 per-seed std",
+   "recomputed": "0.0214",
+   "reported": "0.021",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M1 F1 ensemble",
+   "recomputed": "0.9214",
+   "reported": "0.921",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M1 pAUC@1e-2 per-seed mean",
+   "recomputed": "0.6736",
+   "reported": "0.674",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M1 pAUC@1e-2 per-seed std",
+   "recomputed": "0.0531",
+   "reported": "0.053",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M1 pAUC@1e-2 ensemble",
+   "recomputed": "0.7391",
+   "reported": "0.739",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M1 pAUC@1e-3 per-seed mean",
+   "recomputed": "0.4258",
+   "reported": "0.426",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M1 pAUC@1e-3 per-seed std",
+   "recomputed": "0.0858",
+   "reported": "0.086",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M1 pAUC@1e-3 ensemble",
+   "recomputed": "0.5476",
+   "reported": "0.548",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M2 TPR@1e-3 per-seed mean",
+   "recomputed": "0.3445",
+   "reported": "0.344",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M2 TPR@1e-3 per-seed std",
+   "recomputed": "0.1892",
+   "reported": "0.189",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M2 TPR@1e-3 ensemble",
+   "recomputed": "0.5318",
+   "reported": "0.532",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M2 TPR@1e-2 per-seed mean",
+   "recomputed": "0.7513",
+   "reported": "0.751",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M2 TPR@1e-2 per-seed std",
+   "recomputed": "0.0675",
+   "reported": "0.068",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M2 TPR@1e-2 ensemble",
+   "recomputed": "0.8021",
+   "reported": "0.802",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M2 AUC per-seed mean",
+   "recomputed": "0.96698",
+   "reported": "0.9670",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M2 AUC per-seed std",
+   "recomputed": "0.01048",
+   "reported": "0.0105",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M2 AUC ensemble",
+   "recomputed": "0.97495",
+   "reported": "0.9749",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M2 F1 per-seed mean",
+   "recomputed": "0.8879",
+   "reported": "0.888",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M2 F1 per-seed std",
+   "recomputed": "0.0382",
+   "reported": "0.038",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M2 F1 ensemble",
+   "recomputed": "0.9143",
+   "reported": "0.914",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M2 pAUC@1e-2 per-seed mean",
+   "recomputed": "0.5620",
+   "reported": "0.562",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M2 pAUC@1e-2 per-seed std",
+   "recomputed": "0.1465",
+   "reported": "0.146",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M2 pAUC@1e-2 ensemble",
+   "recomputed": "0.6752",
+   "reported": "0.675",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M2 pAUC@1e-3 per-seed mean",
+   "recomputed": "0.2020",
+   "reported": "0.202",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M2 pAUC@1e-3 per-seed std",
+   "recomputed": "0.1156",
+   "reported": "0.116",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M2 pAUC@1e-3 ensemble",
+   "recomputed": "0.3169",
+   "reported": "0.317",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M3 TPR@1e-3 per-seed mean",
+   "recomputed": "0.5898",
+   "reported": "0.590",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M3 TPR@1e-3 per-seed std",
+   "recomputed": "0.0292",
+   "reported": "0.029",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M3 TPR@1e-3 ensemble",
+   "recomputed": "0.6028",
+   "reported": "0.603",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M3 TPR@1e-2 per-seed mean",
+   "recomputed": "0.7901",
+   "reported": "0.790",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M3 TPR@1e-2 per-seed std",
+   "recomputed": "0.0082",
+   "reported": "0.008",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M3 TPR@1e-2 ensemble",
+   "recomputed": "0.8015",
+   "reported": "0.801",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M3 AUC per-seed mean",
+   "recomputed": "0.96939",
+   "reported": "0.9694",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M3 AUC per-seed std",
+   "recomputed": "0.00435",
+   "reported": "0.0044",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M3 AUC ensemble",
+   "recomputed": "0.97479",
+   "reported": "0.9748",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M3 F1 per-seed mean",
+   "recomputed": "0.9081",
+   "reported": "0.908",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M3 F1 per-seed std",
+   "recomputed": "0.0111",
+   "reported": "0.011",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M3 F1 ensemble",
+   "recomputed": "0.9210",
+   "reported": "0.921",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M3 pAUC@1e-2 per-seed mean",
+   "recomputed": "0.7098",
+   "reported": "0.710",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M3 pAUC@1e-2 per-seed std",
+   "recomputed": "0.0149",
+   "reported": "0.015",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M3 pAUC@1e-2 ensemble",
+   "recomputed": "0.7311",
+   "reported": "0.731",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M3 pAUC@1e-3 per-seed mean",
+   "recomputed": "0.4772",
+   "reported": "0.477",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M3 pAUC@1e-3 per-seed std",
+   "recomputed": "0.0510",
+   "reported": "0.051",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M3 pAUC@1e-3 ensemble",
+   "recomputed": "0.5358",
+   "reported": "0.536",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M4 TPR@1e-3 per-seed mean",
+   "recomputed": "0.4613",
+   "reported": "0.461",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M4 TPR@1e-3 per-seed std",
+   "recomputed": "0.1740",
+   "reported": "0.174",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M4 TPR@1e-3 ensemble",
+   "recomputed": "0.6283",
+   "reported": "0.628",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M4 TPR@1e-2 per-seed mean",
+   "recomputed": "0.7778",
+   "reported": "0.778",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M4 TPR@1e-2 per-seed std",
+   "recomputed": "0.0215",
+   "reported": "0.021",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M4 TPR@1e-2 ensemble",
+   "recomputed": "0.8120",
+   "reported": "0.812",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M4 AUC per-seed mean",
+   "recomputed": "0.96791",
+   "reported": "0.9679",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M4 AUC per-seed std",
+   "recomputed": "0.00747",
+   "reported": "0.0075",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M4 AUC ensemble",
+   "recomputed": "0.97668",
+   "reported": "0.9767",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M4 F1 per-seed mean",
+   "recomputed": "0.9104",
+   "reported": "0.910",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M4 F1 per-seed std",
+   "recomputed": "0.0104",
+   "reported": "0.010",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M4 F1 ensemble",
+   "recomputed": "0.9174",
+   "reported": "0.917",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M4 pAUC@1e-2 per-seed mean",
+   "recomputed": "0.6625",
+   "reported": "0.663",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M4 pAUC@1e-2 per-seed std",
+   "recomputed": "0.0362",
+   "reported": "0.036",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M4 pAUC@1e-2 ensemble",
+   "recomputed": "0.7249",
+   "reported": "0.725",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M4 pAUC@1e-3 per-seed mean",
+   "recomputed": "0.2729",
+   "reported": "0.273",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M4 pAUC@1e-3 per-seed std",
+   "recomputed": "0.1238",
+   "reported": "0.124",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "current tokenizer M4 pAUC@1e-3 ensemble",
+   "recomputed": "0.4508",
+   "reported": "0.451",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M1 TPR@1e-3 per-seed mean",
+   "recomputed": "0.5364",
+   "reported": "0.536",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M1 TPR@1e-3 per-seed std",
+   "recomputed": "0.0600",
+   "reported": "0.060",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M1 TPR@1e-3 ensemble",
+   "recomputed": "0.6632",
+   "reported": "0.663",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M1 TPR@1e-2 per-seed mean",
+   "recomputed": "0.7914",
+   "reported": "0.791",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M1 TPR@1e-2 per-seed std",
+   "recomputed": "0.0196",
+   "reported": "0.020",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M1 TPR@1e-2 ensemble",
+   "recomputed": "0.8373",
+   "reported": "0.837",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M1 AUC per-seed mean",
+   "recomputed": "0.96387",
+   "reported": "0.9639",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M1 AUC per-seed std",
+   "recomputed": "0.01106",
+   "reported": "0.0111",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M1 AUC ensemble",
+   "recomputed": "0.97049",
+   "reported": "0.9705",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M1 F1 per-seed mean",
+   "recomputed": "0.8913",
+   "reported": "0.891",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M1 F1 per-seed std",
+   "recomputed": "0.0268",
+   "reported": "0.027",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M1 F1 ensemble",
+   "recomputed": "0.9126",
+   "reported": "0.913",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M1 pAUC@1e-2 per-seed mean",
+   "recomputed": "0.6864",
+   "reported": "0.686",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M1 pAUC@1e-2 per-seed std",
+   "recomputed": "0.0262",
+   "reported": "0.026",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M1 pAUC@1e-2 ensemble",
+   "recomputed": "0.7558",
+   "reported": "0.756",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M1 pAUC@1e-3 per-seed mean",
+   "recomputed": "0.3976",
+   "reported": "0.398",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M1 pAUC@1e-3 per-seed std",
+   "recomputed": "0.0950",
+   "reported": "0.095",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M1 pAUC@1e-3 ensemble",
+   "recomputed": "0.5521",
+   "reported": "0.552",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M2 TPR@1e-3 per-seed mean",
+   "recomputed": "0.3807",
+   "reported": "0.381",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M2 TPR@1e-3 per-seed std",
+   "recomputed": "0.1648",
+   "reported": "0.165",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M2 TPR@1e-3 ensemble",
+   "recomputed": "0.5410",
+   "reported": "0.541",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M2 TPR@1e-2 per-seed mean",
+   "recomputed": "0.7719",
+   "reported": "0.772",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M2 TPR@1e-2 per-seed std",
+   "recomputed": "0.0494",
+   "reported": "0.049",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M2 TPR@1e-2 ensemble",
+   "recomputed": "0.8013",
+   "reported": "0.801",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M2 AUC per-seed mean",
+   "recomputed": "0.96896",
+   "reported": "0.9690",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M2 AUC per-seed std",
+   "recomputed": "0.00731",
+   "reported": "0.0073",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M2 AUC ensemble",
+   "recomputed": "0.97522",
+   "reported": "0.9752",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M2 F1 per-seed mean",
+   "recomputed": "0.8979",
+   "reported": "0.898",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M2 F1 per-seed std",
+   "recomputed": "0.0219",
+   "reported": "0.022",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M2 F1 ensemble",
+   "recomputed": "0.9100",
+   "reported": "0.910",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M2 pAUC@1e-2 per-seed mean",
+   "recomputed": "0.6199",
+   "reported": "0.620",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M2 pAUC@1e-2 per-seed std",
+   "recomputed": "0.0799",
+   "reported": "0.080",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M2 pAUC@1e-2 ensemble",
+   "recomputed": "0.6983",
+   "reported": "0.698",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M2 pAUC@1e-3 per-seed mean",
+   "recomputed": "0.2701",
+   "reported": "0.270",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M2 pAUC@1e-3 per-seed std",
+   "recomputed": "0.1534",
+   "reported": "0.153",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M2 pAUC@1e-3 ensemble",
+   "recomputed": "0.4490",
+   "reported": "0.449",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M3 TPR@1e-3 per-seed mean",
+   "recomputed": "0.5666",
+   "reported": "0.567",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M3 TPR@1e-3 per-seed std",
+   "recomputed": "0.0468",
+   "reported": "0.047",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M3 TPR@1e-3 ensemble",
+   "recomputed": "0.5974",
+   "reported": "0.597",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M3 TPR@1e-2 per-seed mean",
+   "recomputed": "0.7903",
+   "reported": "0.790",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M3 TPR@1e-2 per-seed std",
+   "recomputed": "0.0185",
+   "reported": "0.019",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M3 TPR@1e-2 ensemble",
+   "recomputed": "0.7999",
+   "reported": "0.800",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M3 AUC per-seed mean",
+   "recomputed": "0.96932",
+   "reported": "0.9693",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M3 AUC per-seed std",
+   "recomputed": "0.00646",
+   "reported": "0.0065",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M3 AUC ensemble",
+   "recomputed": "0.97520",
+   "reported": "0.9752",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M3 F1 per-seed mean",
+   "recomputed": "0.9128",
+   "reported": "0.913",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M3 F1 per-seed std",
+   "recomputed": "0.0109",
+   "reported": "0.011",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M3 F1 ensemble",
+   "recomputed": "0.9191",
+   "reported": "0.919",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M3 pAUC@1e-2 per-seed mean",
+   "recomputed": "0.7048",
+   "reported": "0.705",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M3 pAUC@1e-2 per-seed std",
+   "recomputed": "0.0252",
+   "reported": "0.025",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M3 pAUC@1e-2 ensemble",
+   "recomputed": "0.7296",
+   "reported": "0.730",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M3 pAUC@1e-3 per-seed mean",
+   "recomputed": "0.4433",
+   "reported": "0.443",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M3 pAUC@1e-3 per-seed std",
+   "recomputed": "0.0892",
+   "reported": "0.089",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M3 pAUC@1e-3 ensemble",
+   "recomputed": "0.5316",
+   "reported": "0.532",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M4 TPR@1e-3 per-seed mean",
+   "recomputed": "0.4531",
+   "reported": "0.453",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M4 TPR@1e-3 per-seed std",
+   "recomputed": "0.1492",
+   "reported": "0.149",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M4 TPR@1e-3 ensemble",
+   "recomputed": "0.6290",
+   "reported": "0.629",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M4 TPR@1e-2 per-seed mean",
+   "recomputed": "0.7791",
+   "reported": "0.779",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M4 TPR@1e-2 per-seed std",
+   "recomputed": "0.0173",
+   "reported": "0.017",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M4 TPR@1e-2 ensemble",
+   "recomputed": "0.8027",
+   "reported": "0.803",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M4 AUC per-seed mean",
+   "recomputed": "0.96770",
+   "reported": "0.9677",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M4 AUC per-seed std",
+   "recomputed": "0.00524",
+   "reported": "0.0052",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M4 AUC ensemble",
+   "recomputed": "0.97768",
+   "reported": "0.9777",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M4 F1 per-seed mean",
+   "recomputed": "0.9109",
+   "reported": "0.911",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M4 F1 per-seed std",
+   "recomputed": "0.0133",
+   "reported": "0.013",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M4 F1 ensemble",
+   "recomputed": "0.9170",
+   "reported": "0.917",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M4 pAUC@1e-2 per-seed mean",
+   "recomputed": "0.6609",
+   "reported": "0.661",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M4 pAUC@1e-2 per-seed std",
+   "recomputed": "0.0354",
+   "reported": "0.035",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M4 pAUC@1e-2 ensemble",
+   "recomputed": "0.7192",
+   "reported": "0.719",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M4 pAUC@1e-3 per-seed mean",
+   "recomputed": "0.3189",
+   "reported": "0.319",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M4 pAUC@1e-3 per-seed std",
+   "recomputed": "0.1062",
+   "reported": "0.106",
+   "status": "MATCH"
+  },
+  {
+   "part": "1 clean",
+   "item": "fixed tokenizer M4 pAUC@1e-3 ensemble",
+   "recomputed": "0.4447",
+   "reported": "0.445",
+   "status": "MATCH"
+  },
+  {
+   "part": "2 thresholds",
+   "item": "benign reports strictly above the 1% threshold, number of the 80 model-seeds with exactly 80 (expected floor(0.01 x 8003) = 80)",
+   "recomputed": "73 of 80 exactly 80; the other 7 have 77 to 79",
+   "reported": "80 in every case",
+   "status": "DIFFERENT"
+  },
+  {
+   "part": "2 thresholds",
+   "item": "benign reports strictly above the 0.1% threshold, number of the 80 model-seeds with exactly 8 (expected floor(0.001 x 8003) = 8)",
+   "recomputed": "77 of 80 exactly 8; the other 3 have 6 to 7",
+   "reported": "8 in every case",
+   "status": "DIFFERENT"
+  },
+  {
+   "part": "2 thresholds",
+   "item": "every exception explained by tied logits (benign reports with exactly the logit of the threshold: above < expected <= above + tied)",
+   "recomputed": "10 of 10 exceptions explained",
+   "reported": "n/a (not stated in the reports)",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M1 random 20 prepend detection mean (%)",
+   "recomputed": "25.38",
+   "reported": "25.4",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M1 random 20 prepend detection std (%)",
+   "recomputed": "7.85",
+   "reported": "7.8",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M1 random 50 prepend detection mean (%)",
+   "recomputed": "7.43",
+   "reported": "7.4",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M1 random 50 prepend detection std (%)",
+   "recomputed": "4.05",
+   "reported": "4.0",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M1 random 100 prepend detection mean (%)",
+   "recomputed": "5.73",
+   "reported": "5.7",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M1 random 100 prepend detection std (%)",
+   "recomputed": "5.13",
+   "reported": "5.1",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M1 lgbm 50 prepend detection mean (%)",
+   "recomputed": "1.91",
+   "reported": "1.9",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M1 lgbm 50 prepend detection std (%)",
+   "recomputed": "2.60",
+   "reported": "2.6",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M1 white-box 20 steps detection mean (%)",
+   "recomputed": "1.58",
+   "reported": "1.6",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M1 white-box 20 steps detection std (%)",
+   "recomputed": "1.57",
+   "reported": "1.6",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M1 white-box 50 steps detection mean (%)",
+   "recomputed": "0.58",
+   "reported": "0.6",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M1 white-box 50 steps detection std (%)",
+   "recomputed": "1.19",
+   "reported": "1.2",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M3 random 20 prepend detection mean (%)",
+   "recomputed": "76.19",
+   "reported": "76.2",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M3 random 20 prepend detection std (%)",
+   "recomputed": "2.29",
+   "reported": "2.3",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M3 random 50 prepend detection mean (%)",
+   "recomputed": "65.05",
+   "reported": "65.1",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M3 random 50 prepend detection std (%)",
+   "recomputed": "5.80",
+   "reported": "5.8",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M3 random 100 prepend detection mean (%)",
+   "recomputed": "6.45",
+   "reported": "6.5",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M3 random 100 prepend detection std (%)",
+   "recomputed": "1.32",
+   "reported": "1.3",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M3 lgbm 50 prepend detection mean (%)",
+   "recomputed": "35.13",
+   "reported": "35.1",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M3 lgbm 50 prepend detection std (%)",
+   "recomputed": "13.29",
+   "reported": "13.3",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M3 white-box 20 steps detection mean (%)",
+   "recomputed": "48.68",
+   "reported": "48.7",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M3 white-box 20 steps detection std (%)",
+   "recomputed": "6.27",
+   "reported": "6.3",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M3 white-box 50 steps detection mean (%)",
+   "recomputed": "2.48",
+   "reported": "2.5",
+   "status": "MATCH"
+  },
+  {
+   "part": "3 attacks",
+   "item": "M3 white-box 50 steps detection std (%)",
+   "recomputed": "1.34",
+   "reported": "1.3",
+   "status": "MATCH"
+  },
+  {
+   "part": "4 rebuild",
+   "item": "total token count of the rebuilt 'random 20 prepend' report vs the stored Stage J count, all 17,402 April reports",
+   "recomputed": "17402 equal, 0 differ",
+   "reported": "all equal",
+   "status": "MATCH"
+  },
+  {
+   "part": "4 rebuild",
+   "item": "total token count of the unedited report vs the stored Stage J count, all April reports",
+   "recomputed": "17402 equal, 0 differ",
+   "reported": "all equal",
+   "status": "MATCH"
+  },
+  {
+   "part": "4 rebuild",
+   "item": "first 512 tokens of the store vs the stored model-input rows x_test, all April reports",
+   "recomputed": "17402 equal, 0 differ",
+   "reported": "all equal",
+   "status": "MATCH"
+  }
+ ]
+}

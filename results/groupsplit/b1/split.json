@@ -1,0 +1,14 @@
+{
+ "seed": 2027,
+ "rule": "groups ordered by sha256('2027:' + hash_apis), each assigned to the part with fewer reports so far (ties -> ADAPT)",
+ "n_april": 17402,
+ "n_groups": 2509,
+ "adapt_reports": 8960,
+ "test_reports": 8442,
+ "adapt_groups": 1264,
+ "test_groups": 1245,
+ "test_unseen_reports": 5607,
+ "groups_shared_between_adapt_and_test": 0,
+ "sha256_split_npz": "c9808ac80617af62a62a233e284fce955c3993acb89f62ccecfcfbb19f9d3bd3",
+ "labels_used": false
+}

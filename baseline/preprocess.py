@@ -43,6 +43,8 @@ VARIANTS = {
                        spm_extra="--character_coverage=1.0 --byte_fallback=true --pad_id=0 --unk_id=1 --bos_id=-1 --eos_id=-1"),
     "bpe50k_role": dict(kind="bpe", vocab=50000, seq=512, norm="role", unkfix=True),     # NOTES 27 / 24 P3: hex literals of > 4 digits -> addr<L>x<T>; unknown pieces -> id 50,000 (baseline/gs_tokens_p3.py)
     "bpe50k_addr": dict(kind="bpe", vocab=50000, seq=512, norm="addr", unkfix=True),     # the length-matched control of P3: every such literal -> the single word `addr`
+    "bpe8k_fix": dict(kind="bpe", vocab=8192, seq=512,       # NOTES 30.4a (B1): the corrected tokenizer (full character coverage, byte fallback, pad 0 / unk 1) with vocabulary 8,192, fit on ALL 75,298 January reports (baseline/b1_tokens.py)
+                      spm_extra="--character_coverage=1.0 --byte_fallback=true --pad_id=0 --unk_id=1 --bos_id=-1 --eos_id=-1"),
     "bpe8k_v2": dict(kind="bpe", vocab=8192, seq=512),       # B3: the same, but the tokenizer is fit on the 90% of January that is not the validation slice (--fit-gap-split)
     # released tokenizers (their files, no training): sanity check E
     "released_bpe50k": dict(kind="bpe", released=True, seq=512),

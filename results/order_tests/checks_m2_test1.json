@@ -1,0 +1,13 @@
+{
+ "c1_max_abs_diff_vs_stored_april_logits": {
+  "seed0": 3.0994415283203125e-06,
+  "seed1": 2.6226043701171875e-06,
+  "seed2": 2.86102294921875e-06
+ },
+ "weights_sha256": {
+  "seed0": "a44014e560ed511ce8396b31220a2b8fe69a7a83f55c6962cbf74924e99be7fa",
+  "seed1": "58cae627f4f5ef0625e4901cb1e6e76a0bea5e9b34276e866190df020dc9a8df",
+  "seed2": "3b9bcb410c1d1bb00d8a49245967df00a68c2408ae7d5420edd2bef447ab06b6"
+ },
+ "seconds": 3141
+}

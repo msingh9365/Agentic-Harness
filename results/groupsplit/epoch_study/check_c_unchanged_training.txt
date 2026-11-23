@@ -1,0 +1,1 @@
+NOTES 28.9 (c), local CPU check: v2pe study mode (fold 9, M1 settings, seed 0, 2 epochs, --limit 600) against the standard path (--split-dir results/groupsplit): validation logits identical, max abs difference 0.0 for epochs 1 and 2 (the study only adds scoring).

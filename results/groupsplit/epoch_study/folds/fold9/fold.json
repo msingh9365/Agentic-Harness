@@ -1,0 +1,24 @@
+{
+ "fold": 9,
+ "pool_fold": 4,
+ "split_hash": "c3a2c99bbf5dc6ddc60697e7b9468bf8",
+ "n_train": 66580,
+ "n_val": 8718,
+ "n_val_benign": 3161,
+ "n_val_malware": 5557,
+ "eval_pool_n": 2219,
+ "families": {
+  "backdoor": 1039,
+  "clean": 3119,
+  "coinminer": 683,
+  "dropper": 821,
+  "keylogger": 608,
+  "ransomware": 998,
+  "rat": 542,
+  "trojan": 866,
+  "windows_syswow64": 42
+ },
+ "largest_group_share": 0.121,
+ "groups": 1204,
+ "train_pool_after_holdout": 19288
+}

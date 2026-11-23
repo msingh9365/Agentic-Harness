@@ -36,9 +36,20 @@ def run(a):
         return
     tokens = a.tokens or C.find_dir_with(getattr(a, "tokens_find", None) or "labels.npz")          # --tokens-find all.npz: the dataset of the OLD tokenizer (nebula-tune-inputs) when two datasets with labels.npz are attached
     lab = np.load(os.path.join(tokens, "labels.npz"))
-    x_all, x_test, vocab = gap.load(tokens, a.variant)
-    y_all, y_test = lab["y_train"], lab["y_test"]
-    if a.split_dir:                                                 # group-split validation slice (NOTES 21): asserts ITS stored hash (66,580 / 8,718); tokens and store are those of the refit tokenizer
+    study = None
+    if getattr(a, "study_fold", None) is not None:                  # NOTES 28 (epoch study): January data only; no April label, token array or logit is opened
+        from baseline import epoch_study_lib as ES
+        assert a.loss_log and not (a.april_epoch or a.april_every or a.every_epoch or a.full_january), "study mode: --loss-log only, no April, no full January"
+        study = ES.load_fold(a.study_fold)
+        x_all, vocab = ES.load_train_tokens(tokens, a.variant)
+        x_test, y_test = None, None
+        y_all = lab["y_train"]
+    else:
+        x_all, x_test, vocab = gap.load(tokens, a.variant)
+        y_all, y_test = lab["y_train"], lab["y_test"]
+    if study is not None:
+        trn, val = study["trn"], study["val"]
+    elif a.split_dir:                                                 # group-split validation slice (NOTES 21): asserts ITS stored hash (66,580 / 8,718); tokens and store are those of the refit tokenizer
         from baseline import groupsplit
         sd = a.split_dir if os.path.exists(os.path.join(a.split_dir, "split.npz")) else C.find_dir_with("split.npz")
         trn, val = groupsplit.val_slice(os.path.join(sd, "split.npz"), os.path.join(sd, "split_hash.json"))
@@ -52,9 +63,18 @@ def run(a):
     if a.limit:                                                     # smoke test on CPU only
         r = np.random.default_rng(0)
         trn, val = r.permutation(trn)[:a.limit], r.permutation(val)[:max(40, a.limit // 4)]
-        keep = r.permutation(len(x_test))[:300]
-        x_test, y_test = x_test[keep], y_test[keep]
+        if x_test is not None:
+            keep = r.permutation(len(x_test))[:300]
+            x_test, y_test = x_test[keep], y_test[keep]
     xt, yt, xv, yv = x_all[trn], y_all[trn], x_all[val], y_all[val]
+    study_sets = None
+    if study is not None:
+        sp_ = a.study_store if os.path.exists(a.study_store) else os.path.join(C.find_dir_with(os.path.basename(a.study_store)), os.path.basename(a.study_store))
+        store_s = CS.CallStore.load(sp_)
+        assert len(store_s) > len(x_all)
+        study_sets = ES.attack_sets(store_s, y_all, val, study["eval_pool"], study["ranking"], k=a.study_k, cut=512)
+        print(f"[{a.tag} seed {a.seed}] study fold {a.study_fold} (hash {study['info']['split_hash']}): train {len(trn):,}, validation {len(val):,}; evaluation pool {len(study['eval_pool']):,} benign reports of fold {study['info']['pool_fold']}; {a.study_k} prepended calls: "
+              f"{len(study_sets['rand_mal'][0]):,} malware / {len(study_sets['rand_ben'][0]):,} benign (random), {len(study_sets['lgbm_mal'][0]):,} malware (LightGBM)", flush=True)
     dev = a.device
     C.set_seed(a.seed)
     model = pe.build_chunks(len(vocab), dropout=RECIPE["dropout"], pe_mode=a.pe_mode, pool_mode=a.pooling)
@@ -76,6 +96,9 @@ def run(a):
                 zr = cv.predict_logits(model, tok_, dev, bs=512)
                 suffix = "" if k_ == 20 else str(k_)                     # keys of NOTES 16: val_robust_tpr (20 calls); NOTES 21 adds val_robust100_tpr
                 rec[f"val_robust{suffix}_tpr"], rec["val_robust_thr"], rec[f"val_robust{suffix}_n"] = float((zr > thr).mean()), float(thr), int(len(zr))
+        if study_sets is not None:
+            thr_s = padtest.thresholds(zv, yv, 0.01)
+            rec.update(ES.attack_metrics(lambda t_, tt_: cv.predict_logits(model, t_, dev, bs=512), thr_s, study_sets))
         if loss_log:
             all_l = trainer.train_losses                               # the authors' trainer stores the BCE of every training batch (loss.item()); read only
             new = [float(v) for v in all_l[ll["consumed"]:]]
@@ -84,7 +107,7 @@ def run(a):
             zs = cv.predict_logits(model, xt[sub_idx], dev, bs=512)    # eval mode: no dropout, no randomness
             ll["epochs"].append({"epoch": ep, "step_end": len(ll["batch_losses"]), "n_batches": len(new), "train_epoch_mean_loss": float(np.mean(new)), "val_loss": rec["val_loss"], "val_pauc@1e-2": rec["val"]["pauc@0.01"],
                                  "val_auc": rec["val"]["auc"], "train_subset_clean_loss": gap.bce_logits(yt[sub_idx], zs),
-                                 **{k_: v_ for k_, v_ in rec.items() if k_.startswith("val_robust") and k_.endswith("_tpr")}})
+                                 **{k_: v_ for k_, v_ in rec.items() if (k_.startswith("val_robust") and k_.endswith("_tpr")) or k_.startswith("study_")}, "val_tpr@1e-2": rec["val"]["tpr@0.01"]})
         log.append(rec)
         print(f"[{a.tag} seed {a.seed}] epoch {ep}: val TPR@1e-3 {mv['tpr@0.001']:.3f} @1e-2 {mv['tpr@0.01']:.3f} pAUC@1e-2 {mv['pauc@0.01']:.3f} AUC {mv['auc']:.4f} loss {rec['val_loss']:.4f} | {rec['seconds']:.0f}s", flush=True)
         np.save(os.path.join(out_dir, f"seed{a.seed}_epoch{ep}_val_logits.npy"), zv.astype(np.float32))
@@ -111,6 +134,8 @@ def run(a):
         sp = a.pad_store if os.path.exists(a.pad_store) else os.path.join(C.find_dir_with(os.path.basename(a.pad_store)), os.path.basename(a.pad_store))
         store = CS.CallStore.load(sp)
         pool_rows = inmem_pad.pool_rows_of(store, y_all, pool_trn)
+        if study is not None:                                       # the evaluation pool is NOT a source of training padding calls (NOTES 28.3)
+            pool_rows = ES.train_pool_without_eval(pool_rows, study["eval_pool"], study["info"], strict=not a.limit)
         if getattr(a, "full_january", False) and not a.limit:
             assert len(pool_rows) == 21507 and not (set(pool_rows.tolist()) & set(val.tolist())), (len(pool_rows), "the padding pool must be the 21,507 benign reports of the group-split training part")
         print(f"[{a.tag} seed {a.seed}] call store {sp}: {len(store):,} reports; TRAIN pool {len(pool_rows):,} benign reports of the training slice", flush=True)
@@ -167,6 +192,7 @@ def run(a):
                      "note": "April logits and weights are not produced in this mode"}, os.path.join(a.out, "loss_curves", a.tag, f"seed{a.seed}.json"))
     C.dump_json({"tag": a.tag, "pe_mode": a.pe_mode, "pooling": a.pooling, "aug_dir": a.aug_dir, "pad_store": bool(a.pad_store), "pad_mode": a.pad_mode, "pad_labels": a.pad_labels, "pad_stream": a.pad_stream, "edited_rows_per_epoch": edited, "reports_per_epoch": epoch_sizes, "pos_offset": 0, "recipe": recipe, "pad_prob": getattr(a, "pad_prob", 0.5), "seed": a.seed, "epochs": a.epochs, "batches_per_epoch": bpe, "n_train": int(len(xt)),
                  "n_val": int(len(xv)), "n_val_benign": int((yv == 0).sum()), "tokenizer": a.variant, "split_hash_asserted": True, "env": C.env_info(), "nebula": nb,
+                 "study": ({"fold": a.study_fold, "split_hash": study["info"]["split_hash"], "pool_fold": study["info"]["pool_fold"], "eval_pool_n": int(len(study["eval_pool"])), "k": a.study_k} if study is not None else None),
                  "train_seconds": round(time.time() - t0, 1), "per_epoch": log, "april": "logits of the last epoch stored in seed<k>_epoch<e>_test_logits.npy; not evaluated by this script"},
                 res_path)
 
@@ -257,6 +283,9 @@ def main():
     ap.add_argument("--loss-log", action="store_true", help="loss-curve logging (REPORT loss curves): per-batch training losses, clean training-subset loss and validation metrics after every epoch -> <out>/loss_curves/<tag>/seed<k>.json; no April logits, no weights")
     ap.add_argument("--aug-dir", default=None, help="folder with aug_s<seed>_e<epoch>_{rows,tok}.npy (balanced padding arrays of baseline/make_pad.py)")
     ap.add_argument("--variant", default="bpe50k")
+    ap.add_argument("--study-fold", type=int, default=None, help="NOTES 28 epoch study: train on the training part of this fold, validate on its validation part (folder fold<n>/ searched under /kaggle/input or ES_FOLDS); needs --loss-log, no April")
+    ap.add_argument("--study-store", default="all.npz", help="call-token store used for the per-epoch attack sets of the study")
+    ap.add_argument("--study-k", type=int, default=50, help="number of prepended calls of the per-epoch attack sets of the study")
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--gpus", type=int, default=0)
     ap.add_argument("--limit", type=int, default=0, help="smoke test: use only this many training reports")

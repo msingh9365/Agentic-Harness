@@ -1,0 +1,38 @@
+{
+ "a": {
+  "max_diff_shifted_scores": 3.814697265625e-06
+ },
+ "b": {
+  "m3_custom_vs_unmodified_max_diff": 7.62939453125e-06,
+  "sin_full_with_block_mask_vs_unmodified_max_diff": 7.62939453125e-06,
+  "sin_full_without_mask_vs_unmodified_max_diff": 12.738896369934082
+ },
+ "c_param_counts": {
+  "rope_blocks": 3304321,
+  "rope_full": 3304321,
+  "sin_full": 3304321,
+  "m3": 3304321
+ },
+ "d_same_initial_weights": {
+  "rope_blocks_seed0": true,
+  "rope_full_seed0": true,
+  "sin_full_seed0": true,
+  "rope_blocks_seed1": true,
+  "rope_full_seed1": true,
+  "sin_full_seed1": true
+ },
+ "e": {
+  "rope_blocks": {
+   "first10": 0.6785105526447296,
+   "last10": 0.3113701999187469
+  },
+  "rope_full": {
+   "first10": 0.6798429310321807,
+   "last10": 0.34388104975223543
+  },
+  "sin_full": {
+   "first10": 0.6817742824554444,
+   "last10": 0.4457791417837143
+  }
+ }
+}

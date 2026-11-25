@@ -19,6 +19,8 @@ NAMES = {"rope_blocks": "V1 M3 + RoPE (blocks)", "rope_full": "V2 M3 + RoPE (ful
 def load(d):
     out = {}
     for p in sorted(glob.glob(os.path.join(d, "**", "rg_*", "seed*.json"), recursive=True)):
+        if "loss_curves" in p:
+            continue
         tag = os.path.basename(os.path.dirname(p))
         j = json.load(open(p))
         e3 = [e for e in j["per_epoch"] if e["epoch"] == 3][0]

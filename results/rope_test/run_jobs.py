@@ -5,6 +5,7 @@ Kernel job queue of the RoPE test (NOTES_ROPE.md): every job is the UNCHANGED co
     python -m rope_test.run_jobs --mode final  --variants rope_blocks --out ...      [--lr 0.001]       (10 seeds, all of January, April logits + weights after epoch 3: gs_grid.final_jobs(attbal, fix, 3 epochs))
     python -m rope_test.run_jobs --mode scores --out ...                              (Stage J padding-attack scores of V0 (m3) and V1..V3: baseline.gs_attack --mode scores)
     python -m rope_test.run_jobs --mode wb     --wb-jobs v1:0 v1:1 v1:2 v2:0 v2:1 v2:2 --out ...
+    python -m rope_test.run_jobs --mode attack --families m3 v1 v2 --wb-jobs m3:0 ... v2:2 --out ...   (scores and white-box jobs in one queue)
 Families of the attack modes: m3 = V0 (stored weights, `m3/seed<k>.pt`), v1 = rope_blocks, v2 = rope_full, v3 = sin_full (`v1/seed<k>.pt`, `seed<k>_april.npy`).
 """
 import argparse
@@ -44,14 +45,14 @@ def final_jobs(variants, seeds, lr, out):
     return jobs
 
 
-def attack_jobs(mode, wb_jobs, out, search):
+def attack_jobs(mode, wb_jobs, out, search, families=("m3", "v1", "v2", "v3")):
     extra = ["--extra-families"] + [f"{f}:{k}" for f, k in FAMKIND.items()]
     common = ["--out", out, "--device", "cuda", "--store", "all.npz", "--ranking", "ranking_gs.json", "--split-dir", "split", "--search", search]
     jobs = []
-    if mode == "scores":
-        for f in ["m3", "v1", "v2", "v3"]:
+    if mode in ("scores", "attack"):
+        for f in families:
             jobs.append((f"scores_{f}", 0, FAMKIND.get(f), "baseline.gs_attack", ["--mode", "scores", "--family", f] + common + extra, os.path.join(out, f"scores_{f}.npz")))
-    else:
+    if mode in ("wb", "attack"):
         for j in wb_jobs:
             f, s = j.split(":")
             jobs.append((f"wb_{f}", int(s), FAMKIND.get(f), "baseline.gs_attack", ["--mode", "wb", "--family", f, "--seed", s, "--steps", "50", "--n-wb", "500"] + common + extra,
@@ -61,11 +62,12 @@ def attack_jobs(mode, wb_jobs, out, search):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--mode", required=True, choices=["guard", "final", "scores", "wb"])
+    ap.add_argument("--mode", required=True, choices=["guard", "final", "scores", "wb", "attack"])
     ap.add_argument("--variants", nargs="*", default=["rope_blocks", "rope_full", "sin_full"])
     ap.add_argument("--seeds", type=int, nargs="*", default=None)
     ap.add_argument("--lr", type=float, default=1e-3)
     ap.add_argument("--wb-jobs", nargs="*", default=[])
+    ap.add_argument("--families", nargs="*", default=["m3", "v1", "v2", "v3"], help="attack modes: the families whose padding-attack scores are computed")
     ap.add_argument("--out", default="/kaggle/working/out")
     ap.add_argument("--search", default=os.environ.get("NEBULA_INPUT", "/kaggle/input"))
     ap.add_argument("--dry-run", action="store_true")
@@ -75,7 +77,7 @@ def main():
     elif a.mode == "final":
         jobs = final_jobs(a.variants, a.seeds or list(range(10)), a.lr, a.out)
     else:
-        jobs = attack_jobs(a.mode, a.wb_jobs, a.out, a.search)
+        jobs = attack_jobs(a.mode, a.wb_jobs, a.out, a.search, tuple(a.families))
     cmds = []
     for j in jobs:
         tag, s, v, module, args = j[:5]

@@ -1,0 +1,44 @@
+{
+ "tag": "rf_sin_full",
+ "seeds": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9
+ ],
+ "weights_sha256": {
+  "seed0": "58abc3a0b450403a0cc46894b54b4a34a3cedf08a16cd2388a89aec4507e9dfb",
+  "seed1": "ceb68376d4b0c0c24c02ff4a59df5b2e457ff2afd44036f17d14e982bebebd1c",
+  "seed2": "91c1a1e1b8a70f162da5cb5ad5dc17f542621d6f1d4eccbc866a3b0aef6ec791",
+  "seed3": "c0cd8f1b2623d24e0bb2ac6f39b6b1a8476b8d88b75b5cd969250ddf07bf00a9",
+  "seed4": "cc339e389c9e0632efca6c9fdedeb5594e32a2b43310b538dc62aac25f773d44",
+  "seed5": "6a23f1315cff59adc0f0752ddfc5ed931e876445c256017d15d2bcac6bdf561c",
+  "seed6": "1af0b813c8e41b14d3c425873f0d1a57f2b48921e2688b586ad556fcd7fe053d",
+  "seed7": "d5e62451285c9af49e41ffe24926e6545b1479cf66980006dfbc4b5bd9cb103b",
+  "seed8": "4f757f2341845bc413b38f5459f9ba1d3679e87deabae9c80eb5a31ddf382bbd",
+  "seed9": "9b1cea12c02bd08f26568ee21649c519ea6c7a7bfc72422415890ec467fa21b1"
+ },
+ "logits_sha256": {
+  "seed0": "9eccb0e18327ff4c3ca22d951be78d1cdf3f575661af8a72358f8c2449009c50",
+  "seed1": "6b65cccc997042bcd7fb351d89b8aafa0723104e63a7fa821496619397517475",
+  "seed2": "d2bdeae6618a086e1750d7e50d5483fa32efce9021157cbdce22bd2ea7a3ccfc",
+  "seed3": "e78c26d3f0925efb1c9dd9ba40d071858f41bce636d65b0d392a99fcdad656f8",
+  "seed4": "b6a39ac2519fb0b4c813a3aa4cb7a17e566a46c1e0c2ba8eed8b981dd7463ced",
+  "seed5": "d884dffe07048335a8257bb83b6e72360ad2ae8d1b1cf2553b8faa820e3bd90a",
+  "seed6": "f0169a10b1a2b967d08e2d3524feade437cc52235883a5abab8a7e4f32840117",
+  "seed7": "dee63856ba6d3f76c5755f1eb9bc299ba0252d8b45efaba5b864af1c84fc0e04",
+  "seed8": "24b707f859becd3fe54f240e67f22201514f31c4570d79c0365dbb1cf47ad41d",
+  "seed9": "13414200a776d7d8a4bd1292dddb84d87cf63263cb164b61495f098e42ab3455"
+ },
+ "min_april_auc_for_collapse_check": 0.9591559232422644,
+ "n_train": 75298,
+ "tokenizer": "bpe50k_fix",
+ "epochs": 3,
+ "seeds_with_padding_pool_21507_in_log": 10
+}

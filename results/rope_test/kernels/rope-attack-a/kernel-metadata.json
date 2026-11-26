@@ -1,0 +1,22 @@
+{
+  "id": "manishsinghxdev/rope-attack-a",
+  "title": "rope-attack-a",
+  "code_file": "run.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": "true",
+  "enable_gpu": "true",
+  "enable_tpu": "false",
+  "enable_internet": "true",
+  "machine_shape": "",
+  "dataset_sources": [
+    "manishsinghxdev/gs-fix-inputs",
+    "manishsinghxdev/nebula-groupsplit",
+    "manishsinghxdev/gs-fix-w-m3",
+    "manishsinghxdev/rope-w-v1",
+    "manishsinghxdev/rope-w-v2"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}

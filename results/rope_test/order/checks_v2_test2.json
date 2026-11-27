@@ -1,0 +1,28 @@
+{
+ "c1_max_abs_diff_vs_stored_april_logits": {
+  "shift0_tokens_equal_x_test_rows": true,
+  "seed0": 1.1429190635681152e-05,
+  "seed1": 9.5367431640625e-06,
+  "seed2": 1.3947486877441406e-05,
+  "seed3": 1.1771917343139648e-05,
+  "seed4": 1.049041748046875e-05,
+  "seed5": 1.1444091796875e-05,
+  "seed6": 7.748603820800781e-06,
+  "seed7": 6.67572021484375e-06,
+  "seed8": 6.67572021484375e-06,
+  "seed9": 1.049041748046875e-05
+ },
+ "weights_sha256": {
+  "seed0": "bc9aeedaab95d2349b4449871f0ba33cf12319f86bd00f2bed42ea33bddafba6",
+  "seed1": "879645ece6889e116a3799f30fa7f3faeef832ee8f07c8f9183085edfb359bea",
+  "seed2": "0d9b869c19898b74144c1777f766bbe1c01a8ae8e4bc4ed6c1696ab0c498da4a",
+  "seed3": "769b697c3ca55438798cbc47c0462ab558be2f5dcbda95c6bfde1559f6eef403",
+  "seed4": "2f1de5b50ad0f57692af53c79e699b3b21ae2f9f04c87040334cad197aa96794",
+  "seed5": "102dee6ad18b1ef377b7d801e3d69f4b34a786d911917266b5f1d5cfe0d7711d",
+  "seed6": "4e99cbd18c6619009a11c1fc2d2c03d2cb2ccb641c8416abc24c416ece0647f8",
+  "seed7": "2c90e7fdcaaa1bc8f40d51641f2dee6953f92f3d3c695c4f3ce94c0cbc6c4aca",
+  "seed8": "69ab9b16ead03e745683b276a9f1cc844dea0691ae47dce7252ab723814a9958",
+  "seed9": "38dea8c258fb9bb3432c2d7a9bf36d8f63a2efa790610e6e49d090b69ac970e3"
+ },
+ "seconds": 17197
+}

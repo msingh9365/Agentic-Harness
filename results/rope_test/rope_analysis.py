@@ -141,6 +141,7 @@ def main():
     y = S["v0"]["y"]
     members, groups = groups_members(y)
     allsel = np.arange(len(y))
+    _init(S)
     point = measures(allsel)
     X = {v: vec(point[v]) for v in VARS}
     XS = {v: seedvec(point[v]) for v in VARS}                                        # [seeds, n]
